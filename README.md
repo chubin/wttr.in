@@ -1,5 +1,9 @@
-## Usage
+This is a web frontend for a console weather application wego, using it as a backend.
+You can check it at
 
+    http://wttr.in
+
+## Usage
 
 You can access the service from a shell or from a Web browser:
 
