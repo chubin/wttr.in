@@ -1,0 +1,15 @@
+Usage:
+
+    $ curl wttr.in          # current location
+    $ curl wttr.in/muc      # weather in the Munic airport
+
+Supported locations:
+
+    /paris                  # city name
+    /muc                    # airport code (3 letters)
+    /@stackoverflow.com     # domain name
+
+Special URLs:
+
+    /:help                  # show this page
+

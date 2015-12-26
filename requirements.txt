@@ -1,0 +1,5 @@
+flask
+geoip2
+geopy
+requests
+gevent
