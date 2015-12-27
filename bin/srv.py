@@ -44,6 +44,8 @@ so we have brought you to Oymyakon,
 one of the coldest permanently inhabited locales on the planet.
 """
 
+if not os.path.exists(os.path.dirname( LOG_FILE )):
+    os.makedirs( os.path.dirname( LOG_FILE ) )
 logging.basicConfig(filename=LOG_FILE, level=logging.DEBUG)
 
 reader = geoip2.database.Reader(GEOLITE)
@@ -211,9 +213,11 @@ def show_help():
 
 @app.route('/files/<path:path>')
 def send_static(path):
-    print path
-    print STATIC
     return send_from_directory(STATIC, path)
+
+@app.route('/favicon.ico')
+def send_favicon():
+    return send_from_directory(STATIC, 'favicon.ico')
 
 @app.route("/")
 @app.route("/<string:location>")
