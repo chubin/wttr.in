@@ -44,7 +44,7 @@ To get this information online, you can access the `:help` page:
 
 To install the program you need:
 
-1. Install external depndencies
+1. Install external dependencies
 2. Install python dependencies used by the service
 3. Get WorldWeatherOnline API Key
 4. Configure wego
