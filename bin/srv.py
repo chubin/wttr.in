@@ -22,9 +22,9 @@ patch_all()
 from flask import Flask, request, render_template, send_from_directory
 app = Flask(__name__)
 
-MYDIR = os.path.abspath(os.path.dirname( os.path.dirname('__file__') ))
-GEOLITE = os.path.join( MYDIR, "GeoLite2-City.mmdb" )
-WEGO = "/home/igor/go/bin/wego"
+MYDIR = os.environ.get('WTTR_MYDIR', os.path.abspath(os.path.dirname( os.path.dirname('__file__') )))
+GEOLITE = os.environ.get('WTTR_GEOLITE', os.path.join( MYDIR, "GeoLite2-City.mmdb" ))
+WEGO = os.environ.get('WTTR_WEGO', "/home/igor/go/bin/wego")
 
 CACHEDIR  = os.path.join( MYDIR, "cache" )
 IP2LCACHE = os.path.join( MYDIR, "cache/ip2l" )
