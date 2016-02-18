@@ -225,7 +225,7 @@ def wttr(location = None):
     user_agent = request.headers.get('User-Agent').lower()
 
     html_output = True
-    if 'curl' in user_agent or 'wget' in user_agent:
+    if 'curl' in user_agent or 'wget' in user_agent or 'httpie' in user_agent:
         html_output = False
 
     if location == ':help':
