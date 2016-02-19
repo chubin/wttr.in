@@ -106,12 +106,12 @@ The `City` parameter in `~/.wegorc` is ignored.
 
 ### Configure wttr.in
 
-Edit the `bin/srv.py` and specify the path to the local `wttr.in` installation,
-to the GeoLite database and to the `wego` installation:
+Configure the following environment variables specifing the path to the local `wttr.in`
+installation, to the GeoLite database and to the `wego` installation. For example:
 
-    MYDIR = "/home/igor/wttr.in"
-    GEOLITE = "/home/igor/wttr.in/GeoLite2-City.mmdb"
-    WEGO = "/home/igor/go/bin/wego"
+    WTTR_MYDIR = "/home/igor/wttr.in"
+    WTTR_GEOLITE = "/home/igor/wttr.in/GeoLite2-City.mmdb"
+    WTTR_WEGO = "/home/igor/go/bin/wego"
 
 
 ### Configure HTTP-frontend service
