@@ -222,11 +222,20 @@ def send_favicon():
 @app.route("/")
 @app.route("/<string:location>")
 def wttr(location = None):
+    plain_text_agents = [
+        "curl",
+        "httpie",
+        "lwp-request",
+        "wget",
+    ]
+
     user_agent = request.headers.get('User-Agent').lower()
 
-    html_output = True
-    if 'curl' in user_agent or 'wget' in user_agent or 'httpie' in user_agent or 'lwp-request' in user_agent:
+    if any(agent in user_agent for agent in plain_text_agents):
         html_output = False
+    else:
+        html_output = True
+
 
     if location == ':help':
         help_ = show_help()
