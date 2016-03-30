@@ -53,12 +53,12 @@ To install the program you need:
 
 External requirements:
 
-* wego [https://github.com/schachmat/wego], weather client for terminal
+* [wego](https://github.com/schachmat/wego), weather client for terminal
 
-To install `wego` you must have golang installed. After that:
+To install `wego` you must have [golang](https://golang.org/doc/install) installed. After that:
 
-    go get https://github.com/schachmat/wego
-    go install https://github.com/schachmat/wego
+    go get -u github.com/schachmat/wego
+    go install github.com/schachmat/wego
 
 ### Install python dependencies
 
