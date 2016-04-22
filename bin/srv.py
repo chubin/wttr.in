@@ -233,11 +233,11 @@ def wttr(location = None):
     orig_location = location
 
     if request.headers.getlist("X-Forwarded-For"):
-       ip = request.headers.getlist("X-Forwarded-For")[0]
-       if ip.startswith('::ffff:'):
-           ip = ip[7:]
+        ip = request.headers.getlist("X-Forwarded-For")[0]
+        if ip.startswith('::ffff:'):
+            ip = ip[7:]
     else:
-       ip = request.remote_addr
+        ip = request.remote_addr
 
     try:
         if location is None:
@@ -252,7 +252,7 @@ def wttr(location = None):
         log("%s %s %s %s" % (ip, user_agent, orig_location, location))
         return get_wetter( location, ip, html=html_output )
     except Exception, e:
-        logging.error("Exception has occured", exc_info=1)
+        logging.error("Exception has occurred", exc_info=1)
         return str(e).rstrip()+"\n"
 
 server = WSGIServer(("", 8002), app)
