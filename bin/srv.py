@@ -1,22 +1,17 @@
-import sys
 import logging
 import os
 import re
 import requests
 import socket
-import subprocess
 import time
-import traceback
 
 import geoip2.database
 from geopy.geocoders import Nominatim
 import jinja2
 
-import gevent
 from gevent.wsgi import WSGIServer
-from gevent.queue import Queue
 from gevent.monkey import patch_all
-from gevent.subprocess import Popen, PIPE, STDOUT
+from gevent.subprocess import Popen, PIPE
 patch_all()
 
 from flask import Flask, request, render_template, send_from_directory
