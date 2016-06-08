@@ -111,8 +111,8 @@ def error( text ):
     raise RuntimeError(text)
 
 def log( text ):
-    print text
-    logging.info( text )
+    print text.encode('utf-8')
+    logging.info( text.encode('utf-8') )
 
 def is_ip( ip ):
     if re.match('\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}', ip) is None:
