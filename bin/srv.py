@@ -183,12 +183,13 @@ def ip2location( ip ):
             pass
 
 def get_location( ip_addr ):
-    response = reader.city( ip_addr )
-    city = response.city.name
+    response = reader.insights( ip_addr )
+    city = response.city.name + ',' + response.subdivisions.most_specific.name + ',' + response.country.name
+
     if city is None and response.location:
         coord = "%s, %s" % (response.location.latitude, response.location.longitude)
         location = geolocator.reverse(coord, language='en')
-        city = location.raw.get('address', {}).get('city')
+        city = location.raw.get('address', {}).get('address')
     if city is None:
         print ip_addr
         city = ip2location( ip_addr )
