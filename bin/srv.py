@@ -20,6 +20,8 @@ app = Flask(__name__)
 MYDIR = os.environ.get('WTTR_MYDIR', os.path.abspath(os.path.dirname( os.path.dirname('__file__') )))
 GEOLITE = os.environ.get('WTTR_GEOLITE', os.path.join( MYDIR, "GeoLite2-City.mmdb" ))
 WEGO = os.environ.get('WTTR_WEGO', "/home/igor/go/bin/wego")
+LISTEN_HOST = os.environ.get('WTTR_LISTEN_HOST', "127.0.0.1")
+LISTEN_PORT = int(os.environ.get('WTTR_LISTEN_PORT', "8002"))
 
 CACHEDIR  = os.path.join( MYDIR, "cache" )
 IP2LCACHE = os.path.join( MYDIR, "cache/ip2l" )
@@ -104,8 +106,8 @@ def error( text ):
     raise RuntimeError(text)
 
 def log( text ):
-    print text
-    logging.info( text )
+    print text.encode('utf-8')
+    logging.info( text.encode('utf-8') )
 
 def is_ip( ip ):
     if re.match('\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}', ip) is None:
@@ -254,6 +256,6 @@ def wttr(location = None):
         logging.error("Exception has occurred", exc_info=1)
         return str(e).rstrip()+"\n"
 
-server = WSGIServer(("", 8002), app)
+server = WSGIServer((LISTEN_HOST, LISTEN_PORT), app)
 server.serve_forever()
 
