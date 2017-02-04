@@ -1,22 +1,17 @@
-import sys
 import logging
 import os
 import re
 import requests
 import socket
-import subprocess
 import time
-import traceback
 
 import geoip2.database
 from geopy.geocoders import Nominatim
 import jinja2
 
-import gevent
 from gevent.wsgi import WSGIServer
-from gevent.queue import Queue
 from gevent.monkey import patch_all
-from gevent.subprocess import Popen, PIPE, STDOUT
+from gevent.subprocess import Popen, PIPE
 patch_all()
 
 from flask import Flask, request, render_template, send_from_directory
@@ -237,11 +232,11 @@ def wttr(location = None):
     orig_location = location
 
     if request.headers.getlist("X-Forwarded-For"):
-       ip = request.headers.getlist("X-Forwarded-For")[0]
-       if ip.startswith('::ffff:'):
-           ip = ip[7:]
+        ip = request.headers.getlist("X-Forwarded-For")[0]
+        if ip.startswith('::ffff:'):
+            ip = ip[7:]
     else:
-       ip = request.remote_addr
+        ip = request.remote_addr
 
     try:
         if location is None:
@@ -256,7 +251,7 @@ def wttr(location = None):
         log("%s %s %s %s" % (ip, user_agent, orig_location, location))
         return get_wetter( location, ip, html=html_output )
     except Exception, e:
-        logging.error("Exception has occured", exc_info=1)
+        logging.error("Exception has occurred", exc_info=1)
         return str(e).rstrip()+"\n"
 
 server = WSGIServer(("", 8002), app)
