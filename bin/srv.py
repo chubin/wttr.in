@@ -40,6 +40,13 @@ We were unable to find your location,
 so we have brought you to Oymyakon,
 one of the coldest permanently inhabited locales on the planet.
 """
+PLAIN_TEXT_AGENTS = [
+    "curl",
+    "httpie",
+    "lwp-request",
+    "wget",
+    "python-requests"
+]
 
 if not os.path.exists(os.path.dirname( LOG_FILE )):
     os.makedirs( os.path.dirname( LOG_FILE ) )
@@ -218,16 +225,10 @@ def send_favicon():
 @app.route("/")
 @app.route("/<string:location>")
 def wttr(location = None):
-    plain_text_agents = [
-        "curl",
-        "httpie",
-        "lwp-request",
-        "wget",
-    ]
 
     user_agent = request.headers.get('User-Agent').lower()
 
-    if any(agent in user_agent for agent in plain_text_agents):
+    if any(agent in user_agent for agent in PLAIN_TEXT_AGENTS):
         html_output = False
     else:
         html_output = True
