@@ -1,11 +1,10 @@
-wttr.in — the right way to check the weather.
+*wttr.in — the right way to check the weather.*
 
-wttr.in is a console oriented weather forecast service, that supports various information representation
-like terminal oriented ANSI-sequences for the console HTTP clients such as curl, httpie or wget;
-HTML for web browsers; or PNG for graphical viewers.
-
-wttr.in uses [wego](http://github.com/schachmat/wego) to visualize weather forecast information
-and various weather data sources.
+wttr.in is a console oriented weather forecast service, that supports various information representation methods
+like terminal oriented ANSI-sequences for console HTTP clients such as curl, httpie or wget;
+HTML for web browsers; or PNG for graphical viewers. 
+wttr.in uses [wego](http://github.com/schachmat/wego) for visualization
+and various data sources for weather forecast information.
 
 You can check it at [wttr.in](http://wttr.in).
 
@@ -29,7 +28,7 @@ That is how the actual weather report for your location looks like (it is live!)
 
 
 You can specify the location, for that you want to get the weather information.
-If you omit the location name, you will get the information for you current location,
+If you omit the location name, you will get the information for your current location,
 based on your IP address.
 
     $ curl wttr.in/London
@@ -51,31 +50,41 @@ To get detailed information online, you can access the [/:help](http://wttr.in/:
 
     $ curl wttr.in/:help
 
+## Additional options
+
+By default the USCS units are used for the queries from the USA and the 
+metric system for the rest for the world.
+You can override this behavior with the following options:
+
+    $ curl wttr.in/Amsterdam?u
+    $ curl wttr.in/Amsterdam?m
+
 ## Special pages
 
-wttr.in can be used not only to check the wheather, but some other purposes also:
+wttr.in can be used not only to check the wheather, but for some other purposes also:
 
     $ curl wttr.in/Moon
 
-To see the current Moon phase (uses [pyphoon](https://github.com/chubin/pyphoon) as the backend).
+To see the current Moon phase (uses [pyphoon](https://github.com/chubin/pyphoon) as its backend).
 
     $ curl wttr.in/Moon@2016-12-25
 
-To the Moon phase for the specified date (2016-12-25).
+To see the Moon phase for the specified date (2016-12-25).
 
 ## Translations
 
 wttr.in is currently translated in more than 30 languages.
 
-The preferred language is detected automatically basing on the query headers (Accept-Language)
-which is automatically set by the browser or can be set in curl using the -H key ("-H Accept-Language: fr").
+The preferred language is detected automatically basing on the query headers (`Accept-Language`)
+which is automatically set by the browser or can be set explicitly using command line options
+in console clients (for example: `curl -H "Accept-Language: fr"`).
 
 The preferred language can be forced using the `lang` option:
 
     $ curl wttr.in/Berlin?lang=de
 
 See [/:translation](http://wttr.in/:translation) to learn more about the translation process, 
-to see the list of the supported languages, or if you want to help to translate wttr.in in your language.
+to see the list of the supported languages, or to know how you can help to translate wttr.in in your language.
 
 ## Installation 
 
