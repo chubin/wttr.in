@@ -1,4 +1,12 @@
-This is a web frontend for a console weather application wego, using it as a backend.
+wttr.in — the right way to check the weather.
+
+wttr.in is a console oriented weather forecast service, that supports various information representation
+like terminal oriented ANSI-sequences for the console HTTP clients such as curl, httpie or wget;
+HTML for web browsers; or PNG for graphical viewers.
+
+wttr.in uses [wego](http://github.com/schachmat/wego) to visualize weather forecast information
+and various weather data sources.
+
 You can check it at [wttr.in](http://wttr.in).
 
 ## Usage
@@ -17,7 +25,8 @@ You can access the service from a shell or from a Web browser:
 
 That is how the actual weather report for your location looks like (it is live!):
 
-![Weather Report](http://wttr.in/MyLocation.png)
+![Weather Report](http://wttr.in/MyLocation.png?)
+
 
 You can specify the location, for that you want to get the weather information.
 If you omit the location name, you will get the information for you current location,
@@ -38,9 +47,35 @@ as a location specificator:
     $ curl wttr.in/@github.com
     $ curl wttr.in/@msu.ru
 
-To get this information online, you can access the `:help` page:
+To get detailed information online, you can access the [/:help](http://wttr.in/:help) page:
 
     $ curl wttr.in/:help
+
+## Special pages
+
+wttr.in can be used not only to check the wheather, but some other purposes also:
+
+    $ curl wttr.in/Moon
+
+To see the current Moon phase (uses [pyphoon](https://github.com/chubin/pyphoon) as the backend).
+
+    $ curl wttr.in/Moon@2016-12-25
+
+To the Moon phase for the specified date (2016-12-25).
+
+## Translations
+
+wttr.in is currently translated in more than 30 languages.
+
+The preferred language is detected automatically basing on the query headers (Accept-Language)
+which is automatically set by the browser or can be set in curl using the -H key ("-H Accept-Language: fr").
+
+The preferred language can be forced using the `lang` option:
+
+    $ curl wttr.in/Berlin?lang=de
+
+See [/:translation](http://wttr.in/:translation) to learn more about the translation process, 
+to see the list of the supported languages, or if you want to help to translate wttr.in in your language.
 
 ## Installation 
 
