@@ -29,8 +29,8 @@ That is how the actual weather report for your location looks like (it is live!)
 (it's not your location actually, becasue GitHub's CDN hides your real IP address with its own IP address,
 but it is still a live weather report in your language).
 
-You can specify the location, for that you want to get the weather information.
-If you omit the location name, you will get the information for your current location,
+You can specify the location, which you want to get the weather information for.
+If you omit the location name, you will get the report for your current location,
 based on your IP address.
 
     $ curl wttr.in/London
@@ -55,7 +55,7 @@ To get detailed information online, you can access the [/:help](http://wttr.in/:
 ## Additional options
 
 By default the USCS units are used for the queries from the USA and the 
-metric system for the rest for the world.
+metric system for the rest of the world.
 You can override this behavior with the following options:
 
     $ curl wttr.in/Amsterdam?u
@@ -77,7 +77,7 @@ To see the Moon phase for the specified date (2016-12-25).
 
 wttr.in is currently translated in more than 30 languages.
 
-The preferred language is detected automatically basing on the query headers (`Accept-Language`)
+The preferred language is detected automatically based on the query headers (`Accept-Language`)
 which is automatically set by the browser or can be set explicitly using command line options
 in console clients (for example: `curl -H "Accept-Language: fr"`).
 
@@ -86,7 +86,7 @@ The preferred language can be forced using the `lang` option:
     $ curl wttr.in/Berlin?lang=de
 
 See [/:translation](http://wttr.in/:translation) to learn more about the translation process, 
-to see the list of the supported languages, or to know how you can help to translate wttr.in in your language.
+to see the list of supported languages and contributors, or to know how you can help to translate wttr.in in your language.
 
 ## Installation 
 
@@ -120,13 +120,21 @@ Python requirements:
 * requests
 * gevent
 
-You can install them using `pip`. 
+If you want to get weather reports as PNG files, install also:
+
+* PIL
+* pyte (>=0.6)
+* necessary fonts
+
+You can install most of them using `pip`. 
 
 If `virtualenv` is used:
 
     virtualenv ve
     ve/bin/pip install -r requirements.txt
     ve/bin/pip bin/srv.py
+
+(pyte 0.6 is not yet released and it should be installed direct from the source code from its GitHub repository at the moment).
 
 Also, you need to install the geoip2 database.
 You can use a free database GeoLite2, that can be downloaded from http://dev.maxmind.com/geoip/geoip2/geolite2/
