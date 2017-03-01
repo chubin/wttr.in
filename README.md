@@ -15,7 +15,9 @@ You can access the service from a shell or from a Web browser:
          /   \     0.0 mm         
 
 
-![Weather Report](http://wttr.in/Berlin.png)
+That is how the actual weather report for your location looks like (it is live!):
+
+![Weather Report](http://wttr.in/MyLocation.png)
 
 You can specify the location, for that you want to get the weather information.
 If you omit the location name, you will get the information for you current location,
