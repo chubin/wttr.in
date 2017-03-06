@@ -1,0 +1,32 @@
+wttr.in is translated in NUMBER_OF_LANGUAGES languages:
+
+    SUPPORTED_LANGUAGES
+
+Translated/improved/corrected by:
+
+    * Czech:        Juraj Kakody
+    * Finnish:      @Maxifi
+    * French:       Igor Chubin
+    * German:       Igor Chubin
+    * Greek:        Panayotis Vryonis
+    * Japanese:     @ryunix
+    * Macedonian:   Matej Plavevski
+    * Romanian:     Gabriel Moruz
+    * Russian:      Igor Chubin
+    * Slovak:       Juraj Kakody
+    * Swedish:      John Eriksson
+    * Serbian:      Milan Stevanović @FathVader
+    * Swahili:      Joel Mukuthu
+    * Turkish:      Atabey Kaygun
+    * Ukrainian:    Igor Chubin
+
+and many many others.
+
+In the not likely case wttr.in is not yet translated in your language 
+you can help with the translation.
+Please start with one of the following steps:
+
+    * Open a GitHub issue: github.com/chubin/wttr.in
+    * Write an email to igor@chub.in
+    * Write PM or tweet to igor_chubin
+
