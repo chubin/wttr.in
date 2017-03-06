@@ -29,6 +29,12 @@ Wir hoffen, dass Sie besseres Wetter haben!
 Ελπίζουμε να έχεις καλύτερο καιρό!
 """,
 
+        'fi': u"""
+Emme löytänyt sijaintiasi, joten toimme sinut Oimjakoniin,
+yhteen maailman kylmimmistä pysyvästi asutetuista paikoista.
+Toivottavasti sinulla on parempi sää!
+""",
+
         'fr': u"""
 Nous n'avons pas pu trouver votre position,
 Nous vous avons donc amenés à Oïmiakon,
@@ -94,6 +100,7 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
         'cs': u'Neznámá poloha',
         'de': u'Unbekannter Ort',
         'el': u'Άνγωστη τοποθεσία',
+        'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement inconnu',
         'ja': u'未知の場所です',
         'ro': u'Locaţie necunoscută',
