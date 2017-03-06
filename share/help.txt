@@ -3,13 +3,36 @@ Usage:
     $ curl wttr.in          # current location
     $ curl wttr.in/muc      # weather in the Munic airport
 
-Supported locations:
+Supported location types:
 
     /paris                  # city name
     /muc                    # airport code (3 letters)
     /@stackoverflow.com     # domain name
+    /94107                  # area codes
+
+Special locations:
+
+    /moon                   # Moon phase (add ,+US or ,+France for these cities)
+    /moon@2016-10-25        # Moon phase for the date (@2016-10-25)
+
+Units:
+
+    ?m                      # metric (SI) (used by default everywhere except US)
+    ?u                      # USCS (used by default in US)
+
+Localization:
+
+    $ curl wttr.in/paris?lang=fr
+    $ curl -H "Accept-Language: fr" wttr.in/paris
+
+Supported languages:
+
+    SUPPORTED_LANGUAGES (supported)
+    hi ko zh (in progress)
 
 Special URLs:
 
     /:help                  # show this page
+    /:bash.function         # show recommended bash function wttr()
+    /:translation           # show the information about the translators
 
