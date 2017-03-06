@@ -7,3 +7,35 @@ Kijev       : Kiev
 Kharkov     : Kharkiv
 spb         : Saint Petersburg
 Dnipro      : Dnipropetrovsk
+st.petersburg: Saint Petersburg
+sanfrancisco: San Francisco
+san fransisco:San Francisco
+San+Francisco:San Francisco
+San-Francisco:San Francisco
+Dnipropetrovsk:Dnepropetrovsk
+Dnepr       : Dnipropetrovsk
+sanjose     : San Jose
+san josé    : San Jose
+newyork     : New York
+newy-yourk  : New York
+new-york    : New York
+Saint-Petersburg: Saint Petersburg
+Krakow      : Krakow,pl
+indonesia   : Jakarta
+hanoi,vietnam:Hanoi
+nuernberg   : Nuremberg
+nürnberg    : Nuremberg
+norway      : Oslo
+ville de bruxelles - stad brussel: Brussels
+frankfurt am main:Frankfurt, Hessen
+frankfurt   :Frankfurt, Brandenburg
+frankfurt oder : Frankfurt, Brandenburg
+frankfurt (oder): Frankfurt, Brandenburg
+tel-aviv    : Tel Aviv
+sao paulo   : São Paulo
+los-angeles : Los Angeles
+Sevastopol  : Sevastopol, Ukraine
+Beersheva   : Beersheba
+Be'ersheva  : Beersheba
+Be'er Sheva : Beersheba
+Lugansk     : Luhansk
