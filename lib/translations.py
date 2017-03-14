@@ -81,6 +81,12 @@ en av planetens kallaste platser med permanent bosättning.
 Vi hoppas att vädret är bättre hos dig!
 """,
 
+        'nn': u"""
+Me klarte ikkje å finna din stad, så me har i staden teke deg til Ojmjakon,
+ein av dei kaldaste stadane på kloten med permanent busetnad.
+Me håper vêret er betre hos deg!
+""",
+
         'tr': u"""
 Aradığınız bölge bulunamadı. O yüzden sizi dünyadaki en soğuk sürekli
 yerleşim yerlerinden biri olan Oymyakon'e getirdik.
@@ -108,6 +114,7 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
         'sk': u'Neznáma poloha',
         'sr': u'Непозната локација',
         'sv': u'Okänd plats',
+        'nn': u'Ukjend stad',
         'tr': u'Bölge bulunamadı',
         'ua': u'Невідоме місце',
     }
