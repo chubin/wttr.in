@@ -61,6 +61,43 @@ You can override this behavior with the following options:
     $ curl wttr.in/Amsterdam?u
     $ curl wttr.in/Amsterdam?m
 
+## Supported formats
+
+Wttr.in supports three output formats at the moment:
+
+* ANSI for the terminal;
+* HTML for the browser;
+* PNG for the graphical viewers.
+
+The ANSI and HTML formats are selected basing on the User-Agent string.
+The PNG format can be forced by adding `.png` to the end of the query:
+
+    $ wget wttr.in/Paris.png
+
+You can use all of the options with the PNG-format like in an URL, but you have
+to separate them with `_` instead of `?` and `&`:
+
+    $ wget wttr.in/Paris_0tqp_lang=fr.png
+
+Special useful options for the PNG format:
+
+* `t` for transparency (`transparency=150`);
+* transparency=0..255 for a custom transparency level.
+
+Transparency is a useful feature when the weather PNG's are used to 
+add to add weather data to the pictures:
+
+$ convert 1.jpg <( curl wttr.in/Oymyakon_tqp0.png ) -geometry +50+50 -composite 2.jpg
+
+Here:
+
+* `1.jpg` - sorce file;
+* `2.jpg` - target file;
+* Oymyakon - name of the location;
+* tqp0 - options (recommended).
+
+![Picture with weather data](https://pbs.twimg.com/media/C69-wsIW0AAcAD5.jpg)
+
 ## Special pages
 
 wttr.in can be used not only to check the wheather, but for some other purposes also:
