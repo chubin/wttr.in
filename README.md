@@ -29,7 +29,7 @@ That is how the actual weather report for your location looks like (it is live!)
 (it's not your location actually, becasue GitHub's CDN hides your real IP address with its own IP address,
 but it is still a live weather report in your language).
 
-You can specify the location, which you want to get the weather information for.
+You can specify the location that you want to get the weather information for.
 If you omit the location name, you will get the report for your current location,
 based on your IP address.
 
@@ -63,7 +63,7 @@ You can override this behavior with the following options:
 
 ## Supported formats
 
-Wttr.in supports three output formats at the moment:
+wttr.in supports three output formats at the moment:
 
 * ANSI for the terminal;
 * HTML for the browser;
@@ -84,14 +84,14 @@ Special useful options for the PNG format:
 * `t` for transparency (`transparency=150`);
 * transparency=0..255 for a custom transparency level.
 
-Transparency is a useful feature when the weather PNG's are used to 
-add to add weather data to the pictures:
+Transparency is a useful feature when the weather PNGs are used to 
+add weather data to the pictures:
 
 $ convert 1.jpg <( curl wttr.in/Oymyakon_tqp0.png ) -geometry +50+50 -composite 2.jpg
 
 Here:
 
-* `1.jpg` - sorce file;
+* `1.jpg` - source file;
 * `2.jpg` - target file;
 * Oymyakon - name of the location;
 * tqp0 - options (recommended).
@@ -100,7 +100,7 @@ Here:
 
 ## Special pages
 
-wttr.in can be used not only to check the wheather, but for some other purposes also:
+wttr.in can be used not only to check the weather, but also for some other purposes:
 
     $ curl wttr.in/Moon
 
@@ -127,7 +127,7 @@ to see the list of supported languages and contributors, or to know how you can 
 
 ## Installation 
 
-To install the program you need:
+To install the program:
 
 1. Install external dependencies
 2. Install python dependencies used by the service
