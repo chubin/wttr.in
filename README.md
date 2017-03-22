@@ -42,6 +42,20 @@ about some airports:
     $ curl wttr.in/muc      # Weather for IATA: muc, Munich International Airport, Germany
     $ curl wttr.in/ham      # Weather for IATA: ham, Hamburg Airport, Germany
 
+If you want to specify a location that is not a city/town's name, but a name of some geographical location
+(e.g. it can be a site in a city, a mountain name, a special location etc.) you should place `~` before its name.
+That means the location name should be looked up before:
+
+	$ curl wttr.in/~Vostok+Station
+	$ curl wttr.in/~Eiffel+Tower
+	$ curl wttr.in/~Kilimanjaro
+
+In this case there is a line below the weather forecast output describing the founded precise position:
+
+	Location: Vostok Station, станция Восток, AAT, Antarctica [-78.4642714,106.8364678]
+    Location: Tour Eiffel, 5, Avenue Anatole France, Gros-Caillou, 7e, Paris, Île-de-France, 75007, France [48.8582602,2.29449905432]
+	Location: Kilimanjaro, Northern, Tanzania [-3.4762789,37.3872648] 
+
 You can also use IP-addresses (direct) or domain names (prefixed with @)
 as a location specificator:
 
@@ -110,17 +124,36 @@ To see the current Moon phase (uses [pyphoon](https://github.com/chubin/pyphoon)
 
 To see the Moon phase for the specified date (2016-12-25).
 
-## Translations
+## Internationalization and localization
 
-wttr.in is currently translated in more than 30 languages.
+wttr.in supports multilingual locations names: they can be specified in any language in the world
+(it may be surprising, but many locations in the world do not have any English name at all).
 
-The preferred language is detected automatically based on the query headers (`Accept-Language`)
-which is automatically set by the browser or can be set explicitly using command line options
-in console clients (for example: `curl -H "Accept-Language: fr"`).
+The query string should be specified in Unicode (hex encoded or not). If it contains spaces
+they must be replaced with +:
+
+    $ curl wttr.in/станция+Восток
+    Weather report: станция Восток
+
+                   Overcast
+          .--.     -65 – -47 °C
+       .-(    ).   ↑ 23 km/h
+      (___.__)__)  15 km
+                   0.0 mm
+
+The language used for the output (except the location name) does not depend on the input language
+and it is either English (by default) or the preferred language of the browser (if the query
+was issued from a browser) that is specified in the query headers (`Accept-Language`).
+
+It can be set explicitly when using console clients by means of the appropriate command line options
+(for example: `curl -H "Accept-Language: fr" wttr.in` or `http GET wttr.in Accept-Language:ru`).
 
 The preferred language can be forced using the `lang` option:
 
     $ curl wttr.in/Berlin?lang=de
+
+wttr.in is currently translated in more than 35 languages and the number of supported languages
+is constantly growing.
 
 See [/:translation](http://wttr.in/:translation) to learn more about the translation process, 
 to see the list of supported languages and contributors, or to know how you can help to translate wttr.in in your language.
