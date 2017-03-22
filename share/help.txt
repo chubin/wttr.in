@@ -6,9 +6,12 @@ Usage:
 Supported location types:
 
     /paris                  # city name
+    /~Eiffel+tower          # any location
+    /Москва                 # Unicode name of any location in any language
     /muc                    # airport code (3 letters)
     /@stackoverflow.com     # domain name
     /94107                  # area codes
+    /-78.46,106.79          # GPS coordinates
 
 Special locations:
 
@@ -26,8 +29,9 @@ View options:
     ?1                      # current weather + 1 day
     ?2                      # current weather + 2 days
     ?n                      # narrow version (only day and night)
-    ?q                      # quiet version (no "Weathre report" text)
-    ?Q                      # superquiet version (no "Weathre report", no city name)
+    ?q                      # quiet version (no "Weather report" text)
+    ?Q                      # superquiet version (no "Weather report", no city name)
+    ?T                      # switch terminal sequences off (no colors)
 
 PNG options:
 
@@ -49,8 +53,8 @@ Localization:
 
 Supported languages:
 
-    SUPPORTED_LANGUAGES (supported)
-    hi ko zh (in progress)
+    FULL_TRANSLATION (supported)
+    PARTIAL_TRANSLATION (in progress)
 
 Special URLs:
 
