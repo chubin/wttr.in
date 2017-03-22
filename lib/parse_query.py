@@ -29,6 +29,8 @@ def parse_query(args):
         result['inverted_colors'] = True
     if 't' in q:
         result['transparency'] = '150'
+    if 'T' in q:
+        result['no-terminal'] = True
     if 'p' in q:
         result['padding'] = True
 
