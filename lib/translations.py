@@ -117,6 +117,24 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
         'nn': u'Ukjend stad',
         'tr': u'Bölge bulunamadı',
         'ua': u'Невідоме місце',
+    },
+
+    'LOCATION': {
+        'en': u'Location',
+        'cs': u'Poloha',
+        'de': u'Ort',
+        'el': u'Τοποθεσία',
+        'fi': u'Tuntematon sijainti',
+        'fr': u'Emplacement',
+        'ja': u'未知の場所です',
+        'nn': u'Stad',
+        'ro': u'Locaţie',
+        'ru': u'Местоположение',
+        'sk': u'Poloha',
+        'sr': u'Локација',
+        'sv': u'Plats',
+        'tr': u'Bölge bulunamadı',
+        'ua': u'Місце',
     }
 }
 
