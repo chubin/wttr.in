@@ -255,9 +255,6 @@ to access the service (if you want to use a web frontend; it's recommended):
         access_log  /var/log/nginx/wttr.in-access.log  main;
         error_log  /var/log/nginx/wttr.in-error.log;
 
-        location /clouds_files { root /var/www/igor/; }
-        location /clouds_images { root /var/www/igor/; }
-
         location / {
             proxy_pass         http://127.0.0.1:8002;
 
