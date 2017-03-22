@@ -158,6 +158,8 @@ is constantly growing.
 See [/:translation](http://wttr.in/:translation) to learn more about the translation process, 
 to see the list of supported languages and contributors, or to know how you can help to translate wttr.in in your language.
 
+![Queries to wttr.in in various languages](https://pbs.twimg.com/media/C7hShiDXQAES6z1.jpg)
+
 ## Installation 
 
 To install the program:
