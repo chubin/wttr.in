@@ -23,6 +23,8 @@ def parse_query(args):
         result['narrow'] = True
     if 'm' in q:
         result['use_metric'] = True
+    if 'M' in q:
+        result['use_ms_for_wind'] = True
     if 'u' in q:
         result['use_imperial'] = True
     if 'I' in q:
