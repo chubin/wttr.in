@@ -22,6 +22,7 @@ Units:
 
     ?m                      # metric (SI) (used by default everywhere except US)
     ?u                      # USCS (used by default in US)
+    ?M                      # show wind speed in m/s
 
 View options:
 
@@ -43,6 +44,7 @@ PNG options:
 Options can be combined:
 
     /Paris?0pq
+    /Paris?0pq&lang=fr
     /Paris_0pq.png          # in PNG the file mode are specified after _
     /Rome_0pq_lang=it.png   # long options are separated with underscore
 
