@@ -81,12 +81,6 @@ en av planetens kallaste platser med permanent bosättning.
 Vi hoppas att vädret är bättre hos dig!
 """,
 
-        'nn': u"""
-Me klarte ikkje å finna din stad, så me har i staden teke deg til Ojmjakon,
-ein av dei kaldaste stadane på kloten med permanent busetnad.
-Me håper vêret er betre hos deg!
-""",
-
         'tr': u"""
 Aradığınız bölge bulunamadı. O yüzden sizi dünyadaki en soğuk sürekli
 yerleşim yerlerinden biri olan Oymyakon'e getirdik.
@@ -114,7 +108,6 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
         'sk': u'Neznáma poloha',
         'sr': u'Непозната локација',
         'sv': u'Okänd plats',
-        'nn': u'Ukjend stad',
         'tr': u'Bölge bulunamadı',
         'ua': u'Невідоме місце',
     },
@@ -127,7 +120,6 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
         'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement',
         'ja': u'未知の場所です',
-        'nn': u'Stad',
         'ro': u'Locaţie',
         'ru': u'Местоположение',
         'sk': u'Poloha',
@@ -135,7 +127,30 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
         'sv': u'Plats',
         'tr': u'Bölge bulunamadı',
         'ua': u'Місце',
-    }
+    },
+
+    'CAPACITY_LIMIT_REACHED': {
+        'en': u"""
+Sorry, we are runnig out of queries to the weather service at the moment.
+Here is the weather report for the default city (just to show you, how it looks like).
+We will get new queries as soon as possible.
+You can follow https://twitter.com/igor_chubin for the updates
+======================================================================================
+""",
+    },
+
+    #'Check new Feature: \033[92mwttr.in/Moon\033[0m or \033[92mwttr.in/Moon@2016-Mar-23\033[0m to see the phase of the Moon'
+    #'New feature: \033[92mwttr.in/Rome?lang=it\033[0m or \033[92mcurl -H "Accept-Language: it" wttr.in/Rome\033[0m for the localized version. Your lang instead of "it"'
+
+    'NEW_FEATURE': {
+        'en': u'New feature: multilingual location names \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) and location search \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
+        'ru': u'Попробуйте: названия мест на любом языке \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и поиск мест \033[92mwttr.in/~Kilimanjaro\033[0m (нужно добавить ~ спереди)',
+    },
+
+    'FOLLOW_ME': {
+        'en': u'Follow \033[46m\033[30m@igor_chubin\033[0m for wttr.in updates \033[4m[new \033[14m7 features\033[4m in the last 3 months]\033[0m',
+        'ru': u'Все новые фичи публикуются здесь: \033[46m\033[30m@igor_chubin\033[0m \033[4m[\033[14mза последние 3 месяца: 7 новых фич\033[4m]\033[0m',
+    },
 }
 
 def get_message(message_name, lang):
