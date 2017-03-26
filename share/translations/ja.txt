@@ -1,50 +1,50 @@
-113:                                    : Clear
-113:                                    : Sunny
-116:                                    : Partly cloudy
-119:                                    : Cloudy
-122:                                    : Overcast
-143:                                    : Mist
-176:                                    : Patchy rain possible
-179:                                    : Patchy snow possible
-182:                                    : Patchy sleet possible
-185:                                    : Patchy freezing drizzle possible
-200:                                    : Thundery outbreaks possible
-227:                                    : Blowing snow
-230:                                    : Blizzard
-248:                                    : Fog
-260:                                    : Freezing fog
-263:                                    : Patchy light drizzle
-266:                                    : Light drizzle
-281:                                    : Freezing drizzle
-284:                                    : Heavy freezing drizzle
-293:                                    : Patchy light rain
-296:                                    : Light rain
-299:                                    : Moderate rain at times
-302:                                    : Moderate rain
-305:                                    : Heavy rain at times
-308:                                    : Heavy rain
-311:                                    : Light freezing rain
-314:                                    : Moderate or heavy freezing rain
-317:                                    : Light sleet
-320:                                    : Moderate or heavy sleet
-323:                                    : Patchy light snow
-326:                                    : Light snow
-329:                                    : Patchy moderate snow
-332:                                    : Moderate snow
-335:                                    : Patchy heavy snow
-338:                                    : Heavy snow
-350:                                    : Ice pellets
-353:                                    : Light rain shower
-356:                                    : Moderate or heavy rain shower
-359:                                    : Torrential rain shower
-362:                                    : Light sleet showers
-365:                                    : Moderate or heavy sleet showers
-368:                                    : Light snow showers
-371:                                    : Moderate or heavy snow showers
-386:                                    : Patchy light rain with thunder
-389:                                    : Moderate or heavy rain with thunder
-392:                                    : Patchy light snow with thunder
-395:                                    : Moderate or heavy snow with thunder
+113: 快晴                               : Clear
+113: 晴れ                               : Sunny
+116: 所により曇り                       : Partly cloudy
+119: 曇り                               : Cloudy
+122: 曇り                               : Overcast
+143: 靄                                 : Mist
+176: 所により雨                         : Patchy rain possible
+179: 所により雪                         : Patchy snow possible
+182: 所により凍雨                       : Patchy sleet possible
+185: 所により着氷性の霧雨               : Patchy freezing drizzle possible
+200: 雷雨の発生                         : Thundery outbreaks possible
+227: 吹雪                               : Blowing snow
+230: 猛吹雪                             : Blizzard
+248: 霧                                 : Fog
+260: 着氷性の霧                         : Freezing fog
+263: 所により弱い霧雨                   : Patchy light drizzle
+266: 弱い霧雨                           : Light drizzle
+281: 着氷性の霧雨                       : Freezing drizzle
+284: 強い着氷性の霧雨                   : Heavy freezing drizzle
+293: 所により弱い雨                     : Patchy light rain
+296: 弱い雨                             : Light rain
+299: 時々雨                             : Moderate rain at times
+302: 雨                                 : Moderate rain
+305: 時々強い雨                         : Heavy rain at times
+308: 強い雨                             : Heavy rain
+311: 弱い着氷性の雨                     : Light freezing rain
+314: 着氷性の雨または強い着氷性の雨     : Moderate or heavy freezing rain
+317: 弱い凍雨                           : Light sleet
+320: 凍雨または強い凍雨                 : Moderate or heavy sleet
+323: 所により弱い雪                     : Patchy light snow
+326: 弱い雪                             : Light snow
+329: 所により雪                         : Patchy moderate snow
+332: 雪                                 : Moderate snow
+335: 所により強い雪                     : Patchy heavy snow
+338: 強い雪                             : Heavy snow
+350: 凍雨                               : Ice pellets
+353: 弱い驟雨                           : Light rain shower
+356: 驟雨または強い驟雨                 : Moderate or heavy rain shower
+359: 激しい驟雨                         : Torrential rain shower
+362: 弱い凍雨                           : Light sleet showers
+365: 凍雨または強い凍雨                 : Moderate or heavy sleet showers
+368: 弱い驟雪                           : Light snow showers
+371: 驟雪または強い驟雪                 : Moderate or heavy snow showers
+386: 所により雷を伴う弱い雨             : Patchy light rain with thunder
+389: 雷を伴う雨または強い雨             : Moderate or heavy rain with thunder
+392: 所により雷を伴う弱い雪             : Patchy light snow with thunder
+395: 雷を伴う雪または強い雪             : Moderate or heavy snow with thunder
 
 
 
