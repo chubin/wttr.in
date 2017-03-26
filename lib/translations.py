@@ -134,7 +134,7 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
         'el': u'Τοποθεσία',
         'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement',
-        'ja': u'未知の場所です',
+        'ja': u'位置情報',
         'ro': u'Locaţie',
         'ru': u'Местоположение',
         'sk': u'Poloha',
