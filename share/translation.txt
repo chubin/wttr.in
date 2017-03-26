@@ -4,6 +4,7 @@ wttr.in is translated in NUMBER_OF_LANGUAGES languages:
 
 Translated/improved/corrected by:
 
+    * Armenian      Aram Bayadyan @aramix, Mikayel Ghazaryan @mkdotam
     * Czech:        Juraj Kakody
     * Finnish:      @Maxifi
     * French:       Igor Chubin
