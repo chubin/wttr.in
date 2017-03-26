@@ -29,6 +29,12 @@ Wir hoffen, dass Sie besseres Wetter haben!
 Ελπίζουμε να έχεις καλύτερο καιρό!
 """,
 
+        'fi': u"""
+Emme löytänyt sijaintiasi, joten toimme sinut Oimjakoniin,
+yhteen maailman kylmimmistä pysyvästi asutetuista paikoista.
+Toivottavasti sinulla on parempi sää!
+""",
+
         'fr': u"""
 Nous n'avons pas pu trouver votre position,
 Nous vous avons donc amenés à Oïmiakon,
@@ -93,15 +99,21 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
 шунинг учун биз сизга сайёрамизнинг энг совук нуктаси Оймяконнинг об-хавосини курсатмокдамиз.
 Шу сабаб бугунги об-хаво сиз учун ажойиб булади деган умиддамиз!
 """,
-    },
-    
 
+        'hy': u"""
+Ձեր գտնվելու վայրը չհաջողվեց որոշել,
+այդ պատճառով մենք ձեզ կցուցադրենք եղանակը Օյմյակոնում.
+երկրագնդի ամենասառը բնակավայրում։
+Հույս ունենք որ ձեր եղանակը այսօր ավելի լավն է։
+"""
+    },
 
     'UNKNOWN_LOCATION': {
         'en': u'Unknown location',
         'cs': u'Neznámá poloha',
         'de': u'Unbekannter Ort',
         'el': u'Άνγωστη τοποθεσία',
+        'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement inconnu',
         'ja': u'未知の場所です',
         'ro': u'Locaţie necunoscută',
@@ -112,7 +124,59 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
         'tr': u'Bölge bulunamadı',
         'ua': u'Невідоме місце',
         'uz': u'Аникланмаган худуд',
-    }
+        'hy': u'Անհայտ գտնվելու վայր',
+    },
+
+    'LOCATION': {
+        'en': u'Location',
+        'cs': u'Poloha',
+        'de': u'Ort',
+        'el': u'Τοποθεσία',
+        'fi': u'Tuntematon sijainti',
+        'fr': u'Emplacement',
+        'ja': u'未知の場所です',
+        'ro': u'Locaţie',
+        'ru': u'Местоположение',
+        'sk': u'Poloha',
+        'sr': u'Локација',
+        'sv': u'Plats',
+        'tr': u'Bölge bulunamadı',
+        'ua': u'Місце',
+        'hy': u'Դիրք',
+    },
+
+    'CAPACITY_LIMIT_REACHED': {
+        'en': u"""
+Sorry, we are runnig out of queries to the weather service at the moment.
+Here is the weather report for the default city (just to show you, how it looks like).
+We will get new queries as soon as possible.
+You can follow https://twitter.com/igor_chubin for the updates
+======================================================================================
+""",
+        'hy': u"""
+Կներեք, այս պահին մենք գերազանցել ենք եղանակային տեսության կայանին հարցումների քանակը.
+Կարող եք տեսնել տիպային եղանակը զեկուցում հիմնական քաղաքի համար (Ուղղակի որպես նմուշ)։
+Մենք մշտապես աշխատում ենք հարցումների քանակը բարելավելու ուղղությամբ։
+Կարող եք հետևել մեզ https://twitter.com/igor_chubin թարմացումների համար։
+======================================================================================
+""",
+
+    },
+
+    #'Check new Feature: \033[92mwttr.in/Moon\033[0m or \033[92mwttr.in/Moon@2016-Mar-23\033[0m to see the phase of the Moon'
+    #'New feature: \033[92mwttr.in/Rome?lang=it\033[0m or \033[92mcurl -H "Accept-Language: it" wttr.in/Rome\033[0m for the localized version. Your lang instead of "it"'
+
+    'NEW_FEATURE': {
+        'en': u'New feature: multilingual location names \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) and location search \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
+        'ru': u'Попробуйте: названия мест на любом языке \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и поиск мест \033[92mwttr.in/~Kilimanjaro\033[0m (нужно добавить ~ спереди)',
+        'ru': u'Փորձարկեք: տեղամասերի անունները կամայական լեզվով \033[92mwttr.in/Դիլիջան\033[0m (в UTF-8) և տեղանքի որոնում \033[92mwttr.in/~Արալեռ\033[0m (հարկավոր է ~ ավելացնել դիմացից)',
+    },
+
+    'FOLLOW_ME': {
+        'en': u'Follow \033[46m\033[30m@igor_chubin\033[0m for wttr.in updates \033[4m[new \033[14m7 features\033[4m in the last 3 months]\033[0m',
+        'ru': u'Все новые фичи публикуются здесь: \033[46m\033[30m@igor_chubin\033[0m \033[4m[\033[14mза последние 3 месяца: 7 новых фич\033[4m]\033[0m',
+        'hy': u'Նոր ֆիչռների համար հետևեք՝ \033[46m\033[30m@igor_chubin\033[0m \033[4m[\033[14mվերջին 3 ամսում: 7 թարմացում\033[4m]\033[0m',
+    },
 }
 
 def get_message(message_name, lang):

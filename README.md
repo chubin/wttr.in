@@ -29,7 +29,7 @@ That is how the actual weather report for your location looks like (it is live!)
 (it's not your location actually, becasue GitHub's CDN hides your real IP address with its own IP address,
 but it is still a live weather report in your language).
 
-You can specify the location, which you want to get the weather information for.
+You can specify the location that you want to get the weather information for.
 If you omit the location name, you will get the report for your current location,
 based on your IP address.
 
@@ -41,6 +41,20 @@ about some airports:
 
     $ curl wttr.in/muc      # Weather for IATA: muc, Munich International Airport, Germany
     $ curl wttr.in/ham      # Weather for IATA: ham, Hamburg Airport, Germany
+
+If you want to specify a location that is not a city/town's name, but a name of some geographical location
+(e.g. it can be a site in a city, a mountain name, a special location etc.) you should place `~` before its name.
+That means the location name should be looked up before:
+
+	$ curl wttr.in/~Vostok+Station
+	$ curl wttr.in/~Eiffel+Tower
+	$ curl wttr.in/~Kilimanjaro
+
+In this case there is a line below the weather forecast output describing the founded precise position:
+
+	Location: Vostok Station, станция Восток, AAT, Antarctica [-78.4642714,106.8364678]
+    Location: Tour Eiffel, 5, Avenue Anatole France, Gros-Caillou, 7e, Paris, Île-de-France, 75007, France [48.8582602,2.29449905432]
+	Location: Kilimanjaro, Northern, Tanzania [-3.4762789,37.3872648] 
 
 You can also use IP-addresses (direct) or domain names (prefixed with @)
 as a location specificator:
@@ -61,9 +75,46 @@ You can override this behavior with the following options:
     $ curl wttr.in/Amsterdam?u
     $ curl wttr.in/Amsterdam?m
 
+## Supported formats
+
+wttr.in supports three output formats at the moment:
+
+* ANSI for the terminal;
+* HTML for the browser;
+* PNG for the graphical viewers.
+
+The ANSI and HTML formats are selected basing on the User-Agent string.
+The PNG format can be forced by adding `.png` to the end of the query:
+
+    $ wget wttr.in/Paris.png
+
+You can use all of the options with the PNG-format like in an URL, but you have
+to separate them with `_` instead of `?` and `&`:
+
+    $ wget wttr.in/Paris_0tqp_lang=fr.png
+
+Special useful options for the PNG format:
+
+* `t` for transparency (`transparency=150`);
+* transparency=0..255 for a custom transparency level.
+
+Transparency is a useful feature when the weather PNGs are used to 
+add weather data to the pictures:
+
+$ convert 1.jpg <( curl wttr.in/Oymyakon_tqp0.png ) -geometry +50+50 -composite 2.jpg
+
+Here:
+
+* `1.jpg` - source file;
+* `2.jpg` - target file;
+* Oymyakon - name of the location;
+* tqp0 - options (recommended).
+
+![Picture with weather data](https://pbs.twimg.com/media/C69-wsIW0AAcAD5.jpg)
+
 ## Special pages
 
-wttr.in can be used not only to check the wheather, but for some other purposes also:
+wttr.in can be used not only to check the weather, but also for some other purposes:
 
     $ curl wttr.in/Moon
 
@@ -73,24 +124,45 @@ To see the current Moon phase (uses [pyphoon](https://github.com/chubin/pyphoon)
 
 To see the Moon phase for the specified date (2016-12-25).
 
-## Translations
+## Internationalization and localization
 
-wttr.in is currently translated in more than 30 languages.
+wttr.in supports multilingual locations names: they can be specified in any language in the world
+(it may be surprising, but many locations in the world do not have any English name at all).
 
-The preferred language is detected automatically based on the query headers (`Accept-Language`)
-which is automatically set by the browser or can be set explicitly using command line options
-in console clients (for example: `curl -H "Accept-Language: fr"`).
+The query string should be specified in Unicode (hex encoded or not). If it contains spaces
+they must be replaced with +:
+
+    $ curl wttr.in/станция+Восток
+    Weather report: станция Восток
+
+                   Overcast
+          .--.     -65 – -47 °C
+       .-(    ).   ↑ 23 km/h
+      (___.__)__)  15 km
+                   0.0 mm
+
+The language used for the output (except the location name) does not depend on the input language
+and it is either English (by default) or the preferred language of the browser (if the query
+was issued from a browser) that is specified in the query headers (`Accept-Language`).
+
+It can be set explicitly when using console clients by means of the appropriate command line options
+(for example: `curl -H "Accept-Language: fr" wttr.in` or `http GET wttr.in Accept-Language:ru`).
 
 The preferred language can be forced using the `lang` option:
 
     $ curl wttr.in/Berlin?lang=de
 
+wttr.in is currently translated in more than 35 languages and the number of supported languages
+is constantly growing.
+
 See [/:translation](http://wttr.in/:translation) to learn more about the translation process, 
 to see the list of supported languages and contributors, or to know how you can help to translate wttr.in in your language.
 
+![Queries to wttr.in in various languages](https://pbs.twimg.com/media/C7hShiDXQAES6z1.jpg)
+
 ## Installation 
 
-To install the program you need:
+To install the program:
 
 1. Install external dependencies
 2. Install python dependencies used by the service
@@ -182,9 +254,6 @@ to access the service (if you want to use a web frontend; it's recommended):
         server_name  wttr.in *.wttr.in;
         access_log  /var/log/nginx/wttr.in-access.log  main;
         error_log  /var/log/nginx/wttr.in-error.log;
-
-        location /clouds_files { root /var/www/igor/; }
-        location /clouds_images { root /var/www/igor/; }
 
         location / {
             proxy_pass         http://127.0.0.1:8002;

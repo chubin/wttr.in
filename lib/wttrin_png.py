@@ -28,7 +28,10 @@ import pyte.screens
 #
 import unicodedata2
 
-MYDIR = os.path.abspath(os.path.dirname( os.path.dirname('__file__')))
+MYDIR = os.path.abspath(os.path.dirname(os.path.dirname('__file__')))
+sys.path.append("%s/lib/" % MYDIR)
+import parse_query
+
 PNG_CACHE = os.path.join(MYDIR, "cache/png")
 
 COLS = 180
@@ -111,7 +114,7 @@ def script_category(char):
     else:
         return cat
 
-def gen_term(filename, buf):
+def gen_term(filename, buf, options=None):
     buf = strip_buf(buf)
     cols = len(buf[0])
     rows = len(buf)
@@ -151,9 +154,33 @@ def gen_term(filename, buf):
         y_pos += CHAR_HEIGHT
         #sys.stdout.write('\n')
 
+    if 'transparency' in options:
+        transparency = options.get('transparency', '255')
+        try:
+            transparency = int(transparency)
+        except:
+            transparceny = 255
+
+        if transparency < 0:
+            transparency = 0
+
+        if transparency > 255:
+            transparency = 255
+
+        image = image.convert("RGBA")
+        datas = image.getdata()
+
+        new_data = []
+        for item in datas:
+            new_item = tuple(list(item[:3]) + [transparency])
+            new_data.append(new_item)
+
+        image.putdata(new_data)
+
+
     image.save(filename)
 
-def typescript_to_one_frame(png_file, text):
+def typescript_to_one_frame(png_file, text, options=None):
     """
     Render text (terminal sequence) in png_file
     """
@@ -169,7 +196,7 @@ def typescript_to_one_frame(png_file, text):
 
     stream.feed(text)
 
-    gen_term(png_file, screen.buffer)
+    gen_term(png_file, screen.buffer, options=options)
 
 #
 # wttr.in related functions
@@ -189,6 +216,7 @@ def parse_wttrin_png_name(name):
     """
 
     parsed = {}
+    to_be_parsed = {}
 
     if name.lower()[-4:] == '.png':
         parsed['filetype'] = 'png'
@@ -197,7 +225,7 @@ def parse_wttrin_png_name(name):
     parts = name.split('_')
     parsed['location'] = parts[0]
 
-    for part in parts:
+    for part in parts[1:]:
         if re.match('(?:[0-9]+)x', part):
             parsed['width'] = part[:-1]
         elif re.match('x(?:[0-9]+)', part):
@@ -206,7 +234,11 @@ def parse_wttrin_png_name(name):
             parsed['width'], parsed['height'] = part.split('x', 1)
         elif '=' in part:
             arg, val = part.split('=', 1)
-            parsed[arg] = val
+            to_be_parsed[arg] = val
+        else:
+            to_be_parsed[part] = ''
+
+    parsed.update(parse_query.parse_query(to_be_parsed))
 
     return parsed
 
@@ -246,6 +278,9 @@ def make_wttr_in_png(png_name, options=None):
     """
 
     parsed = parse_wttrin_png_name(png_name)
+    print "------"
+    print parsed
+    print "------"
 
     # if location is MyLocation it should be overriden 
     # with autodetected location (from options)
@@ -257,6 +292,7 @@ def make_wttr_in_png(png_name, options=None):
             if key not in parsed:
                 parsed[key] = val
     url = make_wttrin_query(parsed)
+    print "URL = ", url
 
     timestamp = time.strftime("%Y%m%d%H", time.localtime())
     cached_basename = url[14:].replace('/','_')
@@ -267,12 +303,14 @@ def make_wttr_in_png(png_name, options=None):
     if not os.path.exists(dirname):
         os.makedirs(dirname)
 
+    print "Cached file: %s" % cached_png_file
     if os.path.exists(cached_png_file):
         return cached_png_file
 
+    print "Requesting URL: %s" % url
     text = requests.get(url).text.replace('\n', '\r\n')
     curl_output = text.encode('utf-8')
 
-    typescript_to_one_frame(cached_png_file, curl_output)
+    typescript_to_one_frame(cached_png_file, curl_output, options=parsed)
 
     return cached_png_file
