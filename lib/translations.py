@@ -92,6 +92,13 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
 тому ми покажемо вам погоду в Оймяконе,
 найхолоднішому населеному пункті на планеті.
 Будемо сподіватися, що у вас сьогодні погода краще!
+""",
+
+        'hy': u"""
+Ձեր գտնվելու վայրը չհաջողվեց որոշել,
+այդ պատճառով մենք ձեզ կցուցադրենք եղանակը Օյմյակոնում.
+երկրագնդի ամենասառը բնակավայրում։
+Հույս ունենք որ ձեր եղանակը այսօր ավելի լավն է։
 """
     },
 
@@ -110,6 +117,7 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
         'sv': u'Okänd plats',
         'tr': u'Bölge bulunamadı',
         'ua': u'Невідоме місце',
+        'hy': u'Անհայտ գտնվելու վայր',
     },
 
     'LOCATION': {
@@ -127,6 +135,7 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
         'sv': u'Plats',
         'tr': u'Bölge bulunamadı',
         'ua': u'Місце',
+        'hy': u'Դիրք',
     },
 
     'CAPACITY_LIMIT_REACHED': {
@@ -137,6 +146,14 @@ We will get new queries as soon as possible.
 You can follow https://twitter.com/igor_chubin for the updates
 ======================================================================================
 """,
+        'hy': u"""
+Կներեք, այս պահին մենք գերազանցել ենք եղանակային տեսության կայանին հարցումների քանակը.
+Կարող եք տեսնել տիպային եղանակը զեկուցում հիմնական քաղաքի համար (Ուղղակի որպես նմուշ)։
+Մենք մշտապես աշխատում ենք հարցումների քանակը բարելավելու ուղղությամբ։
+Կարող եք հետևել մեզ https://twitter.com/igor_chubin թարմացումների համար։
+======================================================================================
+""",
+
     },
 
     #'Check new Feature: \033[92mwttr.in/Moon\033[0m or \033[92mwttr.in/Moon@2016-Mar-23\033[0m to see the phase of the Moon'
@@ -145,11 +162,13 @@ You can follow https://twitter.com/igor_chubin for the updates
     'NEW_FEATURE': {
         'en': u'New feature: multilingual location names \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) and location search \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
         'ru': u'Попробуйте: названия мест на любом языке \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и поиск мест \033[92mwttr.in/~Kilimanjaro\033[0m (нужно добавить ~ спереди)',
+        'ru': u'Փորձարկեք: տեղամասերի անունները կամայական լեզվով \033[92mwttr.in/Դիլիջան\033[0m (в UTF-8) և տեղանքի որոնում \033[92mwttr.in/~Արալեռ\033[0m (հարկավոր է ~ ավելացնել դիմացից)',
     },
 
     'FOLLOW_ME': {
         'en': u'Follow \033[46m\033[30m@igor_chubin\033[0m for wttr.in updates \033[4m[new \033[14m7 features\033[4m in the last 3 months]\033[0m',
         'ru': u'Все новые фичи публикуются здесь: \033[46m\033[30m@igor_chubin\033[0m \033[4m[\033[14mза последние 3 месяца: 7 новых фич\033[4m]\033[0m',
+        'hy': u'Նոր ֆիչռների համար հետևեք՝ \033[46m\033[30m@igor_chubin\033[0m \033[4m[\033[14mվերջին 3 ամսում: 7 թարմացում\033[4m]\033[0m',
     },
 }
 
