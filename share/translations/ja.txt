@@ -40,7 +40,7 @@
 362: 弱い凍雨                           : Light sleet showers
 365: 凍雨または強い凍雨                 : Moderate or heavy sleet showers
 368: 弱い驟雪                           : Light snow showers
-368:                                    : Light Rain And Snow Shower, Mist
+368: 弱い雨と驟雪と靄                   : Light Rain And Snow Shower, Mist
 371: 驟雪または強い驟雪                 : Moderate or heavy snow showers
 386: 所により雷を伴う弱い雨             : Patchy light rain with thunder
 389: 雷を伴う雨または強い雨             : Moderate or heavy rain with thunder
