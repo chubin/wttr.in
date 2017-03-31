@@ -5,7 +5,7 @@ wttr.in is translated in NUMBER_OF_LANGUAGES languages:
 Translated/improved/corrected by:
 
     * Armenian      Aram Bayadyan @aramix, Mikayel Ghazaryan @mkdotam
-    * Azerbaijani   Dmytro Nikitiuk and his Azerbaijani friends
+    * Azerbaijani   Dmytro Nikitiuk, Elsevar Abbasov
     * Czech:        Juraj Kakody
     * Finnish:      @Maxifi
     * French:       Igor Chubin
@@ -13,6 +13,7 @@ Translated/improved/corrected by:
     * Greek:        Panayotis Vryonis
     * Japanese:     @ryunix
     * Macedonian:   Matej Plavevski
+    * Nynorsk:      Kevin Brubeck Unhammer (https://unhammer.org/k/)
     * Romanian:     Gabriel Moruz
     * Russian:      Igor Chubin
     * Slovak:       Juraj Kakody
