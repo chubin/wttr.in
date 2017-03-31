@@ -51,6 +51,8 @@ FONT_CAT = {
     'Greek':        "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
     'Han':          "/usr/share/fonts/truetype/motoya-l-cedar/MTLc3m.ttf",
     'Hiragana':     "/usr/share/fonts/truetype/motoya-l-cedar/MTLc3m.ttf",
+    'Katakana':     "/usr/share/fonts/truetype/motoya-l-cedar/MTLc3m.ttf",
+    'Hangul':       "/usr/share/fonts/truetype/lexi/LexiGulim.ttf",
 }
 
 def color_mapping(color):
