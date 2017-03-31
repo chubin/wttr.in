@@ -1,5 +1,20 @@
 # vim: set encoding=utf-8
 
+FULL_TRANSLATION = [
+        "az", "bg", "cs", "da", "de", "el", "es", "fi", "fr", "hi",
+        "hu", "it", "ja", "ko", "ml", "nl", "nn", "pt", "pl", "ro",
+        "ru", "sk", "sr", "sr-lat", "sv", "tr", "uk", "vi", "zh",
+]
+
+PARTIAL_TRANSLATION = [
+        "et", "hy", "jv", "ka", "kk", "ky", "lt", "lv", "mk", "sw",
+        "th", "uz", "zu",
+        "hr",
+        "bs",
+]
+
+SUPPORTED_LANGS = FULL_TRANSLATION + PARTIAL_TRANSLATION
+
 MESSAGE = {
     'NOT_FOUND_MESSAGE': {
         'en': u"""
