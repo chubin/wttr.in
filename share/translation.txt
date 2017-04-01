@@ -8,6 +8,7 @@ Translated/improved/corrected by:
     * Azerbaijani:  Dmytro Nikitiuk, Elsevar Abbasov
     * Belarusian:   Igor Chubin
     * Czech:        Juraj Kakody
+    * Esperanto     Igor Chubin
     * Finnish:      @Maxifi
     * French:       Igor Chubin
     * German:       Igor Chubin
