@@ -11,6 +11,7 @@ PARTIAL_TRANSLATION = [
         "th", "uz", "zu",
         "hr",
         "bs",
+        "be",
 ]
 
 SUPPORTED_LANGS = FULL_TRANSLATION + PARTIAL_TRANSLATION
