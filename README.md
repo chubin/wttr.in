@@ -152,7 +152,7 @@ The preferred language can be forced using the `lang` option:
 
     $ curl wttr.in/Berlin?lang=de
 
-wttr.in is currently translated in more than 35 languages and the number of supported languages
+wttr.in is currently translated in more than 45 languages and the number of supported languages
 is constantly growing.
 
 See [/:translation](http://wttr.in/:translation) to learn more about the translation process, 
