@@ -1,0 +1,82 @@
+113: Glir                               : Clear
+113: Heulog                             : Sunny
+116: Rhannol gymylog                    : Partly cloudy
+119: Cymylog                            : Cloudy
+122: Cymylog                            : Overcast
+143: Niwlog                             : Mist
+176: Glaw anghyson yn bosib             : Patchy rain possible
+179: Eira anghyson yn bosib             : Patchy snow possible
+182: Eirlaw anghyson yn bosib           : Patchy sleet possible
+185: Rhewi a glaw mân anghyson un bosib : Patchy freezing drizzle possible
+200: Mellt yn bosib                     : Thundery outbreaks possible
+227: Eira yn cael ei chwythu            : Blowing snow
+230: Storm eira                         : Blizzard
+248: Niwl                               : Fog
+260: Niwl rhewllyd                      : Freezing fog
+263: Glaw mân ysgafn anghyson           : Patchy light drizzle
+266: Glaw mân ysgafn                    : Light drizzle
+281: Glaw mân rhewllyd                  : Freezing drizzle
+284: Glaw mân ysgafn trwm               : Heavy freezing drizzle
+293: Glaw ysgafn anghyson               : Patchy light rain
+296: Glaw ysgafn                        : Light rain
+299: Glaw cymedrol ar adegau            : Moderate rain at times
+302: Glaw cymedrol                      : Moderate rain
+305: Glaw trwm ar adegau                : Heavy rain at times
+308: Glaw trwm                          : Heavy rain
+311: Glaw rhewllyd ysgafn               : Light freezing rain
+314: Glaw rhewllyd trwm neu cymedrol    : Moderate or heavy freezing rain
+317: Eirlaw ysgafn                      : Light sleet
+320: Eirlaw cymedrol neu trwn           : Moderate or heavy sleet
+323: Eira ysgafn anghyson               : Patchy light snow
+326: Eira ysgafn                        : Light snow
+329: Eira cymedrol anghyson             : Patchy moderate snow
+332: Eira cymedrol                      : Moderate snow
+335: Eira trwm anghyson                 : Patchy heavy snow
+338: Eira trwm                          : Heavy snow
+350: Pelenni iâ                         : Ice pellets
+353: Cawod o law ysgafn                 : Light rain shower
+356: Cawod o law ysgafn neu cymedrol    : Moderate or heavy rain shower
+359: Cawod o law trwm                   : Torrential rain shower
+362: Cawodydd o eirlaw ysgafn           : Light sleet showers
+365: Cawodydd o eirlaw cymedrol new trwm: Moderate or heavy sleet showers
+368: Cawodydd o eira ysgafn             : Light snow showers
+368: Cawod o law ac eira ysgafn, Niwl   : Light Rain And Snow Shower, Mist
+371: Cawodydd o eira cymedrol neu trwm  : Moderate or heavy snow showers
+386: Glaw ysgafn anghyson gyda mellt    : Patchy light rain with thunder
+389: Glaw cymedrol neu trwm gyda mellt  : Moderate or heavy rain with thunder
+392: Eira ysgafn anghyson gyda mellt    : Patchy light snow with thunder
+395: Eira cymedrol neu trwm gyda mellt  : Moderate or heavy snow with thunder
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -21,6 +21,7 @@ Translated/improved/corrected by:
     * Swahili:      Joel Mukuthu
     * Turkish:      Atabey Kaygun
     * Ukrainian:    Igor Chubin
+    * Welsh:        Daniel Thomas
 
 and many many others.
 
