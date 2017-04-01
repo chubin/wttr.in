@@ -1,0 +1,47 @@
+113: Klara                                  : Clear
+113: Suna                                   : Sunny
+116: Parte nuba                             : Partly cloudy
+119: Nuba                                   : Cloudy
+122: Sensuna                                : Overcast
+143: Nebulo                                 : Mist
+176: Flikeca pluvo ebla                     : Patchy rain possible
+179: Flikeca neĝo ebla                      : Patchy snow possible
+182: Flikeca hajlneĝo ebla                  : Patchy sleet possible
+185: Flikeca frosta drizelo ebla            : Patchy freezing drizzle possible
+200: Tondro ebla                            : Thundery outbreaks possible
+227: Blova neĝo                             : Blowing snow
+230: Blizardo                               : Blizzard
+248: Nebulo                                 : Fog
+260: Frosta nebulo                          : Freezing fog
+263: Flikeca malforta drizelo               : Patchy light drizzle
+266: Malforta drizelo                       : Light drizzle
+281: Frosta drizelo                         : Freezing drizzle
+284: Forta frosta drizelo                   : Heavy freezing drizzle
+293: Flikeca forta pluvo                    : Patchy light rain
+296: Malforta pluvo                         : Light rain
+299: Modera pluvo foje                      : Moderate rain at times
+302: Modera pluvo                           : Moderate rain
+305: Forta pluvvo foje                      : Heavy rain at times
+308: Forta pluvo                            : Heavy rain
+311: Malforta glacipluvo                    : Light freezing rain
+314: Modera aŭ forta glacipluvo             : Moderate or heavy freezing rain
+317: Malforta grajlo                        : Light sleet
+320: Modera aŭ forta hajlneĝo               : Moderate or heavy sleet
+323: Flikeca malforta neĝo                  : Patchy light snow
+326: Malforta neĝo                          : Light snow
+329: Flikeca modera neĝo                    : Patchy moderate snow
+332: Modera neĝo                            : Moderate snow
+335: Flikeca forta neĝo                     : Patchy heavy snow
+338: Forta neĝo                             : Heavy snow
+350: Grajlo                                 : Ice pellets
+353: Malforta pluvoverŝo                    : Light rain shower
+356: Modera pluvoverŝo                      : Moderate or heavy rain shower
+359: Torrenta pluvoverŝo                    : Torrential rain shower
+362: Malforta glacipluvego                  : Light sleet showers
+365: Modera aŭ forta glacipluvego           : Moderate or heavy sleet showers
+368: Malforta hajlneĝo                      : Light snow showers
+371: Modera aŭ forta neĝipluvego            : Moderate or heavy snow showers
+386: Flikeca malforta pluvo kun tondro      : Patchy light rain with thunder
+389: Modera aŭ forta pluvo kun tondro       : Moderate or heavy rain with thunder
+392: Flikeca malforta neĝo kun tondro       : Patchy light snow with thunder
+395: Modera aŭ forta neĝo kun tondro        : Moderate or heavy snow with thunder
