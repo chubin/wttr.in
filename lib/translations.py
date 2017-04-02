@@ -7,14 +7,17 @@ We were unable to find your location,
 so we have brought you to Oymyakon,
 one of the coldest permanently inhabited locales on the planet.
 """,
-
         'cs': u"""
 Nepodařilo se nám najít vaši polohu,
 takže jsme vás přivedl do Ojmjakonu.
 Je to jedno z nejchladnějších trvale obydlených míst na planetě.
 Doufáme, že budete mít lepší počasí!
 """,
-
+        'cy': u"""
+Ni darganfyddwyd eich lleoliad,
+felly rydym wedi dod â chi i Oymyakon,
+un o'r llefydd oerach ar y blaned lle mae pobl yn fyw!
+""",
         'de': u"""
 Wir konnten Ihren Standort nicht finden,
 so haben wir Sie nach Oimjakon gebracht,
@@ -111,6 +114,7 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
     'UNKNOWN_LOCATION': {
         'en': u'Unknown location',
         'cs': u'Neznámá poloha',
+        'cy': u'Lleoliad anhysbys',
         'de': u'Unbekannter Ort',
         'el': u'Άνγωστη τοποθεσία',
         'fi': u'Tuntematon sijainti',
@@ -130,6 +134,7 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
     'LOCATION': {
         'en': u'Location',
         'cs': u'Poloha',
+        'cy': u'Lleoliad',
         'de': u'Ort',
         'el': u'Τοποθεσία',
         'fi': u'Tuntematon sijainti',
@@ -168,12 +173,14 @@ You can follow https://twitter.com/igor_chubin for the updates
 
     'NEW_FEATURE': {
         'en': u'New feature: multilingual location names \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) and location search \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
+        'cy': u'Nodwedd newydd: enwau lleoliad amlieithog \033[92mwttr.in/станция+Восток\033[0m (yn UTF-8) a chwilio lleoliad \033[92mwttr.in/~Kilimanjaro\033[0m (ychwanegwch ~ yn gyntaf)',
         'ru': u'Попробуйте: названия мест на любом языке \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и поиск мест \033[92mwttr.in/~Kilimanjaro\033[0m (нужно добавить ~ спереди)',
         'hy': u'Փորձարկեք: տեղամասերի անունները կամայական լեզվով \033[92mwttr.in/Դիլիջան\033[0m (в UTF-8) և տեղանքի որոնում \033[92mwttr.in/~Kilimanjaro\033[0m (հարկավոր է ~ ավելացնել դիմացից)',
     },
 
     'FOLLOW_ME': {
         'en': u'Follow \033[46m\033[30m@igor_chubin\033[0m for wttr.in updates \033[4m[new \033[14m7 features\033[4m in the last 3 months]\033[0m',
+        'cy': u'Dilyn \033[46m\033[30m@igor_Chubin\033[0m am diweddariadau wttr.in \033[4m 7 nodweddion newydd yn y 3 mis dywethaf\033[0m',
         'ru': u'Все новые фичи публикуются здесь: \033[46m\033[30m@igor_chubin\033[0m \033[4m[\033[14mза последние 3 месяца: 7 новых фич\033[4m]\033[0m',
         'hy': u'Նոր ֆիչռների համար հետևեք՝ \033[46m\033[30m@igor_chubin\033[0m \033[4m[\033[14mվերջին 3 ամսում: 7 թարմացում\033[4m]\033[0m',
     },
