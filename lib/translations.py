@@ -152,7 +152,7 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
 
     'CAPACITY_LIMIT_REACHED': {
         'en': u"""
-Sorry, we are runnig out of queries to the weather service at the moment.
+Sorry, we are running out of queries to the weather service at the moment.
 Here is the weather report for the default city (just to show you, how it looks like).
 We will get new queries as soon as possible.
 You can follow https://twitter.com/igor_chubin for the updates
