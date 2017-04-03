@@ -1,3 +1,5 @@
+# vim: set encoding=utf-8
+
 import gevent
 from gevent.wsgi import WSGIServer
 from gevent.queue import Queue
@@ -106,9 +108,18 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
                 stdout = "\n".join(stdout.splitlines()[:27]) + "\n"
 
         if query.get('no-caption', False):
-            first = stdout.splitlines()[0]
+            first = stdout.splitlines()[0].decode('utf-8')
             rest = stdout.splitlines()[1:]
-            stdout = "\n".join([first.split(':',1)[1].strip()] + rest) + "\n"
+
+            separator = None
+            if ':' in first:
+                separator = ':'
+            if u'：' in first:
+                separator = u'：'
+
+            if separator:
+                first = first.split(separator,1)[1]
+                stdout = "\n".join([first.strip().encode('utf-8')] + rest) + "\n"
 
         if query.get('no-terminal', False):
             stdout = remove_ansi(stdout)
