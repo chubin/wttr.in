@@ -101,7 +101,7 @@ Special useful options for the PNG format:
 Transparency is a useful feature when the weather PNGs are used to 
 add weather data to the pictures:
 
-$ convert 1.jpg <( curl wttr.in/Oymyakon_tqp0.png ) -geometry +50+50 -composite 2.jpg
+    $ convert 1.jpg <( curl wttr.in/Oymyakon_tqp0.png ) -geometry +50+50 -composite 2.jpg
 
 Here:
 
