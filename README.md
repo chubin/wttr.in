@@ -101,7 +101,7 @@ Special useful options for the PNG format:
 Transparency is a useful feature when the weather PNGs are used to 
 add weather data to the pictures:
 
-$ convert 1.jpg <( curl wttr.in/Oymyakon_tqp0.png ) -geometry +50+50 -composite 2.jpg
+    $ convert 1.jpg <( curl wttr.in/Oymyakon_tqp0.png ) -geometry +50+50 -composite 2.jpg
 
 Here:
 
@@ -179,8 +179,8 @@ External requirements:
 
 To install `wego` you must have [golang](https://golang.org/doc/install) installed. After that:
 
-    go get -u github.com/schachmat/wego
-    go install github.com/schachmat/wego
+    $ go get -u github.com/schachmat/wego
+    $ go install github.com/schachmat/wego
 
 ### Install python dependencies
 
@@ -202,9 +202,9 @@ You can install most of them using `pip`.
 
 If `virtualenv` is used:
 
-    virtualenv ve
-    ve/bin/pip install -r requirements.txt
-    ve/bin/pip bin/srv.py
+    $ virtualenv ve
+    $ ve/bin/pip install -r requirements.txt
+    $ ve/bin/pip bin/srv.py
 
 (pyte 0.6 is not yet released and it should be installed direct from the source code from its GitHub repository at the moment).
 
