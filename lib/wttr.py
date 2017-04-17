@@ -161,7 +161,7 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
 
     return open(filename).read()
 
-def get_moon(location, html=False):
+def get_moon(location, html=False, lang=None):
     date = None
     if '@' in location:
         date = location[location.index('@')+1:]
@@ -176,7 +176,10 @@ def get_moon(location, html=False):
         else:
             cmd += [date]
 
-    p = Popen(cmd, stdout=PIPE, stderr=PIPE)
+    env = os.environ.copy()
+    if lang:
+        env['LANG'] = lang
+    p = Popen(cmd, stdout=PIPE, stderr=PIPE, env=env)
     stdout, stderr = p.communicate()
 
     if html:
