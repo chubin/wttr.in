@@ -14,6 +14,7 @@ Translated/improved/corrected by:
     * German:       Igor Chubin
     * Greek:        Panayotis Vryonis
     * Japanese:     @ryunix
+    * Korean:       Jeremy Bae @opt9
     * Macedonian:   Matej Plavevski
     * Nynorsk:      Kevin Brubeck Unhammer (https://unhammer.org/k/)
     * Romanian:     Gabriel Moruz
