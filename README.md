@@ -179,8 +179,8 @@ External requirements:
 
 To install `wego` you must have [golang](https://golang.org/doc/install) installed. After that:
 
-    go get -u github.com/schachmat/wego
-    go install github.com/schachmat/wego
+    $ go get -u github.com/schachmat/wego
+    $ go install github.com/schachmat/wego
 
 ### Install python dependencies
 
@@ -202,9 +202,9 @@ You can install most of them using `pip`.
 
 If `virtualenv` is used:
 
-    virtualenv ve
-    ve/bin/pip install -r requirements.txt
-    ve/bin/pip bin/srv.py
+    $ virtualenv ve
+    $ ve/bin/pip install -r requirements.txt
+    $ ve/bin/pip bin/srv.py
 
 (pyte 0.6 is not yet released and it should be installed direct from the source code from its GitHub repository at the moment).
 
