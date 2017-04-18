@@ -3,7 +3,7 @@
 FULL_TRANSLATION = [
         "az", "bg", "cs", "cy", "da", "de", "el", "eo", "es", "fi",
         "fr", "hi", "hu", "it", "ja", "ko", "ml", "nl", "nn", "pt",
-        "pl", "ro", "ru", "sk", "sr", "sr-lat", "sv", "tr", "uk", "vi",
+        "pl", "ro", "ru", "sk", "sl", "sr", "sr-lat", "sv", "tr", "uk", "vi",
         "zh",
 ]
 
@@ -140,6 +140,7 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
         'ro': u'Locaţie necunoscută',
         'ru': u'Неизвестное местоположение',
         'sk': u'Neznáma poloha',
+        'sl': u'Neznano lokacijo',
         'sr': u'Непозната локација',
         'sv': u'Okänd plats',
         'tr': u'Bölge bulunamadı',
@@ -160,6 +161,7 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
         'ro': u'Locaţie',
         'ru': u'Местоположение',
         'sk': u'Poloha',
+        'sl': u'Lokacijo',
         'sr': u'Локација',
         'sv': u'Plats',
         'tr': u'Bölge bulunamadı',
