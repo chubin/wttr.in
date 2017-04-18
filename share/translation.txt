@@ -20,6 +20,7 @@ Translated/improved/corrected by:
     * Romanian:     Gabriel Moruz
     * Russian:      Igor Chubin
     * Slovak:       Juraj Kakody
+    * Slovenian:    B.S.
     * Swedish:      John Eriksson
     * Serbian:      Milan Stevanović @FathVader
     * Swahili:      Joel Mukuthu

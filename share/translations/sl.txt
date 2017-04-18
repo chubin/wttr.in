@@ -1,0 +1,47 @@
+113: Jasno                                      : Clear
+113: Sončno                                     : Sunny
+116: Delno oblačno                              : Partly cloudy
+119: Oblačno                                    : Cloudy
+122: Pretežno oblačno                           : Overcast
+143: Megleno                                    : Mist
+176: Možne plohe                                : Patchy rain possible
+179: Možno občasno sneženje                     : Patchy snow possible
+182: Možen žled                                 : Patchy sleet possible
+185: Možna pomrznjena rosa                      : Patchy freezing drizzle possible
+200: Možno neurje z grmenjem                    : Thundery outbreaks possible
+227: Snežno neurje                              : Blowing snow
+230: Snežno neurje                              : Blizzard
+248: Megla                                      : Fog
+260: Zmrznjena megla                            : Freezing fog
+263: Rahlo rosenje                              : Patchy light drizzle
+266: Rahel dež                                  : Light drizzle
+281: Zmrznjeno rosenje                          : Freezing drizzle
+284: Močno zmrznjeno rosenje                    : Heavy freezing drizzle
+293: Občasno rahel dež                          : Patchy light rain
+296: Rahel dež                                  : Light rain
+299: Občasno droben dež                         : Moderate rain at times
+302: Droben dež                                 : Moderate rain
+305: Občasno močan dež                          : Heavy rain at times
+308: Močan dež                                  : Heavy rain
+311: Rahel zmrznjen dež                         : Light freezing rain
+314: Zmrznjen dež                               : Moderate or heavy freezing rain
+317: Rahel žled                                 : Light sleet
+320: Žled                                       : Moderate or heavy sleet
+323: Občasno rahlo sneženje                     : Patchy light snow
+326: Rahel sneg                                 : Light snow
+329: Občasno rahlo sneženje                     : Patchy moderate snow
+332: Rahel sneg                                 : Moderate snow
+335: Občasno močan sneg                         : Patchy heavy snow
+338: Močan sneg                                 : Heavy snow
+350: Led                                        : Ice pellets
+353: Rahla ploha                                : Light rain shower
+356: Rahle ali močne plohe                      : Moderate or heavy rain shower
+359: Hudourniški dež                            : Torrential rain shower
+362: Rahel žled                                 : Light sleet showers
+365: Žled                                       : Moderate or heavy sleet showers
+368: Občasno rahlo sneženje                     : Light snow showers
+371: Rahle ali močne snežne padavine            : Moderate or heavy snow showers
+386: Občasno rahel dež z grmenjem               : Patchy light rain with thunder
+389: Dež z grmenjem                             : Moderate or heavy rain with thunder
+392: Občasen sneg z grmenjem                    : Patchy light snow with thunder
+395: Sneg z grmenjem                            : Moderate or heavy snow with thunder
