@@ -50,6 +50,7 @@ Options can be combined:
 
 Localization:
 
+    $ curl fr.wttr.in/Paris
     $ curl wttr.in/paris?lang=fr
     $ curl -H "Accept-Language: fr" wttr.in/paris
 

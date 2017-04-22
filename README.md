@@ -152,6 +152,10 @@ The preferred language can be forced using the `lang` option:
 
     $ curl wttr.in/Berlin?lang=de
 
+The third option is to choose the language using DNS name used in the query:
+
+    $ curl de.wttr.in/Berlin
+
 wttr.in is currently translated in more than 45 languages and the number of supported languages
 is constantly growing.
 
