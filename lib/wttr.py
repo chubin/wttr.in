@@ -107,9 +107,9 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
             if query['days'] == '2':
                 stdout = "\n".join(stdout.splitlines()[:27]) + "\n"
 
+        first = stdout.splitlines()[0].decode('utf-8')
+        rest = stdout.splitlines()[1:]
         if query.get('no-caption', False):
-            first = stdout.splitlines()[0].decode('utf-8')
-            rest = stdout.splitlines()[1:]
 
             separator = None
             if ':' in first:
@@ -150,7 +150,9 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
 
         if query.get('inverted_colors'):
             stdout = stdout.replace('<body class="">', '<body class="" style="background:white;color:#777777">')
-
+        
+        title = "<title>%s</title>" % first.encode('utf-8')
+        stdout = re.sub("<head>", "<head>" + title, stdout)
         open(filename+'.html', 'w').write(stdout)
 
     filename = get_filename(location, lang=lang, query=query, location_name=location_name)
@@ -179,8 +181,9 @@ def get_moon(location, html=False, lang=None):
     env = os.environ.copy()
     if lang:
         env['LANG'] = lang
+    print cmd
     p = Popen(cmd, stdout=PIPE, stderr=PIPE, env=env)
-    stdout, stderr = p.communicate()
+    stdout = p.communicate()[0]
 
     if html:
         p = Popen(["bash", ANSI2HTML, "--palette=solarized", "--bg=dark"],  stdin=PIPE, stdout=PIPE, stderr=PIPE)
