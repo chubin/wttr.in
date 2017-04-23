@@ -1,0 +1,52 @@
+113: Ведро: Clear 
+113: Сончево: Sunny
+116: Делумно Облачно: Partly cloudy 
+119: Облачно: Cloudy 
+122: Облачно: Overcast 
+143: Слаба магла: Mist 
+176: Умерено врнежливо во близина: Patchy rain nearby  
+176: Умерено врнежливо можно: Patchy rain possible 
+179: Умерено снежливо можно: Patchy snow possible  
+182: Умерено можно: Patchy sleet possible 
+185: Умерено: Patchy freezing drizzle possible 
+200: Грмежи во близина: Thundery outbreaks in nearby 
+200: Грмежи можно: Thundery outbreaks possible 
+227: Снег: Blowing snow 
+230: Виулица: Blizzard 
+248: Магла: Fog 
+260: Смрзнувачка магла: Freezing fog 
+263: Умерен слаб дожд: Patchy light drizzle 
+266: Роса: Light drizzle 
+281: Смрзнувачка роса: Freezing drizzle 
+284: Тежка смрзнувачка роса: Heavy freezing drizzle 
+293: Умерен слаб дожд: Patchy light rain  
+296: Слаб дожд: Light rain 
+299: Умерен дожд понекогаш: Moderate rain at times 
+302: Умерен дожд: Moderate rain 
+305: Пороен дожд: Heavy rain at times 
+308: Пороен дожд : Heavy rain 
+311: Смрзнувачки дожд: Light freezing rain 
+314: Умерен или тешки врнежи со дожд: Moderate or heavy freezing rain 
+317: Дожд со лед: Light sleet 
+320: Умерен или тежок дожд со лед: Moderate or heavy sleet 
+323: Умерени врнежи на слаб снег: Patchy light snow 
+326: Слабо врнежи снег: Light snow 
+329: Умерени врнежи на снег: Patchy moderate snow 
+332: Умерен врнежи на снег: Moderate snow 
+335: Умерено тешки врнежи на снег: Patchy heavy snow 
+338: Тешки врнежи со снег: Heavy snow 
+350: Град: Ice pellets 
+353: Слаби врнежи: Light rain shower 
+356: Умерени или тешки врнежи: Moderate or heavy rain shower 
+359: Пороен дожд: Torrential rain shower 
+362: Слаби дождови: Light sleet showers 
+365: Умерено или тешки : Moderate or heavy sleet showers 
+368: Слаби врнежи снег: Light snow showers 
+371: Умерено или тежки врнежи со снег: Moderate or heavy snow showers 
+386: Умерено слаб дожд во области со грмежи: Patchy light rain in area with thunder 
+386: Умерено слаб дожд со грмежи: Patchy light rain with thunder 
+389: Умерен или тешки врнежи во области со грмежи: Moderate or heavy rain in area with thunder 
+389: Умерен или тешки врнежи со грмежи: Moderate or heavy rain with thunder 
+392: Умерено слаб снег со грмежи: Patchy light snow with thunder 
+395: Умерен или тешки врнежи снег во области со грмежи: Moderate or heavy snow in area with thunder 
+395: Умерен или тешки врнежи снег со грмежи: Moderate or heavy snow with thunder 
