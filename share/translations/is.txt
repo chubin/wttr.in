@@ -41,7 +41,7 @@
 365 : Dálítil eða mikil slydduél                  : Moderate or heavy sleet showers
 368 : Lítilshátta Snjóél                          : Light snow showers
 371 : Dálítil eða mikil snjóél                    : Moderate or heavy snow showers
-386 : Lítilsháttar skúrir með þrumuveðri á köflum	: Patchy light rain with thunder
+386 : Lítilsháttar skúrir með þrumuveðri á köflum : Patchy light rain with thunder
 389 : Dálítil eða mikil rigning með þrumuveðri    : Moderate or heavy rain with thunder
 392 : Lítilsháttar él þrumuveðri á köflum         : Patchy light snow with thunder
 395 : Dálítil eða mikill snjórkoma með þrumuveðri : Moderate or heavy snow with thunder
