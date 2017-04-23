@@ -3,45 +3,45 @@
 116 : Parcialment ennuvolat                 : Partly cloudy
 119 : Ennuvolat                             : Cloudy
 122 : Ennuvolat                             : Overcast
-143 : Boira                                 : Mist
-176 : Parcialment ennuvolat                 : Patchy rain possible
-179 : Irregular neu possible                : Patchy snow possible
-182 : Irregular aiguaneu possible           : Patchy sleet possible
-185 : Plugim congelació dispersada possible : Patchy freezing drizzle possible
-200 : Thundery possibles brots              : Thundery outbreaks possible
-227 : Vent i neu                            : Blowing snow
-230 : Tempesta de neu                       : Blizzard
+143 : Boirina                               : Mist
+176 : Possible pluja intermitent            : Patchy rain possible
+179 : Possible neu intermitent              : Patchy snow possible
+182 : Possible aiguaneu intermitent         : Patchy sleet possible
+185 : Possible plugim gelat intermitent     : Patchy freezing drizzle possible
+200 : Possible tempesta elèctrica           : Thundery outbreaks possible
+227 : Tempesta de neu                       : Blowing snow
+230 : Torb                                  : Blizzard
 248 : Boira                                 : Fog
-260 : Boira congelada                       : Freezing fog
-263 : Plugim lleugera irregular             : Patchy light drizzle
-266 : lleugera plugim                       : Light drizzle
-281 : Plugim gelada                         : Freezing drizzle
-284 : Plugim congelació pesat               : Heavy freezing drizzle
-293 : Intervals de pluges                   : Patchy light rain
+260 : Boira gebradora                       : Freezing fog
+263 : Plugim lleuger intermitent            : Patchy light drizzle
+266 : Plugim lleuger                        : Light drizzle
+281 : Plugim gelat                          : Freezing drizzle
+284 : Plugim gelat intens                   : Heavy freezing drizzle
+293 : Pluja lleugera intermitent            : Patchy light rain
 296 : Pluja lleugera                        : Light rain
-299 : Pluja moderada a vegades              : Moderate rain at times
+299 : Pluja moderada puntual                : Moderate rain at times
 302 : Pluja moderada                        : Moderate rain
-305 : Puntulas pluges fortes                : Heavy rain at times
-308 : Pluja intensa                         : Heavy rain
-311 : Pluja de congelació llum              : Light freezing rain
-314 : Pluja moderada o forta de congelació  : Moderate or heavy freezing rain
+305 : Pluja forta puntual                   : Heavy rain at times
+308 : Pluja forta                           : Heavy rain
+311 : Calamarsa                             : Light freezing rain
+314 : Pedra o granís                        : Moderate or heavy freezing rain
 317 : Aiguaneu lleugera                     : Light sleet
 320 : Aiguaneu moderada o forta             : Moderate or heavy sleet
-323 : Neu lleugera irregular                : Patchy light snow
+323 : Neu lleugera intermitent              : Patchy light snow
 326 : Neu lleugera                          : Light snow
-329 : Neu moderada irregular                : Patchy moderate snow
-332 : Nevades moderades                     : Moderate snow
-335 : Fortes nevades irregular              : Patchy heavy snow
-338 : Les fortes nevades                    : Heavy snow
+329 : Neu moderada intermitent              : Patchy moderate snow
+332 : Neu moderada                          : Moderate snow
+335 : Neu forta intermitent                 : Patchy heavy snow
+338 : Neu forta                             : Heavy snow
 350 : Grànuls de gel                        : Ice pellets
-353 : Dutxa de pluja lleugera               : Light rain shower
-356 : Dutxa de pluja moderada o forta       : Moderate or heavy rain shower
-359 : Pluja torrencial                      : Torrential rain shower
-362 : Lleugers ruixats d'aiguaneu           : Light sleet showers
+353 : Ruixats de pluja lleugera             : Light rain shower
+356 : Ruixats de pluja moderada o forta     : Moderate or heavy rain shower
+359 : Ruixats de pluja torrencial           : Torrential rain shower
+362 : Ruixats d'aiguaneu lleugera           : Light sleet showers
 365 : Ruixats d'aiguaneu moderada o forta   : Moderate or heavy sleet showers
-368 : Neu lleugera                          : Light snow showers
+368 : Ruixats de neu lleugera               : Light snow showers
 371 : Neu moderada o forta                  : Moderate or heavy snow showers
 386 : Intervals de pluges amb trons         : Patchy light rain with thunder
 389 : Pluja moderada o forta amb trons      : Moderate or heavy rain with thunder
-392 : Neu lleugera irregular amb trons      : Patchy light snow with thunder
+392 : Neu lleugera intermitent amb trons    : Patchy light snow with thunder
 395 : Neu moderada o forta amb trons        : Moderate or heavy snow with thunder
