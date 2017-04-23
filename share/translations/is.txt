@@ -1,47 +1,47 @@
-113 : Hreinsa                                   : Clear
-113 : Sunny                                     : Sunny
-116 : Skýjað með köflum                     : Partly cloudy
-119 : Skýjað                                : Cloudy
-122 : Skýjað                                : Overcast
-143 : Mist                                  : Mist
-176 : Patchy rigning mögulegt               : Patchy rain possible
-179 : Patchy snjór mögulegt                 : Patchy snow possible
-182 : Patchy sleet hægt                     : Patchy sleet possible
-185 : Patchy frystingu drizzle mögulegt     : Patchy freezing drizzle possible
-200 : Thundery braust út                    : Thundery outbreaks possible
-227 : Blása snjó                            : Blowing snow
-230 : Blizzard                              : Blizzard
-248 : Þoku                                  : Fog
-260 : Frostþokur                            : Freezing fog
-263 : Patchy light drizzle                  : Patchy light drizzle
-266 : Létt þrýstingur                       : Light drizzle
-281 : Frysting dælur                        : Freezing drizzle
-284 : Heavy freezing drizzle                : Heavy freezing drizzle
-293 : Patchy létt rigning                   : Patchy light rain
-296 : Létt rigning                          : Light rain
-299 : Miðlungs rigning stundum              : Moderate rain at times
-302 : Miðlungs rigning                      : Moderate rain
-305 : Þungur rigning stundum                : Heavy rain at times
-308 : Mikil rigning                         : Heavy rain
-311 : Létt frostregn                        : Light freezing rain
-314 : Miðlungs eða þungur frostregn         : Moderate or heavy freezing rain
-317 : Ljóssláttur                           : Light sleet
-320 : Miðlungs eða þungur sleet             : Moderate or heavy sleet
-323 : Patchy ljós snjór                     : Patchy light snow
-326 : Létt snjór                            : Light snow
-329 : Patchy meðallagi snjór                : Patchy moderate snow
-332 : Miðlungs snjór                        : Moderate snow
-335 : Patchy þungur snjór                   : Patchy heavy snow
-338 : Þungur snjór                          : Heavy snow
-350 : Ísflögur                              : Ice pellets
-353 : Létt rigning sturtu                   : Light rain shower
-356 : Miðlungs eða mikil rigning sturtu     : Moderate or heavy rain shower
-359 : Torrential rigning sturtu             : Torrential rain shower
-362 : Ljóssléttur sturtur                   : Light sleet showers
-365 : Miðlungs eða þungur sólgleraugu       : Moderate or heavy sleet showers
-368 : Létt snjósturtur                      : Light snow showers
-371 : Miðlungs eða þungur snjósturtur       : Moderate or heavy snow showers
-386 : Patchy létt rigning með þrumuveðri    : Patchy light rain with thunder
-389 : Miðlungs eða mikil rigning með þrumuveðri: Moderate or heavy rain with thunder
-392 : Patchy ljós snjór með þrumuveðri      : Patchy light snow with thunder
-395 : Miðlungs eða þungur snjór með þrumuveðri : Moderate or heavy snow with thunder
+113 : Heiðskýrt                                   : Clear
+113 : Sól                                         : Sunny
+116 : Léttskýjað                                  : Partly cloudy
+119 : Skýjað                                      : Cloudy
+122 : Alskýjað                                    : Overcast
+143 : Mistur                                      : Mist
+176 : Hætta á rigningu á köflum                   : Patchy rain possible
+179 : Hætta á snjókomu á köflum                   : Patchy snow possible
+182 : Hætta á slyddu á köflum                     : Patchy sleet possible
+185 : Hætta á frostúða á köflum                   : Patchy freezing drizzle possible
+200 : Hætta á þrumuveðri                          : Thundery outbreaks possible
+227 : Skafrenningur                               : Blowing snow
+230 : Snjóbylur                                   : Blizzard
+248 : Þoka                                        : Fog
+260 : Frostþoka                                   : Freezing fog
+263 : Lítilsháttar súld á köflum                  : Patchy light drizzle
+266 : Lítilsháttar súld                           : Light drizzle
+281 : Frostúði                                    : Freezing drizzle
+284 : Mikill frostúði                             : Heavy freezing drizzle
+293 : Lítilsháttar rigning á köflum               : Patchy light rain
+296 : Lítilsháttar rigning                        : Light rain
+299 : Dálítil rigning á köflum                    : Moderate rain at times
+302 : Dálítil rigning                             : Moderate rain
+305 : Mikil rigning á köflum                      : Heavy rain at times
+308 : Mikil rigning                               : Heavy rain
+311 : Lítilsháttar frostrigning                   : Light freezing rain
+314 : Dálítið eða mikið frostregn                 : Moderate or heavy freezing rain
+317 : Lítilsháttar slydda                         : Light sleet
+320 : Dálítil eða mikil slydda                    : Moderate or heavy sleet
+323 : Lítilsháttar snjókoma á köflum              : Patchy light snow
+326 : Lítilsháttar snjókoma                       : Light snow
+329 : Dálítil snjókoma á köflum                   : Patchy moderate snow
+332 : Dálítil snjókoma                            : Moderate snow
+335 : Mikill snjókoma á köflum                    : Patchy heavy snow
+338 : Mikill snjókoma                             : Heavy snow
+350 : Haglél                                      : Ice pellets
+353 : Skúrir                                      : Light rain shower
+356 : Dálitlir eða mikilir Skúrir                 : Moderate or heavy rain shower
+359 : Úrhellis rigning                            : Torrential rain shower
+362 : Slydduél                                    : Light sleet showers
+365 : Dálítil eða mikil slydduél                  : Moderate or heavy sleet showers
+368 : Lítilshátta Snjóél                          : Light snow showers
+371 : Dálítil eða mikil snjóél                    : Moderate or heavy snow showers
+386 : Lítilsháttar skúrir með þrumuveðri á köflum : Patchy light rain with thunder
+389 : Dálítil eða mikil rigning með þrumuveðri    : Moderate or heavy rain with thunder
+392 : Lítilsháttar él þrumuveðri á köflum         : Patchy light snow with thunder
+395 : Dálítil eða mikill snjórkoma með þrumuveðri : Moderate or heavy snow with thunder
