@@ -66,8 +66,13 @@ Nous espérons que vous avez une meilleure météo
 代わりにオイミャコンの天気予報を表示しています。
 オイミャコンは地球上で最も寒い居住地の一つです。
 """,
+        'mk': u"""
+Неможевме да ја пронајдеме вашата локација,
+затоа ве однесовме во Ојмајкон,
+еден од најладните трајно населени места на планетата.
+""",
 
-        'ro': u"""
+      'ro': u"""
 Nu v-am putut identifica locația, prin urmare va aratam vremea din Oimiakon,
 una dintre cele mai reci localități permanent locuite de pe planetă.
 Sperăm că aveți vreme mai bună!        
@@ -136,6 +141,7 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
         'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement inconnu',
         'ja': u'未知の場所です',
+        'mk': u'Непозната локација',
         'ro': u'Locaţie necunoscută',
         'ru': u'Неизвестное местоположение',
         'sk': u'Neznáma poloha',
@@ -157,6 +163,7 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
         'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement',
         'ja': u'位置情報',
+        'mk': u'Локација',
         'ro': u'Locaţie',
         'ru': u'Местоположение',
         'sk': u'Poloha',
@@ -176,6 +183,13 @@ We will get new queries as soon as possible.
 You can follow https://twitter.com/igor_chubin for the updates
 ======================================================================================
 """,
+        'mk': u"""
+Извинете, ни снемуваат барања за до сервисот кој ни нуди временска прогноза во моментот.
+Еве една временска прогноза за град (за да видите како изгледа).
+Ќе добиеме нови барања најбрзо што можеме.
+Следете го https://twitter.com/igor_chubin за известувања
+======================================================================================
+""",
         'hy': u"""
 Կներեք, այս պահին մենք գերազանցել ենք եղանակային տեսության կայանին հարցումների քանակը.
 Կարող եք տեսնել տիպային եղանակը զեկուցում հիմնական քաղաքի համար (Ուղղակի որպես նմուշ)։
@@ -191,6 +205,7 @@ You can follow https://twitter.com/igor_chubin for the updates
 
     'NEW_FEATURE': {
         'en': u'New feature: multilingual location names \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) and location search \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
+        'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
         'cy': u'Nodwedd newydd: enwau lleoliad amlieithog \033[92mwttr.in/станция+Восток\033[0m (yn UTF-8) a chwilio lleoliad \033[92mwttr.in/~Kilimanjaro\033[0m (ychwanegwch ~ yn gyntaf)',
         'ru': u'Попробуйте: названия мест на любом языке \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и поиск мест \033[92mwttr.in/~Kilimanjaro\033[0m (нужно добавить ~ спереди)',
         'hy': u'Փորձարկեք: տեղամասերի անունները կամայական լեզվով \033[92mwttr.in/Դիլիջան\033[0m (в UTF-8) և տեղանքի որոնում \033[92mwttr.in/~Kilimanjaro\033[0m (հարկավոր է ~ ավելացնել դիմացից)',
@@ -199,6 +214,7 @@ You can follow https://twitter.com/igor_chubin for the updates
     'FOLLOW_ME': {
         'en': u'Follow \033[46m\033[30m@igor_chubin\033[0m for wttr.in updates',
         'cy': u'Dilyn \033[46m\033[30m@igor_Chubin\033[0m am diweddariadau wttr.in',
+        'mk': u'Следете \033[46m\033[30m@igor_chubin\033[0m за wttr.in новости',
         'ru': u'Все новые фичи публикуются здесь: \033[46m\033[30m@igor_chubin\033[0m',
         'hy': u'Նոր ֆիչռների համար հետևեք՝ \033[46m\033[30m@igor_chubin\033[0m',
     },
@@ -209,4 +225,3 @@ def get_message(message_name, lang):
         return ''
     message_dict = MESSAGE[message_name]
     return message_dict.get(lang, message_dict.get('en', ''))
-
