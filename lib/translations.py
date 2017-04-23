@@ -61,6 +61,12 @@ L'un des endroits les plus froids habités en permanence sur la planète.
 Nous espérons que vous avez une meilleure météo
 """,
 
+        'is': u"""
+Við finnum ekki staðsetninguna þína og vísum þér þar með á Ojmjakon,
+ein af köldustu byggðum jarðar.
+Vonandi er betra veður hjá þér.
+""",
+
         'ja': u"""
 指定された場所が見つかりませんでした。
 代わりにオイミャコンの天気予報を表示しています。
@@ -140,6 +146,7 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
         'el': u'Άνγωστη τοποθεσία',
         'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement inconnu',
+        'is': u'Óþekkt staðsetning',
         'ja': u'未知の場所です',
         'mk': u'Непозната локација',
         'ro': u'Locaţie necunoscută',
@@ -162,6 +169,7 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
         'el': u'Τοποθεσία',
         'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement',
+        'is': u'Staðsetning',
         'ja': u'位置情報',
         'mk': u'Локација',
         'ro': u'Locaţie',
