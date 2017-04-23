@@ -1,16 +1,15 @@
 # vim: set encoding=utf-8
 
 FULL_TRANSLATION = [
-        "az", "bg", "cs", "cy", "da", "de", "el", "eo", "es", "fi",
-        "fr", "hi", "hu", "it", "ja", "ko", "ml", "nl", "nn", "pt",
-        "pl", "ro", "ru", "sk", "sl", "sr", "sr-lat", "sv", "tr", "uk", "vi",
-        "zh",
+        "az", "bg", "ca", "cs", "cy", "da", "de", "el", "eo", "es",
+        "fi", "fr", "hi", "hr", "hu", "is", "it", "ja", "ko", "mk",
+        "ml", "nl", "nn", "pt", "pl", "ro", "ru", "sk", "sl", "sr",
+        "sr-lat", "sv", "tr", "uk", "uz", "vi", "zh",
 ]
 
 PARTIAL_TRANSLATION = [
-        "et", "hy", "jv", "ka", "kk", "ky", "lt", "lv", "mk", "sw",
-        "th", "uz", "zu",
-        "hr",
+        "et", "hy", "jv", "ka", "kk", "ky", "lt", "lv", "sw",
+        "th", "zu",
         "bs",
         "be",
 ]
@@ -198,10 +197,10 @@ You can follow https://twitter.com/igor_chubin for the updates
     },
 
     'FOLLOW_ME': {
-        'en': u'Follow \033[46m\033[30m@igor_chubin\033[0m for wttr.in updates \033[4m[new \033[14m7 features\033[4m in the last 3 months]\033[0m',
-        'cy': u'Dilyn \033[46m\033[30m@igor_Chubin\033[0m am diweddariadau wttr.in \033[4m 7 nodweddion newydd yn y 3 mis dywethaf\033[0m',
-        'ru': u'Все новые фичи публикуются здесь: \033[46m\033[30m@igor_chubin\033[0m \033[4m[\033[14mза последние 3 месяца: 7 новых фич\033[4m]\033[0m',
-        'hy': u'Նոր ֆիչռների համար հետևեք՝ \033[46m\033[30m@igor_chubin\033[0m \033[4m[\033[14mվերջին 3 ամսում: 7 թարմացում\033[4m]\033[0m',
+        'en': u'Follow \033[46m\033[30m@igor_chubin\033[0m for wttr.in updates',
+        'cy': u'Dilyn \033[46m\033[30m@igor_Chubin\033[0m am diweddariadau wttr.in',
+        'ru': u'Все новые фичи публикуются здесь: \033[46m\033[30m@igor_chubin\033[0m',
+        'hy': u'Նոր ֆիչռների համար հետևեք՝ \033[46m\033[30m@igor_chubin\033[0m',
     },
 }
 
