@@ -1,47 +1,47 @@
-113 : Čist                           : Clear
-113 : Sunčano                        : Sunny
-116 : Delimično oblačno              : Partly cloudy
-119 : Oblačno je                     : Cloudy
-122 : Oblacno                        : Overcast
-143 : Mrlja                          : Mist
-176 : Moguće kiša pada kiša          : Patchy rain possible
-179 : Mogući snijeg                  : Patchy snow possible
-182 : Mogući snijeg                  : Patchy sleet possible
-185 : Mogu žutokrveno hladno         : Patchy freezing drizzle possible
-200 : Mogu zanimljivo flash          : Thundery outbreaks possible
-227 : Puhivanje snijeg               : Blowing snow
-230 : Oluji                          : Blizzard
-248 : Magla                          : Fog
-260 : Frost, magla                   : Freezing fog
-263 : Briljantan svjetlo kišnicu     : Patchy light drizzle
-266 : Bistar kiša                    : Light drizzle
-281 : Ledeno pljuskanja              : Freezing drizzle
-284 : Teško je da se smrzneš         : Heavy freezing drizzle
-293 : Vrijeme je jasno               : Patchy light rain
-296 : Meko kiša                      : Light rain
-299 : Ponekad kiše                   : Moderate rain at times
-302 : Umjerena kiša                  : Moderate rain
-305 : Ponekad kiša                   : Heavy rain at times
-308 : Tuš                            : Heavy rain
-311 : Čvrsto kiša                    : Light freezing rain
-314 : Umjereno, ili teški ledene kiše : Moderate or heavy freezing rain
-317 : Vrijeme je jasno               : Light sleet
-320 : Umjerena ili snijega tuševe    : Moderate or heavy sleet
-323 : Svjetlo.                            : Patchy light snow
-326 : Slab snijeg                    : Light snow
-329 : Moćna stila snijeg             : Patchy moderate snow
-332 : Umjerena snijeg                : Moderate snow
-335 : Moćna snijeg                   : Patchy heavy snow
-338 : Mnogo snega                    : Heavy snow
-350 : Led muda                       : Ice pellets
-353 : Svjetlo kiša tuš               : Light rain shower
-356 : Umjerena ili kiše tuš          : Moderate or heavy rain shower
-359 : Na otvorenom tropske tuš       : Torrential rain shower
-362 : Svjetlo kiša tokom dana        : Light sleet showers
-365 : Umjerena da kiše               : Moderate or heavy sleet showers
-368 : Kiše                           : Light snow showers
-371 : Umjerena da kiše, snijeg       : Moderate or heavy snow showers
-386 : Kiša s grmljavinom             : Patchy light rain with thunder
-389 : Umjerena ili kiše s grmljavinom : Moderate or heavy rain with thunder
-392 : Svjetlo sa munja               : Patchy light snow with thunder
-395 : Umjerena ili snijega s grmljavinom: Moderate or heavy snow with thunder
+113 : Vedro                               : Clear
+113 : Sunčano                             : Sunny
+116 : Djelomično oblačno                  : Partly cloudy
+119 : Oblačno                             : Cloudy
+122 : Tmurno                              : Overcast
+143 : Magla                               : Mist
+176 : Moguća povremena kiša               : Patchy rain possible
+179 : Moguć povremeni snijeg              : Patchy snow possible
+182 : Moguća povremena susnježica         : Patchy sleet possible
+185 : Moguća poledica                     : Patchy freezing drizzle possible
+200 : Moguć prolom oblaka                 : Thundery outbreaks possible
+227 : Nanosi snijega                      : Blowing snow
+230 : Mećava                              : Blizzard
+248 : Magla                               : Fog
+260 : Mraz, magla                         : Freezing fog
+263 : Rosulja                             : Patchy light drizzle
+266 : Lagana kišica                       : Light drizzle
+281 : Ledena kišica                       : Freezing drizzle
+284 : Jaka ledena kiša                    : Heavy freezing drizzle
+293 : Povremena agana kiša                : Patchy light rain
+296 : Lagana kiša                         : Light rain
+299 : Mjerena povremena kiša              : Moderate rain at times
+302 : Umjerena kiša                       : Moderate rain
+305 : Povremeni pljuskovi                 : Heavy rain at times
+308 : Pljusak                             : Heavy rain
+311 : Lagana ledena kiša                  : Light freezing rain
+314 : Umjerena ili jaka ledena kiša       : Moderate or heavy freezing rain
+317 : Lagana susnježica                   : Light sleet
+320 : Umjerena ili jaka susnježica        : Moderate or heavy sleet
+323 : Mguć lagan snijeg                   : Patchy light snow
+326 : Lagan snijeg                        : Light snow
+329 : Moguć umjeren snijeg                : Patchy moderate snow
+332 : Umjeren snijeg                      : Moderate snow
+335 : Moguć jak snijeg                    : Patchy heavy snow
+338 : Jak snijeg                          : Heavy snow
+350 : Ledena tuča                         : Ice pellets
+353 : Lagani pljusak                      : Light rain shower
+356 : Umjeren ili jak pljusak             : Moderate or heavy rain shower
+359 : Silovit pljusak                     : Torrential rain shower
+362 : Lagana susnježica                   : Light sleet showers
+365 : Umjerena ili jaka susnježica        : Moderate or heavy sleet showers
+368 : Lagani snježni pljuskovi            : Light snow showers
+371 : Umjereni ili jaki snježni pljuskovi : Moderate or heavy snow showers
+386 : Lagana kiša s grmljavinom           : Patchy light rain with thunder
+389 : Umjerena ili jaka kiša s grmljavinom: Moderate or heavy rain with thunder
+392 : Lagan snijeg s grmljavinom          : Patchy light snow with thunder
+395 : Umjeren ili jak snijeg s grmljavinom: Moderate or heavy snow with thunder
