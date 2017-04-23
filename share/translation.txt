@@ -7,6 +7,7 @@ Translated/improved/corrected by:
     * Armenian:     Aram Bayadyan @aramix, Mikayel Ghazaryan @mkdotam
     * Azerbaijani:  Dmytro Nikitiuk, Elsevar Abbasov
     * Belarusian:   Igor Chubin
+    * Croatian:     Siniša Kusić @ku5ic
     * Czech:        Juraj Kakody
     * Esperanto:    Igor Chubin
     * Finnish:      @Maxifi
