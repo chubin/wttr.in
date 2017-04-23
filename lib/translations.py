@@ -1,16 +1,15 @@
 # vim: set encoding=utf-8
 
 FULL_TRANSLATION = [
-        "az", "bg", "cs", "cy", "da", "de", "el", "eo", "es", "fi",
-        "fr", "hi", "hu", "it", "ja", "ko", "ml", "nl", "nn", "pt",
-        "pl", "ro", "ru", "sk", "sl", "sr", "sr-lat", "sv", "tr", "uk", "vi",
-        "zh", "mk",
+        "az", "bg", "ca", "cs", "cy", "da", "de", "el", "eo", "es",
+        "fi", "fr", "hi", "hr", "hu", "is", "it", "ja", "ko", "mk",
+        "ml", "nl", "nn", "pt", "pl", "ro", "ru", "sk", "sl", "sr",
+        "sr-lat", "sv", "tr", "uk", "uz", "vi", "zh",
 ]
 
 PARTIAL_TRANSLATION = [
         "et", "hy", "jv", "ka", "kk", "ky", "lt", "lv", "sw",
-        "th", "uz", "zu",
-        "hr",
+        "th", "zu",
         "bs",
         "be",
 ]
@@ -23,11 +22,6 @@ MESSAGE = {
 We were unable to find your location,
 so we have brought you to Oymyakon,
 one of the coldest permanently inhabited locales on the planet.
-""",
-    'mk': u"""
-Неможевме да ја пронајдеме вашата локација,
-затоа ве однесовме во Ојмајкон,
-еден од најладните трајно населени места на планетата.
 """,
         'cs': u"""
 Nepodařilo se nám najít vaši polohu,
@@ -72,8 +66,13 @@ Nous espérons que vous avez une meilleure météo
 代わりにオイミャコンの天気予報を表示しています。
 オイミャコンは地球上で最も寒い居住地の一つです。
 """,
+        'mk': u"""
+Неможевме да ја пронајдеме вашата локација,
+затоа ве однесовме во Ојмајкон,
+еден од најладните трајно населени места на планетата.
+""",
 
-        'ro': u"""
+      'ro': u"""
 Nu v-am putut identifica locația, prin urmare va aratam vremea din Oimiakon,
 una dintre cele mai reci localități permanent locuite de pe planetă.
 Sperăm că aveți vreme mai bună!        
@@ -135,7 +134,6 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
 
     'UNKNOWN_LOCATION': {
         'en': u'Unknown location',
-        'mk': u'Непозната локација',
         'cs': u'Neznámá poloha',
         'cy': u'Lleoliad anhysbys',
         'de': u'Unbekannter Ort',
@@ -143,6 +141,7 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
         'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement inconnu',
         'ja': u'未知の場所です',
+        'mk': u'Непозната локација',
         'ro': u'Locaţie necunoscută',
         'ru': u'Неизвестное местоположение',
         'sk': u'Neznáma poloha',
@@ -157,7 +156,6 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
 
     'LOCATION': {
         'en': u'Location',
-        'mk': u'Локација',
         'cs': u'Poloha',
         'cy': u'Lleoliad',
         'de': u'Ort',
@@ -165,6 +163,7 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
         'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement',
         'ja': u'位置情報',
+        'mk': u'Локација',
         'ro': u'Locaţie',
         'ru': u'Местоположение',
         'sk': u'Poloha',
@@ -213,11 +212,11 @@ You can follow https://twitter.com/igor_chubin for the updates
     },
 
     'FOLLOW_ME': {
-        'en': u'Follow \033[46m\033[30m@igor_chubin\033[0m for wttr.in updates \033[4m[new \033[14m7 features\033[4m in the last 3 months]\033[0m',
-        'mk': u'Следете \033[46m\033[30m@igor_chubin\033[0m за wttr.in новости \033[4m[нови \033[14m7 опции \033[4m во последните 3 месеци]\033[0m',
-        'cy': u'Dilyn \033[46m\033[30m@igor_Chubin\033[0m am diweddariadau wttr.in \033[4m 7 nodweddion newydd yn y 3 mis dywethaf\033[0m',
-        'ru': u'Все новые фичи публикуются здесь: \033[46m\033[30m@igor_chubin\033[0m \033[4m[\033[14mза последние 3 месяца: 7 новых фич\033[4m]\033[0m',
-        'hy': u'Նոր ֆիչռների համար հետևեք՝ \033[46m\033[30m@igor_chubin\033[0m \033[4m[\033[14mվերջին 3 ամսում: 7 թարմացում\033[4m]\033[0m',
+        'en': u'Follow \033[46m\033[30m@igor_chubin\033[0m for wttr.in updates',
+        'cy': u'Dilyn \033[46m\033[30m@igor_Chubin\033[0m am diweddariadau wttr.in',
+        'mk': u'Следете \033[46m\033[30m@igor_chubin\033[0m за wttr.in новости',
+        'ru': u'Все новые фичи публикуются здесь: \033[46m\033[30m@igor_chubin\033[0m',
+        'hy': u'Նոր ֆիչռների համար հետևեք՝ \033[46m\033[30m@igor_chubin\033[0m',
     },
 }
 
