@@ -2,7 +2,7 @@
 113 : Assolellat                            : Sunny
 116 : Parcialment ennuvolat                 : Partly cloudy
 119 : Ennuvolat                             : Cloudy
-122 : Ennuvolat                             : Overcast
+122 : Molt ennuvolat                        : Overcast
 143 : Boirina                               : Mist
 176 : Possible pluja intermitent            : Patchy rain possible
 179 : Possible neu intermitent              : Patchy snow possible
