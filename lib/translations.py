@@ -125,9 +125,9 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
 """,
 
         'uz': u"""
-Сиз турган худудни аниклаб булмади,
-шунинг учун биз сизга сайёрамизнинг энг совук нуктаси Оймяконнинг об-хавосини курсатмокдамиз.
-Шу сабаб бугунги об-хаво сиз учун ажойиб булади деган умиддамиз!
+Sizning joylashuvingizni aniqlay olmadik,
+shuning uchun sizga sayyoramizning eng sovuq aholi punkti - Oymyakondagi ob-havo haqida ma'lumot beramiz.
+Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
 """,
 
         'hy': u"""
