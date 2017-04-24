@@ -23,6 +23,11 @@ We were unable to find your location,
 so we have brought you to Oymyakon,
 one of the coldest permanently inhabited locales on the planet.
 """,
+        'ca': u"""
+Hem estat incapaços de trobar la seva ubicació,
+és per aquest motiu que l'hem portat fins Oymyakon,
+un dels llocs més freds inhabitats de manera permanent al planeta.
+""",
         'cs': u"""
 Nepodařilo se nám najít vaši polohu,
 takže jsme vás přivedl do Ojmjakonu.
@@ -134,6 +139,7 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
 
     'UNKNOWN_LOCATION': {
         'en': u'Unknown location',
+        'ca': u'Localització desconeguda',
         'cs': u'Neznámá poloha',
         'cy': u'Lleoliad anhysbys',
         'de': u'Unbekannter Ort',
@@ -156,6 +162,7 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
 
     'LOCATION': {
         'en': u'Location',
+        'ca': u'Localització',
         'cs': u'Poloha',
         'cy': u'Lleoliad',
         'de': u'Ort',
@@ -183,6 +190,13 @@ We will get new queries as soon as possible.
 You can follow https://twitter.com/igor_chubin for the updates
 ======================================================================================
 """,
+        'ca': u"""
+Disculpi'ns, ens hem quedat sense consultes al servei meteorològic momentàniament.
+Aquí li oferim l'informe del temps a la ciutat per defecte (només per mostrar, quin aspecte té).
+Obtindrem noves consultes tan aviat com ens sigui possible.
+Pot seguir https://twitter.com/igor_chubin per noves actualitzacions
+======================================================================================
+""",
         'mk': u"""
 Извинете, ни снемуваат барања за до сервисот кој ни нуди временска прогноза во моментот.
 Еве една временска прогноза за град (за да видите како изгледа).
@@ -205,6 +219,7 @@ You can follow https://twitter.com/igor_chubin for the updates
 
     'NEW_FEATURE': {
         'en': u'New feature: multilingual location names \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) and location search \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
+        'ca': u'Noves funcionalitats: noms d\'ubicació multilingües \033[92mwttr.in/станция+Восток\033 [0m (en UTF-8) i la ubicació de recerca \ 033 [92mwttr.in/~Kilimanjaro\033 [0m (només cal afegir ~ abans)',
         'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
         'cy': u'Nodwedd newydd: enwau lleoliad amlieithog \033[92mwttr.in/станция+Восток\033[0m (yn UTF-8) a chwilio lleoliad \033[92mwttr.in/~Kilimanjaro\033[0m (ychwanegwch ~ yn gyntaf)',
         'ru': u'Попробуйте: названия мест на любом языке \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и поиск мест \033[92mwttr.in/~Kilimanjaro\033[0m (нужно добавить ~ спереди)',
@@ -213,6 +228,7 @@ You can follow https://twitter.com/igor_chubin for the updates
 
     'FOLLOW_ME': {
         'en': u'Follow \033[46m\033[30m@igor_chubin\033[0m for wttr.in updates',
+        'ca': u'Seguiu \033[46m\033[30m@igor_chubin\033[0m per actualitzacions de wttr.in',
         'cy': u'Dilyn \033[46m\033[30m@igor_Chubin\033[0m am diweddariadau wttr.in',
         'mk': u'Следете \033[46m\033[30m@igor_chubin\033[0m за wttr.in новости',
         'ru': u'Все новые фичи публикуются здесь: \033[46m\033[30m@igor_chubin\033[0m',
