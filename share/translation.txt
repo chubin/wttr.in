@@ -17,7 +17,7 @@ Translated/improved/corrected by:
     * Greek:        Panayotis Vryonis
     * Icelandic:    Óli G. @dvergur, Skúli Arnlaugsson @Arnlaugsson
     * Japanese:     @ryunix
-    * Korean:       Jeremy Bae @opt9
+    * Korean:       Jeremy Bae @opt9, Jung Winter @res_tin
     * Macedonian:   Matej Plavevski @MatejMecka
     * Nynorsk:      Kevin Brubeck Unhammer (https://unhammer.org/k/)
     * Romanian:     Gabriel Moruz
