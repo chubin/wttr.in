@@ -83,10 +83,10 @@ Vonandi er betra veður hjá þér.
 еден од најладните трајно населени места на планетата.
 """,
 
-      'ro': u"""
+        'ro': u"""
 Nu v-am putut identifica locația, prin urmare va aratam vremea din Oimiakon,
 una dintre cele mai reci localități permanent locuite de pe planetă.
-Sperăm că aveți vreme mai bună!        
+Sperăm că aveți vreme mai bună!
 """,
 
         'ru': u"""
@@ -128,6 +128,11 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
 найхолоднішому населеному пункті на планеті.
 Будемо сподіватися, що у вас сьогодні погода краще!
 """,
+        'ko': u"""
+지정된 장소를 찾을 수 없습니다,
+대신 오이먀콘의 일기 예보를 표시합니다,
+오이먀콘은 지구상에서 가장 추운 곳에 위치한 마을입니다!
+""",
 
         'uz': u"""
 Sizning joylashuvingizni aniqlay olmadik,
@@ -163,6 +168,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'sv': u'Okänd plats',
         'tr': u'Bölge bulunamadı',
         'ua': u'Невідоме місце',
+        'ko': u'알 수 없는 장소',
         'uz': u'Аникланмаган худуд',
         'hy': u'Անհայտ գտնվելու վայր',
     },
@@ -187,6 +193,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'sv': u'Plats',
         'tr': u'Bölge bulunamadı',
         'ua': u'Місце',
+        'ko': u'위치',
         'hy': u'Դիրք',
     },
 
@@ -219,6 +226,13 @@ Pot seguir https://twitter.com/igor_chubin per noves actualitzacions
 Կարող եք հետևել մեզ https://twitter.com/igor_chubin թարմացումների համար։
 ======================================================================================
 """,
+        'ko': u"""
+죄송합니다. 현재 날씨 정보를 가져오는 쿼리 요청이 한도에 도달했습니다.
+대신 기본으로 설정된 도시에 대한 일기 예보를 보여드리겠습니다. (이는 단지 어떻게 보이는지 알려주기 위함입니다).
+쿼리 요청이 가능한 한 빨리 이루어질 수 있도록 하겠습니다.
+업데이트 소식을 원하신다면 https://twitter.com/igor_chubin 을 팔로우 해주세요.
+======================================================================================
+""",
 
     },
 
@@ -231,6 +245,7 @@ Pot seguir https://twitter.com/igor_chubin per noves actualitzacions
         'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
         'cy': u'Nodwedd newydd: enwau lleoliad amlieithog \033[92mwttr.in/станция+Восток\033[0m (yn UTF-8) a chwilio lleoliad \033[92mwttr.in/~Kilimanjaro\033[0m (ychwanegwch ~ yn gyntaf)',
         'ru': u'Попробуйте: названия мест на любом языке \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и поиск мест \033[92mwttr.in/~Kilimanjaro\033[0m (нужно добавить ~ спереди)',
+        'ko': u'새로운 기능: 다국어로 대응된 위치 \033[92mwttr.in/서울\033[0m (UTF-8에서) 장소 검색 \033[92mwttr.in/~Kilimanjaro\033[0m (앞에 ~를 붙이세요)',
         'hy': u'Փորձարկեք: տեղամասերի անունները կամայական լեզվով \033[92mwttr.in/Դիլիջան\033[0m (в UTF-8) և տեղանքի որոնում \033[92mwttr.in/~Kilimanjaro\033[0m (հարկավոր է ~ ավելացնել դիմացից)',
     },
 
@@ -240,6 +255,7 @@ Pot seguir https://twitter.com/igor_chubin per noves actualitzacions
         'cy': u'Dilyn \033[46m\033[30m@igor_Chubin\033[0m am diweddariadau wttr.in',
         'mk': u'Следете \033[46m\033[30m@igor_chubin\033[0m за wttr.in новости',
         'ru': u'Все новые фичи публикуются здесь: \033[46m\033[30m@igor_chubin\033[0m',
+        'ko': u'wttr.in의 업데이트 소식을 원하신다면 \033[46m\033[30m@igor_chubin\033[0m 을 팔로우 해주세요',
         'hy': u'Նոր ֆիչռների համար հետևեք՝ \033[46m\033[30m@igor_chubin\033[0m',
     },
 }
