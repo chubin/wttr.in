@@ -83,10 +83,10 @@ Vonandi er betra veður hjá þér.
 еден од најладните трајно населени места на планетата.
 """,
 
-      'ro': u"""
+        'ro': u"""
 Nu v-am putut identifica locația, prin urmare va aratam vremea din Oimiakon,
 una dintre cele mai reci localități permanent locuite de pe planetă.
-Sperăm că aveți vreme mai bună!        
+Sperăm că aveți vreme mai bună!
 """,
 
         'ru': u"""
@@ -128,6 +128,11 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
 найхолоднішому населеному пункті на планеті.
 Будемо сподіватися, що у вас сьогодні погода краще!
 """,
+        'ko': u"""
+지정된 장소를 찾을 수 없습니다,
+대신 오이먀콘의 일기 예보를 표시합니다,
+오이먀콘은 지구상에서 가장 추운 곳에 위치한 마을입니다!
+""",
 
         'uz': u"""
 Sizning joylashuvingizni aniqlay olmadik,
@@ -163,6 +168,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'sv': u'Okänd plats',
         'tr': u'Bölge bulunamadı',
         'ua': u'Невідоме місце',
+        'ko': u'알 수 없는 장소',
         'uz': u'Аникланмаган худуд',
         'hy': u'Անհայտ գտնվելու վայր',
     },
@@ -187,6 +193,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'sv': u'Plats',
         'tr': u'Bölge bulunamadı',
         'ua': u'Місце',
+        'ko': u'위치',
         'hy': u'Դիրք',
     },
 
