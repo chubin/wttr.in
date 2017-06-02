@@ -1,16 +1,15 @@
 # vim: set encoding=utf-8
 
 FULL_TRANSLATION = [
-        "az", "bg", "ca", "cs", "cy", "da", "de", "el", "eo", "es",
-        "fi", "fr", "hi", "hr", "hu", "is", "it", "ja", "ko", "mk",
-        "ml", "nl", "nn", "pt", "pl", "ro", "ru", "sk", "sl", "sr",
-        "sr-lat", "sv", "tr", "uk", "uz", "vi", "zh",
+        "az", "bg", "bs", "ca", "cs", "cy", "da", "de", "el", "eo",
+        "es", "fi", "fr", "hi", "hr", "hu", "is", "it", "ja", "ko",
+        "mk", "ml", "nl", "nn", "pt", "pl", "ro", "ru", "sk", "sl",
+        "sr", "sr-lat", "sv", "tr", "uk", "uz", "vi", "zh",
 ]
 
 PARTIAL_TRANSLATION = [
         "et", "hy", "jv", "ka", "kk", "ky", "lt", "lv", "sw",
         "th", "zu",
-        "bs",
         "be",
 ]
 
@@ -23,22 +22,32 @@ We were unable to find your location,
 so we have brought you to Oymyakon,
 one of the coldest permanently inhabited locales on the planet.
 """,
+            
+        'bs': u"""
+Nismo mogli pronaći vašu lokaciju,
+tako da smo te doveli do Oymyakon,
+jedan od najhladnijih stalno naseljena mjesta na planeti.
+Nadamo se da ćete imati bolje vreme!       
+""",
         'ca': u"""
 Hem estat incapaços de trobar la seva ubicació,
 és per aquest motiu que l'hem portat fins Oymyakon,
 un dels llocs més freds inhabitats de manera permanent al planeta.
 """,
+            
         'cs': u"""
 Nepodařilo se nám najít vaši polohu,
 takže jsme vás přivedl do Ojmjakonu.
 Je to jedno z nejchladnějších trvale obydlených míst na planetě.
 Doufáme, že budete mít lepší počasí!
 """,
+            
         'cy': u"""
 Ni darganfyddwyd eich lleoliad,
 felly rydym wedi dod â chi i Oymyakon,
 un o'r llefydd oerach ar y blaned lle mae pobl yn fyw!
 """,
+            
         'de': u"""
 Wir konnten Ihren Standort nicht finden,
 so haben wir Sie nach Oimjakon gebracht,
@@ -150,6 +159,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
 
     'UNKNOWN_LOCATION': {
         'en': u'Unknown location',
+        'bs': u'Nepoznatoja lokacija',
         'ca': u'Localització desconeguda',
         'cs': u'Neznámá poloha',
         'cy': u'Lleoliad anhysbys',
@@ -175,6 +185,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
 
     'LOCATION': {
         'en': u'Location',
+        'bs': u'Lokacija',
         'ca': u'Localització',
         'cs': u'Poloha',
         'cy': u'Lleoliad',
@@ -203,6 +214,13 @@ Sorry, we are running out of queries to the weather service at the moment.
 Here is the weather report for the default city (just to show you, how it looks like).
 We will get new queries as soon as possible.
 You can follow https://twitter.com/igor_chubin for the updates
+======================================================================================
+""",
+        'bs': u"""
+Žao mi je, mi ponestaje upita i vremenska prognoza u ovom trenutku.
+Ovdje je izvještaj o vremenu za default grada (samo da vam pokažem kako to izgleda).
+Mi ćemo dobiti nove upite u najkraćem mogućem roku.
+Možete pratiti https://twitter.com/igor_chubin za ažuriranja
 ======================================================================================
 """,
         'ca': u"""
@@ -241,6 +259,7 @@ Pot seguir https://twitter.com/igor_chubin per noves actualitzacions
 
     'NEW_FEATURE': {
         'en': u'New feature: multilingual location names \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) and location search \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
+        'bs': u'XXXXXXXXXXXXXXXXXXXX: XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\ 033[92mwttr.in/станция+Восток\033 [0m (XX UTF-8) XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
         'ca': u'Noves funcionalitats: noms d\'ubicació multilingües \033[92mwttr.in/станция+Восток\033 [0m (en UTF-8) i la ubicació de recerca \ 033 [92mwttr.in/~Kilimanjaro\033 [0m (només cal afegir ~ abans)',
         'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
         'cy': u'Nodwedd newydd: enwau lleoliad amlieithog \033[92mwttr.in/станция+Восток\033[0m (yn UTF-8) a chwilio lleoliad \033[92mwttr.in/~Kilimanjaro\033[0m (ychwanegwch ~ yn gyntaf)',
@@ -251,6 +270,7 @@ Pot seguir https://twitter.com/igor_chubin per noves actualitzacions
 
     'FOLLOW_ME': {
         'en': u'Follow \033[46m\033[30m@igor_chubin\033[0m for wttr.in updates',
+        'bs': u'XXXXXX \033[46m\033[30m@igor_chubin\033[0m XXXXXXXXXXXXXXXXXXX',   
         'ca': u'Seguiu \033[46m\033[30m@igor_chubin\033[0m per actualitzacions de wttr.in',
         'cy': u'Dilyn \033[46m\033[30m@igor_Chubin\033[0m am diweddariadau wttr.in',
         'mk': u'Следете \033[46m\033[30m@igor_chubin\033[0m за wttr.in новости',
