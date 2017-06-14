@@ -50,7 +50,7 @@ un o'r llefydd oerach ar y blaned lle mae pobl yn fyw!
             
         'de': u"""
 Wir konnten Ihren Standort nicht finden,
-so haben wir Sie nach Oimjakon gebracht,
+also haben wir Sie nach Oimjakon gebracht,
 einer der kältesten dauerhaft bewohnten Orte auf dem Planeten.
 Wir hoffen, dass Sie besseres Wetter haben!
 """,
