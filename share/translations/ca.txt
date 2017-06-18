@@ -13,35 +13,35 @@
 230 : Torb                                  : Blizzard
 248 : Boira                                 : Fog
 260 : Boira gebradora                       : Freezing fog
-263 : Plugim lleuger intermitent            : Patchy light drizzle
-266 : Plugim lleuger                        : Light drizzle
+263 : Plugim suau intermitent               : Patchy light drizzle
+266 : Plugim suau                           : Light drizzle
 281 : Plugim gelat                          : Freezing drizzle
 284 : Plugim gelat intens                   : Heavy freezing drizzle
-293 : Pluja lleugera intermitent            : Patchy light rain
-296 : Pluja lleugera                        : Light rain
+293 : Pluja suau intermitent                : Patchy light rain
+296 : Pluja suau                            : Light rain
 299 : Pluja moderada puntual                : Moderate rain at times
 302 : Pluja moderada                        : Moderate rain
 305 : Pluja forta puntual                   : Heavy rain at times
 308 : Pluja forta                           : Heavy rain
 311 : Calamarsa                             : Light freezing rain
 314 : Pedra o granís                        : Moderate or heavy freezing rain
-317 : Aiguaneu lleugera                     : Light sleet
+317 : Aiguaneu suau                         : Light sleet
 320 : Aiguaneu moderada o forta             : Moderate or heavy sleet
-323 : Neu lleugera intermitent              : Patchy light snow
-326 : Neu lleugera                          : Light snow
-329 : Neu moderada intermitent              : Patchy moderate snow
-332 : Neu moderada                          : Moderate snow
-335 : Neu forta intermitent                 : Patchy heavy snow
-338 : Neu forta                             : Heavy snow
-350 : Grànuls de gel                        : Ice pellets
-353 : Ruixats de pluja lleugera             : Light rain shower
+323 : Nevada suau intermitent               : Patchy light snow
+326 : Nevada suau                           : Light snow
+329 : Nevada moderada intermitent           : Patchy moderate snow
+332 : Nevada moderada                       : Moderate snow
+335 : Nevada forta intermitent              : Patchy heavy snow
+338 : Nevada forta                          : Heavy snow
+350 : Gebra                                 : Ice pellets
+353 : Ruixats de pluja suau                 : Light rain shower
 356 : Ruixats de pluja moderada o forta     : Moderate or heavy rain shower
 359 : Ruixats de pluja torrencial           : Torrential rain shower
-362 : Ruixats d'aiguaneu lleugera           : Light sleet showers
+362 : Ruixats d'aiguaneu suau               : Light sleet showers
 365 : Ruixats d'aiguaneu moderada o forta   : Moderate or heavy sleet showers
-368 : Ruixats de neu lleugera               : Light snow showers
-371 : Neu moderada o forta                  : Moderate or heavy snow showers
+368 : Ruixats de neu suau                   : Light snow showers
+371 : Nevada moderada o forta               : Moderate or heavy snow showers
 386 : Intervals de pluges amb trons         : Patchy light rain with thunder
 389 : Pluja moderada o forta amb trons      : Moderate or heavy rain with thunder
-392 : Neu lleugera intermitent amb trons    : Patchy light snow with thunder
-395 : Neu moderada o forta amb trons        : Moderate or heavy snow with thunder
+392 : Nevada lleugera intermitent amb trons : Patchy light snow with thunder
+395 : Nevada moderada o forta amb trons     : Moderate or heavy snow with thunder
