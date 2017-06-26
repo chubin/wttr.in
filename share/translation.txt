@@ -13,7 +13,7 @@ Translated/improved/corrected by:
     * Czech:        Juraj Kakody
     * Esperanto:    Igor Chubin
     * Finnish:      @Maxifi
-    * French:       Igor Chubin
+    * French:       Igor Chubin, @daftaupe 
     * German:       Igor Chubin
     * Greek:        Panayotis Vryonis
     * Icelandic:    Óli G. @dvergur, Skúli Arnlaugsson @Arnlaugsson
