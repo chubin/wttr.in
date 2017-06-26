@@ -69,10 +69,10 @@ Toivottavasti sinulla on parempi sää!
 """,
 
         'fr': u"""
-Nous n'avons pas pu trouver votre position,
+Nous n'avons pas pu déterminer votre position,
 Nous vous avons donc amenés à Oïmiakon,
-L'un des endroits les plus froids habités en permanence sur la planète.
-Nous espérons que vous avez une meilleure météo
+l'un des endroits les plus froids habités en permanence sur la planète.
+Nous espérons qu'il fait meilleur chez vous !
 """,
 
         'is': u"""
@@ -230,6 +230,13 @@ Obtindrem noves consultes tan aviat com ens sigui possible.
 Pot seguir https://twitter.com/igor_chubin per noves actualitzacions
 ======================================================================================
 """,
+        'fr': u"""
+Désolé, nous avons épuisé les requêtes vers le service météo.
+Voici un bulletin météo de l'emplacement par défaut (pour vous donner un aperçu).
+Nous serons très bientôt en mesure de faire de nouvelles requêtes.
+Vous pouvez suivre https://twitter.com/igor_chubin pour rester informé.
+======================================================================================
+""",
         'mk': u"""
 Извинете, ни снемуваат барања за до сервисот кој ни нуди временска прогноза во моментот.
 Еве една временска прогноза за град (за да видите како изгледа).
@@ -261,6 +268,7 @@ Pot seguir https://twitter.com/igor_chubin per noves actualitzacions
         'en': u'New feature: multilingual location names \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) and location search \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
         'bs': u'XXXXXXXXXXXXXXXXXXXX: XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\ 033[92mwttr.in/станция+Восток\033 [0m (XX UTF-8) XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
         'ca': u'Noves funcionalitats: noms d\'ubicació multilingües \033[92mwttr.in/станция+Восток\033 [0m (en UTF-8) i la ubicació de recerca \ 033 [92mwttr.in/~Kilimanjaro\033 [0m (només cal afegir ~ abans)',
+        'fr': u'Nouvelles fonctionnalités: noms d'emplacements multilingues \033[92mwttr.in/станция+Восток\033 [0m (en UTF-8) et recherche d'emplacement \ 033 [92mwttr.in/~Kilimanjaro\033 [0m (ajouter ~ devant)',
         'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
         'cy': u'Nodwedd newydd: enwau lleoliad amlieithog \033[92mwttr.in/станция+Восток\033[0m (yn UTF-8) a chwilio lleoliad \033[92mwttr.in/~Kilimanjaro\033[0m (ychwanegwch ~ yn gyntaf)',
         'ru': u'Попробуйте: названия мест на любом языке \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и поиск мест \033[92mwttr.in/~Kilimanjaro\033[0m (нужно добавить ~ спереди)',
@@ -273,6 +281,7 @@ Pot seguir https://twitter.com/igor_chubin per noves actualitzacions
         'bs': u'XXXXXX \033[46m\033[30m@igor_chubin\033[0m XXXXXXXXXXXXXXXXXXX',   
         'ca': u'Seguiu \033[46m\033[30m@igor_chubin\033[0m per actualitzacions de wttr.in',
         'cy': u'Dilyn \033[46m\033[30m@igor_Chubin\033[0m am diweddariadau wttr.in',
+        'fr': u'Suivez \033[46m\033[30m@igor_Chubin\033[0m pour rester informé sur wttr.in',
         'mk': u'Следете \033[46m\033[30m@igor_chubin\033[0m за wttr.in новости',
         'ru': u'Все новые фичи публикуются здесь: \033[46m\033[30m@igor_chubin\033[0m',
         'ko': u'wttr.in의 업데이트 소식을 원하신다면 \033[46m\033[30m@igor_chubin\033[0m 을 팔로우 해주세요',
