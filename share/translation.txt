@@ -14,7 +14,7 @@ Translated/improved/corrected by:
     * Esperanto:    Igor Chubin
     * Finnish:      @Maxifi
     * French:       Igor Chubin, @daftaupe 
-    * German:       Igor Chubin
+    * German:       Igor Chubin, @MAGICC (https://kthx.at)
     * Greek:        Panayotis Vryonis
     * Icelandic:    Óli G. @dvergur, Skúli Arnlaugsson @Arnlaugsson
     * Japanese:     @ryunix
