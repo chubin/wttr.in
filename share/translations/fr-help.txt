@@ -1,19 +1,19 @@
 Usage:
 
-    $ curl wttr.in          # lieu actuel
+    $ curl wttr.in          # emplacement actuel
     $ curl wttr.in/cdg      # météo à l'aéroport de Paris - Charles de Gaulle
 
-Types de lieux acceptés:
+Types d'emplacements acceptés:
 
     /paris                  # nom de la ville
-    /~Eiffel+tower          # lieu quelconque
-    /Москва                 # nom Unicode ou lieu quelconque dans n'importe quelle langue
+    /~Eiffel+tower          # emplacement quelconque
+    /Москва                 # nom Unicode ou emplacement quelconque dans n'importe quelle langue
     /muc                    # code aéroport (3 lettres)
     /@stackoverflow.com     # nom de domaine
     /94107                  # code postal (seulement aux États-Unis)
     /-78.46,106.79          # coordonnées GPS
 
-Lieux particuliers:
+Emplacements particuliers:
 
     /moon                   # phases de la lune (ajouter ,+US ou ,+France pour accéder aux villes du même nom)
     /moon@2016-10-25        # phases de la lune pour cette date (@2016-10-25)
