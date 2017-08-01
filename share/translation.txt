@@ -20,6 +20,7 @@ Translated/improved/corrected by:
     * Japanese:     @ryunix
     * Korean:       Jeremy Bae @opt9, Jung Winter @res_tin
     * Macedonian:   Matej Plavevski @MatejMecka
+		* Norwegian:    Fredrik Fjeld @fredrikfjeld
     * Nynorsk:      Kevin Brubeck Unhammer (https://unhammer.org/k/)
     * Romanian:     Gabriel Moruz
     * Russian:      Igor Chubin

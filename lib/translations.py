@@ -9,10 +9,10 @@ PARTIAL_TRANSLATION = [
         "da", "el", "eo", "es", "et", "fi", "fr",
         "hi", "hr", "hu", "hy", "is", "it", "ja",
         "jv", "ka", "kk", "ko", "ky", "lt", "lv",
-        "mk", "ml", "nl", "nn", "pt", "pl", "ro",
-        "ru", "sk", "sl", "sr", "sr-lat", "sv",
-        "sw", "th", "tr", "uk", "uz", "vi", "zh",
-        "zu",
+        "mk", "ml", "nb", "nl", "nn", "pt", "pl",
+        "ro", "ru", "sk", "sl", "sr", "sr-lat",
+        "sv", "sw", "th", "tr", "uk", "uz", "vi",
+        "zh", "zu",
 ]
 
 
