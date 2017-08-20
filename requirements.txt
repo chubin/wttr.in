@@ -3,3 +3,4 @@ geoip2
 geopy
 requests
 gevent
+dnspython

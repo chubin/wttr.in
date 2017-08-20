@@ -14,6 +14,9 @@ from gevent.monkey import patch_all
 from gevent.subprocess import Popen, PIPE
 patch_all()
 
+import dns.resolver
+from dns.exception import DNSException
+
 from flask import Flask, request, render_template, send_from_directory
 app = Flask(__name__)
 
@@ -257,7 +260,11 @@ def wttr(location = None):
         if is_ip( location ):
             location = get_location( location )
         if location.startswith('@'):
-            location = get_location( socket.gethostbyname( location[1:] ) )
+            try:
+                loc = dns.resolver.query( location[1:], 'LOC' )
+                location = str("%.7f,%.7f" % (loc[0].float_latitude, loc[0].float_longitude))
+            except DNSException, e:
+                location = get_location( socket.gethostbyname( location[1:] ) )
 
         location = location_canonical_name( location )
         log("%s %s %s %s" % (ip, user_agent, orig_location, location))
