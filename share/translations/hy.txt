@@ -9,7 +9,7 @@
 182:                                    : Patchy sleet possible             : Местами дождь со снегом
 185:                                    : Patchy freezing drizzle possible  : Местами замерзающая морось
 200:                                    : Thundery outbreaks possible       : Местами грозы              
-227:                                    : Blowing snow                      : Поземок
+227: Ձնաբուք                            : Blowing snow                      : Поземок
 230:                                    : Blizzard                          : Метель
 248:                                    : Fog                               : Туман
 260:                                    : Freezing fog                      : Переохлажденный туман
