@@ -1,7 +1,7 @@
 # vim: set encoding=utf-8
 
 FULL_TRANSLATION = [
-    	"de",
+    	"de", "nb",
 ]
 
 PARTIAL_TRANSLATION = [
@@ -108,6 +108,12 @@ Vonandi er betra veður hjá þér.
 еден од најладните трајно населени места на планетата.
 """,
 
+        'nb': u"""
+Vi kunne ikke finne din lokasjon,
+så her får du Ojmjakon, et av de kaldeste bebodde stedene på planeten.
+Vi håper været er bedre hos deg!
+""",
+
         'ro': u"""
 Nu v-am putut identifica locația, prin urmare va aratam vremea din Oimiakon,
 una dintre cele mai reci localități permanent locuite de pe planetă.
@@ -159,7 +165,7 @@ Sizning joylashuvingizni aniqlay olmadik,
 shuning uchun sizga sayyoramizning eng sovuq aholi punkti - Oymyakondagi ob-havo haqida ma'lumot beramiz.
 Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
 """
-   
+
 		},
 
 
@@ -178,6 +184,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'ja': u'未知の場所です',
         'ko': u'알 수 없는 장소',
         'mk': u'Непозната локација',
+        'nb': u'Ukjent sted',
         'ro': u'Locaţie necunoscută',
         'ru': u'Неизвестное местоположение',
         'sk': u'Neznáma poloha',
@@ -204,6 +211,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'ja': u'位置情報',
         'ko': u'위치',
         'mk': u'Локација',
+        'nb': u'Sted',
         'ro': u'Locaţie',
         'ru': u'Местоположение',
         'sk': u'Poloha',
@@ -278,6 +286,13 @@ Folgen Sie https://twitter.com/igor_chubin für Updates.
 Следете го https://twitter.com/igor_chubin за известувања.
 ======================================================================================
 """,
+        'nb': u"""
+Beklager, vi kan ikke nå værtjenesten for øyeblikket.
+Her er værmeldingen for standardbyen så du får se hvordan tjenesten ser ut.
+Vi vil forsøke å fikse problemet så snart som mulig.
+Du kan følge https://twitter.com/igor_chubin for oppdateringer.
+======================================================================================
+""",
 
     },
 
@@ -290,6 +305,7 @@ Folgen Sie https://twitter.com/igor_chubin für Updates.
         'ca': u'Noves funcionalitats: noms d\'ubicació multilingües \033[92mwttr.in/станция+Восток\033 [0m (en UTF-8) i la ubicació de recerca \ 033 [92mwttr.in/~Kilimanjaro\033 [0m (només cal afegir ~ abans)',
         'fr': u'Nouvelles fonctionnalités: noms d\'emplacements multilingues \033[92mwttr.in/станция+Восток\033 [0m (en UTF-8) et recherche d\'emplacement \ 033 [92mwttr.in/~Kilimanjaro\033 [0m (ajouter ~ devant)',
         'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
+        'nb': u'Ny funksjon: flerspråklige stedsnavn \033[92mwttr.in/станция+Восток\033[0m (i UTF-8) og lokasjonssøk \033[92mwttr.in/~Kilimanjaro\033[0m (bare legg til ~ foran)',
         'cy': u'Nodwedd newydd: enwau lleoliad amlieithog \033[92mwttr.in/станция+Восток\033[0m (yn UTF-8) a chwilio lleoliad \033[92mwttr.in/~Kilimanjaro\033[0m (ychwanegwch ~ yn gyntaf)',
         'de': u'Neue Funktion: mehrsprachige Ortsnamen \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) und Ortssuche \033[92mwttr.in/~Kilimanjaro\033[0m (fügen Sie ein ~ vor dem Ort ein)',
         'hy': u'Փորձարկեք: տեղամասերի անունները կամայական լեզվով \033[92mwttr.in/Դիլիջան\033[0m (в UTF-8) և տեղանքի որոնում \033[92mwttr.in/~Kilimanjaro\033[0m (հարկավոր է ~ ավելացնել դիմացից)',
@@ -308,6 +324,7 @@ Folgen Sie https://twitter.com/igor_chubin für Updates.
         'hy': u'Նոր ֆիչռների համար հետևեք՝ \033[46m\033[30m@igor_chubin\033[0m',
         'ko': u'wttr.in의 업데이트 소식을 원하신다면 \033[46m\033[30m@igor_chubin\033[0m 을 팔로우 해주세요',
         'mk': u'Следете \033[46m\033[30m@igor_chubin\033[0m за wttr.in новости',
+        'nb': u'Følg \033[46m\033[30m@igor_chubin\033[0m for wttr.in oppdateringer',
         'ru': u'Все новые фичи публикуются здесь: \033[46m\033[30m@igor_chubin\033[0m',
     },
 }
