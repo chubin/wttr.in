@@ -164,8 +164,12 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
 Sizning joylashuvingizni aniqlay olmadik,
 shuning uchun sizga sayyoramizning eng sovuq aholi punkti - Oymyakondagi ob-havo haqida ma'lumot beramiz.
 Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
-"""
+""",
 
+        'zh': u"""
+我们无法找到您的位置, 
+当前显示奥伊米亚康(Oymyakon)，这个星球上最冷的人类定居点。
+""",
 		},
 
 
@@ -194,6 +198,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'tr': u'Bölge bulunamadı',
         'ua': u'Невідоме місце',
         'uz': u'Аникланмаган худуд',
+        'zh': u'未知地点',
     },
 
     'LOCATION': {
@@ -220,6 +225,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'sv': u'Plats',
         'tr': u'Bölge bulunamadı',
         'ua': u'Місце',
+        'zh': u'地点',
     },
 
     'CAPACITY_LIMIT_REACHED': {
@@ -294,6 +300,13 @@ Du kan følge https://twitter.com/igor_chubin for oppdateringer.
 ======================================================================================
 """,
 
+        'zh': u"""
+抱歉，当前天气服务不可用。
+以下显示默认城市（只对您可见）。
+我们将会尽快获取新数据。
+您可以通过https://twitter.com/igor_chubin 获取最新动态。
+======================================================================================
+""",
     },
 
     #'Check new Feature: \033[92mwttr.in/Moon\033[0m or \033[92mwttr.in/Moon@2016-Mar-23\033[0m to see the phase of the Moon'
@@ -312,6 +325,7 @@ Du kan følge https://twitter.com/igor_chubin for oppdateringer.
         'ko': u'새로운 기능: 다국어로 대응된 위치 \033[92mwttr.in/서울\033[0m (UTF-8에서) 장소 검색 \033[92mwttr.in/~Kilimanjaro\033[0m (앞에 ~를 붙이세요)',
         'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
         'ru': u'Попробуйте: названия мест на любом языке \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и поиск мест \033[92mwttr.in/~Kilimanjaro\033[0m (нужно добавить ~ спереди)',
+        'zh': u'新功能：多语言地点名称 \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) 及地点搜索\033[92mwttr.in/~Kilimanjaro\033[0m （只需在名称前加~）',
     },
 
     'FOLLOW_ME': {
@@ -326,6 +340,7 @@ Du kan følge https://twitter.com/igor_chubin for oppdateringer.
         'mk': u'Следете \033[46m\033[30m@igor_chubin\033[0m за wttr.in новости',
         'nb': u'Følg \033[46m\033[30m@igor_chubin\033[0m for wttr.in oppdateringer',
         'ru': u'Все новые фичи публикуются здесь: \033[46m\033[30m@igor_chubin\033[0m',
+        'zh': u'关注 \033[46m\033[30m@igor_chubin\033[0m 获取 wttr.in 动态',
     },
 }
 
