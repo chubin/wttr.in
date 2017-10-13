@@ -1,0 +1,47 @@
+113: Cerah                                  : Clear
+113: Cerah                                  : Sunny
+116: Agak berawan                           : Partly cloudy
+119: Berawan                                : Cloudy
+122: Mendung                                : Overcast
+143: Kabut tipis                            : Mist
+176: Kemungkinan hujan tidak merata         : Patchy rain possible
+179: Kemungkinan salju tidak merata         : Patchy snow possible
+182: Kemungkinan hujan salju tidak merata   : Patchy sleet possible
+185: Gerimis dingin tidak merata            : Patchy freezing drizzle possible
+200: Kemungkinan petir                      : Thundery outbreaks possible
+227: Salju dan berangin                     : Blowing snow
+230: Badai salju                            : Blizzard
+248: Kabut                                  : Fog
+260: Kabut dingin                           : Freezing fog
+263: Gerimis ringan tidak merata            : Patchy light drizzle
+266: Gerimis ringan                         : Light drizzle
+281: Gerimis dingin                         : Freezing drizzle
+284: Gerimis dingin dan lebat               : Heavy freezing drizzle
+293: Hujan ringan tidak merata              : Patchy light rain
+296: Hujan ringan                           : Light rain
+299: Terkadang hujan                        : Moderate rain at times
+302: Hujan sedang                           : Moderate rain
+305: Terkadang hujan lebat                  : Heavy rain at times
+308: Hujan lebat                            : Heavy rain
+311: Hujan dingin ringan                    : Light freezing rain
+314: Hujan dingin sedang atau lebat         : Moderate or heavy freezing rain
+317: Hujan bercampur salju ringan           : Light sleet
+320: Hujan bercampur salju sedang atau lebat: Moderate or heavy sleet
+323: Salju ringan tidak merata              : Patchy light snow
+326: Salju ringan                           : Light snow
+329: Salju sedang tidak merata              : Patchy moderate snow
+332: Salju sedang                           : Moderate snow
+335: Salju lebat tidak merata               : Patchy heavy snow
+338: Salju lebat                            : Heavy snow
+350: Hujan es                               : Ice pellets
+353: Hujan ringan                           : Light rain shower
+356: Hujan sedang atau lebat                : Moderate or heavy rain shower
+359: Hujan sangat lebat                     : Torrential rain shower
+362: Hujan bercampur salju ringan           : Light sleet showers
+365: Hujan bercampur salju                  : Moderate or heavy sleet showers
+368: Salju ringan                           : Light snow showers
+371: Salju sedang atau lebat                : Moderate or heavy snow showers
+386: Hujan ringan dengan petir tidak merata : Patchy light rain with thunder
+389: Hujan dengan petir                     : Moderate or heavy rain with thunder
+392: Salju ringan dengan petir tidak merata : Patchy light snow with thunder
+395: Salju sedang atau lebat dengan petir   : Moderate or heavy snow with thunder
