@@ -120,13 +120,15 @@ def log( text ):
     logging.info( text.encode('utf-8') )
 
 def is_ip( ip ):
-    if re.match('\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}', ip) is None:
-        return False
     try:
-        socket.inet_aton(ip)
+        socket.inet_pton(socket.AF_INET, ip)
         return True
     except socket.error:
-        return False
+        try:
+            socket.inet_pton(socket.AF_INET6, ip)
+            return True
+        except socket.error:
+            return False
 
 def save_weather_data( location, filename ):
 
@@ -264,7 +266,7 @@ def wttr(location = None):
                 loc = dns.resolver.query( location[1:], 'LOC' )
                 location = str("%.7f,%.7f" % (loc[0].float_latitude, loc[0].float_longitude))
             except DNSException, e:
-                location = get_location( socket.gethostbyname( location[1:] ) )
+                location = get_location( socket.getaddrinfo( location[1:], None )[0][4][0] )
 
         location = location_canonical_name( location )
         log("%s %s %s %s" % (ip, user_agent, orig_location, location))
