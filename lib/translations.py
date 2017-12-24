@@ -7,12 +7,12 @@ FULL_TRANSLATION = [
 PARTIAL_TRANSLATION = [
         "az", "be", "bg", "bs", "ca", "cy", "cs",
         "da", "el", "eo", "es", "et", "fi", "fr",
-        "hi", "hr", "hu", "hy", "is", "it", "ja",
-        "jv", "ka", "kk", "ko", "ky", "lt", "lv",
-        "mk", "ml", "nl", "nn", "pt", "pl", "ro",
-        "ru", "sk", "sl", "sr", "sr-lat", "sv",
-        "sw", "th", "tr", "uk", "uz", "vi", "zh",
-        "zu",
+        "hi", "hr", "hu", "hy", "id", "is", "it",
+        "ja", "jv", "ka", "kk", "ko", "ky", "lt",
+        "lv", "mk", "ml", "nl", "nn", "pt", "pl",
+        "ro", "ru", "sk", "sl", "sr", "sr-lat",
+        "sv", "sw", "th", "tr", "uk", "uz", "vi",
+        "zh", "zu",
 ]
 
 
@@ -82,6 +82,12 @@ Nous espérons qu'il fait meilleur chez vous !
 այդ պատճառով մենք ձեզ կցուցադրենք եղանակը Օյմյակոնում.
 երկրագնդի ամենասառը բնակավայրում։
 Հույս ունենք որ ձեր եղանակը այսօր ավելի լավն է։
+""",
+
+        'id': u"""
+Kami tidak dapat menemukan lokasi anda,
+jadi kami membawa anda ke Oymyakon,
+salah satu tempat terdingin yang selalu dihuni di planet ini!
 """,
 
         'is': u"""
@@ -180,6 +186,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement inconnu',
         'hy': u'Անհայտ գտնվելու վայր',
+        'id': u'Lokasi tidak diketahui',
         'is': u'Óþekkt staðsetning',
         'ja': u'未知の場所です',
         'ko': u'알 수 없는 장소',
@@ -207,6 +214,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement',
         'hy': u'Դիրք',
+        'id': u'Lokasi',
         'is': u'Staðsetning',
         'ja': u'位置情報',
         'ko': u'위치',
@@ -272,6 +280,13 @@ Folgen Sie https://twitter.com/igor_chubin für Updates.
 Կարող եք հետևել մեզ https://twitter.com/igor_chubin թարմացումների համար.
 ======================================================================================
 """,
+        'id': u"""
+Maaf, kami kehabian permintaan ke layanan cuaca saat ini.
+Ini adalah laporan cuaca dari kota standar (hanya untuk menunjukkan kepada anda bagaimana tampilannya).
+Kami akan mencoba permintaan baru lagi sesegera mungkin.
+Anda dapat mengikuti https://twitter.com/igor_chubin untuk informasi terbaru.
+======================================================================================
+""",
         'ko': u"""
 죄송합니다. 현재 날씨 정보를 가져오는 쿼리 요청이 한도에 도달했습니다.
 대신 기본으로 설정된 도시에 대한 일기 예보를 보여드리겠습니다. (이는 단지 어떻게 보이는지 알려주기 위함입니다).
@@ -309,6 +324,7 @@ Du kan følge https://twitter.com/igor_chubin for oppdateringer.
         'cy': u'Nodwedd newydd: enwau lleoliad amlieithog \033[92mwttr.in/станция+Восток\033[0m (yn UTF-8) a chwilio lleoliad \033[92mwttr.in/~Kilimanjaro\033[0m (ychwanegwch ~ yn gyntaf)',
         'de': u'Neue Funktion: mehrsprachige Ortsnamen \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) und Ortssuche \033[92mwttr.in/~Kilimanjaro\033[0m (fügen Sie ein ~ vor dem Ort ein)',
         'hy': u'Փորձարկեք: տեղամասերի անունները կամայական լեզվով \033[92mwttr.in/Դիլիջան\033[0m (в UTF-8) և տեղանքի որոնում \033[92mwttr.in/~Kilimanjaro\033[0m (հարկավոր է ~ ավելացնել դիմացից)',
+        'id': u'Fitur baru: nama lokasi dalam multibahasa \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) dan pencarian lokasi \033[92mwttr.in/~Kilimanjaro\033[0m (hanya tambah tanda ~ sebelumnya)',
         'ko': u'새로운 기능: 다국어로 대응된 위치 \033[92mwttr.in/서울\033[0m (UTF-8에서) 장소 검색 \033[92mwttr.in/~Kilimanjaro\033[0m (앞에 ~를 붙이세요)',
         'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
         'ru': u'Попробуйте: названия мест на любом языке \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и поиск мест \033[92mwttr.in/~Kilimanjaro\033[0m (нужно добавить ~ спереди)',
@@ -322,6 +338,7 @@ Du kan følge https://twitter.com/igor_chubin for oppdateringer.
         'fr': u'Suivez \033[46m\033[30m@igor_Chubin\033[0m pour rester informé sur wttr.in',
         'de': u'Folgen Sie \033[46m\033[30mhttps://twitter.com/igor_chubin\033[0m für wttr.in Updates',
         'hy': u'Նոր ֆիչռների համար հետևեք՝ \033[46m\033[30m@igor_chubin\033[0m',
+        'id': u'Ikuti \033[46m\033[30m@igor_chubin\033[0m untuk informasi wttr.in terbaru',
         'ko': u'wttr.in의 업데이트 소식을 원하신다면 \033[46m\033[30m@igor_chubin\033[0m 을 팔로우 해주세요',
         'mk': u'Следете \033[46m\033[30m@igor_chubin\033[0m за wttr.in новости',
         'nb': u'Følg \033[46m\033[30m@igor_chubin\033[0m for wttr.in oppdateringer',

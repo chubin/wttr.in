@@ -1,0 +1,67 @@
+Cara penggunaan:
+
+    $ curl wttr.in          # lokasi saat ini
+    $ curl wttr.in/muc      # cuaca di bandara Munich
+
+Dukungan tipe lokasi:
+
+    /paris                  # nama kota
+    /~Eiffel+tower          # sembarang lokasi
+    /Москва                 # nama Unicode dari semabarang lokasi dalam sembarang bahasa
+    /muc                    # kode bandara (3 huruf)
+    /@stackoverflow.com     # nama domain
+    /94107                  # kode area
+    /-78.46,106.79          # koordinat GPS
+
+Lokasi khusus:
+
+    /moon                   # bentuk Bulan (tambahkan ,+US atau ,+France untuk kota-kota tersebut)
+    /moon@2016-10-25        # bentuk Bulan untuk tanggal (@2016-10-25)
+
+Satuan:
+
+    ?m                      # metrik (SI) (digunakan sebagai standar di semua tempat kecuali US)
+    ?u                      # USCS (digunakan sebagai standar di US)
+    ?M                      # tampilkan kecepatan angin dalam m/s
+
+Opsi tampilan:
+
+    ?0                      # hanya cuaca saat ini
+    ?1                      # cuaca saat ini + 1 hari
+    ?2                      # cuaca saat ini + 2 hari
+    ?n                      # versi sempit (hanya siang dan malam)
+    ?q                      # versi diam (tanpa teks "Laporan cuaca")
+    ?Q                      # versi sangat diam (tanpa teks "Laporan cuaca", tanpa nama kota)
+    ?T                      # ganti urutan terminal (tanpa warna)
+
+Opsi PNG:
+
+    /paris.png              # hasilkan suatu berkas PNG
+    ?p                      # tambahkan bingkai di sekeliling hasil
+    ?t                      # transparansi 150
+    transparency=...        # transparansi dari 0 sampai 255 (255 = tidak transparan)
+
+Opsi dapat digabung:
+
+    /Paris?0pq
+    /Paris?0pq&lang=fr
+    /Paris_0pq.png          # dalam PNG mode berkas ditentukan sesudah _
+    /Rome_0pq_lang=it.png   # opsi panjang dipisahkan dengan underscore
+
+Lokalisasi:
+
+    $ curl fr.wttr.in/Paris
+    $ curl wttr.in/paris?lang=fr
+    $ curl -H "Accept-Language: fr" wttr.in/paris
+
+Dukungan bahasa:
+
+    FULL_TRANSLATION (supported)
+    PARTIAL_TRANSLATION (in progress)
+
+URL khusus:
+
+    /:help                  # tampilkan halaman ini
+    /:bash.function         # tampilkan fungsi bash yang direkomendasikan wttr()
+    /:translation           # tampilkan informasi tentang translator
+
