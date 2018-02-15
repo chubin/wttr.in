@@ -26,7 +26,7 @@ That is how the actual weather report for your location looks like (it is live!)
 
 ![Weather Report](http://wttr.in/MyLocation.png?)
 
-(it's not your location actually, becasue GitHub's CDN hides your real IP address with its own IP address,
+(it's not your location actually, because GitHub's CDN hides your real IP address with its own IP address,
 but it is still a live weather report in your language).
 
 You can specify the location that you want to get the weather information for.

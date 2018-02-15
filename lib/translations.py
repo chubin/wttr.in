@@ -154,7 +154,7 @@ Vi hoppas att vädret är bättre hos dig!
 """,
 
         'tr': u"""
-Aradığınız bölge bulunamadı. O yüzden sizi dünyadaki en soğuk sürekli
+Aradığınız konum bulunamadı. O yüzden sizi dünyadaki en soğuk sürekli
 yerleşim yerlerinden biri olan Oymyakon'e getirdik.
 Umarız sizin olduğunuz yerde havalar daha iyidir!
 """,
@@ -198,7 +198,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'sl': u'Neznano lokacijo',
         'sr': u'Непозната локација',
         'sv': u'Okänd plats',
-        'tr': u'Bölge bulunamadı',
+        'tr': u'Bilinmeyen konum',
         'ua': u'Невідоме місце',
         'uz': u'Аникланмаган худуд',
     },
@@ -226,7 +226,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'sl': u'Lokacijo',
         'sr': u'Локација',
         'sv': u'Plats',
-        'tr': u'Bölge bulunamadı',
+        'tr': u'Konum',
         'ua': u'Місце',
     },
 
@@ -308,6 +308,13 @@ Vi vil forsøke å fikse problemet så snart som mulig.
 Du kan følge https://twitter.com/igor_chubin for oppdateringer.
 ======================================================================================
 """,
+        'tr': u"""
+Üzgünüz, an itibariyle hava durumu servisine yapabileceğimiz sorgu limitine ulaştık.
+Varsayılan şehir için hava durumu bilgisini görüyorsunuz (neye benzediğini gösterebilmek için).
+Mümkün olan en kısa sürede servise yeniden sorgu yapmaya başlayacağız.
+Gelişmeler için https://twitter.com/igor_chubin adresini takip edebilirsiniz.
+======================================================================================
+""",
 
     },
 
@@ -328,6 +335,7 @@ Du kan følge https://twitter.com/igor_chubin for oppdateringer.
         'ko': u'새로운 기능: 다국어로 대응된 위치 \033[92mwttr.in/서울\033[0m (UTF-8에서) 장소 검색 \033[92mwttr.in/~Kilimanjaro\033[0m (앞에 ~를 붙이세요)',
         'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
         'ru': u'Попробуйте: названия мест на любом языке \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и поиск мест \033[92mwttr.in/~Kilimanjaro\033[0m (нужно добавить ~ спереди)',
+        'tr': u'Yeni özellik: çok dilli konum isimleri \033[92mwttr.in/станция+Восток\033[0m (UTF-8 ile) ve konum arama \033[92mwttr.in/~Kilimanjaro\033[0m (sadece önüne ~ ekleyin)',
     },
 
     'FOLLOW_ME': {
@@ -343,6 +351,7 @@ Du kan følge https://twitter.com/igor_chubin for oppdateringer.
         'mk': u'Следете \033[46m\033[30m@igor_chubin\033[0m за wttr.in новости',
         'nb': u'Følg \033[46m\033[30m@igor_chubin\033[0m for wttr.in oppdateringer',
         'ru': u'Все новые фичи публикуются здесь: \033[46m\033[30m@igor_chubin\033[0m',
+        'tr': u'wttr.in ile ilgili gelişmeler için \033[46m\033[30m@igor_chubin\033[0m adresini takip edin',
     },
 }
 
