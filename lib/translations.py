@@ -1,7 +1,7 @@
 # vim: set encoding=utf-8
 
 FULL_TRANSLATION = [
-        "de", "fr", "id", 'it", "nb", "ru"
+        "de", "fr", "id", "it", "nb", "ru",
 ]
 
 PARTIAL_TRANSLATION = [
