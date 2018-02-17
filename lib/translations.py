@@ -1,13 +1,13 @@
 # vim: set encoding=utf-8
 
 FULL_TRANSLATION = [
-        "de", "fr", "id", "nb", "ru"
+        "de", "fr", "id", 'it", "nb", "ru"
 ]
 
 PARTIAL_TRANSLATION = [
         "az", "be", "bg", "bs", "ca", "cy", "cs",
         "da", "el", "eo", "es", "et", "fi",
-        "hi", "hr", "hu", "hy", "is", "it",
+        "hi", "hr", "hu", "hy", "is",
         "ja", "jv", "ka", "kk", "ko", "ky", "lt",
         "lv", "mk", "ml", "nl", "nn", "pt", "pl",
         "ro", "sk", "sl", "sr", "sr-lat",
@@ -96,6 +96,12 @@ Við finnum ekki staðsetninguna þína og vísum þér þar með á Ojmjakon,
 ein af köldustu byggðum jarðar.
 Vonandi er betra veður hjá þér.
 """,
+
+        'it': u"""
+Non siamo riusciti a trovare la sua posizione
+quindi la abbiamo portato a Oymyakon,
+uno dei luoghi abitualmente abitati più freddi del pianeta.
+Ci auguriamo che le condizioni dove lei si trova siano migliori!""",
 
         'ja': u"""
 指定された場所が見つかりませんでした。
@@ -189,6 +195,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'hy': u'Անհայտ գտնվելու վայր',
         'id': u'Lokasi tidak diketahui',
         'is': u'Óþekkt staðsetning',
+        'it': u'Località sconosciuta',
         'ja': u'未知の場所です',
         'ko': u'알 수 없는 장소',
         'mk': u'Непозната локација',
@@ -217,6 +224,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'hy': u'Դիրք',
         'id': u'Lokasi',
         'is': u'Staðsetning',
+        'it': u'Località',
         'ja': u'位置情報',
         'ko': u'위치',
         'mk': u'Локација',
@@ -288,6 +296,13 @@ Kami akan mencoba permintaan baru lagi sesegera mungkin.
 Anda dapat mengikuti https://twitter.com/igor_chubin untuk informasi terbaru.
 ======================================================================================
 """,
+        'it': u"""
+Scusate, attualmente stiamo esaurendo le risorse a disposizione del servizio meteo.
+Qui trovate il bollettino del tempo per la città di default (solo per mostrarvi come si presenta).
+Potremo elaborare nuove richieste appena possibile.
+Potete seguire https://twitter.com/igor_chubin per gli aggiornamenti.
+======================================================================================
+""",
         'ko': u"""
 죄송합니다. 현재 날씨 정보를 가져오는 쿼리 요청이 한도에 도달했습니다.
 대신 기본으로 설정된 도시에 대한 일기 예보를 보여드리겠습니다. (이는 단지 어떻게 보이는지 알려주기 위함입니다).
@@ -333,6 +348,7 @@ Gelişmeler için https://twitter.com/igor_chubin adresini takip edebilirsiniz.
         'de': u'Neue Funktion: mehrsprachige Ortsnamen \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) und Ortssuche \033[92mwttr.in/~Kilimanjaro\033[0m (fügen Sie ein ~ vor dem Ort ein)',
         'hy': u'Փորձարկեք: տեղամասերի անունները կամայական լեզվով \033[92mwttr.in/Դիլիջան\033[0m (в UTF-8) և տեղանքի որոնում \033[92mwttr.in/~Kilimanjaro\033[0m (հարկավոր է ~ ավելացնել դիմացից)',
         'id': u'Fitur baru: nama lokasi dalam multibahasa \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) dan pencarian lokasi \033[92mwttr.in/~Kilimanjaro\033[0m (hanya tambah tanda ~ sebelumnya)',
+        'it': u'Nuove funzionalità: nomi delle località multilingue \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) e ricerca della località \033[92mwttr.in/~Kilimanjaro\033[0m (basta premettere ~)',
         'ko': u'새로운 기능: 다국어로 대응된 위치 \033[92mwttr.in/서울\033[0m (UTF-8에서) 장소 검색 \033[92mwttr.in/~Kilimanjaro\033[0m (앞에 ~를 붙이세요)',
         'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
         'ru': u'Попробуйте: названия мест на любом языке \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и поиск мест \033[92mwttr.in/~Kilimanjaro\033[0m (нужно добавить ~ спереди)',
@@ -348,6 +364,7 @@ Gelişmeler için https://twitter.com/igor_chubin adresini takip edebilirsiniz.
         'de': u'Folgen Sie \033[46m\033[30mhttps://twitter.com/igor_chubin\033[0m für wttr.in Updates',
         'hy': u'Նոր ֆիչռների համար հետևեք՝ \033[46m\033[30m@igor_chubin\033[0m',
         'id': u'Ikuti \033[46m\033[30m@igor_chubin\033[0m untuk informasi wttr.in terbaru',
+        'it': u'Seguite \033[46m\033[30m@igor_chubin\033[0m per aggiornamenti a wttr.in',
         'ko': u'wttr.in의 업데이트 소식을 원하신다면 \033[46m\033[30m@igor_chubin\033[0m 을 팔로우 해주세요',
         'mk': u'Следете \033[46m\033[30m@igor_chubin\033[0m за wttr.in новости',
         'nb': u'Følg \033[46m\033[30m@igor_chubin\033[0m for wttr.in oppdateringer',

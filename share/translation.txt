@@ -17,6 +17,7 @@ Translated/improved/corrected by:
     * German:       Igor Chubin, @MAGICC (https://kthx.at)
     * Greek:        Panayotis Vryonis
     * Hebrew:       Eran Rom
+    * Italian:      Diego Maniacco
     * Icelandic:    Óli G. @dvergur, Skúli Arnlaugsson @Arnlaugsson
     * Indonesian:   Andria Arisal @andria009
     * Japanese:     @ryunix
