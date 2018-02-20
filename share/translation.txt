@@ -22,6 +22,7 @@ Translated/improved/corrected by:
     * Indonesian:   Andria Arisal @andria009
     * Japanese:     @ryunix
     * Korean:       Jeremy Bae @opt9, Jung Winter @res_tin
+    * Latvian:      Gunārs Danovskis
     * Macedonian:   Matej Plavevski @MatejMecka
     * Norwegian:    Fredrik Fjeld @fredrikfjeld
     * Nynorsk:      Kevin Brubeck Unhammer (https://unhammer.org/k/)
