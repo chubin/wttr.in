@@ -1,0 +1,47 @@
+113:                                    : Clear                             : Skaidrs                         
+113:                                    : Sunny                             : Saulains
+116:                                    : Partly cloudy                     : Daļēji mākoņains
+119:                                    : Cloudy                            : Mākoņains              
+122:                                    : Overcast                          : Apmācies
+143:                                    : Mist                              : Viegla migla
+176:                                    : Patchy rain possible              : Vietām iespējams lietus
+179:                                    : Patchy snow possible              : Vietām iespējams sniegs
+182:                                    : Patchy sleet possible             : Vietām iespējams auksts lietus
+185:                                    : Patchy freezing drizzle possible  : Vietām iespējams sals
+200:                                    : Thundery outbreaks possible       : Iespējams pērkons              
+227:                                    : Blowing snow                      : Sniegputenis
+230:                                    : Blizzard                          : Sniega vētra
+248:                                    : Fog                               : Migla
+260:                                    : Freezing fog                      : Auksta migla
+263:                                    : Patchy light drizzle              : Vietām viegli smidzina
+266:                                    : Light drizzle                     : Viegli smidzina
+281:                                    : Freezing drizzle                  : Smalks un auksts lietus
+284:                                    : Heavy freezing drizzle            : Spēcīgs auksts lietus
+293:                                    : Patchy light rain                 : Vietām viegls lietus
+296:                                    : Light rain                        : Viegls lietus
+299:                                    : Moderate rain at times            : Īslaicīgs lietus
+302:                                    : Moderate rain                     : Lietus
+305:                                    : Heavy rain at times               : Īslaicīgs stiprs lietus
+308:                                    : Heavy rain                        : Stiprs
+311:                                    : Light freezing rain               : Viegls un auksts lietus
+314:                                    : Moderate or heavy freezing rain   : Mērens/Stiprs un auksts lietus
+317:                                    : Light sleet                       : Viegls un auksts lietus
+320:                                    : Moderate or heavy sleet           : Mērens/Stiprs un auksts lietus
+323:                                    : Patchy light snow                 : Vietām viegls sniegs
+326:                                    : Light snow                        : Viegls sniegs
+329:                                    : Patchy moderate snow              : Vietām vidējs sniegs
+332:                                    : Moderate snow                     : Sniegs
+335:                                    : Patchy heavy snow                 : Vietām stiprs sniegs
+338:                                    : Heavy snow                        : Stiprs sniegs
+350:                                    : Ice pellets                       : Krusa
+353:                                    : Light rain shower                 : Viegla lietus duša
+356:                                    : Moderate or heavy rain shower     : Mērena/Stipra lietus duša
+359:                                    : Torrential rain shower            : Stipra lietus duša
+362:                                    : Light sleet showers               : Viegla un auksta lietus duša
+365:                                    : Moderate or heavy sleet showers   : Viegls sniegs
+368:                                    : Light snow showers                : Viegla lietus duša ar sniegu
+371:                                    : Moderate or heavy snow showers    : Mērena/Stipra lietus duša ar sniegu
+386:                                    : Patchy light rain with thunder      : Vietām viegls lietus ar pērkona negaisu
+389:                                    : Moderate or heavy rain with thunder : Mērens/Stiprs lietus ar pērkona negaisu
+392:                                    : Patchy light snow with thunder      : Vietām viegls sniegs ar pērkona negaisu
+395:                                    : Moderate or heavy snow with thunder : Mērens/Stiprs sniegs ar pērkona negaisu
