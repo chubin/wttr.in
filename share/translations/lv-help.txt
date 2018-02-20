@@ -10,7 +10,7 @@ Atbalstītie lokācijas tipi:
     /Москва                 # Unicode nosaukums jebkurā valodā
     /rix                    # lidostas kods (3 letters)
     /@stackoverflow.com     # Domēna vārds
-    /94107                  # pasta indekss
+    /94107                  # pasta indekss (tikai ASV)
     /-78.46,106.79          # GPS koordinātes
 
 Speciālās atrašanās vietas:
