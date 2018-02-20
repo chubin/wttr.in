@@ -41,7 +41,7 @@ PNG iespējas:
     ?t                      # caurspīdīgums 150
     transparency=...        # caurspīdīgums no 0 - 255 (255 = necaurspīdīgs)
 
-Parametrs var apvienot:
+Parametrus var apvienot:
 
     /Paris?0pq
     /Paris?0pq&lang=fr
@@ -59,7 +59,7 @@ Atbalstītās valodas:
     FULL_TRANSLATION (Atbalstīts)
     PARTIAL_TRANSLATION (Tiek strādāts pie tā)
 
-Special URLs:
+Īpašie URLs:
 
     /:help                  # parāda palīgā tekstu
     /:bash.function         # parāda ieteicamo bash funkciju wttr()
