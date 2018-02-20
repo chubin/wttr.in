@@ -6,8 +6,8 @@
 143:                                    : Mist                              : Viegla migla
 176:                                    : Patchy rain possible              : Vietām iespējams lietus
 179:                                    : Patchy snow possible              : Vietām iespējams sniegs
-182:                                    : Patchy sleet possible             : Vietām iespējams auksts lietus
-185:                                    : Patchy freezing drizzle possible  : Vietām iespējams sals
+182:                                    : Patchy sleet possible             : Vietām iespējams sals
+185:                                    : Patchy freezing drizzle possible  : Vietām iespējams auksts lietus
 200:                                    : Thundery outbreaks possible       : Iespējams pērkons              
 227:                                    : Blowing snow                      : Sniegputenis
 230:                                    : Blizzard                          : Sniega vētra
