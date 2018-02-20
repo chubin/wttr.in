@@ -1,0 +1,66 @@
+Lietošana:
+
+    $ curl wttr.in          # pašreizējā atrašanās vieta
+    $ curl wttr.in/rix      # laikapstākļi Rīgas lidostā
+
+Atbalstītie lokācijas tipi:
+
+    /paris                  # pilsētas nosaukums
+    /~Eiffel+tower          # jebkura dabas objekts
+    /Москва                 # Unicode nosaukums jebkurā valodā
+    /rix                    # lidostas kods (3 letters)
+    /@stackoverflow.com     # Domēna vārds
+    /94107                  # pasta indekss (tikai ASV)
+    /-78.46,106.79          # GPS koordinātes
+
+Speciālās atrašanās vietas:
+
+    /moon                   # Mēness fāze (pievieno ,+US vai ,+France specifiskai pilsētai)
+    /moon@2016-10-25        # Mēness fāze datumā (@2016-10-25)
+
+Mērvienības:
+
+    ?m                      # Metriskā sistēma (SI) (izmantoto kā standartu visās vietās izņemot ASV)
+    ?u                      # USCS (ASV vietām izmanto kā standartu)
+    ?M                      # vēja ātrums m/s
+
+Skata iespējas:
+
+    ?0                      # tikai pašreizējos laikapstākļus
+    ?1                      # pašreizējos laikapstākļus + 1 dienu
+    ?2                      # pašreizējos laikapstākļus + 2 dienas
+    ?n                      # īsā versija (tkai diena un nakts)
+    ?q                      # apgrieztā versija (bez "Laika ziņas" teksta)
+    ?Q                      # ļoti apgrieztā versija (bez "Laika ziņas" teksta, pilsētas nosaukuma)
+    ?T                      # rādīt nekrāsainu
+
+PNG iespējas:
+
+    /paris.png              # izveidot PNG failu
+    ?p                      # pievienot rāmi ap izvades failu
+    ?t                      # caurspīdīgums 150
+    transparency=...        # caurspīdīgums no 0 - 255 (255 = necaurspīdīgs)
+
+Parametrus var apvienot:
+
+    /Paris?0pq
+    /Paris?0pq&lang=fr
+    /Paris_0pq.png          # PNG failā iestatījumi tiek rakstīti aiz _
+    /Rome_0pq_lang=it.png   # gari parametri tiek apvienoti ar _
+
+Lokalizācija:
+
+    $ curl fr.wttr.in/Paris
+    $ curl wttr.in/paris?lang=fr
+    $ curl -H "Accept-Language: fr" wttr.in/paris
+
+Atbalstītās valodas:
+
+    FULL_TRANSLATION (Atbalstīts)
+    PARTIAL_TRANSLATION (Tiek strādāts pie tā)
+
+Īpašie URLs:
+
+    /:help                  # parāda palīgā tekstu
+    /:bash.function         # parāda ieteicamo bash funkciju wttr()
+    /:translation           # parāda informāciju par tukojumiem

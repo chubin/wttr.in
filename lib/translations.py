@@ -114,6 +114,11 @@ Ci auguriamo che le condizioni dove lei si trova siano migliori!""",
 대신 오이먀콘의 일기 예보를 표시합니다,
 오이먀콘은 지구상에서 가장 추운 곳에 위치한 마을입니다!
 """,
+	    
+	    'lv': u"""
+Mēs nevarējām atrast jūsu atrašanās vietu tādēļ nogādājām jūs Oimjakonā,
+vienā no aukstākajām apdzīvotajām vietām uz planētas.
+""",
 
         'mk': u"""
 Неможевме да ја пронајдеме вашата локација,
@@ -198,6 +203,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'it': u'Località sconosciuta',
         'ja': u'未知の場所です',
         'ko': u'알 수 없는 장소',
+	'lv': u'Nezināma atrašanās vieta',
         'mk': u'Непозната локација',
         'nb': u'Ukjent sted',
         'ro': u'Locaţie necunoscută',
@@ -227,6 +233,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'it': u'Località',
         'ja': u'位置情報',
         'ko': u'위치',
+	'lv': u'Atrašanās vieta'
         'mk': u'Локација',
         'nb': u'Sted',
         'ro': u'Locaţie',
@@ -310,6 +317,13 @@ Potete seguire https://twitter.com/igor_chubin per gli aggiornamenti.
 업데이트 소식을 원하신다면 https://twitter.com/igor_chubin 을 팔로우 해주세요.
 ======================================================================================
 """,
+	    'lv': u"""
+Atvainojiet, uz doto brīdi mēs esam mazliet noslogoti.
+Šeit ir laika ziņas noklusējuma pilsētai (lai parādītu jums, kā izskatās izveidotais ziņojums).
+Mēs atsāksim darbu cik ātri vien varēsim.
+Jūs varat sekot https://twitter.com/igor_chubin lai redzētu visus jaunumus.
+======================================================================================
+""",
         'mk': u"""
 Извинете, ни снемуваат барања за до сервисот кој ни нуди временска прогноза во моментот.
 Еве една временска прогноза за град (за да видите како изгледа).
@@ -350,6 +364,7 @@ Gelişmeler için https://twitter.com/igor_chubin adresini takip edebilirsiniz.
         'id': u'Fitur baru: nama lokasi dalam multibahasa \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) dan pencarian lokasi \033[92mwttr.in/~Kilimanjaro\033[0m (hanya tambah tanda ~ sebelumnya)',
         'it': u'Nuove funzionalità: nomi delle località multilingue \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) e ricerca della località \033[92mwttr.in/~Kilimanjaro\033[0m (basta premettere ~)',
         'ko': u'새로운 기능: 다국어로 대응된 위치 \033[92mwttr.in/서울\033[0m (UTF-8에서) 장소 검색 \033[92mwttr.in/~Kilimanjaro\033[0m (앞에 ~를 붙이세요)',
+	'lv': u'Jaunums: Daudzvalodu atrašanās vietu nosaukumi \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) un dabas objektu meklēšana \033[92mwttr.in/~Kilimanjaro\033[0m (tikai priekšā pievieno ~)',
         'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
         'ru': u'Попробуйте: названия мест на любом языке \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и поиск мест \033[92mwttr.in/~Kilimanjaro\033[0m (нужно добавить ~ спереди)',
         'tr': u'Yeni özellik: çok dilli konum isimleri \033[92mwttr.in/станция+Восток\033[0m (UTF-8 ile) ve konum arama \033[92mwttr.in/~Kilimanjaro\033[0m (sadece önüne ~ ekleyin)',
@@ -366,6 +381,7 @@ Gelişmeler için https://twitter.com/igor_chubin adresini takip edebilirsiniz.
         'id': u'Ikuti \033[46m\033[30m@igor_chubin\033[0m untuk informasi wttr.in terbaru',
         'it': u'Seguite \033[46m\033[30m@igor_chubin\033[0m per aggiornamenti a wttr.in',
         'ko': u'wttr.in의 업데이트 소식을 원하신다면 \033[46m\033[30m@igor_chubin\033[0m 을 팔로우 해주세요',
+	'lv': u'Seko \033[46m\033[30m@igor_chubin\033[0m , lai uzzinātu wttr.in jaunumus',
         'mk': u'Следете \033[46m\033[30m@igor_chubin\033[0m за wttr.in новости',
         'nb': u'Følg \033[46m\033[30m@igor_chubin\033[0m for wttr.in oppdateringer',
         'ru': u'Все новые фичи публикуются здесь: \033[46m\033[30m@igor_chubin\033[0m',
