@@ -1,7 +1,7 @@
 # vim: set encoding=utf-8
 
 FULL_TRANSLATION = [
-        "de", "fr", "id", "it", "nb", "ru",
+        "de", "fr", "id", "it", "nb", "pl", "ru",
 ]
 
 PARTIAL_TRANSLATION = [
@@ -9,7 +9,7 @@ PARTIAL_TRANSLATION = [
         "da", "el", "eo", "es", "et", "fi",
         "hi", "hr", "hu", "hy", "is",
         "ja", "jv", "ka", "kk", "ko", "ky", "lt",
-        "lv", "mk", "ml", "nl", "nn", "pt", "pl",
+        "lv", "mk", "ml", "nl", "nn", "pt",
         "ro", "sk", "sl", "sr", "sr-lat",
         "sv", "sw", "th", "tr", "uk", "uz", "vi",
         "zh", "zu",
@@ -132,6 +132,13 @@ så her får du Ojmjakon, et av de kaldeste bebodde stedene på planeten.
 Vi håper været er bedre hos deg!
 """,
 
+        'pl': u"""
+Nie udało nam się znaleźć podanej przez Ciebie lokalizacji,
+więc zabraliśmy Cię do Ojmiakonu,
+jednego z najzimniejszych, stale zamieszkanych miejsc na Ziemi.
+Mamy nadzieję, że u Ciebie jest cieplej!
+""",
+
         'ro': u"""
 Nu v-am putut identifica locația, prin urmare va aratam vremea din Oimiakon,
 una dintre cele mai reci localități permanent locuite de pe planetă.
@@ -207,6 +214,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
 	'lv': u'Nezināma atrašanās vieta',
         'mk': u'Непозната локација',
         'nb': u'Ukjent sted',
+        'pl': u'Nieznana lokalizacja',
         'ro': u'Locaţie necunoscută',
         'ru': u'Неизвестное местоположение',
         'sk': u'Neznáma poloha',
@@ -238,6 +246,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
 	'lv': u'Atrašanās vieta'
         'mk': u'Локација',
         'nb': u'Sted',
+        'pl': u'Lokalizacja',
         'ro': u'Locaţie',
         'ru': u'Местоположение',
         'sk': u'Poloha',
@@ -340,6 +349,15 @@ Vi vil forsøke å fikse problemet så snart som mulig.
 Du kan følge https://twitter.com/igor_chubin for oppdateringer.
 ======================================================================================
 """,
+
+        'pl': u"""
+Bardzo nam przykro, ale chwilowo wykorzystaliśmy limit zapytań do serwisu pogodowego.
+To, co widzisz jest przykładowym raportem pogodowym dla domyślnego miasta.
+Postaramy się przywrócić funkcjonalność tak szybko, jak to tylko możliwe.
+Możesz śledzić https://twitter.com/igor_chubin na Twitterze, aby być na bieżąco.
+======================================================================================
+""",
+
         'tr': u"""
 Üzgünüz, an itibariyle hava durumu servisine yapabileceğimiz sorgu limitine ulaştık.
 Varsayılan şehir için hava durumu bilgisini görüyorsunuz (neye benzediğini gösterebilmek için).
@@ -369,6 +387,7 @@ Gelişmeler için https://twitter.com/igor_chubin adresini takip edebilirsiniz.
         'kk': u'',
 	'lv': u'Jaunums: Daudzvalodu atrašanās vietu nosaukumi \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) un dabas objektu meklēšana \033[92mwttr.in/~Kilimanjaro\033[0m (tikai priekšā pievieno ~)',
         'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
+        'pl': u'Nowa funkcjonalność: wielojęzyczne nazwy lokalizacji \033[92mwttr.in/станция+Восток\033[0m (w UTF-8) i szukanie lokalizacji \033[92mwttr.in/~Kilimanjaro\033[0m (poprzedź zapytanie ~ - znakiem tyldy)',
         'ru': u'Попробуйте: названия мест на любом языке \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и поиск мест \033[92mwttr.in/~Kilimanjaro\033[0m (нужно добавить ~ спереди)',
         'tr': u'Yeni özellik: çok dilli konum isimleri \033[92mwttr.in/станция+Восток\033[0m (UTF-8 ile) ve konum arama \033[92mwttr.in/~Kilimanjaro\033[0m (sadece önüne ~ ekleyin)',
     },
@@ -388,6 +407,7 @@ Gelişmeler için https://twitter.com/igor_chubin adresini takip edebilirsiniz.
 	'lv': u'Seko \033[46m\033[30m@igor_chubin\033[0m , lai uzzinātu wttr.in jaunumus',
         'mk': u'Следете \033[46m\033[30m@igor_chubin\033[0m за wttr.in новости',
         'nb': u'Følg \033[46m\033[30m@igor_chubin\033[0m for wttr.in oppdateringer',
+        'pl': u'Śledź \033[46m\033[30m@igor_chubin\033[0m aby być na bieżąco z nowościami dotyczącymi wttr.in',
         'ru': u'Все новые фичи публикуются здесь: \033[46m\033[30m@igor_chubin\033[0m',
         'tr': u'wttr.in ile ilgili gelişmeler için \033[46m\033[30m@igor_chubin\033[0m adresini takip edin',
     },
