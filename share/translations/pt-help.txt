@@ -24,11 +24,11 @@ Unidades:
     ?u                      # Sistema Unificado de Clasificaçāo de Solo ou USCS (o padrão nos EUA)
     ?M                      # mostrar a velocidade do vento em m/s
 
-Opciones de visualização:
+Opçōes de visualização:
 
     ?0                      # somente o clima atual
     ?1                      # o clima atual + a previsão de 1 dia
-    ?2                      # o clima atual + a previsão de 2 dia
+    ?2                      # o clima atual + a previsão de 2 dias
     ?n                      # versão curta (só o dia e a noite)
     ?q                      # versão quieta (sem o texto de "Previsão do Tempo")
     ?Q                      # versão superquieta (sem "Previsão do Tempo" e o nome da cidade)
@@ -46,7 +46,7 @@ As opções podem ser usadas em conjunto:
     /Paris?0pq
     /Paris?0pq&lang=fr
     /Paris_0pq.png          # em PNG as opções se especificam depois do caracter _
-    /Rome_0pq_lang=it.png   # uma longa sequência de opcões podem ser separadas pelo caracter _
+    /Rome_0pq_lang=it.png   # uma longa sequência de opções podem ser separadas pelo caracter _
 
 Localizaçāo:
 
