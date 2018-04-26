@@ -26,8 +26,10 @@ Translated/improved/corrected by:
     * Macedonian:   Matej Plavevski @MatejMecka
     * Norwegian:    Fredrik Fjeld @fredrikfjeld
     * Nynorsk:      Kevin Brubeck Unhammer (https://unhammer.org/k/)
+    * Portuguese:   Fernando Bitti Loureiro @fbitti (on github)
     * Romanian:     Gabriel Moruz
     * Russian:      Igor Chubin
+    * Spanish:      Fernando Bitti Loureiro @fbitti (on github)
     * Slovak:       Juraj Kakody
     * Slovenian:    B.S.
     * Swedish:      John Eriksson
