@@ -21,6 +21,7 @@ Translated/improved/corrected by:
     * Icelandic:    Óli G. @dvergur, Skúli Arnlaugsson @Arnlaugsson
     * Indonesian:   Andria Arisal @andria009
     * Japanese:     @ryunix
+    * Kazakh:       Akku Tutkusheva, Oleg Tropinin
     * Korean:       Jeremy Bae @opt9, Jung Winter @res_tin
     * Latvian:      Gunārs Danovskis
     * Macedonian:   Matej Plavevski @MatejMecka
