@@ -235,7 +235,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'ja': u'位置情報',
         'ko': u'위치',
         'kk': u'',
-	'lv': u'Atrašanās vieta'
+	'lv': u'Atrašanās vieta',
         'mk': u'Локација',
         'nb': u'Sted',
         'ro': u'Locaţie',
