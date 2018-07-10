@@ -210,8 +210,6 @@ If `virtualenv` is used:
     $ ve/bin/pip install -r requirements.txt
     $ ve/bin/pip bin/srv.py
 
-(pyte 0.6 is not yet released and it should be installed direct from the source code from its GitHub repository at the moment).
-
 Also, you need to install the geoip2 database.
 You can use a free database GeoLite2, that can be downloaded from http://dev.maxmind.com/geoip/geoip2/geolite2/
 
