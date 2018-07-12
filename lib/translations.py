@@ -205,7 +205,6 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
 
 		},
 
-
     'UNKNOWN_LOCATION': {
         'en': u'Unknown location',
         'bs': u'Nepoznatoja lokacija',
@@ -396,8 +395,9 @@ Gelişmeler için https://twitter.com/igor_chubin adresini takip edebilirsiniz.
 
     },
 
-    #'Check new Feature: \033[92mwttr.in/Moon\033[0m or \033[92mwttr.in/Moon@2016-Mar-23\033[0m to see the phase of the Moon'
-    #'New feature: \033[92mwttr.in/Rome?lang=it\033[0m or \033[92mcurl -H "Accept-Language: it" wttr.in/Rome\033[0m for the localized version. Your lang instead of "it"'
+    # Historical messages:  
+    #     'Check new Feature: \033[92mwttr.in/Moon\033[0m or \033[92mwttr.in/Moon@2016-Mar-23\033[0m to see the phase of the Moon'
+    #     'New feature: \033[92mwttr.in/Rome?lang=it\033[0m or \033[92mcurl -H "Accept-Language: it" wttr.in/Rome\033[0m for the localized version. Your lang instead of "it"'
 
     'NEW_FEATURE': {
         'en': u'New feature: multilingual location names \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) and location search \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
