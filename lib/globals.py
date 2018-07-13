@@ -1,3 +1,4 @@
+from __future__ import print_function
 import logging
 import os
 
@@ -29,13 +30,13 @@ MALFORMED_RESPONSE_HTML_PAGE = open(os.path.join(STATIC, 'malformed-response.htm
 
 def error(text):
     if not text.startswith('Too many queries'):
-        print text
+        print(text)
     logging.error("ERROR "+text)
     raise RuntimeError(text)
 
 def log(text):
     if not text.startswith('Too many queries'):
-        print text
+        print(text)
         logging.info(text)
 
 

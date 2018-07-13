@@ -1,3 +1,4 @@
+from __future__ import print_function
 import logging
 import os
 import re
@@ -99,7 +100,7 @@ class Limits:
             if self.limit[interval] <= self.counter[interval][ip]:
                 log("Too many queries: %s in %s for %s" % (self.limit[interval], interval, ip) )
                 raise RuntimeError("Not so fast! Number of queries per %s is limited to %s" % (interval, self.limit[interval]))
-            print self.counter
+            print(self.counter)
 
     def clear_counters( self ):
         t = int( time.time() )
@@ -112,11 +113,11 @@ class Limits:
 limits = Limits()
 
 def error( text ):
-    print text
+    print(text)
     raise RuntimeError(text)
 
 def log( text ):
-    print text.encode('utf-8')
+    print(text.encode('utf-8'))
     logging.info( text.encode('utf-8') )
 
 def is_ip( ip ):
@@ -196,7 +197,7 @@ def get_location( ip_addr ):
         location = geolocator.reverse(coord, language='en')
         city = location.raw.get('address', {}).get('city')
     if city is None:
-        print ip_addr
+        print(ip_addr)
         city = ip2location( ip_addr )
     return city or NOT_FOUND_LOCATION
 
@@ -263,13 +264,13 @@ def wttr(location = None):
             try:
                 loc = dns.resolver.query( location[1:], 'LOC' )
                 location = str("%.7f,%.7f" % (loc[0].float_latitude, loc[0].float_longitude))
-            except DNSException, e:
+            except DNSException as e:
                 location = get_location( socket.gethostbyname( location[1:] ) )
 
         location = location_canonical_name( location )
         log("%s %s %s %s" % (ip, user_agent, orig_location, location))
         return get_wetter( location, ip, html=html_output )
-    except Exception, e:
+    except Exception as e:
         logging.error("Exception has occurred", exc_info=1)
         return str(e).rstrip()+"\n"
 
