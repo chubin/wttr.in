@@ -156,7 +156,7 @@ The third option is to choose the language using DNS name used in the query:
 
     $ curl de.wttr.in/Berlin
 
-wttr.in is currently translated in more than 50 languages and the number of supported languages
+wttr.in is currently translated into 54 languages and the number of supported languages
 is constantly growing.
 
 See [/:translation](http://wttr.in/:translation) to learn more about the translation process, 
