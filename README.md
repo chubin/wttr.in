@@ -1,8 +1,8 @@
 *wttr.in — the right way to check the weather.*
 
 wttr.in is a console oriented weather forecast service, that supports various information representation methods
-like terminal oriented ANSI-sequences for console HTTP clients such as curl, httpie or wget;
-HTML for web browsers; or PNG for graphical viewers. 
+like terminal oriented ANSI-sequences for console HTTP clients (curl, httpie, or wget),
+HTML for web browsers, or PNG for graphical viewers. 
 wttr.in uses [wego](http://github.com/schachmat/wego) for visualization
 and various data sources for weather forecast information.
 
@@ -26,7 +26,7 @@ That is how the actual weather report for your location looks like (it is live!)
 
 ![Weather Report](http://wttr.in/MyLocation.png?)
 
-(it's not your location actually, because GitHub's CDN hides your real IP address with its own IP address,
+(it's not your location actually. GitHub's CDN hides your real IP address with its own IP address,
 but it is still a live weather report in your language).
 
 You can specify the location that you want to get the weather information for.
@@ -36,14 +36,14 @@ based on your IP address.
     $ curl wttr.in/London
     $ curl wttr.in/Moscow
 
-You can use 3-letters airport codes if you want to get the weather information
-about some airports:
+Use 3-letters airport codes in order to get the weather information
+at a certain airport:
 
     $ curl wttr.in/muc      # Weather for IATA: muc, Munich International Airport, Germany
     $ curl wttr.in/ham      # Weather for IATA: ham, Hamburg Airport, Germany
 
-If you want to specify a location that is not a city/town's name, but a name of some geographical location
-(e.g. it can be a site in a city, a mountain name, a special location etc.) you should place `~` before its name.
+If you want to use some geographical location (not just a town or a city)
+(e.g. it can be a site in a city, a mountain name, a special location, etc.) you should place `~` before its name.
 That means the location name should be looked up before:
 
 	$ curl wttr.in/~Vostok+Station
@@ -93,7 +93,7 @@ to separate them with `_` instead of `?` and `&`:
 
     $ wget wttr.in/Paris_0tqp_lang=fr.png
 
-Special useful options for the PNG format:
+Useful options for the PNG format:
 
 * `t` for transparency (`transparency=150`);
 * transparency=0..255 for a custom transparency level.
@@ -114,7 +114,7 @@ Here:
 
 ## Special pages
 
-wttr.in can be used not only to check the weather, but also for some other purposes:
+wttr.in can be used not only to check the weather:
 
     $ curl wttr.in/Moon
 
