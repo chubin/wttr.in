@@ -68,8 +68,7 @@ To get detailed information online, you can access the [/:help](http://wttr.in/:
 
 ## Additional options
 
-By default the USCS units are used for the queries from the USA and the 
-metric system for the rest of the world.
+By default the USCS units are used for the queries from the USA and the metric system for the rest of the world.
 You can override this behavior with the following options:
 
     $ curl wttr.in/Amsterdam?u
