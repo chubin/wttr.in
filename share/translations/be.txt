@@ -1,0 +1,47 @@
+113:                                    : Clear                               : Ясна
+113:                                    : Sunny                               : Сонечна
+116:                                    : Partly cloudy                       : Пераменная воблачнасць
+119:                                    : Cloudy                              : Воблачнасць
+122:                                    : Overcast                            : Хмарна
+143:                                    : Mist                                : Смуга
+176:                                    : Patchy rain possible                : Месцамі дождж
+179:                                    : Patchy snow possible                : Месцамі снег
+182:                                    : Patchy sleet possible               : Месцамі дождж са снегам
+185:                                    : Patchy freezing drizzle possible    : Месцамі студзёная імжа
+200:                                    : Thundery outbreaks possible         : Месцамі навальніцы
+227:                                    : Blowing snow                        : Нізавая завіруха
+230:                                    : Blizzard                            : Мяцеліца
+248:                                    : Fog                                 : Туман
+260:                                    : Freezing fog                        : Студзёны туман
+263:                                    : Patchy light drizzle                : Месцамі невялікая імжа
+266:                                    : Light drizzle                       : Невялікая імжа
+281:                                    : Freezing drizzle                    : Студзёная імжа
+284:                                    : Heavy freezing drizzle              : Моцная студзёная імжа
+293:                                    : Patchy light rain                   : Месцамі невялікі дождж
+296:                                    : Light rain                          : Невялікі дождж
+299:                                    : Moderate rain at times              : Часам умераны дождж
+302:                                    : Moderate rain                       : Умераны дождж
+305:                                    : Heavy rain at times                 : Часам моцны дождж
+308:                                    : Heavy rain                          : Моцны дождж
+311:                                    : Light freezing rain                 : Невялікі студзёны дождж
+314:                                    : Moderate or heavy freezing rain     : Умераны ці моцны студзёны дождж
+317:                                    : Light sleet                         : Невялікі дождж са снегам
+320:                                    : Moderate or heavy sleet             : Умераны ці моцны дождж са снегам
+323:                                    : Patchy light snow                   : Месцамі невялікі снег
+326:                                    : Light snow                          : Невялікі снег
+329:                                    : Patchy moderate snow                : Месцамі умераны снег
+332:                                    : Moderate snow                       : Умераны снег
+335:                                    : Patchy heavy snow                   : Месцамі моцны снег
+338:                                    : Heavy snow                          : Моцны снег
+350:                                    : Ice pellets                         : Ледзяны дождж
+353:                                    : Light rain shower                   : Слабы ліўневы дождж
+356:                                    : Moderate or heavy rain shower       : Умераны ці моцны ліўневы дождж
+359:                                    : Torrential rain shower              : Вельмі моцны ліўневы дождж
+362:                                    : Light sleet showers                 : Невялікі ліўневы дождж са снегам
+365:                                    : Moderate or heavy sleet showers     : Умераны ці моцны ліўневы дождж са снегам
+368:                                    : Light snow showers                  : Невялікі ліўневы снег
+371:                                    : Moderate or heavy snow showers      : Умераны ці моцны ліўневы снег
+386:                                    : Patchy light rain with thunder      : Месцамі невялікі дождж з навальніцай
+389:                                    : Moderate or heavy rain with thunder : Умераны ці моцны дождж з навальніцай
+392:                                    : Patchy light snow with thunder      : Месцамі невялікі снег з навальніцай
+395:                                    : Moderate or heavy snow with thunder : Умераны ці моцны снег з навальніцай
