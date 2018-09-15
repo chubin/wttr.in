@@ -11,7 +11,7 @@ PARTIAL_TRANSLATION = [
         "ja", "jv", "ka", "kk", "ko", "ky", "lt",
         "lv", "mk", "ml", "nl", "nn", "pt",
         "ro", "sk", "sl", "sr", "sr-lat",
-        "sv", "sw", "th", "tr", "uk", "uz", "vi",
+        "sv", "sw", "th", "tr", "te", "uk", "uz", "vi",
         "zh", "zu",
         "he",
 ]
@@ -196,7 +196,12 @@ yerleşim yerlerinden biri olan Oymyakon'e getirdik.
 Umarız sizin olduğunuz yerde havalar daha iyidir!
 """,
 
-        'uk': u"""
+        'te': u"""
+మేము మీ స్థానాన్ని కనుగొనలేకపోయాము
+కనుక మనం "ఓమాయకాన్కు" తీసుకొని వచ్చాము,
+భూమిపై అత్యల్ప శాశ్వతంగా నివసించే స్థానిక ప్రదేశాలలో ఒకటి.
+""",
+	 'uk': u"""
 Ваше місце розташування визначити не вдалося,
 тому ми покажемо вам погоду в Оймяконе,
 найхолоднішому населеному пункті на планеті.
@@ -241,6 +246,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'sl': u'Neznano lokacijo',
         'sr': u'Непозната локација',
         'sv': u'Okänd plats',
+	'te': u'తెలియని ప్రదేశం',
         'tr': u'Bilinmeyen konum',
         'ua': u'Невідоме місце',
         'uz': u'Аникланмаган худуд',
@@ -276,6 +282,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'sl': u'Lokacijo',
         'sr': u'Локација',
         'sv': u'Plats',
+	'te': u'స్థానము',   
         'tr': u'Konum',
         'ua': u'Місце',
     },
@@ -400,6 +407,13 @@ Em breve voltaremos a ter acesso às consultas.
 Você pode seguir https://twitter.com/igor_chubin para acompanhar a situação.
 ======================================================================================
 """,
+	'te': u"""
+క్షమించండి, ప్రస్తుతానికి మేము వాతావరణ సేవకు ప్రశ్నలను గడుపుతున్నాం.
+ఇక్కడ డిఫాల్ట్ నగరం కోసం వాతావరణ నివేదిక (కేవలం మీకు చూపించడానికి, ఇది ఎలా కనిపిస్తుంది).
+సాధ్యమైనంత త్వరలో కొత్త ప్రశ్నలను పొందుతారు.
+నవీకరణల కోసం https://twitter.com/igor_chubin ను మీరు అనుసరించవచ్చు.
+======================================================================================
+""",
         'tr': u"""
 Üzgünüz, an itibariyle hava durumu servisine yapabileceğimiz sorgu limitine ulaştık.
 Varsayılan şehir için hava durumu bilgisini görüyorsunuz (neye benzediğini gösterebilmek için).
@@ -436,6 +450,7 @@ Gelişmeler için https://twitter.com/igor_chubin adresini takip edebilirsiniz.
         'pt': u'Nova funcionalidade: nomes de localidades em várias línguas \033[92mwttr.in/станция+Восток\033[0m (em UTF-8) e procura por localidades \033[92mwttr.in/~Kilimanjaro\033[0m (é só colocar ~ antes)',
         'ru': u'Попробуйте: названия мест на любом языке \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и поиск мест \033[92mwttr.in/~Kilimanjaro\033[0m (нужно добавить ~ спереди)',
         'tr': u'Yeni özellik: çok dilli konum isimleri \033[92mwttr.in/станция+Восток\033[0m (UTF-8 ile) ve konum arama \033[92mwttr.in/~Kilimanjaro\033[0m (sadece önüne ~ ekleyin)',
+        'te': u'క్రొత్త లక్షణం: బహుభాషా స్థాన పేర్లు \ 033 [92mwttr.in/stancelя+Vostок\033 [0 U (UTF-8 లో) మరియు స్థానం శోధన \ 033 [92mwttr.in/~kilimanjaro\033 [0m (కేవలం ~ ముందుకి జోడించండి)',   
     },
 
     'FOLLOW_ME': {
@@ -458,7 +473,8 @@ Gelişmeler için https://twitter.com/igor_chubin adresini takip edebilirsiniz.
         'pl': u'Śledź \033[46m\033[30m@igor_chubin\033[0m aby być na bieżąco z nowościami dotyczącymi wttr.in',
         'pt': u'Seguir \033[46m\033[30m@igor_chubin\033[0m para as novidades de wttr.in',
         'ru': u'Все новые фичи публикуются здесь: \033[46m\033[30m@igor_chubin\033[0m',
-        'tr': u'wttr.in ile ilgili gelişmeler için \033[46m\033[30m@igor_chubin\033[0m adresini takip edin',
+        'te': u'అనుసరించండి \ 033 [46m \ 033 [30m @ igor_chubin \ 033 [wttr.in నవీకరణలను కోసం',
+	'tr': u'wttr.in ile ilgili gelişmeler için \033[46m\033[30m@igor_chubin\033[0m adresini takip edin',
     },
 }
 
