@@ -225,6 +225,10 @@ def send_static(path):
 def send_favicon():
     return send_from_directory(STATIC, 'favicon.ico')
 
+@app.route('/malformed-response.html')
+def send_malformed():
+    return send_from_directory(STATIC, 'malformed-response.html')
+
 @app.route("/")
 @app.route("/<string:location>")
 def wttr(location = None):
