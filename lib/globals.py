@@ -30,6 +30,9 @@ DEFAULT_LOCATION = "oymyakon"
 
 MALFORMED_RESPONSE_HTML_PAGE = open(os.path.join(STATIC, 'malformed-response.html')).read()
 
+LISTEN_HOST = ""
+LISTEN_PORT = 8002
+
 def error(text):
     if not text.startswith('Too many queries'):
         print text
