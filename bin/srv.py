@@ -324,16 +324,13 @@ def wttr(location = None):
 
     user_agent = request.headers.get('User-Agent', '').lower()
 
-    if any(agent in user_agent for agent in PLAIN_TEXT_AGENTS):
-        html_output = False
-    else:
-        html_output = True
+    html_output = not any(agent in user_agent for agent in PLAIN_TEXT_AGENTS)
 
 
-    if location == ':help':
-        help_ = show_help()
+    if location in show_help.pages:
+        help_ = show_help(location, lang)
         if html_output:
-            return render_template( 'index.html', body=help_ )
+            return render_template('index.html', body=help_)
         else:
             return help_
 
