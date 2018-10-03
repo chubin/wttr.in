@@ -1,69 +1,54 @@
+#!/usr/bin/env python
+# vim: set encoding=utf-8
+
+import gevent
+from gevent.wsgi import WSGIServer
+from gevent.queue import Queue
+from gevent.monkey import patch_all
+from gevent.subprocess import Popen, PIPE, STDOUT
+patch_all()
+
+import sys
 import logging
 import os
 import re
 import requests
 import socket
 import time
+import json
 
 import geoip2.database
-from geopy.geocoders import Nominatim
 import jinja2
 
-from gevent.wsgi import WSGIServer
-from gevent.monkey import patch_all
-from gevent.subprocess import Popen, PIPE
-patch_all()
-
-import dns.resolver
-from dns.exception import DNSException
-
-from flask import Flask, request, render_template, send_from_directory
+from flask import Flask, request, render_template, send_from_directory, send_file, make_response
 app = Flask(__name__)
 
-MYDIR = os.environ.get('WTTR_MYDIR', os.path.abspath(os.path.dirname( os.path.dirname('__file__') )))
-GEOLITE = os.environ.get('WTTR_GEOLITE', os.path.join( MYDIR, "GeoLite2-City.mmdb" ))
-WEGO = os.environ.get('WTTR_WEGO', "/home/igor/go/bin/wego")
-LISTEN_HOST = os.environ.get('WTTR_LISTEN_HOST', "127.0.0.1")
-LISTEN_PORT = int(os.environ.get('WTTR_LISTEN_PORT', "8002"))
+MYDIR = os.path.abspath(os.path.dirname( os.path.dirname('__file__') ))
+sys.path.append("%s/lib/" % MYDIR)
+import wttrin_png, parse_query
+from translations import get_message, FULL_TRANSLATION, PARTIAL_TRANSLATION, SUPPORTED_LANGS
+from buttons import TWITTER_BUTTON, GITHUB_BUTTON, GITHUB_BUTTON_2, GITHUB_BUTTON_3, GITHUB_BUTTON_FOOTER
 
-CACHEDIR  = os.path.join( MYDIR, "cache" )
-IP2LCACHE = os.path.join( MYDIR, "cache/ip2l" )
-ALIASES   = os.path.join( MYDIR, "share/aliases" )
-ANSI2HTML = os.path.join( MYDIR, "share/ansi2html.sh" )
-HELP_FILE = os.path.join( MYDIR, 'share/help.txt' )
-LOG_FILE  = os.path.join( MYDIR, 'log/main.log' )
-TEMPLATES = os.path.join( MYDIR, 'share/templates' )
-STATIC    = os.path.join( MYDIR, 'share/static' )
+from globals import GEOLITE, \
+                    IP2LCACHE, ALIASES, BLACKLIST, \
+                    get_help_file, BASH_FUNCTION_FILE, TRANSLATION_FILE, LOG_FILE, TEST_FILE, \
+                    TEMPLATES, STATIC, \
+                    NOT_FOUND_LOCATION, \
+                    MALFORMED_RESPONSE_HTML_PAGE, \
+                    IATA_CODES_FILE, \
+                    log, error
 
-NOT_FOUND_LOCATION = "NOT_FOUND"
-DEFAULT_LOCATION = "Oymyakon"
+from wttr import get_wetter, get_moon
 
-NOT_FOUND_MESSAGE = """
-We were unable to find your location,
-so we have brought you to Oymyakon,
-one of the coldest permanently inhabited locales on the planet.
-"""
-PLAIN_TEXT_AGENTS = [
-    "curl",
-    "httpie",
-    "lwp-request",
-    "wget",
-    "python-requests"
-]
-
-if not os.path.exists(os.path.dirname( LOG_FILE )):
-    os.makedirs( os.path.dirname( LOG_FILE ) )
-logging.basicConfig(filename=LOG_FILE, level=logging.DEBUG)
-
-reader = geoip2.database.Reader(GEOLITE)
-geolocator = Nominatim()
+if not os.path.exists(os.path.dirname(LOG_FILE)):
+    os.makedirs(os.path.dirname(LOG_FILE))
+logging.basicConfig(filename=LOG_FILE, level=logging.DEBUG, format='%(asctime)s %(message)s')
 
 my_loader = jinja2.ChoiceLoader([
     app.jinja_loader,
     jinja2.FileSystemLoader(TEMPLATES),
 ])
 app.jinja_loader = my_loader
-
 
 class Limits:
     def __init__( self ):
@@ -90,7 +75,9 @@ class Limits:
             }
         self.clear_counters()
 
-    def check_ip( self, ip ):
+    def check_ip(self, ip):
+        if ip == '5.9.243.177':
+            return
         self.clear_counters()
         for interval in self.intervals:
             if ip not in self.counter[interval]:
@@ -99,7 +86,6 @@ class Limits:
             if self.limit[interval] <= self.counter[interval][ip]:
                 log("Too many queries: %s in %s for %s" % (self.limit[interval], interval, ip) )
                 raise RuntimeError("Not so fast! Number of queries per %s is limited to %s" % (interval, self.limit[interval]))
-            print self.counter
 
     def clear_counters( self ):
         t = int( time.time() )
@@ -107,19 +93,18 @@ class Limits:
             if t / self.divisor[interval] != self.last_update[interval]:
                 self.counter[interval] = {}
                 self.last_update[interval] = t / self.divisor[interval]
-        
 
 limits = Limits()
 
-def error( text ):
+def error(text):
     print text
     raise RuntimeError(text)
 
-def log( text ):
+def log(text):
     print text.encode('utf-8')
     logging.info( text.encode('utf-8') )
 
-def is_ip( ip ):
+def is_ip(ip):
     if re.match('\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}', ip) is None:
         return False
     try:
@@ -128,7 +113,89 @@ def is_ip( ip ):
     except socket.error:
         return False
 
-def save_weather_data( location, filename ):
+def location_normalize(location):
+    #translation_table = dict.fromkeys(map(ord, '!@#$*;'), None)
+    def remove_chars( c, s ):
+        return ''.join(x for x in s if x not in c )
+
+    location = location.lower().replace('_', ' ').replace('+', ' ').strip()
+    if not location.startswith('moon@'):
+        location = remove_chars(r'!@#$*;:\\', location)
+    return location
+
+def load_aliases(aliases_filename):
+    aliases_db = {}
+    with open(aliases_filename, 'r') as f:
+        for line in f.readlines():
+            from_, to_ = line.decode('utf-8').split(':', 1)
+            aliases_db[location_normalize(from_)] = location_normalize(to_)
+    return aliases_db
+
+def load_iata_codes(iata_codes_filename):
+    with open(iata_codes_filename, 'r') as f:
+        result = []
+        for line in f.readlines():
+            result.append(line.strip())
+    return set(result)
+
+location_alias = load_aliases(ALIASES)
+location_black_list = [x.strip() for x in open(BLACKLIST, 'r').readlines()]
+iata_codes = load_iata_codes(IATA_CODES_FILE)
+print "IATA CODES LOADED: %s" % len(iata_codes)
+
+def location_canonical_name(location):
+    location = location_normalize(location)
+    if location in location_alias:
+        return location_alias[location.lower()]
+    return location
+
+def ascii_only(s):
+    try:
+        for i in range(5):
+            s = s.encode('utf-8')
+        return True
+    except:
+        return False
+
+def geolocator(location):
+    try:
+        geo = requests.get('http://localhost:8004/%s' % location).text
+    except Exception as e:
+        print "ERROR: %s" % e
+        return
+
+    if geo == "":
+        return
+
+    try:
+        answer = json.loads(geo.encode('utf-8'))
+        return answer
+    except Exception as e:
+        print "ERROR: %s" % e
+        return None
+
+def ip2location(ip):
+    cached = os.path.join(IP2LCACHE, ip)
+    if not os.path.exists(IP2LCACHE):
+        os.makedirs(IP2LCACHE)
+
+    if os.path.exists(cached):
+        location = open(cached, 'r').read()
+        return location
+
+    try:
+        t = requests.get( 'http://api.ip2location.com/?ip=%s&key=%s&package=WS10' % (IP2LOCATION_KEY, ip)).text
+        if ';' in t:
+            location = t.split(';')[3]
+            open(cached, 'w').write(location)
+            print "ip2location says: %s" % location
+            return location
+    except:
+            pass
+
+reader = geoip2.database.Reader(GEOLITE)
+def get_location(ip_addr):
+    response = reader.city(ip_addr)
 
     if location == NOT_FOUND_LOCATION:
         location_not_found = True
@@ -171,22 +238,6 @@ def get_wetter(location, ip, html=False):
     return open(filename).read()
 
 
-def ip2location( ip ):
-    cached = os.path.join( IP2LCACHE, ip )
-
-    if os.path.exists( cached ):
-        return open( cached, 'r' ).read()
-
-    try:
-        t = requests.get( 'http://api.ip2location.com/?ip=%s&key=demo&package=WS10' % ip ).text
-        if ';' in t:
-            location = t.split(';')[3]
-            if not os.path.exists( IP2LCACHE ):
-                os.makedirs( IP2LCACHE )
-            open( cached, 'w' ).write( location )
-            return location
-    except:
-            pass
 
 def get_location( ip_addr ):
     response = reader.city( ip_addr )
@@ -274,8 +325,13 @@ def wttr(location = None):
         log("%s %s %s %s" % (ip, user_agent, orig_location, location))
         return get_wetter( location, ip, html=html_output )
     except Exception, e:
-        logging.error("Exception has occurred", exc_info=1)
-        return str(e).rstrip()+"\n"
+        if 'Malformed response' in str(e) or 'API key has reached calls per day allowed limit' in str(e):
+            if html_output:
+                return MALFORMED_RESPONSE_HTML_PAGE
+            else:
+                return get_message('CAPACITY_LIMIT_REACHED', lang).encode('utf-8')
+        logging.error("Exception has occured", exc_info=1)
+        return "ERROR"
 
 server = WSGIServer((LISTEN_HOST, LISTEN_PORT), app)
 server.serve_forever()
