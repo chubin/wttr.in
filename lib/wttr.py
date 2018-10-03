@@ -14,14 +14,45 @@ import dateutil
 
 from translations import get_message, FULL_TRANSLATION, PARTIAL_TRANSLATION, SUPPORTED_LANGS
 from globals import WEGO, PYPHOON, CACHEDIR, ANSI2HTML, \
-                    NOT_FOUND_LOCATION, DEFAULT_LOCATION, \
+                    NOT_FOUND_LOCATION, DEFAULT_LOCATION, TEST_FILE, \
                     log, error
 
 def _is_invalid_location(location):
     if '.png' in location:
         return True
 
-def get_wetter(location, ip, html=False, lang=None, query=None, location_name=None, full_address=None):
+def get_wetter(location, ip, html=False, lang=None, query=None, location_name=None, full_address=None, url=None):
+
+    local_url = url
+    local_location = location
+
+    def get_opengraph():
+
+        if local_url is None:
+            url = ""
+        else:
+            url = local_url.encode('utf-8')
+
+        if local_location is None:
+            location = ""
+        else:
+            location = local_location.encode('utf-8')
+
+        pic_url = url.replace('?', '_')
+
+        return (
+            '<meta property="og:image" content="%(pic_url)s_0pq.png" />'
+            '<meta property="og:site_name" content="wttr.in" />'
+            '<meta property="og:type" content="profile" />'
+            '<meta property="og:url" content="%(url)s" />'
+        ) % {
+            'pic_url': pic_url,
+            'url': url,
+            'location': location,
+        }
+
+            # '<meta property="og:title" content="Weather report: %(location)s" />'
+            # '<meta content="Partly cloudy // 6-8 °C // ↑ 9 km/h // 10 km // 0.4 mm" property="og:description" />'
 
     def get_filename(location, lang=None, query=None, location_name=None):
         location = location.replace('/', '_')
@@ -54,11 +85,17 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
         
         NOT_FOUND_MESSAGE_HEADER = ""
         while True:
+            location_not_found = False
+            if location in [ "test-thunder" ]:
+                test_name = location[5:]
+                test_file = TEST_FILE.replace('NAME', test_name)
+                stdout = open(test_file, 'r').read()
+                stderr = ""
+                break
+            print "LOCATION = ", location
             if location == NOT_FOUND_LOCATION:
                 location_not_found = True
                 location = DEFAULT_LOCATION
-            else:
-                location_not_found = False
             
             cmd = [WEGO, '--city=%s' % location]
 
@@ -128,7 +165,7 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
         if query.get('no-city', False):
             stdout = "\n".join(stdout.splitlines()[2:]) + "\n"
 
-        if full_address:
+        if full_address and query.get('format', 'txt') != 'png':
             line = "%s: %s [%s]\n" % (get_message('LOCATION', lang).encode('utf-8'), full_address.encode('utf-8'), location)
             stdout += line
 
@@ -153,9 +190,11 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
             stdout = stdout.replace('<body class="">', '<body class="" style="background:white;color:#777777">')
         
         title = "<title>%s</title>" % first.encode('utf-8')
-        stdout = re.sub("<head>", "<head>" + title, stdout)
+        opengraph = get_opengraph()
+        stdout = re.sub("<head>", "<head>" + title + opengraph, stdout)
         open(filename+'.html', 'w').write(stdout)
 
+    print "LOCATION >>> ", location
     filename = get_filename(location, lang=lang, query=query, location_name=location_name)
     if not os.path.exists(filename):
         save_weather_data(location, filename, lang=lang, query=query, location_name=location_name, full_address=full_address)
