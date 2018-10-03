@@ -23,7 +23,8 @@ import jinja2
 from flask import Flask, request, render_template, send_from_directory, send_file, make_response
 app = Flask(__name__)
 
-MYDIR = os.path.abspath(os.path.dirname( os.path.dirname('__file__') ))
+MYDIR = os.path.abspath(
+    os.path.dirname(os.path.dirname('__file__')))
 sys.path.append("%s/lib/" % MYDIR)
 import wttrin_png, parse_query
 from translations import get_message, FULL_TRANSLATION, PARTIAL_TRANSLATION, SUPPORTED_LANGS
@@ -37,7 +38,7 @@ from globals import GEOLITE, \
                     MALFORMED_RESPONSE_HTML_PAGE, \
                     IATA_CODES_FILE, \
                     log, error, \
-                    LISTEN_PORT, LISTEN_HOST
+                    LISTEN_PORT, LISTEN_HOST, PLAIN_TEXT_AGENTS
 
 from wttr import get_wetter, get_moon
 
@@ -52,7 +53,7 @@ my_loader = jinja2.ChoiceLoader([
 app.jinja_loader = my_loader
 
 class Limits:
-    def __init__( self ):
+    def __init__(self):
         self.intervals = ['min', 'hour', 'day']
         self.divisor = {
             'min':      60,
@@ -62,7 +63,7 @@ class Limits:
         self.counter = {
             'min':      {},
             'hour':     {},
-            'day':      {},  
+            'day':      {},
             }
         self.limit = {
             'min':      30,
@@ -76,17 +77,24 @@ class Limits:
             }
         self.clear_counters()
 
-    def check_ip(self, ip):
-        if ip == '5.9.243.177':
+    def check_ip(self, ip_address):
+        """
+        check if connections from `ip_address` are allowed
+        and raise a RuntimeError exception if they are not
+        """
+        if ip_address == '5.9.243.177':
             return
         self.clear_counters()
         for interval in self.intervals:
-            if ip not in self.counter[interval]:
-                self.counter[interval][ip] = 0
-            self.counter[interval][ip] += 1
-            if self.limit[interval] <= self.counter[interval][ip]:
-                log("Too many queries: %s in %s for %s" % (self.limit[interval], interval, ip) )
-                raise RuntimeError("Not so fast! Number of queries per %s is limited to %s" % (interval, self.limit[interval]))
+            if ip_address not in self.counter[interval]:
+                self.counter[interval][ip_address] = 0
+            self.counter[interval][ip_address] += 1
+            if self.limit[interval] <= self.counter[interval][ip_address]:
+                log("Too many queries: %s in %s for %s"
+                    % (self.limit[interval], interval, ip_address))
+                raise RuntimeError(
+                    "Not so fast! Number of queries per %s is limited to %s"
+                    % (interval, self.limit[interval]))
 
     def clear_counters( self ):
         t = int( time.time() )
@@ -96,14 +104,6 @@ class Limits:
                 self.last_update[interval] = t / self.divisor[interval]
 
 limits = Limits()
-
-def error(text):
-    print text
-    raise RuntimeError(text)
-
-def log(text):
-    print text.encode('utf-8')
-    logging.info( text.encode('utf-8') )
 
 def is_ip(ip):
     if re.match('\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}', ip) is None:
@@ -150,10 +150,10 @@ def location_canonical_name(location):
         return location_alias[location.lower()]
     return location
 
-def ascii_only(s):
+def ascii_only(string):
     try:
         for i in range(5):
-            s = s.encode('utf-8')
+            string = string.encode('utf-8')
         return True
     except:
         return False
@@ -403,11 +403,12 @@ def wttr(location = None):
                 query_source_location = NOT_FOUND_LOCATION, None
 
         location = location_canonical_name(location)
-        log("%s %s %s %s %s %s" % (ip, user_agent, orig_location, location, query.get('use_imperial', False), lang))
+        log("%s %s %s %s %s %s" \
+            % (ip, user_agent, orig_location, location, query.get('use_imperial', False), lang))
 
         # We are ready to return the answer
         if png_filename:
-            options={}
+            options = {}
             if lang is not None:
                 options['lang'] = lang
 
@@ -416,8 +417,8 @@ def wttr(location = None):
 
             cached_png_file = wttrin_png.make_wttr_in_png(png_filename, options=options)
             response = make_response(send_file(cached_png_file,
-                             attachment_filename=png_filename,
-                             mimetype='image/png'))
+                                               attachment_filename=png_filename,
+                                               mimetype='image/png'))
 
             # Trying to disable github caching
             response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
@@ -431,22 +432,27 @@ def wttr(location = None):
             if country and location != NOT_FOUND_LOCATION:
                 location = "%s, %s" % (location, country)
             output = get_wetter(location, ip,
-                html=html_output,
-                lang=lang,
-                query=query,
-                location_name=override_location_name,
-                full_address=full_address,
-                url=request.url,
-                )
+                                html=html_output,
+                                lang=lang,
+                                query=query,
+                                location_name=override_location_name,
+                                full_address=full_address,
+                                url=request.url,
+                               )
 
-        if 'Malformed response' in str(output) or 'API key has reached calls per day allowed limit' in str(output):
+        if 'Malformed response' in str(output) \
+                or 'API key has reached calls per day allowed limit' in str(output):
             if html_output:
                 return MALFORMED_RESPONSE_HTML_PAGE
-            else:
-                return get_message('CAPACITY_LIMIT_REACHED', lang).encode('utf-8')
+            return get_message('CAPACITY_LIMIT_REACHED', lang).encode('utf-8')
 
         if html_output:
-            output = output.replace('</body>', TWITTER_BUTTON + GITHUB_BUTTON + GITHUB_BUTTON_3 + GITHUB_BUTTON_2 + GITHUB_BUTTON_FOOTER + '</body>')
+            output = output.replace('</body>',
+                                    (TWITTER_BUTTON
+                                     + GITHUB_BUTTON
+                                     + GITHUB_BUTTON_3
+                                     + GITHUB_BUTTON_2
+                                     + GITHUB_BUTTON_FOOTER) + '</body>')
         else:
             if query.get('days', '3') != '0':
                 #output += '\n' + get_message('NEW_FEATURE', lang).encode('utf-8')
@@ -456,14 +462,13 @@ def wttr(location = None):
     #except RuntimeError, e:
     #    return str(e)
     except Exception, e:
-        if 'Malformed response' in str(e) or 'API key has reached calls per day allowed limit' in str(e):
+        if 'Malformed response' in str(e) \
+                or 'API key has reached calls per day allowed limit' in str(e):
             if html_output:
                 return MALFORMED_RESPONSE_HTML_PAGE
-            else:
-                return get_message('CAPACITY_LIMIT_REACHED', lang).encode('utf-8')
+            return get_message('CAPACITY_LIMIT_REACHED', lang).encode('utf-8')
         logging.error("Exception has occured", exc_info=1)
         return "ERROR"
 
 server = WSGIServer((LISTEN_HOST, LISTEN_PORT), app)
 server.serve_forever()
-
