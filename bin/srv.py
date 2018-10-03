@@ -321,6 +321,54 @@ def send_malformed():
 @app.route("/")
 @app.route("/<string:location>")
 def wttr(location = None):
+    """
+    Main rendering function, it processes incoming weather queries.
+    Depending on user agent it returns output in HTML or ANSI format.
+
+    Incoming data:
+        request.args
+        request.headers
+        request.remote_addr
+        request.referrer
+        request.query_string
+    """
+    if request.referrer:
+        print request.referrer
+
+    hostname = request.headers['Host']
+    lang = None
+    if hostname != 'wttr.in' and hostname.endswith('.wttr.in'):
+        lang = hostname[:-8]
+
+    if request.headers.getlist("X-Forwarded-For"):
+       ip = request.headers.getlist("X-Forwarded-For")[0]
+       if ip.startswith('::ffff:'):
+           ip = ip[7:]
+    else:
+       ip = request.remote_addr
+
+    try:
+        limits.check_ip(ip)
+    except RuntimeError, e:
+        return str(e)
+    except Exception, e:
+        logging.error("Exception has occured", exc_info=1)
+        return "ERROR"
+
+    if location is not None and location.lower() in location_black_list:
+        return ""
+
+    png_filename = None
+    if location is not None and location.lower().endswith(".png"):
+        png_filename = location
+        location = location[:-4]
+
+    query = parse_query.parse_query(request.args)
+
+    if 'lang' in request.args:
+        lang = request.args.get('lang')
+    if lang is None and 'Accept-Language' in request.headers:
+        lang = find_supported_language(parse_accept_language(request.headers.get('Accept-Language', '')))
 
     user_agent = request.headers.get('User-Agent', '').lower()
 
@@ -344,21 +392,119 @@ def wttr(location = None):
         ip = request.remote_addr
 
     try:
-        if location is None:
-            location = get_location( ip )
+        # if location is starting with ~
+        # or has non ascii symbols
+        # it should be handled like a search term (for geolocator)
+        override_location_name = None
+        full_address = None
 
-        if is_ip( location ):
-            location = get_location( location )
+        if location is not None and not ascii_only(location):
+            location = "~" + location
+
+        if location is not None and location.upper() in iata_codes:
+            location = '~%s' % location
+
+        if location is not None and location.startswith('~'):
+            geolocation = geolocator(location_canonical_name(location[1:]))
+            if geolocation is not None:
+                override_location_name = location[1:].replace('+', ' ')
+                location = "%s,%s" % (geolocation['latitude'], geolocation['longitude'])
+                full_address = geolocation['address']
+                print full_address
+            else:
+                location = NOT_FOUND_LOCATION #location[1:]
+        try:
+            query_source_location = get_location(ip)
+        except:
+            query_source_location = NOT_FOUND_LOCATION, None
+
+        # what units should be used
+        # metric or imperial
+        # based on query and location source (imperial for US by default)
+        print "lang = %s" % lang
+        if query.get('use_metric', False) and not query.get('use_imperial', False):
+            query['use_imperial'] = False
+            query['use_metric'] = True
+        elif query.get('use_imperial', False) and not query.get('use_metric', False):
+            query['use_imperial'] = True
+            query['use_metric'] = False
+        elif lang == 'us':
+            # slack uses m by default, to override it speciy us.wttr.in
+            query['use_imperial'] = True
+            query['use_metric'] = False
+        else:
+            if query_source_location[1] in ['US'] and 'slack' not in user_agent:
+                query['use_imperial'] = True
+                query['use_metric'] = False
+            else:
+                query['use_imperial'] = False
+                query['use_metric'] = True
+
+        country = None
+        if location is None or location == 'MyLocation':
+            location, country = query_source_location
+
+        if is_ip(location):
+            location, country = get_location(location)
         if location.startswith('@'):
             try:
-                loc = dns.resolver.query( location[1:], 'LOC' )
-                location = str("%.7f,%.7f" % (loc[0].float_latitude, loc[0].float_longitude))
-            except DNSException, e:
-                location = get_location( socket.gethostbyname( location[1:] ) )
+                location, country = get_location(socket.gethostbyname(location[1:]))
+            except:
+                query_source_location = NOT_FOUND_LOCATION, None
 
-        location = location_canonical_name( location )
-        log("%s %s %s %s" % (ip, user_agent, orig_location, location))
-        return get_wetter( location, ip, html=html_output )
+        location = location_canonical_name(location)
+        log("%s %s %s %s %s %s" % (ip, user_agent, orig_location, location, query.get('use_imperial', False), lang))
+
+        # We are ready to return the answer
+        if png_filename:
+            options={}
+            if lang is not None:
+                options['lang'] = lang
+
+            options['location'] = "%s,%s" % (location, country)
+            options.update(query)
+
+            cached_png_file = wttrin_png.make_wttr_in_png(png_filename, options=options)
+            response = make_response(send_file(cached_png_file,
+                             attachment_filename=png_filename,
+                             mimetype='image/png'))
+
+            # Trying to disable github caching
+            response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+            response.headers['Pragma'] = 'no-cache'
+            response.headers['Expires'] = '0'
+            return response
+
+        if location == 'moon' or location.startswith('moon@'):
+            output = get_moon(location, html=html_output, lang=lang)
+        else:
+            if country and location != NOT_FOUND_LOCATION:
+                location = "%s, %s" % (location, country)
+            output = get_wetter(location, ip,
+                html=html_output,
+                lang=lang,
+                query=query,
+                location_name=override_location_name,
+                full_address=full_address,
+                url=request.url,
+                )
+
+        if 'Malformed response' in str(output) or 'API key has reached calls per day allowed limit' in str(output):
+            if html_output:
+                return MALFORMED_RESPONSE_HTML_PAGE
+            else:
+                return get_message('CAPACITY_LIMIT_REACHED', lang).encode('utf-8')
+
+        if html_output:
+            output = output.replace('</body>', TWITTER_BUTTON + GITHUB_BUTTON + GITHUB_BUTTON_3 + GITHUB_BUTTON_2 + GITHUB_BUTTON_FOOTER + '</body>')
+        else:
+            if query.get('days', '3') != '0':
+                #output += '\n' + get_message('NEW_FEATURE', lang).encode('utf-8')
+                output += '\n' + get_message('FOLLOW_ME', lang).encode('utf-8') + '\n'
+        return output
+
+    #except RuntimeError, e:
+    #    return str(e)
     except Exception, e:
         if 'Malformed response' in str(e) or 'API key has reached calls per day allowed limit' in str(e):
             if html_output:
