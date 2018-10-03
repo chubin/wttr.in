@@ -265,6 +265,24 @@ def location_canonical_name( location ):
         return location_alias[location.lower()]
     return location
 
+def parse_accept_language(acceptLanguage):
+  languages = acceptLanguage.split(",")
+  locale_q_pairs = []
+
+  for language in languages:
+    try:
+        if language.split(";")[0] == language:
+          # no q => q = 1
+          locale_q_pairs.append((language.strip(), "1"))
+        else:
+          locale = language.split(";")[0].strip()
+          q = language.split(";")[1].split("=")[1]
+          locale_q_pairs.append((locale, q))
+    except:
+        pass
+
+  return locale_q_pairs
+
 def find_supported_language(accepted_languages):
     for p in accepted_languages:
         lang = p[0]
