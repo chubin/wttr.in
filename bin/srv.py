@@ -322,7 +322,7 @@ def send_malformed():
 @app.route("/<string:location>")
 def wttr(location = None):
 
-    user_agent = request.headers.get('User-Agent').lower()
+    user_agent = request.headers.get('User-Agent', '').lower()
 
     if any(agent in user_agent for agent in PLAIN_TEXT_AGENTS):
         html_output = False
