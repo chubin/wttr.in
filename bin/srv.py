@@ -67,7 +67,7 @@ app.jinja_loader = my_loader
 
 class Limits:
     def __init__( self ):
-        self.intervals = [ 'min', 'hour', 'day' ]
+        self.intervals = ['min', 'hour', 'day']
         self.divisor = {
             'min':      60,
             'hour':     3600,
@@ -79,9 +79,9 @@ class Limits:
             'day':      {},  
             }
         self.limit = {
-            'min':      10,
-            'hour':     20,
-            'day':      100,
+            'min':      30,
+            'hour':     600,
+            'day':      1000,
             }
         self.last_update = {
             'min':      0,
