@@ -265,6 +265,15 @@ def location_canonical_name( location ):
         return location_alias[location.lower()]
     return location
 
+def find_supported_language(accepted_languages):
+    for p in accepted_languages:
+        lang = p[0]
+        if '-' in lang:
+            lang = lang.split('-',1)[0]
+        if lang in SUPPORTED_LANGS:
+            return lang
+    return None
+
 def show_help():
     return open(HELP_FILE, 'r').read()
 
