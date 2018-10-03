@@ -17,6 +17,9 @@ BLACKLIST = os.path.join( MYDIR, "share/blacklist" )
 HELP_FILE           = os.path.join( MYDIR, 'share/help.txt' )
 BASH_FUNCTION_FILE  = os.path.join( MYDIR, 'share/bash-function.txt' )
 TRANSLATION_FILE    = os.path.join( MYDIR, 'share/translation.txt' )
+TEST_FILE           = os.path.join( MYDIR, 'share/test-NAME.txt' )
+
+IATA_CODES_FILE = os.path.join(MYDIR, 'share/list-of-iata-codes.txt')
 
 LOG_FILE  = os.path.join( MYDIR, 'log/main.log' )
 TEMPLATES = os.path.join( MYDIR, 'share/templates' )
@@ -38,4 +41,11 @@ def log(text):
         print text
         logging.info(text)
 
+def get_help_file(lang):
+    help_file = os.path.join(MYDIR, 'share/translations/%s-help.txt' % lang)
+    print ">>>", help_file
+    if os.path.exists(help_file):
+        return help_file
+    else:
+        return HELP_FILE
 
