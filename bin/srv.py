@@ -274,8 +274,19 @@ def find_supported_language(accepted_languages):
             return lang
     return None
 
-def show_help():
-    return open(HELP_FILE, 'r').read()
+def show_help(location, lang):
+    text = ""
+    if location == ":help":
+        text = open(get_help_file(lang), 'r').read()
+        text = text.replace('FULL_TRANSLATION', ' '.join(FULL_TRANSLATION))
+        text = text.replace('PARTIAL_TRANSLATION', ' '.join(PARTIAL_TRANSLATION))
+    elif location == ":bash.function":
+        text = open(BASH_FUNCTION_FILE, 'r').read()
+    elif location == ":translation":
+        text = open(TRANSLATION_FILE, 'r').read()
+        text = text.replace('NUMBER_OF_LANGUAGES', str(len(SUPPORTED_LANGS))).replace('SUPPORTED_LANGUAGES', ' '.join(SUPPORTED_LANGS))
+    return text.decode('utf-8')
+show_help.pages = [':help', ':bash.function', ':translation' ]
 
 @app.route('/files/<path:path>')
 def send_static(path):
