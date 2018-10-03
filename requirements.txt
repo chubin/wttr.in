@@ -4,3 +4,4 @@ geopy
 requests
 gevent
 dnspython
+pylint
