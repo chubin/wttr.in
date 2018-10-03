@@ -36,7 +36,8 @@ from globals import GEOLITE, \
                     NOT_FOUND_LOCATION, \
                     MALFORMED_RESPONSE_HTML_PAGE, \
                     IATA_CODES_FILE, \
-                    log, error
+                    log, error, \
+                    LISTEN_PORT, LISTEN_HOST
 
 from wttr import get_wetter, get_moon
 
@@ -197,73 +198,22 @@ reader = geoip2.database.Reader(GEOLITE)
 def get_location(ip_addr):
     response = reader.city(ip_addr)
 
-    if location == NOT_FOUND_LOCATION:
-        location_not_found = True
-        location = DEFAULT_LOCATION
-    else:
-        location_not_found = False
-    p = Popen( [ WEGO, '-location=%s' % location ], stdout=PIPE, stderr=PIPE )
-    stdout, stderr = p.communicate()
-    if p.returncode != 0:
-        error( stdout + stderr )
-
-    dirname = os.path.dirname( filename )
-    if not os.path.exists( dirname ):
-        os.makedirs( dirname )
-    
-    if location_not_found:
-        stdout += NOT_FOUND_MESSAGE
-
-    open( filename, 'w' ).write( stdout )
-
-    p = Popen( [ "bash", ANSI2HTML, "--palette=solarized", "--bg=dark" ],  stdin=PIPE, stdout=PIPE, stderr=PIPE )
-    stdout, stderr = p.communicate( stdout )
-    if p.returncode != 0:
-        error( stdout + stderr )
-
-    open( filename+'.html', 'w' ).write( stdout )
-
-def get_filename( location ):
-    location = location.replace('/', '_')
-    timestamp = time.strftime( "%Y%m%d%H", time.localtime() )
-    return "%s/%s/%s" % ( CACHEDIR, location, timestamp )
-
-def get_wetter(location, ip, html=False):
-    filename = get_filename( location )
-    if not os.path.exists( filename ):
-        limits.check_ip( ip )
-        save_weather_data( location, filename )
-    if html:
-        filename += '.html'
-    return open(filename).read()
-
-
-
-def get_location( ip_addr ):
-    response = reader.city( ip_addr )
+    country = response.country.iso_code
     city = response.city.name
-    if city is None and response.location:
-        coord = "%s, %s" % (response.location.latitude, response.location.longitude)
-        location = geolocator.reverse(coord, language='en')
-        city = location.raw.get('address', {}).get('city')
+
+    #
+    # temporary disabled it because of geoip services capcacity
+    #
+    #if city is None and response.location:
+    #    coord = "%s, %s" % (response.location.latitude, response.location.longitude)
+    #    try:
+    #        location = geolocator.reverse(coord, language='en')
+    #        city = location.raw.get('address', {}).get('city')
+    #    except:
+    #        pass
     if city is None:
-        print ip_addr
-        city = ip2location( ip_addr )
-    return city or NOT_FOUND_LOCATION
-
-def load_aliases( aliases_filename ):
-    aliases_db = {}
-    with open( aliases_filename, 'r' ) as f:
-        for line in f.readlines():
-            from_, to_ = line.split(':', 1)
-            aliases_db[ from_.strip().lower() ] = to_.strip()
-    return aliases_db
-
-location_alias = load_aliases( ALIASES )
-def location_canonical_name( location ):
-    if location.lower() in location_alias:
-        return location_alias[location.lower()]
-    return location
+        city = ip2location(ip_addr)
+    return (city or NOT_FOUND_LOCATION), country
 
 def parse_accept_language(acceptLanguage):
   languages = acceptLanguage.split(",")
