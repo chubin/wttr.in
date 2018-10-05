@@ -96,12 +96,15 @@ class Limits:
                     "Not so fast! Number of queries per %s is limited to %s"
                     % (interval, self.limit[interval]))
 
-    def clear_counters( self ):
-        t = int( time.time() )
+    def clear_counters(self):
+        """
+        Initialize counters for new interval
+        """
+        t_int = int(time.time())
         for interval in self.intervals:
-            if t / self.divisor[interval] != self.last_update[interval]:
+            if t_int / self.divisor[interval] != self.last_update[interval]:
                 self.counter[interval] = {}
-                self.last_update[interval] = t / self.divisor[interval]
+                self.last_update[interval] = t_int / self.divisor[interval]
 
 limits = Limits()
 
