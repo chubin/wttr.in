@@ -50,13 +50,13 @@ takže jsme vás přivedl do Ojmjakonu.
 Je to jedno z nejchladnějších trvale obydlených míst na planetě.
 Doufáme, že budete mít lepší počasí!
 """,
-            
+
         'cy': u"""
 Ni darganfyddwyd eich lleoliad,
 felly rydym wedi dod â chi i Oymyakon,
 un o'r llefydd oerach ar y blaned lle mae pobl yn fyw!
 """,
-            
+
         'de': u"""
 Wir konnten Ihren Standort nicht finden,
 also haben wir Sie nach Oimjakon gebracht,
@@ -70,8 +70,8 @@ Wir hoffen, dass Sie besseres Wetter haben!
 μία από τις πιο κρύες μόνιμα κατοικημένες περιοχές στον πλανήτη.
 Ελπίζουμε να έχεις καλύτερο καιρό!
 """,
-	        
-	'es': u"""
+
+        'es': u"""
 No hemos logrado encontrar tu ubicación,
 asi que hemos decidido enseñarte el tiempo en Oymyakon,
 uno de los sitios más fríos y permanentemente deshabitados del planeta.
@@ -126,8 +126,8 @@ Ci auguriamo che le condizioni dove lei si trova siano migliori!""",
 대신 오이먀콘의 일기 예보를 표시합니다,
 오이먀콘은 지구상에서 가장 추운 곳에 위치한 마을입니다!
 """,
-	    
-	    'lv': u"""
+
+            'lv': u"""
 Mēs nevarējām atrast jūsu atrašanās vietu tādēļ nogādājām jūs Oimjakonā,
 vienā no aukstākajām apdzīvotajām vietām uz planētas.
 """,
@@ -143,8 +143,8 @@ Vi kunne ikke finne din lokasjon,
 så her får du Ojmjakon, et av de kaldeste bebodde stedene på planeten.
 Vi håper været er bedre hos deg!
 """,
-	    
-	'pt': u"""
+
+        'pt': u"""
 Não conseguimos encontrar a sua localização,
 então decidimos te mostrar o tempo em Oymyakon,
 um dos lugares mais frios e permanentemente desabitados do planeta.
@@ -201,7 +201,7 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
 కనుక మనం "ఓమాయకాన్కు" తీసుకొని వచ్చాము,
 భూమిపై అత్యల్ప శాశ్వతంగా నివసించే స్థానిక ప్రదేశాలలో ఒకటి.
 """,
-	 'uk': u"""
+         'uk': u"""
 Ваше місце розташування визначити не вдалося,
 тому ми покажемо вам погоду в Оймяконе,
 найхолоднішому населеному пункті на планеті.
@@ -214,7 +214,7 @@ shuning uchun sizga sayyoramizning eng sovuq aholi punkti - Oymyakondagi ob-havo
 Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
 """
 
-		},
+                },
 
     'UNKNOWN_LOCATION': {
         'en': u'Unknown location',
@@ -239,14 +239,14 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'mk': u'Непозната локација',
         'nb': u'Ukjent sted',
         'pl': u'Nieznana lokalizacja',
-        'pt': u'Localização desconhecida',	    
+        'pt': u'Localização desconhecida',
         'ro': u'Locaţie necunoscută',
         'ru': u'Неизвестное местоположение',
         'sk': u'Neznáma poloha',
         'sl': u'Neznano lokacijo',
         'sr': u'Непозната локација',
         'sv': u'Okänd plats',
-	'te': u'తెలియని ప్రదేశం',
+        'te': u'తెలియని ప్రదేశం',
         'tr': u'Bilinmeyen konum',
         'ua': u'Невідоме місце',
         'uz': u'Аникланмаган худуд',
@@ -271,7 +271,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'ja': u'位置情報',
         'ko': u'위치',
         'kk': u'',
-	'lv': u'Atrašanās vieta',
+        'lv': u'Atrašanās vieta',
         'mk': u'Локација',
         'nb': u'Sted',
         'pl': u'Lokalizacja',
@@ -282,7 +282,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'sl': u'Lokacijo',
         'sr': u'Локација',
         'sv': u'Plats',
-	'te': u'స్థానము',   
+        'te': u'స్థానము',
         'tr': u'Konum',
         'ua': u'Місце',
     },
@@ -372,7 +372,7 @@ Potete seguire https://twitter.com/igor_chubin per gli aggiornamenti.
 업데이트 소식을 원하신다면 https://twitter.com/igor_chubin 을 팔로우 해주세요.
 ======================================================================================
 """,
-	    'lv': u"""
+        'lv': u"""
 Atvainojiet, uz doto brīdi mēs esam mazliet noslogoti.
 Šeit ir laika ziņas noklusējuma pilsētai (lai parādītu jums, kā izskatās izveidotais ziņojums).
 Mēs atsāksim darbu cik ātri vien varēsim.
@@ -407,7 +407,7 @@ Em breve voltaremos a ter acesso às consultas.
 Você pode seguir https://twitter.com/igor_chubin para acompanhar a situação.
 ======================================================================================
 """,
-	'te': u"""
+        'te': u"""
 క్షమించండి, ప్రస్తుతానికి మేము వాతావరణ సేవకు ప్రశ్నలను గడుపుతున్నాం.
 ఇక్కడ డిఫాల్ట్ నగరం కోసం వాతావరణ నివేదిక (కేవలం మీకు చూపించడానికి, ఇది ఎలా కనిపిస్తుంది).
 సాధ్యమైనంత త్వరలో కొత్త ప్రశ్నలను పొందుతారు.
@@ -433,7 +433,7 @@ Gelişmeler için https://twitter.com/igor_chubin adresini takip edebilirsiniz.
         'be': u'Новыя магчымасці: назвы месц на любой мове \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) i пошук месц \033[92mwttr.in/~Kilimanjaro\033[0m (трэба дадаць ~ ў пачатак)',
         'bs': u'XXXXXXXXXXXXXXXXXXXX: XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\033[92mwttr.in/станция+Восток\033[0m (XX UTF-8) XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
         'ca': u'Noves funcionalitats: noms d\'ubicació multilingües \033[92mwttr.in/станция+Восток\033[0m (en UTF-8) i la ubicació de recerca \033[92mwttr.in/~Kilimanjaro\033[0m (només cal afegir ~ abans)',
-	'es': u'Nuevas funcionalidades: los nombres de las ubicaciones en vários idiomas \033[92mwttr.in/станция+Восток\033[0m (em UTF-8) y la búsqueda por ubicaciones \033[92mwttr.in/~Kilimanjaro\033[0m (tan solo inserte ~ en frente)',  
+        'es': u'Nuevas funcionalidades: los nombres de las ubicaciones en vários idiomas \033[92mwttr.in/станция+Восток\033[0m (em UTF-8) y la búsqueda por ubicaciones \033[92mwttr.in/~Kilimanjaro\033[0m (tan solo inserte ~ en frente)',
         'fr': u'Nouvelles fonctionnalités: noms d\'emplacements multilingues \033[92mwttr.in/станция+Восток\033[0m (en UTF-8) et recherche d\'emplacement \033[92mwttr.in/~Kilimanjaro\033[0m (ajouter ~ devant)',
         'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
         'nb': u'Ny funksjon: flerspråklige stedsnavn \033[92mwttr.in/станция+Восток\033[0m (i UTF-8) og lokasjonssøk \033[92mwttr.in/~Kilimanjaro\033[0m (bare legg til ~ foran)',
@@ -444,7 +444,7 @@ Gelişmeler için https://twitter.com/igor_chubin adresini takip edebilirsiniz.
         'it': u'Nuove funzionalità: nomi delle località multilingue \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) e ricerca della località \033[92mwttr.in/~Kilimanjaro\033[0m (basta premettere ~)',
         'ko': u'새로운 기능: 다국어로 대응된 위치 \033[92mwttr.in/서울\033[0m (UTF-8에서) 장소 검색 \033[92mwttr.in/~Kilimanjaro\033[0m (앞에 ~를 붙이세요)',
         'kk': u'',
-	'lv': u'Jaunums: Daudzvalodu atrašanās vietu nosaukumi \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) un dabas objektu meklēšana \033[92mwttr.in/~Kilimanjaro\033[0m (tikai priekšā pievieno ~)',
+        'lv': u'Jaunums: Daudzvalodu atrašanās vietu nosaukumi \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) un dabas objektu meklēšana \033[92mwttr.in/~Kilimanjaro\033[0m (tikai priekšā pievieno ~)',
         'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
         'pl': u'Nowa funkcjonalność: wielojęzyczne nazwy lokalizacji \033[92mwttr.in/станция+Восток\033[0m (w UTF-8) i szukanie lokalizacji \033[92mwttr.in/~Kilimanjaro\033[0m (poprzedź zapytanie ~ - znakiem tyldy)',
         'pt': u'Nova funcionalidade: nomes de localidades em várias línguas \033[92mwttr.in/станция+Восток\033[0m (em UTF-8) e procura por localidades \033[92mwttr.in/~Kilimanjaro\033[0m (é só colocar ~ antes)',
@@ -458,7 +458,7 @@ Gelişmeler için https://twitter.com/igor_chubin adresini takip edebilirsiniz.
         'be': u'Сачыце за \033[46m\033[30m@igor_chubin\033[0m за навінамі wttr.in',
         'bs': u'XXXXXX \033[46m\033[30m@igor_chubin\033[0m XXXXXXXXXXXXXXXXXXX',   
         'ca': u'Seguiu \033[46m\033[30m@igor_chubin\033[0m per actualitzacions de wttr.in',
-	'es': u'Seguir \033[46m\033[30m@igor_chubin\033[0m para recibir las novedades de wttr.in',
+        'es': u'Seguir \033[46m\033[30m@igor_chubin\033[0m para recibir las novedades de wttr.in',
         'cy': u'Dilyn \033[46m\033[30m@igor_Chubin\033[0m am diweddariadau wttr.in',
         'fr': u'Suivez \033[46m\033[30m@igor_Chubin\033[0m pour rester informé sur wttr.in',
         'de': u'Folgen Sie \033[46m\033[30mhttps://twitter.com/igor_chubin\033[0m für wttr.in Updates',
@@ -467,14 +467,14 @@ Gelişmeler için https://twitter.com/igor_chubin adresini takip edebilirsiniz.
         'it': u'Seguite \033[46m\033[30m@igor_chubin\033[0m per aggiornamenti a wttr.in',
         'ko': u'wttr.in의 업데이트 소식을 원하신다면 \033[46m\033[30m@igor_chubin\033[0m 을 팔로우 해주세요',
         'kk': u'',
-	'lv': u'Seko \033[46m\033[30m@igor_chubin\033[0m , lai uzzinātu wttr.in jaunumus',
+        'lv': u'Seko \033[46m\033[30m@igor_chubin\033[0m , lai uzzinātu wttr.in jaunumus',
         'mk': u'Следете \033[46m\033[30m@igor_chubin\033[0m за wttr.in новости',
         'nb': u'Følg \033[46m\033[30m@igor_chubin\033[0m for wttr.in oppdateringer',
         'pl': u'Śledź \033[46m\033[30m@igor_chubin\033[0m aby być na bieżąco z nowościami dotyczącymi wttr.in',
         'pt': u'Seguir \033[46m\033[30m@igor_chubin\033[0m para as novidades de wttr.in',
         'ru': u'Все новые фичи публикуются здесь: \033[46m\033[30m@igor_chubin\033[0m',
         'te': u'అనుసరించండి \ 033 [46m \ 033 [30m @ igor_chubin \ 033 [wttr.in నవీకరణలను కోసం',
-	'tr': u'wttr.in ile ilgili gelişmeler için \033[46m\033[30m@igor_chubin\033[0m adresini takip edin',
+        'tr': u'wttr.in ile ilgili gelişmeler için \033[46m\033[30m@igor_chubin\033[0m adresini takip edin',
     },
 }
 
