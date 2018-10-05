@@ -3,7 +3,7 @@ import os
 
 MYDIR = os.path.abspath(os.path.dirname( os.path.dirname('__file__') ))
 
-GEOLITE = os.path.join( MYDIR, "GeoLite2-City.mmdb" )
+GEOLITE = os.path.join(MYDIR, 'data', "GeoLite2-City.mmdb")
 WEGO = "/home/igor/go/bin/we-lang"
 PYPHOON = "/home/igor/wttr.in/pyphoon/bin/pyphoon-lolcat"
 
@@ -32,6 +32,18 @@ MALFORMED_RESPONSE_HTML_PAGE = open(os.path.join(STATIC, 'malformed-response.htm
 
 LISTEN_HOST = ""
 LISTEN_PORT = 8002
+
+PLAIN_TEXT_AGENTS = [
+    "curl",
+    "httpie",
+    "lwp-request",
+    "wget",
+    "python-requests"
+]
+
+PLAIN_TEXT_PAGES = [':help', ':bash.function', ':translation']
+
+IP2LOCATION_KEY = ''
 
 def error(text):
     if not text.startswith('Too many queries'):
