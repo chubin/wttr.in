@@ -1,3 +1,29 @@
+def metric_or_imperial(query, lang, us_ip=False):
+    """
+    """
+
+    # what units should be used
+    # metric or imperial
+    # based on query and location source (imperial for US by default)
+    if query.get('use_metric', False) and not query.get('use_imperial', False):
+        query['use_imperial'] = False
+        query['use_metric'] = True
+    elif query.get('use_imperial', False) and not query.get('use_metric', False):
+        query['use_imperial'] = True
+        query['use_metric'] = False
+    elif lang == 'us':
+        # slack uses m by default, to override it speciy us.wttr.in
+        query['use_imperial'] = True
+        query['use_metric'] = False
+    else:
+        if us_ip:
+            query['use_imperial'] = True
+            query['use_metric'] = False
+        else:
+            query['use_imperial'] = False
+            query['use_metric'] = True
+
+    return query
 
 def parse_query(args):
     result = {}
