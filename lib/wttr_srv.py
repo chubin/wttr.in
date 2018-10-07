@@ -7,8 +7,6 @@ Main wttr.in rendering function implementation
 
 import logging
 import os
-import re
-import socket
 from flask import render_template, send_file, make_response
 
 import wttrin_png
@@ -31,19 +29,6 @@ logging.basicConfig(filename=LOG_FILE, level=logging.DEBUG, format='%(asctime)s 
 
 LIMITS = Limits(whitelist=[MY_EXTERNAL_IP], limits=(30, 60, 100))
 
-def is_ip(ip_addr):
-    """
-    Check if `ip_addr` looks like an IP Address
-    """
-
-    if re.match(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}', ip_addr) is None:
-        return False
-    try:
-        socket.inet_aton(ip_addr)
-        return True
-    except socket.error:
-        return False
-
 def show_text_file(name, lang):
     """
     show static file `name` for `lang`
@@ -61,19 +46,6 @@ def show_text_file(name, lang):
                 .replace('NUMBER_OF_LANGUAGES', str(len(SUPPORTED_LANGS)))\
                 .replace('SUPPORTED_LANGUAGES', ' '.join(SUPPORTED_LANGS))
     return text.decode('utf-8')
-
-def location_normalize(location):
-    """
-    Normalize location name `location`
-    """
-    #translation_table = dict.fromkeys(map(ord, '!@#$*;'), None)
-    def _remove_chars(chars, string):
-        return ''.join(x for x in string if x not in chars)
-
-    location = location.lower().replace('_', ' ').replace('+', ' ').strip()
-    if not location.startswith('moon@'):
-        location = _remove_chars(r'!@#$*;:\\', location)
-    return location
 
 def client_ip_address(request):
     """

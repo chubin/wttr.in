@@ -1,10 +1,22 @@
 """
 All location related functions and converters.
+
+The main entry point is `location_processing`
+which gets `location` and `source_ip_address`
+and basing on this information generates
+precise location description.
+
 """
 
+import os
 import json
+import re
+import socket
 import requests
 import geoip2.database
+
+from globals import GEOLITE, GEOLOCATOR_SERVICE, IP2LCACHE, IP2LOCATION_KEY, NOT_FOUND_LOCATION, \
+                    ALIASES, BLACKLIST, IATA_CODES_FILE
 
 GEOIP_READER = geoip2.database.Reader(GEOLITE)
 
@@ -17,6 +29,33 @@ def ascii_only(string):
         return True
     except UnicodeDecodeError:
         return False
+
+def is_ip(ip_addr):
+    """
+    Check if `ip_addr` looks like an IP Address
+    """
+
+    if re.match(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}', ip_addr) is None:
+        return False
+    try:
+        socket.inet_aton(ip_addr)
+        return True
+    except socket.error:
+        return False
+
+def location_normalize(location):
+    """
+    Normalize location name `location`
+    """
+    #translation_table = dict.fromkeys(map(ord, '!@#$*;'), None)
+    def _remove_chars(chars, string):
+        return ''.join(x for x in string if x not in chars)
+
+    location = location.lower().replace('_', ' ').replace('+', ' ').strip()
+    if not location.startswith('moon@'):
+        location = _remove_chars(r'!@#$*;:\\', location)
+    return location
+
 
 
 def geolocator(location):
