@@ -34,6 +34,8 @@ DEFAULT_LOCATION = "oymyakon"
 
 MALFORMED_RESPONSE_HTML_PAGE = open(os.path.join(STATIC, 'malformed-response.html')).read()
 
+GEOLOCATOR_SERVICE = 'http://localhost:8004'
+
 LISTEN_HOST = ""
 LISTEN_PORT = 8002
 
