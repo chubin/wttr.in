@@ -163,50 +163,59 @@ LOCATION_BLACK_LIST = [x.strip() for x in open(BLACKLIST, 'r').readlines()]
 IATA_CODES = load_iata_codes(IATA_CODES_FILE)
 
 def is_location_blocked(location):
+    """
+    Return True if this location is blocked
+    or False if it is allowed
+    """
     return location is not None and location.lower() in LOCATION_BLACK_LIST
 
 
-def location_processing():
+def location_processing(location, ip_addr):
+    """
+    """
 
-        # if location is starting with ~
-        # or has non ascii symbols
-        # it should be handled like a search term (for geolocator)
-        override_location_name = None
-        full_address = None
+    # if location is starting with ~
+    # or has non ascii symbols
+    # it should be handled like a search term (for geolocator)
+    override_location_name = None
+    full_address = None
 
-        if location is not None and not ascii_only(location):
-            location = "~" + location
+    if location is not None and not ascii_only(location):
+        location = "~" + location
 
-        if location is not None and location.upper() in IATA_CODES:
-            location = '~%s' % location
+    if location is not None and location.upper() in IATA_CODES:
+        location = '~%s' % location
 
-        if location is not None and location.startswith('~'):
-            geolocation = geolocator(location_canonical_name(location[1:]))
-            if geolocation is not None:
-                override_location_name = location[1:].replace('+', ' ')
-                location = "%s,%s" % (geolocation['latitude'], geolocation['longitude'])
-                full_address = geolocation['address']
-                print full_address
-            else:
-                location = NOT_FOUND_LOCATION #location[1:]
+    if location is not None and location.startswith('~'):
+        geolocation = geolocator(location_canonical_name(location[1:]))
+        if geolocation is not None:
+            override_location_name = location[1:].replace('+', ' ')
+            location = "%s,%s" % (geolocation['latitude'], geolocation['longitude'])
+            full_address = geolocation['address']
+            print full_address
+        else:
+            location = NOT_FOUND_LOCATION #location[1:]
+    try:
+        query_source_location = get_location(ip_addr)
+    except:
+        query_source_location = NOT_FOUND_LOCATION, None
+
+    country = None
+    if location is None or location == 'MyLocation':
+        location, country = query_source_location
+
+    if is_ip(location):
+        location, country = get_location(location)
+    if location.startswith('@'):
         try:
-            query_source_location = get_location(ip_addr)
+            location, country = get_location(socket.gethostbyname(location[1:]))
         except:
             query_source_location = NOT_FOUND_LOCATION, None
 
-        country = None
-        if location is None or location == 'MyLocation':
-            location, country = query_source_location
+    location = location_canonical_name(location)
 
-
-
-        if is_ip(location):
-            location, country = get_location(location)
-        if location.startswith('@'):
-            try:
-                location, country = get_location(socket.gethostbyname(location[1:]))
-            except:
-                query_source_location = NOT_FOUND_LOCATION, None
-
-        location = location_canonical_name(location)
-
+    return location, \
+            override_location_name, \
+            full_address, \
+            country, \
+            query_source_location
