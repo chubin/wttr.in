@@ -1,61 +1,33 @@
 #!/usr/bin/env python
 # vim: set encoding=utf-8
 
-from gevent.pywsgi import WSGIServer
-from gevent.monkey import patch_all
-patch_all()
+"""
+Main wttr.in rendering function implementation
+"""
 
-# pylint: disable=wrong-import-position,wrong-import-order
-import sys
 import logging
 import os
 import re
-import requests
 import socket
-import json
+from flask import render_template, send_file, make_response
 
-import geoip2.database
-import jinja2
-
-from flask import Flask, request, render_template, \
-                    send_from_directory, send_file, make_response
-APP = Flask(__name__)
-
-MYDIR = os.path.abspath(
-    os.path.dirname(os.path.dirname('__file__')))
-sys.path.append("%s/lib/" % MYDIR)
 import wttrin_png
 import parse_query
 from translations import get_message, FULL_TRANSLATION, PARTIAL_TRANSLATION, SUPPORTED_LANGS
-from buttons import TWITTER_BUTTON, \
-                    GITHUB_BUTTON, GITHUB_BUTTON_2, GITHUB_BUTTON_3, \
-                    GITHUB_BUTTON_FOOTER
-
-from globals import GEOLITE, \
-                    IP2LCACHE, ALIASES, BLACKLIST, \
-                    get_help_file, BASH_FUNCTION_FILE, TRANSLATION_FILE, LOG_FILE, \
-                    TEMPLATES, STATIC, \
+from buttons import add_buttons
+from globals import get_help_file, log, \
+                    BASH_FUNCTION_FILE, TRANSLATION_FILE, LOG_FILE, \
                     NOT_FOUND_LOCATION, \
                     MALFORMED_RESPONSE_HTML_PAGE, \
-                    IATA_CODES_FILE, \
-                    log, \
-                    LISTEN_PORT, LISTEN_HOST, PLAIN_TEXT_AGENTS, PLAIN_TEXT_PAGES, \
-                    IP2LOCATION_KEY, MY_EXTERNAL_IP
-
+                    PLAIN_TEXT_AGENTS, PLAIN_TEXT_PAGES, \
+                    MY_EXTERNAL_IP
+from location import is_location_blocked, location_processing
 from limits import Limits
 from wttr import get_wetter, get_moon
-
-# pylint: enable=wrong-import-position,wrong-import-order
 
 if not os.path.exists(os.path.dirname(LOG_FILE)):
     os.makedirs(os.path.dirname(LOG_FILE))
 logging.basicConfig(filename=LOG_FILE, level=logging.DEBUG, format='%(asctime)s %(message)s')
-
-MY_LOADER = jinja2.ChoiceLoader([
-    APP.jinja_loader,
-    jinja2.FileSystemLoader(TEMPLATES),
-])
-APP.jinja_loader = MY_LOADER
 
 LIMITS = Limits(whitelist=[MY_EXTERNAL_IP], limits=(30, 60, 100))
 
@@ -85,167 +57,83 @@ def location_normalize(location):
         location = _remove_chars(r'!@#$*;:\\', location)
     return location
 
-def load_aliases(aliases_filename):
+def client_ip_address(request):
     """
-    Load aliases from the aliases file
+    Return client ip address for `request`.
+    Flask related
     """
-    aliases_db = {}
-    with open(aliases_filename, 'r') as f_aliases:
-        for line in f_aliases.readlines():
-            from_, to_ = line.decode('utf-8').split(':', 1)
-            aliases_db[location_normalize(from_)] = location_normalize(to_)
-    return aliases_db
 
-def load_iata_codes(iata_codes_filename):
+    if request.headers.getlist("X-Forwarded-For"):
+        ip_addr = request.headers.getlist("X-Forwarded-For")[0]
+        if ip_addr.startswith('::ffff:'):
+            ip_addr = ip_addr[7:]
+    else:
+        ip_addr = request.remote_addr
+
+    return ip_addr
+
+def get_answer_language(request):
     """
-    Load IATA codes from the IATA codes file
+    Return preferred answer language based on
+    domain name, query arguments and headers
     """
-    with open(iata_codes_filename, 'r') as f_iata_codes:
-        result = []
-        for line in f_iata_codes.readlines():
-            result.append(line.strip())
-    return set(result)
 
-LOCATION_ALIAS = load_aliases(ALIASES)
-LOCATION_BLACK_LIST = [x.strip() for x in open(BLACKLIST, 'r').readlines()]
-IATA_CODES = load_iata_codes(IATA_CODES_FILE)
-GEOIP_READER = geoip2.database.Reader(GEOLITE)
+    def _parse_accept_language(accept_language):
+        languages = accept_language.split(",")
+        locale_q_pairs = []
 
-def location_canonical_name(location):
-    location = location_normalize(location)
-    if location in LOCATION_ALIAS:
-        return LOCATION_ALIAS[location.lower()]
-    return location
+        for language in languages:
+            try:
+                if language.split(";")[0] == language:
+                    # no q => q = 1
+                    locale_q_pairs.append((language.strip(), "1"))
+                else:
+                    locale = language.split(";")[0].strip()
+                    weight = language.split(";")[1].split("=")[1]
+                    locale_q_pairs.append((locale, weight))
+            except IndexError:
+                pass
 
-def ascii_only(string):
-    try:
-        for _ in range(5):
-            string = string.encode('utf-8')
-        return True
-    except:
-        return False
+        return locale_q_pairs
 
-def geolocator(location):
-    try:
-        geo = requests.get('http://localhost:8004/%s' % location).text
-    except Exception as e:
-        print "ERROR: %s" % e
-        return
-
-    if geo == "":
-        return
-
-    try:
-        answer = json.loads(geo.encode('utf-8'))
-        return answer
-    except Exception as e:
-        print "ERROR: %s" % e
+    def _find_supported_language(accepted_languages):
+        for lang_tuple in accepted_languages:
+            lang = lang_tuple[0]
+            if '-' in lang:
+                lang = lang.split('-', 1)[0]
+            if lang in SUPPORTED_LANGS:
+                return lang
         return None
 
-def ip2location(ip):
-    cached = os.path.join(IP2LCACHE, ip)
-    if not os.path.exists(IP2LCACHE):
-        os.makedirs(IP2LCACHE)
+    lang = None
+    hostname = request.headers['Host']
+    if hostname != 'wttr.in' and hostname.endswith('.wttr.in'):
+        lang = hostname[:-8]
 
-    if os.path.exists(cached):
-        location = open(cached, 'r').read()
-        return location
+    if 'lang' in request.args:
+        lang = request.args.get('lang')
 
-    try:
-        ip2location_response = requests\
-                .get('http://api.ip2location.com/?ip=%s&key=%s&package=WS10' \
-                        % (IP2LOCATION_KEY, ip)).text
-        if ';' in ip2location_response:
-            location = ip2location_response.split(';')[3]
-            open(cached, 'w').write(location)
-            print "ip2location says: %s" % location
-            return location
-    except:
-            pass
+    header_accept_language = request.headers.get('Accept-Language', '')
+    if lang is None and header_accept_language:
+        lang = _find_supported_language(
+            _parse_accept_language(header_accept_language))
 
-def get_location(ip_addr):
+    return lang
+
+def get_output_format(request):
     """
-    Return location pair (CITY, COUNTRY) for `ip_addr`
+    Return preferred output format: ansi, text, html or png
+    based on arguments and headers in `request`.
+    Return new location (can be rewritten)
     """
 
-    response = GEOIP_READER.city(ip_addr)
-    country = response.country.iso_code
-    city = response.city.name
+    # FIXME
+    user_agent = request.headers.get('User-Agent', '').lower()
+    html_output = not any(agent in user_agent for agent in PLAIN_TEXT_AGENTS)
+    return html_output
 
-    #
-    # temporary disabled it because of geoip services capcacity
-    #
-    #if city is None and response.location:
-    #    coord = "%s, %s" % (response.location.latitude, response.location.longitude)
-    #    try:
-    #        location = geolocator.reverse(coord, language='en')
-    #        city = location.raw.get('address', {}).get('city')
-    #    except:
-    #        pass
-    if city is None:
-        city = ip2location(ip_addr)
-    return (city or NOT_FOUND_LOCATION), country
 
-def parse_accept_language(acceptLanguage):
-    languages = acceptLanguage.split(",")
-    locale_q_pairs = []
-
-    for language in languages:
-        try:
-            if language.split(";")[0] == language:
-                # no q => q = 1
-                locale_q_pairs.append((language.strip(), "1"))
-            else:
-                locale = language.split(";")[0].strip()
-                weight = language.split(";")[1].split("=")[1]
-                locale_q_pairs.append((locale, weight))
-        except:
-            pass
-
-    return locale_q_pairs
-
-def find_supported_language(accepted_languages):
-    for lang_tuple in accepted_languages:
-        lang = lang_tuple[0]
-        if '-' in lang:
-            lang = lang.split('-', 1)[0]
-        if lang in SUPPORTED_LANGS:
-            return lang
-    return None
-
-def show_help(location, lang):
-    text = ""
-    if location == ":help":
-        text = open(get_help_file(lang), 'r').read()
-        text = text.replace('FULL_TRANSLATION', ' '.join(FULL_TRANSLATION))
-        text = text.replace('PARTIAL_TRANSLATION', ' '.join(PARTIAL_TRANSLATION))
-    elif location == ":bash.function":
-        text = open(BASH_FUNCTION_FILE, 'r').read()
-    elif location == ":translation":
-        text = open(TRANSLATION_FILE, 'r').read()
-        text = text\
-                .replace('NUMBER_OF_LANGUAGES', str(len(SUPPORTED_LANGS)))\
-                .replace('SUPPORTED_LANGUAGES', ' '.join(SUPPORTED_LANGS))
-    return text.decode('utf-8')
-
-@APP.route('/files/<path:path>')
-def send_static(path):
-    "Send any static file located in /files/"
-    return send_from_directory(STATIC, path)
-
-@APP.route('/favicon.ico')
-def send_favicon():
-    "Send static file favicon.ico"
-    return send_from_directory(STATIC, 'favicon.ico')
-
-@APP.route('/malformed-response.html')
-def send_malformed():
-    "Send static file malformed-response.html"
-    return send_from_directory(STATIC, 'malformed-response.html')
-
-@APP.route("/")
-@APP.route("/<string:location>")
-def wttr(location = None):
+def wttr(location, request):
     """
     Main rendering function, it processes incoming weather queries.
     Depending on user agent it returns output in HTML or ANSI format.
