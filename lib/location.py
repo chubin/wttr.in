@@ -102,7 +102,7 @@ def ip2location(ip_addr):
             open(cached, 'w').write(location)
             print "ip2location says: %s" % location
             return location
-    except requests.exceptions.ConnectionError as exception:
+    except requests.exceptions.ConnectionError:
         return None
 
 def get_location(ip_addr):
