@@ -486,7 +486,7 @@ Gelişmeler için https://twitter.com/igor_chubin adresini takip edebilirsiniz.
         'lv': u'Seko \033[46m\033[30m@igor_chubin\033[0m , lai uzzinātu wttr.in jaunumus',
         'mk': u'Следете \033[46m\033[30m@igor_chubin\033[0m за wttr.in новости',
         'nb': u'Følg \033[46m\033[30m@igor_chubin\033[0m for wttr.in oppdateringer',
-        'nl': u'Volg \033[46m\033[30m@igor_chubin\033[0m voor wttr.in updates'
+        'nl': u'Volg \033[46m\033[30m@igor_chubin\033[0m voor wttr.in updates',
         'pl': u'Śledź \033[46m\033[30m@igor_chubin\033[0m aby być na bieżąco z nowościami dotyczącymi wttr.in',
         'pt': u'Seguir \033[46m\033[30m@igor_chubin\033[0m para as novidades de wttr.in',
         'ru': u'Все новые фичи публикуются здесь: \033[46m\033[30m@igor_chubin\033[0m',
