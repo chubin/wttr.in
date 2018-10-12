@@ -1,48 +1,48 @@
-113:                                    : Helder
-113:                                    : Zonnig
-116:                                    : Deels bewolkt
-119:                                    : Bewolkt
-122:                                    : Bewolkt
-143:                                    : Mist
-176:                                    : Mogelijk plaatselijk regen
-179:                                    : Mogelijk plaatselijk sneeuw
-182:                                    : Mogelijk plaatselijk hagel
-185:                                    : Mogelijk plaatselijk ijzel
-200:                                    : Mogelijk een onweersbui
-227:                                    : Sneeuw winden
-230:                                    : Sneeuwstorm
-248:                                    : Mist
-260:                                    : Rijp
-263:                                    : Plaatselijk motregen
-266:                                    : Motregen
-281:                                    : Ijzel
-284:                                    : Zware ijzel
-293:                                    : Plaatselijk lichte regen
-296:                                    : Lichte regen
-299:                                    : Af en toe regen
-302:                                    : Regen
-305:                                    : Af en toe zware regen
-308:                                    : Zware regen
-311:                                    : Lichte ijzel
-314:                                    : Zware ijzel
-317:                                    : Lichte hagel
-320:                                    : Zware hagel
-323:                                    : Plaatselijk lichte sneeuw
-326:                                    : Lichte sneeuw
-329:                                    : Plaatselijke sneeuw
-332:                                    : Sneeuw
-335:                                    : Plaatselijk zware sneeuw
-338:                                    : Zware sneeuw
-350:                                    : Hagel
-353:                                    : Lichte regenbuien
-356:                                    : Regenbuien
-359:                                    : Extreem zware regenbuien
-362:                                    : Lichte hagelbuien
-365:                                    : Hagelbuien
-368:                                    : Lichte sneeuwbuien
-371:                                    : Sneeuwbuien
-386:                                    : Plaatselijk lichte regen met onweer
-389:                                    : Regen met onweer
-392:                                    : Plaatselijk lichte sneeuw met onweer
-395:                                    : Sneeuw met onweer
+113: Helder                         : Clear                             
+113: Zonnig                         : Sunny
+116: Deels bewolkt                  : Partly cloudy
+119: Bewolkt                        : Cloudy
+122: Bewolkt                        : Overcast
+143: Mist                           : Mist
+176: Mogelijk plaatselijk regen     : Patchy rain possible
+179: Mogelijk plaatselijk sneeuw    : Patchy snow possible
+182: Mogelijk plaatselijk hagel     : Patchy sleet possible
+185: Mogelijk plaatselijk ijzel     : Patchy freezing drizzle possible
+200: Mogelijk een onweersbui        : Thundery outbreaks possible
+227: Sneeuw winden                  : Blowing snow
+230: Sneeuwstorm                    : Blizzard
+248: Mist                           : Fog
+260: Rijp                           : Freezing fog
+263: Plaatselijk motregen           : Patchy light drizzle
+266: Motregen                       : Light drizzle
+281: Ijzel                          : Freezing drizzle
+284: Zware ijzel                    : Heavy freezing drizzle
+293: Plaatselijk lichte regen       : Patchy light rain
+296: Lichte regen                   : Light rain
+299: Af en toe regen                : Moderate rain at times
+302: Regen                          : Moderate rain
+305: Af en toe zware regen          : Heavy rain at times
+308: Zware regen                    : Heavy rain
+311: Lichte ijzel                   : Light freezing rain
+314: Zware ijzel                    : Moderate or heavy freezing rain
+317: Lichte hagel                   : Light sleet
+320: Zware hagel                    : Moderate or heavy sleet
+323: Plaatselijk lichte sneeuw      : Patchy light snow
+326: Lichte sneeuw                  : Light snow
+329: Plaatselijke sneeuw            : Patchy moderate snow
+332: Sneeuw                         : Moderate snow
+335: Plaatselijk zware sneeuw       : Patchy heavy snow
+338: Zware sneeuw                   : Heavy snow
+350: Hagel                          : Ice pellets
+353: Lichte regenbuien              : Light rain shower
+356: Regenbuien                     : Moderate or heavy rain shower
+359: Extreem zware regenbuien       : Torrential rain shower
+362: Lichte hagelbuien              : Light sleet showers
+365: Hagelbuien                     : Moderate or heavy sleet showers
+368: Lichte sneeuwbuien             : Light snow showers
+371: Sneeuwbuien                    : Moderate or heavy snow showers
+386: Plaatselijk lichte regen met on: Patchy light rain with thunder      weer
+389: Regen met onweer               : Moderate or heavy rain with thunder
+392: Plaatselijk lichte sneeuw met o: Patchy light snow with thunder      nweer
+395: Sneeuw met onweer              : Moderate or heavy snow with thunder
 
