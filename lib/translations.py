@@ -144,6 +144,12 @@ så her får du Ojmjakon, et av de kaldeste bebodde stedene på planeten.
 Vi håper været er bedre hos deg!
 """,
 
+        'nl': u"""
+Wij konden uw locatie niet vaststellen
+dus hebben we u naar Ojmjakon gebracht,
+één van de koudste permanent bewoonde gebieden op deze planeet.
+        """,
+
         'pt': u"""
 Não conseguimos encontrar a sua localização,
 então decidimos te mostrar o tempo em Oymyakon,
@@ -238,6 +244,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'lv': u'Nezināma atrašanās vieta',
         'mk': u'Непозната локација',
         'nb': u'Ukjent sted',
+        'nl': u'Onbekende locatie',
         'pl': u'Nieznana lokalizacja',
         'pt': u'Localização desconhecida',
         'ro': u'Locaţie necunoscută',
@@ -274,6 +281,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'lv': u'Atrašanās vieta',
         'mk': u'Локација',
         'nb': u'Sted',
+        'nl': u'Locatie',
         'pl': u'Lokalizacja',
         'pt': u'Localização',
         'ro': u'Locaţie',
@@ -393,6 +401,13 @@ Vi vil forsøke å fikse problemet så snart som mulig.
 Du kan følge https://twitter.com/igor_chubin for oppdateringer.
 ======================================================================================
 """,
+        'nl': u"""
+Excuse, wij kunnen u op dit moment dit weerbericht niet laten zien.
+Hier is het weerbericht voor de standaard stad(zodat u weet hoe het er uitziet)
+Wij lossen dit probleem zo snel mogelijk op.
+voor updates kunt u ons op https://twitter.com/igor_chubin volgen.
+======================================================================================
+""",
         'pl': u"""
 Bardzo nam przykro, ale chwilowo wykorzystaliśmy limit zapytań do serwisu pogodowego.
 To, co widzisz jest przykładowym raportem pogodowym dla domyślnego miasta.
@@ -437,6 +452,7 @@ Gelişmeler için https://twitter.com/igor_chubin adresini takip edebilirsiniz.
         'fr': u'Nouvelles fonctionnalités: noms d\'emplacements multilingues \033[92mwttr.in/станция+Восток\033[0m (en UTF-8) et recherche d\'emplacement \033[92mwttr.in/~Kilimanjaro\033[0m (ajouter ~ devant)',
         'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
         'nb': u'Ny funksjon: flerspråklige stedsnavn \033[92mwttr.in/станция+Восток\033[0m (i UTF-8) og lokasjonssøk \033[92mwttr.in/~Kilimanjaro\033[0m (bare legg til ~ foran)',
+        'nl': u'Nieuwe functie: tweetalige locatie namen \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) en locatie zoeken \033[92mwttr.in/~Kilimanjaro\033[0m (zet er gewoon een ~ voor)',
         'cy': u'Nodwedd newydd: enwau lleoliad amlieithog \033[92mwttr.in/станция+Восток\033[0m (yn UTF-8) a chwilio lleoliad \033[92mwttr.in/~Kilimanjaro\033[0m (ychwanegwch ~ yn gyntaf)',
         'de': u'Neue Funktion: mehrsprachige Ortsnamen \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) und Ortssuche \033[92mwttr.in/~Kilimanjaro\033[0m (fügen Sie ein ~ vor dem Ort ein)',
         'hy': u'Փորձարկեք: տեղամասերի անունները կամայական լեզվով \033[92mwttr.in/Դիլիջան\033[0m (в UTF-8) և տեղանքի որոնում \033[92mwttr.in/~Kilimanjaro\033[0m (հարկավոր է ~ ավելացնել դիմացից)',
@@ -470,6 +486,7 @@ Gelişmeler için https://twitter.com/igor_chubin adresini takip edebilirsiniz.
         'lv': u'Seko \033[46m\033[30m@igor_chubin\033[0m , lai uzzinātu wttr.in jaunumus',
         'mk': u'Следете \033[46m\033[30m@igor_chubin\033[0m за wttr.in новости',
         'nb': u'Følg \033[46m\033[30m@igor_chubin\033[0m for wttr.in oppdateringer',
+        'nl': u'Volg \033[46m\033[30m@igor_chubin\033[0m voor wttr.in updates'
         'pl': u'Śledź \033[46m\033[30m@igor_chubin\033[0m aby być na bieżąco z nowościami dotyczącymi wttr.in',
         'pt': u'Seguir \033[46m\033[30m@igor_chubin\033[0m para as novidades de wttr.in',
         'ru': u'Все новые фичи публикуются здесь: \033[46m\033[30m@igor_chubin\033[0m',
