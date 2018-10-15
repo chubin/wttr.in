@@ -37,7 +37,7 @@ View options:
 PNG options:
 
     /paris.png              # generate a PNG file
-    ?p                      # add frame arond the output
+    ?p                      # add frame around the output
     ?t                      # transparency 150
     transparency=...        # transparency from 0 to 255 (255 = not transparent)
 
