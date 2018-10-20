@@ -165,15 +165,15 @@ def wttr(location, request):
     orig_location = location
 
     location, override_location_name, full_address, country, query_source_location = \
-            location_processing()
+            location_processing(location, ip_addr)
 
     us_ip = query_source_location[1] == 'US' and 'slack' not in user_agent
     query = parse_query.metric_or_imperial(query, lang, us_ip=us_ip)
 
-    log(" ".join(map(str([
-        ip_addr, user_agent, orig_location, location,
+    log(" ".join(map(str, [
+        ip_addr, user_agent, orig_location.encode('utf-8'), location,
         query.get('use_imperial', False), lang
-        ]))))
+        ])))
 
     if country and location != NOT_FOUND_LOCATION:
         location = "%s, %s" % (location, country)
