@@ -5,3 +5,4 @@ requests
 gevent
 dnspython
 pylint
+cyrtranslit
