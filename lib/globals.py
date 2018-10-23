@@ -39,6 +39,10 @@ GEOLOCATOR_SERVICE = 'http://localhost:8004'
 LISTEN_HOST = ""
 LISTEN_PORT = 8002
 
+PROXY_HOST = "127.0.0.1"
+PROXY_PORT = 5001
+PROXY_CACHEDIR = "api-cache"
+
 MY_EXTERNAL_IP = '5.9.243.187'
 
 PLAIN_TEXT_AGENTS = [
@@ -52,6 +56,7 @@ PLAIN_TEXT_AGENTS = [
 PLAIN_TEXT_PAGES = [':help', ':bash.function', ':translation']
 
 IP2LOCATION_KEY = ''
+
 
 def error(text):
     "log error `text` and raise a RuntimeError exception"

@@ -1,19 +1,29 @@
-# vim: set encoding=utf-8
+# vim: fileencoding=utf-8
+
+"""
+Translation of almost everything.
+"""
 
 FULL_TRANSLATION = [
-        "de", "fr", "id", "it", "nb", "nl", "pl", "ru",
+    "de", "fr", "id", "it", "nb", "nl", "pl", "ru",
 ]
 
 PARTIAL_TRANSLATION = [
-        "az", "be", "bg", "bs", "ca", "cy", "cs",
-        "da", "el", "eo", "es", "et", "fi",
-        "hi", "hr", "hu", "hy", "is",
-        "ja", "jv", "ka", "kk", "ko", "ky", "lt",
-        "lv", "mk", "ml", "nl", "nn", "pt",
-        "ro", "sk", "sl", "sr", "sr-lat",
-        "sv", "sw", "th", "tr", "te", "uk", "uz", "vi",
-        "zh", "zu",
-        "he",
+    "az", "be", "bg", "bs", "ca", "cy", "cs",
+    "da", "el", "eo", "es", "et", "fi",
+    "hi", "hr", "hu", "hy", "is",
+    "ja", "jv", "ka", "kk", "ko", "ky", "lt",
+    "lv", "mk", "ml", "nl", "nn", "pt",
+    "ro", "sk", "sl", "sr", "sr-lat",
+    "sv", "sw", "th", "tr", "te", "uk", "uz", "vi",
+    "zh", "zu",
+    "he",
+]
+
+PROXY_LANGS = [
+    'az', 'bs', 'ca', 'cy', 'eo', 'he', 'hr',
+    'hy', 'id', 'is', 'it', 'ja',
+    'kk', 'lv', 'mk', 'nb', 'nn', 'sl', 'uz'
 ]
 
 
