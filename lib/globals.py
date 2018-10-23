@@ -9,7 +9,7 @@ MYDIR = os.path.abspath(os.path.dirname(os.path.dirname('__file__')))
 
 GEOLITE = os.path.join(MYDIR, 'data', "GeoLite2-City.mmdb")
 WEGO = "/home/igor/go/bin/we-lang"
-PYPHOON = "/home/igor/wttr.in/pyphoon/bin/pyphoon-lolcat"
+PYPHOON = "/home/igor/pyphoon/bin/pyphoon-lolcat"
 
 CACHEDIR = os.path.join(MYDIR, "cache")
 IP2LCACHE = os.path.join(MYDIR, "cache/ip2l")
