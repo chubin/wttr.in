@@ -133,6 +133,11 @@ def get_location(ip_addr):
     if city is None:
         city, country = ip2location(ip_addr)
 
+    # workaround for the strange bug with the country name
+    # maybe some other countries has this problem too
+    if country == 'Russian Federation':
+        country = 'Russia'
+
     if city:
         return city, country
     else:
