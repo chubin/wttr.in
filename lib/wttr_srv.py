@@ -190,11 +190,12 @@ def wttr(location, request):
             response = make_response(send_file(cached_png_file,
                                                attachment_filename=png_filename,
                                                mimetype='image/png'))
-            response.update({
-                'Cache-Control': 'no-cache, no-store, must-revalidate',
-                'Pragma': 'no-cache',
-                'Expires': '0',
-                })
+            for key, value in {
+                    'Cache-Control': 'no-cache, no-store, must-revalidate',
+                    'Pragma': 'no-cache',
+                    'Expires': '0',
+                }.items():
+                response.headers[key] = value
 
             # Trying to disable github caching
             return response
