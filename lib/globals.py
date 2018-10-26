@@ -11,8 +11,8 @@ GEOLITE = os.path.join(MYDIR, 'data', "GeoLite2-City.mmdb")
 WEGO = "/home/igor/go/bin/we-lang"
 PYPHOON = "/home/igor/pyphoon/bin/pyphoon-lolcat"
 
-CACHEDIR = os.path.join(MYDIR, "cache")
-IP2LCACHE = os.path.join(MYDIR, "cache/ip2l")
+CACHEDIR = os.path.join(MYDIR, "cache/wego/")
+IP2LCACHE = os.path.join(MYDIR, "cache/ip2l/")
 
 ALIASES = os.path.join(MYDIR, "share/aliases")
 ANSI2HTML = os.path.join(MYDIR, "share/ansi2html.sh")
@@ -55,8 +55,9 @@ PLAIN_TEXT_AGENTS = [
 
 PLAIN_TEXT_PAGES = [':help', ':bash.function', ':translation']
 
-IP2LOCATION_KEY = ''
-
+_IP2LOCATION_KEY_FILE = os.environ['HOME'] + '/.ip2location.key'
+if os.path.exists(_IP2LOCATION_KEY_FILE):
+    IP2LOCATION_KEY = open(_IP2LOCATION_KEY_FILE, 'r').read().strip()
 
 def error(text):
     "log error `text` and raise a RuntimeError exception"

@@ -89,21 +89,25 @@ def ip2location(ip_addr):
     if not os.path.exists(IP2LCACHE):
         os.makedirs(IP2LCACHE)
 
+    location = None
+
     if os.path.exists(cached):
         location = open(cached, 'r').read()
-        return location
+    else:
+        try:
+            ip2location_response = requests\
+                    .get('http://api.ip2location.com/?ip=%s&key=%s&package=WS10' \
+                            % (ip_addr, IP2LOCATION_KEY)).text
+            if ';' in ip2location_response:
+                open(cached, 'w').write(ip2location_response)
+            location = ip2location_response
+        except requests.exceptions.ConnectionError:
+            pass
 
-    try:
-        ip2location_response = requests\
-                .get('http://api.ip2location.com/?ip=%s&key=%s&package=WS10' \
-                        % (IP2LOCATION_KEY, ip_addr)).text
-        if ';' in ip2location_response:
-            location = ip2location_response.split(';')[3]
-            open(cached, 'w').write(location)
-            print "ip2location says: %s" % location
-            return location
-    except requests.exceptions.ConnectionError:
-        return None
+    if ';' in location:
+        location = "%s,%s" % (location.split(';')[3], location.split(';')[1])
+
+    return location
 
 def get_location(ip_addr):
     """
