@@ -41,7 +41,7 @@ LISTEN_PORT = 8002
 
 PROXY_HOST = "127.0.0.1"
 PROXY_PORT = 5001
-PROXY_CACHEDIR = "api-cache"
+PROXY_CACHEDIR = os.path.join(MYDIR, "cache/proxy-wwo/")
 
 MY_EXTERNAL_IP = '5.9.243.187'
 
