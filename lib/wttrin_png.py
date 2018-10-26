@@ -95,7 +95,8 @@ def strip_buf(buf):
             break
         number_of_lines += 1
 
-    buf = buf[:-number_of_lines]
+    if number_of_lines:
+        buf = buf[:-number_of_lines]
 
     max_len = max(line_len(x) for x in buf)
     buf = [line[:max_len] for line in buf]
@@ -118,7 +119,7 @@ def script_category(char):
 
 def gen_term(filename, buf, options=None):
     buf = strip_buf(buf)
-    cols = len(buf[0])
+    cols = max(len(x) for x in buf)
     rows = len(buf)
 
     image = Image.new('RGB', (cols * CHAR_WIDTH, rows * CHAR_HEIGHT))
@@ -198,7 +199,10 @@ def typescript_to_one_frame(png_file, text, options=None):
 
     stream.feed(text)
 
-    gen_term(png_file, screen.buffer, options=options)
+    buf = sorted(screen.buffer.items(), key=lambda x: x[0])
+    buf = [[x[1] for x in sorted(line[1].items(), key=lambda x: x[0])] for line in buf]
+
+    gen_term(png_file, buf, options=options)
 
 #
 # wttr.in related functions
