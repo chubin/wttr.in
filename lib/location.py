@@ -105,7 +105,9 @@ def ip2location(ip_addr):
             pass
 
     if ';' in location:
-        location = "%s,%s" % (location.split(';')[3], location.split(';')[1])
+        location = location.split(';')[3], location.split(';')[1]
+    else:
+        location = location, None
 
     return location
 
@@ -129,8 +131,12 @@ def get_location(ip_addr):
     #    except:
     #        pass
     if city is None:
-        city = ip2location(ip_addr)
-    return (city or NOT_FOUND_LOCATION), country
+        city, country = ip2location(ip_addr)
+
+    if city:
+        return city, country
+    else:
+        return NOT_FOUND_LOCATION, None
 
 
 def location_canonical_name(location):
@@ -198,17 +204,17 @@ def location_processing(location, ip_addr):
             full_address = geolocation['address']
         else:
             location = NOT_FOUND_LOCATION #location[1:]
-    try:
-        query_source_location = get_location(ip_addr)
-    except:
-        query_source_location = NOT_FOUND_LOCATION, None
+
+    query_source_location = None, None
 
     country = None
     if location is None or location == 'MyLocation':
+        query_source_location = get_location(ip_addr)
         location, country = query_source_location
 
     if is_ip(location):
         location, country = get_location(location)
+
     if location.startswith('@'):
         try:
             location, country = get_location(socket.gethostbyname(location[1:]))

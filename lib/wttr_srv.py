@@ -178,14 +178,14 @@ def wttr(location, request):
                      [ip_addr, user_agent, orig_location_utf8, location_utf8, use_imperial, lang])))
 
     if country and location != NOT_FOUND_LOCATION:
-        location = "%s, %s" % (location, country)
+        location = "%s,%s" % (location, country)
 
     # We are ready to return the answer
     try:
         if png_filename:
             options = {
                 'lang': None,
-                'location': "%s,%s" % (location, country)}
+                'location': location}
             options.update(query)
 
             cached_png_file = wttrin_png.make_wttr_in_png(png_filename, options=options)
