@@ -92,7 +92,6 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
                 stdout = open(test_file, 'r').read()
                 stderr = ""
                 break
-            print "LOCATION = ", location
             if location == NOT_FOUND_LOCATION:
                 location_not_found = True
                 location = DEFAULT_LOCATION
@@ -194,7 +193,6 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
         stdout = re.sub("<head>", "<head>" + title + opengraph, stdout)
         open(filename+'.html', 'w').write(stdout)
 
-    print "LOCATION >>> ", location
     filename = get_filename(location, lang=lang, query=query, location_name=location_name)
     if not os.path.exists(filename):
         save_weather_data(location, filename, lang=lang, query=query, location_name=location_name, full_address=full_address)
@@ -221,7 +219,6 @@ def get_moon(location, html=False, lang=None):
     env = os.environ.copy()
     if lang:
         env['LANG'] = lang
-    print cmd
     p = Popen(cmd, stdout=PIPE, stderr=PIPE, env=env)
     stdout = p.communicate()[0]
 

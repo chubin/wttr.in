@@ -196,7 +196,6 @@ def location_processing(location, ip_addr):
             override_location_name = location[1:].replace('+', ' ')
             location = "%s,%s" % (geolocation['latitude'], geolocation['longitude'])
             full_address = geolocation['address']
-            print full_address
         else:
             location = NOT_FOUND_LOCATION #location[1:]
     try:

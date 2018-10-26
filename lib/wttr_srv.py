@@ -171,7 +171,7 @@ def wttr(location, request):
     query = parse_query.metric_or_imperial(query, lang, us_ip=us_ip)
 
     log(" ".join(map(str, [
-        ip_addr, user_agent, orig_location.encode('utf-8'), location,
+        ip_addr, user_agent, (orig_location or "").encode('utf-8'), location,
         query.get('use_imperial', False), lang
         ])))
 
