@@ -117,7 +117,7 @@ def get_location(ip_addr):
     """
 
     response = GEOIP_READER.city(ip_addr)
-    country = response.country.iso_code
+    country = response.country.name
     city = response.city.name
 
     #
