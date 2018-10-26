@@ -32,7 +32,7 @@ MYDIR = os.path.abspath(os.path.dirname(os.path.dirname('__file__')))
 sys.path.append("%s/lib/" % MYDIR)
 import parse_query
 
-PNG_CACHE = os.path.join(MYDIR, "cache/png")
+from globals import PNG_CACHE
 
 COLS = 180
 ROWS = 100

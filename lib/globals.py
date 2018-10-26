@@ -11,8 +11,14 @@ GEOLITE = os.path.join(MYDIR, 'data', "GeoLite2-City.mmdb")
 WEGO = "/home/igor/go/bin/we-lang"
 PYPHOON = "/home/igor/pyphoon/bin/pyphoon-lolcat"
 
-CACHEDIR = os.path.join(MYDIR, "cache/wego/")
-IP2LCACHE = os.path.join(MYDIR, "cache/ip2l/")
+_DATADIR = "/wttr.in"
+_LOGDIR = "/wttr.in/log"
+
+CACHEDIR = os.path.join(_DATADIR, "cache/wego/")
+IP2LCACHE = os.path.join(_DATADIR, "cache/ip2l/")
+PNG_CACHE = os.path.join(_DATADIR, "cache/png")
+
+LOG_FILE = os.path.join(_LOGDIR, 'main.log')
 
 ALIASES = os.path.join(MYDIR, "share/aliases")
 ANSI2HTML = os.path.join(MYDIR, "share/ansi2html.sh")
@@ -25,7 +31,6 @@ TEST_FILE = os.path.join(MYDIR, 'share/test-NAME.txt')
 
 IATA_CODES_FILE = os.path.join(MYDIR, 'share/list-of-iata-codes.txt')
 
-LOG_FILE = os.path.join(MYDIR, 'log/main.log')
 TEMPLATES = os.path.join(MYDIR, 'share/templates')
 STATIC = os.path.join(MYDIR, 'share/static')
 
@@ -41,7 +46,7 @@ LISTEN_PORT = 8002
 
 PROXY_HOST = "127.0.0.1"
 PROXY_PORT = 5001
-PROXY_CACHEDIR = os.path.join(MYDIR, "cache/proxy-wwo/")
+PROXY_CACHEDIR = os.path.join(_DATADIR, "cache/proxy-wwo/")
 
 MY_EXTERNAL_IP = '5.9.243.187'
 
