@@ -167,7 +167,7 @@ def wttr(location, request):
     location, override_location_name, full_address, country, query_source_location = \
             location_processing(location, ip_addr)
 
-    us_ip = query_source_location[1] == 'US' and 'slack' not in user_agent
+    us_ip = query_source_location[1] == 'United States' and 'slack' not in user_agent
     query = parse_query.metric_or_imperial(query, lang, us_ip=us_ip)
 
     # logging query

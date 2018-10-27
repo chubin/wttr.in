@@ -210,11 +210,10 @@ def location_processing(location, ip_addr):
         else:
             location = NOT_FOUND_LOCATION #location[1:]
 
-    query_source_location = None, None
+    query_source_location = get_location(ip_addr)
 
     country = None
     if location is None or location == 'MyLocation':
-        query_source_location = get_location(ip_addr)
         location, country = query_source_location
 
     if is_ip(location):
@@ -224,7 +223,7 @@ def location_processing(location, ip_addr):
         try:
             location, country = get_location(socket.gethostbyname(location[1:]))
         except:
-            query_source_location = NOT_FOUND_LOCATION, None
+            location, country = NOT_FOUND_LOCATION, None
 
     location = location_canonical_name(location)
 
