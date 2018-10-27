@@ -64,6 +64,10 @@ _IP2LOCATION_KEY_FILE = os.environ['HOME'] + '/.ip2location.key'
 if os.path.exists(_IP2LOCATION_KEY_FILE):
     IP2LOCATION_KEY = open(_IP2LOCATION_KEY_FILE, 'r').read().strip()
 
+_WWO_KEY_FILE = os.environ['HOME'] + '/.wwo.key'
+if os.path.exists(_WWO_KEY_FILE):
+    WWO_KEY = open(_WWO_KEY_FILE, 'r').read().strip()
+
 def error(text):
     "log error `text` and raise a RuntimeError exception"
 
