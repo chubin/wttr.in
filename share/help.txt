@@ -1,7 +1,7 @@
 Usage:
 
     $ curl wttr.in          # current location
-    $ curl wttr.in/muc      # weather in the Munic airport
+    $ curl wttr.in/muc      # weather in the Munich airport
 
 Supported location types:
 
