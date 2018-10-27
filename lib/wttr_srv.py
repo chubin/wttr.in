@@ -22,6 +22,7 @@ from globals import get_help_file, log, \
 from location import is_location_blocked, location_processing
 from limits import Limits
 from wttr import get_wetter, get_moon
+from wttr_line import wttr_line
 
 if not os.path.exists(os.path.dirname(LOG_FILE)):
     os.makedirs(os.path.dirname(LOG_FILE))
@@ -182,6 +183,9 @@ def wttr(location, request):
 
     # We are ready to return the answer
     try:
+        if 'format' in query:
+            return wttr_line(location, query)
+
         if png_filename:
             options = {
                 'lang': None,
