@@ -183,7 +183,7 @@ def wttr(location, request):
 
     # We are ready to return the answer
     try:
-        if 'line' in query:
+        if 'format' in query:
             return wttr_line(location, query)
 
         if png_filename:

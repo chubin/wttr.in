@@ -270,7 +270,7 @@ def make_wttrin_query(parsed):
     for key, val in parsed.items():
         args.append('%s=%s' % (key, val))
 
-    args.append('format=png')
+    args.append('filetype=png')
 
     url = "http://wttr.in/%s" % location
     if args != []:

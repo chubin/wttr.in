@@ -120,7 +120,7 @@ def wttr_line(location, query):
     in format `line_format`
     """
 
-    format_line = query.get('line', '')
+    format_line = query.get('format', '')
 
     if format_line in PRECONFIGURED_FORMAT:
         format_line = PRECONFIGURED_FORMAT[format_line]
