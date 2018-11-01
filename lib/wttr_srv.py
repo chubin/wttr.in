@@ -18,7 +18,7 @@ from globals import get_help_file, log, \
                     NOT_FOUND_LOCATION, \
                     MALFORMED_RESPONSE_HTML_PAGE, \
                     PLAIN_TEXT_AGENTS, PLAIN_TEXT_PAGES, \
-                    MY_EXTERNAL_IP
+                    MY_EXTERNAL_IP, QUERY_LIMITS
 from location import is_location_blocked, location_processing
 from limits import Limits
 from wttr import get_wetter, get_moon
@@ -28,7 +28,7 @@ if not os.path.exists(os.path.dirname(LOG_FILE)):
     os.makedirs(os.path.dirname(LOG_FILE))
 logging.basicConfig(filename=LOG_FILE, level=logging.DEBUG, format='%(asctime)s %(message)s')
 
-LIMITS = Limits(whitelist=[MY_EXTERNAL_IP], limits=(30, 60, 100))
+LIMITS = Limits(whitelist=[MY_EXTERNAL_IP], limits=QUERY_LIMITS)
 
 def show_text_file(name, lang):
     """

@@ -41,6 +41,10 @@ MALFORMED_RESPONSE_HTML_PAGE = open(os.path.join(STATIC, 'malformed-response.htm
 
 GEOLOCATOR_SERVICE = 'http://localhost:8004'
 
+# number of queries from the same IP address is limited
+# (minute, hour, day) limitations:
+QUERY_LIMITS = (300, 3600, 24*3600)
+
 LISTEN_HOST = ""
 LISTEN_PORT = 8002
 
