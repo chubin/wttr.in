@@ -87,6 +87,14 @@ def log(text):
         print text
         logging.info(text)
 
+def debug_log(text):
+    """
+    Write `text` to the debug log
+    """
+
+    with open('/tmp/wttr.in-debug.log', 'a') as f_debug:
+        f_debug.write(text+'\n')
+
 def get_help_file(lang):
     "Return help file for `lang`"
 
