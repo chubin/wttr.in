@@ -72,7 +72,7 @@ def render_location(data):
     location (l)
     """
 
-    return data['location']
+    return data['location'].title()
 
 FORMAT_SYMBOL = {
     'c':    render_condition,

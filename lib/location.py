@@ -116,9 +116,13 @@ def get_location(ip_addr):
     Return location pair (CITY, COUNTRY) for `ip_addr`
     """
 
-    response = GEOIP_READER.city(ip_addr)
-    country = response.country.name
-    city = response.city.name
+    try:
+        response = GEOIP_READER.city(ip_addr)
+        country = response.country.name
+        city = response.city.name
+    except geoip2.errors.AddressNotFoundError:
+        country = None
+        city = None
 
     #
     # temporary disabled it because of geoip services capcacity
