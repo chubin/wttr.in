@@ -143,14 +143,15 @@ def gen_term(filename, buf, options=None):
                      (x_pos+CHAR_WIDTH, y_pos+CHAR_HEIGHT)),
                     fill=color_mapping(char.bg))
 
-            cat = script_category(char.data)
-            if cat not in font:
-                print "Unknown font category: %s" % cat
-            draw.text(
-                (x_pos, y_pos),
-                char.data,
-                font=font.get(cat, font.get('default')),
-                fill=current_color)
+            if char.data:
+                cat = script_category(char.data)
+                if cat not in font:
+                    log("Unknown font category: %s" % cat)
+                draw.text(
+                    (x_pos, y_pos),
+                    char.data,
+                    font=font.get(cat, font.get('default')),
+                    fill=current_color)
             #sys.stdout.write(c.data)
 
             x_pos += CHAR_WIDTH
