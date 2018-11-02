@@ -123,6 +123,24 @@ def get_output_format(request):
     html_output = not any(agent in user_agent for agent in PLAIN_TEXT_AGENTS)
     return html_output
 
+def cyclic_location_selection(locations, period):
+    """
+    Return one of `locations` (: separated list)
+    basing on the current time and query interval `period`
+    """
+
+    locations = locations.split(':')
+    max_len = max(len(x) for x in locations)
+    locations = [x.rjust(max_len) for x in locations]
+
+    try:
+        period = int(period)
+    except ValueError:
+        period = 1
+
+    index = int(time.time())/period % len(locations)
+    return locations[index]
+
 
 def wttr(location, request):
     """
@@ -162,6 +180,9 @@ def wttr(location, request):
         if html_output:
             return render_template('index.html', body=help_)
         return help_
+
+    if location and ':' in location:
+        location = cyclic_location_selection(location, query.get('period', 1))
 
     orig_location = location
 
