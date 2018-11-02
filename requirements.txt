@@ -6,3 +6,4 @@ gevent
 dnspython
 pylint
 cyrtranslit
+astral

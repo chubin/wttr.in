@@ -15,6 +15,8 @@ Initial implementation of one-line output mode.
 
 import sys
 import re
+import datetime
+from astral import Astral
 from constants import WWO_CODE, WEATHER_SYMBOL, WIND_DIRECTION
 from weather_data import get_weather_data
 
@@ -24,6 +26,10 @@ PRECONFIGURED_FORMAT = {
     '3':    u'%l: %c %t',
     '4':    u'%l: %c 🌡️%t 🌬️%w',
 }
+
+MOON_PHASES = (
+    u"🌑", u"🌒", u"🌓", u"🌔", u"🌕", u"🌖", u"🌗", u"🌘"
+)
 
 def render_temperature(data):
     """
@@ -74,11 +80,30 @@ def render_location(data):
 
     return data['location'].title()
 
+def render_moonphase(_):
+    """
+    A symbol describing the phase of the moon
+    """
+    astral = Astral()
+    moon_index = int(
+        int(32.0*astral.moon_phase(date=datetime.datetime.today())/28+2)%32/4
+    )
+    return MOON_PHASES[moon_index]
+
+def render_moonday(_):
+    """
+    An number describing the phase of the moon (days after the New Moon)
+    """
+    astral = Astral()
+    return str(int(astral.moon_phase(date=datetime.datetime.today())))
+
 FORMAT_SYMBOL = {
     'c':    render_condition,
     't':    render_temperature,
     'w':    render_wind,
     'l':    render_location,
+    'm':    render_moonphase,
+    'M':    render_moonday,
     }
 
 def render_line(line, data):
@@ -101,7 +126,7 @@ def render_line(line, data):
         render_function = FORMAT_SYMBOL[symbol]
         return render_function(data)
 
-    return re.sub(r'%[^%]*[a-z]', render_symbol, line)
+    return re.sub(r'%[^%]*[a-zA-Z]', render_symbol, line)
 
 def format_weather_data(format_line, location, data):
     """
