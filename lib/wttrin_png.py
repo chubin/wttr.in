@@ -32,7 +32,7 @@ MYDIR = os.path.abspath(os.path.dirname(os.path.dirname('__file__')))
 sys.path.append("%s/lib/" % MYDIR)
 import parse_query
 
-from globals import PNG_CACHE
+from globals import PNG_CACHE, log
 
 COLS = 180
 ROWS = 100
@@ -311,11 +311,9 @@ def make_wttr_in_png(png_name, options=None):
     if not os.path.exists(dirname):
         os.makedirs(dirname)
 
-    print "Cached file: %s" % cached_png_file
     if os.path.exists(cached_png_file):
         return cached_png_file
 
-    print "Requesting URL: %s" % url
     text = requests.get(url).text.replace('\n', '\r\n')
     curl_output = text.encode('utf-8')
 

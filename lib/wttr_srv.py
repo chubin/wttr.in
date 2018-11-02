@@ -7,6 +7,7 @@ Main wttr.in rendering function implementation
 
 import logging
 import os
+import time
 from flask import render_template, send_file, make_response
 
 import wttrin_png
@@ -205,6 +206,7 @@ def wttr(location, request):
     # We are ready to return the answer
     try:
         if 'format' in query:
+            location = (orig_location or location).lstrip('~')
             return wttr_line(location, query)
 
         if png_filename:
