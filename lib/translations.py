@@ -5,7 +5,7 @@ Translation of almost everything.
 """
 
 FULL_TRANSLATION = [
-    "de", "fr", "id", "it", "nb", "nl", "pl", "ru",
+    "de", "fr", "fa", "id", "it", "nb", "nl", "pl", "ru",
 ]
 
 PARTIAL_TRANSLATION = [
@@ -85,6 +85,10 @@ Wir hoffen, dass Sie besseres Wetter haben!
 No hemos logrado encontrar tu ubicación,
 asi que hemos decidido enseñarte el tiempo en Oymyakon,
 uno de los sitios más fríos y permanentemente deshabitados del planeta.
+""",
+        'fa': u"""
+ما نتونستیم مکان شما رو پیدا کنیم. به همین خاطر شما رو به om بردیم
+، یکی از سردترین مکان های روی زمین که اصلا قابل سکونت نیست!
 """,    
 
         'fi': u"""
@@ -242,6 +246,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'de': u'Unbekannter Ort',
         'el': u'Άνγωστη τοποθεσία',
         'es': u'Ubicación desconocida',
+        'fa': u'مکان نامعلوم',
         'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement inconnu',
         'hy': u'Անհայտ գտնվելու վայր',
@@ -279,6 +284,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'de': u'Ort',
         'el': u'Τοποθεσία',
         'es': u'Ubicación',
+		'fa': u'مکان',
         'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement',
         'hy': u'Դիրք',
@@ -346,6 +352,13 @@ Lo siento, hemos alcanzado el límite de peticiones al servicio de previsión de
 A continuación, la previsión del tiempo para una ciudad estándar (solo para que puedas ver que aspecto tiene el informe).
 Muy pronto volveremos a tener acceso a las peticiones.
 Puedes seguir https://twitter.com/igor_chubin para estar al tanto de la situación.
+======================================================================================
+""",
+		'fa': u"""
+متأسفانه در حال حاضر ظرفیت ما برای درخواست به سرویس هواشناسی به اتمام رسیده.
+اینجا می تونید گزارش هواشناسی برای شهر پیش فرض رو ببینید (فقط برای اینه که بهتون نشون بدیم چه شکلی هست)
+ما تلاش میکنیم در اسرع وقت ظرفیت جدید به دست بیاریم.
+برای دنبال کردن اخبار جدید میتونید https://twitter.com/igor_chubin رو فالو کنید.
 ======================================================================================
 """,
         'fr': u"""
@@ -466,6 +479,7 @@ Gelişmeler için https://twitter.com/igor_chubin adresini takip edebilirsiniz.
         'bs': u'XXXXXXXXXXXXXXXXXXXX: XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\033[92mwttr.in/станция+Восток\033[0m (XX UTF-8) XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
         'ca': u'Noves funcionalitats: noms d\'ubicació multilingües \033[92mwttr.in/станция+Восток\033[0m (en UTF-8) i la ubicació de recerca \033[92mwttr.in/~Kilimanjaro\033[0m (només cal afegir ~ abans)',
         'es': u'Nuevas funcionalidades: los nombres de las ubicaciones en vários idiomas \033[92mwttr.in/станция+Восток\033[0m (em UTF-8) y la búsqueda por ubicaciones \033[92mwttr.in/~Kilimanjaro\033[0m (tan solo inserte ~ en frente)',
+        'fa': u'قابلیت جدید: پشتیبانی از نام چند زبانه مکانها \033[92mwttr.in/станция+Восток\033[0m (در فرمت UTF-8) و جسجتوی مکان ها \033[92mwttr.in/~Kilimanjaro\033[0m (فقط قبل از اون ~ اضافه کنید)',
         'fr': u'Nouvelles fonctionnalités: noms d\'emplacements multilingues \033[92mwttr.in/станция+Восток\033[0m (en UTF-8) et recherche d\'emplacement \033[92mwttr.in/~Kilimanjaro\033[0m (ajouter ~ devant)',
         'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
         'nb': u'Ny funksjon: flerspråklige stedsnavn \033[92mwttr.in/станция+Восток\033[0m (i UTF-8) og lokasjonssøk \033[92mwttr.in/~Kilimanjaro\033[0m (bare legg til ~ foran)',
@@ -493,6 +507,7 @@ Gelişmeler için https://twitter.com/igor_chubin adresini takip edebilirsiniz.
         'ca': u'Seguiu \033[46m\033[30m@igor_chubin\033[0m per actualitzacions de wttr.in',
         'es': u'Seguir \033[46m\033[30m@igor_chubin\033[0m para recibir las novedades de wttr.in',
         'cy': u'Dilyner \033[46m\033[30m@igor_Chubin\033[0m am diweddariadau wttr.in',
+        'fa': u'برای دنبال کردن خبرهای wttr.in شناسه \033[46m\033[30m@igor_chubin\033[0m رو فالو کنید.',
         'fr': u'Suivez \033[46m\033[30m@igor_Chubin\033[0m pour rester informé sur wttr.in',
         'de': u'Folgen Sie \033[46m\033[30mhttps://twitter.com/igor_chubin\033[0m für wttr.in Updates',
         'hy': u'Նոր ֆիչռների համար հետևեք՝ \033[46m\033[30m@igor_chubin\033[0m',
@@ -517,3 +532,4 @@ def get_message(message_name, lang):
         return ''
     message_dict = MESSAGE[message_name]
     return message_dict.get(lang, message_dict.get('en', ''))
+	
