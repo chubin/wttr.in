@@ -284,7 +284,7 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
         'de': u'Ort',
         'el': u'Τοποθεσία',
         'es': u'Ubicación',
-		'fa': u'مکان',
+        'fa': u'مکان',
         'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement',
         'hy': u'Դիրք',
