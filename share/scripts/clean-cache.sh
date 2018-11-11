@@ -1,5 +1,7 @@
 #!/bin/bash
 
-mv /exa2/wttr.in.cache /exa2/wttr.in.cache.old
-mkdir /exa2/wttr.in.cache/
-rm -rf /exa2/wttr.in.cache.old
+CACHEDIR="/wttr.in/cache"
+
+mv "${CACHEDIR}/wego" "${CACHEDIR}/wego.old"
+mkdir "${CACHEDIR}/wego"
+rm -rf "${CACHEDIR}/wego.old"
