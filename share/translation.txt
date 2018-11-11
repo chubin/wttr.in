@@ -28,6 +28,7 @@ Translated/improved/corrected by:
     * Macedonian:   Matej Plavevski @MatejMecka
     * Norwegian:    Fredrik Fjeld @fredrikfjeld
     * Nynorsk:      Kevin Brubeck Unhammer (https://unhammer.org/k/)
+    * Persian:      Javad @threadripper_
     * Polish:       Wojtek Łukasiewicz @wojtuch (on github) 
     * Portuguese:   Fernando Bitti Loureiro @fbitti (on github)
     * Romanian:     Gabriel Moruz
