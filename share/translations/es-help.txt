@@ -5,13 +5,13 @@ Instrucciones:
 
 Tipos de ubicación soportados:
 
-    /paris                  # el nonbre de una ciudad
+    /paris                  # el nombre de una ciudad
     /~Eiffel+tower          # el nombre de cualquier sitio famoso
     /Москва                 # el nombre Unicode de cualquier sitio en cualquier idioma
     /muc                    # el código de un aeropuerto (3 letras)
     /@stackoverflow.com     # el nombre de un dominio web
     /94107                  # un código de area
-    /-78.46,106.79          # coordinadas de GPS
+    /-78.46,106.79          # coordenadas de GPS
 
 Sitios especiales:
 
@@ -28,7 +28,7 @@ Opciones de visualización:
 
     ?0                      # solamente el clima actual
     ?1                      # el clima actual + la previsión de 1 día
-    ?2                      # el clima actual + la previsão de 2 días
+    ?2                      # el clima actual + la previsión de 2 días
     ?n                      # versión corta (solo el día y la noche)
     ?q                      # versión quieta (sin el texto de "El tiempo en")
     ?Q                      # versión superquieta (ni "El tiempo en" ni el nombre de la ciudad)
