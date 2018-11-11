@@ -21,8 +21,8 @@ PARTIAL_TRANSLATION = [
 ]
 
 PROXY_LANGS = [
-    'az', 'bs', 'ca', 'cy', 'eo', 'he', 'hr',
-    'hy', 'id', 'is', 'it', 'ja',
+    'az', 'bs', 'ca', 'cy', 'eo', 'fa',
+    'he', 'hr', 'hy', 'id', 'is', 'it', 'ja',
     'kk', 'lv', 'mk', 'nb', 'nn', 'sl', 'uz'
 ]
 
@@ -53,14 +53,12 @@ Hem estat incapaços de trobar la seva ubicació,
 és per aquest motiu que l'hem portat fins Oymyakon,
 un dels llocs més freds inhabitats de manera permanent al planeta.
 """,
-            
         'cs': u"""
 Nepodařilo se nám najít vaši polohu,
 takže jsme vás přivedl do Ojmjakonu.
 Je to jedno z nejchladnějších trvale obydlených míst na planetě.
 Doufáme, že budete mít lepší počasí!
 """,
-
         'cy': u"""
 Ni darganfyddwyd eich lleoliad,
 felly rydym wedi dod â chi i Oymyakon,
@@ -72,15 +70,13 @@ Wir konnten Ihren Standort nicht finden,
 also haben wir Sie nach Oimjakon gebracht,
 einer der kältesten dauerhaft bewohnten Orte auf dem Planeten.
 Wir hoffen, dass Sie besseres Wetter haben!
-""",    
-
+""",
         'el': u"""
 Δεν μπορέσαμε να βρούμε την τοποθεσία σου,
 για αυτό διαλέξαμε το Οϊμιάκον για εσένα,
 μία από τις πιο κρύες μόνιμα κατοικημένες περιοχές στον πλανήτη.
 Ελπίζουμε να έχεις καλύτερο καιρό!
 """,
-
         'es': u"""
 No hemos logrado encontrar tu ubicación,
 asi que hemos decidido enseñarte el tiempo en Oymyakon,
@@ -89,152 +85,130 @@ uno de los sitios más fríos y permanentemente deshabitados del planeta.
         'fa': u"""
 ما نتونستیم مکان شما رو پیدا کنیم. به همین خاطر شما رو به om بردیم
 ، یکی از سردترین مکان های روی زمین که اصلا قابل سکونت نیست!
-""",    
-
+""",
         'fi': u"""
 Emme löytänyt sijaintiasi, joten toimme sinut Oimjakoniin,
 yhteen maailman kylmimmistä pysyvästi asutetuista paikoista.
 Toivottavasti sinulla on parempi sää!
 """,
-
         'fr': u"""
 Nous n'avons pas pu déterminer votre position,
 Nous vous avons donc amenés à Oïmiakon,
 l'un des endroits les plus froids habités en permanence sur la planète.
 Nous espérons qu'il fait meilleur chez vous !
 """,
-
         'hy': u"""
 Ձեր գտնվելու վայրը չհաջողվեց որոշել,
 այդ պատճառով մենք ձեզ կցուցադրենք եղանակը Օյմյակոնում.
 երկրագնդի ամենասառը բնակավայրում։
 Հույս ունենք որ ձեր եղանակը այսօր ավելի լավն է։
 """,
-
         'id': u"""
 Kami tidak dapat menemukan lokasi anda,
 jadi kami membawa anda ke Oymyakon,
 salah satu tempat terdingin yang selalu dihuni di planet ini!
 """,
-
         'is': u"""
 Við finnum ekki staðsetninguna þína og vísum þér þar með á Ojmjakon,
 ein af köldustu byggðum jarðar.
 Vonandi er betra veður hjá þér.
 """,
-
         'it': u"""
 Non siamo riusciti a trovare la sua posizione
 quindi la abbiamo portato a Oymyakon,
 uno dei luoghi abitualmente abitati più freddi del pianeta.
-Ci auguriamo che le condizioni dove lei si trova siano migliori!""",
-
+Ci auguriamo che le condizioni dove lei si trova siano migliori!
+""",
         'ja': u"""
 指定された場所が見つかりませんでした。
 代わりにオイミャコンの天気予報を表示しています。
 オイミャコンは地球上で最も寒い居住地の一つです。
 """,
-
         'ko': u"""
 지정된 장소를 찾을 수 없습니다,
 대신 오이먀콘의 일기 예보를 표시합니다,
 오이먀콘은 지구상에서 가장 추운 곳에 위치한 마을입니다!
 """,
-
-            'lv': u"""
+        'lv': u"""
 Mēs nevarējām atrast jūsu atrašanās vietu tādēļ nogādājām jūs Oimjakonā,
 vienā no aukstākajām apdzīvotajām vietām uz planētas.
 """,
-
         'mk': u"""
 Неможевме да ја пронајдеме вашата локација,
 затоа ве однесовме во Ојмајкон,
 еден од најладните трајно населени места на планетата.
 """,
-
         'nb': u"""
 Vi kunne ikke finne din lokasjon,
 så her får du Ojmjakon, et av de kaldeste bebodde stedene på planeten.
 Vi håper været er bedre hos deg!
 """,
-
         'nl': u"""
 Wij konden uw locatie niet vaststellen
 dus hebben we u naar Ojmjakon gebracht,
 één van de koudste permanent bewoonde gebieden op deze planeet.
-        """,
-
+""",
         'pt': u"""
 Não conseguimos encontrar a sua localização,
 então decidimos te mostrar o tempo em Oymyakon,
 um dos lugares mais frios e permanentemente desabitados do planeta.
 """,
-
         'pl': u"""
 Nie udało nam się znaleźć podanej przez Ciebie lokalizacji,
 więc zabraliśmy Cię do Ojmiakonu,
 jednego z najzimniejszych, stale zamieszkanych miejsc na Ziemi.
 Mamy nadzieję, że u Ciebie jest cieplej!
 """,
-
         'ro': u"""
 Nu v-am putut identifica locația, prin urmare va aratam vremea din Oimiakon,
 una dintre cele mai reci localități permanent locuite de pe planetă.
 Sperăm că aveți vreme mai bună!
 """,
-
         'ru': u"""
 Ваше местоположение определить не удалось,
 поэтому мы покажем вам погоду в Оймяконе,
 самом холодном населённом пункте на планете.
 Будем надеяться, что у вас сегодня погода лучше!
 """,
-
         'sk': u"""
 Nepodarilo sa nám nájsť vašu polohu,
 takže sme vás priviedli do Ojmiakonu.
 Je to jedno z najchladnejších trvale obývaných miest na planéte.
 Dúfame, že budete mať lepšie počasie!
 """,
-
         'sr': u"""
 Нисмо успели да пронађемо Вашу локацију,
 па смо Вас довели у Ојмјакон,
 једно од најхладнијих стално насељених места на планети.
 Надамо се да је време код Вас боље него што је то случај овде!
 """,
-
         'sv': u"""
 Vi lyckades inte hitta er plats så vi har istället tagit er till Ojmjakon,
 en av planetens kallaste platser med permanent bosättning.
 Vi hoppas att vädret är bättre hos dig!
 """,
-
         'tr': u"""
 Aradığınız konum bulunamadı. O yüzden sizi dünyadaki en soğuk sürekli
 yerleşim yerlerinden biri olan Oymyakon'e getirdik.
 Umarız sizin olduğunuz yerde havalar daha iyidir!
 """,
-
         'te': u"""
 మేము మీ స్థానాన్ని కనుగొనలేకపోయాము
 కనుక మనం "ఓమాయకాన్కు" తీసుకొని వచ్చాము,
 భూమిపై అత్యల్ప శాశ్వతంగా నివసించే స్థానిక ప్రదేశాలలో ఒకటి.
 """,
-         'uk': u"""
+        'uk': u"""
 Ваше місце розташування визначити не вдалося,
 тому ми покажемо вам погоду в Оймяконе,
 найхолоднішому населеному пункті на планеті.
 Будемо сподіватися, що у вас сьогодні погода краще!
 """,
-
         'uz': u"""
 Sizning joylashuvingizni aniqlay olmadik,
 shuning uchun sizga sayyoramizning eng sovuq aholi punkti - Oymyakondagi ob-havo haqida ma'lumot beramiz.
 Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
 """
-
-                },
+    },
 
     'UNKNOWN_LOCATION': {
         'en': u'Unknown location',
@@ -340,6 +314,13 @@ Obtindrem noves consultes tan aviat com ens sigui possible.
 Pot seguir https://twitter.com/igor_chubin per noves actualitzacions.
 ======================================================================================
 """,
+        'de': u"""
+Entschuldigung, wir können momentan den Wetterdienst nicht erreichen.
+Dafür zeigen wir Ihnen das Wetter an einem Beispielort, damit Sie sehen wie die Seite das Wetter anzeigt.
+Wir werden versuchen das Problem so schnell wie möglich zu beheben.
+Folgen Sie https://twitter.com/igor_chubin für Updates.
+======================================================================================
+""",
         'cy': u"""
 Rydym yn brin o ymholiadau i'r gwasanaeth tywydd ar hyn o bryd. 
 Felly dyma'r adroddiad tywydd ar gyfer y ddinas ragosod (er mwyn arddangos sut mae'n edrych). 
@@ -366,20 +347,6 @@ Désolé, nous avons épuisé les requêtes vers le service météo.
 Voici un bulletin météo de l'emplacement par défaut (pour vous donner un aperçu).
 Nous serons très bientôt en mesure de faire de nouvelles requêtes.
 Vous pouvez suivre https://twitter.com/igor_chubin pour rester informé.
-======================================================================================
-""",
-        'mk': u"""
-Извинете, ни снемуваат барања за до сервисот кој ни нуди временска прогноза во моментот.
-Еве една временска прогноза за град (за да видите како изгледа).
-Ќе добиеме нови барања најбрзо што можеме.
-Следете го https://twitter.com/igor_chubin за известувања
-======================================================================================
-""",
-        'de': u"""
-Entschuldigung, wir können momentan den Wetterdienst nicht erreichen.
-Dafür zeigen wir Ihnen das Wetter an einem Beispielort, damit Sie sehen wie die Seite das Wetter anzeigt.
-Wir werden versuchen das Problem so schnell wie möglich zu beheben.
-Folgen Sie https://twitter.com/igor_chubin für Updates.
 ======================================================================================
 """,
         'hy': u"""
@@ -421,7 +388,7 @@ Jūs varat sekot https://twitter.com/igor_chubin lai redzētu visus jaunumus.
 Извинете, ни снемуваат барања за до сервисот кој ни нуди временска прогноза во моментот.
 Еве една временска прогноза за град (за да видите како изгледа).
 Ќе добиеме нови барања најбрзо што можеме.
-Следете го https://twitter.com/igor_chubin за известувања.
+Следете го https://twitter.com/igor_chubin за известувања
 ======================================================================================
 """,
         'nb': u"""
@@ -503,7 +470,7 @@ Gelişmeler için https://twitter.com/igor_chubin adresini takip edebilirsiniz.
     'FOLLOW_ME': {
         'en': u'Follow \033[46m\033[30m@igor_chubin\033[0m for wttr.in updates',
         'be': u'Сачыце за \033[46m\033[30m@igor_chubin\033[0m за навінамі wttr.in',
-        'bs': u'XXXXXX \033[46m\033[30m@igor_chubin\033[0m XXXXXXXXXXXXXXXXXXX',   
+        'bs': u'XXXXXX \033[46m\033[30m@igor_chubin\033[0m XXXXXXXXXXXXXXXXXXX',
         'ca': u'Seguiu \033[46m\033[30m@igor_chubin\033[0m per actualitzacions de wttr.in',
         'es': u'Seguir \033[46m\033[30m@igor_chubin\033[0m para recibir las novedades de wttr.in',
         'cy': u'Dilyner \033[46m\033[30m@igor_Chubin\033[0m am diweddariadau wttr.in',
@@ -532,4 +499,3 @@ def get_message(message_name, lang):
         return ''
     message_dict = MESSAGE[message_name]
     return message_dict.get(lang, message_dict.get('en', ''))
-	
