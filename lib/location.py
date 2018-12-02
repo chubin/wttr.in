@@ -7,6 +7,7 @@ and basing on this information generates
 precise location description.
 
 """
+from __future__ import print_function
 
 import os
 import json
@@ -67,7 +68,7 @@ def geolocator(location):
     try:
         geo = requests.get('%s/%s' % (GEOLOCATOR_SERVICE, location)).text
     except requests.exceptions.ConnectionError as exception:
-        print "ERROR: %s" % exception
+        print("ERROR: %s" % exception)
         return None
 
     if geo == "":
@@ -77,7 +78,7 @@ def geolocator(location):
         answer = json.loads(geo.encode('utf-8'))
         return answer
     except ValueError as exception:
-        print "ERROR: %s" % exception
+        print("ERROR: %s" % exception)
         return None
 
     return None

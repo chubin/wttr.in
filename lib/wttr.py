@@ -1,5 +1,6 @@
 # vim: set encoding=utf-8
 
+from __future__ import print_function
 import gevent
 from gevent.pywsgi import WSGIServer
 from gevent.queue import Queue
@@ -119,7 +120,7 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
             p = Popen(cmd, stdout=PIPE, stderr=PIPE)
             stdout, stderr = p.communicate()
             if p.returncode != 0:
-                print "ERROR: location not found: %s" % location
+                print("ERROR: location not found: %s" % location)
                 if 'Unable to find any matching weather location to the query submitted' in stderr:
                     if location != NOT_FOUND_LOCATION:
                         NOT_FOUND_MESSAGE_HEADER = u"ERROR: %s: %s\n---\n\n" % (get_message('UNKNOWN_LOCATION', lang), location)
