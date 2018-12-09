@@ -1,6 +1,7 @@
 #!/usr/bin/python
 #vim: encoding=utf-8
 
+from __future__ import print_function
 import sys
 import os
 import re
@@ -287,9 +288,9 @@ def make_wttr_in_png(png_name, options=None):
     """
 
     parsed = parse_wttrin_png_name(png_name)
-    print "------"
-    print parsed
-    print "------"
+    print("------")
+    print(parsed)
+    print("------")
 
     # if location is MyLocation it should be overriden 
     # with autodetected location (from options)
@@ -301,7 +302,7 @@ def make_wttr_in_png(png_name, options=None):
             if key not in parsed:
                 parsed[key] = val
     url = make_wttrin_query(parsed)
-    print "URL = ", url
+    print("URL = ", url)
 
     timestamp = time.strftime("%Y%m%d%H", time.localtime())
     cached_basename = url[14:].replace('/','_')
