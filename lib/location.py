@@ -96,7 +96,7 @@ def ip2location(ip_addr):
     else:
         try:
             ip2location_response = requests\
-                    .get('http://api.ip2location.com/?ip=%s&key=%s&package=WS10' \
+                    .get('http://api.ip2location.com/?ip=%s&key=%s&package=WS3' \
                             % (ip_addr, IP2LOCATION_KEY)).text
             if ';' in ip2location_response:
                 open(cached, 'w').write(ip2location_response)
