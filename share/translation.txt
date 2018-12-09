@@ -11,6 +11,7 @@ Translated/improved/corrected by:
     * Catalan:      Angel Jarabo @legna29A
     * Croatian:     Siniša Kusić @ku5ic
     * Czech:        Juraj Kakody
+    * Danish:       Kim Schulz @kimusan (on github)
     * Dutch:        Youri Claes
     * Esperanto:    Igor Chubin
     * Finnish:      @Maxifi
