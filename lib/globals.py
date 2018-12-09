@@ -1,6 +1,7 @@
 """
 global configuration of the project
 """
+from __future__ import print_function
 
 import logging
 import os
@@ -76,7 +77,7 @@ def error(text):
     "log error `text` and raise a RuntimeError exception"
 
     if not text.startswith('Too many queries'):
-        print text
+        print(text)
     logging.error("ERROR %s", text)
     raise RuntimeError(text)
 
@@ -84,7 +85,7 @@ def log(text):
     "log error `text` and do not raise any exceptions"
 
     if not text.startswith('Too many queries'):
-        print text
+        print(text)
         logging.info(text)
 
 def debug_log(text):

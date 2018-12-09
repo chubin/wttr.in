@@ -8,6 +8,7 @@ It caches the answers and handles various data sources transforming their
 answers into format supported by the wttr.in service.
 
 """
+from __future__ import print_function
 
 from gevent.pywsgi import WSGIServer
 from gevent.monkey import patch_all
@@ -90,7 +91,7 @@ def translate(text, lang):
     """
     translated = TRANSLATIONS.get(lang, {}).get(text, text)
     if text.encode('utf-8') == translated:
-        print "%s: %s" % (lang, text)
+        print("%s: %s" % (lang, text))
     return translated
 
 def cyr(to_translate):
@@ -111,9 +112,9 @@ def add_translations(content, lang):
     try:
         d = json.loads(content)         # pylint: disable=invalid-name
     except ValueError as exception:
-        print "---"
-        print exception
-        print "---"
+        print("---")
+        print(exception)
+        print("---")
 
     try:
         weather_condition = d['data']['current_condition'][0]['weatherDesc'][0]['value']
@@ -159,7 +160,7 @@ def add_translations(content, lang):
 
         content = json.dumps(d)
     except (IndexError, ValueError) as exception:
-        print exception
+        print(exception)
     return content
 
 @APP.route("/<path:path>")
@@ -176,7 +177,7 @@ def proxy(path):
     if content is None:
         srv = _find_srv_for_query(path, query_string)
         url = '%s/%s?%s' % (srv, path, query_string)
-        print url
+        print(url)
 
         attempts = 5
         while attempts:

@@ -163,7 +163,7 @@ def wttr(location, request):
 
     try:
         LIMITS.check_ip(ip_addr)
-    except RuntimeError, exception:
+    except RuntimeError as exception:
         return str(exception)
 
     png_filename = None
@@ -249,7 +249,7 @@ def wttr(location, request):
                 output += '\n' + get_message('FOLLOW_ME', lang).encode('utf-8') + '\n'
         return output
 
-    except RuntimeError, exception:
+    except RuntimeError as exception:
         if 'Malformed response' in str(exception) \
                 or 'API key has reached calls per day allowed limit' in str(exception):
             if html_output:
