@@ -2,6 +2,9 @@
 
 CACHEDIR="/wttr.in/cache"
 
-mv "${CACHEDIR}/wego" "${CACHEDIR}/wego.old"
-mkdir "${CACHEDIR}/wego"
-rm -rf "${CACHEDIR}/wego.old"
+for dir in wego proxy-wwo png
+do
+  mv "${CACHEDIR}/${dir}" "${CACHEDIR}/${dir}.old"
+  mkdir "${CACHEDIR}/${dir}"
+  rm -rf "${CACHEDIR}/${dir}.old"
+done
