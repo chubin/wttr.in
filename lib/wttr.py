@@ -11,7 +11,7 @@ patch_all()
 import os
 import re
 import time
-import dateutil
+import dateutil.parser
 
 from translations import get_message, FULL_TRANSLATION, PARTIAL_TRANSLATION, SUPPORTED_LANGS
 from globals import WEGO, PYPHOON, CACHEDIR, ANSI2HTML, \
