@@ -1,7 +1,7 @@
 wttr()
 {
     # change Paris to your default location
-    local request="wttr.in/${1:-Paris}"
+    local request="wttr.in/${1-Paris}"
     [ "$COLUMNS" -lt 125 ] && request+='?n'
     curl -H "Accept-Language: ${LANG%_*}" --compressed "$request"
 }
