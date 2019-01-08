@@ -80,6 +80,7 @@ You can override this behavior by adding `?u` or `?m` to a URL like this:
 wttr.in currently supports three output formats:
 
 * ANSI for the terminal;
+* ANSI for the terminal, one-line mode;
 * HTML for the browser;
 * PNG for the graphical viewers.
 
@@ -110,6 +111,15 @@ In this example:
 * `tqp0` - options (recommended).
 
 ![Picture with weather data](https://pbs.twimg.com/media/C69-wsIW0AAcAD5.jpg)
+
+## One-line output
+
+For one-line output format, specify additional URL parameter `format`:
+
+```
+$ curl wttr.in/Nuremberg?format=3
+Nuremberg: 🌦 +5⁰C
+```
 
 ## Moon phases
 
