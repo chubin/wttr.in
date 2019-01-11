@@ -199,7 +199,49 @@ def location_processing(location, ip_addr):
     # it should be handled like a search term (for geolocator)
     override_location_name = None
     full_address = None
+    hide_full_address = False
+    force_show_full_address = location is not None and location.startswith('~')
 
+    # location ~ means that it should be detected automatically,
+    # and shown in the location line below the report
+    if location == '~':
+        location = None
+
+    if location and location.lstrip('~').startswith('@'):
+        try:
+            location, country = get_location(
+                socket.gethostbyname(
+                    location.lstrip('~')[1:]))
+            location = '~' + location
+            hide_full_address = not force_show_full_address
+        except:
+            location, country = NOT_FOUND_LOCATION, None
+
+    query_source_location = get_location(ip_addr)
+
+    country = None
+    if location is None or location == 'MyLocation':
+        location, country = query_source_location
+
+        # Let us try to use geolocation services for locations
+        # that were derived from IPs.
+        if location:
+            location = '~' + location
+            hide_full_address = not force_show_full_address
+    elif is_ip(location):
+        location, country = get_location(location)
+
+        # here too
+        if location:
+            location = '~' + location
+            hide_full_address = not force_show_full_address
+
+    if location and not location.startswith('~'):
+        location = location_canonical_name(location)
+
+    # up to this point it is possible that the name
+    # contains some unicode symbols
+    # here we resolve them
     if location is not None and not ascii_only(location):
         location = "~" + location
 
@@ -211,26 +253,12 @@ def location_processing(location, ip_addr):
         if geolocation is not None:
             override_location_name = location[1:].replace('+', ' ')
             location = "%s,%s" % (geolocation['latitude'], geolocation['longitude'])
-            full_address = geolocation['address']
+            if not hide_full_address:
+                full_address = geolocation['address']
+            else:
+                full_address = None
         else:
             location = NOT_FOUND_LOCATION #location[1:]
-
-    query_source_location = get_location(ip_addr)
-
-    country = None
-    if location is None or location == 'MyLocation':
-        location, country = query_source_location
-
-    if is_ip(location):
-        location, country = get_location(location)
-
-    if location.startswith('@'):
-        try:
-            location, country = get_location(socket.gethostbyname(location[1:]))
-        except:
-            location, country = NOT_FOUND_LOCATION, None
-
-    location = location_canonical_name(location)
 
     return location, \
             override_location_name, \
