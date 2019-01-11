@@ -4,18 +4,17 @@ TWITTER_BUTTON = """
 """
 
 GITHUB_BUTTON = """
-<!-- Place this tag where you want the button to render. -->
-<a aria-label="Star chubin/wttr.in on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/chubin/wttr.in#stargazers_count" data-count-href="/chubin/wttr.in/stargazers" data-icon="octicon-star" href="https://github.com/chubin/wttr.in" class="github-button">wttr.in</a>
+<a aria-label="Star chubin/wttr.in on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/chubin/wttr.in#stargazers_count" data-count-href="/chubin/wttr.in/stargazers" data-show-count="true" data-icon="octicon-star" href="https://github.com/chubin/wttr.in" class="github-button">wttr.in</a>
 """
 
 GITHUB_BUTTON_2 = """
 <!-- Place this tag where you want the button to render. -->
-<a aria-label="Star schachmat/wego on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/schachmat/wego#stargazers_count" data-count-href="/schachmat/wego/stargazers" data-icon="octicon-star" href="https://github.com/schachmat/wego" class="github-button">wego</a>
+<a aria-label="Star schachmat/wego on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/schachmat/wego#stargazers_count" data-count-href="/schachmat/wego/stargazers" data-show-count="true" data-icon="octicon-star" href="https://github.com/schachmat/wego" class="github-button">wego</a>
 """
 
 GITHUB_BUTTON_3 = """
 <!-- Place this tag where you want the button to render. -->
-<a aria-label="Star chubin/pyphoon on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/chubin/pyphoon#stargazers_count" data-count-href="/chubin/pyphoon/stargazers" data-icon="octicon-star" href="https://github.com/chubin/pyphoon" class="github-button">pyphoon</a>
+<a aria-label="Star chubin/pyphoon on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/chubin/pyphoon#stargazers_count" data-count-href="/chubin/pyphoon/stargazers" data-show-count="true" data-icon="octicon-star" href="https://github.com/chubin/pyphoon" class="github-button">pyphoon</a>
 """
 
 GITHUB_BUTTON_FOOTER = """
