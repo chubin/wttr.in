@@ -165,8 +165,13 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
         if query.get('no-city', False):
             stdout = "\n".join(stdout.splitlines()[2:]) + "\n"
 
-        if full_address and query.get('format', 'txt') != 'png':
-            line = "%s: %s [%s]\n" % (get_message('LOCATION', lang).encode('utf-8'), full_address.encode('utf-8'), location)
+        if full_address \
+            and query.get('format', 'txt') != 'png' \
+            and (not query.get('no-city') and not query.get('no-caption')):
+            line = "%s: %s [%s]\n" % (
+                get_message('LOCATION', lang).encode('utf-8'),
+                full_address.encode('utf-8'),
+                location.encode('utf-8'))
             stdout += line
 
         if query.get('padding', False):
@@ -212,8 +217,8 @@ def get_moon(location, html=False, lang=None):
     if date:
         try:
             dateutil.parser.parse(date)
-        except:
-            pass
+        except Exception as e:
+            print("ERROR: %s" % e)
         else:
             cmd += [date]
 
