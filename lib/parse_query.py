@@ -72,6 +72,8 @@ def parse_query(args):
         result['no-caption'] = True
     if 'Q' in q:
         result['no-city'] = True
+    if 'F' in q:
+        result['no-follow-line'] = True
 
     for key, val in args.items():
         if val == 'True':

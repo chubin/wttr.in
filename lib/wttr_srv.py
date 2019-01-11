@@ -241,10 +241,10 @@ def wttr(location, request):
                                 url=request.url,
                                )
 
-        if html_output:
-            output = add_buttons(output)
-        else:
-            if query.get('days', '3') != '0':
+        if query.get('days', '3') != '0' and not query.get('no-follow-line'):
+            if html_output:
+                output = add_buttons(output)
+            else:
                 #output += '\n' + get_message('NEW_FEATURE', lang).encode('utf-8')
                 output += '\n' + get_message('FOLLOW_ME', lang).encode('utf-8') + '\n'
         return output
