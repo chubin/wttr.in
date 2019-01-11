@@ -16,7 +16,7 @@ Initial implementation of one-line output mode.
 import sys
 import re
 import datetime
-from astral import Astral
+from astral import Astral, Location
 from constants import WWO_CODE, WEATHER_SYMBOL, WIND_DIRECTION
 from weather_data import get_weather_data
 
@@ -31,17 +31,27 @@ MOON_PHASES = (
     u"🌑", u"🌒", u"🌓", u"🌔", u"🌕", u"🌖", u"🌗", u"🌘"
 )
 
-def render_temperature(data):
+def convert_to_fahrenheit(temp):
+    "Convert Celcius `temp` to Fahrenheit"
+
+    return (temp*9.0/5)+32
+
+def render_temperature(data, query):
     """
     temperature (t)
     """
 
-    temperature = u'%s⁰C' % data['temp_C']
+    if query.get('use_imperial', False):
+        temperature = u'%s⁰F' % data['temp_F']
+    else:
+        temperature = u'%s⁰C' % data['temp_C']
+
     if temperature[0] != '-':
         temperature = '+' + temperature
+
     return temperature
 
-def render_condition(data):
+def render_condition(data, query):
     """
     condition (c)
     """
@@ -49,7 +59,7 @@ def render_condition(data):
     weather_condition = WEATHER_SYMBOL[WWO_CODE[data['weatherCode']]]
     return weather_condition
 
-def render_wind(data):
+def render_wind(data, query):
     """
     wind (w)
     """
@@ -69,18 +79,23 @@ def render_wind(data):
     else:
         wind_direction = ""
 
-    unit = ' km/h'
-    wind = u'%s%s%s' % (wind_direction, data['windspeedKmph'], unit)
+    if query.get('use_imperial', False):
+        unit = ' mph'
+        wind = u'%s%s%s' % (wind_direction, data['windspeedMiles'], unit)
+    else:
+        unit = ' km/h'
+        wind = u'%s%s%s' % (wind_direction, data['windspeedKmph'], unit)
+
     return wind
 
-def render_location(data):
+def render_location(data, query):
     """
     location (l)
     """
 
     return data['location'].title()
 
-def render_moonphase(_):
+def render_moonphase(_, query):
     """
     A symbol describing the phase of the moon
     """
@@ -90,12 +105,23 @@ def render_moonphase(_):
     )
     return MOON_PHASES[moon_index]
 
-def render_moonday(_):
+def render_moonday(_, query):
     """
     An number describing the phase of the moon (days after the New Moon)
     """
     astral = Astral()
     return str(int(astral.moon_phase(date=datetime.datetime.today())))
+
+def render_sunset(data, query):
+    location = data['location']
+    city_name = location
+    astral = Astral()
+    location = Location(('Nuremberg', 'Germany',
+              49.453872, 11.077298, 'Europe/Berlin', 0))
+    sun = location.sun(date=datetime.datetime.today(), local=True)
+
+
+    return str(sun['sunset'])
 
 FORMAT_SYMBOL = {
     'c':    render_condition,
@@ -104,9 +130,10 @@ FORMAT_SYMBOL = {
     'l':    render_location,
     'm':    render_moonphase,
     'M':    render_moonday,
+    's':    render_sunset,
     }
 
-def render_line(line, data):
+def render_line(line, data, query):
     """
     Render format `line` using `data`
     """
@@ -124,11 +151,11 @@ def render_line(line, data):
             return ''
 
         render_function = FORMAT_SYMBOL[symbol]
-        return render_function(data)
+        return render_function(data, query)
 
     return re.sub(r'%[^%]*[a-zA-Z]', render_symbol, line)
 
-def format_weather_data(format_line, location, data):
+def format_weather_data(format_line, location, data, query):
     """
     Format information about current weather `data` for `location`
     with specified in `format_line` format
@@ -136,7 +163,7 @@ def format_weather_data(format_line, location, data):
 
     current_condition = data['data']['current_condition'][0]
     current_condition['location'] = location
-    output = render_line(format_line, current_condition)
+    output = render_line(format_line, current_condition, query)
     return output
 
 def wttr_line(location, query):
@@ -152,7 +179,7 @@ def wttr_line(location, query):
 
     weather_data = get_weather_data(location)
 
-    output = format_weather_data(format_line, location, weather_data)
+    output = format_weather_data(format_line, location, weather_data, query)
     output = output.rstrip("\n")+"\n"
     return output
 
