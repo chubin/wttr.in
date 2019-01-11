@@ -243,7 +243,7 @@ def location_processing(location, ip_addr):
     # contains some unicode symbols
     # here we resolve them
     if location is not None and not ascii_only(location):
-        location = "~" + location
+        location = "~" + location.lstrip('~')
 
     if location is not None and location.upper() in IATA_CODES:
         location = '~%s' % location
@@ -252,7 +252,10 @@ def location_processing(location, ip_addr):
         geolocation = geolocator(location_canonical_name(location[1:]))
         if geolocation is not None:
             override_location_name = location[1:].replace('+', ' ')
+            if country:
+                override_location_name += ", %s" % country
             location = "%s,%s" % (geolocation['latitude'], geolocation['longitude'])
+            country = None
             if not hide_full_address:
                 full_address = geolocation['address']
             else:
