@@ -121,6 +121,8 @@ $ curl wttr.in/Nuremberg?format=3
 Nuremberg: 🌦 +5⁰C
 ```
 
+Available preconfigured formats: 1, 2, 3, 4 and custom format using a percent notation.
+
 ## Moon phases
 
 wttr.in can also be used to check the phase of the Moon. This example shows how to see the current Moon phase:
