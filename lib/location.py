@@ -207,11 +207,11 @@ def location_processing(location, ip_addr):
     if location == '~':
         location = None
 
-    if location and location.lstrip('~').startswith('@'):
+    if location and location.lstrip('~ ').startswith('@'):
         try:
             location, country = get_location(
                 socket.gethostbyname(
-                    location.lstrip('~')[1:]))
+                    location.lstrip('~ ')[1:]))
             location = '~' + location
             if country:
                 location += ", %s" % country
@@ -243,13 +243,16 @@ def location_processing(location, ip_addr):
             hide_full_address = not force_show_full_address
 
     if location and not location.startswith('~'):
-        location = location_canonical_name(location)
+        tmp_location = location_canonical_name(location)
+        if tmp_location != location:
+            override_location_name = location
+            locaiton = tmp_location
 
     # up to this point it is possible that the name
     # contains some unicode symbols
     # here we resolve them
     if location is not None and not ascii_only(location):
-        location = "~" + location.lstrip('~')
+        location = "~" + location.lstrip('~ ')
 
     if location is not None and location.upper() in IATA_CODES:
         location = '~%s' % location

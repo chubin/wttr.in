@@ -93,7 +93,7 @@ def render_location(data, query):
     location (l)
     """
 
-    return data['location'].title()
+    return (data['override_location'] or data['location']) # .title()
 
 def render_moonphase(_, query):
     """
@@ -155,7 +155,7 @@ def render_line(line, data, query):
 
     return re.sub(r'%[^%]*[a-zA-Z]', render_symbol, line)
 
-def format_weather_data(format_line, location, data, query):
+def format_weather_data(format_line, location, override_location, data, query):
     """
     Format information about current weather `data` for `location`
     with specified in `format_line` format
@@ -163,10 +163,11 @@ def format_weather_data(format_line, location, data, query):
 
     current_condition = data['data']['current_condition'][0]
     current_condition['location'] = location
+    current_condition['override_location'] = override_location
     output = render_line(format_line, current_condition, query)
     return output
 
-def wttr_line(location, query):
+def wttr_line(location, override_location_name, query):
     """
     Return 1line weather information for `location`
     in format `line_format`
@@ -179,7 +180,7 @@ def wttr_line(location, query):
 
     weather_data = get_weather_data(location)
 
-    output = format_weather_data(format_line, location, weather_data, query)
+    output = format_weather_data(format_line, location, override_location_name, weather_data, query)
     output = output.rstrip("\n")+"\n"
     return output
 
@@ -193,7 +194,7 @@ def main():
         'line': sys.argv[2],
         }
 
-    sys.stdout.write(wttr_line(location, query))
+    sys.stdout.write(wttr_line(location, location, query))
 
 if __name__ == '__main__':
     main()

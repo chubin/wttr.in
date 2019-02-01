@@ -208,8 +208,7 @@ def wttr(location, request):
     # We are ready to return the answer
     try:
         if 'format' in query:
-            location = (orig_location or location).lstrip('~')
-            return wttr_line(location, query)
+            return wttr_line(location, override_location_name, query)
 
         if png_filename:
             options = {
