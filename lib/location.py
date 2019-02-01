@@ -213,6 +213,8 @@ def location_processing(location, ip_addr):
                 socket.gethostbyname(
                     location.lstrip('~')[1:]))
             location = '~' + location
+            if country:
+                location += ", %s" % country
             hide_full_address = not force_show_full_address
         except:
             location, country = NOT_FOUND_LOCATION, None
@@ -227,6 +229,8 @@ def location_processing(location, ip_addr):
         # that were derived from IPs.
         if location:
             location = '~' + location
+            if country:
+                location += ", %s" % country
             hide_full_address = not force_show_full_address
     elif is_ip(location):
         location, country = get_location(location)
@@ -234,6 +238,8 @@ def location_processing(location, ip_addr):
         # here too
         if location:
             location = '~' + location
+            if country:
+                location += ", %s" % country
             hide_full_address = not force_show_full_address
 
     if location and not location.startswith('~'):
@@ -252,8 +258,6 @@ def location_processing(location, ip_addr):
         geolocation = geolocator(location_canonical_name(location[1:]))
         if geolocation is not None:
             override_location_name = location[1:].replace('+', ' ')
-            if country:
-                override_location_name += ", %s" % country
             location = "%s,%s" % (geolocation['latitude'], geolocation['longitude'])
             country = None
             if not hide_full_address:
