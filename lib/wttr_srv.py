@@ -112,7 +112,7 @@ def get_answer_language(request):
 
     return lang
 
-def get_output_format(request):
+def get_output_format(request, query):
     """
     Return preferred output format: ansi, text, html or png
     based on arguments and headers in `request`.
@@ -121,6 +121,8 @@ def get_output_format(request):
 
     # FIXME
     user_agent = request.headers.get('User-Agent', '').lower()
+    if query.get('force-ansi'):
+        return False
     html_output = not any(agent in user_agent for agent in PLAIN_TEXT_AGENTS)
     return html_output
 
@@ -173,7 +175,7 @@ def wttr(location, request):
 
     lang = get_answer_language(request)
     query = parse_query.parse_query(request.args)
-    html_output = get_output_format(request)
+    html_output = get_output_format(request, query)
     user_agent = request.headers.get('User-Agent', '').lower()
 
     if location in PLAIN_TEXT_PAGES:
