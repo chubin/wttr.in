@@ -230,7 +230,7 @@ def wttr(location, request):
             return response
 
         if location == 'moon' or location.startswith('moon@'):
-            output = get_moon(location, html=html_output, lang=lang)
+            output = get_moon(location, html=html_output, lang=lang, query=query)
         else:
             output = get_wetter(location, ip_addr,
                                 html=html_output,

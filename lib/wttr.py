@@ -207,7 +207,10 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
 
     return open(filename).read()
 
-def get_moon(location, html=False, lang=None):
+def get_moon(location, html=False, lang=None, query=None):
+    if query is None:
+        query = {}
+
     date = None
     if '@' in location:
         date = location[location.index('@')+1:]
@@ -227,6 +230,9 @@ def get_moon(location, html=False, lang=None):
         env['LANG'] = lang
     p = Popen(cmd, stdout=PIPE, stderr=PIPE, env=env)
     stdout = p.communicate()[0]
+
+    if query.get('no-terminal', False):
+        stdout = remove_ansi(stdout)
 
     if html:
         p = Popen(["bash", ANSI2HTML, "--palette=solarized", "--bg=dark"],  stdin=PIPE, stdout=PIPE, stderr=PIPE)
