@@ -22,6 +22,10 @@ def _is_invalid_location(location):
     if '.png' in location:
         return True
 
+def remove_ansi(sometext):
+    ansi_escape = re.compile(r'(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]')
+    return ansi_escape.sub('', sometext)
+
 def get_wetter(location, ip, html=False, lang=None, query=None, location_name=None, full_address=None, url=None):
 
     local_url = url
@@ -77,9 +81,6 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
         return "%s/%s/%s%s%s%s%s" % (CACHEDIR, location, timestamp, imperial_suffix, lang_suffix, query_line, location_name)
 
     def save_weather_data(location, filename, lang=None, query=None, location_name=None, full_address=None):
-        ansi_escape = re.compile(r'(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]')
-        def remove_ansi(sometext):
-            return ansi_escape.sub('', sometext)
      
         if _is_invalid_location( location ):
             error("Invalid location: %s" % location)
