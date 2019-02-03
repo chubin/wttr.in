@@ -1,0 +1,68 @@
+Gebruik:
+
+    $ curl wttr.in          # huidige ligging
+    $ cur wttr.in/muc       # weerberig in München se lughawe
+
+Ondersteunde soorte ligging:
+
+    /paris                  # stadsnaam
+    /~Eiffel+tower          # enige ligging
+    /Москва                 # Unikode naam van enige ligging in enige taal
+    /muc                    # lughawe kode (3 letters)
+    /@stackoverflow.com     # domeinnaam
+    /94107                  # gebiedskodes
+    /-78.46,106.79          # GPS koördinate
+
+Besondere liggings:
+
+    /moon                   # Fase van die maan (voeg +US of ,+France by vir daardie stede)
+    /moon@2016-10-25        # Fase van die maan vir die datum (@2016-10-25)
+
+Eenhede:
+
+    m                       # metrike (SI) (word orals gebruik behalwe vir die VSA)
+    u                       # USCS (gebruik in die VSA)
+    M                       # vertoon die spoed van die wind in m/s
+
+Besigtig keuses:
+
+    0                       # slegs die huidige weer
+    1                       # huidige weer + 1 dag
+    2                       # huidige weer + 2 dae
+    F                       # moet nie die "Volg" lyn wys nie
+    n                       # smal weergawe (slegs dag en nag)
+    q                       # stil weergawe (geen "Weerberig" teks nie)
+    Q                       # baie stil weergawe (geen "Weerberig), geen stadsnaam
+    T                       # skakel terminaal kodes af (geen kleur)
+
+PNG keuses:
+
+    /paris.png              # skep 'n PNG leêr
+    p                       # voeg 'n raam by rondom die uitset
+    t                       # deursigtigheid 150
+    transparency=...        # deursigtigheid vanaf 0 tot 255 (255 = nie deursigtig nie)
+
+Keuses can saamgevoeg word
+
+    /Paris?0pq
+    /Paris?0pq&lang=fr
+    /Paris_0pq.png          # met PNG word die lêer mode daarna gegee 
+    /Rome_0pq_lang=it.png   # lang keuses word met 'n onderstreping verdeel
+
+Lokalisering:
+
+    $ curl fr.wttr.in/Paris
+    $ curl wttr.in/paris?lang=fr
+    $ curl -H "Accept-Language: fr" wttr.in/paris
+
+Ondersteunde tale:
+
+    FULL_TRANSLATION (word ondersteun)
+    PARTIAL_TRANSLATION (in wording)
+
+Spesiale URLe:
+
+    /:help                  # vertoon hierdie bladsy
+    /:bash.function         # vertoon aanbeveling vir bash funksie wttr()
+    /:translation           # vertoon die besonderhede van die vertalers
+

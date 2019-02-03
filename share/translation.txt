@@ -3,7 +3,8 @@ wttr.in is translated in NUMBER_OF_LANGUAGES languages:
     SUPPORTED_LANGUAGES
 
 Translated/improved/corrected by:
-
+    
+    * Afrikaans:    Casper Labuschage @casperl (on github)
     * Armenian:     Aram Bayadyan @aramix, Mikayel Ghazaryan @mkdotam, Grigor Khachatryan @grigortw
     * Azerbaijani:  Dmytro Nikitiuk, Elsevar Abbasov
     * Belarusian:   Igor Chubin, Anton Zhavoronkov @edogby (on github)

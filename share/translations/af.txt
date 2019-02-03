@@ -1,0 +1,47 @@
+113: Helder                                 : Clear
+113: Sonnig                                 : Sunny
+116: Gedeeltelik bewolk                     : Partly cloudy
+119: Bewolk                                 : Cloudy
+122: Oortrokke                              : Overcast
+143: Mis toestande                          : Mist
+176: Gedeeltelike reën moontlik             : Patchy rain possible
+179: Gedeeltelike sneeu moontlik            : Patchy snow possible
+182: Gedeeltelike ysreën moontlik           : Patchy sleet possible
+185: Gedeeltelik ysige motreën moontlik     : Patchy freezing drizzle possible
+200: Donderbuie moontlik                    : Thundery outbreaks possible
+227: Waaiende sneeu                         : Blowing snow
+230: Sneeustorm                             : Blizzard
+248: Mis toestande                          : Fog
+260: Vriesende mis toestande                : Freezing fog
+263: Gedeeltelike ligte motreën             : Patchy light drizzle
+266: Ligte motreën                          : Light drizzle
+281: Vriesende motreën                      : Freezing drizzle
+284: Erg vriesende motreën                  : Heavy freezing drizzle
+293: Gedeeltelike ligte reën                : Patchy light rain
+296: Ligte reën                             : Light rain
+299: Matige reën by tye                     : Moderate rain at times
+302: Matige reën                            : Moderate rain
+305: Swaar reën by tye                      : Heavy rain at times
+308: Swaar reën                             : Heavy rain
+311: Ligte vriesende reën                   : Light freezing rain
+314: Matige tot swaar vriesende reën        : Moderate or heavy freezing rain
+317: Ligte ysreën                           : Light sleet
+320: Matige tot swaar ysreën                : Moderate or heavy sleet
+323: Verspreide ligte sneeu                 : Patchy light snow
+326: Ligte sneeu                            : Light snow
+329: Verspreide ligte sneeu                 : Patchy moderate snow
+332: Matige sneeu                           : Moderate snow
+335: Verspreide swaar sneeu                 : Patchy heavy snow
+338: Swaar sneeu                            : Heavy snow
+350: Haelkorrels                            : Ice pellets
+353: Ligte bui reën                         : Light rain shower
+356: Matige tot swaar bui reënbui           : Moderate or heavy rain shower
+359: Stortreën                              : Torrential rain shower
+362: Ligte buie ysreën                      : Light sleet showers
+365: Ligte tot swaar buie ysreën            : Moderate or heavy sleet showers
+368: Ligte buie sneeu                       : Light snow showers
+371: Ligte tot swaar buie sneeu             : Moderate or heavy snow showers
+386: Verspreide ligte buie en donderbuie    : Patchy light rain with thunder
+389: Ligte tot swaar buie en donderbuie     : Moderate or heavy rain with thunder
+392: Verspreide ligte sneeu met donderbuie  : Patchy light snow with thunder
+395: Matige of swaar sneeu met donderbuie   : Moderate or heavy snow with thunder

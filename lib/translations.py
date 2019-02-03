@@ -5,7 +5,7 @@ Translation of almost everything.
 """
 
 FULL_TRANSLATION = [
-    "da", "de", "fr", "fa", "id", "it", "nb", "nl", "pl", "ru",
+    "af", "da", "de", "fr", "fa", "id", "it", "nb", "nl", "pl", "ru",
 ]
 
 PARTIAL_TRANSLATION = [
@@ -26,7 +26,6 @@ PROXY_LANGS = [
     'kk', 'lv', 'mk', 'nb', 'nn', 'sl', 'uz'
 ]
 
-
 SUPPORTED_LANGS = FULL_TRANSLATION + PARTIAL_TRANSLATION
 
 MESSAGE = {
@@ -35,6 +34,11 @@ MESSAGE = {
 We were unable to find your location
 so we have brought you to Oymyakon,
 one of the coldest permanently inhabited locales on the planet.
+""",
+        'af': u"""
+Ons kon nie u ligging opspoor nie
+gevolglik het ons vir u na Oymyakon geneem,
+een van die koudste permanent bewoonde plekke op aarde.
 """,
         'be': u"""
 Ваша месцазнаходжанне вызначыць не атрымалася,
@@ -46,7 +50,7 @@ one of the coldest permanently inhabited locales on the planet.
 Nismo mogli pronaći vašu lokaciju,
 tako da smo te doveli do Oymyakon,
 jedan od najhladnijih stalno naseljena mjesta na planeti.
-Nadamo se da ćete imati bolje vreme!       
+Nadamo se da ćete imati bolje vreme!
 """,
         'ca': u"""
 Hem estat incapaços de trobar la seva ubicació,
@@ -62,7 +66,7 @@ Doufáme, že budete mít lepší počasí!
         'cy': u"""
 Ni darganfyddwyd eich lleoliad,
 felly rydym wedi dod â chi i Oymyakon,
-un o'r llefydd oeraf ar y blaned ble mae pobl yn dal i fyw! 
+un o'r llefydd oeraf ar y blaned ble mae pobl yn dal i fyw!
 """,
 
         'de': u"""
@@ -217,6 +221,7 @@ En af koldeste og helt ubolige lokationer på planeten.
 
     'UNKNOWN_LOCATION': {
         'en': u'Unknown location',
+        'af': u'Onbekende ligging',
         'be': u'Невядомае месцазнаходжанне',
         'bs': u'Nepoznatoja lokacija',
         'ca': u'Localització desconeguda',
@@ -256,6 +261,7 @@ En af koldeste og helt ubolige lokationer på planeten.
 
     'LOCATION': {
         'en': u'Location',
+        'af': u'Ligging',
         'be': u'Месцазнаходжанне',
         'bs': u'Lokacija',
         'ca': u'Localització',
@@ -300,6 +306,13 @@ We will get new queries as soon as possible.
 You can follow https://twitter.com/igor_chubin for the updates.
 ======================================================================================
 """,
+        'af': u"""
+Verskoning, ons oorskry tans die vermoë om navrae aan die weerdiens te rig.
+Hier is die weerberig van 'n voorbeeld ligging (bloot om aan u te wys hoe dit lyk).
+Ons sal weereens nuwe navrae kan hanteer so gou as moontlik.
+U kan vir https://twitter.com/igor_chubin volg vir opdaterings.
+======================================================================================
+""",
         'be': u"""
 Прабачце, мы выйшлі за ліміты колькасці запытаў да службы надвор'я ў дадзены момант.
 Вось прагноз надвор'я для горада па змаўчанні (толькі, каб паказаць вам, як гэта выглядае).
@@ -329,9 +342,9 @@ Folgen Sie https://twitter.com/igor_chubin für Updates.
 ======================================================================================
 """,
         'cy': u"""
-Rydym yn brin o ymholiadau i'r gwasanaeth tywydd ar hyn o bryd. 
-Felly dyma'r adroddiad tywydd ar gyfer y ddinas ragosod (er mwyn arddangos sut mae'n edrych). 
-Byddwn gyda ymholiadau newydd yn fuan. 
+Rydym yn brin o ymholiadau i'r gwasanaeth tywydd ar hyn o bryd.
+Felly dyma'r adroddiad tywydd ar gyfer y ddinas ragosod (er mwyn arddangos sut mae'n edrych).
+Byddwn gyda ymholiadau newydd yn fuan.
 Gellir dilyn https://twitter.com/igor_chubin i gael newyddion pellach.
 ======================================================================================
 """,
@@ -450,12 +463,13 @@ Du kan følge https://twitter.com/igor_chubin for at få opdateringer.
 
     },
 
-    # Historical messages:  
+    # Historical messages:
     #     'Check new Feature: \033[92mwttr.in/Moon\033[0m or \033[92mwttr.in/Moon@2016-Mar-23\033[0m to see the phase of the Moon'
     #     'New feature: \033[92mwttr.in/Rome?lang=it\033[0m or \033[92mcurl -H "Accept-Language: it" wttr.in/Rome\033[0m for the localized version. Your lang instead of "it"'
 
     'NEW_FEATURE': {
         'en': u'New feature: multilingual location names \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) and location search \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
+        'af': u'Nuwe eienskap: veeltalige name vir liggings \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) en ligging soek \033[92mwttr.in/~Kilimanjaro\033[0m (plaas net ~ vooraan)',
         'be': u'Новыя магчымасці: назвы месц на любой мове \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) i пошук месц \033[92mwttr.in/~Kilimanjaro\033[0m (трэба дадаць ~ ў пачатак)',
         'bs': u'XXXXXXXXXXXXXXXXXXXX: XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\033[92mwttr.in/станция+Восток\033[0m (XX UTF-8) XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
         'ca': u'Noves funcionalitats: noms d\'ubicació multilingües \033[92mwttr.in/станция+Восток\033[0m (en UTF-8) i la ubicació de recerca \033[92mwttr.in/~Kilimanjaro\033[0m (només cal afegir ~ abans)',
@@ -478,12 +492,13 @@ Du kan følge https://twitter.com/igor_chubin for at få opdateringer.
         'pt': u'Nova funcionalidade: nomes de localidades em várias línguas \033[92mwttr.in/станция+Восток\033[0m (em UTF-8) e procura por localidades \033[92mwttr.in/~Kilimanjaro\033[0m (é só colocar ~ antes)',
         'ru': u'Попробуйте: названия мест на любом языке \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и поиск мест \033[92mwttr.in/~Kilimanjaro\033[0m (нужно добавить ~ спереди)',
         'tr': u'Yeni özellik: çok dilli konum isimleri \033[92mwttr.in/станция+Восток\033[0m (UTF-8 ile) ve konum arama \033[92mwttr.in/~Kilimanjaro\033[0m (sadece önüne ~ ekleyin)',
-        'te': u'క్రొత్త లక్షణం: బహుభాషా స్థాన పేర్లు \ 033 [92mwttr.in/stancelя+Vostок\033 [0 U (UTF-8 లో) మరియు స్థానం శోధన \ 033 [92mwttr.in/~kilimanjaro\033 [0m (కేవలం ~ ముందుకి జోడించండి)',   
+        'te': u'క్రొత్త లక్షణం: బహుభాషా స్థాన పేర్లు \ 033 [92mwttr.in/stancelя+Vostок\033 [0 U (UTF-8 లో) మరియు స్థానం శోధన \ 033 [92mwttr.in/~kilimanjaro\033 [0m (కేవలం ~ ముందుకి జోడించండి)',
         'da': u'Ny funktion: flersprogede lokationsnavne \033[92mwttr.in/станция+Восток\033[0m (som UTF-8) og lokations søgning \033[92mwttr.in/~Kilimanjaro\033[0m (bare tilføj ~ inden)',
     },
 
     'FOLLOW_ME': {
         'en': u'Follow \033[46m\033[30m@igor_chubin\033[0m for wttr.in updates',
+        'af': u'Volg \033[46m\033[30m@igor_chubin\033[0m vir wttr.in opdaterings',
         'be': u'Сачыце за \033[46m\033[30m@igor_chubin\033[0m за навінамі wttr.in',
         'bs': u'XXXXXX \033[46m\033[30m@igor_chubin\033[0m XXXXXXXXXXXXXXXXXXX',
         'ca': u'Seguiu \033[46m\033[30m@igor_chubin\033[0m per actualitzacions de wttr.in',
