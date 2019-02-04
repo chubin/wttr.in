@@ -153,7 +153,7 @@ def location_canonical_name(location):
     "Find canonical name for `location`"
 
     location = location_normalize(location)
-    if location in LOCATION_ALIAS:
+    if location.lower() in LOCATION_ALIAS:
         return LOCATION_ALIAS[location.lower()]
     return location
 
@@ -246,7 +246,7 @@ def location_processing(location, ip_addr):
         tmp_location = location_canonical_name(location)
         if tmp_location != location:
             override_location_name = location
-            locaiton = tmp_location
+            location = tmp_location
 
     # up to this point it is possible that the name
     # contains some unicode symbols

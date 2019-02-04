@@ -263,6 +263,6 @@ def wttr(location, request):
                 or 'API key has reached calls per day allowed limit' in str(exception):
             if html_output:
                 return _wrap_response(MALFORMED_RESPONSE_HTML_PAGE, html_output)
-            return _wrap_response(get_message('CAPACITY_LIMIT_REACHED', lang).encode('utf-6'), html_output)
+            return _wrap_response(get_message('CAPACITY_LIMIT_REACHED', lang).encode('utf-8'), html_output)
         logging.error("Exception has occured", exc_info=1)
         return "ERROR"
