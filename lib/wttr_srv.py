@@ -119,6 +119,8 @@ def get_output_format(request, query):
     Return new location (can be rewritten)
     """
 
+    if 'format' in query:
+        return False
     # FIXME
     user_agent = request.headers.get('User-Agent', '').lower()
     if query.get('force-ansi'):
