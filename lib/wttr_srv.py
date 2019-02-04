@@ -160,6 +160,11 @@ def wttr(location, request):
         request.query_string
     """
 
+    def _wrap_response(response_text, html_output):
+        response = make_response(response_text)
+        response.mimetype = 'text/html' if html_output else 'text/plain'
+        return response
+
     if is_location_blocked(location):
         return ""
 
@@ -183,8 +188,8 @@ def wttr(location, request):
     if location in PLAIN_TEXT_PAGES:
         help_ = show_text_file(location, lang)
         if html_output:
-            return render_template('index.html', body=help_)
-        return help_
+            return _wrap_response(render_template('index.html', body=help_), html_output)
+        return _wrap_response(help_, html_output)
 
     if location and ':' in location:
         location = cyclic_location_selection(location, query.get('period', 1))
@@ -210,7 +215,7 @@ def wttr(location, request):
     # We are ready to return the answer
     try:
         if 'format' in query:
-            return wttr_line(location, override_location_name, query)
+            return _wrap_response(wttr_line(location, override_location_name, query), html_output)
 
         if png_filename:
             options = {
@@ -250,13 +255,14 @@ def wttr(location, request):
             else:
                 #output += '\n' + get_message('NEW_FEATURE', lang).encode('utf-8')
                 output += '\n' + get_message('FOLLOW_ME', lang).encode('utf-8') + '\n'
-        return output
+
+        return _wrap_response(output, html_output)
 
     except RuntimeError as exception:
         if 'Malformed response' in str(exception) \
                 or 'API key has reached calls per day allowed limit' in str(exception):
             if html_output:
-                return MALFORMED_RESPONSE_HTML_PAGE
-            return get_message('CAPACITY_LIMIT_REACHED', lang).encode('utf-8')
+                return _wrap_response(MALFORMED_RESPONSE_HTML_PAGE, html_output)
+            return _wrap_response(get_message('CAPACITY_LIMIT_REACHED', lang).encode('utf-6'), html_output)
         logging.error("Exception has occured", exc_info=1)
         return "ERROR"
