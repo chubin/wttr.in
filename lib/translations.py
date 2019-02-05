@@ -21,9 +21,9 @@ PARTIAL_TRANSLATION = [
 ]
 
 PROXY_LANGS = [
-    'az', 'be', 'bs', 'ca', 'cy', 'eo', 'fa',
+    'af', 'az', 'be', 'bs', 'ca', 'cy', 'eo', 'fa',
     'he', 'hr', 'hy', 'id', 'is', 'it', 'ja',
-    'kk', 'lv', 'mk', 'nb', 'nn', 'sl', 'uz'
+    'kk', 'lv', 'mk', 'nb', 'nn', 'ro', 'sl', 'uz'
 ]
 
 SUPPORTED_LANGS = FULL_TRANSLATION + PARTIAL_TRANSLATION
