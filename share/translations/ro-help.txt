@@ -1,0 +1,67 @@
+Utilizare:
+
+    $ curl wttr.in          # localizare curentă
+    $ curl wttr.in/otp      # Aeroportul Internațional Henri Coandă (OTP)
+
+Tipuri de localizări acceptate:
+
+    /Cluj                   # numele localității
+    /~coloana+infinitului   # locuri binecunoscute sau puncte de interes
+    /Москва                 # nume Unicode în orice limbă
+    /otp                    # cod aeroport (3 litere)
+    /@stackoverflow.com     # nume de domeniu
+    /94107                  # cod poștal (doar pentru Statele Unite)
+    /-78.46,106.79          # coordonate GPS
+
+Localizări speciale:
+
+    /moon                   # faza lunii (adăugați ,+US sau ,+France pentru a arăta orașele cu acest nume)
+    /moon@2016-10-25        # faza lunii într-o anumită dată (@2016-10-25)
+
+Unități de măsură:
+
+    ?m                      # sistem metric (implicit, mai puțin pentru Statele Unite ale Americii)
+    ?u                      # USCS (implicit pentru Statele Unite ale Americii)
+    ?M                      # afișează viteza vântului în m/s
+
+Opțiuni de afișare:
+
+    ?0                      # azi
+    ?1                      # azi și mâine
+    ?2                      # azi, mâine și poimâine
+    ?n                      # doar ziua și noaptea
+    ?q                      # fără antet "Prognoza meteo pentru"
+    ?Q                      # fără antet "Prognoza meteo pentru", fără numele localității
+    ?T                      # fără coduri speciale în terminal (fără culori)
+
+Opțiuni PNG:
+
+    /Băicoi.png             # generează un fișier PNG
+    ?p                      # cu chenar
+    ?t                      # cu transparență 150
+    transparency=...        # cu transparență în intervalul [0-255] (255 = fără transparență)
+
+Combinarea opțiunilor:
+
+    /Lehliu-Gară?0q
+    /Vaslui?0q&lang=ro
+    /Videle_0pq.png         # în modul PNG opțiunile se specifică după _
+    /Roma_0pq_lang=it.png   # opțiunile cu nume lung se separă prin _
+
+Limba de afișare:
+
+    $ curl ro.wttr.in/Tărtășești
+    $ curl wttr.in/Paris?lang=fr
+    $ curl -H "Accept-Language: de" wttr.in/berlin
+
+Limbi suportate:
+
+    FULL_TRANSLATION (Suport complet)
+    PARTIAL_TRANSLATION (Suport incomplet)
+
+URL-uri speciale:
+
+    /:help                  # afișează această pagină
+    /:bash.function         # funcție bash wttr()
+    /:translation           # afișează informații despre traducerile din wttr.in
+
