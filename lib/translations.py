@@ -5,7 +5,7 @@ Translation of almost everything.
 """
 
 FULL_TRANSLATION = [
-    "af", "da", "de", "fr", "fa", "id", "it", "nb", "nl", "pl", "ru",
+    "af", "da", "de", "fr", "fa", "id", "it", "nb", "nl", "pl", "ro", "ru",
 ]
 
 PARTIAL_TRANSLATION = [
@@ -14,7 +14,7 @@ PARTIAL_TRANSLATION = [
     "hi", "hr", "hu", "hy", "is",
     "ja", "jv", "ka", "kk", "ko", "ky", "lt",
     "lv", "mk", "ml", "nl", "nn", "pt",
-    "ro", "sk", "sl", "sr", "sr-lat",
+    "sk", "sl", "sr", "sr-lat",
     "sv", "sw", "th", "tr", "te", "uk", "uz", "vi",
     "zh", "zu",
     "he",
@@ -164,7 +164,7 @@ jednego z najzimniejszych, stale zamieszkanych miejsc na Ziemi.
 Mamy nadzieję, że u Ciebie jest cieplej!
 """,
         'ro': u"""
-Nu v-am putut identifica locația, prin urmare va aratam vremea din Oimiakon,
+Nu v-am putut identifica localitatea, prin urmare vă arătăm vremea din Oimiakon,
 una dintre cele mai reci localități permanent locuite de pe planetă.
 Sperăm că aveți vreme mai bună!
 """,
@@ -247,7 +247,7 @@ En af koldeste og helt ubolige lokationer på planeten.
         'nl': u'Onbekende locatie',
         'pl': u'Nieznana lokalizacja',
         'pt': u'Localização desconhecida',
-        'ro': u'Locaţie necunoscută',
+        'ro': u'Localitate necunoscută',
         'ru': u'Неизвестное местоположение',
         'sk': u'Neznáma poloha',
         'sl': u'Neznano lokacijo',
@@ -287,7 +287,7 @@ En af koldeste og helt ubolige lokationer på planeten.
         'nl': u'Locatie',
         'pl': u'Lokalizacja',
         'pt': u'Localização',
-        'ro': u'Locaţie',
+        'ro': u'Localitate',
         'ru': u'Местоположение',
         'sk': u'Poloha',
         'sl': u'Lokacijo',
@@ -439,6 +439,13 @@ Em breve voltaremos a ter acesso às consultas.
 Você pode seguir https://twitter.com/igor_chubin para acompanhar a situação.
 ======================================================================================
 """,
+        'ro': u"""
+Ne pare rău, momentan am epuizat cererile alocate de către serviciul de prognoză meteo.
+Vă arătăm prognoza meteo pentru localitatea implicită (ca exemplu, să vedeți cum arată).
+Vom obține alocarea de cereri noi cât de curând posibil.
+Puteți urmări https://twitter.com/igor_chubin pentru actualizări.
+======================================================================================
+""",
         'te': u"""
 క్షమించండి, ప్రస్తుతానికి మేము వాతావరణ సేవకు ప్రశ్నలను గడుపుతున్నాం.
 ఇక్కడ డిఫాల్ట్ నగరం కోసం వాతావరణ నివేదిక (కేవలం మీకు చూపించడానికి, ఇది ఎలా కనిపిస్తుంది).
@@ -490,6 +497,7 @@ Du kan følge https://twitter.com/igor_chubin for at få opdateringer.
         'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
         'pl': u'Nowa funkcjonalność: wielojęzyczne nazwy lokalizacji \033[92mwttr.in/станция+Восток\033[0m (w UTF-8) i szukanie lokalizacji \033[92mwttr.in/~Kilimanjaro\033[0m (poprzedź zapytanie ~ - znakiem tyldy)',
         'pt': u'Nova funcionalidade: nomes de localidades em várias línguas \033[92mwttr.in/станция+Восток\033[0m (em UTF-8) e procura por localidades \033[92mwttr.in/~Kilimanjaro\033[0m (é só colocar ~ antes)',
+        'ro': u'Funcționalitate nouă: nume de localități multilingve \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) și căutare de localități \033[92mwttr.in/~Kilimanjaro\033[0m (adăuați ~ în față)',
         'ru': u'Попробуйте: названия мест на любом языке \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и поиск мест \033[92mwttr.in/~Kilimanjaro\033[0m (нужно добавить ~ спереди)',
         'tr': u'Yeni özellik: çok dilli konum isimleri \033[92mwttr.in/станция+Восток\033[0m (UTF-8 ile) ve konum arama \033[92mwttr.in/~Kilimanjaro\033[0m (sadece önüne ~ ekleyin)',
         'te': u'క్రొత్త లక్షణం: బహుభాషా స్థాన పేర్లు \ 033 [92mwttr.in/stancelя+Vostок\033 [0 U (UTF-8 లో) మరియు స్థానం శోధన \ 033 [92mwttr.in/~kilimanjaro\033 [0m (కేవలం ~ ముందుకి జోడించండి)',
@@ -518,6 +526,7 @@ Du kan følge https://twitter.com/igor_chubin for at få opdateringer.
         'nl': u'Volg \033[46m\033[30m@igor_chubin\033[0m voor wttr.in updates',
         'pl': u'Śledź \033[46m\033[30m@igor_chubin\033[0m aby być na bieżąco z nowościami dotyczącymi wttr.in',
         'pt': u'Seguir \033[46m\033[30m@igor_chubin\033[0m para as novidades de wttr.in',
+        'ro': u'Urmăriți \033[46m\033[30m@igor_chubin\033[0m pentru actualizări despre wttr.in',
         'ru': u'Все новые фичи публикуются здесь: \033[46m\033[30m@igor_chubin\033[0m',
         'te': u'అనుసరించండి \ 033 [46m \ 033 [30m @ igor_chubin \ 033 [wttr.in నవీకరణలను కోసం',
         'tr': u'wttr.in ile ilgili gelişmeler için \033[46m\033[30m@igor_chubin\033[0m adresini takip edin',
