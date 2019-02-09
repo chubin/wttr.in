@@ -123,6 +123,13 @@ Nuremberg: 🌦 +5⁰C
 
 Available preconfigured formats: 1, 2, 3, 4 and custom format using a percent notation.
 
+Use `:` separated lists for multiple locations (for repeating queries):
+
+```
+$ curl wttr.in/Nuremberg:Hamburg:Berlin?format=
+Nuremberg: 🌦 +5⁰C
+```
+
 ## Moon phases
 
 wttr.in can also be used to check the phase of the Moon. This example shows how to see the current Moon phase:
