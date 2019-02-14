@@ -118,10 +118,57 @@ For one-line output format, specify additional URL parameter `format`:
 
 ```
 $ curl wttr.in/Nuremberg?format=3
-Nuremberg: 🌦 +5⁰C
+Nuremberg: 🌦 +11⁰C
 ```
 
-Available preconfigured formats: 1, 2, 3, 4 and custom format using a percent notation.
+Available preconfigured formats: 1, 2, 3, 4 and the custom format using the percent notation (see below).
+
+You can sepcify multiple locations separated with `:` (for repeating queries):
+
+```
+$ curl wttr.in/Nuremberg:Hamburg:Berlin?format=3
+Nuremberg: 🌦 +11⁰C
+```
+Or to process all this queries at once:
+
+```
+$ curl 'wttr.in/{Nuremberg,Hamburg,Berlin}?format=3'
+Nuremberg: 🌦 +11⁰C
+Hamburg: 🌦 +8⁰C
+Berlin: 🌦 +8⁰C
+```
+
+To specify your own custom output format, use the special `%`-notation:
+
+```
+    c    Weather condition,
+    t    Temperature,
+    w    Wind,
+    l    Location,
+    m    Moonphase 🌑🌒🌓🌔🌕🌖🌗🌘,
+    M    Moonday,
+```
+
+So, these two calls are the same:
+
+```
+    $ curl wttr.in/London?format=3
+    London: ⛅️ +7⁰C
+    $ curl wttr.in/London?format="%l:+%c+%t"
+    London: ⛅️ +7⁰C
+```
+Keep in mind, that when using in `tmux.conf`, you have to escape `%` with `%`, i.e. write there `%%` instead of `%`.
+
+In progams, that are querying the service automatically (such as tmux),it is better to use some reasonable update interval. In tmux, you can configure it with `status-interval`.
+
+If several, `:` separated locations, are specified in the query, specify update period
+as an additional query parameter `period=`:
+```
+set -g status-interval 60
+WEATHER='#(curl -s wttr.in/London:Stockholm:Moscow\?format\="%%l:+%%c%%20%%t%%60%%w&period=60")'
+set -g status-right "$WEATHER ..."
+```
+![wttr.in in tmux status bar](https://wttr.in/files/example-tmux-status-line.png)
 
 ## Moon phases
 
