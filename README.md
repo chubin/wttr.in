@@ -132,7 +132,7 @@ Nuremberg: 🌦 +11⁰C
 Or to process all this queries at once:
 
 ```
-$ curl 'wttr.in/{Nuremberg,Hamburg,Berlin}?format=3'
+$ curl -s 'wttr.in/{Nuremberg,Hamburg,Berlin}?format=3'
 Nuremberg: 🌦 +11⁰C
 Hamburg: 🌦 +8⁰C
 Berlin: 🌦 +8⁰C
