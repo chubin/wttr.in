@@ -142,6 +142,7 @@ To specify your own custom output format, use the special `%`-notation:
 
 ```
     c    Weather condition,
+    h    Humidity,
     t    Temperature,
     w    Wind,
     l    Location,
