@@ -1,50 +1,50 @@
-113:                                    : Limpo
-113:                                    : Ensolarado
-116:                                    : Parcialmente encoberto
-119:                                    : Encoberto
-122:                                    : Nublado
-143:                                    : Névoa
-176:                                    : Possibilidade chuva fraca
-179:                                    : Possibilidade neve fraca
-182:                                    : Possibilidade granizo
-185:                                    : Possibilidade chuvisco gelado
-200:                                    : Possibilidade de pancadas de chuva
-227:                                    : Neve com vento
-230:                                    : Nevasca
-248:                                    : Nevoeiro
-260:                                    : Névoa congelante
-263:                                    : Chuvisco irregualr
-266:                                    : Chuvisco
-281:                                    : Chuvisco gelado
-284:                                    : Chuvisco muito gelado
-293:                                    : Garoa irregular
-296:                                    : Garoa
-299:                                    : Chuva moderada ocasional
-302:                                    : Chuva moderada
-305:                                    : Chuva forte ocasional
-308:                                    : Chuva forte
-311:                                    : Garoa gelada
-314:                                    : Chuva forte ou moderada gelada
-317:                                    : Granizo fraco
-320:                                    : Granizo moderado ou forte
-323:                                    : Neve fraca irregular
-326:                                    : Neve fraca
-329:                                    : Neve moderada irregular
-332:                                    : Neve moderada
-335:                                    : Neve forte irregular
-338:                                    : Neve forte
-350:                                    : Pelotas de gelo
-353:                                    : Chuveiro de garoa
-356:                                    : Chuveiro de chuva moderada ou forte
-359:                                    : Chuveiro de chuva torrencial
-362:                                    : Chuveiro de granizo fraco
-365:                                    : Chuveiro de granizo moderada ou forte
-368:                                    : Chuveiro de neve fraca
-371:                                    : Chuveiro de neve moderada ou forte
-386:                                    : Tempestate com garoa irregular
-389:                                    : Tempestade com chuva moderada ou forte
-392:                                    : Tempestade com neve fraca
-395:                                    : Tempestade com neve moderada ou forte
+113: Limpo                                        :  Clear
+113: Ensolarado                                   :  Sunny
+116: Parcialmente encoberto                       :  Partly cloudy
+119: Encoberto                                    :  Cloudy
+122: Nublado                                      :  Overcast
+143: Névoa                                        :  Mist
+176: Possibilidade chuva fraca                    :  Patchy rain possible
+179: Possibilidade neve fraca                     :  Patchy snow possible
+182: Possibilidade granizo                        :  Patchy sleet possible
+185: Possibilidade chuvisco gelado                :  Patchy freezing drizzle possible
+200: Possibilidade de pancadas de chuva           :  Thundery outbreaks possible
+227: Neve com vento                               :  Blowing snow
+230: Nevasca                                      :  Blizzard
+248: Nevoeiro                                     :  Fog
+260: Névoa congelante                             :  Freezing fog
+263: Chuvisco irregualr                           :  Patchy light drizzle
+266: Chuvisco                                     :  Light drizzle
+281: Chuvisco gelado                              :  Freezing drizzle
+284: Chuvisco muito gelado                        :  Heavy freezing drizzle
+293: Garoa irregular                              :  Patchy light rain
+296: Garoa                                        :  Light rain
+299: Chuva moderada ocasional                     :  Moderate rain at times
+302: Chuva moderada                               :  Moderate rain
+305: Chuva forte ocasional                        :  Heavy rain at times
+308: Chuva forte                                  :  Heavy rain
+311: Garoa gelada                                 :  Light freezing rain
+314: Chuva forte ou moderada gelada               :  Moderate or heavy freezing rain
+317: Granizo fraco                                :  Light sleet
+320: Granizo moderado ou forte                    :  Moderate or heavy sleet
+323: Neve fraca irregular                         :  Patchy light snow
+326: Neve fraca                                   :  Light snow
+329: Neve moderada irregular                      :  Patchy moderate snow
+332: Neve moderada                                :  Moderate snow
+335: Neve forte irregular                         :  Patchy heavy snow
+338: Neve forte                                   :  Heavy snow
+350: Pelotas de gelo                              :  Ice pellets
+353: Chuveiro de garoa                            :  Light rain shower
+356: Chuveiro de chuva moderada ou forte          :  Moderate or heavy rain shower
+359: Chuveiro de chuva torrencial                 :  Torrential rain shower
+362: Chuveiro de granizo fraco                    :  Light sleet showers
+365: Chuveiro de granizo moderada ou forte        :  Moderate or heavy sleet showers
+368: Chuveiro de neve fraca                       :  Light snow showers
+371: Chuveiro de neve moderada ou forte           :  Moderate or heavy snow showers
+386: Tempestate com garoa irregular               :  Patchy light rain with thunder
+389: Tempestade com chuva moderada ou forte       :  Moderate or heavy rain with thunder
+392: Tempestade com neve fraca                    :  Patchy light snow with thunder
+395: Tempestade com neve moderada ou forte        :  Moderate or heavy snow with thunder
 
 
 
