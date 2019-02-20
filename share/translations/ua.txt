@@ -1,0 +1,47 @@
+113:                                    : Clear                             : Ясно
+113:                                    : Sunny                             : Сонячно
+116:                                    : Partly cloudy                     : Змінна хмарність
+119:                                    : Cloudy                            : Хмарно
+122:                                    : Overcast                          : Похмуро
+143:                                    : Mist                              : Невеликий туман
+176:                                    : Patchy rain possible              : Місцями дощ
+179:                                    : Patchy snow possible              : Місцями сніг
+182:                                    : Patchy sleet possible             : Місцями дощ зі снігом
+185:                                    : Patchy freezing drizzle possible  : Місцями ожеледь
+200:                                    : Thundery outbreaks possible       : Місцями грози
+227:                                    : Blowing snow                      : Заметіль
+230:                                    : Blizzard                          : Снігова буря
+248:                                    : Fog                               : Туман
+260:                                    : Freezing fog                      : Крижаний туман
+263:                                    : Patchy light drizzle              : Місцями мряка
+266:                                    : Light drizzle                     : Мряка
+281:                                    : Freezing drizzle                  : Ожеледь
+284:                                    : Heavy freezing drizzle            : Сильна ожеледь
+293:                                    : Patchy light rain                 : Місцями невеликий дощ
+296:                                    : Light rain                        : Невеликий дощ
+299:                                    : Moderate rain at times            : Часом помірний дощ
+302:                                    : Moderate rain                     : Помірний дощ
+305:                                    : Heavy rain at times               : Часом сильний дощ
+308:                                    : Heavy rain                        : Сильний дощ
+311:                                    : Light freezing rain               : Слабкий крижаний дощ
+314:                                    : Moderate or heavy freezing rain   : Крижаний дощ
+317:                                    : Light sleet                       : Невеликий дощ зі снігом
+320:                                    : Moderate or heavy sleet           : Дощ зі снігом
+323:                                    : Patchy light snow                 : Місцями невеликий сніг
+326:                                    : Light snow                        : Невеликий сніг
+329:                                    : Patchy moderate snow              : Місцями помірний сніг
+332:                                    : Moderate snow                     : Помірний сніг
+335:                                    : Patchy heavy snow                 : Місцями сильний сніг
+338:                                    : Heavy snow                        : Сильний сніг
+350:                                    : Ice pellets                       : Льодяний дощ
+353:                                    : Light rain shower                 : Невелика злива
+356:                                    : Moderate or heavy rain shower     : Злива
+359:                                    : Torrential rain shower            : Дуже сильна злива
+362:                                    : Light sleet showers               : Невеликий мокрий сніг
+365:                                    : Moderate or heavy sleet showers   : Мокрий сніг
+368:                                    : Light snow showers                : Невеликий сніг
+371:                                    : Moderate or heavy snow showers    : Сніг
+386:                                    : Patchy light rain with thunder      : Місцями дощ з грозою
+389:                                    : Moderate or heavy rain with thunder : Дощ з грозою
+392:                                    : Patchy light snow with thunder      : Місцями сніг з грозою
+395:                                    : Moderate or heavy snow with thunder : Сніг з грозою
