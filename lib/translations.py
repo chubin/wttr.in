@@ -13,7 +13,7 @@ PARTIAL_TRANSLATION = [
     "el", "eo", "es", "et", "fi",
     "hi", "hr", "hu", "hy", "is",
     "ja", "jv", "ka", "kk", "ko", "ky", "lt",
-    "lv", "mk", "ml", "nl", "nn", "pt",
+    "lv", "mk", "ml", "nl", "nn", "pt", "pt-br",
     "sk", "sl", "sr", "sr-lat",
     "sv", "sw", "th", "tr", "te", "uk", "uz", "vi",
     "zh", "zu",
@@ -23,7 +23,8 @@ PARTIAL_TRANSLATION = [
 PROXY_LANGS = [
     'af', 'az', 'be', 'bs', 'ca', 'cy', 'eo', 'fa',
     'he', 'hr', 'hy', 'id', 'is', 'it', 'ja',
-    'kk', 'lv', 'mk', 'nb', 'nn', 'ro', 'sl', 'uz'
+    'kk', 'lv', 'mk', 'nb', 'nn', 'ro', 'sl', 'uz',
+    "pt-br",
 ]
 
 SUPPORTED_LANGS = FULL_TRANSLATION + PARTIAL_TRANSLATION
