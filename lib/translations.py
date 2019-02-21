@@ -217,6 +217,11 @@ Vi kunne desværre ikke finde din lokation
 så vi har bragt dig til Oymyakon,
 En af koldeste og helt ubolige lokationer på planeten.
 """,
+        'et': u"""
+Me ei suutnud tuvastada teie asukohta
+ning seetõttu paigutasime teid Oymyakoni,
+mis on üks kõige külmemaid püsivalt asustatud paiku planeedil.
+""",
     },
 
     'UNKNOWN_LOCATION': {
@@ -231,6 +236,7 @@ En af koldeste og helt ubolige lokationer på planeten.
         'da': u'Ukendt lokation',
         'el': u'Άνγωστη τοποθεσία',
         'es': u'Ubicación desconocida',
+        'et': u'Tundmatu asukoht',
         'fa': u'مکان نامعلوم',
         'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement inconnu',
@@ -271,6 +277,7 @@ En af koldeste og helt ubolige lokationer på planeten.
         'da': u'Lokation',
         'el': u'Τοποθεσία',
         'es': u'Ubicación',
+        'et': u'Asukoht',
         'fa': u'مکان',
         'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement',
@@ -467,6 +474,13 @@ Vi får nye forespørsler hurtigst muligt.
 Du kan følge https://twitter.com/igor_chubin for at få opdateringer.
 ======================================================================================
 """,
+        'et': u"""
+Vabandage, kuid hetkel on päringud ilmateenusele piiratud.
+Selle asemel kuvame hetkel näidislinna ilmaprognoosi (näitamaks, kuidas see välja näeb).
+Üritame probleemi lahendada niipea kui võimalik.
+Jälgige https://twitter.com/igor_chubin värskenduste jaoks.
+======================================================================================
+""",
 
     },
 
@@ -502,6 +516,7 @@ Du kan følge https://twitter.com/igor_chubin for at få opdateringer.
         'tr': u'Yeni özellik: çok dilli konum isimleri \033[92mwttr.in/станция+Восток\033[0m (UTF-8 ile) ve konum arama \033[92mwttr.in/~Kilimanjaro\033[0m (sadece önüne ~ ekleyin)',
         'te': u'క్రొత్త లక్షణం: బహుభాషా స్థాన పేర్లు \ 033 [92mwttr.in/stancelя+Vostок\033 [0 U (UTF-8 లో) మరియు స్థానం శోధన \ 033 [92mwttr.in/~kilimanjaro\033 [0m (కేవలం ~ ముందుకి జోడించండి)',
         'da': u'Ny funktion: flersprogede lokationsnavne \033[92mwttr.in/станция+Восток\033[0m (som UTF-8) og lokations søgning \033[92mwttr.in/~Kilimanjaro\033[0m (bare tilføj ~ inden)',
+        'et': u'Uus funktsioon: mitmekeelsed asukohanimed \033[92mwttr.in/станция+Восток\033[0m (UTF-8 vormingus) ja asukoha otsing \033[92mwttr.in/~Kilimanjaro\033[0m (lisa ~ enne)',
     },
 
     'FOLLOW_ME': {
@@ -531,6 +546,7 @@ Du kan følge https://twitter.com/igor_chubin for at få opdateringer.
         'te': u'అనుసరించండి \ 033 [46m \ 033 [30m @ igor_chubin \ 033 [wttr.in నవీకరణలను కోసం',
         'tr': u'wttr.in ile ilgili gelişmeler için \033[46m\033[30m@igor_chubin\033[0m adresini takip edin',
         'da': u'Følg \033[46m\033[30m@igor_chubin\033[0m for at få wttr.in opdateringer',
+        'et': u'Jälgi \033[46m\033[30m@igor_chubin\033[0m wttr.in uudiste tarbeks',
     },
 }
 
