@@ -86,6 +86,11 @@ No hemos logrado encontrar tu ubicación,
 asi que hemos decidido enseñarte el tiempo en Oymyakon,
 uno de los sitios más fríos y permanentemente deshabitados del planeta.
 """,
+        'et': u"""
+Me ei suutnud tuvastada teie asukohta
+ning seetõttu paigutasime teid Oymyakoni,
+mis on üks kõige külmemaid püsivalt asustatud paiku planeedil.
+""",
         'fa': u"""
 ما نتونستیم مکان شما رو پیدا کنیم. به همین خاطر شما رو به om بردیم
 ، یکی از سردترین مکان های روی زمین که اصلا قابل سکونت نیست!
@@ -231,6 +236,7 @@ En af koldeste og helt ubolige lokationer på planeten.
         'da': u'Ukendt lokation',
         'el': u'Άνγωστη τοποθεσία',
         'es': u'Ubicación desconocida',
+        'et': u'Tundmatu asukoht',
         'fa': u'مکان نامعلوم',
         'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement inconnu',
@@ -271,6 +277,7 @@ En af koldeste og helt ubolige lokationer på planeten.
         'da': u'Lokation',
         'el': u'Τοποθεσία',
         'es': u'Ubicación',
+        'et': u'Asukoht',
         'fa': u'مکان',
         'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement',
