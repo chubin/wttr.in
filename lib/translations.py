@@ -362,6 +362,13 @@ Muy pronto volveremos a tener acceso a las peticiones.
 Puedes seguir https://twitter.com/igor_chubin para estar al tanto de la situación.
 ======================================================================================
 """,
+        'et': u"""
+Vabandage, kuid hetkel on päringud ilmateenusele piiratud.
+Selle asemel kuvame hetkel näidislinna ilmaprognoosi (näitamaks, kuidas see välja näeb).
+Üritame probleemi lahendada niipea kui võimalik.
+Jälgige https://twitter.com/igor_chubin värskenduste jaoks.
+======================================================================================
+""",
         'fa': u"""
 متأسفانه در حال حاضر ظرفیت ما برای درخواست به سرویس هواشناسی به اتمام رسیده.
 اینجا می تونید گزارش هواشناسی برای شهر پیش فرض رو ببینید (فقط برای اینه که بهتون نشون بدیم چه شکلی هست)
