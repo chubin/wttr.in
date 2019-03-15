@@ -5,7 +5,7 @@ Translation of almost everything.
 """
 
 FULL_TRANSLATION = [
-    "af", "da", "de", "fr", "fa", "id", "it", "nb", "nl", "pl", "ro", "ru", "uk"
+    "af", "da", "de", "fr", "fa", "id", "it", "nb", "nl", "pl", "pt-br", "ro", "ru", "uk"
 ]
 
 PARTIAL_TRANSLATION = [
@@ -156,6 +156,11 @@ Não conseguimos encontrar a sua localização,
 então decidimos te mostrar o tempo em Oymyakon,
 um dos lugares mais frios e permanentemente desabitados do planeta.
 """,
+        'pt-br': u"""
+Não conseguimos encontrar a sua localização,
+então decidimos te mostrar o tempo em Oymyakon,
+um dos lugares mais frios e permanentemente desabitados do planeta.
+""",
         'pl': u"""
 Nie udało nam się znaleźć podanej przez Ciebie lokalizacji,
 więc zabraliśmy Cię do Ojmiakonu,
@@ -252,6 +257,7 @@ mis on üks kõige külmemaid püsivalt asustatud paiku planeedil.
         'nl': u'Onbekende locatie',
         'pl': u'Nieznana lokalizacja',
         'pt': u'Localização desconhecida',
+        'pt-br': u'Localização desconhecida',
         'ro': u'Localitate necunoscută',
         'ru': u'Неизвестное местоположение',
         'sk': u'Neznáma poloha',
@@ -293,6 +299,7 @@ mis on üks kõige külmemaid püsivalt asustatud paiku planeedil.
         'nl': u'Locatie',
         'pl': u'Lokalizacja',
         'pt': u'Localização',
+        'pt-br': u'Localização',
         'ro': u'Localitate',
         'ru': u'Местоположение',
         'sk': u'Poloha',
@@ -445,6 +452,13 @@ Em breve voltaremos a ter acesso às consultas.
 Você pode seguir https://twitter.com/igor_chubin para acompanhar a situação.
 ======================================================================================
 """,
+        'pt-br': u"""
+Desculpe-nos, atingimos o limite de consultas ao serviço de previsão do tempo neste momento.
+Veja a seguir a previsão do tempo para uma cidade padrão (apenas para você ver que aspecto o relatório tem).
+Em breve voltaremos a ter acesso às consultas.
+Você pode seguir https://twitter.com/igor_chubin para acompanhar a situação.
+======================================================================================
+""",
         'ro': u"""
 Ne pare rău, momentan am epuizat cererile alocate de către serviciul de prognoză meteo.
 Vă arătăm prognoza meteo pentru localitatea implicită (ca exemplu, să vedeți cum arată).
@@ -516,6 +530,7 @@ Jälgige https://twitter.com/igor_chubin värskenduste jaoks.
         'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
         'pl': u'Nowa funkcjonalność: wielojęzyczne nazwy lokalizacji \033[92mwttr.in/станция+Восток\033[0m (w UTF-8) i szukanie lokalizacji \033[92mwttr.in/~Kilimanjaro\033[0m (poprzedź zapytanie ~ - znakiem tyldy)',
         'pt': u'Nova funcionalidade: nomes de localidades em várias línguas \033[92mwttr.in/станция+Восток\033[0m (em UTF-8) e procura por localidades \033[92mwttr.in/~Kilimanjaro\033[0m (é só colocar ~ antes)',
+        'pt-br': u'Nova funcionalidade: nomes de localidades em várias línguas \033[92mwttr.in/станция+Восток\033[0m (em UTF-8) e procura por localidades \033[92mwttr.in/~Kilimanjaro\033[0m (é só colocar ~ antes)',
         'ro': u'Funcționalitate nouă: nume de localități multilingve \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) și căutare de localități \033[92mwttr.in/~Kilimanjaro\033[0m (adăuați ~ în față)',
         'ru': u'Попробуйте: названия мест на любом языке \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и поиск мест \033[92mwttr.in/~Kilimanjaro\033[0m (нужно добавить ~ спереди)',
         'tr': u'Yeni özellik: çok dilli konum isimleri \033[92mwttr.in/станция+Восток\033[0m (UTF-8 ile) ve konum arama \033[92mwttr.in/~Kilimanjaro\033[0m (sadece önüne ~ ekleyin)',
@@ -547,6 +562,7 @@ Jälgige https://twitter.com/igor_chubin värskenduste jaoks.
         'nl': u'Volg \033[46m\033[30m@igor_chubin\033[0m voor wttr.in updates',
         'pl': u'Śledź \033[46m\033[30m@igor_chubin\033[0m aby być na bieżąco z nowościami dotyczącymi wttr.in',
         'pt': u'Seguir \033[46m\033[30m@igor_chubin\033[0m para as novidades de wttr.in',
+        'pt-br': u'Seguir \033[46m\033[30m@igor_chubin\033[0m para as novidades de wttr.in',
         'ro': u'Urmăriți \033[46m\033[30m@igor_chubin\033[0m pentru actualizări despre wttr.in',
         'ru': u'Все новые фичи публикуются здесь: \033[46m\033[30m@igor_chubin\033[0m',
         'te': u'అనుసరించండి \ 033 [46m \ 033 [30m @ igor_chubin \ 033 [wttr.in నవీకరణలను కోసం',
