@@ -43,7 +43,7 @@ Translated/improved/corrected by:
     * Serbian:      Milan Stevanović @FathVader
     * Swahili:      Joel Mukuthu
     * Turkish:      Atabey Kaygun, Yilmaz @edigu
-    * Ukrainian:    Igor Chubin
+    * Ukrainian:    Igor Chubin, Serhiy @pavse
     * Uzbek:        Shukhrat Mukimov
     * Welsh:        Daniel Thomas
 
