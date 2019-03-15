@@ -89,7 +89,10 @@ def render_wind(data, query):
     else:
         wind_direction = ""
 
-    if query.get('use_imperial', False):
+    if query.get('use_ms_for_wind', False):
+        unit = ' m/s'
+        wind = u'%s%.1f%s' % (wind_direction, float(data['windspeedKmph'])/36.0*10.0, unit)
+    elif query.get('use_imperial', False):
         unit = ' mph'
         wind = u'%s%s%s' % (wind_direction, data['windspeedMiles'], unit)
     else:
