@@ -42,9 +42,9 @@ def render_temperature(data, query):
     """
 
     if query.get('use_imperial', False):
-        temperature = u'%s⁰F' % data['temp_F']
+        temperature = u'%s°F' % data['temp_F']
     else:
-        temperature = u'%s⁰C' % data['temp_C']
+        temperature = u'%s°C' % data['temp_C']
 
     if temperature[0] != '-':
         temperature = '+' + temperature
@@ -58,6 +58,16 @@ def render_condition(data, query):
 
     weather_condition = WEATHER_SYMBOL[WWO_CODE[data['weatherCode']]]
     return weather_condition
+
+def render_humidity(data, query):
+    """
+    humidity (h)
+    """
+
+    humidity = data.get('humidity', '')
+    if humidity:
+        humidity += '%'
+    return humidity
 
 def render_wind(data, query):
     """
@@ -125,6 +135,7 @@ def render_sunset(data, query):
 
 FORMAT_SYMBOL = {
     'c':    render_condition,
+    'h':    render_humidity,
     't':    render_temperature,
     'w':    render_wind,
     'l':    render_location,
