@@ -5,7 +5,7 @@ Translation of almost everything.
 """
 
 FULL_TRANSLATION = [
-    "af", "da", "de", "fr", "fa", "id", "it", "nb", "nl", "pl", "ro", "ru",
+    "af", "da", "de", "fr", "fa", "id", "it", "nb", "nl", "pl", "ro", "ru", "uk"
 ]
 
 PARTIAL_TRANSLATION = [
@@ -15,7 +15,7 @@ PARTIAL_TRANSLATION = [
     "ja", "jv", "ka", "kk", "ko", "ky", "lt",
     "lv", "mk", "ml", "nl", "nn", "pt", "pt-br",
     "sk", "sl", "sr", "sr-lat",
-    "sv", "sw", "th", "tr", "te", "uk", "uz", "vi",
+    "sv", "sw", "th", "tr", "te", "uz", "vi",
     "zh", "zu",
     "he",
 ]
@@ -69,7 +69,6 @@ Ni darganfyddwyd eich lleoliad,
 felly rydym wedi dod â chi i Oymyakon,
 un o'r llefydd oeraf ar y blaned ble mae pobl yn dal i fyw!
 """,
-
         'de': u"""
 Wir konnten Ihren Standort nicht finden,
 also haben wir Sie nach Oimjakon gebracht,
@@ -203,10 +202,10 @@ Umarız sizin olduğunuz yerde havalar daha iyidir!
 భూమిపై అత్యల్ప శాశ్వతంగా నివసించే స్థానిక ప్రదేశాలలో ఒకటి.
 """,
         'uk': u"""
-Ваше місце розташування визначити не вдалося,
-тому ми покажемо вам погоду в Оймяконе,
+Ми не змогли визначити Ваше місцезнаходження,
+тому покажемо Вам погоду в Оймяконі —
 найхолоднішому населеному пункті на планеті.
-Будемо сподіватися, що у вас сьогодні погода краще!
+Будемо сподіватися, що у Вас сьогодні погода краще!
 """,
         'uz': u"""
 Sizning joylashuvingizni aniqlay olmadik,
@@ -262,7 +261,7 @@ mis on üks kõige külmemaid püsivalt asustatud paiku planeedil.
         'sv': u'Okänd plats',
         'te': u'తెలియని ప్రదేశం',
         'tr': u'Bilinmeyen konum',
-        'ua': u'Невідоме місце',
+        'uk': u'Невідоме місце',
         'uz': u'Аникланмаган худуд',
     },
 
@@ -303,7 +302,7 @@ mis on üks kõige külmemaid püsivalt asustatud paiku planeedil.
         'sv': u'Plats',
         'te': u'స్థానము',
         'tr': u'Konum',
-        'ua': u'Місце',
+        'uk': u'Місцезнаходження'
     },
 
     'CAPACITY_LIMIT_REACHED': {
@@ -482,7 +481,13 @@ Selle asemel kuvame hetkel näidislinna ilmaprognoosi (näitamaks, kuidas see v�
 Jälgige https://twitter.com/igor_chubin värskenduste jaoks.
 ======================================================================================
 """,
-
+        'uk': u"""
+Вибачте, ми перевищили максимальну кількість запитів до сервісу погоди.
+Ось прогноз погоди у нашому місті (просто показати Вам як це виглядає).
+Ми відновимо роботу як тільки зможемо.
+Ви можете підписатися на https://twitter.com/igor_chubin для отримання новин.
+======================================================================================
+"""
     },
 
     # Historical messages:
@@ -518,6 +523,7 @@ Jälgige https://twitter.com/igor_chubin värskenduste jaoks.
         'te': u'క్రొత్త లక్షణం: బహుభాషా స్థాన పేర్లు \ 033 [92mwttr.in/stancelя+Vostок\033 [0 U (UTF-8 లో) మరియు స్థానం శోధన \ 033 [92mwttr.in/~kilimanjaro\033 [0m (కేవలం ~ ముందుకి జోడించండి)',
         'da': u'Ny funktion: flersprogede lokationsnavne \033[92mwttr.in/станция+Восток\033[0m (som UTF-8) og lokations søgning \033[92mwttr.in/~Kilimanjaro\033[0m (bare tilføj ~ inden)',
         'et': u'Uus funktsioon: mitmekeelsed asukohanimed \033[92mwttr.in/станция+Восток\033[0m (UTF-8 vormingus) ja asukoha otsing \033[92mwttr.in/~Kilimanjaro\033[0m (lisa ~ enne)',
+        'uk': u'Спробуйте: назви місць будь-якою мовою \033[92mwttr.in/станція+Восток\033[0m (в UTF-8) та пошук місць \033[92mwttr.in/~Kilimanjaro\033[0m (потрібно додати ~ спочатку)'
     },
 
     'FOLLOW_ME': {
@@ -548,6 +554,7 @@ Jälgige https://twitter.com/igor_chubin värskenduste jaoks.
         'tr': u'wttr.in ile ilgili gelişmeler için \033[46m\033[30m@igor_chubin\033[0m adresini takip edin',
         'da': u'Følg \033[46m\033[30m@igor_chubin\033[0m for at få wttr.in opdateringer',
         'et': u'Jälgi \033[46m\033[30m@igor_chubin\033[0m wttr.in uudiste tarbeks',
+        'uk': u'Нові можливості wttr.in публікуються тут: \033[46m\033[30m@igor_chubin\033[0m'
     },
 }
 
