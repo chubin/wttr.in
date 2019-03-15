@@ -22,7 +22,7 @@ PROXY_LANGS = [
     "af", "az", "be", "bs", "ca", "cy", "eo",
     "et", "fa", "he", "hr", "hy", "id", "is",
     "it", "ja", "kk", "lv", "mk", "nb", "nn",
-    "ro", "sl", "pt-br", "uk", "uz",
+    "ro", "ru", "sl", "pt-br", "uk", "uz",
 ]
 
 SUPPORTED_LANGS = FULL_TRANSLATION + PARTIAL_TRANSLATION
