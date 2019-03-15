@@ -175,6 +175,8 @@ def format_weather_data(format_line, location, override_location, data, query):
     with specified in `format_line` format
     """
 
+    if 'data' not in data:
+        return 'Unknow location; please try ~%s' % location
     current_condition = data['data']['current_condition'][0]
     current_condition['location'] = location
     current_condition['override_location'] = override_location
