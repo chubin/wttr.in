@@ -45,11 +45,11 @@
 389: Mõõdukas või tugev vihm äikesega   : Moderate or heavy rain with thunder
 392: Paiguti nõrk lumesadu äikesega     : Patchy light snow with thunder
 395: Mõõdukas või tugev lumesadu äikesega : Moderate or heavy snow with thunder
-   :                                    : Rain shower
-   :                                    : Heavy showers
-   :                                    : Light showers
-   :                                    : Heavy snow showers
-   :                                    : Thundery showers
-   :                                    : Thundery heavy rain
-   :                                    : Thundery snow showers
-   :                                    : Heavy snow showers
+   : Hoogvihm                           : Rain shower
+   : Tugev hoogvihm                     : Heavy showers
+   : Nõrk hoogvihm                      : Light showers
+   : Tugev hooglumi                     : Heavy snow showers
+   : Äikesevihm                         : Thundery showers
+   : Tugev äikesevihm                   : Thundery heavy rain
+   : Äikesega lumesadu                  : Thundery snow showers
+   : Tugev hooglumi                     : Heavy snow showers
