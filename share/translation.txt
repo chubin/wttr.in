@@ -16,6 +16,7 @@ Translated/improved/corrected by:
     * Danish:       Kim Schulz @kimusan (on github)
     * Dutch:        Youri Claes
     * Esperanto:    Igor Chubin
+    * Estonian:     Jaan Jänesmäe @janesmae (on github)
     * Finnish:      @Maxifi
     * French:       Igor Chubin, @daftaupe 
     * German:       Igor Chubin, @MAGICC (https://kthx.at)
