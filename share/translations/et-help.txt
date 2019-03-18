@@ -1,0 +1,66 @@
+Kasutus:
+
+    $ curl wttr.in          # praegune asukoht
+    $ curl wttr.in/tll      # ilmaprognoos Tallinna Lennujaamas
+
+Toetatud asukohatüübid:
+
+    /paris                  # linna nimi
+    /~suur+munamägi         # mistahes asukoht
+    /Москва                 # Ükskõik millises keeles Unicode'i vormingus asukoha nimi
+    /muc                    # IATA Lennujaama kood (3 tähemärki)
+    /@stackoverflow.com     # domeeninimi
+    /94107                  # Piirkonna kood (Ainult USA)
+    /-78.46,106.79          # GPS-koordinaadid
+
+Erilised asukohad:
+
+    /moon                   # Kuu faas (lisage, +US või +France linnade jaoks))
+    /moon@2016-10-25        # Kuu faas kindlal kuupäeval (@2016-10-25)
+
+Ühikud:
+
+    ?m                      # meetriline (SI) (kasutatakse vaikimisi kõikjal peale USA)
+    ?u                      # USCS (kasutusel vaikimisi USA)
+    ?M                      # kuva tuule kiirust m/s
+
+Vaadete valikuid:
+
+    ?0                      # kuva ainult praegune ilm
+    ?1                      # kuva praegune ilm + 1 päeva prognoos
+    ?2                      # kuva praegune ilm + 2 päeva prognoos
+    ?n                      # kitsas vaade (Päeva & Öö prognoos)
+    ?q                      # taltsas variant ('ilmaprognoos' tekstita)
+    ?Q                      # eriti taltsas variant (asukohata ja 'ilmaprognoos' tekstita)
+    ?T                      # värvideta
+
+PNG valikud:
+
+    /paris.png              # loo PNG fail
+    ?p                      # lisab raami ümber väljundi
+    ?t                      # läbipaistvus 150
+    transparency=...        # läbipaistvus 0-st kuni 255-ni (255 = pole läbipaistev)
+
+Valikuid saab kombineerida:
+
+    /Paris?0pq
+    /Paris?0pq&lang=fr
+    /Paris_0pq.png          # PNG failis saab valikuid määrata peale _ (alakriips) tähemärki
+    /Rome_0pq_lang=it.png   # pikad valikud on eraldatud alakriipsuga
+
+Lokaliseerimine:
+
+    $ curl fr.wttr.in/Paris
+    $ curl wttr.in/paris?lang=fr
+    $ curl -H "Accept-Language: fr" wttr.in/paris
+
+Toetattud keeled:
+
+    FULL_TRANSLATION (toetatud)
+    PARTIAL_TRANSLATION (teoksil)
+
+Erilehed:
+
+    /:help                  # kuvab käesolevat lehte
+    /:bash.function         # kuvab soovitatud bash-funktsiooni wttr()
+    /:translation           # kuvab infot tõlkijate kohta
