@@ -53,8 +53,8 @@ Nadamo se da ćete imati bolje vreme!
 """,
         'ca': u"""
 Hem estat incapaços de trobar la seva ubicació,
-és per aquest motiu que l'hem portat fins Oymyakon,
-un dels llocs més freds inhabitats de manera permanent al planeta.
+per això l'hem portat fins Oymyakon,
+un dels llocs més freds i permanentment deshabitats del planeta.
 """,
         'cs': u"""
 Nepodařilo se nám najít vaši polohu,
@@ -340,10 +340,10 @@ Možete pratiti https://twitter.com/igor_chubin za ažuriranja.
 ======================================================================================
 """,
         'ca': u"""
-Disculpi'ns, ens hem quedat sense consultes al servei meteorològic momentàniament.
-Aquí li oferim l'informe del temps a la ciutat per defecte (només per mostrar, quin aspecte té).
+Disculpa'ns, ens hem quedat momentàniament sense consultes al servei meteorològic.
+Aquí t'oferim l'informe del temps a la ciutat per defecte (només per mostrar quin aspecte té).
 Obtindrem noves consultes tan aviat com ens sigui possible.
-Pot seguir https://twitter.com/igor_chubin per noves actualitzacions.
+Pots seguir https://twitter.com/igor_chubin per noves actualitzacions.
 ======================================================================================
 """,
         'de': u"""
@@ -544,7 +544,7 @@ Jälgige https://twitter.com/igor_chubin värskenduste jaoks.
         'af': u'Volg \033[46m\033[30m@igor_chubin\033[0m vir wttr.in opdaterings',
         'be': u'Сачыце за \033[46m\033[30m@igor_chubin\033[0m за навінамі wttr.in',
         'bs': u'XXXXXX \033[46m\033[30m@igor_chubin\033[0m XXXXXXXXXXXXXXXXXXX',
-        'ca': u'Seguiu \033[46m\033[30m@igor_chubin\033[0m per actualitzacions de wttr.in',
+        'ca': u'Segueix \033[46m\033[30m@igor_chubin\033[0m per actualitzacions de wttr.in',
         'es': u'Seguir \033[46m\033[30m@igor_chubin\033[0m para recibir las novedades de wttr.in',
         'cy': u'Dilyner \033[46m\033[30m@igor_Chubin\033[0m am diweddariadau wttr.in',
         'fa': u'برای دنبال کردن خبرهای wttr.in شناسه \033[46m\033[30m@igor_chubin\033[0m رو فالو کنید.',
