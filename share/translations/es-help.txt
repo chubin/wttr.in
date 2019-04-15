@@ -16,7 +16,7 @@ Tipos de ubicación soportados:
 Sitios especiales:
 
     /moon                   # la fase de la luna (añade ,+US o ,+France para estos paises)
-    /moon@2016-10-25        # la fase de la lua en una fecha específica (@2016-10-25)
+    /moon@2016-10-25        # la fase de la luna en una fecha específica (@2016-10-25)
 
 Unidades:
 
@@ -30,9 +30,9 @@ Opciones de visualización:
     ?1                      # el clima actual + la previsión de 1 día
     ?2                      # el clima actual + la previsión de 2 días
     ?n                      # versión corta (solo el día y la noche)
-    ?q                      # versión quieta (sin el texto de "El tiempo en")
-    ?Q                      # versión superquieta (ni "El tiempo en" ni el nombre de la ciudad)
-    ?T                      # apaga las secuencias de terminal (sin colores)
+    ?q                      # versión silenciosa (sin el texto de "El tiempo en")
+    ?Q                      # versión supersilenciosa (ni "El tiempo en" ni el nombre de la ciudad)
+    ?T                      # desactiva las secuencias de terminal (sin colores)
 
 Opciones de PNG:
 
