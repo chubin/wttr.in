@@ -89,6 +89,26 @@ def render_humidity(data, query):
         humidity += '%'
     return humidity
 
+def render_precipitation(data, query):
+    """
+    precipitation (p)
+    """
+
+    answer = data.get('precipMM', '')
+    if answer:
+        answer += 'mm'
+    return answer
+
+def render_pressure(data, query):
+    """
+    pressure (P)
+    """
+
+    answer = data.get('pressure', '')
+    if answer:
+        answer += 'hPa'
+    return answer
+
 def render_wind(data, query):
     """
     wind (w)
@@ -166,6 +186,8 @@ FORMAT_SYMBOL = {
     'm':    render_moonphase,
     'M':    render_moonday,
     's':    render_sunset,
+    'p':    render_precipitation,
+    'P':    render_pressure,
     }
 
 def render_line(line, data, query):

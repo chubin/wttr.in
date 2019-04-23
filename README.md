@@ -149,6 +149,8 @@ To specify your own custom output format, use the special `%`-notation:
     l    Location,
     m    Moonphase 🌑🌒🌓🌔🌕🌖🌗🌘,
     M    Moonday,
+    p    precipitation (mm),
+    P    pressure (hPa),
 ```
 
 So, these two calls are the same:
