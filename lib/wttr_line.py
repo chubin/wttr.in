@@ -59,6 +59,26 @@ def render_condition(data, query):
     weather_condition = WEATHER_SYMBOL[WWO_CODE[data['weatherCode']]]
     return weather_condition
 
+def render_condition_fullname(data, query):
+    """
+    condition_fullname (C)
+    """
+
+    found = None
+    for key, val in data.items():
+        if key.startswith('lang_'):
+            found = val
+            break
+    if not found:
+        found = data['weatherDesc']
+
+    try:
+        weather_condition = found[0]['value']
+    except KeyError:
+        weather_condition = ''
+
+    return weather_condition
+
 def render_humidity(data, query):
     """
     humidity (h)
@@ -138,6 +158,7 @@ def render_sunset(data, query):
 
 FORMAT_SYMBOL = {
     'c':    render_condition,
+    'C':    render_condition_fullname,
     'h':    render_humidity,
     't':    render_temperature,
     'w':    render_wind,
