@@ -215,7 +215,7 @@ def wttr(location, request):
     # We are ready to return the answer
     try:
         if 'format' in query:
-            return _wrap_response(wttr_line(location, override_location_name, query), html_output)
+            return _wrap_response(wttr_line(location, override_location_name, query, lang), html_output)
 
         if png_filename:
             options = {

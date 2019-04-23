@@ -183,7 +183,7 @@ def format_weather_data(format_line, location, override_location, data, query):
     output = render_line(format_line, current_condition, query)
     return output
 
-def wttr_line(location, override_location_name, query):
+def wttr_line(location, override_location_name, query, lang):
     """
     Return 1line weather information for `location`
     in format `line_format`
@@ -194,7 +194,7 @@ def wttr_line(location, override_location_name, query):
     if format_line in PRECONFIGURED_FORMAT:
         format_line = PRECONFIGURED_FORMAT[format_line]
 
-    weather_data = get_weather_data(location)
+    weather_data = get_weather_data(location, lang)
 
     output = format_weather_data(format_line, location, override_location_name, weather_data, query)
     output = output.rstrip("\n")+"\n"
@@ -210,7 +210,7 @@ def main():
         'line': sys.argv[2],
         }
 
-    sys.stdout.write(wttr_line(location, location, query))
+    sys.stdout.write(wttr_line(location, location, query, 'en'))
 
 if __name__ == '__main__':
     main()

@@ -6,12 +6,11 @@ import json
 import requests
 from globals import WWO_KEY
 
-def get_weather_data(location):
+def get_weather_data(location, lang):
     """
     Get weather data for `location`
     """
     key = WWO_KEY
-    lang = 'en'
     url = ('/premium/v1/weather.ashx'
            '?key=%s&q=%s&format=json'
            '&num_of_days=3&tp=3&lang=%s') % (key, location, lang)
