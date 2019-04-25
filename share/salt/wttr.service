@@ -1,0 +1,9 @@
+[Unit]
+Description=Wttr weather service
+
+[Service]
+ExecStart=/usr/bin/authbind --deep /srv/ephemeral/start.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
