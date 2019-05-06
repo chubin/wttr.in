@@ -273,7 +273,7 @@ If `virtualenv` is used:
 
     $ virtualenv ve
     $ ve/bin/pip install -r requirements.txt
-    $ ve/bin/pip bin/srv.py
+    $ ve/bin/python bin/srv.py
 
 Also, you need to install the geoip2 database.
 You can use a free database GeoLite2 that can be downloaded from (http://dev.maxmind.com/geoip/geoip2/geolite2/).
