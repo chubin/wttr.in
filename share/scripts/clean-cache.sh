@@ -8,3 +8,8 @@ do
   mkdir "${CACHEDIR}/${dir}"
   rm -rf "${CACHEDIR}/${dir}.old"
 done
+
+cd /wttr.in/log
+mv main.log main.log.1
+touch main.log
+

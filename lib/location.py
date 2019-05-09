@@ -95,15 +95,18 @@ def ip2location(ip_addr):
     if os.path.exists(cached):
         location = open(cached, 'r').read()
     else:
-        try:
-            ip2location_response = requests\
-                    .get('http://api.ip2location.com/?ip=%s&key=%s&package=WS3' \
-                            % (ip_addr, IP2LOCATION_KEY)).text
-            if ';' in ip2location_response:
-                open(cached, 'w').write(ip2location_response)
-            location = ip2location_response
-        except requests.exceptions.ConnectionError:
-            pass
+        # if IP2LOCATION_KEY is not set, do not the query,
+        # because the query wont be processed anyway
+        if IP2LOCATION_KEY:
+            try:
+                ip2location_response = requests\
+                        .get('http://api.ip2location.com/?ip=%s&key=%s&package=WS3' \
+                                % (ip_addr, IP2LOCATION_KEY)).text
+                if ';' in ip2location_response:
+                    open(cached, 'w').write(ip2location_response)
+                location = ip2location_response
+            except requests.exceptions.ConnectionError:
+                pass
 
     if ';' in location:
         location = location.split(';')[3], location.split(';')[1]

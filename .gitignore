@@ -4,3 +4,4 @@ share/static/fonts/
 data/
 log/
 .idea/
+*.swp

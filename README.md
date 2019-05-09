@@ -234,8 +234,8 @@ To install the application:
 
 1. Install external dependencies
 2. Install Python dependencies used by the service
-3. Get a WorldWeatherOnline API Key
-4. Configure wego
+3. Configure IP2Location (optional)
+4. Get a WorldWeatherOnline API and configure wego
 5. Configure wttr.in
 6. Configure the HTTP-frontend service
 
@@ -278,13 +278,23 @@ If `virtualenv` is used:
 Also, you need to install the geoip2 database.
 You can use a free database GeoLite2 that can be downloaded from (http://dev.maxmind.com/geoip/geoip2/geolite2/).
 
-### Get a WorldWeatherOnline key
+### Configure IP2Location (optional)
+
+If you want to use the IP2location service for IP-addresses that are not covered by GeoLite2,
+you have to obtain a API key of that service, and after that save into the `~/.ip2location.key` file:
+
+```
+$ echo 'YOUR_IP2LOCATION_KEY' > ~/.ip2location.key
+```
+
+If you don't have this file, the service will be silently skipped (it is not a big problem,
+because the MaxMind database is pretty good).
+
+### Get a WorldWeatherOnline key and configure wego
 
 To get a WorldWeatherOnline API key, you must register here:
  
     https://developer.worldweatheronline.com/auth/register
-
-### Configure wego
 
 After you have a WorldWeatherOnline key, you can configure `wego`:
 

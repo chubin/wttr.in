@@ -67,6 +67,7 @@ PLAIN_TEXT_AGENTS = [
 PLAIN_TEXT_PAGES = [':help', ':bash.function', ':translation']
 
 _IP2LOCATION_KEY_FILE = os.environ['HOME'] + '/.ip2location.key'
+IP2LOCATION_KEY = None
 if os.path.exists(_IP2LOCATION_KEY_FILE):
     IP2LOCATION_KEY = open(_IP2LOCATION_KEY_FILE, 'r').read().strip()
 
