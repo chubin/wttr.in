@@ -7,3 +7,6 @@ dnspython
 pylint
 cyrtranslit
 astral
+timezonefinder
+Pillow
+pyte
