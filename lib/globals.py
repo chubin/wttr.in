@@ -1,5 +1,14 @@
 """
 global configuration of the project
+
+External environment variables:
+
+    WTTR_MYDIR
+    WTTR_GEOLITE
+    WTTR_WEGO
+    WTTR_LISTEN_HOST
+    WTTR_LISTEN_PORT
+
 """
 from __future__ import print_function
 
@@ -8,8 +17,12 @@ import os
 
 MYDIR = os.path.abspath(os.path.dirname(os.path.dirname('__file__')))
 
-GEOLITE = os.path.join(MYDIR, 'data', "GeoLite2-City.mmdb")
-WEGO = "/home/igor/go/bin/we-lang"
+if "WTTR_GEOLITE" in os.environ:
+    GEOLITE = os.environ["WTTR_GEOLITE"]
+else:
+    GEOLITE = os.path.join(MYDIR, 'data', "GeoLite2-City.mmdb")
+
+WEGO = os.environ.get("WTTR_WEGO", "/home/igor/go/bin/we-lang")
 PYPHOON = "/home/igor/pyphoon/bin/pyphoon-lolcat"
 
 _DATADIR = "/wttr.in"
@@ -46,8 +59,11 @@ GEOLOCATOR_SERVICE = 'http://localhost:8004'
 # (minute, hour, day) limitations:
 QUERY_LIMITS = (300, 3600, 24*3600)
 
-LISTEN_HOST = ""
-LISTEN_PORT = 8002
+LISTEN_HOST = os.environ.get("WTTR_LISTEN_HOST", "")
+try:
+    LISTEN_PORT = int(os.environ.get("WTTR_LISTEN_PORT"))
+except (TypeError, ValueError):
+    LISTEN_PORT = 8002
 
 PROXY_HOST = "127.0.0.1"
 PROXY_PORT = 5001
@@ -72,6 +88,7 @@ if os.path.exists(_IP2LOCATION_KEY_FILE):
     IP2LOCATION_KEY = open(_IP2LOCATION_KEY_FILE, 'r').read().strip()
 
 _WWO_KEY_FILE = os.environ['HOME'] + '/.wwo.key'
+WWO_KEY = "key-is-not-specified"
 if os.path.exists(_WWO_KEY_FILE):
     WWO_KEY = open(_WWO_KEY_FILE, 'r').read().strip()
 
