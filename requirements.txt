@@ -10,3 +10,4 @@ astral
 timezonefinder
 Pillow
 pyte
+python-dateutil
