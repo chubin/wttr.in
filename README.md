@@ -296,7 +296,10 @@ To get a WorldWeatherOnline API key, you must register here:
  
     https://developer.worldweatheronline.com/auth/register
 
-After you have a WorldWeatherOnline key, you can configure `wego`:
+After you have a WorldWeatherOnline key, you can save it into the
+WWO key file: `~/.wwo.key`
+
+Also, you have to specify the key in the `wego` configuration:
 
     $ cat ~/.wegorc 
     {
