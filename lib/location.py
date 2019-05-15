@@ -108,7 +108,7 @@ def ip2location(ip_addr):
             except requests.exceptions.ConnectionError:
                 pass
 
-    if ';' in location:
+    if location and ';' in location:
         location = location.split(';')[3], location.split(';')[1]
     else:
         location = location, None
