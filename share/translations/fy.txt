@@ -1,0 +1,47 @@
+113: Helder                       : Clear                             
+113: Sinnich                      : Sunny
+116: Bytsje bewolkt               : Partly cloudy
+119: Bewolkt                      : Cloudy
+122: Bewolkt                      : Overcast
+143: Mistich                      : Mist
+176: Misskien lokaal reinbui      : Patchy rain possible
+179: Misskien lokaal snie         : Patchy snow possible
+182: Misskien lokaal hagel        : Patchy sleet possible
+185: Misskien lokaal izel         : Patchy freezing drizzle possible
+200: Misskien in onwaarsbui       : Thundery outbreaks possible
+227: Snie wyn                     : Blowing snow
+230: Sniestoarm                   : Blizzard
+248: Mistich                      : Fog
+260: Rijp                         : Freezing fog
+263: Lokaal motrein               : Patchy light drizzle
+266: Motrein                      : Light drizzle
+281: Izel                         : Freezing drizzle
+284: Swiere izel                  : Heavy freezing drizzle
+293: Lokaal in bytsje rein        : Patchy light rain
+296: Bytsje rein                  : Light rain
+299: Út en troch rein             : Moderate rain at times
+302: Rein                         : Moderate rain
+305: Út en troch swiere rein      : Heavy rain at times
+308: Swiere rein                  : Heavy rain
+311: Lichte izel                  : Light freezing rain
+314: Swiere izel                  : Moderate or heavy freezing rain
+317: Lichte hagel                 : Light sleet
+320: Swiere hagel                 : Moderate or heavy sleet
+323: Lokaal lichte snie           : Patchy light snow
+326: Lichte snie                  : Light snow
+329: Lokaal snie                  : Patchy moderate snow
+332: Snie                         : Moderate snow
+335: Lokaal swiere snie           : Patchy heavy snow
+338: Swiere snie                  : Heavy snow
+350: Hagel                        : Ice pellets
+353: Lichte reinbuien             : Light rain shower
+356: Reinbuien                    : Moderate or heavy rain shower
+359: Ekstreem swiere reinbuien    : Torrential rain shower
+362: Lichte hagelbuien            : Light sleet showers
+365: Hagelbuien                   : Moderate or heavy sleet showers
+368: Lichte sniebuien             : Light snow showers
+371: Sniebuien                    : Moderate or heavy snow showers
+386: Lokaal lichte rein mei onwaar: Patchy light rain with thunder      weer
+389: Rein mei onwaar              : Moderate or heavy rain with thunder
+392: Lokaal lichte snie mei onwaar: Patchy light snow with thunder      nweer
+395: Snie mei onwaar              : Moderate or heavy snow with thunder
