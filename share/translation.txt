@@ -15,6 +15,7 @@ Translated/improved/corrected by:
     * Czech:        Juraj Kakody
     * Danish:       Kim Schulz @kimusan (on github)
     * Dutch:        Youri Claes
+    * Frisian:      Anne Douwe Bouma @anned20 (on github)
     * Esperanto:    Igor Chubin
     * Estonian:     Jaan Jänesmäe @janesmae (on github)
     * Finnish:      @Maxifi
