@@ -5,14 +5,14 @@ Translation of almost everything.
 """
 
 FULL_TRANSLATION = [
-    "af", "da", "de", "fr", "fa", "et", "id", "it", "nb", "nl", "pl", "pt-br", "ro", "ru", "uk"
+    "af", "da", "de", "fr", "fa", "et", "id", "it", "nb", "nl", "fy", "pl", "pt-br", "ro", "ru", "uk"
 ]
 
 PARTIAL_TRANSLATION = [
     "az", "be", "bg", "bs", "ca", "cy", "cs",
     "el", "eo", "es", "fi", "hi", "hr",
     "hu", "hy", "is", "ja", "jv", "ka", "kk",
-    "ko", "ky", "lt", "lv", "mk", "ml", "nl",
+    "ko", "ky", "lt", "lv", "mk", "ml", "nl", "fy",
     "nn", "pt", "pt-br", "sk", "sl", "sr", "sr-lat",
     "sv", "sw", "th", "tr", "te", "uz", "vi",
     "zh", "zu", "he",
@@ -150,6 +150,11 @@ Wij konden uw locatie niet vaststellen
 dus hebben we u naar Ojmjakon gebracht,
 één van de koudste permanent bewoonde gebieden op deze planeet.
 """,
+        'fy': u"""
+Wy koenen jo lokaasje net fêststelle
+dus wy ha jo nei Ojmjakon brocht,
+ien fan de kâldste permanent bewenbere plakken op ierde.
+""",
         'pt': u"""
 Não conseguimos encontrar a sua localização,
 então decidimos te mostrar o tempo em Oymyakon,
@@ -254,6 +259,7 @@ mis on üks kõige külmemaid püsivalt asustatud paiku planeedil.
         'mk': u'Непозната локација',
         'nb': u'Ukjent sted',
         'nl': u'Onbekende locatie',
+        'fy': u'Ûnbekende lokaasje',
         'pl': u'Nieznana lokalizacja',
         'pt': u'Localização desconhecida',
         'pt-br': u'Localização desconhecida',
@@ -296,6 +302,7 @@ mis on üks kõige külmemaid püsivalt asustatud paiku planeedil.
         'mk': u'Локација',
         'nb': u'Sted',
         'nl': u'Locatie',
+        'fy': u'Lokaasje',
         'pl': u'Lokalizacja',
         'pt': u'Localização',
         'pt-br': u'Localização',
@@ -437,6 +444,13 @@ Wij lossen dit probleem zo snel mogelijk op.
 voor updates kunt u ons op https://twitter.com/igor_chubin volgen.
 ======================================================================================
 """,
+        'fy': u"""
+Excuses, wy kinne op dit moment 't waarberjocht net sjin litte.
+Hjir is 't waarberjocht foar de standaard stêd.
+Wy losse dit probleem sa gau mooglik op.
+Foar updates kinne jo ús op https://twitter.com/igor_chubin folgje.
+======================================================================================
+""",
         'pl': u"""
 Bardzo nam przykro, ale chwilowo wykorzystaliśmy limit zapytań do serwisu pogodowego.
 To, co widzisz jest przykładowym raportem pogodowym dla domyślnego miasta.
@@ -518,6 +532,7 @@ Jälgige https://twitter.com/igor_chubin värskenduste jaoks.
         'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
         'nb': u'Ny funksjon: flerspråklige stedsnavn \033[92mwttr.in/станция+Восток\033[0m (i UTF-8) og lokasjonssøk \033[92mwttr.in/~Kilimanjaro\033[0m (bare legg til ~ foran)',
         'nl': u'Nieuwe functie: tweetalige locatie namen \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) en locatie zoeken \033[92mwttr.in/~Kilimanjaro\033[0m (zet er gewoon een ~ voor)',
+        'fy': u'Nije funksje: twatalige lokaasje nammen \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) en lokaasje sykjen \033[92mwttr.in/~Kilimanjaro\033[0m (set er gewoan in ~ foar)',
         'cy': u'Nodwedd newydd: enwau lleoliadau amlieithog \033[92mwttr.in/станция+Восток\033[0m (yn UTF-8) a chwilio am leoliad \033[92mwttr.in/~Kilimanjaro\033[0m (ychwanegwch ~ yn gyntaf)',
         'de': u'Neue Funktion: mehrsprachige Ortsnamen \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) und Ortssuche \033[92mwttr.in/~Kilimanjaro\033[0m (fügen Sie ein ~ vor dem Ort ein)',
         'hy': u'Փորձարկեք: տեղամասերի անունները կամայական լեզվով \033[92mwttr.in/Դիլիջան\033[0m (в UTF-8) և տեղանքի որոնում \033[92mwttr.in/~Kilimanjaro\033[0m (հարկավոր է ~ ավելացնել դիմացից)',
@@ -559,6 +574,7 @@ Jälgige https://twitter.com/igor_chubin värskenduste jaoks.
         'mk': u'Следете \033[46m\033[30m@igor_chubin\033[0m за wttr.in новости',
         'nb': u'Følg \033[46m\033[30m@igor_chubin\033[0m for wttr.in oppdateringer',
         'nl': u'Volg \033[46m\033[30m@igor_chubin\033[0m voor wttr.in updates',
+        'fy': u'Folgje \033[46m\033[30m@igor_chubin\033[0m foar wttr.in updates',
         'pl': u'Śledź \033[46m\033[30m@igor_chubin\033[0m aby być na bieżąco z nowościami dotyczącymi wttr.in',
         'pt': u'Seguir \033[46m\033[30m@igor_chubin\033[0m para as novidades de wttr.in',
         'pt-br': u'Seguir \033[46m\033[30m@igor_chubin\033[0m para as novidades de wttr.in',
