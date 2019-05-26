@@ -78,24 +78,32 @@ def get_answer_language(request):
             try:
                 if language.split(";")[0] == language:
                     # no q => q = 1
-                    locale_q_pairs.append((language.strip(), "1"))
+                    locale_q_pairs.append((language.strip(), 1))
                 else:
                     locale = language.split(";")[0].strip()
-                    weight = language.split(";")[1].split("=")[1]
+                    weight = float(language.split(";")[1].split("=")[1])
                     locale_q_pairs.append((locale, weight))
-            except IndexError:
+            except (IndexError, ValueError):
                 pass
 
         return locale_q_pairs
 
     def _find_supported_language(accepted_languages):
-        for lang_tuple in accepted_languages:
-            lang = lang_tuple[0]
-            if '-' in lang:
-                lang = lang.split('-', 1)[0]
-            if lang in SUPPORTED_LANGS:
-                return lang
-        return None
+        def supported_langs():
+            """Yields all pairs in the Accept-Language header
+            supported in SUPPORTED_LANGS or None if 'en' is the preferred"""
+            for lang_tuple in accepted_languages:
+                lang = lang_tuple[0]
+                if '-' in lang:
+                    lang = lang.split('-', 1)[0]
+                if lang in SUPPORTED_LANGS:
+                    yield lang, lang_tuple[1]
+                elif lang == 'en':
+                    yield None, lang_tuple[1]
+        try:
+            return max(supported_langs(), key=lambda lang_tuple:lang_tuple[1])[0]
+        except ValueError:
+            return None
 
     lang = None
     hostname = request.headers['Host']
