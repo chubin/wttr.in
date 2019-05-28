@@ -5,7 +5,8 @@ Translation of almost everything.
 """
 
 FULL_TRANSLATION = [
-    "af", "da", "de", "fr", "fa", "et", "id", "it", "nb", "nl", "fy", "pl", "pt-br", "ro", "ru", "uk"
+    "af", "da", "de", "fr", "fa", "et", "id", "it", "nb", "nl",
+    "pl", "pt-br", "ro", "ru", "uk"
 ]
 
 PARTIAL_TRANSLATION = [
@@ -20,7 +21,7 @@ PARTIAL_TRANSLATION = [
 
 PROXY_LANGS = [
     "af", "az", "be", "bs", "ca", "cy", "eo",
-    "et", "fa", "he", "hr", "hy", "id", "is",
+    "et", "fa", "fy", "he", "hr", "hy", "id", "is",
     "it", "ja", "kk", "lv", "mk", "nb", "nn",
     "ro", "ru", "sl", "pt-br", "uk", "uz",
 ]
