@@ -1,0 +1,67 @@
+Cách dùng:
+
+    $ curl wttr.in          # vị trí hiện tại
+    $ curl wttr.in/sgn      # thời tiết sân bay Tân Sơn Nhất
+
+Các loại địa điểm được hỗ trợ:
+
+    /paris                  # tên thành phố
+    /~Eiffel+tower          # địa điểm nổi tiếng bất kỳ
+    /Москва                 # tên địa điểm Unicode trong bất cứ ngôn ngữ nào
+    /sgn                    # mã sân bay IATA (3 ký tự)
+    /@stackoverflow.com     # tên miền
+    /94107                  # mã vùng (chỉ cho Hoa Kỳ)
+    /-78.46,106.79          # tọa độ
+
+Địa điểm đặc biệt:
+
+    /moon                   # pha mặt trăng (thêm ,+US hoặc ,+France để lấy chu kỳ mặt trăng cho địa điểm đó)
+    /moon@2016-10-25        # pha mặt trăng của 1 ngày (@2016-10-25)
+
+Đơn vị:
+
+    ?m                      # hệ mét (SI) (mặc định cho mọi nơi trừ Mỹ)
+    ?u                      # USCS (mặc định cho Mỹ)
+    ?M                      # tốc độ gió theo m/s
+
+Tùy chọn hiển thị:
+
+    ?0                      # Chỉ hiện thời tiết hiện tại
+    ?1                      # Thời tiết hiện tại + 1 ngày
+    ?2                      # Thời tiết hiện tại + 2 ngày
+    ?n                      # bản rút gọn (chỉ có ngày & đêm)
+    ?q                      # bản thu nhỏ (không có dòng "Báo cáo thời tiết")
+    ?Q                      # bản siêu nhỏ (không có dòng "Báo cáo thời tiết" và địa điểm)
+    ?T                      # tắt escape sequence cho terminal (không màu)
+
+Tùy chọn PNG:
+
+    /paris.png              # tạo ra file PNG
+    ?p                      # thêm khung xung quanh
+    ?t                      # độ trong suốt = 150
+    transparency=...        # độ trong suốt từ 0 tới 255 (255 = không trong suốt)
+
+Kết hợp các tùy chọn:
+
+    /Paris?0pq
+    /Paris?0pq&lang=fr
+    /Paris_0pq.png          # với file PNG thì tùy chọn nằm phía sau dấu _
+    /Rome_0pq_lang=it.png   # các tùy chọn phân cách với nhau bằng dấu _
+
+Bản địa hóa:
+
+    $ curl fr.wttr.in/Paris
+    $ curl wttr.in/paris?lang=fr
+    $ curl -H "Accept-Language: fr" wttr.in/paris
+
+Các ngôn ngữ được hỗ trợ:
+
+    FULL_TRANSLATION (hỗ trợ)
+    PARTIAL_TRANSLATION (chưa dịch hoàn toàn)
+
+URL đặc biệt:
+
+    /:help                  # hiện trang này
+    /:bash.function         # hiện hàm wttr() được đề nghị cho bash
+    /:translation           # hiện thông tin về người biên dịch
+
