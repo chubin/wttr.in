@@ -21,7 +21,7 @@ Translated/improved/corrected by:
     * Finnish:      @Maxifi
     * French:       Igor Chubin, @daftaupe 
     * German:       Igor Chubin, @MAGICC (https://kthx.at)
-    * Greek:        Panayotis Vryonis
+    * Greek:        Panayotis Vryonis and @Petewg (on github)
     * Hebrew:       E.R.
     * Italian:      Diego Maniacco
     * Icelandic:    Óli G. @dvergur, Skúli Arnlaugsson @Arnlaugsson
