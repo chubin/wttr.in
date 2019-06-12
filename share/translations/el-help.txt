@@ -61,8 +61,8 @@
 
 Υποστηριζόμενες γλώσσες:
 
-    FULL_TRANSLATION (υποστηριζόμενες)
-    PARTIAL_TRANSLATION (σε εξέλιξη)
+    FULL_TRANSLATION (πλήρως υποστηριζόμενες)
+    PARTIAL_TRANSLATION (εργασία σε εξέλιξη)
 
 Ειδικά URLs:
 
