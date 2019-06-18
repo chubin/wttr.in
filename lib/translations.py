@@ -46,6 +46,11 @@ een van die koudste permanent bewoonde plekke op aarde.
 самым халодным населеным пункце на планеце.
 Будзем спадзявацца, што ў вас сёння надвор'е лепей!
 """,
+        'bg':u"""
+Не успяхме да открием вашето местоположение
+така че ви доведохме в Оймякон,
+едно от най-студените постоянно обитавани места на планетата.
+""",
         'bs': u"""
 Nismo mogli pronaći vašu lokaciju,
 tako da smo te doveli do Oymyakon,
@@ -237,6 +242,7 @@ mis on üks kõige külmemaid püsivalt asustatud paiku planeedil.
         'en': u'Unknown location',
         'af': u'Onbekende ligging',
         'be': u'Невядомае месцазнаходжанне',
+        'bg': u'Неизвестно местоположение',
         'bs': u'Nepoznatoja lokacija',
         'ca': u'Ubicació desconeguda',
         'cs': u'Neznámá poloha',
@@ -280,6 +286,7 @@ mis on üks kõige külmemaid püsivalt asustatud paiku planeedil.
         'en': u'Location',
         'af': u'Ligging',
         'be': u'Месцазнаходжанне',
+        'bg': u'Местоположение',
         'bs': u'Lokacija',
         'ca': u'Ubicació',
         'cs': u'Poloha',
@@ -339,6 +346,12 @@ U kan vir https://twitter.com/igor_chubin volg vir opdaterings.
 Мы вернемся як мага хутчэй.
 Вы можаце сачыць на https://twitter.com/igor_chubin за абнаўленнямі.
 ======================================================================================
+""",
+        'bg': u"""
+Съжаляваме, количеството заявки към услугата за предсказване на време е почти изчерпано.
+Ето доклад за града по подразбиране (просто да видите как изглежда).
+Ще осогурим допълнителни заявки максимално бързо.
+Може да последвате https://twitter.com/igor_chubin за обновления.
 """,
         'bs': u"""
 Žao mi je, mi ponestaje upita i vremenska prognoza u ovom trenutku.
@@ -525,6 +538,7 @@ Jälgige https://twitter.com/igor_chubin värskenduste jaoks.
         'en': u'New feature: multilingual location names \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) and location search \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
         'af': u'Nuwe eienskap: veeltalige name vir liggings \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) en ligging soek \033[92mwttr.in/~Kilimanjaro\033[0m (plaas net ~ vooraan)',
         'be': u'Новыя магчымасці: назвы месц на любой мове \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) i пошук месц \033[92mwttr.in/~Kilimanjaro\033[0m (трэба дадаць ~ ў пачатак)',
+        'bg': u'Нова функционалност: многоезични имена на места\033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и в търсенето \033[92mwttr.in/~Kilimanjaro\033[0m (добавете ~ преди)',
         'bs': u'XXXXXXXXXXXXXXXXXXXX: XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\033[92mwttr.in/станция+Восток\033[0m (XX UTF-8) XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
         'ca': u'Noves funcionalitats: noms d\'ubicació multilingües \033[92mwttr.in/станция+Восток\033[0m (en UTF-8) i la ubicació de recerca \033[92mwttr.in/~Kilimanjaro\033[0m (només cal afegir ~ abans)',
         'es': u'Nuevas funcionalidades: los nombres de las ubicaciones en vários idiomas \033[92mwttr.in/станция+Восток\033[0m (em UTF-8) y la búsqueda por ubicaciones \033[92mwttr.in/~Kilimanjaro\033[0m (tan solo inserte ~ en frente)',
@@ -559,6 +573,7 @@ Jälgige https://twitter.com/igor_chubin värskenduste jaoks.
         'en': u'Follow \033[46m\033[30m@igor_chubin\033[0m for wttr.in updates',
         'af': u'Volg \033[46m\033[30m@igor_chubin\033[0m vir wttr.in opdaterings',
         'be': u'Сачыце за \033[46m\033[30m@igor_chubin\033[0m за навінамі wttr.in',
+        'bg': u'Последвай \033[46m\033[30m@igor_chubin\033[0m за обновления свързани с wttr.in',
         'bs': u'XXXXXX \033[46m\033[30m@igor_chubin\033[0m XXXXXXXXXXXXXXXXXXX',
         'ca': u'Segueix \033[46m\033[30m@igor_chubin\033[0m per actualitzacions de wttr.in',
         'es': u'Seguir \033[46m\033[30m@igor_chubin\033[0m para recibir las novedades de wttr.in',
