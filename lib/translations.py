@@ -5,13 +5,13 @@ Translation of almost everything.
 """
 
 FULL_TRANSLATION = [
-    "af", "da", "de", "fr", "fa", "et", "id", "it", "nb", "nl",
+    "af", "da", "de", "el", "fr", "fa", "et", "id", "it", "nb", "nl",
     "pl", "pt-br", "ro", "ru", "uk"
 ]
 
 PARTIAL_TRANSLATION = [
     "az", "be", "bg", "bs", "ca", "cy", "cs",
-    "el", "eo", "es", "fi", "ga", "hi", "hr",
+    "eo", "es", "fi", "ga", "hi", "hr",
     "hu", "hy", "is", "ja", "jv", "ka", "kk",
     "ko", "ky", "lt", "lv", "mk", "ml", "nl", "fy",
     "nn", "pt", "pt-br", "sk", "sl", "sr", "sr-lat",
