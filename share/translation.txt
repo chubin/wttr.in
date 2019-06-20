@@ -9,6 +9,7 @@ Translated/improved/corrected by:
     * Azerbaijani:  Dmytro Nikitiuk, Elsevar Abbasov
     * Belarusian:   Igor Chubin, Anton Zhavoronkov @edogby (on github)
     * Bosnian:      Ismar Kunc @ismarkunc
+    * Bulgarian:    Vladimir Vitkov @zeridon (on github)
     * Brazilian-PT: Tupã Negreiros @TupaNegreiros (on github)
     * Catalan:      Angel Jarabo @legna29A
     * Croatian:     Siniša Kusić @ku5ic
