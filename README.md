@@ -174,6 +174,44 @@ set -g status-right "$WEATHER ..."
 ```
 ![wttr.in in tmux status bar](https://wttr.in/files/example-tmux-status-line.png)
 
+To see emojis in terminal, you need:
+
+1. Terminal support for emojis (was added to Cairo 1.15.8);
+2. Font with emojis support.
+
+For the Emoji font, we recommend *Noto Color Emoji*, and a good alternative option would be the *Emoji One* font;
+both of them support all necessary emoji glyphs.
+
+Font configuration:
+
+```
+$ cat ~/.config/fontconfig/fonts.conf
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+  <alias>
+    <family>serif</family>
+    <prefer>
+      <family>Noto Color Emoji</family>
+    </prefer>
+  </alias>
+  <alias>
+    <family>sans-serif</family>
+    <prefer>
+      <family>Noto Color Emoji</family>
+    </prefer>
+  </alias>
+  <alias>
+    <family>monospace</family>
+    <prefer>
+      <family>Noto Color Emoji</family>
+    </prefer>
+  </alias>
+</fontconfig>
+```
+
+(to apply the configuration, run `fc-cache -f -v`)
+
 ## Moon phases
 
 wttr.in can also be used to check the phase of the Moon. This example shows how to see the current Moon phase:
