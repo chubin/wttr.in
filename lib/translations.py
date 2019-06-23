@@ -5,14 +5,15 @@ Translation of almost everything.
 """
 
 FULL_TRANSLATION = [
-    "af", "da", "de", "el", "fr", "fa", "et", "id", "it", "nb", "nl",
-    "pl", "pt-br", "ro", "ru", "uk"
+    "af", "da", "de", "el", "et", "fr", "fa", "hu",
+    "id", "it", "nb", "nl", "pl", "pt-br", "ro", "ru",
+    "uk"
 ]
 
 PARTIAL_TRANSLATION = [
     "az", "be", "bg", "bs", "ca", "cy", "cs",
     "eo", "es", "fi", "ga", "hi", "hr",
-    "hu", "hy", "is", "ja", "jv", "ka", "kk",
+    "hy", "is", "ja", "jv", "ka", "kk",
     "ko", "ky", "lt", "lv", "mk", "ml", "nl", "fy",
     "nn", "pt", "pt-br", "sk", "sl", "sr", "sr-lat",
     "sv", "sw", "th", "tr", "te", "uz", "vi",
@@ -104,6 +105,11 @@ Nous n'avons pas pu déterminer votre position,
 Nous vous avons donc amenés à Oïmiakon,
 l'un des endroits les plus froids habités en permanence sur la planète.
 Nous espérons qu'il fait meilleur chez vous !
+""",
+        'hu': u"""
+Nem sikerült megtalálni a pozíciódat,
+így elhoztunk Ojmjakonba;
+az egyik leghidegebb állandóan lakott településre a bolygón.
 """,
         'hy': u"""
 Ձեր գտնվելու վայրը չհաջողվեց որոշել,
@@ -255,6 +261,7 @@ mis on üks kõige külmemaid püsivalt asustatud paiku planeedil.
         'fa': u'مکان نامعلوم',
         'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement inconnu',
+        'hu': u'Ismeretlen lokáció',
         'hy': u'Անհայտ գտնվելու վայր',
         'id': u'Lokasi tidak diketahui',
         'is': u'Óþekkt staðsetning',
@@ -299,6 +306,7 @@ mis on üks kõige külmemaid püsivalt asustatud paiku planeedil.
         'fa': u'مکان',
         'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement',
+        'hu': u'Lokáció',
         'hy': u'Դիրք',
         'id': u'Lokasi',
         'is': u'Staðsetning',
@@ -400,6 +408,13 @@ Désolé, nous avons épuisé les requêtes vers le service météo.
 Voici un bulletin météo de l'emplacement par défaut (pour vous donner un aperçu).
 Nous serons très bientôt en mesure de faire de nouvelles requêtes.
 Vous pouvez suivre https://twitter.com/igor_chubin pour rester informé.
+======================================================================================
+""",
+        'hu': u"""
+Sajnáljuk, kifogytunk az időjárási szolgáltatásra fordított erőforrásokból.
+Itt van az alapértelmezett város időjárási jelentése (hogy lásd, hogyan néz ki).
+A lehető leghamarabb új erőforrásokat fogunk kapni.
+A frissítésekért tekintsd meg a https://twitter.com/igor_chubin oldalt.
 ======================================================================================
 """,
         'hy': u"""
@@ -550,6 +565,7 @@ Jälgige https://twitter.com/igor_chubin värskenduste jaoks.
         'fy': u'Nije funksje: twatalige lokaasje nammen \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) en lokaasje sykjen \033[92mwttr.in/~Kilimanjaro\033[0m (set er gewoan in ~ foar)',
         'cy': u'Nodwedd newydd: enwau lleoliadau amlieithog \033[92mwttr.in/станция+Восток\033[0m (yn UTF-8) a chwilio am leoliad \033[92mwttr.in/~Kilimanjaro\033[0m (ychwanegwch ~ yn gyntaf)',
         'de': u'Neue Funktion: mehrsprachige Ortsnamen \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) und Ortssuche \033[92mwttr.in/~Kilimanjaro\033[0m (fügen Sie ein ~ vor dem Ort ein)',
+        'hu': u'Új funkcinalitás: többnyelvű helynevek \033[92mwttr.in/станция+Восток\033[0m (UTF-8-ban) és pozíció keresés \033[92mwttr.in/~Kilimanjaro\033[0m (csak adj egy ~ jelet elé)',
         'hy': u'Փորձարկեք: տեղամասերի անունները կամայական լեզվով \033[92mwttr.in/Դիլիջան\033[0m (в UTF-8) և տեղանքի որոնում \033[92mwttr.in/~Kilimanjaro\033[0m (հարկավոր է ~ ավելացնել դիմացից)',
         'id': u'Fitur baru: nama lokasi dalam multibahasa \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) dan pencarian lokasi \033[92mwttr.in/~Kilimanjaro\033[0m (hanya tambah tanda ~ sebelumnya)',
         'it': u'Nuove funzionalità: nomi delle località multilingue \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) e ricerca della località \033[92mwttr.in/~Kilimanjaro\033[0m (basta premettere ~)',
@@ -581,6 +597,7 @@ Jälgige https://twitter.com/igor_chubin värskenduste jaoks.
         'fa': u'برای دنبال کردن خبرهای wttr.in شناسه \033[46m\033[30m@igor_chubin\033[0m رو فالو کنید.',
         'fr': u'Suivez \033[46m\033[30m@igor_Chubin\033[0m pour rester informé sur wttr.in',
         'de': u'Folgen Sie \033[46m\033[30mhttps://twitter.com/igor_chubin\033[0m für wttr.in Updates',
+        'hu': u'Kövesd \033[46m\033[30m@igor_chubin\033[0m-t további wttr.in információkért',
         'hy': u'Նոր ֆիչռների համար հետևեք՝ \033[46m\033[30m@igor_chubin\033[0m',
         'id': u'Ikuti \033[46m\033[30m@igor_chubin\033[0m untuk informasi wttr.in terbaru',
         'it': u'Seguite \033[46m\033[30m@igor_chubin\033[0m per aggiornamenti a wttr.in',
