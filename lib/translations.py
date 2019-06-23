@@ -109,7 +109,7 @@ Nous espérons qu'il fait meilleur chez vous !
         'hu': u"""
 Nem sikerült megtalálni a pozíciódat,
 így elhoztunk Ojmjakonba;
-az egyik leghidegebb állandóan lakott település a bolygón.
+az egyik leghidegebb állandóan lakott településre a bolygón.
 """,
         'hy': u"""
 Ձեր գտնվելու վայրը չհաջողվեց որոշել,
