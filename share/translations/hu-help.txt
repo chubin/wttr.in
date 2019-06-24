@@ -13,7 +13,7 @@ Támogatott pozíciómeghatározások:
     /94107                  # körzetszám
     /-78.46,106.79          # GPS koordináták
 
-Speciális "helyek":
+Speciális helyek:
 
     /moon                   # holdfázis (a végére tehető ,+US vagy ,+France például)
     /moon@2016-10-25        # holdfázis az adott dátumhoz (@2016-10-25)
