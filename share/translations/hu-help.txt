@@ -47,8 +47,8 @@ A beállítások kombinálhatók:
 
     /Paris?0pq
     /Paris?0pq&lang=fr
-    /Paris_0pq.png          # PNG módban az opciók az aláhúzásjel után megadhatók
-    /Rome_0pq_lang=it.png   # a hosszú opcióneveket el kell választani aláhúzásjelekkel
+    /Paris_0pq.png          # PNG módban az opciók egy aláhúzásjel után megadhatók
+    /Rome_0pq_lang=it.png   # a hosszú opcióneveket aláhúzásjelekkel kell elválasztani
 
 Megjelenítés különböző nyelveken:
 
