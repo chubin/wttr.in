@@ -1,0 +1,69 @@
+Használat:
+
+    $ curl wttr.in          # jelenlegi tartózkodási hely
+    $ curl wttr.in/muc      # időjárás a müncheni repülőtéren
+
+Támogatott pozíciómeghatározások:
+
+    /paris                  # város
+    /~Eiffel+tower          # bármilyen hely
+    /Москва                 # Unicode név bármilyen nyelven
+    /muc                    # repülőtér kód (3 betű)
+    /@stackoverflow.com     # domain név
+    /94107                  # körzetszám
+    /-78.46,106.79          # GPS koordináták
+
+Speciális "helyek":
+
+    /moon                   # holdfázis (a végére tehető ,+US vagy ,+France például)
+    /moon@2016-10-25        # holdfázis az adott dátumhoz (@2016-10-25)
+
+Mértékegységek:
+
+    m                       # metrikus (SI) (használatban mindenhol az USA kivételével)
+    u                       # USA hagyományos (alapértelmezett az USA-ban)
+    M                       # szélsebesség m/s-ban
+
+Megjelenítési beállítások:
+
+    0                       # csak az aktuális időjárás
+    1                       # aktuális időjárás + 1 nap
+    2                       # aktuális időjárás + 2 nap
+    A                       # User-Agent figyelmen kívül hagyása, ANSI output kikényszerítése (terminálokban)
+    F                       # ne jeneítse meg a "Kövesd" sort
+    n                       # keskeny változat (csak nappal és éjszaka)
+    q                       # csendes verzió ("Időjárás előrejelzés" szöveg nélkül)
+    Q                       # szupercsendes verzió ("Időjárás előrejelzés" szöveg és hely nélkül)
+    T                       # terminál szekvenciák kikapcsolása (színek nélküli megjelenés)
+
+PNG beállítások:
+
+    /paris.png              # PNG kép készítése
+    p                       # keret a kép köré
+    t                       # 150-es "átlátszóság"
+    transparency=...        # "átlátszóság" 0 és 255 között (255 = egyáltalán nem átlátszó)
+
+A beállítások kombinálhatók:
+
+    /Paris?0pq
+    /Paris?0pq&lang=fr
+    /Paris_0pq.png          # PNG módban az opciók az aláhúzásjel után megadhatók
+    /Rome_0pq_lang=it.png   # a hosszú opcióneveket el kell választani aláhúzásjelekkel
+
+Megjelenítés különböző nyelveken:
+
+    $ curl fr.wttr.in/Paris
+    $ curl wttr.in/paris?lang=fr
+    $ curl -H "Accept-Language: fr" wttr.in/paris
+
+Támogatott nyelvek:
+
+    FULL_TRANSLATION (teljesen támogatott)
+    PARTIAL_TRANSLATION (folyamatban...)
+
+Speciális URL-ek:
+
+    /:help                  # segítség (ez az oldal)
+    /:bash.function         # ajánlott bash függvény
+    /:translation           # információ a fordítókról
+
