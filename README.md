@@ -123,7 +123,7 @@ Nuremberg: 🌦 +11⁰C
 
 Available preconfigured formats: 1, 2, 3, 4 and the custom format using the percent notation (see below).
 
-You can sepcify multiple locations separated with `:` (for repeating queries):
+You can specify multiple locations separated with `:` (for repeating queries):
 
 ```
 $ curl wttr.in/Nuremberg:Hamburg:Berlin?format=3
