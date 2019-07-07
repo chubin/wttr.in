@@ -1,0 +1,82 @@
+113: Senin                                          :  Clear
+113: Însorit                                        :  Sunny
+116: Parțial înnorat                                :  Partly cloudy
+119: Înnorat                                        :  Cloudy
+122: Cer acoperit                                   :  Overcast
+143: Ceață                                          :  Mist
+176: Posibilă ploaie pe alocuri                     :  Patchy rain possible
+179: Posibilă ninsoare pe alocuri                   :  Patchy snow possible
+182: Posibilă lapoviță pe alocuri                   :  Patchy sleet possible
+185: Posibilă burniță înghețată pe alocuri          :  Patchy freezing drizzle possible
+200: Posibile tunete                                :  Thundery outbreaks possible
+227: Zăpadă în rafale                               :  Blowing snow
+230: Viscol                                         :  Blizzard
+248: Ceață                                          :  Fog
+260: Ceață înghețată                                :  Freezing fog
+263: Burniță ușoară pe alocuri                      :  Patchy light drizzle
+266: Burniță ușoară                                 :  Light drizzle
+281: Burniță înghețată                              :  Freezing drizzle
+284: Burnită înghețată abundentă                    :  Heavy freezing drizzle
+293: Ploaie ușoară pe alocuri                       :  Patchy light rain
+296: Ploaie ușoară                                  :  Light rain
+299: Momente de ploaie moderată                     :  Moderate rain at times
+302: Ploaie moderată                                :  Moderate rain
+305: Momente de ploaie torențială                   :  Heavy rain at times
+308: Ploaie torențială                              :  Heavy rain
+311: Ploaie înghețată ușoară                        :  Light freezing rain
+314: Ploaie înghețată moderată sau torențială       :  Moderate or heavy freezing rain
+317: Lapoviță ușoară                                :  Light sleet
+320: Lapoviță moderată sau torențială               :  Moderate or heavy sleet
+323: Ninsoare ușoară pe alocuri                     :  Patchy light snow
+326: Ninsoare ușoară                                :  Light snow
+329: Ninsoare moderată pe alocuri                   :  Patchy moderate snow
+332: Ninsoare moderată                              :  Moderate snow
+335: Ninsoare abundentă pe alocuri                  :  Patchy heavy snow
+338: Ninsoare abundentă                             :  Heavy snow
+350: Grindină                                       :  Ice pellets
+353: Averse de ploaie ușoară                        :  Light rain shower
+356: Averse de ploaie moderată sau torențială       :  Moderate or heavy rain shower
+359: Averse de ploaie torențială                    :  Torrential rain shower
+362: Averse de lapoviță ușoară                      :  Light sleet showers
+365: Averse de lapoviță moderată sau torențială     :  Moderate or heavy sleet showers
+368: Averse de ninsoare ușoară                      :  Light snow showers
+371: Averse de ninsoare moderată sau torențială     :  Moderate or heavy snow showers
+386: Ploi ușoare cu tunete pe alocuri               :  Patchy light rain with thunder
+389: Ploaie moderată sau furtună cu tunete          :  Moderate or heavy rain with thunder
+392: Ninsoare ușoară cu tunete pe alocuri           :  Patchy light snow with thunder
+395: Ninsoare moderată sau abundentă cu tunete      :  Moderate or heavy snow with thunder
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

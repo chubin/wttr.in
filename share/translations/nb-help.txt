@@ -1,0 +1,66 @@
+Bruk:
+
+    $ curl wttr.in          # nåværende lokasjon
+    $ curl wttr.in/osl      # været på Gardermoen flyplass
+
+Støttede lokasjonsspesifiseringer:
+
+    /oslo                   # bynavn
+    /~Ullevål+stadion       # valgfri lokasjon
+    /Москва                 # Unicode navn på lokasjon på alle språk
+    /osl                    # flyplasskode (3 bokstaver)
+    /@stackoverflow.com     # domenenavn
+    /94107                  # postnummer (bare USA)
+    /-78.46,106.79          # GPS-koordinater
+
+Spesielle lokasjoner:
+
+    /moon                   # Månefase (legg til ,+US eller ,+France disse byene)
+    /moon@2016-10-25        # Månefase for spesifisert dato (@2016-10-25)
+
+Enheter:
+
+    ?m                      # metrisk (SI) (standard alle steder unntatt USA)
+    ?u                      # USCS (standard i USA)
+    ?M                      # vindstyrke i meter per sekund
+
+Visningsvalg:
+
+    ?0                      # kun været nå
+    ?1                      # været nå + 1 dag
+    ?2                      # været nå + 2 dager
+    ?n                      # smal visning (bare dag og natt)
+    ?q                      # stille visning (ingen "Værmelding"-tekst)
+    ?Q                      # superstille visning (ingen "Værmelding", ingen bynavn)
+    ?T                      # ingen terminalsekvenser (ingen farger)
+
+PNG valg:
+
+    /paris.png              # generer en PNG-fil
+    ?p                      # legg til ramme
+    ?t                      # gjennomsiktighet 150
+    transparency=...        # gjennomsiktighet fra 0 til 255 (255 = ikke gjennomsiktig)
+
+Tilvalg kan kombineres:
+
+    /Paris?0pq
+    /Paris?0pq&lang=fr
+    /Paris_0pq.png          # for PNG er filmodus spesifisert etter _
+    /Rome_0pq_lang=it.png   # lange tilvalg separeres med understrek
+
+Oversettelser:
+
+    $ curl fr.wttr.in/Paris
+    $ curl wttr.in/paris?lang=fr
+    $ curl -H "Accept-Language: fr" wttr.in/paris
+
+Støttede språk:
+
+    FULL_TRANSLATION (støttet)
+    PARTIAL_TRANSLATION (under arbeid)
+
+Spesielle URLer:
+
+    /:help                  # vis denne siden
+    /:bash.function         # vis den foreslåtte bash-funksjonen wttr()
+    /:translation           # vis informasjon om oversetterne

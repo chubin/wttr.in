@@ -1,0 +1,60 @@
+Gebruik:
+
+    $ curl wttr.in              # huidige locatie
+    $ curl wttr.in/muc          # het weer in Munic's vliegveld
+
+Ondersteunde locatie soorten:
+
+    /paris                      # stadsnaam
+    /~Eiffel+tower              # elke locatie
+    /Москва                     # Unicode naam van elke locatie in elke taal
+    /muc                        # vliegveld codes (3 letters)
+    /@stackoverflow.com         # domeinnaam
+    /94107                      # gebieds code
+    /-78.46,106.76              # GPS coördinaten
+
+Specialen locaties:
+
+    /moon                       # Maanstand (voeg ,+US or ,+France voor deze plekken)
+    /moon@2016-10-25            # Maanstand op deze datum (@2016-10-25)
+
+Eenheden:
+
+    ?m                          # metriek (SI) (gebruikt als standaard overal behalve US)
+    ?u                          # USCS (standaard in US)
+    ?M                          # laat wind snelheid in m/s zien
+
+Beeld opties:
+
+    ?0                          # alleen huidig weer
+    ?1                          # huidig weer + 1 dag
+    ?2                          # huidig weer + 2 dag
+    ?n                          # smalle versie (alleen dag en nacht)
+    ?q                          # stille versie (geen "Weerbericht" tekst)
+    ?Q                          # superstille versie (geen " Weerbericht", geen stadsnaam)
+    ?T                          # wissel terminal volgorde off (geen kleur)
+
+PNG opties:
+
+    /paris.png                  # genereerd een PNG bestand
+    ?p                          # voegt een frame rond de output
+    ?t                          # transparantie 150
+    transparency=...            # transparantie van 0 to 255 (255 is niet doorzichtig)
+
+Lokalisatie:
+
+    $ curl fr.wttr.in/Paris
+    $ curl wttr.in/paris?lang=fr
+    $ curl -H "Accept-Language: fr" wttr.in/paris
+
+Ondersteunde talen:
+
+	de fr id it nb ru (ondersteund)
+    ar az be bg bs ca cy cs da el eo es et fi hi hr hu hy is ja jv ka kk ko ky lt lv mk ml nl nn pt pl ro sk sl sr sr-lat sv sw th tr uk uz vi zh zu he (mee bezig)
+
+Speciale URLs:
+
+	/:help						# laat help pagina zien
+	/:bash.function				# laat voorgestelde wttr() functie zien voor in bash
+	/:translation				# laat the informatie van de vertalers zien
+

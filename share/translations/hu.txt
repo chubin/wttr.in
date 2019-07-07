@@ -1,0 +1,47 @@
+113: Tiszta                              : Clear
+113: Napos                               : Sunny
+116: Részben felhős                      : Partly cloudy
+119: Felhős                              : Cloudy
+122: Borult                              : Overcast
+143: Köd                                 : Mist
+176: Szórványos zápor előfordulhat       : Patchy rain possible
+179: Szórványos havazás előfordulhat     : Patchy snow possible
+182: Szórványos havas eső előfordulhat   : Patchy sleet possible
+185: Szórványos ónos eső előfordulhat    : Patchy freezing drizzle possible
+200: Viharos széllökések előfordulhatnak : Thundery outbreaks possible
+227: Hófúvás                             : Blowing snow
+230: Hóvihar                             : Blizzard
+248: Köd                                 : Fog
+260: Jeges köd                           : Freezing fog
+263: Szórványosan enyhe önos eső         : Patchy light drizzle
+266: Gyenge önös eső                     : Light drizzle
+281: Ónos eső                            : Freezing drizzle
+284: Erős ónos eső                       : Heavy freezing drizzle
+293: Szórványosan gyenge eső             : Patchy light rain
+296: Gyenge eső                          : Light rain
+299: Időnként eső                        : Moderate rain at times
+302: Eső                                 : Moderate rain
+305: Időnként intenzív eső               : Heavy rain at times
+308: Intenzív eső                        : Heavy rain
+311: Enyhe jéges eső                     : Light freezing rain
+314: Jéges eső                           : Moderate or heavy freezing rain
+317: Enyhe havas eső                     : Light sleet
+320: Havas eső                           : Moderate or heavy sleet
+323: Szórványos hószállingózás           : Patchy light snow
+326: Hószállingózás                      : Light snow
+329: Szórványos havazás                  : Patchy moderate snow
+332: Havazás                             : Moderate snow
+335: Szórványosan intenzív havazás       : Patchy heavy snow
+338: Intenzív havazás                    : Heavy snow
+350: Jégeső                              : Ice pellets
+353: Enyhe zápor                         : Light rain shower
+356: Zápor                               : Moderate or heavy rain shower
+359: Zuhogó eső                          : Torrential rain shower
+362: Enyhe havas eső                     : Light sleet showers
+365: Havas eső                           : Moderate or heavy sleet showers
+368: Hószállingózás                      : Light snow showers
+371: Havazás                             : Moderate or heavy snow showers
+386: Szórványos zivatar                  : Patchy light rain with thunder
+389: Zivatar                             : Moderate or heavy rain with thunder
+392: Szórványos hózivatar                : Patchy light snow with thunder
+395: Hózivatar                           : Moderate or heavy snow with thunder

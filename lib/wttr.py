@@ -1,7 +1,8 @@
 # vim: set encoding=utf-8
 
+from __future__ import print_function
 import gevent
-from gevent.wsgi import WSGIServer
+from gevent.pywsgi import WSGIServer
 from gevent.queue import Queue
 from gevent.monkey import patch_all
 from gevent.subprocess import Popen, PIPE, STDOUT
@@ -10,18 +11,53 @@ patch_all()
 import os
 import re
 import time
-import dateutil
+import dateutil.parser
 
 from translations import get_message, FULL_TRANSLATION, PARTIAL_TRANSLATION, SUPPORTED_LANGS
 from globals import WEGO, PYPHOON, CACHEDIR, ANSI2HTML, \
-                    NOT_FOUND_LOCATION, DEFAULT_LOCATION, \
+                    NOT_FOUND_LOCATION, DEFAULT_LOCATION, TEST_FILE, \
                     log, error
 
 def _is_invalid_location(location):
     if '.png' in location:
         return True
 
-def get_wetter(location, ip, html=False, lang=None, query=None, location_name=None, full_address=None):
+def remove_ansi(sometext):
+    ansi_escape = re.compile(r'(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]')
+    return ansi_escape.sub('', sometext)
+
+def get_wetter(location, ip, html=False, lang=None, query=None, location_name=None, full_address=None, url=None):
+
+    local_url = url
+    local_location = location
+
+    def get_opengraph():
+
+        if local_url is None:
+            url = ""
+        else:
+            url = local_url.encode('utf-8')
+
+        if local_location is None:
+            location = ""
+        else:
+            location = local_location.encode('utf-8')
+
+        pic_url = url.replace('?', '_')
+
+        return (
+            '<meta property="og:image" content="%(pic_url)s_0pq.png" />'
+            '<meta property="og:site_name" content="wttr.in" />'
+            '<meta property="og:type" content="profile" />'
+            '<meta property="og:url" content="%(url)s" />'
+        ) % {
+            'pic_url': pic_url,
+            'url': url,
+            'location': location,
+        }
+
+            # '<meta property="og:title" content="Weather report: %(location)s" />'
+            # '<meta content="Partly cloudy // 6-8 °C // ↑ 9 km/h // 10 km // 0.4 mm" property="og:description" />'
 
     def get_filename(location, lang=None, query=None, location_name=None):
         location = location.replace('/', '_')
@@ -45,20 +81,22 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
         return "%s/%s/%s%s%s%s%s" % (CACHEDIR, location, timestamp, imperial_suffix, lang_suffix, query_line, location_name)
 
     def save_weather_data(location, filename, lang=None, query=None, location_name=None, full_address=None):
-        ansi_escape = re.compile(r'(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]')
-        def remove_ansi(sometext):
-            return ansi_escape.sub('', sometext)
      
         if _is_invalid_location( location ):
             error("Invalid location: %s" % location)
         
         NOT_FOUND_MESSAGE_HEADER = ""
         while True:
+            location_not_found = False
+            if location in [ "test-thunder" ]:
+                test_name = location[5:]
+                test_file = TEST_FILE.replace('NAME', test_name)
+                stdout = open(test_file, 'r').read()
+                stderr = ""
+                break
             if location == NOT_FOUND_LOCATION:
                 location_not_found = True
                 location = DEFAULT_LOCATION
-            else:
-                location_not_found = False
             
             cmd = [WEGO, '--city=%s' % location]
 
@@ -83,7 +121,7 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
             p = Popen(cmd, stdout=PIPE, stderr=PIPE)
             stdout, stderr = p.communicate()
             if p.returncode != 0:
-                print "ERROR: location not found: %s" % location
+                print("ERROR: location not found: %s" % location)
                 if 'Unable to find any matching weather location to the query submitted' in stderr:
                     if location != NOT_FOUND_LOCATION:
                         NOT_FOUND_MESSAGE_HEADER = u"ERROR: %s: %s\n---\n\n" % (get_message('UNKNOWN_LOCATION', lang), location)
@@ -128,8 +166,13 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
         if query.get('no-city', False):
             stdout = "\n".join(stdout.splitlines()[2:]) + "\n"
 
-        if full_address:
-            line = "%s: %s [%s]\n" % (get_message('LOCATION', lang).encode('utf-8'), full_address.encode('utf-8'), location)
+        if full_address \
+            and query.get('format', 'txt') != 'png' \
+            and (not query.get('no-city') and not query.get('no-caption')):
+            line = "%s: %s [%s]\n" % (
+                get_message('LOCATION', lang).encode('utf-8'),
+                full_address.encode('utf-8'),
+                location.encode('utf-8'))
             stdout += line
 
         if query.get('padding', False):
@@ -153,7 +196,8 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
             stdout = stdout.replace('<body class="">', '<body class="" style="background:white;color:#777777">')
         
         title = "<title>%s</title>" % first.encode('utf-8')
-        stdout = re.sub("<head>", "<head>" + title, stdout)
+        opengraph = get_opengraph()
+        stdout = re.sub("<head>", "<head>" + title + opengraph, stdout)
         open(filename+'.html', 'w').write(stdout)
 
     filename = get_filename(location, lang=lang, query=query, location_name=location_name)
@@ -164,7 +208,10 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
 
     return open(filename).read()
 
-def get_moon(location, html=False, lang=None):
+def get_moon(location, html=False, lang=None, query=None):
+    if query is None:
+        query = {}
+
     date = None
     if '@' in location:
         date = location[location.index('@')+1:]
@@ -174,17 +221,19 @@ def get_moon(location, html=False, lang=None):
     if date:
         try:
             dateutil.parser.parse(date)
-        except:
-            pass
+        except Exception as e:
+            print("ERROR: %s" % e)
         else:
             cmd += [date]
 
     env = os.environ.copy()
     if lang:
         env['LANG'] = lang
-    print cmd
     p = Popen(cmd, stdout=PIPE, stderr=PIPE, env=env)
     stdout = p.communicate()[0]
+
+    if query.get('no-terminal', False):
+        stdout = remove_ansi(stdout)
 
     if html:
         p = Popen(["bash", ANSI2HTML, "--palette=solarized", "--bg=dark"],  stdin=PIPE, stdout=PIPE, stderr=PIPE)

@@ -1,8 +1,9 @@
 Msk         : Moscow
 Moskva      : Moscow
 Moskau      : Moscow
-Kyiv        : Kiev
-Kiew        : Kiev
+Kyiv        : Kiev,Ukraine
+Kiew        : Kiev,Ukraine
+Kiev        : Kiev,Ukraine
 Kijev       : Kiev
 Kharkov     : Kharkiv
 spb         : Saint Petersburg
@@ -35,8 +36,14 @@ tel-aviv    : Tel Aviv
 sao paulo   : São Paulo
 los-angeles : Los Angeles
 Sevastopol  : Sevastopol, Ukraine
+Simferopol  : Simferopol, Ukraine
 Beersheva   : Beersheba
 Be'ersheva  : Beersheba
 Be'er Sheva : Beersheba
 Lugansk     : Luhansk
 Bjalistoko  : Białystok
+Chicago     : Chicago,IL
+Paris       : Paris,France
+Giessen     : Giessen, Germany
+Braga       : Braga, Portugal
+Kashan      : ~Kashan,Iran

@@ -1,0 +1,66 @@
+Użycie:
+
+    $ curl wttr.in          # aktualna lokalizacja
+    $ curl wttr.in/waw      # wybrana lokalizacja (WAW - Lotnisko Okęcie)
+
+Opcje wyboru lokalizacji:
+
+    /paris                  # miasto
+    /~Eiffel+tower          # miejsce
+    /Москва                 # nazwa miasta w dowolnym języku (jako Unicode string)
+    /waw                    # kod lotniska IATA (3 znaki)
+    /@stackoverflow.com     # domena
+    /94107                  # kod obszaru (tylko w USA)
+    /-78.46,106.79          # współrzędne geograficzne
+
+Specjalne miejsca:
+
+    /moon                   # faza księżyca (używając n.p. ,+US lub ,+France zostanie wyświetlona faza dla podanego miejsca)
+    /moon@2016-10-25        # faza księżyca danego dnia (@2016-10-25)
+
+Jednostki:
+
+    ?m                      # system metryczny (SI) (standard poza USA)
+    ?u                      # USCS (standard w USA)
+    ?M                      # Prędkość wiatru w m/s
+
+Ustawienia wyświetlania:
+
+    ?0                      # Pokaż jedynie aktualną pogodę
+    ?1                      # Pokaż pogodę na jutro
+    ?2                      # Pokaż pogodę na pojutrze
+    ?n                      # Wersja kompaktowa (tylko noc i dzień)
+    ?q                      # Wersja okrojona (bez tekstu 'Pogoda w')
+    ?Q                      # Wersja bardziej okrojona (bez tekstu 'Pogoda w' i nazwy miasta)
+    ?T                      # Wersja jednokolorowa
+
+Opcje PNG:
+
+    /paris.png              # generuje plik PNG
+    ?p                      # dodaje obramowanie do obrazka
+    ?t                      # Przezroczystość 150
+    transparency=...        # Przezroczystość między 0 a 255 (255 = brak przezroczystości)
+
+Opcje mogą być ze sobą łączone:
+
+    /Paris?0pq
+    /Paris?0pq&lang=fr
+    /Paris_0pq.png          # jeśli generujemy obrazek PNG, to te opcje podajemy po _ (znaku podkreślenia)
+    /Rome_0pq_lang=it.png   # _ (znakiem podkreślenia) oddzielamy opcje od siebie
+
+Lokalizacja:
+
+    $ curl fr.wttr.in/Paris
+    $ curl wttr.in/paris?lang=fr
+    $ curl -H "Accept-Language: fr" wttr.in/paris
+
+Obsługiwane języki:
+
+    FULL_TRANSLATION (obsługiwane)
+    PARTIAL_TRANSLATION (w tłumaczeniu)
+
+Strony specjalne:
+
+    /:help                  # wyświetla tę stronę
+    /:bash.function         # wyświetla proponowaną funkcję `wttr()` dla powłoki bash
+    /:translation           # wyświetla informacje o tłumaczach

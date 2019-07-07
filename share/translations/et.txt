@@ -1,0 +1,55 @@
+113: Selge                              : Clear
+113: Päikeseline                        : Sunny
+116: Vahelduv pilvisus                  : Partly cloudy
+119: Pilvine                            : Cloudy
+122: Sombune                            : Overcast
+143: Uduvine                            : Mist
+176: Paiguti vihmasaju võimalus         : Patchy rain possible
+179: Paiguti lumesaju võimalus          : Patchy snow possible
+182: Paiguti lörtsisaju võimalus        : Patchy sleet possible
+185: Paiguti jääudu võimalus            : Patchy freezing drizzle possible
+200: Äikese võimalus                    : Thundery outbreaks possible
+227: Tuisk                              : Blowing snow
+230: Lumetorm                           : Blizzard
+248: Udu                                : Fog
+260: Jääudu                             : Freezing fog
+263: Paiguti nõrk uduvihm               : Patchy light drizzle
+266: Nõrk uduvihm                       : Light drizzle
+281: Jääudu                             : Freezing drizzle
+284: Tugev uduvihm                      : Heavy freezing drizzle
+293: Vahelduv nõrk vihm                 : Patchy light rain
+296: Nõrk vihm                          : Light rain
+299: Vahelduv mõõdukas vihm             : Moderate rain at times
+302: Mõõdukas vihm                      : Moderate rain
+305: Vahelduv tugev vihm                : Heavy rain at times
+308: Tugev vihm                         : Heavy rain
+311: Nõrk jäävihm                       : Light freezing rain
+314: Mõõdukas või tugev jäävihm         : Moderate or heavy freezing rain
+317: Nõrk lörtsisadu                    : Light sleet
+320: Mõõdukas või tugev lörtsisadu      : Moderate or heavy sleet
+323: Paiguti nõrk lumesadu              : Patchy light snow
+326: Nõrk lumesadu                      : Light snow
+329: Paiguti mõõdukas lumesadu          : Patchy moderate snow
+332: Mõõdukas lumesadu	                : Moderate snow
+335: Paiguti tugev lumesadu             : Patchy heavy snow
+338: Tugev lumesadu                     : Heavy snow
+350: Rahe                               : Ice pellets
+353: Nõrk hoogvihm                      : Light rain shower
+356: Mõõdukas või tugev hoogvihm        : Moderate or heavy rain shower
+359: Padu hoogvihm                      : Torrential rain shower
+362: Nõrk hooglörts                     : Light sleet showers
+365: Mõõdukas või tugev hooglörts       : Moderate or heavy sleet showers
+368: Nõrk hooglumi                      : Light snow showers
+371: Mõõdukas või tugev hooglumi        : Moderate or heavy snow showers
+386: Paiguti nõrk vihm äikesega         : Patchy light rain with thunder
+389: Mõõdukas või tugev vihm äikesega   : Moderate or heavy rain with thunder
+392: Paiguti nõrk lumesadu äikesega     : Patchy light snow with thunder
+395: Mõõdukas või tugev lumesadu äikesega : Moderate or heavy snow with thunder
+   : Hoogvihm                           : Rain shower
+   : Tugev hoogvihm                     : Heavy showers
+   : Nõrk hoogvihm                      : Light showers
+   : Tugev hooglumi                     : Heavy snow showers
+   : Äikesevihm                         : Thundery showers
+   : Tugev äikesevihm                   : Thundery heavy rain
+   : Äikesega lumesadu                  : Thundery snow showers
+   : Tugev hooglumi                     : Heavy snow showers
