@@ -26,6 +26,7 @@ MY_LOADER = jinja2.ChoiceLoader([
     APP.jinja_loader,
     jinja2.FileSystemLoader(TEMPLATES),
 ])
+
 APP.jinja_loader = MY_LOADER
 
 @APP.route('/files/<path:path>')

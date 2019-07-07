@@ -9,6 +9,7 @@ Translated/improved/corrected by:
     * Azerbaijani:  Dmytro Nikitiuk, Elsevar Abbasov
     * Belarusian:   Igor Chubin, Anton Zhavoronkov @edogby (on github)
     * Bosnian:      Ismar Kunc @ismarkunc
+    * Bulgarian:    Vladimir Vitkov @zeridon (on github)
     * Brazilian-PT: Tupã Negreiros @TupaNegreiros (on github)
     * Catalan:      Angel Jarabo @legna29A
     * Croatian:     Siniša Kusić @ku5ic
@@ -21,8 +22,9 @@ Translated/improved/corrected by:
     * Finnish:      @Maxifi
     * French:       Igor Chubin, @daftaupe 
     * German:       Igor Chubin, @MAGICC (https://kthx.at)
-    * Greek:        Panayotis Vryonis
+    * Greek:        Panayotis Vryonis and @Petewg (on github)
     * Hebrew:       E.R.
+    * Hungarian:    Mark Petruska
     * Italian:      Diego Maniacco
     * Icelandic:    Óli G. @dvergur, Skúli Arnlaugsson @Arnlaugsson
     * Indonesian:   Andria Arisal @andria009

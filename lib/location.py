@@ -11,7 +11,6 @@ from __future__ import print_function
 
 import os
 import json
-import re
 import socket
 import requests
 import geoip2.database
@@ -36,13 +35,15 @@ def is_ip(ip_addr):
     Check if `ip_addr` looks like an IP Address
     """
 
-    if re.match(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}', ip_addr) is None:
-        return False
     try:
-        socket.inet_aton(ip_addr)
+        socket.inet_pton(socket.AF_INET, ip_addr.encode("utf-8"))
         return True
     except socket.error:
-        return False
+        try:
+            socket.inet_pton(socket.AF_INET6, ip_addr.encode("utf-8"))
+            return True
+        except socket.error:
+            return False
 
 def location_normalize(location):
     """
@@ -225,17 +226,10 @@ def location_processing(location, ip_addr):
     query_source_location = get_location(ip_addr)
 
     country = None
-    if location is None or location == 'MyLocation':
-        location, country = query_source_location
+    if not location or location == 'MyLocation':
+        location = ip_addr
 
-        # Let us try to use geolocation services for locations
-        # that were derived from IPs.
-        if location:
-            location = '~' + location
-            if country:
-                location += ", %s" % country
-            hide_full_address = not force_show_full_address
-    elif is_ip(location):
+    if is_ip(location):
         location, country = get_location(location)
 
         # here too

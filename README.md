@@ -123,7 +123,7 @@ Nuremberg: 🌦 +11⁰C
 
 Available preconfigured formats: 1, 2, 3, 4 and the custom format using the percent notation (see below).
 
-You can sepcify multiple locations separated with `:` (for repeating queries):
+You can specify multiple locations separated with `:` (for repeating queries):
 
 ```
 $ curl wttr.in/Nuremberg:Hamburg:Berlin?format=3
@@ -173,6 +173,44 @@ WEATHER='#(curl -s wttr.in/London:Stockholm:Moscow\?format\="%%l:+%%c%%20%%t%%60
 set -g status-right "$WEATHER ..."
 ```
 ![wttr.in in tmux status bar](https://wttr.in/files/example-tmux-status-line.png)
+
+To see emojis in terminal, you need:
+
+1. Terminal support for emojis (was added to Cairo 1.15.8);
+2. Font with emojis support.
+
+For the Emoji font, we recommend *Noto Color Emoji*, and a good alternative option would be the *Emoji One* font;
+both of them support all necessary emoji glyphs.
+
+Font configuration:
+
+```
+$ cat ~/.config/fontconfig/fonts.conf
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+  <alias>
+    <family>serif</family>
+    <prefer>
+      <family>Noto Color Emoji</family>
+    </prefer>
+  </alias>
+  <alias>
+    <family>sans-serif</family>
+    <prefer>
+      <family>Noto Color Emoji</family>
+    </prefer>
+  </alias>
+  <alias>
+    <family>monospace</family>
+    <prefer>
+      <family>Noto Color Emoji</family>
+    </prefer>
+  </alias>
+</fontconfig>
+```
+
+(to apply the configuration, run `fc-cache -f -v`)
 
 ## Moon phases
 
