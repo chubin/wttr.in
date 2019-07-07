@@ -5,9 +5,10 @@ Translation of almost everything.
 """
 
 FULL_TRANSLATION = [
-    "af", "da", "de", "el", "et", "fr", "fa", "hu",
-    "id", "it", "nb", "nl", "pl", "pt-br", "ro", "ru",
-    "uk"
+    "af", "da", "de", "el", "et",
+    "fr", "fa", "hu", "id", "it",
+    "nb", "nl", "pl", "pt-br", "ro",
+    "ru", "uk", "vi"
 ]
 
 PARTIAL_TRANSLATION = [
@@ -16,7 +17,7 @@ PARTIAL_TRANSLATION = [
     "hy", "is", "ja", "jv", "ka", "kk",
     "ko", "ky", "lt", "lv", "mk", "ml", "nl", "fy",
     "nn", "pt", "pt-br", "sk", "sl", "sr", "sr-lat",
-    "sv", "sw", "th", "tr", "te", "uz", "vi",
+    "sv", "sw", "th", "tr", "te", "uz",
     "zh", "zu", "he",
 ]
 
@@ -242,6 +243,11 @@ Me ei suutnud tuvastada teie asukohta
 ning seetõttu paigutasime teid Oymyakoni,
 mis on üks kõige külmemaid püsivalt asustatud paiku planeedil.
 """,
+        'vi': u"""
+Chúng tôi không tìm thấy địa điểm của bạn
+vì vậy chúng tôi đưa bạn đến Oymyakon,
+một trong những nơi lạnh nhất có người sinh sống trên trái đất.
+""",
     },
 
     'UNKNOWN_LOCATION': {
@@ -287,6 +293,7 @@ mis on üks kõige külmemaid püsivalt asustatud paiku planeedil.
         'tr': u'Bilinmeyen konum',
         'uk': u'Невідоме місце',
         'uz': u'Аникланмаган худуд',
+        'vi': u'Địa điểm không xác định',
     },
 
     'LOCATION': {
@@ -330,7 +337,8 @@ mis on üks kõige külmemaid püsivalt asustatud paiku planeedil.
         'sv': u'Plats',
         'te': u'స్థానము',
         'tr': u'Konum',
-        'uk': u'Місцезнаходження'
+        'uk': u'Місцезнаходження',
+        'en': u'Địa điểm',
     },
 
     'CAPACITY_LIMIT_REACHED': {
@@ -542,7 +550,14 @@ Jälgige https://twitter.com/igor_chubin värskenduste jaoks.
 Ми відновимо роботу як тільки зможемо.
 Ви можете підписатися на https://twitter.com/igor_chubin для отримання новин.
 ======================================================================================
-"""
+""",
+        'vi': u"""
+Xin lỗi, hiện tại chúng tôi đã hết lượt yêu cầu thông tin thời tiết.
+Đây là dự báo thời tiết cho thành phố mặc định (chỉ để cho bạn thấy nó trông như thế nào).
+Chung tôi sẽ có thêm lượt truy vấn sớm nhất có thể
+Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật thông tin mới nhất.
+======================================================================================
+""",
     },
 
     # Historical messages:
@@ -582,7 +597,8 @@ Jälgige https://twitter.com/igor_chubin värskenduste jaoks.
         'te': u'క్రొత్త లక్షణం: బహుభాషా స్థాన పేర్లు \ 033 [92mwttr.in/stancelя+Vostок\033 [0 U (UTF-8 లో) మరియు స్థానం శోధన \ 033 [92mwttr.in/~kilimanjaro\033 [0m (కేవలం ~ ముందుకి జోడించండి)',
         'da': u'Ny funktion: flersprogede lokationsnavne \033[92mwttr.in/станция+Восток\033[0m (som UTF-8) og lokations søgning \033[92mwttr.in/~Kilimanjaro\033[0m (bare tilføj ~ inden)',
         'et': u'Uus funktsioon: mitmekeelsed asukohanimed \033[92mwttr.in/станция+Восток\033[0m (UTF-8 vormingus) ja asukoha otsing \033[92mwttr.in/~Kilimanjaro\033[0m (lisa ~ enne)',
-        'uk': u'Спробуйте: назви місць будь-якою мовою \033[92mwttr.in/станція+Восток\033[0m (в UTF-8) та пошук місць \033[92mwttr.in/~Kilimanjaro\033[0m (потрібно додати ~ спочатку)'
+        'uk': u'Спробуйте: назви місць будь-якою мовою \033[92mwttr.in/станція+Восток\033[0m (в UTF-8) та пошук місць \033[92mwttr.in/~Kilimanjaro\033[0m (потрібно додати ~ спочатку)',
+        'vi': u'Chức năng mới: tên địa điểm đa ngôn ngữ \033[92mwttr.in/станция+Восток\033[0m (dùng UTF-8) và tìm kiếm địa điểm \033[92mwttr.in/~Kilimanjaro\033[0m (chỉ cần thêm ~ phía trước)',
     },
 
     'FOLLOW_ME': {
@@ -617,7 +633,8 @@ Jälgige https://twitter.com/igor_chubin värskenduste jaoks.
         'tr': u'wttr.in ile ilgili gelişmeler için \033[46m\033[30m@igor_chubin\033[0m adresini takip edin',
         'da': u'Følg \033[46m\033[30m@igor_chubin\033[0m for at få wttr.in opdateringer',
         'et': u'Jälgi \033[46m\033[30m@igor_chubin\033[0m wttr.in uudiste tarbeks',
-        'uk': u'Нові можливості wttr.in публікуються тут: \033[46m\033[30m@igor_chubin\033[0m'
+        'uk': u'Нові можливості wttr.in публікуються тут: \033[46m\033[30m@igor_chubin\033[0m',
+        'vi': u'Theo dõi \033[46m\033[30m@igor_chubin\033[0m để cập nhật thông tin về wttr.in',
     },
 }
 
