@@ -50,6 +50,8 @@ FONT_CAT = {
     'default':      "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
     'Cyrillic':     "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
     'Greek':        "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+    'Arabic':       "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+    'Hebrew':       "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
     'Han':          "/usr/share/fonts/truetype/motoya-l-cedar/MTLc3m.ttf",
     'Hiragana':     "/usr/share/fonts/truetype/motoya-l-cedar/MTLc3m.ttf",
     'Katakana':     "/usr/share/fonts/truetype/motoya-l-cedar/MTLc3m.ttf",
