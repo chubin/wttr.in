@@ -64,10 +64,12 @@ def client_ip_address(request):
 
     return ip_addr
 
-def get_answer_language(request):
+def _parse_language_header(header):
     """
-    Return preferred answer language based on
-    domain name, query arguments and headers
+    >>> _parse_language_header("en-US,en;q=0.9")
+    >>> _parse_language_header("en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7")
+    >>> _parse_language_header("xx, fr-CA;q=0.8, da-DK;q=0.9")
+    'da'
     """
 
     def _parse_accept_language(accept_language):
@@ -89,6 +91,7 @@ def get_answer_language(request):
         return locale_q_pairs
 
     def _find_supported_language(accepted_languages):
+
         def supported_langs():
             """Yields all pairs in the Accept-Language header
             supported in SUPPORTED_LANGS or None if 'en' is the preferred"""
@@ -105,6 +108,14 @@ def get_answer_language(request):
         except ValueError:
             return None
 
+    return _find_supported_language(_parse_accept_language(header))
+
+def get_answer_language(request):
+    """
+    Return preferred answer language based on
+    domain name, query arguments and headers
+    """
+
     lang = None
     hostname = request.headers['Host']
     if hostname != 'wttr.in' and hostname.endswith('.wttr.in'):
@@ -115,8 +126,7 @@ def get_answer_language(request):
 
     header_accept_language = request.headers.get('Accept-Language', '')
     if lang is None and header_accept_language:
-        lang = _find_supported_language(
-            _parse_accept_language(header_accept_language))
+        lang = _parse_language_header(header_accept_language)
 
     return lang
 
@@ -275,3 +285,7 @@ def wttr(location, request):
             return _wrap_response(get_message('CAPACITY_LIMIT_REACHED', lang).encode('utf-8'), html_output)
         logging.error("Exception has occured", exc_info=1)
         return "ERROR"
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
