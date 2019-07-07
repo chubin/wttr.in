@@ -50,5 +50,7 @@ def wttr(location=None):
     "Main function wrapper"
     return wttr_srv.wttr(location, request)
 
-SERVER = WSGIServer((LISTEN_HOST, LISTEN_PORT), APP)
+SERVER = WSGIServer(
+    (LISTEN_HOST, int(os.environ.get('WTTRIN_SRV_PORT', LISTEN_PORT))),
+    APP)
 SERVER.serve_forever()
