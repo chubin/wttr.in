@@ -225,17 +225,10 @@ def location_processing(location, ip_addr):
     query_source_location = get_location(ip_addr)
 
     country = None
-    if location is None or location == 'MyLocation':
-        location, country = query_source_location
+    if not location or location == 'MyLocation':
+        location = ip_addr
 
-        # Let us try to use geolocation services for locations
-        # that were derived from IPs.
-        if location:
-            location = '~' + location
-            if country:
-                location += ", %s" % country
-            hide_full_address = not force_show_full_address
-    elif is_ip(location):
+    if is_ip(location):
         location, country = get_location(location)
 
         # here too

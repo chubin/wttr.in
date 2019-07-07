@@ -288,13 +288,10 @@ def make_wttr_in_png(png_name, options=None):
     """
 
     parsed = parse_wttrin_png_name(png_name)
-    print("------")
-    print(parsed)
-    print("------")
 
     # if location is MyLocation it should be overriden 
     # with autodetected location (from options)
-    if parsed.get('location', 'MyLocation') == 'MyLocation':
+    if parsed.get('location', 'MyLocation') == 'MyLocation' or not parsed.get('location', ''):
         del parsed['location']
 
     if options is not None:

@@ -196,21 +196,22 @@ def wttr(location, request):
 
     orig_location = location
 
-    location, override_location_name, full_address, country, query_source_location = \
-            location_processing(location, ip_addr)
+    if not png_filename:
+        location, override_location_name, full_address, country, query_source_location = \
+                location_processing(location, ip_addr)
 
-    us_ip = query_source_location[1] == 'United States' and 'slack' not in user_agent
-    query = parse_query.metric_or_imperial(query, lang, us_ip=us_ip)
+        us_ip = query_source_location[1] == 'United States' and 'slack' not in user_agent
+        query = parse_query.metric_or_imperial(query, lang, us_ip=us_ip)
 
-    # logging query
-    orig_location_utf8 = (orig_location or "").encode('utf-8')
-    location_utf8 = location.encode('utf-8')
-    use_imperial = query.get('use_imperial', False)
-    log(" ".join(map(str,
-                     [ip_addr, user_agent, orig_location_utf8, location_utf8, use_imperial, lang])))
+        # logging query
+        orig_location_utf8 = (orig_location or "").encode('utf-8')
+        location_utf8 = location.encode('utf-8')
+        use_imperial = query.get('use_imperial', False)
+        log(" ".join(map(str,
+                         [ip_addr, user_agent, orig_location_utf8, location_utf8, use_imperial, lang])))
 
-    if country and location != NOT_FOUND_LOCATION:
-        location = "%s,%s" % (location, country)
+        if country and location != NOT_FOUND_LOCATION:
+            location = "%s,%s" % (location, country)
 
     # We are ready to return the answer
     try:
@@ -219,7 +220,7 @@ def wttr(location, request):
 
         if png_filename:
             options = {
-                'lang': None,
+                'lang': lang,
                 'location': location}
             options.update(query)
 
