@@ -301,7 +301,6 @@ def make_wttr_in_png(png_name, options=None):
             if key not in parsed:
                 parsed[key] = val
     url = make_wttrin_query(parsed)
-    print("URL = ", url)
 
     timestamp = time.strftime("%Y%m%d%H", time.localtime())
     cached_basename = url[14:].replace('/','_')
@@ -315,7 +314,8 @@ def make_wttr_in_png(png_name, options=None):
     if os.path.exists(cached_png_file):
         return cached_png_file
 
-    text = requests.get(url).text.replace('\n', '\r\n')
+    headers = {'X-PNG-Query-For': options.get('ip_addr', '1.1.1.1')}
+    text = requests.get(url, headers=headers).text.replace('\n', '\r\n')
     curl_output = text.encode('utf-8')
 
     typescript_to_one_frame(cached_png_file, curl_output, options=parsed)

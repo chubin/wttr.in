@@ -55,7 +55,11 @@ def client_ip_address(request):
     Flask related
     """
 
-    if request.headers.getlist("X-Forwarded-For"):
+    if request.headers.getlist("X-PNG-Query-For"):
+        ip_addr = request.headers.getlist("X-PNG-Query-For")[0]
+        if ip_addr.startswith('::ffff:'):
+            ip_addr = ip_addr[7:]
+    elif request.headers.getlist("X-Forwarded-For"):
         ip_addr = request.headers.getlist("X-Forwarded-For")[0]
         if ip_addr.startswith('::ffff:'):
             ip_addr = ip_addr[7:]
@@ -238,6 +242,7 @@ def wttr(location, request):
 
         if png_filename:
             options = {
+                'ip_addr': ip_addr,
                 'lang': lang,
                 'location': location}
             options.update(query)
