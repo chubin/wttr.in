@@ -341,7 +341,7 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
         'te': u'స్థానము',
         'tr': u'Konum',
         'uk': u'Місцезнаходження',
-        'en': u'Địa điểm',
+        'vi': u'Địa điểm',
     },
 
     'CAPACITY_LIMIT_REACHED': {
