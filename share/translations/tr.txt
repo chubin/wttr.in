@@ -1,5 +1,5 @@
 113: Açık												: Clear
-113: Günşeli											: Sunny
+113: Güneşli											: Sunny
 116: Parçalı bulutlu									: Partly cloudy
 119: Bulutlu											: Cloudy
 122: Kapalı												: Overcast
@@ -34,13 +34,13 @@
 335: Yer yer kuvvetli kar yağışı						: Patchy heavy snow
 338: Kuvvetli kar yağışı								: Heavy snow
 350: Dolu yağışı										: Ice pellets
-353: Hafif sağnak yağmur								: Light rain shower
-356: Orta kuvvette veya şiddetli sağnak yağmur			: Moderate or heavy rain shower
-359: Sel riski olan şiddetli sağnak yağmur 				: Torrential rain shower
-362: Hafif karla karışık sağnak yağmur					: Light sleet showers
-365: Orta veya şiddetli karla karışık sağnak yağmur 	: Moderate or heavy sleet showers
-368: Hafif sağnak kar yağışı							: Light snow showers
-371: Orta kuvvette veya şiddetli sağnak kar yağışı		: Moderate or heavy snow showers
+353: Hafif sağanak yağmur								: Light rain shower
+356: Orta kuvvette veya şiddetli sağanak yağmur			: Moderate or heavy rain shower
+359: Sel riski olan şiddetli sağanak yağmur 			: Torrential rain shower
+362: Hafif karla karışık sağanak yağmur					: Light sleet showers
+365: Orta veya şiddetli karla karışık sağanak yağmur 	: Moderate or heavy sleet showers
+368: Hafif sağanak kar yağışı							: Light snow showers
+371: Orta kuvvette veya şiddetli sağanak kar yağışı		: Moderate or heavy snow showers
 386: Yer yer gök gürültülü ve yağmurlu					: Patchy light rain with thunder
 389: Orta kuvvette veya şiddetli gök gürültülü yağmur	: Moderate or heavy rain with thunder
 392: Yer yer gök gürültülü ve karlı						: Patchy light snow with thunder
