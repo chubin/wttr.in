@@ -46,7 +46,7 @@ Translated/improved/corrected by:
     * Swedish:      John Eriksson
     * Serbian:      Milan Stevanović @FathVader
     * Swahili:      Joel Mukuthu
-    * Turkish:      Atabey Kaygun, Yilmaz @edigu
+    * Turkish:      Atabey Kaygun, Yilmaz @edigu, Volkan Tokmak(@volkanto)
     * Ukrainian:    Igor Chubin, Serhiy @pavse
     * Uzbek:        Shukhrat Mukimov
     * Welsh:        Daniel Thomas
