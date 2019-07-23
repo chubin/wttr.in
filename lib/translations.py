@@ -8,7 +8,7 @@ FULL_TRANSLATION = [
     "af", "da", "de", "el", "et",
     "fr", "fa", "hu", "id", "it",
     "nb", "nl", "pl", "pt-br", "ro",
-    "ru", "uk", "vi"
+    "ru", "tr", "uk", "vi"
 ]
 
 PARTIAL_TRANSLATION = [
@@ -17,7 +17,7 @@ PARTIAL_TRANSLATION = [
     "hy", "is", "ja", "jv", "ka", "kk",
     "ko", "ky", "lt", "lv", "mk", "ml", "nl", "fy",
     "nn", "pt", "pt-br", "sk", "sl", "sr", "sr-lat",
-    "sv", "sw", "th", "tr", "te", "uz",
+    "sv", "sw", "th", "te", "uz",
     "zh", "zu", "he",
 ]
 
