@@ -236,6 +236,11 @@ Sizning joylashuvingizni aniqlay olmadik,
 shuning uchun sizga sayyoramizning eng sovuq aholi punkti - Oymyakondagi ob-havo haqida ma'lumot beramiz.
 Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
 """,
+        'zh': u"""
+我们无法找到您的位置, 
+当前显示奥伊米亚康(Oymyakon)，这个星球上最冷的人类定居点。
+""",
+		},
         'da': u"""
 Vi kunne desværre ikke finde din lokation
 så vi har bragt dig til Oymyakon,
@@ -296,6 +301,7 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
         'tr': u'Bilinmeyen konum',
         'uk': u'Невідоме місце',
         'uz': u'Аникланмаган худуд',
+        'zh': u'未知地点',
         'vi': u'Địa điểm không xác định',
     },
 
@@ -338,6 +344,7 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
         'sl': u'Lokacijo',
         'sr': u'Локација',
         'sv': u'Plats',
+        'zh': u'地点',
         'te': u'స్థానము',
         'tr': u'Konum',
         'uk': u'Місцезнаходження',
@@ -477,6 +484,11 @@ Vi vil forsøke å fikse problemet så snart som mulig.
 Du kan følge https://twitter.com/igor_chubin for oppdateringer.
 ======================================================================================
 """,
+        'zh': u"""
+抱歉，当前天气服务不可用。
+以下显示默认城市（只对您可见）。
+我们将会尽快获取新数据。
+您可以通过https://twitter.com/igor_chubin 获取最新动态。
         'nl': u"""
 Excuse, wij kunnen u op dit moment dit weerbericht niet laten zien.
 Hier is het weerbericht voor de standaard stad(zodat u weet hoe het er uitziet)
@@ -596,6 +608,7 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
         'pt-br': u'Nova funcionalidade: nomes de localidades em várias línguas \033[92mwttr.in/станция+Восток\033[0m (em UTF-8) e procura por localidades \033[92mwttr.in/~Kilimanjaro\033[0m (é só colocar ~ antes)',
         'ro': u'Funcționalitate nouă: nume de localități multilingve \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) și căutare de localități \033[92mwttr.in/~Kilimanjaro\033[0m (adăuați ~ în față)',
         'ru': u'Попробуйте: названия мест на любом языке \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и поиск мест \033[92mwttr.in/~Kilimanjaro\033[0m (нужно добавить ~ спереди)',
+        'zh': u'新功能：多语言地点名称 \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) 及地点搜索\033[92mwttr.in/~Kilimanjaro\033[0m （只需在名称前加~）',
         'tr': u'Yeni özellik: çok dilli konum isimleri \033[92mwttr.in/станция+Восток\033[0m (UTF-8 ile) ve konum arama \033[92mwttr.in/~Kilimanjaro\033[0m (sadece önüne ~ ekleyin)',
         'te': u'క్రొత్త లక్షణం: బహుభాషా స్థాన పేర్లు \ 033 [92mwttr.in/stancelя+Vostок\033 [0 U (UTF-8 లో) మరియు స్థానం శోధన \ 033 [92mwttr.in/~kilimanjaro\033 [0m (కేవలం ~ ముందుకి జోడించండి)',
         'da': u'Ny funktion: flersprogede lokationsnavne \033[92mwttr.in/станция+Восток\033[0m (som UTF-8) og lokations søgning \033[92mwttr.in/~Kilimanjaro\033[0m (bare tilføj ~ inden)',
@@ -632,6 +645,7 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
         'pt-br': u'Seguir \033[46m\033[30m@igor_chubin\033[0m para as novidades de wttr.in',
         'ro': u'Urmăriți \033[46m\033[30m@igor_chubin\033[0m pentru actualizări despre wttr.in',
         'ru': u'Все новые фичи публикуются здесь: \033[46m\033[30m@igor_chubin\033[0m',
+        'zh': u'关注 \033[46m\033[30m@igor_chubin\033[0m 获取 wttr.in 动态',
         'te': u'అనుసరించండి \ 033 [46m \ 033 [30m @ igor_chubin \ 033 [wttr.in నవీకరణలను కోసం',
         'tr': u'wttr.in ile ilgili gelişmeler için \033[46m\033[30m@igor_chubin\033[0m adresini takip edin',
         'da': u'Følg \033[46m\033[30m@igor_chubin\033[0m for at få wttr.in opdateringer',
