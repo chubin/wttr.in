@@ -1,0 +1,47 @@
+113: Καθαρός                            : Clear
+113: Λιακάδα                            : Sunny
+116: Αραιή συννεφιά                     : Partly cloudy
+119: Συννεφιά                           : Cloudy
+122: Πυκνή νέφωση                       : Overcast
+143: Αραιή ομίχλη                       : Mist
+176: Πιθανή βροχή τοπικά                : Patchy rain possible
+179: Πιθανή χιονόπτωση τοπικά           : Patchy snow possible
+182: Πιθανή χαλαζόπτωση τοπικά          : Patchy sleet possible
+185: Πιθανό παγωμ. ψιλόβροχο τοπικά     : Patchy freezing drizzle possible
+200: Πιθανή πτώση κεραυνών              : Thundery outbreaks possible
+227: Ριπές χιονιού                      : Blowing snow
+230: Χιονοθύελλα                        : Blizzard
+248: Ομίχλη                             : Fog
+260: Παγωμένη ομίχλη                    : Freezing fog
+263: Ασθενής ψιχάλα  τοπικά             : Patchy light drizzle
+266: Ασθενής ψιχάλα                     : Light drizzle
+281: Παγωμένο ψιλόβροχο                 : Freezing drizzle
+284: Πυκνό παγωμένο ψιλόβροχο           : Heavy freezing drizzle
+293: Ασθενής όμβρος τοπικά              : Patchy light rain
+296: Ασθενής βροχόπτωση                 : Light rain
+299: Μέτρια βροχή παροδικά              : Moderate rain at times
+302: Μέτρια βροχόπτωση                  : Moderate rain
+305: Έντονη βροχή παροδικά              : Heavy rain at times
+308: Έντονη βροχόπτωση                  : Heavy rain
+311: Αραιό χιονόνερο                    : Light freezing rain
+314: Μέτριο ή έντονο χιονόνερο          : Moderate or heavy freezing rain
+317: Ασθενής χαλαζόπτωση                : Light sleet
+320: Μέτρια ή έντονη χαλαζόπτωση        : Moderate or heavy sleet
+323: Αραιή χιονόπτωση κατά τόπους       : Patchy light snow
+326: Αραιή χιονόπτωση                   : Light snow
+329: Μέτρια χιονόπτωση τοπικά           : Patchy moderate snow
+332: Μέτρια χιονόπτωση                  : Moderate snow
+335: Πυκνή χιονόπτωση τοπικά            : Patchy heavy snow
+338: Πυκνή χιονόπτωση                   : Heavy snow
+350: Χιονόνερο                          : Ice pellets
+353: Ασθενής βροχή παροδικά             : Light rain shower
+356: Μέτρια ή έντονη βροχή παροδικά     : Moderate or heavy rain shower
+359: Καταρρακτώδης βροχή παροδικά       : Torrential rain shower
+362: Ασθενής χαλαζόπτωση παροδικά       : Light sleet showers
+365: Μέτρια/έντονη χαλαζόπτωση παροδικά : Moderate or heavy sleet showers
+368: Αραιή χιονόπτωση παροδικά          : Light snow showers
+371: Μέτρια ή πυκνή χιονόπτωση παροδικά : Moderate or heavy snow showers
+386: Ασθενής βροχή με κεραυνούς τοπικά  : Patchy light rain with thunder
+389: Μέτρια ή δυνατή βροχή με κεραυνούς : Moderate or heavy rain with thunder
+392: Ασθενής χιονόπτωση-κεραυνοί τοπικά : Patchy light snow with thunder
+395: Μέτρια ή πυκνή χιονόπτωση-κεραυνοί : Moderate or heavy snow with thunder

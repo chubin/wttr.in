@@ -1,0 +1,68 @@
+Komut Satırı Kullanımı:
+
+    $ curl wttr.in          # bulunduğunuz konum
+    $ curl wttr.in/esb      # Esenboğa havalimanında hava durumu
+
+Desteklenen konum tipleri:
+
+    /istanbul               # şehir adı
+    /~Anıtkabir             # herhangi bir konum
+    /Москва                 # Herhangi bir dilde herhangi bir unicode konum
+    /esb                    # havalimanı kodu (3 harfli)
+    /@stackoverflow.com     # alan adı
+    /06800                  # posta kodları
+    /39.925325,32.836987    # Yer belirleme sistemi(GPS) koordinatları
+
+Özel konumlar:
+
+    /moon                   # Ay evresi (Şehir veya ülke için +TR veya +İstanbul ekleyin)
+    /moon@2016-10-25        # Belirli bir tarih için ay evresi (@2016-10-25)
+
+Ölçü birimleri:
+
+    ?m                      # metrik sistem (SI) (ABD dışında her yer için varsayılan)
+    ?u                      # USCS (ABD için varsayılan)
+    ?M                      # Rüzgar hızını metre/saniye(m/s) olarak göster
+
+Seçenekleri görüntüle:
+
+    ?0                      # sadece bugün için hava durumu
+    ?1                      # Bugün ve 1 gün sonrası için hava durumu
+    ?2                      # Bugün ve 2 gün sonrası için hava durumu
+    ?A                      # Kullanıcı aracısı(User-Agent) bilgilerini göz ardı eder ve terminalde ANSI formatında çıktı için zorlar
+    ?F                      # "Follow(Takip et)" satırını göstermez
+    ?n                      # dar görünüm (sadece gece ve gündüz)
+    ?q                      # sessiz görünüm ("Hava durumu" yazısı yok)
+    ?Q                      # aşırı sessiz görünüm ("Hava durumu" yazısı ve şehir adı yok)
+    ?T                      # terminal geçişlerini kapatır (renkler yok)
+
+PNG seçenekleri:
+
+    /istanbul.png           # bir PNG dosyası üretir
+    ?p                      # çıktı etrafına bir çerçeve ekler
+    ?t                      # 150 birim saydamlık
+    transparency=...        # 0 ila 255 arasında saydamlık (255 = saydam değil)
+
+Seçenekler birleştirilebilir:
+
+    /Istanbul?0pq
+    /Istanbul?0pq&lang=fr
+    /Istanbul_0pq.png       # PNG dosya modları _ karakterinden sonra belirtilir
+    /izmir_0pq_lang=it.png  # uzun seçenekler alt çizgi ile ayrılır
+
+Yerelleştirme:
+
+    $ curl tr.wttr.in/Istanbul
+    $ curl wttr.in/izmir?lang=tr
+    $ curl -H "Accept-Language: tr" wttr.in/izmir
+
+Desteklenen diller:
+
+    FULL_TRANSLATION (destekleniyor)
+    PARTIAL_TRANSLATION (geliştirme aşamasında)
+
+Özel adresler:
+
+    /:help                  # bu sayfayı göster
+    /:bash.function         # önerilen bash fonksiyonu wttr() içeriğini göster
+    /:translation           # çevirmenler hakkındaki bilgileri göster

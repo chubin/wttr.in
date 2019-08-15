@@ -1,0 +1,47 @@
+113 :                                     בהיר: Clear
+113 :                                     שמשי: Sunny
+116 :                                        מעונן חלקית : Partly cloudy
+119 :                                        מעונן : Cloudy
+122 :                                        מעונן : Overcast
+143 :                                        ערפל : Mist
+176 :                                        סיכוי לגשם מקומי : Patchy rain possible
+179 :                                        סיכוי לשלג מקומי : Patchy snow possible
+182 :                                        סיכוי לגשם מעורב בשלג מקומי : Patchy sleet possible
+185 :                                        סיכוי לברד מקומי : Patchy freezing drizzle possible
+200 :                                        סיכוי לסופת ברקים : Thundery outbreaks possible
+227 :                                        משבי שלג : Blowing snow
+230 :                                        סופת שלג : Blizzard
+248 :                                        ערפל : Fog
+260 :                                        קרה : Freezing fog
+263 :                                        ברד מקומי קל : Patchy light drizzle
+266 :                                        ברד קל : Light drizzle
+281 :                                        ברד : Freezing drizzle
+284 :                                        ברד כבד : Heavy freezing drizzle
+293 :                                        גשם מקומי קל : Patchy light rain
+296 :                                        גשם קל : Light rain
+299 :                                        גשם לסירוגין : Moderate rain at times
+302 :                                        גשם  : Moderate rain
+305 :                                        גשם כבד לסירוגין : Heavy rain at times
+308 :                                        גשם כבד : Heavy rain
+311 :                                        גשם קופא קל : Light freezing rain
+314 :                                        גשם קופא בינוני עד כבד : Moderate or heavy freezing rain
+317 :                                        גשם מעורב בשלג קל : Light sleet
+320 :                                        גשם מעורב בשלג בינוני עד כבד : Moderate or heavy sleet
+323 :                                        שלג מקומי קל : Patchy light snow
+326 :                                        שלג קל : Light snow
+329 :                                        שלג מקומי בינוני : Patchy moderate snow
+332 :                                        שלג בינוני : Moderate snow
+335 :                                        שלג מקומי כבד : Patchy heavy snow
+338 :                                        שלג כבד : Heavy snow
+350 :                                        ברד : Ice pellets
+353 :                                        גשם קל : Light rain shower
+356 :                                        גשם בינוני עד כבד : Moderate or heavy rain shower
+359 :                                        ממטרים כבדים : Torrential rain shower
+362 :                                        גשם מעורב בשלג קל : Light sleet showers
+365 :                                        גשם מעורב בשלג בינוני עד כבד : Moderate or heavy sleet showers
+368 :                                        שלג קל : Light snow showers
+371 :                                        שלג בינוני עד כבד : Moderate or heavy snow showers
+386 :                                        גשם מקומי קל ורעמים : Patchy light rain with thunder
+389 :                                        גשם בינוני עד כבד ורעמים : Moderate or heavy rain with thunder
+392 :                                        שלג קל ורעמים : Patchy light snow with thunder
+395 :                                        שלג בינוני עד כבד ורעמים : Moderate or heavy snow with thunder

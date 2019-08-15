@@ -1,0 +1,47 @@
+113: صاف                                                    : Clear
+113: آفتابی                                                 : Sunny
+116: نیمه ابری                                              : Partly cloudy
+119: ابری                                                   : Cloudy
+122: پوشیده از ابر                                          : Overcast
+143: شبنم                                                   : Mist
+176: احتمال بارش پراکنده باران                              : Patchy rain possible
+179: احتمال بارش پراکنده برف                                : Patchy snow possible
+182: احتمال بارش پراکنده تگرگ                               : Patchy sleet possible
+185: احتمال بارش پراکنده قطرات منجمد باران                  : Patchy freezing drizzle possible
+200: احتمال رعد و برق                                       : Thundery outbreaks possible
+227: بارش سنگین برف                                         : Blowing snow
+230: کولاک                                                  : Blizzard
+248: مه                                                     : Fog
+260: مه یخ زده                                              : Freezing fog
+263: بارش پراکنده نم نم باران                               : Patchy light drizzle
+266: بارش نم نم باران                                       : Light drizzle
+281: بارش ریزباران یخ بسته	                                 : Freezing drizzle
+284: بارش سنگین ریزباران یخ بسته	                           : Heavy freezing drizzle
+293: بارش پراکنده باران                                     : Patchy light rain
+296: بارش باران                                             : Light rain
+299: بارش یکنواخت و ملایم باران                             : Moderate rain at times
+302: بارش ملایم باران                                       : Moderate rain
+305: بارش سنگین باران به صورت یکنواخت                       : Heavy rain at times
+308: بارش سنگین باران                                       : Heavy rain
+311: بارش نم نم باران یخ بسته                               : Light freezing rain
+314: بارش ملایم یا سنگین باران یخ بسته                      : Moderate or heavy freezing rain
+317: بارش سبک تگرگ                                          : Light sleet
+320: بارش ملایم یا سنگین تگرگ                               : Moderate or heavy sleet
+323: بارش پراکنده و سبک برف                                 : Patchy light snow
+326: بارش سبک برف                                           : Light snow
+329: بارش پراکنده و ملایم برف                               : Patchy moderate snow
+332: بارش ملایم برف                                         : Moderate snow
+335: بارش پراکنده و سنگین برف                               : Patchy heavy snow
+338: بارش سنگین برف                                         : Heavy snow
+350: بارش دانه های ریز یخ                                   : Ice pellets
+353: دوش باران سبک                                          : Light rain shower
+356: دوش باران ملایم یا سنگین                               : Moderate or heavy rain shower
+359: دوش باران سیلی                                         : Torrential rain shower
+362: بارش سبک دوش تگرگ                                      : Light sleet showers
+365: بارش ملایم یا سنگین دوش تگرگ                           : Moderate or heavy sleet showers
+368: بارش سبک دوش برف                                       : Light snow showers
+371: بارش ملایم یا سنگین دوش برف                            : Moderate or heavy snow showers
+386: بارش پراکنده باران همراه با رعد و برق                  : Patchy light rain with thunder
+389: بارش ملایم یا سنگین باران همراه با رعد و برق           : Moderate or heavy rain with thunder
+392: بارش پراکنده برف ملایم یا سنگین همراه با رعد و برق     : Patchy light snow with thunder
+395: بارش ملایم یا سنگین برف همراه با رعد و برق             : Moderate or heavy snow with thunder

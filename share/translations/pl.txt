@@ -1,0 +1,81 @@
+113: Bezchmurnie                                              : Clear
+113: Słonecznie                                               : Sunny
+116: Lekkie zachmurzenie                                      : Partly cloudy
+119: Zachmurzenie                                             : Cloudy
+122: Całkowite zachmurzenie                                   : Overcast
+143: Zamglenie                                                : Mist
+176: Możliwe miejscowe opady deszczu                          : Patchy rain possible
+179: Możliwe miejscowe opady śniegu                           : Patchy snow possible
+182: Możliwe miejscowe opady deszczu ze śniegiem              : Patchy sleet possible
+185: Możliwe miejscowe opady marznącego deszczu               : Patchy freezing drizzle possible
+200: Możliwa burza                                            : Thundery outbreaks possible
+227: Zawieja śnieżna                                          : Blowing snow
+230: Śnieżyca                                                 : Blizzard
+248: Mgła                                                     : Fog
+260: Marznąca mgła                                            : Freezing fog
+263: Przelotna mżawka                                         : Patchy light drizzle
+266: Mżawka                                                   : Light drizzle
+281: Marznąca mżawka                                          : Freezing drizzle
+284: Marznąca mżawka                                          : Heavy freezing drizzle
+293: Przelotne lekkie opady deszczu                           : Patchy light rain
+296: Lekkie opady deszczu                                     : Light rain
+299: Przelotne umiarkowane opady deszczu                      : Moderate rain at times
+302: Umiarkowane opady deszczu                                : Moderate rain
+305: Przelotne silne opady deszczu                            : Heavy rain at times
+308: Silne opady deszczu                                      : Heavy rain
+311: Lekki marznący deszcz                                    : Light freezing rain
+314: Umiarkowany lub silny marznący deszcz                    : Moderate or heavy freezing rain
+317: Lekki deszcz ze śniegiem                                 : Light sleet
+320: Umiarkowany lub silny deszcz ze śniegiem                 : Moderate or heavy sleet
+323: Miejscowe lekkie opady śniegu                            : Patchy light snow
+326: Lekkie opady śniegu                                      : Light snow
+329: Miejscowe umiarkowane opady śniegu                       : Patchy moderate snow
+332: Umiarkowane opady śniegu                                 : Moderate snow
+335: Miejscowe silne opady śniegu                             : Patchy heavy snow
+338: Silne opady śniegu                                       : Heavy snow
+350: Gradobicie                                               : Ice pellets
+353: Lekkie opady deszczu                                     : Light rain shower
+356: Umiarkowane lub silne opady deszczu                      : Moderate or heavy rain shower
+359: Oberwanie chmury                                         : Torrential rain shower
+362: Lekki deszcz ze śniegiem                                 : Light sleet showers
+365: Umiarkowany lub silny deszcz ze śniegiem                 : Moderate or heavy sleet showers
+368: Lekkie opady śniegu                                      : Light snow showers
+371: Umiarkowane lub silne opady śniegu                       : Moderate or heavy snow showers
+386: Miejscowe lekkie opady deszczu i burza z piorunami       : Patchy light rain with thunder
+389: Umiarkowane lub silne opady deszczu i burza z piorunami  : Moderate or heavy rain with thunder
+392: Miejscowe lekkie opady śniegu i burza z piorunami        : Patchy light snow with thunder
+395: Umiarkowane lub silne opady śniegu i burza z piorunami   : Moderate or heavy snow with thunder
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

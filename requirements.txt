@@ -4,3 +4,10 @@ geopy
 requests
 gevent
 dnspython
+pylint
+cyrtranslit
+astral
+timezonefinder
+Pillow
+pyte
+python-dateutil

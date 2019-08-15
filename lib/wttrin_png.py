@@ -1,6 +1,7 @@
 #!/usr/bin/python
 #vim: encoding=utf-8
 
+from __future__ import print_function
 import sys
 import os
 import re
@@ -32,7 +33,7 @@ MYDIR = os.path.abspath(os.path.dirname(os.path.dirname('__file__')))
 sys.path.append("%s/lib/" % MYDIR)
 import parse_query
 
-PNG_CACHE = os.path.join(MYDIR, "cache/png")
+from globals import PNG_CACHE, log
 
 COLS = 180
 ROWS = 100
@@ -49,6 +50,8 @@ FONT_CAT = {
     'default':      "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
     'Cyrillic':     "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
     'Greek':        "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+    'Arabic':       "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+    'Hebrew':       "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
     'Han':          "/usr/share/fonts/truetype/motoya-l-cedar/MTLc3m.ttf",
     'Hiragana':     "/usr/share/fonts/truetype/motoya-l-cedar/MTLc3m.ttf",
     'Katakana':     "/usr/share/fonts/truetype/motoya-l-cedar/MTLc3m.ttf",
@@ -95,7 +98,8 @@ def strip_buf(buf):
             break
         number_of_lines += 1
 
-    buf = buf[:-number_of_lines]
+    if number_of_lines:
+        buf = buf[:-number_of_lines]
 
     max_len = max(line_len(x) for x in buf)
     buf = [line[:max_len] for line in buf]
@@ -118,7 +122,7 @@ def script_category(char):
 
 def gen_term(filename, buf, options=None):
     buf = strip_buf(buf)
-    cols = len(buf[0])
+    cols = max(len(x) for x in buf)
     rows = len(buf)
 
     image = Image.new('RGB', (cols * CHAR_WIDTH, rows * CHAR_HEIGHT))
@@ -142,14 +146,15 @@ def gen_term(filename, buf, options=None):
                      (x_pos+CHAR_WIDTH, y_pos+CHAR_HEIGHT)),
                     fill=color_mapping(char.bg))
 
-            cat = script_category(char.data)
-            if cat not in font:
-                print "Unknown font category: %s" % cat
-            draw.text(
-                (x_pos, y_pos),
-                char.data,
-                font=font.get(cat, font.get('default')),
-                fill=current_color)
+            if char.data:
+                cat = script_category(char.data)
+                if cat not in font:
+                    log("Unknown font category: %s" % cat)
+                draw.text(
+                    (x_pos, y_pos),
+                    char.data,
+                    font=font.get(cat, font.get('default')),
+                    fill=current_color)
             #sys.stdout.write(c.data)
 
             x_pos += CHAR_WIDTH
@@ -198,7 +203,10 @@ def typescript_to_one_frame(png_file, text, options=None):
 
     stream.feed(text)
 
-    gen_term(png_file, screen.buffer, options=options)
+    buf = sorted(screen.buffer.items(), key=lambda x: x[0])
+    buf = [[x[1] for x in sorted(line[1].items(), key=lambda x: x[0])] for line in buf]
+
+    gen_term(png_file, buf, options=options)
 
 #
 # wttr.in related functions
@@ -266,6 +274,8 @@ def make_wttrin_query(parsed):
     for key, val in parsed.items():
         args.append('%s=%s' % (key, val))
 
+    args.append('filetype=png')
+
     url = "http://wttr.in/%s" % location
     if args != []:
         url += "?%s" % ("&".join(args))
@@ -280,13 +290,10 @@ def make_wttr_in_png(png_name, options=None):
     """
 
     parsed = parse_wttrin_png_name(png_name)
-    print "------"
-    print parsed
-    print "------"
 
     # if location is MyLocation it should be overriden 
     # with autodetected location (from options)
-    if parsed.get('location', 'MyLocation') == 'MyLocation':
+    if parsed.get('location', 'MyLocation') == 'MyLocation' or not parsed.get('location', ''):
         del parsed['location']
 
     if options is not None:
@@ -294,7 +301,6 @@ def make_wttr_in_png(png_name, options=None):
             if key not in parsed:
                 parsed[key] = val
     url = make_wttrin_query(parsed)
-    print "URL = ", url
 
     timestamp = time.strftime("%Y%m%d%H", time.localtime())
     cached_basename = url[14:].replace('/','_')
@@ -305,12 +311,11 @@ def make_wttr_in_png(png_name, options=None):
     if not os.path.exists(dirname):
         os.makedirs(dirname)
 
-    print "Cached file: %s" % cached_png_file
     if os.path.exists(cached_png_file):
         return cached_png_file
 
-    print "Requesting URL: %s" % url
-    text = requests.get(url).text.replace('\n', '\r\n')
+    headers = {'X-PNG-Query-For': options.get('ip_addr', '1.1.1.1')}
+    text = requests.get(url, headers=headers).text.replace('\n', '\r\n')
     curl_output = text.encode('utf-8')
 
     typescript_to_one_frame(cached_png_file, curl_output, options=parsed)

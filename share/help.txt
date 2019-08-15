@@ -1,7 +1,7 @@
 Usage:
 
     $ curl wttr.in          # current location
-    $ curl wttr.in/muc      # weather in the Munic airport
+    $ curl wttr.in/muc      # weather in the Munich airport
 
 Supported location types:
 
@@ -20,25 +20,27 @@ Special locations:
 
 Units:
 
-    ?m                      # metric (SI) (used by default everywhere except US)
-    ?u                      # USCS (used by default in US)
-    ?M                      # show wind speed in m/s
+    m                       # metric (SI) (used by default everywhere except US)
+    u                       # USCS (used by default in US)
+    M                       # show wind speed in m/s
 
 View options:
 
-    ?0                      # only current weather
-    ?1                      # current weather + 1 day
-    ?2                      # current weather + 2 days
-    ?n                      # narrow version (only day and night)
-    ?q                      # quiet version (no "Weather report" text)
-    ?Q                      # superquiet version (no "Weather report", no city name)
-    ?T                      # switch terminal sequences off (no colors)
+    0                       # only current weather
+    1                       # current weather + 1 day
+    2                       # current weather + 2 days
+    A                       # ignore User-Agent and force ANSI output format (terminal)
+    F                       # do not show the "Follow" line
+    n                       # narrow version (only day and night)
+    q                       # quiet version (no "Weather report" text)
+    Q                       # superquiet version (no "Weather report", no city name)
+    T                       # switch terminal sequences off (no colors)
 
 PNG options:
 
     /paris.png              # generate a PNG file
-    ?p                      # add frame arond the output
-    ?t                      # transparency 150
+    p                       # add frame around the output
+    t                       # transparency 150
     transparency=...        # transparency from 0 to 255 (255 = not transparent)
 
 Options can be combined:
