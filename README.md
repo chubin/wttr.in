@@ -228,6 +228,13 @@ a lot of additional weather and astronomical information is available:
   $ curl v2.wttr.in/München
 ```
 
+or
+
+```
+  $ curl wttr.in/München?format=v2
+```
+
+
 ![data-reach output format](https://wttr.in/files/example-wttr-v2.png)
 
 (The mode is experimental, and it has several limitations currently:
