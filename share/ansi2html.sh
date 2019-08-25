@@ -103,6 +103,7 @@ fi
 printf '%s' "<html>
 <head>
 <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
+<link rel=\"stylesheet\" type=\"text/css\" href=\"https://adobe-fonts.github.io/source-code-pro/source-code-pro.css\">
 <link rel=\"stylesheet\" type=\"text/css\" href=\"/files/style.css\" />
 <style type=\"text/css\">
 .ef0,.f0 { color: #$P0; } .eb0,.b0 { background-color: #$P0; }
