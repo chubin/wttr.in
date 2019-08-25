@@ -212,7 +212,16 @@ def render_line(line, data, query):
 
     return re.sub(r'%[^%]*[a-zA-Z]', render_symbol, line)
 
-def format_weather_data(format_line, location, override_location, data, query):
+def render_json(data):
+    output = json.dumps(data, indent=4, sort_keys=True)
+
+    output = "\n".join(
+        re.sub('"[^"]*worldweatheronline[^"]*"', '""', line) if "worldweatheronline" in line else line
+        for line in output.splitlines()) + "\n"
+
+    return output
+
+def format_weather_data(format_line, location, override_location, full_address, data, query):
     """
     Format information about current weather `data` for `location`
     with specified in `format_line` format
