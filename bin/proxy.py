@@ -65,7 +65,7 @@ TRANSLATIONS = load_translations()
 
 
 def _find_srv_for_query(path, query):   # pylint: disable=unused-argument
-    return 'http://api.worldweatheronline.com/'
+    return 'http://api.worldweatheronline.com'
 
 def _load_content_and_headers(path, query):
     timestamp = time.strftime("%Y%m%d%H", time.localtime())
