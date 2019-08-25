@@ -212,6 +212,29 @@ $ cat ~/.config/fontconfig/fonts.conf
 
 (to apply the configuration, run `fc-cache -f -v`)
 
+## Data-reach output format
+
+In the experimental data-reach output format, that is available under the view code `v2`,
+a lot of additional weather and astronomical information is available:
+
+* Temperature, and precepetation changes forecast throughout the days;
+* Moonphase for today and the next three days;
+* The current weather condition, temperature, humidity, windspeed and direction, pressure;
+* Timezone;
+* Dawn, sunrise, noon, sunset, dusk time for he selected location;
+* Precise geographical coordinates for the selected location.
+
+```
+  $ curl v2.wttr.in/München
+```
+
+![data-reach output format](https://wttr.in/files/example-wttr-v2.png)
+
+(The mode is experimental, and it has several limitations currently:
+
+* It works only in terminal;
+* Only English is supported).
+
 ## Moon phases
 
 wttr.in can also be used to check the phase of the Moon. This example shows how to see the current Moon phase:
