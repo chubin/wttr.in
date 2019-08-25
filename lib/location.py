@@ -248,11 +248,11 @@ def location_processing(location, ip_addr):
     # up to this point it is possible that the name
     # contains some unicode symbols
     # here we resolve them
-    if location is not None and not ascii_only(location):
+    if location is not None: # and not ascii_only(location):
         location = "~" + location.lstrip('~ ')
 
-    if location is not None and location.upper() in IATA_CODES:
-        location = '~%s' % location
+    # if location is not None and location.upper() in IATA_CODES:
+    #     location = '~%s' % location
 
     if location is not None and location.startswith('~'):
         geolocation = geolocator(location_canonical_name(location[1:]))
