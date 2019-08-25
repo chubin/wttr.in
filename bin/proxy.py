@@ -76,6 +76,14 @@ def _load_content_and_headers(path, query):
     except IOError:
         return None, None
 
+def _touch_empty_file(path, query, content, headers):
+    timestamp = time.strftime("%Y%m%d%H", time.localtime())
+    cache_file = os.path.join(PROXY_CACHEDIR + ".empty", timestamp, path, query)
+    cache_dir = os.path.dirname(cache_file)
+    if not os.path.exists(cache_dir):
+        os.makedirs(cache_dir)
+    open(cache_file, 'w').write("")
+
 def _save_content_and_headers(path, query, content, headers):
     timestamp = time.strftime("%Y%m%d%H", time.localtime())
     cache_file = os.path.join(PROXY_CACHEDIR, timestamp, path, query)
@@ -172,6 +180,7 @@ def proxy(path):
     lang = request.args.get('lang', 'en')
     query_string = request.query_string
     query_string = query_string.replace('sr-lat', 'sr')
+    query_string = query_string.replace('lang=None', 'lang=en')
     content, headers = _load_content_and_headers(path, query_string)
 
     if content is None:
@@ -180,23 +189,29 @@ def proxy(path):
         print(url)
 
         attempts = 5
+        response = None
         while attempts:
-            response = requests.get(url, timeout=10)
+            response = requests.get(url, timeout=2)
             try:
                 json.loads(response.content)
                 break
             except ValueError:
                 attempts -= 1
 
-        headers = {}
-        headers['Content-Type'] = response.headers['content-type']
-        content = add_translations(response.content, lang)
-        _save_content_and_headers(path, query_string, content, headers)
+        _touch_empty_file(path, query_string, content, headers)
+        if response:
+            headers = {}
+            headers['Content-Type'] = response.headers['content-type']
+            content = add_translations(response.content, lang)
+            _save_content_and_headers(path, query_string, content, headers)
+        else:
+            content = "{}"
 
     return content, 200, headers
 
 if __name__ == "__main__":
     #app.run(host='0.0.0.0', port=5001, debug=False)
     #app.debug = True
-    SERVER = WSGIServer((PROXY_HOST, PROXY_PORT), APP)
+    bind_addr = "0.0.0.0"
+    SERVER = WSGIServer((bind_addr, PROXY_PORT), APP)
     SERVER.serve_forever()
