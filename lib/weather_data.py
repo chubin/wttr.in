@@ -16,7 +16,7 @@ def get_weather_data(location, lang):
            '&num_of_days=3&tp=3&lang=%s') % (key, location, lang)
     url = 'http://127.0.0.1:5001' + url
 
-    response = requests.get(url, timeout=1)
+    response = requests.get(url, timeout=10)
     try:
         data = json.loads(response.content)
     except ValueError:

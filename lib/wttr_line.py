@@ -16,9 +16,11 @@ Initial implementation of one-line output mode.
 import sys
 import re
 import datetime
+import json
 from astral import Astral, Location
 from constants import WWO_CODE, WEATHER_SYMBOL, WIND_DIRECTION
 from weather_data import get_weather_data
+import spark
 
 PRECONFIGURED_FORMAT = {
     '1':    u'%c %t',
@@ -229,26 +231,36 @@ def format_weather_data(format_line, location, override_location, full_address, 
 
     if 'data' not in data:
         return 'Unknown location; please try ~%s' % location
+
+    if format_line == "j1":
+        return render_json(data['data'])
+    if format_line == "v2":
+        return spark.main(location,
+                override_location=override_location,
+                full_address=full_address, data=data)
+
     current_condition = data['data']['current_condition'][0]
     current_condition['location'] = location
     current_condition['override_location'] = override_location
     output = render_line(format_line, current_condition, query)
     return output
 
-def wttr_line(location, override_location_name, query, lang):
+def wttr_line(location, override_location_name, full_address, query, lang, fmt):
     """
     Return 1line weather information for `location`
     in format `line_format`
     """
 
-    format_line = query.get('format', '')
+    format_line = query.get('format', fmt or '')
 
     if format_line in PRECONFIGURED_FORMAT:
         format_line = PRECONFIGURED_FORMAT[format_line]
 
     weather_data = get_weather_data(location, lang)
 
-    output = format_weather_data(format_line, location, override_location_name, weather_data, query)
+    output = format_weather_data(
+        format_line, location, override_location_name, full_address,
+        weather_data, query)
     output = output.rstrip("\n")+"\n"
     return output
 
@@ -262,7 +274,7 @@ def main():
         'line': sys.argv[2],
         }
 
-    sys.stdout.write(wttr_line(location, location, query, 'en'))
+    sys.stdout.write(wttr_line(location, location, None, query, 'en', "v1"))
 
 if __name__ == '__main__':
     main()

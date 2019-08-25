@@ -114,16 +114,20 @@ def _parse_language_header(header):
 
     return _find_supported_language(_parse_accept_language(header))
 
-def get_answer_language(request):
+def get_answer_language_and_format(request):
     """
     Return preferred answer language based on
     domain name, query arguments and headers
     """
 
     lang = None
+    fmt = None
     hostname = request.headers['Host']
     if hostname != 'wttr.in' and hostname.endswith('.wttr.in'):
         lang = hostname[:-8]
+        if lang == "v2":
+            fmt = "v2"
+            lang = None
 
     if 'lang' in request.args:
         lang = request.args.get('lang')
@@ -132,7 +136,7 @@ def get_answer_language(request):
     if lang is None and header_accept_language:
         lang = _parse_language_header(header_accept_language)
 
-    return lang
+    return lang, fmt
 
 def get_output_format(request, query):
     """
@@ -202,7 +206,7 @@ def wttr(location, request):
         png_filename = location
         location = location[:-4]
 
-    lang = get_answer_language(request)
+    lang, fmt = get_answer_language_and_format(request)
     query = parse_query.parse_query(request.args)
     html_output = get_output_format(request, query)
     user_agent = request.headers.get('User-Agent', '').lower()
@@ -237,8 +241,10 @@ def wttr(location, request):
 
     # We are ready to return the answer
     try:
-        if 'format' in query:
-            return _wrap_response(wttr_line(location, override_location_name, query, lang), html_output)
+        if fmt or 'format' in query:
+            return _wrap_response(
+                wttr_line(location, override_location_name, full_address, query, lang, fmt),
+                html_output)
 
         if png_filename:
             options = {

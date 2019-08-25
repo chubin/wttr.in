@@ -11,3 +11,6 @@ timezonefinder
 Pillow
 pyte
 python-dateutil
+diagram
+pyjq
+scipy
