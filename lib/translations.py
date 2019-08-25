@@ -668,6 +668,7 @@ CAPTION = {
     "da": u"Vejret i:",
     "de": u"Wetterbericht für:",
     "el": u"Πρόγνωση καιρού για:",
+    "en": u"weather report for:",
     "eo": u"Veterprognozo por:",
     "es": u"El tiempo en:",
     "et": u"Ilmaprognoos:",
