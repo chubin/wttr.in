@@ -240,7 +240,6 @@ Umid qilamizki, sizda bugungi ob-havo bundan yaxshiroq!
 我们无法找到您的位置, 
 当前显示奥伊米亚康(Oymyakon)，这个星球上最冷的人类定居点。
 """,
-		},
         'da': u"""
 Vi kunne desværre ikke finde din lokation
 så vi har bragt dig til Oymyakon,
@@ -489,6 +488,8 @@ Du kan følge https://twitter.com/igor_chubin for oppdateringer.
 以下显示默认城市（只对您可见）。
 我们将会尽快获取新数据。
 您可以通过https://twitter.com/igor_chubin 获取最新动态。
+======================================================================================
+""",
         'nl': u"""
 Excuse, wij kunnen u op dit moment dit weerbericht niet laten zien.
 Hier is het weerbericht voor de standaard stad(zodat u weet hoe het er uitziet)
