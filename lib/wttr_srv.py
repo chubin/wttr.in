@@ -267,8 +267,8 @@ def wttr(location, request):
             # Trying to disable github caching
             return response
 
-        if orig_location.lower() == 'moon' or orig_location.lower().startswith('moon@'):
-            output = get_moon(location, html=html_output, lang=lang, query=query)
+        if orig_location and (orig_location.lower() == 'moon' or orig_location.lower().startswith('moon@')):
+            output = get_moon(orig_location, html=html_output, lang=lang, query=query)
         else:
             output = get_wetter(location, ip_addr,
                                 html=html_output,
