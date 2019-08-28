@@ -214,7 +214,7 @@ $ cat ~/.config/fontconfig/fonts.conf
 
 ## Data-rich output format
 
-In the experimental data-reach output format, that is available under the view code `v2`,
+In the experimental data-rich output format, that is available under the view code `v2`,
 a lot of additional weather and astronomical information is available:
 
 * Temperature, and precepetation changes forecast throughout the days;
