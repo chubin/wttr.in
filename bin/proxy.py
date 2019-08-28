@@ -188,10 +188,14 @@ def proxy(path):
         url = '%s/%s?%s' % (srv, path, query_string)
         print(url)
 
-        attempts = 5
+        attempts = 10
         response = None
         while attempts:
-            response = requests.get(url, timeout=2)
+            try:
+                response = requests.get(url, timeout=2)
+            except requests.ReadTimeout:
+                attempts -= 1
+                continue
             try:
                 json.loads(response.content)
                 break
