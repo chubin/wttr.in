@@ -242,6 +242,10 @@ or
 * It works only in terminal;
 * Only English is supported).
 
+Currently, you need some tweaks for some terminals, to get the best possible visualization:
+
+* URXVT: 
+
 ## Moon phases
 
 wttr.in can also be used to check the phase of the Moon. This example shows how to see the current Moon phase:
