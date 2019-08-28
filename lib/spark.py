@@ -273,7 +273,7 @@ def draw_astronomical(city_name, geo_data):
         if time_interval % 3 == 0:
             moon_phase = city.moon_phase(
                 date=datetime_day_start + datetime.timedelta(hours=time_interval))
-            moon_phase_emoji = constants.MOON_PHASES[int(math.floor(moon_phase*1.0/28.0*8))]
+            moon_phase_emoji = constants.MOON_PHASES[int(math.floor(moon_phase*1.0/28.0*8+0.5)) % len(constants.MOON_PHASES)]
             if time_interval in [0, 24, 48, 69]:
                 moon_line += moon_phase_emoji + " "
             else:
@@ -536,13 +536,14 @@ def get_geodata(location):
     return json.loads(text)
 # }}}
 
-def main(location, override_location=None, data=None, full_address=None):
+def main(location, override_location=None, data=None, full_address=None, view=None):
     config = {
         "lang": "en",
         "locale": "en_US",
         "location": location,
         "override_location": override_location,
         "full_address": full_address,
+        "view": view,
         }
 
     geo_data = get_geodata(location)
