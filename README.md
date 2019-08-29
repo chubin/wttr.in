@@ -163,7 +163,7 @@ So, these two calls are the same:
 ```
 Keep in mind, that when using in `tmux.conf`, you have to escape `%` with `%`, i.e. write there `%%` instead of `%`.
 
-In progams, that are querying the service automatically (such as tmux),it is better to use some reasonable update interval. In tmux, you can configure it with `status-interval`.
+In programs, that are querying the service automatically (such as tmux), it is better to use some reasonable update interval. In tmux, you can configure it with `status-interval`.
 
 If several, `:` separated locations, are specified in the query, specify update period
 as an additional query parameter `period=`:
