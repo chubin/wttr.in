@@ -242,9 +242,21 @@ or
 * It works only in terminal;
 * Only English is supported).
 
-Currently, you need some tweaks for some terminals, to get the best possible visualization:
+Currently, you need some tweaks for some terminals, to get the best possible visualization.
 
-* URXVT: 
+### URXVT
+
+Depending on your configuration you might be taking all steps, or only a few. URXVT currenly doesn't support emoji related fonts, but we can get almost the same effect using *Font-Symbola*. So add to your `.Xresources` file the following line:
+```
+    xft:symbola:size=10:minspace=False
+```
+You can add it _after_ your preferred font and it will only show up when required.
+Then, if you see or feel like you're having spacing issues, add this: `URxvt.letterSpace: 0`
+For some reason URXVT sometimes stops deciding right the word spacing and we need to force it this way.
+
+The result, should look like:
+
+![URXVT Emoji line](https://user-images.githubusercontent.com/24360204/63842949-1d36d480-c975-11e9-81dd-998d1329bd8a.png)
 
 ## Moon phases
 
