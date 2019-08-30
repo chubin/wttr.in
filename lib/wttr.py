@@ -168,7 +168,9 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
 
         if full_address \
             and query.get('format', 'txt') != 'png' \
-            and (not query.get('no-city') and not query.get('no-caption')):
+            and (not query.get('no-city')
+                 and not query.get('no-caption')
+                 and not query.get('days') == '0'):
             line = "%s: %s [%s]\n" % (
                 get_message('LOCATION', lang).encode('utf-8'),
                 full_address.encode('utf-8'),
