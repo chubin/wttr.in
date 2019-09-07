@@ -250,6 +250,8 @@ def location_processing(location, ip_addr):
     # here we resolve them
     if location is not None: # and not ascii_only(location):
         location = "~" + location.lstrip('~ ')
+        if not override_location_name:
+            override_location_name = location.lstrip('~')
 
     # if location is not None and location.upper() in IATA_CODES:
     #     location = '~%s' % location
@@ -257,7 +259,8 @@ def location_processing(location, ip_addr):
     if location is not None and location.startswith('~'):
         geolocation = geolocator(location_canonical_name(location[1:]))
         if geolocation is not None:
-            override_location_name = location[1:].replace('+', ' ')
+            if not override_location_name:
+                override_location_name = location[1:].replace('+', ' ')
             location = "%s,%s" % (geolocation['latitude'], geolocation['longitude'])
             country = None
             if not hide_full_address:
@@ -266,6 +269,7 @@ def location_processing(location, ip_addr):
                 full_address = None
         else:
             location = NOT_FOUND_LOCATION #location[1:]
+
 
     return location, \
             override_location_name, \
