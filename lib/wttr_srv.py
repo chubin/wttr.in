@@ -25,6 +25,8 @@ from limits import Limits
 from wttr import get_wetter, get_moon
 from wttr_line import wttr_line
 
+import cache
+
 if not os.path.exists(os.path.dirname(LOG_FILE)):
     os.makedirs(os.path.dirname(LOG_FILE))
 logging.basicConfig(filename=LOG_FILE, level=logging.DEBUG, format='%(asctime)s %(message)s')
@@ -211,6 +213,12 @@ def wttr(location, request):
     html_output = get_output_format(request, query)
     user_agent = request.headers.get('User-Agent', '').lower()
 
+    # generating cache signature
+    cache_signature = cache.get_signature(user_agent, request.url, ip_addr, lang)
+    answer = cache.get(cache_signature)
+    if answer:
+        return _wrap_response(answer, html_output)
+
     if location in PLAIN_TEXT_PAGES:
         help_ = show_text_file(location, lang)
         if html_output:
@@ -242,8 +250,13 @@ def wttr(location, request):
     # We are ready to return the answer
     try:
         if fmt or 'format' in query:
+            response_text = wttr_line(
+                location, override_location_name, full_address, query, lang, fmt)
+            fmt = fmt or query.get('format')
+            response_text = cache.store(cache_signature, response_text)
+
             return _wrap_response(
-                wttr_line(location, override_location_name, full_address, query, lang, fmt),
+                response_text,
                 html_output)
 
         if png_filename:

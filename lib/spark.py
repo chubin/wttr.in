@@ -481,13 +481,12 @@ def textual_information(data_parsed, geo_data, config):
     output.append('Timezone: %s' % timezone)
 
     tmp_output = []
-    tmp_output.append('  Now:    %s'
-                      % datetime.datetime.now(pytz.timezone(timezone)).strftime("%H:%M:%S%z"))
+    tmp_output.append('  Now:    %%{{NOW(%s)}}' % timezone)
     tmp_output.append('Dawn:    %s'
                       % str(sun['dawn'].strftime("%H:%M:%S")))
     tmp_output.append('Sunrise: %s'
                       % str(sun['sunrise'].strftime("%H:%M:%S")))
-    tmp_output.append('  Noon:   %s'
+    tmp_output.append('  Zenith: %s'
                       % str(sun['noon'].strftime("%H:%M:%S     ")))
     tmp_output.append('Sunset:  %s'
                       % str(sun['sunset'].strftime("%H:%M:%S")))
