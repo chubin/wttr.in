@@ -45,37 +45,3 @@
 389: Lluvia moderada o fuerte con truenos: Moderate or heavy rain with thunder
 392: Nieve ligera irregular con truenos: Patchy light snow with thunder
 395: Nieve moderada o fuerte con truenos: Moderate or heavy snow with thunder
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
