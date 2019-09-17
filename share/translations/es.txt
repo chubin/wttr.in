@@ -1,0 +1,47 @@
+114: Claro: Clear
+113: Soleado: Sunny
+116: Parcialmente nublado: Partly cloudy
+119: Nublado: Cloudy
+122: Cubierto de nubes: Overcast
+143: Bruma: Mist
+176: Posible lluvia irregular: Patchy rain possible
+179: Posible aguanieve irregular: Patchy snow possible
+182: Posible aguanieve irregular: Patchy sleet possible
+185: Posible llovizna helada irregular: Patchy freezing drizzle possible
+200: Posibles brotes de tormentas: Thundery outbreaks possible
+227: Nieve tormentosa: Blowing snow
+230: Tormenta de nieve: Blizzard
+248: Niebla: Fog
+260: Niebla helada: Freezing fog
+263: Llovizna ligera irregular: Patchy light drizzle
+266: Llovizna ligera: Light drizzle
+281: Llovizna helada: Freezing drizzle
+284: Llovizna fuertemente helada: Heavy freezing drizzle
+293: Lluvia ligera irregular: Patchy light rain
+296: Lluvia ligera: Light rain
+299: Lluvia moderada ocasional: Moderate rain at times
+302: Lluvia moderada: Moderate rain
+305: LLuvia fuerte ocasional: Heavy rain at times
+308: Lluvia fuerte: Heavy rain
+311: Lluvia ligera helada: Light freezing rain
+314: Lluvia helada moderada o fuerte: Moderate or heavy freezing rain
+317: Aguanieve ligero: Light sleet
+320: Aguanieve moderado o fuerte: Moderate or heavy sleet
+323: Nieve ligera irregular: Patchy light snow
+326: Nieve ligera: Light snow
+329: Nieve moderada irregular: Patchy moderate snow
+332: Nieve moderada: Moderate snow
+335: Nieve pesada irregular: Patchy heavy snow
+338: Nieve pesada: Heavy snow
+350: Gránulos de hielo: Ice pellets
+353: Aguacero ligero: Light rain shower
+356: Aguacero moderada o fuerte: Moderate or heavy rain shower
+359: Aguacero torrencial: Torrential rain shower
+362: Aguacero ligero con aguanieve: Light sleet showers
+365: Aguacero con aguanieve moderado o fuerte: Moderate or heavy sleet showers
+368: Aguacero con nieve ligero: Light snow showers
+371: Aguacero con nieve moderado o fuerte: Moderate or heavy snow showers
+386: Lluvia ligera irregular con truenos: Patchy light rain with thunder
+389: Lluvia moderada o fuerte con truenos: Moderate or heavy rain with thunder
+392: Nieve ligera irregular con truenos: Patchy light snow with thunder
+395: Nieve moderada o fuerte con truenos: Moderate or heavy snow with thunder
