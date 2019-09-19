@@ -115,6 +115,8 @@ In this example:
 
 You can embed a special wttr.in widget, that disaplays the weather condition for the current or a selected location, into a HTML page using the [wttr-switcher](https://github.com/midzer/wttr-switcher). That is how it looks like: [wttr-switcher-example](https://midzer.github.io/wttr-switcher/).
 
+![Embedded wttr.in](https://)
+
 ## JSON output
 
 The JSON format is a feature providing access to wttr.in data through an easy-to-parse format, without requiring the user to create a complex script to reinterpret wttr.in's graphical output.
