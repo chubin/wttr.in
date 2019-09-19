@@ -113,9 +113,9 @@ In this example:
 
 ![Picture with weather data](https://pbs.twimg.com/media/C69-wsIW0AAcAD5.jpg)
 
-You can embed a special wttr.in widget, that disaplays the weather condition for the current or a selected location, into a HTML page using the [wttr-switcher](https://github.com/midzer/wttr-switcher). That is how it looks like: [wttr-switcher-example](https://midzer.github.io/wttr-switcher/).
+You can embed a special wttr.in widget, that disaplays the weather condition for the current or a selected location, into a HTML page using the [wttr-switcher](https://github.com/midzer/wttr-switcher). That is how it looks like: [wttr-switcher-example](https://midzer.github.io/wttr-switcher/) or on a real world web site: https://feuerwehr-eisolzried.de/.
 
-![Embedded wttr.in](https://)
+![Embedded wttr.in example at feuerwehr-eisolzried.de](https://user-images.githubusercontent.com/3875145/65265457-50eac180-db11-11e9-8f9b-2e1711dfc436.png)
 
 ## JSON output
 
