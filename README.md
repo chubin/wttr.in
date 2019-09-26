@@ -202,6 +202,7 @@ To specify your own custom output format, use the special `%`-notation:
     m    Moonphase 🌑🌒🌓🌔🌕🌖🌗🌘,
     M    Moonday,
     p    precipitation (mm),
+    o    Probability of Precipitation,
     P    pressure (hPa),
 ```
 
