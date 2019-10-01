@@ -96,7 +96,7 @@ asi que hemos decidido enseñarte el tiempo en Oymyakon,
 uno de los sitios más fríos y permanentemente deshabitados del planeta.
 """,
         'fa': u"""
-ما نتونستیم مکان شما رو پیدا کنیم. به همین خاطر شما رو به om بردیم
+ما نتونستیم مکان شما رو پیدا کنیم. به همین خاطر شما رو به اویمیاکن بردیم
 ، یکی از سردترین مکان های روی زمین که اصلا قابل سکونت نیست!
 """,
         'fi': u"""
@@ -673,7 +673,7 @@ CAPTION = {
     "eo": u"Veterprognozo por:",
     "es": u"El tiempo en:",
     "et": u"Ilmaprognoos:",
-    "fa": u"ﺍﻮﻫ ﻭ ﺏﺁ ﺕیﻊﺿﻭ ﺵﺭﺍﺯگ",
+    "fa": u"گزارش آب و هئا برای شما:",
     "fi": u"Säätiedotus:",
     "fr": u"Prévisions météo pour:",
     "fy": u"Waarberjocht foar:",
