@@ -13,7 +13,7 @@
     /220121                 # паштовы індэкс
     /53.953994,27.537774    # каардынаты GPS
 
-Асобыя месцазнаходжанні:
+Адмысловыя месцазнаходжанні:
 
     /moon                   # Фаза месяца (дадайце ,+US або ,+France для горада Moon у ЗША або ў Францыі)
     /moon@2016-10-25        # Фаза Месяца для гэтай даты (@2016-10-25)
@@ -48,7 +48,7 @@
     /iuje?pq
     /dzvinsk?0pq&lang=be
     /bielastok_0pq.png      # для PNG опцыі падаюцца пасля знаку _
-    /zlobin_0pq_lang=be.png   # доўгія опцыі адасабляюцца знакам _
+    /turau_0pq_lang=be.png  # доўгія опцыі адасабляюцца знакам _
 
 Лакалізацыя:
 
@@ -58,12 +58,12 @@
 
 Даступныя мовы:
 
-    FULL_TRANSLATION ()
-    PARTIAL_TRANSLATION (in progress)
+    FULL_TRANSLATION (падтрымліваюцца)
+    PARTIAL_TRANSLATION (не цалкам)
 
-Special URLs:
+Адмысловыя адрасы:
 
-    /:help                  # show this page
-    /:bash.function         # show recommended bash function wttr()
-    /:translation           # show the information about the translators
+    /:help                  # паказаць гэтую старонку
+    /:bash.function         # паказаць рэкамендаваную функцыю bash wttr()
+    /:translation           # паказаць спіс перакладаў
 
