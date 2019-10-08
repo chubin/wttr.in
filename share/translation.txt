@@ -3,7 +3,7 @@ wttr.in is translated in NUMBER_OF_LANGUAGES languages:
     SUPPORTED_LANGUAGES
 
 Translated/improved/corrected by:
-    
+
     * Afrikaans:    Casper Labuschage @casperl (on github)
     * Armenian:     Aram Bayadyan @aramix, Mikayel Ghazaryan @mkdotam, Grigor Khachatryan @grigortw
     * Azerbaijani:  Dmytro Nikitiuk, Elsevar Abbasov
@@ -20,7 +20,7 @@ Translated/improved/corrected by:
     * Esperanto:    Igor Chubin
     * Estonian:     Jaan Jänesmäe @janesmae (on github)
     * Finnish:      @Maxifi
-    * French:       Igor Chubin, @daftaupe 
+    * French:       Igor Chubin, @daftaupe, @iago-lito
     * German:       Igor Chubin, @MAGICC (https://kthx.at)
     * Greek:        Panayotis Vryonis and @Petewg (on github)
     * Hebrew:       E.R.
@@ -36,7 +36,7 @@ Translated/improved/corrected by:
     * Norwegian:    Fredrik Fjeld @fredrikfjeld
     * Nynorsk:      Kevin Brubeck Unhammer (https://unhammer.org/k/)
     * Persian:      Javad @threadripper_
-    * Polish:       Wojtek Łukasiewicz @wojtuch (on github) 
+    * Polish:       Wojtek Łukasiewicz @wojtuch (on github)
     * Portuguese:   Fernando Bitti Loureiro @fbitti (on github)
     * Romanian:     Gabriel Moruz
     * Russian:      Igor Chubin
@@ -54,7 +54,7 @@ Translated/improved/corrected by:
 
 and many many others.
 
-In the not likely case wttr.in is not yet translated in your language 
+In the not likely case wttr.in is not yet translated in your language
 you can help with the translation.
 Please start with one of the following steps:
 
