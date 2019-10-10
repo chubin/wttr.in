@@ -255,6 +255,11 @@ Chúng tôi không tìm thấy địa điểm của bạn
 vì vậy chúng tôi đưa bạn đến Oymyakon,
 một trong những nơi lạnh nhất có người sinh sống trên trái đất.
 """,
+        'zh-tw': u"""
+我們找不到您的位置
+所以我們帶您到奧伊米亞康，
+這個星球上有人類定居最冷之處。
+""",
     },
 
     'UNKNOWN_LOCATION': {
@@ -302,6 +307,7 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
         'uz': u'Аникланмаган худуд',
         'zh': u'未知地点',
         'vi': u'Địa điểm không xác định',
+        'zh-tw': u'未知位置',
     },
 
     'LOCATION': {
@@ -348,6 +354,7 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
         'tr': u'Konum',
         'uk': u'Місцезнаходження',
         'vi': u'Địa điểm',
+        'zh-tw': u'位置',
     },
 
     'CAPACITY_LIMIT_REACHED': {
@@ -574,6 +581,13 @@ Chung tôi sẽ có thêm lượt truy vấn sớm nhất có thể
 Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật thông tin mới nhất.
 ======================================================================================
 """,
+        'zh-tw': u"""
+抱歉，目前天氣服務的查詢請求太多了。
+這裡是預設城市的天氣報告（只是為您展示它的外觀）。
+我們將盡快取得新的資料。
+您可以追蹤 https://twitter.com/igor_chubin 以取得更新。
+======================================================================================
+""",
     },
 
     # Historical messages:
@@ -616,6 +630,7 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
         'et': u'Uus funktsioon: mitmekeelsed asukohanimed \033[92mwttr.in/станция+Восток\033[0m (UTF-8 vormingus) ja asukoha otsing \033[92mwttr.in/~Kilimanjaro\033[0m (lisa ~ enne)',
         'uk': u'Спробуйте: назви місць будь-якою мовою \033[92mwttr.in/станція+Восток\033[0m (в UTF-8) та пошук місць \033[92mwttr.in/~Kilimanjaro\033[0m (потрібно додати ~ спочатку)',
         'vi': u'Chức năng mới: tên địa điểm đa ngôn ngữ \033[92mwttr.in/станция+Восток\033[0m (dùng UTF-8) và tìm kiếm địa điểm \033[92mwttr.in/~Kilimanjaro\033[0m (chỉ cần thêm ~ phía trước)',
+        'zh-tw': u'新功能：多語言地點名稱 \033[92mwttr.in/станция+Восток\033[0m （使用 UTF-8 編碼）與位置搜尋 \033[92mwttr.in/~Kilimanjaro\033[0m （只要在地點前加 ~ 就可以了）',
     },
 
     'FOLLOW_ME': {
@@ -653,6 +668,7 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
         'et': u'Jälgi \033[46m\033[30m@igor_chubin\033[0m wttr.in uudiste tarbeks',
         'uk': u'Нові можливості wttr.in публікуються тут: \033[46m\033[30m@igor_chubin\033[0m',
         'vi': u'Theo dõi \033[46m\033[30m@igor_chubin\033[0m để cập nhật thông tin về wttr.in',
+        'zh-tw': u'追蹤 \033[46m\033[30m@igor_chubin\033[0m 以取得更多 wttr.in 的動態',
     },
 }
 
@@ -717,6 +733,7 @@ CAPTION = {
     "vi": u"Báo cáo thời tiết:",
     "zh": u"天氣預報：",
     "zu": u"Isimo sezulu:",
+    "zh-tw": u"天氣報告：",
 }
 
 def get_message(message_name, lang):

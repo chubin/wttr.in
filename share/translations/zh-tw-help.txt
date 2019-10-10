@@ -1,0 +1,69 @@
+使用方法
+
+    $ curl wttr.in          # 目前位置
+    $ curl wttr.in/muc      # 慕尼黑機場的天氣
+
+支援的位置類型：
+
+    /paris                  # 城市名稱
+    /~Eiffel+tower          # 任意地點
+    /Москва                 # 任意地點在任何語言的 Unicode 名稱
+    /muc                    # 機場代碼（3個字母）
+    /@stackoverflow.com     # 網域名稱
+    /94107                  # 區域代碼
+    /-78.46,106.79          # GPS 座標
+
+特殊位置：
+
+    /moon                   # 月相（加入 ,+US 或 ,+France 來觀看這些地方的月相）
+    /moon@2016-10-25        # 特定日期的月相 (@2016-10-25)
+
+單位：
+
+    m                       # 公制（國際單位制）（除了美國以外的地方皆預設使用此單位置）
+    u                       # USCS（美國預設使用）
+    M                       # 以公尺／秒為單位顯示風速
+
+檢視選項：
+
+    0                       # 僅目前的天氣
+    1                       # 目前的天氣+未來1天
+    2                       # 目前的天氣+未來2天
+    A                       # 忽略使用者代理字串並強制使用 ANSI 輸出格式（終端機）
+    F                       # 不要顯示「追蹤」那行
+    n                       # 窄版（僅日夜）
+    q                       # 安靜版（無「天氣報告」文字）
+    Q                       # 超安靜版（無「天氣報告」、無城市名稱）
+    T                       # 關閉終端機序列（無色彩）
+
+PNG 選項：
+
+    /paris.png              # 生成 PNG 檔案
+    p                       # 在輸出周圍新增框架
+    t                       # 透明度 150
+    transparency=...        # 透明度從 0 到 255（255 = 不透明）
+
+可合併使用的選項
+
+    /Paris?0pq
+    /Paris?0pq&lang=fr
+    /Paris_0pq.png          # PNG 檔案模式於 _ 後指定
+    /Rome_0pq_lang=it.png   # 以底線分隔長選項
+
+在地化：
+
+    $ curl fr.wttr.in/Paris
+    $ curl wttr.in/paris?lang=fr
+    $ curl -H "Accept-Language: fr" wttr.in/paris
+
+支援的語言：
+
+    FULL_TRANSLATION (supported)
+    PARTIAL_TRANSLATION (in progress)
+
+特殊 URL：
+
+    /:help                  # 顯示此頁面
+    /:bash.function         # 顯示建議的 bash 函式 wttr()
+    /:translation           # 顯示關於譯者的資訊
+
