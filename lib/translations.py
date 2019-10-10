@@ -5,14 +5,14 @@ Translation of almost everything.
 """
 
 FULL_TRANSLATION = [
-    "af", "da", "de", "el", "et",
+    "af", "be", "da", "de", "el", "et",
     "fr", "fa", "hu", "id", "it",
     "nb", "nl", "pl", "pt-br", "ro",
-    "ru", "tr", "uk", "vi"
+    "ru", "tr", "uk", "vi", "zh-tw"
 ]
 
 PARTIAL_TRANSLATION = [
-    "az", "be", "bg", "bs", "ca", "cy", "cs",
+    "az", "bg", "bs", "ca", "cy", "cs",
     "eo", "es", "fi", "ga", "hi", "hr",
     "hy", "is", "ja", "jv", "ka", "kk",
     "ko", "ky", "lt", "lv", "mk", "ml", "nl", "fy",
@@ -28,7 +28,7 @@ PROXY_LANGS = [
     "id", "is", "it", "ja", "kk",
     "lv", "mk", "nb", "nn", "ro",
     "ru", "sl", "pt-br", "uk", "uz",
-    "vi",
+    "vi", "zh-tw",
 ]
 
 SUPPORTED_LANGS = FULL_TRANSLATION + PARTIAL_TRANSLATION
