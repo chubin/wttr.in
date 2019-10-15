@@ -1,4 +1,5 @@
-113 : Clair                                        : Clear
+: Pluie                                            : Rain
+113 : Temps clair                                  : Clear
 113 : Ensoleillé                                   : Sunny
 116 : Partiellement couvert                        : Partly cloudy
 119 : Nuageux                                      : Cloudy
