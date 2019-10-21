@@ -1,4 +1,5 @@
 : Pluie                                            : Rain
+: Pluie légère, Averses                            :Light Rain, Rain Shower
 113 : Temps clair                                  : Clear
 113 : Ensoleillé                                   : Sunny
 116 : Partiellement couvert                        : Partly cloudy
