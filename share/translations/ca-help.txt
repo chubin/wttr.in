@@ -29,7 +29,7 @@ Opcions de visualització:
     ?0                      # noms el clima actual
     ?1                      # el clima actual + la previsió d'1 dia
     ?2                      # el clima actual + la previsió de 2 dies
-    ?n                      # versió curta (snoms el dia i la nit)
+    ?n                      # versió curta (només el dia i la nit)
     ?q                      # versió silenciosa (sense el text de "El temps a")
     ?Q                      # versió supersilenciosa (ni "El temps a" ni el nom de la ciutat)
     ?T                      # desactiva les seqüències del terminal (sense colors)
