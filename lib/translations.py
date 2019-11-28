@@ -406,7 +406,7 @@ Pots seguir https://twitter.com/igor_chubin per noves actualitzacions.
 """,
         'de': u"""
 Entschuldigung, wir können momentan den Wetterdienst nicht erreichen.
-Dafür zeigen wir Ihnen das Wetter an einem Beispielort, damit Sie sehen wie die Seite das Wetter anzeigt.
+Dafür zeigen wir Ihnen das Wetter an einem Beispielort, damit Sie sehen, wie die Seite das Wetter anzeigt.
 Wir werden versuchen das Problem so schnell wie möglich zu beheben.
 Folgen Sie https://twitter.com/igor_chubin für Updates.
 ======================================================================================
