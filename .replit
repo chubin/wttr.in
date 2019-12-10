@@ -1,0 +1,2 @@
+language = "python3"
+run = "echo Enter city to receive weather data from: ;read city; eval \"curl wttr.in/$city\";"
