@@ -43,7 +43,7 @@ import translations
 import wttr_line
 
 if not sys.version_info >= (3, 0):
-    reload(sys)
+    reload(sys) # noqa: F821
     sys.setdefaultencoding("utf-8")
 
 # data processing {{{
