@@ -2,7 +2,6 @@ group: travis_latest
 language: python
 cache: pip
 python:
-    - 2.7
     - 3.7
 install:
     - pip install flake8 -r requirements.txt

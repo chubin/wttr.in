@@ -42,8 +42,9 @@ import constants
 import translations
 import wttr_line
 
-reload(sys)
-sys.setdefaultencoding("utf-8")
+if sys.version_info >= (3, 0):
+    reload(sys)
+    sys.setdefaultencoding("utf-8")
 
 # data processing {{{
 
