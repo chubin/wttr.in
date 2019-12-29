@@ -45,7 +45,7 @@ V2_TRANSLATION = {
     "mk": ("Прогноза за времето во:",       "", "", "", "", "", "", "", ""),
     "ml": ("കാലാവസ്ഥ റിപ്പോർട്ട്:",                 "", "", "", "", "", "", "", ""),
     "nb": ("Værmelding for:",               "", "", "", "", "", "", "", ""),
-    "nl": ("Weerbericht voor:",             "", "", "", "", "", "", "", ""),
+    "nl": ("Weerbericht voor:",             "Weer",     "Tijdzone",     "Nu",       "Dageraad",         "Zonsopkomst",  "Zenit",        "Zonsondergang",    "Schemering"),
     "nn": ("Vêrmelding for:",               "", "", "", "", "", "", "", ""),
     "pl": ("Pogoda w:",                     "", "", "", "", "", "", "", ""),
     "pt": ("Previsão do tempo para:",       "", "", "", "", "", "", "", ""),
