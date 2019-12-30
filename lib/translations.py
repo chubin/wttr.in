@@ -420,7 +420,7 @@ Gellir dilyn https://twitter.com/igor_chubin i gael newyddion pellach.
 """,
         'es': u"""
 Lo siento, hemos alcanzado el límite de peticiones al servicio de previsión del tiempo en este momento.
-A continuación, la previsión del tiempo para una ciudad estándar (solo para que puedas ver que aspecto tiene el informe).
+A continuación, la previsión del tiempo para una ciudad estándar (solo para que puedas ver el formato del reporte).
 Muy pronto volveremos a tener acceso a las peticiones.
 Puedes seguir https://twitter.com/igor_chubin para estar al tanto de la situación.
 ======================================================================================
@@ -613,7 +613,7 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
         'bg': u'Нова функционалност: многоезични имена на места\033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и в търсенето \033[92mwttr.in/~Kilimanjaro\033[0m (добавете ~ преди)',
         'bs': u'XXXXXXXXXXXXXXXXXXXX: XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\033[92mwttr.in/станция+Восток\033[0m (XX UTF-8) XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
         'ca': u'Noves funcionalitats: noms d\'ubicació multilingües \033[92mwttr.in/станция+Восток\033[0m (en UTF-8) i la ubicació de recerca \033[92mwttr.in/~Kilimanjaro\033[0m (només cal afegir ~ abans)',
-        'es': u'Nuevas funcionalidades: los nombres de las ubicaciones en vários idiomas \033[92mwttr.in/станция+Восток\033[0m (em UTF-8) y la búsqueda por ubicaciones \033[92mwttr.in/~Kilimanjaro\033[0m (tan solo inserte ~ en frente)',
+        'es': u'Nuevas funcionalidades: los nombres de las ubicaciones en varios idiomas \033[92mwttr.in/станция+Восток\033[0m (em UTF-8) y la búsqueda por ubicaciones \033[92mwttr.in/~Kilimanjaro\033[0m (tan solo inserte ~ en frente)',
         'fa': u'قابلیت جدید: پشتیبانی از نام چند زبانه مکانها \033[92mwttr.in/станция+Восток\033[0m (در فرمت UTF-8) و جسجتوی مکان ها \033[92mwttr.in/~Kilimanjaro\033[0m (فقط قبل از اون ~ اضافه کنید)',
         'fr': u'Nouvelles fonctionnalités: noms d\'emplacements multilingues \033[92mwttr.in/станция+Восток\033[0m (en UTF-8) et recherche d\'emplacement \033[92mwttr.in/~Kilimanjaro\033[0m (ajouter ~ devant)',
         'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
@@ -701,7 +701,7 @@ CAPTION = {
     "el": u"Πρόγνωση καιρού για:",
     "en": u"weather report for:",
     "eo": u"Veterprognozo por:",
-    "es": u"El tiempo en:",
+    "es": u"El reporte del tiempo en:",
     "et": u"Ilmaprognoos:",
     "fa": u"گزارش آب و هئا برای شما:",
     "fi": u"Säätiedotus:",
