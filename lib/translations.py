@@ -8,7 +8,7 @@ FULL_TRANSLATION = [
     "af", "be", "ca", "da", "de", "el", "et",
     "fr", "fa", "hu", "id", "it",
     "nb", "nl", "pl", "pt-br", "ro",
-    "ru", "tr", "th", "uk", "vi", "zh-tw"
+    "ru", "tr", "th", "uk", "vi", "zh-cn", "zh-tw"
 ]
 
 PARTIAL_TRANSLATION = [
@@ -499,7 +499,7 @@ Du kan følge https://twitter.com/igor_chubin for oppdateringer.
 抱歉，当前天气服务不可用。
 以下显示默认城市（只对您可见）。
 我们将会尽快获取新数据。
-您可以通过https://twitter.com/igor_chubin 获取最新动态。
+您可以通过 https://twitter.com/igor_chubin 获取最新动态。
 ======================================================================================
 """,
         'nl': u"""
@@ -745,7 +745,7 @@ CAPTION = {
     "uk": u"Прогноз погоди для:",
     "uz": u"Ob-havo bashorati:",
     "vi": u"Báo cáo thời tiết:",
-    "zh": u"天氣預報：",
+    "zh": u"天气预报：",
     "zu": u"Isimo sezulu:",
     "zh-tw": u"天氣報告：",
 }
