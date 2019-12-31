@@ -28,7 +28,7 @@ PROXY_LANGS = [
     "id", "is", "it", "ja", "kk",
     "lv", "mk", "nb", "nn", "ro",
     "ru", "sl", "th", "pt-br", "uk", "uz",
-    "vi", "zh-tw",
+    "vi", "zh-cn", "zh-tw",
 ]
 
 SUPPORTED_LANGS = FULL_TRANSLATION + PARTIAL_TRANSLATION
@@ -751,6 +751,8 @@ CAPTION = {
 }
 
 def get_message(message_name, lang):
+    if lang == 'zh-cn':
+        lang = 'zh'
     if message_name not in MESSAGE:
         return ''
     message_dict = MESSAGE[message_name]
