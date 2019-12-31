@@ -1,0 +1,69 @@
+用法：
+
+    $ curl wttr.in          # 当前位置
+    $ curl wttr.in/pek      # 机场三字码
+
+支持的位置类型：
+
+    /paris                  # 城市名称
+    /~Eiffel+tower          # 任意地点
+    /北京                    # 任意语言的任意地点
+    /PEK                    # 机场三字码
+    /@stackoverflow.com     # 域名
+    /94107                  # 区域代码
+    /-78.46,106.79          # GPS 坐标
+
+特殊位置：
+
+    /moon                   # 月相（加上 ,+US 或 ,+France 以察看特定城市的月相）
+    /moon@2016-10-25        # 特定日期的月相（@2016-10-25）
+
+单位：
+
+    m                       # 公制（国际单位制）（除美国外该单位制为默认值）
+    u                       # USCS（美国默认单位制）
+    M                       # 以米/秒为单位显示风速
+
+查看选项：
+
+    0                       # 仅当前天气
+    1                       # 当前天气 + 未来 1 天
+    2                       # 当前天气 + 未来 2 天
+    A                       # 忽略代理(User-Agent)并强制使用 ANSI 输出格式（终端模式）
+    F                       # 不显示「关注」(Follow)那行
+    n                       # 较窄模式（仅日夜）
+    q                       # 简练模式（无「天气预报」文字）
+    Q                       # 极简模式（无「天气预报」、无城市名称）
+    T                       # 关闭终端转义序列（无颜色）
+
+PNG 选项：
+
+    /paris.png              # 生成 PNG 文件
+    p                       # 在输出图像周围增加缩进空白
+    t                       # 透明度 150
+    transparency=...        # 透明度从 0 到 255（255 = 不透明）
+
+可合并使用的选项
+
+    /Paris?0pq
+    /Paris?0pq&lang=fr
+    /Paris_0pq.png          # PNG 文件模式中在下划线 _ 后指定选项
+    /Rome_0pq_lang=it.png   # 用下划线分隔长选项
+
+本地化：
+
+    $ curl fr.wttr.in/Paris
+    $ curl wttr.in/paris?lang=fr
+    $ curl -H "Accept-Language: fr" wttr.in/paris
+
+支持的语言：
+
+    FULL_TRANSLATION (supported)
+    PARTIAL_TRANSLATION (in progress)
+
+特殊 URL：
+
+    /:help                  # 显示此页面
+    /:bash.function         # 显示建议的 bash 函数 wttr()
+    /:translation           # 显示翻译者信息
+
