@@ -9,7 +9,7 @@ V2_TRANSLATION = {
     "en": ("Weather report for:",           "Weather",  "Timezone",     "Now",      "Dawn",             "Sunrise",      "Zenith",       "Sunset",           "Dusk"),
     "af": ("Weer verslag vir:",             "", "", "", "", "", "", "", ""),
     "ar": ("تقرير حالة ألطقس",              "", "", "", "", "", "", "", ""),
-    "az": ("Hava proqnozu:",                "", "", "", "", "", "", "", ""),
+    "az": ("Hava proqnozu:",                "Hava",     "Saat zonası",  "İndi",     "Şəfəq",            "Günəş çıxdı",  "Zenit",        "Gün batımı",       "Toran"),
     "be": ("Прагноз надвор'я для:",         "", "", "", "", "", "", "", ""),
     "bg": ("Прогноза за времето в:",        "", "", "", "", "", "", "", ""),
     "bs": ("Vremenske prognoze za:",        "", "", "", "", "", "", "", ""),
