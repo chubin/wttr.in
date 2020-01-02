@@ -20,7 +20,7 @@ V2_TRANSLATION = {
     "de": ("Wetterbericht für:",            "Wetter",   "Zeitzone",     "Jetzt",    "Morgendämmerung",  "Sonnenaufgang","Zenit",        "Sonnenuntergang",  "Abenddämmerung"),
     "el": ("Πρόγνωση καιρού για:",          "", "", "", "", "", "", "", ""),
     "eo": ("Veterprognozo por:",            "Vetero",   "Horzono",      "Nun",      "Tagiĝo",           "Sunleviĝo",    "Zenito",       "Sunsubiro",        "Krepusko"),
-    "es": ("El tiempo en:",                 "", "", "", "", "", "", "", ""),
+    "es": ("El tiempo en:",                 "Clima", "Zona horaria", "Ahora", "Alborada", "Amanecer", "Cenit", "Atardecer", "Anochecer"),
     "et": ("Ilmaprognoos:",                 "", "", "", "", "", "", "", ""),
     "fa": ("اوه و بآ تیعضو شرازگ",          "", "", "", "", "", "", "", ""),
     "fi": ("Säätiedotus:",                  "", "", "", "", "", "", "", ""),
