@@ -7,24 +7,24 @@
 176: Месцамі дождж                              : Patchy rain possible                : 
 179: Месцамі снег                               : Patchy snow possible                : 
 182: Месцамі дождж са снегам                    : Patchy sleet possible               : 
-185: Месцамі студзёная імжа                     : Patchy freezing drizzle possible    : 
+185: Месцамі сцюдзёная імжа                     : Patchy freezing drizzle possible    : 
 200: Месцамі навальніцы                         : Thundery outbreaks possible         : 
 227: Нізавая завіруха                           : Blowing snow                        : 
 230: Мяцеліца                                   : Blizzard                            : 
 248: Туман                                      : Fog                                 : 
-260: Студзёны туман                             : Freezing fog                        : 
+260: Сцюдзёны туман                             : Freezing fog                        : 
 263: Месцамі невялікая імжа                     : Patchy light drizzle                : 
 266: Невялікая імжа                             : Light drizzle                       : 
-281: Студзёная імжа                             : Freezing drizzle                    : 
-284: Моцная студзёная імжа                      : Heavy freezing drizzle              : 
+281: Сцюдзёная імжа                             : Freezing drizzle                    : 
+284: Моцная сцюдзёная імжа                      : Heavy freezing drizzle              : 
 293: Месцамі невялікі дождж                     : Patchy light rain                   : 
 296: Невялікі дождж                             : Light rain                          : 
 299: Часам умераны дождж                        : Moderate rain at times              : 
 302: Умераны дождж                              : Moderate rain                       : 
 305: Часам моцны дождж                          : Heavy rain at times                 : 
 308: Моцны дождж                                : Heavy rain                          : 
-311: Невялікі студзёны дождж                    : Light freezing rain                 : 
-314: Умераны ці моцны студзёны дождж            : Moderate or heavy freezing rain     : 
+311: Невялікі сцюдзёны дождж                    : Light freezing rain                 : 
+314: Умераны ці моцны сцюдзёны дождж            : Moderate or heavy freezing rain     : 
 317: Невялікі дождж са снегам                   : Light sleet                         : 
 320: Умераны ці моцны дождж са снегам           : Moderate or heavy sleet             : 
 323: Месцамі невялікі снег                      : Patchy light snow                   : 

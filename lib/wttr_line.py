@@ -101,6 +101,16 @@ def render_precipitation(data, query):
         answer += 'mm'
     return answer
 
+def render_precipitation_chance(data, query):
+    """
+    precipitation chance (o)
+    """
+
+    answer = data.get('chanceofrain', '')
+    if answer:
+        answer += '%'
+    return answer
+
 def render_pressure(data, query):
     """
     pressure (P)
@@ -189,6 +199,7 @@ FORMAT_SYMBOL = {
     'M':    render_moonday,
     's':    render_sunset,
     'p':    render_precipitation,
+    'o':    render_precipitation_chance,
     'P':    render_pressure,
     }
 

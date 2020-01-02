@@ -63,7 +63,6 @@ def load_translations():
     return translations
 TRANSLATIONS = load_translations()
 
-
 def _find_srv_for_query(path, query):   # pylint: disable=unused-argument
     return 'http://api.worldweatheronline.com'
 
@@ -206,8 +205,8 @@ def proxy(path):
         if response:
             headers = {}
             headers['Content-Type'] = response.headers['content-type']
+            _save_content_and_headers(path, query_string, response.content, headers)
             content = add_translations(response.content, lang)
-            _save_content_and_headers(path, query_string, content, headers)
         else:
             content = "{}"
 

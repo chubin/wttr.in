@@ -1,0 +1,81 @@
+113: ฟ้าโปร่ง                                  : Clear                               :
+113: แดดจัด                                   : Sunny                               :
+116: มีเมฆบางส่วน                              : Partly cloudy                       :
+119: มีเมฆมาก                                 : Cloudy                              :
+122: มืดครึ้ม                                   : Overcast                            :
+143: มีหมอก                                   : Mist                                :
+176: มีโอกาสฝนตกเป็นหย่อม ๆ                     : Patchy rain possible                :
+179: มีโอกาสหิมะตกเป็นหย่อม ๆ                    : Patchy snow possible                :
+182: มีโอกาสลูกเห็บตกเป็นหย่อม ๆ                  : Patchy sleet possible               :
+185: มีโอกาสละอองฝนเยือกแข็งตกเป็นหย่อม ๆ         : Patchy freezing drizzle possible    :
+200: มีโอกาสฟ้าผ่า                              : Thundery outbreaks possible         :
+227: หิมะพัดผ่าน                                : Blowing snow                        :
+230: พายุหิมะ                                  : Blizzard                            :
+248: หมอก                                    : Fog                                 :
+260: หมอกเยือกแข็ง                             : Freezing fog                        :
+263: ละอองฝนเป็นหย่อม ๆ                        : Patchy light drizzle                :
+266: ฝนพรำ                                   : Light drizzle                       :
+281: ละอองฝนเยือกแข็ง                          : Freezing drizzle                    :
+284: ละอองฝนเยือกแข็งอย่างหนัก                   : Heavy freezing drizzle              :
+293: ฝนตกเบาบางเป็นหย่อม ๆ                     : Patchy light rain                   :
+296: ฝนตกเล็กน้อย                              : Light rain                          :
+299: ฝนตกปานกลางในช่วงเวลานั้น                  : Moderate rain at times              :
+302: ฝนตกปานกลาง                             : Moderate rain                       :
+305: ฝนตกหนักในช่วงเวลานั้น                      : Heavy rain at times                 :
+308: ฝนตกหนัก                                 : Heavy rain                          :
+311: ฝนเยือกแข็งเบาบาง                         : Light freezing rain                 :
+314: ฝนเยือกแข็งปานกลางหรือหนัก                  : Moderate or heavy freezing rain     :
+317: ลูกเห็บเบาบาง                             : Light sleet                         :
+320: ลูกเห็บปานกลางหรือหนัก                      : Moderate or heavy sleet             :
+323: หิมะตกโปรยปรายเป็นหย่อม ๆ                  : Patchy light snow                   :
+326: หิมะตกเบาบาง                             : Light snow                          :
+329: หิมะตกปานกลางเป็นหย่อม ๆ                   : Patchy moderate snow                :
+332: หิมะตกปานกลาง                            : Moderate snow                       :
+335: หิมะตกหนักเป็นหย่อม ๆ                       : Patchy heavy snow                   :
+338: หิมะตกหนัก                                : Heavy snow                          :
+350: มีเกล็ดน้ำแข็ง                              : Ice pellets                         :
+353: ฝนตกโปรยปราย                            : Light rain shower                   :
+356: ฝนตกปานกลางหรือหนัก                       : Moderate or heavy rain shower       :
+359: ฝนตกชุก                                  : Torrential rain shower              :
+362: ลูกเห็บตกเบาบาง                           : Light sleet showers                 :
+365: ลูกเห็บตกปานกลางหรือหนัก                    : Moderate or heavy sleet showers     :
+368: หิมะตกโปรยปราย                           : Light snow showers                  :
+371: หิมะตกปานกลางหรือหนัก                      : Moderate or heavy snow showers      :
+386: ฝนตกและมีฟ้าผ่าเป็นหย่อม ๆ                   : Patchy light rain with thunder      :
+389: ฝนตกและมีฟ้าผ่าปานกลางหรือหนัก               : Moderate or heavy rain with thunder :
+392: หิมะตกและมีฟ้าผ่าเป็นหย่อม ๆ                  : Patchy light snow with thunder      :
+395: หิมะตกและมีฟ้าผ่าปานกลางหรือหนัก              : Moderate or heavy snow with thunder :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
