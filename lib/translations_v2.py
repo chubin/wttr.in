@@ -24,7 +24,7 @@ V2_TRANSLATION = {
     "et": ("Ilmaprognoos:",                 "", "", "", "", "", "", "", ""),
     "fa": ("اوه و بآ تیعضو شرازگ",          "", "", "", "", "", "", "", ""),
     "fi": ("Säätiedotus:",                  "", "", "", "", "", "", "", ""),
-    "fr": ("Prévisions météo pour:",        "", "", "", "", "", "", "", ""),
+    "fr": ("Prévisions météo pour :",       "Météo", "Fuseau Horaire", "Heure", "Aube", "Lever du Soleil", "Zénith", "Coucher du Soleil", "Crépuscule"),
     "fy": ("Waarberjocht foar:",            "", "", "", "", "", "", "", ""),
     "ga": ("Réamhaisnéis na haimsire do:",  "", "", "", "", "", "", "", ""),
     "he": (":ריוואה גזמ תיזחת",             "", "", "", "", "", "", "", ""),
