@@ -35,13 +35,13 @@
 338: Kraftig sne                            : Heavy snow
 350: Haglbyger                              : Ice pellets
 353: Lette regnbyger                        : Light rain shower
-356: Moderate til kraftig regn              : Moderate or heavy rain shower
+356: Moderate eller kraftige regnbyger      : Moderate or heavy rain shower
 359: Skybrud                                : Torrential rain shower
 362: Lette sludbyger                        : Light sleet showers
-365: Moderate til kraftige sludbyger        : Moderate or heavy sleet showers
+365: Moderate eller kraftige sludbyger      : Moderate or heavy sleet showers
 368: Lette snebyger                         : Light snow showers
-371: Moderate til kraftige snebyger         : Moderate or heavy snow showers
+371: Moderate eller kraftige snebyger       : Moderate or heavy snow showers
 386: Byger af let regn med torden           : Patchy light rain with thunder
 389: Moderat eller krafig regn med torden   : Moderate or heavy rain with thunder
 392: Byger af let sne med torden            : Patchy light snow with thunder
-395: Moderat til kraftig sne med torden     : Moderate or heavy snow with thunder
+395: Moderat eller kraftig sne med torden   : Moderate or heavy snow with thunder
