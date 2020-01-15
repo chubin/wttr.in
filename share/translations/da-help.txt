@@ -1,66 +1,66 @@
 Brugsanvisning:
 
-    $ curl wttr.in          # nuværende lokation
-    $ curl wttr.in/osl      # vejret på Gardermoen flyveplads
+    $ curl wttr.in          # Nuværende lokation
+    $ curl wttr.in/aarhus   # Vejret i Aarhus
 
 Understøttede lokationsspecifikationer:
 
-    /gistrup                # bynavn
-    /~Aalborg+stadion       # valgfri lokation
-    /Москва                 # Unicode navn på lokation på alle sprog
-    /cph                    # flyvepladskode (3 bogstaver)
-    /@stackoverflow.com     # domønenavn
-    /94107                  # postnummer (kun USA)
+    /Skanderborg            # Bynavn
+    /~Aarhus+stadion        # Valgfri lokation
+    /Москва                 # Unicode-navn på lokation på alle sprog
+    /cph                    # Flyvepladskode (3 bogstaver)
+    /@stackoverflow.com     # Domænenavn
+    /94107                  # Postnummer (kun USA)
     /-78.46,106.79          # GPS-koordinater
 
-Specielle lokationer:
+Særlige lokationer:
 
     /moon                   # Månefase (brug med ,+US eller ,+France for disse lokationer)
     /moon@2014-10-26        # Månefase for specifik dato (@2014-10-26)
 
 Enheder:
 
-    ?m                      # metrisk (SI) (standard alle steder undtaget i USA)
+    ?m                      # Metrisk (SI) (standard alle steder undtagen i USA)
     ?u                      # USCS (standard i USA)
-    ?M                      # vindstyrke i meter per sekund
+    ?M                      # Vindstyrke i meter per sekund
 
 Visningsvalg:
 
-    ?0                      # kun vejret nu
-    ?1                      # vejret nu + 1 dag
-    ?2                      # vejret nu + 2 dage
-    ?n                      # smal visning (kun dag og nat)
-    ?q                      # stille visning (ingen "Vejrmelding"-tekst)
-    ?Q                      # superstille visning (ingen "Vejrmelding", ingen bynavn)
-    ?T                      # ingen terminalsekvenser (ingen farver)
+    ?0                      # Øjebliksvejr
+    ?1                      # Øjebliksvejr + 1 dag
+    ?2                      # Øjebliksvejr + 2 dage
+    ?n                      # Simplificeret visning (kun dag og nat)
+    ?q                      # Begrænset visning (ingen "Vejrmelding"-tekst)
+    ?Q                      # Meget begrænset visning (ingen "Vejrmelding", ingen bynavn)
+    ?T                      # Ingen terminalsekvenser (ingen farver)
 
 PNG valg:
 
-    /paris.png              # generer en PNG-fil
-    ?p                      # tegn ramme på
-    ?t                      # gennemsigtighed 150
-    transparency=...        # gennemsigtighed fra 0 til 255 (255 = ikke gennemsigtigt)
+    /paris.png              # Generér en PNG-fil
+    ?p                      # Tilføj ramme
+    ?t                      # Sæt gennemsigtighed til 150
+    transparency=...        # Tilpas gennemsigtighed fra 0 til 255 (255 = ikke gennemsigtigt)
 
-Tilvalg kan kombineres:
+Kombinationsmuligheder:
 
     /Paris?0pq
     /Paris?0pq&lang=fr
-    /Paris_0pq.png          # for PNG er filmodus specificeret efter _
-    /Rome_0pq_lang=it.png   # lange tilvalg separeres med underscore (_)
+    /Paris_0pq.png          # For .PNG er fil-modus specificeret efter _
+    /Rome_0pq_lang=it.png   # Sprog defineres efter underscore (_)
 
 Oversættelser:
 
-    $ curl fr.wttr.in/Paris
-    $ curl wttr.in/paris?lang=fr
-    $ curl -H "Accept-Language: fr" wttr.in/paris
+    $ curl da.wttr.in/Aarhus
+    $ curl wttr.in/aarhus?lang=da
+    $ curl -H "Accept-Language: da" wttr.in/aarhus
 
 Understøttede sprog:
 
     FULL_TRANSLATION (understøttet)
-    PARTIAL_TRANSLATION (under udarbejdning)
+    PARTIAL_TRANSLATION (under udarbejdelse)
 
-Specielle URLer:
+Særlige URL'er:
 
-    /:help                  # vis denne side
-    /:bash.function         # vis den foreslåede bash-funktion wttr()
-    /:translation           # vis information om oversætterne
+    /:help                  # Vis denne side
+    /:bash.function         # Vis den foreslåede bash-funktion wttr()
+    /:translation           # Vis information om oversætterne

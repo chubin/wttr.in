@@ -1,47 +1,47 @@
-113: Klart                                  : Clear
+113: Skyfrit                                : Clear
 113: Sol                                    : Sunny
-116: Delvis skyet                           : Partly cloudy
+116: Delvist skyet                          : Partly cloudy
 119: Skyet                                  : Cloudy
 122: Overskyet                              : Overcast
-143: Dis                                    : Mist
-176: Chance for skiftende regn              : Patchy rain possible
-179: Chance for skiftende sne               : Patchy snow possible
-182: Chance for skiftende slud              : Patchy sleet possible
-185: Chance for skiftende, kold småregn     : Patchy freezing drizzle possible
+143: Diset                                  : Mist
+176: Skiftende regn                         : Patchy rain possible
+179: Skiftende sne                          : Patchy snow possible
+182: Skiftende slud                         : Patchy sleet possible
+185: Skiftende kold småregn                 : Patchy freezing drizzle possible
 200: Fare for torden                        : Thundery outbreaks possible
 227: Snefygning                             : Blowing snow
 230: Snestorm                               : Blizzard
 248: Tåge                                   : Fog
-260: Kold tåge                              : Freezing fog
-263: Skiftende, let støvregn                : Patchy light drizzle
+260: Frysende tåge                          : Freezing fog
+263: Skiftende og let støvregn              : Patchy light drizzle
 266: Let støvregn                           : Light drizzle
 281: Kold støvregn                          : Freezing drizzle
-284: Kraftig, kold regn                     : Heavy freezing drizzle
-293: Skiftende, let regn                    : Patchy light rain
+284: Kraftig kold regn                      : Heavy freezing drizzle
+293: Skiftende let regn                     : Patchy light rain
 296: Let regn                               : Light rain
-299: Til tider en smule regn                : Moderate rain at times
+299: Skiftevist en smule regn               : Moderate rain at times
 302: En smule regn                          : Moderate rain
-305: Til tider kraftig regn                 : Heavy rain at times
+305: Skiftevist kraftig regn                : Heavy rain at times
 308: Kraftig regn                           : Heavy rain
-311: Let, kold regn                         : Light freezing rain
-314: Moderat eller kraftig, kold, regn      : Moderate or heavy freezing rain
+311: Let og frysende regn                   : Light freezing rain
+314: Moderat eller kraftig frysende regn    : Moderate or heavy freezing rain
 317: Let slud                               : Light sleet
 320: Moderat eller kraftig slud             : Moderate or heavy sleet
 323: Byger af let sne                       : Patchy light snow
 326: Let sne                                : Light snow
 329: Byger med moderat sne                  : Patchy moderate snow
-332: Moderat snevej                         : Moderate snow
-335: Byger med kraftigt snefald             : Patchy heavy snow
-338: Kraftigt snefald                       : Heavy snow
-350: Hagl                                   : Ice pellets
+332: Moderat sne                            : Moderate snow
+335: Byger med kraftig sne                  : Patchy heavy snow
+338: Kraftig sne                            : Heavy snow
+350: Haglbyger                              : Ice pellets
 353: Lette regnbyger                        : Light rain shower
-356: Moderat til tunge regnskyl             : Moderate or heavy rain shower
-359: Styrtregn                              : Torrential rain shower
+356: Moderate eller kraftige regnbyger      : Moderate or heavy rain shower
+359: Skybrud                                : Torrential rain shower
 362: Lette sludbyger                        : Light sleet showers
-365: Moderat til tunge sludbyger            : Moderate or heavy sleet showers
+365: Moderate eller kraftige sludbyger      : Moderate or heavy sleet showers
 368: Lette snebyger                         : Light snow showers
-371: Moderat til kraftige snebyger          : Moderate or heavy snow showers
+371: Moderate eller kraftige snebyger       : Moderate or heavy snow showers
 386: Byger af let regn med torden           : Patchy light rain with thunder
 389: Moderat eller krafig regn med torden   : Moderate or heavy rain with thunder
 392: Byger af let sne med torden            : Patchy light snow with thunder
-395: Moderat til krafitg sne med torden     : Moderate or heavy snow with thunder
+395: Moderat eller kraftig sne med torden   : Moderate or heavy snow with thunder
