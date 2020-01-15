@@ -1,81 +1,50 @@
-113: Wolkenlos										: Clear
-113: Sonnig											: Sunny
-116: Leicht Bewölkt									: Partly cloudy
-119: Wolkig											: Cloudy
-122: Bedeckt										: Overcast
-143: Nebel											: Mist
-176: Stellenweise Regen möglich						: Patchy rain possible
-179: Stellenweise Schnee möglich					: Patchy snow possible
-182: Stellenweise Schneeregen möglich				: Patchy sleet possible
-185: Stellenweise gefrierende Nässe möglich			: Patchy freezing drizzle possible
-200: Gewitter möglich								: Thundery outbreaks possible
-227: Schneesturm									: Blowing snow
-230: Blizzard										: Blizzard
-248: Nebel											: Fog
-260: Gefrierender Nebel								: Freezing fog
-263: Stellenweise Nieselregen						: Patchy light drizzle
-266: Leichter Nieselregen							: Light drizzle
-281: Gefrierender Nieselregen						: Freezing drizzle
-284: Starker gefrierender Nieselregen				: Heavy freezing drizzle
-293: Stellenweise leichter Regen					: Patchy light rain
-296: Leichter Regen									: Light rain
-299: Stellenweise gemäßigter Regen					: Moderate rain at times
-302: Gemäßigter Regen								: Moderate rain
-305: Stellenweise starker Regen						: Heavy rain at times
-308: Starker Regen									: Heavy rain
-311: Leichter gefrierender Regen					: Light freezing rain
-314: Gemäßigter oder starker gefrierender Regen		: Moderate or heavy freezing rain
-317: Leichter Schneeregen							: Light sleet
-320: Gemäßigter oder starker Schneeregen			: Moderate or heavy sleet
-323: Stellenweise leichter Schneefall				: Patchy light snow
-326: Leichter Schneefall							: Light snow
-329: Stellenweise gemäßigter Schneefall				: Patchy moderate snow
-332: Gemäßigter Schneefall							: Moderate snow
-335: Stellenweise starker Schneefall				: Patchy heavy snow
-338: Starker Schneefall								: Heavy snow
-350: Eiskörner										: Ice pellets
-353: Leichter Regen									: Light rain shower
-356: Gemäßigter oder starker Regen					: Moderate or heavy rain shower
-359: Wolkenbruch									: Torrential rain shower
-362: Leichter Schneeregen							: Light sleet showers
-365: Gemäßigter oder starker Schneeregen			: Moderate or heavy sleet showers
-368: Leichter Schneefall							: Light snow showers
-371: Gemäßigter oder starker Schneefall				: Moderate or heavy snow showers
-386: Stellenweise leichter Regen mit Gewitter		: Patchy light rain with thunder
-389: Gemäßigter oder starker Regen mit Gewitter		: Moderate or heavy rain with thunder
-392: Stellenweise leichter Schnefall mit Gewitter	: Patchy light snow with thunder
-395: Gemäßigter oder starker Schnefall mit Gewitter	: Moderate or heavy snow with thunder
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+: Regen                                             : Rain
+: leichter Regen, Regenschauer                      : Light Rain, Rain Shower
+: Regenschauer                                      : Rain Shower
+113: Wolkenlos                                      : Clear
+113: Sonnig                                         : Sunny
+116: Leicht Bewölkt                                 : Partly cloudy
+119: Wolkig                                         : Cloudy
+122: Bedeckt                                        : Overcast
+143: Nebel                                          : Mist
+176: Stellenweise Regen möglich                     : Patchy rain possible
+179: Stellenweise Schnee möglich                    : Patchy snow possible
+182: Stellenweise Schneeregen möglich               : Patchy sleet possible
+185: Stellenweise gefrierende Nässe möglich         : Patchy freezing drizzle possible
+200: Gewitter möglich                               : Thundery outbreaks possible
+227: Schneesturm                                    : Blowing snow
+230: Blizzard                                       : Blizzard
+248: Nebel                                          : Fog
+260: Gefrierender Nebel                             : Freezing fog
+263: Stellenweise Nieselregen                       : Patchy light drizzle
+266: Leichter Nieselregen                           : Light drizzle
+281: Gefrierender Nieselregen                       : Freezing drizzle
+284: Starker gefrierender Nieselregen               : Heavy freezing drizzle
+293: Stellenweise leichter Regen                    : Patchy light rain
+296: Leichter Regen                                 : Light rain
+299: Stellenweise gemäßigter Regen                  : Moderate rain at times
+302: Gemäßigter Regen                               : Moderate rain
+305: Stellenweise starker Regen                     : Heavy rain at times
+308: Starker Regen                                  : Heavy rain
+311: Leichter gefrierender Regen                    : Light freezing rain
+314: Gemäßigter oder starker gefrierender Regen     : Moderate or heavy freezing rain
+317: Leichter Schneeregen                           : Light sleet
+320: Gemäßigter oder starker Schneeregen            : Moderate or heavy sleet
+323: Stellenweise leichter Schneefall               : Patchy light snow
+326: Leichter Schneefall                            : Light snow
+329: Stellenweise gemäßigter Schneefall             : Patchy moderate snow
+332: Gemäßigter Schneefall                          : Moderate snow
+335: Stellenweise starker Schneefall                : Patchy heavy snow
+338: Starker Schneefall                             : Heavy snow
+350: Eiskörner                                      : Ice pellets
+353: Leichter Regen                                 : Light rain shower
+356: Gemäßigter oder starker Regen                  : Moderate or heavy rain shower
+359: Wolkenbruch                                    : Torrential rain shower
+362: Leichter Schneeregen                           : Light sleet showers
+365: Gemäßigter oder starker Schneeregen            : Moderate or heavy sleet showers
+368: Leichter Schneefall                            : Light snow showers
+371: Gemäßigter oder starker Schneefall             : Moderate or heavy snow showers
+386: Stellenweise leichter Regen mit Gewitter       : Patchy light rain with thunder
+389: Gemäßigter oder starker Regen mit Gewitter     : Moderate or heavy rain with thunder
+392: Stellenweise leichter Schnefall mit Gewitter   : Patchy light snow with thunder
+395: Gemäßigter oder starker Schnefall mit Gewitter : Moderate or heavy snow with thunder
