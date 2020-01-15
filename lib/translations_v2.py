@@ -21,7 +21,7 @@ V2_TRANSLATION = {
     "el": ("Πρόγνωση καιρού για:",          "", "", "", "", "", "", "", ""),
     "eo": ("Veterprognozo por:",            "Vetero",   "Horzono",      "Nun",      "Tagiĝo",           "Sunleviĝo",    "Zenito",       "Sunsubiro",        "Krepusko"),
     "es": ("El tiempo en:",                 "Clima", "Zona horaria", "Ahora", "Alborada", "Amanecer", "Cenit", "Atardecer", "Anochecer"),
-    "et": ("Ilmaprognoos:",                 "", "", "", "", "", "", "", ""),
+    "et": ("Ilmaprognoos:",                 "Ilm", "Ajatsoon", "Hetkel", "Koit", "Päikesetõus", "Seniit", "Päikeseloojang", "Eha"),
     "fa": ("اوه و بآ تیعضو شرازگ",          "", "", "", "", "", "", "", ""),
     "fi": ("Säätiedotus:",                  "", "", "", "", "", "", "", ""),
     "fr": ("Prévisions météo pour:",        "", "", "", "", "", "", "", ""),
