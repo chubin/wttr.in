@@ -16,7 +16,7 @@ V2_TRANSLATION = {
     "ca": ("Informe del temps per a:",      "", "", "", "", "", "", "", ""),
     "cs": ("Předpověď počasí pro:",         "", "", "", "", "", "", "", ""),
     "cy": ("Adroddiad tywydd ar gyfer:",    "", "", "", "", "", "", "", ""),
-    "da": ("Vejret i:",                     "", "", "", "", "", "", "", ""),
+    "da": ("Vejret i:",                     "Vejret", "Tidszone", "Nu", "Daggry", "Solopgang", "Zenit", "Solnedgang", "Skumring"),
     "de": ("Wetterbericht für:",            "Wetter",   "Zeitzone",     "Jetzt",    "Morgendämmerung",  "Sonnenaufgang","Zenit",        "Sonnenuntergang",  "Abenddämmerung"),
     "el": ("Πρόγνωση καιρού για:",          "", "", "", "", "", "", "", ""),
     "eo": ("Veterprognozo por:",            "Vetero",   "Horzono",      "Nun",      "Tagiĝo",           "Sunleviĝo",    "Zenito",       "Sunsubiro",        "Krepusko"),
