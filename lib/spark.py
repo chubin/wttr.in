@@ -26,14 +26,20 @@ import re
 import math
 import json
 import datetime
-import StringIO
+try:
+    import StringIO
+except:
+    import io as StringIO
 
 import requests
 import diagram
 import pyjq
 import pytz
 import numpy as np
-from astral import Astral, Location
+try:
+    from astral import Astral, Location
+except ImportError:
+    pass
 from scipy.interpolate import interp1d
 from babel.dates import format_datetime
 

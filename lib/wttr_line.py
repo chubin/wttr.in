@@ -17,7 +17,10 @@ import sys
 import re
 import datetime
 import json
-from astral import Astral, Location
+try:
+    from astral import Astral, Location
+except ImportError:
+    pass
 from constants import WWO_CODE, WEATHER_SYMBOL, WIND_DIRECTION
 from weather_data import get_weather_data
 import spark

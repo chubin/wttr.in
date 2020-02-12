@@ -168,7 +168,11 @@ def load_aliases(aliases_filename):
     aliases_db = {}
     with open(aliases_filename, 'r') as f_aliases:
         for line in f_aliases.readlines():
-            from_, to_ = line.decode('utf-8').split(':', 1)
+            try:
+                from_, to_ = line.decode('utf-8').split(':', 1)
+            except AttributeError:
+                from_, to_ = line.split(':', 1)
+
             aliases_db[location_normalize(from_)] = location_normalize(to_)
     return aliases_db
 
