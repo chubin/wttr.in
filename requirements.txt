@@ -16,3 +16,4 @@ pyjq
 scipy
 babel
 pylru
+numba
