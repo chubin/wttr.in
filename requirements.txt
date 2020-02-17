@@ -7,7 +7,7 @@ dnspython
 pylint
 cyrtranslit
 astral
-timezonefinder
+timezonefinder==2.1.2
 Pillow
 pyte
 python-dateutil
@@ -16,4 +16,6 @@ pyjq
 scipy
 babel
 pylru
+pysocks
+supervisor
 numba
