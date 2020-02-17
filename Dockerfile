@@ -17,12 +17,15 @@ WORKDIR /app
 COPY ./bin /app/bin
 COPY ./lib /app/lib
 COPY ./share /app/share
-COPY ./GeoLite2-City.mmdb /app
 COPY ./requirements.txt /app
+COPY ./src/we-lang/we-lang.go /app
+
+# There are several files that must be fetched/created manually
+# before building the image
 COPY ./.wegorc /root
-COPY ./we-lang.go /app
 COPY ./.ip2location.key /root
 COPY ./airports.dat /app
+COPY ./GeoLite2-City.mmdb /app
 
 RUN export PATH=$PATH:/go/bin && \ 
     go get -u github.com/mattn/go-colorable && \
@@ -38,7 +41,7 @@ RUN mkdir -p /var/log/supervisor && \
     mkdir -p /etc/supervisor/conf.d
 RUN chmod -R o+rw /var/log/supervisor && \
     chmod -R o+rw /var/run
-COPY supervisord.conf /etc/supervisor/supervisord.conf
+COPY share/docker/supervisord.conf /etc/supervisor/supervisord.conf
 
 ENV WTTR_MYDIR="/app"
 ENV WTTR_GEOLITE="/app/GeoLite2-City.mmdb"
@@ -46,9 +49,6 @@ ENV WTTR_WEGO="/root/go/bin/we-lang"
 ENV WTTR_LISTEN_HOST="0.0.0.0"
 ENV WTTR_LISTEN_PORT="8002"
 
-
 EXPOSE 8002
 
 CMD ["/usr/local/bin/supervisord"]
-
-
