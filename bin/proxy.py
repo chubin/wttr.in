@@ -180,6 +180,7 @@ def proxy(path):
     query_string = request.query_string
     query_string = query_string.replace('sr-lat', 'sr')
     query_string = query_string.replace('lang=None', 'lang=en')
+    query_string += "&extra=localObsTime"
     content, headers = _load_content_and_headers(path, query_string)
 
     if content is None:
