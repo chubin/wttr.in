@@ -1,0 +1,47 @@
+113: Clar                               : Clear
+113: Allegre                            : Sunny
+116: Pauc Nubilose                     : Partly cloudy
+119: Nubilose                           : Cloudy
+122: Gris                               : Overcast
+143: Nebula                             : Mist
+176: Pauc pluvia possibile              : Patchy rain possible
+179: Pauc nive possibile                : Patchy snow possible
+182: Pauc nive miscite con pluvia       : Patchy sleet possible
+185: Pauc nive glacial con pluvia       : Patchy freezing drizzle possible
+200: Rar tonitro possibile              : Thundery outbreaks possible
+227: Ventose nive                       : Blowing snow
+230: Tempesta de nive                   : Blizzard
+248: Bruma                              : Fog
+260: Bruma glacial                      : Freezing fog
+263: Pauc pluvia                        : Patchy light drizzle
+266: Pluveva                            : Light drizzle
+281: Pluveva glacial                    : Freezing drizzle
+284: Multe pluvia glacial               : Heavy freezing drizzle
+293: Pauc pluvia                        : Patchy light rain
+296: Pluveva                            : Light rain
+299: Pluvia moderate a vices            : Moderate rain at times
+302: Pluvia moderate                    : Moderate rain
+305: Multe pluvia a vices               : Heavy rain at times
+308: Multe pluvia                       : Heavy rain
+311: Pauc pluvia glacial                : Light freezing rain
+314: Multe o moderate pluvia glacial    : Moderate or heavy freezing rain
+317: Pauc nive miscite con pluvia       : Light sleet
+320: Multe o moderate nive miscite      : Moderate or heavy sleet
+323: Breve nive                         : Patchy light snow
+326: Pauc nive                          : Light snow
+329: Breve nive moderate                : Patchy moderate snow
+332: Nive moderate                      : Moderate snow
+335: Multe nive a veces                 : Patchy heavy snow
+338: Multe nive                         : Heavy snow
+350: Bolletas de glacie                 : Ice pellets
+353: Pauc pluvia                        : Light rain shower
+356: Multe o moderate pluvia            : Moderate or heavy rain shower
+359: Tempesta de pluvia                 : Torrential rain shower
+362: Pauc pluvia con glacie             : Light sleet showers
+365: Multe o moderate pluvia con glacie : Moderate or heavy sleet showers
+368: Pauc nive con pluvia               : Light snow showers
+371: Multe o moderate nive con pluvia   : Moderate or heavy snow showers
+386: Pauc pluvia con tonitro            : Patchy light rain with thunder
+389: Moderate pluvia con tonitro        : Moderate or heavy rain with thunder
+392: Pauc nive con tonitro              : Patchy light snow with thunder
+395: Moderate o multe nive con tonitro  : Moderate or heavy snow with thunder

@@ -1,0 +1,66 @@
+Instructiones:
+
+    $ curl wttr.in          # le tempore a vostre location actual
+    $ curl wttr.in/muc      # le tempore del aeroporto de Múnich
+
+Typos de location appoiava:
+
+    /paris                  # le nomine de un citate
+    /~Eiffel+tower          # le nomine de qualque sito famose
+    /Москва                 # le nomine Unicode de qualque sito in qualque lingua
+    /muc                    # le codice de un aeroporto (3 litteras)
+    /@stackoverflow.com     # le nomine de un dominio internet
+    /94107                  # un codice de area
+    /-78.46,106.79          # coordinatas de GPS
+
+Sitos speciales:
+
+    /moon                   # le phase del luna (adjunge ,+US o ,+France por iste paises)
+    /moon@2016-10-25        # le phase del luna in un data specific (@2016-10-25)
+
+Unitates:
+
+    ?m                      # metric (SI) (le standardo in tote le sitos extra in EEUU)
+    ?u                      # Systema Uniforme de Classification del Solo o USCS (le standardo in EEUU)
+    ?M                      # demonstrar le velocitate del vento in m/s
+
+Optiones visual:
+
+    ?0                      # solmente le tempore actual
+    ?1                      # le tempore actual + le prevision de 1 die
+    ?2                      # le tempore actual + le prevision de 2 die
+    ?n                      # version curte (solmente le die et le nocte)
+    ?q                      # version silentiose (sin le texto de "Le tempore a")
+    ?Q                      # version supersilentiose (nec "Le tempore a" nec le nomine del citate)
+    ?T                      # desactiva le sequentias de terminal (sin colores)
+
+Optiones de PNG:
+
+    /paris.png              # genera un imagine PNG
+    ?p                      # adde un frontiera circa le imagine
+    ?t                      # transparentia 150
+    transparency=...        # transparentia de 0 a 255 (255 = sin transparentia)
+
+Le optiones pote usar insimul:
+
+    /Paris?0pq
+    /Paris?0pq&lang=fr
+    /Paris_0pq.png          # in PNG le optiones sera post que le character _
+    /Rome_0pq_lang=it.png   # un grande secuentia de optiones pote seperate per le character _
+
+Location:
+
+    $ curl fr.wttr.in/Paris
+    $ curl wttr.in/paris?lang=fr
+    $ curl -H "Accept-Language: fr" wttr.in/paris
+
+Linguas appoiava:
+
+    FULL_TRANSLATION (appoiava)
+    PARTIAL_TRANSLATION (in progresso)
+
+URLs speciales:
+
+    /:help                  # monstra isto pagina
+    /:bash.function         # proponera un function wttr() in bash
+    /:translation           # monstra aviso super le traductores
