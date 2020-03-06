@@ -14,7 +14,7 @@ FULL_TRANSLATION = [
 PARTIAL_TRANSLATION = [
     "az", "bg", "bs", "cy", "cs",
     "eo", "es", "fi", "ga", "hi", "hr",
-    "hy", "is", "ja", "jv", "ka", "kk",
+    "hy", "ia", "is", "ja", "jv", "ka", "kk",
     "ko", "ky", "lt", "lv", "mk", "ml", "nl", "fy",
     "nn", "pt", "pt-br", "sk", "sl", "sr", "sr-lat",
     "sv", "sw",  "te", "uz",
@@ -32,6 +32,7 @@ PROXY_LANGS = [
 ]
 
 SUPPORTED_LANGS = FULL_TRANSLATION + PARTIAL_TRANSLATION
+
 
 MESSAGE = {
     'NOT_FOUND_MESSAGE': {
@@ -120,6 +121,11 @@ az egyik leghidegebb állandóan lakott településre a bolygón.
 այդ պատճառով մենք ձեզ կցուցադրենք եղանակը Օյմյակոնում.
 երկրագնդի ամենասառը բնակավայրում։
 Հույս ունենք որ ձեր եղանակը այսօր ավելի լավն է։
+""",
+        'ia': u"""
+Nos non trovate su location,
+assi nos su apporte a Oymyakon,
+un del plus frigide locos habita super le planeta!
 """,
         'id': u"""
 Kami tidak dapat menemukan lokasi anda,
@@ -285,6 +291,7 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
         'hu': u'Ismeretlen lokáció',
         'hy': u'Անհայտ գտնվելու վայր',
         'id': u'Lokasi tidak diketahui',
+        'ia': u'Location incognite',
         'is': u'Óþekkt staðsetning',
         'it': u'Località sconosciuta',
         'ja': u'未知の場所です',
@@ -333,6 +340,7 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
         'fr': u'Emplacement',
         'hu': u'Lokáció',
         'hy': u'Դիրք',
+        'ia': u'Location',
         'id': u'Lokasi',
         'is': u'Staðsetning',
         'it': u'Località',
@@ -451,6 +459,13 @@ A frissítésekért tekintsd meg a https://twitter.com/igor_chubin oldalt.
 Կարող եք տեսնել տիպային եղանակը զեկուցում հիմնական քաղաքի համար (Ուղղակի որպես նմուշ):
 Մենք մշտապես աշխատում ենք հարցումների քանակը բարելավելու ուղղությամբ:
 Կարող եք հետևել մեզ https://twitter.com/igor_chubin թարմացումների համար.
+======================================================================================
+""",
+        'ia': u"""
+Pardono, nos ha exhaurite inquisitione del servicio tempore alora.
+Ecce es le reporto tempore por qualque citate (demonstrar le reporte).
+Nos recipera inquisitione nove tosto.
+Tu pote abonar a https://twitter.com/igor_chubin por nove information.
 ======================================================================================
 """,
         'id': u"""
@@ -624,6 +639,7 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
         'de': u'Neue Funktion: mehrsprachige Ortsnamen \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) und Ortssuche \033[92mwttr.in/~Kilimanjaro\033[0m (fügen Sie ein ~ vor dem Ort ein)',
         'hu': u'Új funkcinalitás: többnyelvű helynevek \033[92mwttr.in/станция+Восток\033[0m (UTF-8-ban) és pozíció keresés \033[92mwttr.in/~Kilimanjaro\033[0m (csak adj egy ~ jelet elé)',
         'hy': u'Փորձարկեք: տեղամասերի անունները կամայական լեզվով \033[92mwttr.in/Դիլիջան\033[0m (в UTF-8) և տեղանքի որոնում \033[92mwttr.in/~Kilimanjaro\033[0m (հարկավոր է ~ ավելացնել դիմացից)',
+        'ia': u'Nove functione: location nomine multilingue \033[92mwttr.in/станция+Восток\033[0m (a UTF-8) e recerca de location\033[92mwttr.in/~Kilimanjaro\033[0m (solo adde ~ ante)',
         'id': u'Fitur baru: nama lokasi dalam multibahasa \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) dan pencarian lokasi \033[92mwttr.in/~Kilimanjaro\033[0m (hanya tambah tanda ~ sebelumnya)',
         'it': u'Nuove funzionalità: nomi delle località multilingue \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) e ricerca della località \033[92mwttr.in/~Kilimanjaro\033[0m (basta premettere ~)',
         'ko': u'새로운 기능: 다국어로 대응된 위치 \033[92mwttr.in/서울\033[0m (UTF-8에서) 장소 검색 \033[92mwttr.in/~Kilimanjaro\033[0m (앞에 ~를 붙이세요)',
@@ -660,6 +676,7 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
         'de': u'Folgen Sie \033[46m\033[30mhttps://twitter.com/igor_chubin\033[0m für wttr.in Updates',
         'hu': u'Kövesd \033[46m\033[30m@igor_chubin\033[0m-t további wttr.in információkért',
         'hy': u'Նոր ֆիչռների համար հետևեք՝ \033[46m\033[30m@igor_chubin\033[0m',
+        'ia': u'Seque \033[46m\033[30m@igor_chubin\033[0m por nove information de wttr.in',
         'id': u'Ikuti \033[46m\033[30m@igor_chubin\033[0m untuk informasi wttr.in terbaru',
         'it': u'Seguite \033[46m\033[30m@igor_chubin\033[0m per aggiornamenti a wttr.in',
         'ko': u'wttr.in의 업데이트 소식을 원하신다면 \033[46m\033[30m@igor_chubin\033[0m 을 팔로우 해주세요',
@@ -685,7 +702,6 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
         'zh-tw': u'追蹤 \033[46m\033[30m@igor_chubin\033[0m 以取得更多 wttr.in 的動態',
     },
 }
-
 CAPTION = {
     "af": u"Weer verslag vir:",
     "ar": u"ﺖﻗﺮﻳﺭ ﺡﺎﻟﺓ ﺄﻠﻄﻘﺳ",
@@ -712,6 +728,7 @@ CAPTION = {
     "hr": u"Vremenska prognoza za:",
     "hu": u"Időjárás előrejelzés:",
     "hy": u"Եղանակի տեսություն:",
+    "ia": u"Reporto tempore por:",
     "id": u"Prakiraan cuaca:",
     "it": u"Previsioni meteo:",
     "is": u"Veðurskýrsla fyrir:",

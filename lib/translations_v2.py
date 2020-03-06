@@ -31,6 +31,7 @@ V2_TRANSLATION = {
     "hr": ("Vremenska prognoza za:",        "", "", "", "", "", "", "", ""),
     "hu": ("Időjárás előrejelzés:",         "", "", "", "", "", "", "", ""),
     "hy": ("Եղանակի տեսություն:",           "", "", "", "", "", "", "", ""),
+    "ia": ("Reporto tempore pro:",          "Tempore", "Fuso Horari", "Alora", "Alba", "Aurora", "Zenit", "Poner del sol", "Crepusculo"),
     "id": ("Prakiraan cuaca:",              "", "", "", "", "", "", "", ""),
     "it": ("Previsioni meteo:",             "", "", "", "", "", "", "", ""),
     "is": ("Veðurskýrsla fyrir:",           "", "", "", "", "", "", "", ""),
@@ -68,3 +69,5 @@ V2_TRANSLATION = {
     "zh-tw": ("天氣預報：",                 "天氣", "時區", "目前", "黎明", "日出", "日正當中", "日落", "黃昏"),
     "zu": ("Isimo sezulu:",                 "", "", "", "", "", "", "", ""),
     }
+
+
