@@ -6,7 +6,7 @@ Translation of almost everything.
 
 FULL_TRANSLATION = [
     "af", "be", "ca", "da", "de", "el", "et",
-    "fr", "fa", "hu", "id", "it",
+    "fr", "fa", "hu", "ia", "id", "it",
     "nb", "nl", "pl", "pt-br", "ro",
     "ru", "tr", "th", "uk", "vi", "zh-cn", "zh-tw"
 ]
@@ -14,7 +14,7 @@ FULL_TRANSLATION = [
 PARTIAL_TRANSLATION = [
     "az", "bg", "bs", "cy", "cs",
     "eo", "es", "fi", "ga", "hi", "hr",
-    "hy", "ia", "is", "ja", "jv", "ka", "kk",
+    "hy", "is", "ja", "jv", "ka", "kk",
     "ko", "ky", "lt", "lv", "mk", "ml", "nl", "fy",
     "nn", "pt", "pt-br", "sk", "sl", "sr", "sr-lat",
     "sv", "sw",  "te", "uz",
@@ -25,7 +25,7 @@ PROXY_LANGS = [
     "af", "az", "be", "bs", "ca",
     "cy", "el", "eo", "et", "fa",
     "fy", "he", "hr", "hu", "hy",
-    "id", "is", "it", "ja", "kk",
+    "ia", "id", "is", "it", "ja", "kk",
     "lv", "mk", "nb", "nn", "ro",
     "ru", "sl", "th", "pt-br", "uk", "uz",
     "vi", "zh-cn", "zh-tw",
