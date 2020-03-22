@@ -45,37 +45,3 @@
 389:中或大雷阵雨                            : Moderate or heavy rain with thunder
 392:小雷阵雪                               : Patchy light snow with thunder
 395:中或大雷阵雪                            : Moderate or heavy snow with thunder
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
