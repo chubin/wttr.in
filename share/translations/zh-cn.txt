@@ -33,7 +33,7 @@
 332:中雪                                  : Moderate snow
 335:局部大雪                               : Patchy heavy snow
 338:大雪                                  : Heavy snow
-350:冰珠                                  : Ice pellets
+350:冰丸                                  : Ice pellets
 353:小阵雨                                : Light rain shower
 356:中或大阵雨                             : Moderate or heavy rain shower
 359:暴阵雨                                : Torrential rain shower
