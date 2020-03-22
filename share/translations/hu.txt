@@ -13,8 +13,8 @@
 230: Hóvihar                             : Blizzard
 248: Köd                                 : Fog
 260: Jeges köd                           : Freezing fog
-263: Szórványosan enyhe önos eső         : Patchy light drizzle
-266: Gyenge önös eső                     : Light drizzle
+263: Szórványosan enyhe ónos eső         : Patchy light drizzle
+266: Gyenge ónos eső                     : Light drizzle
 281: Ónos eső                            : Freezing drizzle
 284: Erős ónos eső                       : Heavy freezing drizzle
 293: Szórványosan gyenge eső             : Patchy light rain
