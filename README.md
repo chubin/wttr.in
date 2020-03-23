@@ -17,10 +17,10 @@ You can access the service from a shell or from a Web browser like this:
     Weather for City: Paris, France
 
          \   /     Clear
-          .-.      10 – 11 °C     
-       ― (   ) ―   ↑ 11 km/h      
-          `-’      10 km          
-         /   \     0.0 mm         
+          .-.      10 – 11 °C  
+       ― (   ) ―   ↑ 11 km/h  
+          `-’      10 km  
+         /   \     0.0 mm  
 
 
 Here is an actual weather report for your location (it's live!):
@@ -56,7 +56,7 @@ results of looking up the location:
 
 	Location: Vostok Station, станция Восток, AAT, Antarctica [-78.4642714,106.8364678]
     Location: Tour Eiffel, 5, Avenue Anatole France, Gros-Caillou, 7e, Paris, Île-de-France, 75007, France [48.8582602,2.29449905432]
-	Location: Kilimanjaro, Northern, Tanzania [-3.4762789,37.3872648] 
+	Location: Kilimanjaro, Northern, Tanzania [-3.4762789,37.3872648]
 
 You can also use IP-addresses (direct) or domain names (prefixed with `@`) to specify a location:
 
@@ -132,34 +132,34 @@ The result will look something like the following:
     {
     "current_condition": [
         {
-            "FeelsLikeC": "25", 
-            "FeelsLikeF": "76", 
-            "cloudcover": "100", 
-            "humidity": "76", 
-            "observation_time": "04:08 PM", 
-            "precipMM": "0.2", 
-            "pressure": "1019", 
-            "temp_C": "22", 
-            "temp_F": "72", 
-            "uvIndex": 5, 
-            "visibility": "16", 
-            "weatherCode": "122", 
+            "FeelsLikeC": "25",
+            "FeelsLikeF": "76",
+            "cloudcover": "100",
+            "humidity": "76",
+            "observation_time": "04:08 PM",
+            "precipMM": "0.2",
+            "pressure": "1019",
+            "temp_C": "22",
+            "temp_F": "72",
+            "uvIndex": 5,
+            "visibility": "16",
+            "weatherCode": "122",
             "weatherDesc": [
                 {
                     "value": "Overcast"
                 }
-            ], 
+            ],
             "weatherIconUrl": [
                 {
                     "value": ""
                 }
-            ], 
-            "winddir16Point": "NNE", 
-            "winddirDegree": "20", 
-            "windspeedKmph": "7", 
+            ],
+            "winddir16Point": "NNE",
+            "winddirDegree": "20",
+            "windspeedKmph": "7",
             "windspeedMiles": "4"
         }
-    ], 
+    ],
     ...
 
 Most of these values are self-explanatory, aside from `weatherCode`. The `weatherCode` is an enumeration which you can find at either [the WorldWeatherOnline website](https://www.worldweatheronline.com/developer/api/docs/weather-icons.aspx) or [in the wttr.in source code](https://github.com/chubin/wttr.in/blob/master/lib/constants.py).
@@ -323,6 +323,21 @@ Get the Moon phase for a particular date by adding `@YYYY-MM-DD`:
 
 The Moon phase information uses [pyphoon](https://github.com/chubin/pyphoon) as its backend.
 
+Unicode representation of moonphases suffers 2 caveats:
+
+- With some fonts, the representation `🌘` is ambiguous, for it either seem
+  almost-shadowed or almost-lit, depedending on whether your terminal is in
+  light mode or dark mode. Relying on colored fonts like `noto-fonts` works
+  around this problem.
+
+- The representation `🌘` is also ambiguous, for it means "last quarter" in
+  northern hemisphere, but "first quarter" in souther hemisphere. It also means
+  nothing in tropical zones. This is a limitation that
+  [Unicode](https://www.unicode.org/L2/L2017/17304-moon-var.pdf) is aware about.
+  But it has not been worked around at `wttr.in` yet.
+
+See #364 for corresponding tracking issue. Any help is welcome.
+
 ## Internationalization and localization
 
 wttr.in supports multilingual locations names that can be specified in any language in the world
@@ -359,13 +374,13 @@ The third option is to choose the language using the DNS name used in the query:
 
 wttr.in is currently translated into 54 languages, and the number of supported languages is constantly growing.
 
-See [/:translation](http://wttr.in/:translation) to learn more about the translation process, 
+See [/:translation](http://wttr.in/:translation) to learn more about the translation process,
 to see the list of supported languages and contributors, or to know how you can help to translate wttr.in
 in your language.
 
 ![Queries to wttr.in in various languages](https://pbs.twimg.com/media/C7hShiDXQAES6z1.jpg)
 
-## Installation 
+## Installation
 
 To install the application:
 
@@ -404,7 +419,7 @@ If you want to get weather reports as PNG files, you'll also need to install:
 * pyte (>=0.6)
 * necessary fonts
 
-You can install most of them using `pip`. 
+You can install most of them using `pip`.
 
 If `virtualenv` is used:
 
@@ -430,7 +445,7 @@ because the MaxMind database is pretty good).
 ### Get a WorldWeatherOnline key and configure wego
 
 To get a WorldWeatherOnline API key, you must register here:
- 
+
     https://developer.worldweatheronline.com/auth/register
 
 After you have a WorldWeatherOnline key, you can save it into the
@@ -438,7 +453,7 @@ WWO key file: `~/.wwo.key`
 
 Also, you have to specify the key in the `wego` configuration:
 
-    $ cat ~/.wegorc 
+    $ cat ~/.wegorc
     {
         "APIKey": "00XXXXXXXXXXXXXXXXXXXXXXXXXXX",
         "City": "London",
