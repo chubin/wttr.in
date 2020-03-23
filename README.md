@@ -313,7 +313,8 @@ The result, should look like:
 
 ## Moon phases
 
-wttr.in can also be used to check the phase of the Moon. This example shows how to see the current Moon phase:
+wttr.in can also be used to check the phase of the Moon. This example shows how to see the current Moon phase
+in the full-output mode:
 
     $ curl wttr.in/Moon
 
@@ -323,7 +324,12 @@ Get the Moon phase for a particular date by adding `@YYYY-MM-DD`:
 
 The Moon phase information uses [pyphoon](https://github.com/chubin/pyphoon) as its backend.
 
-Unicode representation of moonphases suffers 2 caveats:
+To get the moon phase information in the online mode, use `%m`:
+
+    $ curl wttr.in/London?format=%m
+    🌖
+
+Keep in mid that the Unicode representation of moonphases suffers 2 caveats:
 
 - With some fonts, the representation `🌘` is ambiguous, for it either seem
   almost-shadowed or almost-lit, depedending on whether your terminal is in
@@ -336,7 +342,8 @@ Unicode representation of moonphases suffers 2 caveats:
   [Unicode](https://www.unicode.org/L2/L2017/17304-moon-var.pdf) is aware about.
   But it has not been worked around at `wttr.in` yet.
 
-See #364 for corresponding tracking issue. Any help is welcome.
+See #247, #364 for the corresponding tracking issues,
+and [pyphoon#1](https://github.com/chubin/pyphoon/issues/1) for pyphoon. Any help is welcome.
 
 ## Internationalization and localization
 
