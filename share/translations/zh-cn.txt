@@ -4,10 +4,10 @@
 119:多云                                  : Cloudy
 122:阴                                    : Overcast
 143:轻雾                                  : Mist
-176:可能下小雨                             : Patchy rain possible
-179:可能下小雪                             : Patchy snow possible
-182:可能有雨夹雪                            : Patchy sleet possible
-185:可能有冻毛毛雨                          : Patchy freezing drizzle possible
+176:局部下小雨                             : Patchy rain possible
+179:局部下小雪                             : Patchy snow possible
+182:局部有雨夹雪                            : Patchy sleet possible
+185:局部有冻毛毛雨                          : Patchy freezing drizzle possible
 200:可能打雷                               : Thundery outbreaks possible
 227:小雪                                  : Blowing snow
 230:暴雪                                  : Blizzard
