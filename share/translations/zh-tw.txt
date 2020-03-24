@@ -1,6 +1,6 @@
 113: 晴朗                            : Clear                               :
 113: 陽光充足                        : Sunny                               :
-116: 部份有雲                        : Partly cloudy                       :
+116: 晴時多雲                        : Partly cloudy                       :
 119: 多雲                            : Cloudy                              :
 122: 陰天                            : Overcast                            :
 143: 薄霧                            : Mist                                :
@@ -13,11 +13,11 @@
 230: 雪暴                            : Blizzard                            :
 248: 霧                              : Fog                                 :
 260: 凍霧                            : Freezing fog                        :
-263: 部份毛毛細雨                    : Patchy light drizzle                :
+263: 局部毛毛細雨                    : Patchy light drizzle                :
 266: 毛毛細雨                        : Light drizzle                       :
 281: 凍毛毛雨                        : Freezing drizzle                    :
 284: 重凍毛毛雨                      : Heavy freezing drizzle              :
-293: 部份小雨                        : Patchy light rain                   :
+293: 局部小雨                        : Patchy light rain                   :
 296: 小雨                            : Light rain                          :
 299: 有時中雨                        : Moderate rain at times              :
 302: 中雨                            : Moderate rain                       :
@@ -27,11 +27,11 @@
 314: 中或大凍雨                      : Moderate or heavy freezing rain     :
 317: 小雨夾雪                        : Light sleet                         :
 320: 中或大雨夾雪                    : Moderate or heavy sleet             :
-323: 部份小雪                        : Patchy light snow                   :
+323: 局部小雪                        : Patchy light snow                   :
 326: 小雪                            : Light snow                          :
-329: 部份中雪                        : Patchy moderate snow                :
+329: 局部中雪                        : Patchy moderate snow                :
 332: 中雪                            : Moderate snow                       :
-335: 部份大雪                        : Patchy heavy snow                   :
+335: 局部大雪                        : Patchy heavy snow                   :
 338: 大雪                            : Heavy snow                          :
 350: 冰珠                            : Ice pellets                         :
 353: 小陣雨                          : Light rain shower                   :
@@ -41,7 +41,7 @@
 365: 中或大陣雨夾雪                  : Moderate or heavy sleet showers     :
 368: 小陣雪                          : Light snow showers                  :
 371: 中或大陣雪                      : Moderate or heavy snow showers      :
-386: 部份小雷雨                      : Patchy light rain with thunder      :
+386: 局部小雷雨                      : Patchy light rain with thunder      :
 389: 中或大雷雨                      : Moderate or heavy rain with thunder :
 392: 可能會打雷的小陣雪              : Patchy light snow with thunder      :
 395: 可能會打雷的中或大陣雪          : Moderate or heavy snow with thunder :
