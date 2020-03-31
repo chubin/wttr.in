@@ -1,6 +1,5 @@
 TWITTER_BUTTON = """
-<a href="https://twitter.com/igor_chubin" class="twitter-follow-button" data-show-count="false" data-button="grey">Follow @igor_chubin</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<a href="https://twitter.com/igor_chubin?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @igor_chubin</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 """
 
 GITHUB_BUTTON = """
