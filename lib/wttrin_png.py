@@ -52,7 +52,7 @@ FONT_CAT = {
     'Greek':        "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
     'Arabic':       "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
     'Hebrew':       "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
-    'Han':          "/usr/share/fonts/truetype/motoya-l-cedar/MTLc3m.ttf",
+    'Han':          "/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc",
     'Hiragana':     "/usr/share/fonts/truetype/motoya-l-cedar/MTLc3m.ttf",
     'Katakana':     "/usr/share/fonts/truetype/motoya-l-cedar/MTLc3m.ttf",
     'Hangul':       "/usr/share/fonts/truetype/lexi/LexiGulim.ttf",
