@@ -26,20 +26,16 @@ import re
 import math
 import json
 import datetime
-try:
-    import StringIO
-except:
-    import io as StringIO
+import io
 
 import requests
 import diagram
 import pyjq
 import pytz
 import numpy as np
-try:
-    from astral import Astral, Location
-except ImportError:
-    pass
+from astral import LocationInfo
+from astral import moon
+from astral.sun import sun
 from scipy.interpolate import interp1d
 from babel.dates import format_datetime
 
@@ -241,10 +237,7 @@ def draw_time(geo_data):
 def draw_astronomical(city_name, geo_data):
     datetime_day_start = datetime.datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
 
-    a = Astral()
-    a.solar_depression = 'civil'
-
-    city = Location()
+    city = LocationInfo()
     city.latitude = geo_data["latitude"]
     city.longitude = geo_data["longitude"]
     city.timezone = geo_data["timezone"]
@@ -256,12 +249,12 @@ def draw_astronomical(city_name, geo_data):
         current_date = (
             datetime_day_start
             + datetime.timedelta(hours=1*time_interval)).replace(tzinfo=pytz.timezone(geo_data["timezone"]))
-        sun = city.sun(date=current_date, local=False)
+        current_sun = sun(city.observer, date=current_date)
 
-        dawn = sun['dawn'] # .replace(tzinfo=None)
-        dusk = sun['dusk'] # .replace(tzinfo=None)
-        sunrise = sun['sunrise'] # .replace(tzinfo=None)
-        sunset = sun['sunset'] # .replace(tzinfo=None)
+        dawn = current_sun['dawn'] # .replace(tzinfo=None)
+        dusk = current_sun['dusk'] # .replace(tzinfo=None)
+        sunrise = current_sun['sunrise'] # .replace(tzinfo=None)
+        sunset = current_sun['sunset'] # .replace(tzinfo=None)
 
         if current_date < dawn:
             char = " "
@@ -278,7 +271,7 @@ def draw_astronomical(city_name, geo_data):
 
         # moon
         if time_interval % 3 == 0:
-            moon_phase = city.moon_phase(
+            moon_phase = moon.phase(
                 date=datetime_day_start + datetime.timedelta(hours=time_interval))
             moon_phase_emoji = constants.MOON_PHASES[int(math.floor(moon_phase*1.0/28.0*8+0.5)) % len(constants.MOON_PHASES)]
             if time_interval in [0, 24, 48, 69]:
@@ -454,7 +447,7 @@ def textual_information(data_parsed, geo_data, config):
         return output
                 
 
-    city = Location()
+    city = LocationInfo()
     city.latitude = geo_data["latitude"]
     city.longitude = geo_data["longitude"]
     city.timezone = geo_data["timezone"]
@@ -464,7 +457,7 @@ def textual_information(data_parsed, geo_data, config):
 
     datetime_day_start = datetime.datetime.now()\
             .replace(hour=0, minute=0, second=0, microsecond=0)
-    sun = city.sun(date=datetime_day_start, local=True)
+    current_sun = sun(city.observer, date=datetime_day_start)
 
     format_line = "%c %C, %t, %h, %w, %P"
     current_condition = data_parsed['data']['current_condition'][0]
