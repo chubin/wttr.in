@@ -49,7 +49,7 @@ def show_text_file(name, lang):
         text = text\
                 .replace('NUMBER_OF_LANGUAGES', str(len(SUPPORTED_LANGS)))\
                 .replace('SUPPORTED_LANGUAGES', ' '.join(SUPPORTED_LANGS))
-    return text.decode('utf-8')
+    return text
 
 def client_ip_address(request):
     """
@@ -238,8 +238,8 @@ def wttr(location, request):
         query = parse_query.metric_or_imperial(query, lang, us_ip=us_ip)
 
         # logging query
-        orig_location_utf8 = (orig_location or "").encode('utf-8')
-        location_utf8 = location.encode('utf-8')
+        orig_location_utf8 = (orig_location or "")
+        location_utf8 = location
         use_imperial = query.get('use_imperial', False)
         log(" ".join(map(str,
                          [ip_addr, user_agent, orig_location_utf8, location_utf8, use_imperial, lang])))
@@ -297,16 +297,17 @@ def wttr(location, request):
                 output = add_buttons(output)
             else:
                 #output += '\n' + get_message('NEW_FEATURE', lang).encode('utf-8')
-                output += '\n' + get_message('FOLLOW_ME', lang).encode('utf-8') + '\n'
+                output += '\n' + get_message('FOLLOW_ME', lang) + '\n'
 
         return _wrap_response(output, html_output)
 
     except Exception as exception:
         # if 'Malformed response' in str(exception) \
         #         or 'API key has reached calls per day allowed limit' in str(exception):
+            logging.error("Exception has occured", exc_info=1)
             if html_output:
                 return _wrap_response(MALFORMED_RESPONSE_HTML_PAGE, html_output)
-            return _wrap_response(get_message('CAPACITY_LIMIT_REACHED', lang).encode('utf-8'), html_output)
+            return _wrap_response(get_message('CAPACITY_LIMIT_REACHED', lang), html_output)
         # logging.error("Exception has occured", exc_info=1)
         # return "ERROR"
 

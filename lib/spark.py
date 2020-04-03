@@ -70,9 +70,11 @@ def interpolate_data(input_data, max_width):
     Resample `input_data` to number of `max_width` counts
     """
 
-    x = list(range(len(input_data)))
+    input_data = list(input_data)
+    input_data_len = len(input_data)
+    x = list(range(input_data_len))
     y = input_data
-    xvals = np.linspace(0, len(input_data)-1, max_width)
+    xvals = np.linspace(0, input_data_len-1, max_width)
     yinterp = interp1d(x, y, kind='cubic')
     return yinterp(xvals)
 
@@ -82,7 +84,7 @@ def jq_query(query, data_parsed):
     """
 
     pyjq_data = pyjq.all(query, data_parsed)
-    data = map(float, pyjq_data)
+    data = list(map(float, pyjq_data))
     return data
 
 # }}}
@@ -136,11 +138,11 @@ def draw_spark(data, height, width, color_data):
                 orig_max_line = max_line
 
                 # aligning it
-                if len(max_line)/2 < j and len(max_line)/2 + j < width:
-                    spaces = " "*(j - len(max_line)/2)
+                if len(max_line)//2 < j and len(max_line)//2 + j < width:
+                    spaces = " "*(j - len(max_line)//2)
                     max_line = spaces + max_line # + spaces
                     max_line = max_line + " "*(width - len(max_line))
-                elif len(max_line)/2 + j >= width:
+                elif len(max_line)//2 + j >= width:
                     max_line = " "*(width - len(max_line)) + max_line
 
                 max_line = max_line.replace(orig_max_line, colorize(orig_max_line, "38;5;33"))
@@ -160,13 +162,13 @@ def draw_diagram(data, height, width):
     option.size = diagram.Point([width, height])
     option.mode = 'g'
 
-    stream = StringIO.StringIO()
+    stream = io.BytesIO()
     gram = diagram.DGWrapper(
         data=[list(data), range(len(data))],
         dg_option=option,
         ostream=stream)
     gram.show()
-    return stream.getvalue()
+    return stream.getvalue().decode("utf-8")
 # }}}
 # draw_date {{{
 
@@ -185,7 +187,7 @@ def draw_date(config, geo_data):
         datetime_ = datetime_day_start + datetime.timedelta(hours=24*day)
         date = format_datetime(datetime_, "EEE dd MMM", locale=locale, tzinfo=tzinfo)
 
-        spaces = ((24-len(date))/2)*" "
+        spaces = ((24-len(date))//2)*" "
         date = spaces + date + spaces
         date = " "*(24-len(date)) + date
         answer += date
@@ -326,7 +328,7 @@ def draw_wind(data, color_data):
 
         degree = int(degree)
         if degree:
-            wind_direction = constants.WIND_DIRECTION[((degree+22)%360)/45]
+            wind_direction = constants.WIND_DIRECTION[((degree+22)%360)//45]
         else:
             wind_direction = ""
 
@@ -470,15 +472,15 @@ def textual_information(data_parsed, geo_data, config):
     tmp_output = []
     tmp_output.append('  Now:    %%{{NOW(%s)}}' % timezone)
     tmp_output.append('Dawn:    %s'
-                      % str(sun['dawn'].strftime("%H:%M:%S")))
+                      % str(current_sun['dawn'].strftime("%H:%M:%S")))
     tmp_output.append('Sunrise: %s'
-                      % str(sun['sunrise'].strftime("%H:%M:%S")))
+                      % str(current_sun['sunrise'].strftime("%H:%M:%S")))
     tmp_output.append('  Zenith: %s'
-                      % str(sun['noon'].strftime("%H:%M:%S     ")))
+                      % str(current_sun['noon'].strftime("%H:%M:%S     ")))
     tmp_output.append('Sunset:  %s'
-                      % str(sun['sunset'].strftime("%H:%M:%S")))
+                      % str(current_sun['sunset'].strftime("%H:%M:%S")))
     tmp_output.append('Dusk:    %s'
-                      % str(sun['dusk'].strftime("%H:%M:%S")))
+                      % str(current_sun['dusk'].strftime("%H:%M:%S")))
     tmp_output = [
         re.sub("^([A-Za-z]*:)", lambda m: colorize(m.group(1), "2"), x)
         for x in tmp_output]

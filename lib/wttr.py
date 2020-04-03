@@ -8,6 +8,7 @@ from gevent.monkey import patch_all
 from gevent.subprocess import Popen, PIPE, STDOUT
 patch_all()
 
+import sys
 import os
 import re
 import time
@@ -36,12 +37,12 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
         if local_url is None:
             url = ""
         else:
-            url = local_url.encode('utf-8')
+            url = local_url
 
         if local_location is None:
             location = ""
         else:
-            location = local_location.encode('utf-8')
+            location = local_location
 
         pic_url = url.replace('?', '_')
 
@@ -120,9 +121,12 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
 
             p = Popen(cmd, stdout=PIPE, stderr=PIPE)
             stdout, stderr = p.communicate()
+            stdout = stdout.decode("utf-8")
+            stderr = stderr.decode("utf-8")
+
             if p.returncode != 0:
                 print("ERROR: location not found: %s" % location)
-                if 'Unable to find any matching weather location to the query submitted' in stderr:
+                if u'Unable to find any matching weather location to the query submitted' in stderr:
                     if location != NOT_FOUND_LOCATION:
                         NOT_FOUND_MESSAGE_HEADER = u"ERROR: %s: %s\n---\n\n" % (get_message('UNKNOWN_LOCATION', lang), location)
                         location = NOT_FOUND_LOCATION
@@ -133,10 +137,10 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
         dirname = os.path.dirname(filename)
         if not os.path.exists(dirname):
             os.makedirs(dirname)
-        
+
         if location_not_found:
-            stdout += get_message('NOT_FOUND_MESSAGE', lang).encode('utf-8')
-            stdout = NOT_FOUND_MESSAGE_HEADER.encode('utf-8') + stdout
+            stdout += get_message('NOT_FOUND_MESSAGE', lang)
+            stdout = NOT_FOUND_MESSAGE_HEADER + stdout
 
         if 'days' in query:
             if query['days'] == '0':
@@ -146,7 +150,7 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
             if query['days'] == '2':
                 stdout = "\n".join(stdout.splitlines()[:27]) + "\n"
 
-        first = stdout.splitlines()[0].decode('utf-8')
+        first = stdout.splitlines()[0]
         rest = stdout.splitlines()[1:]
         if query.get('no-caption', False):
 
@@ -158,7 +162,7 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
 
             if separator:
                 first = first.split(separator,1)[1]
-                stdout = "\n".join([first.strip().encode('utf-8')] + rest) + "\n"
+                stdout = "\n".join([first.strip()] + rest) + "\n"
 
         if query.get('no-terminal', False):
             stdout = remove_ansi(stdout)
@@ -172,9 +176,9 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
                  and not query.get('no-caption')
                  and not query.get('days') == '0'):
             line = "%s: %s [%s]\n" % (
-                get_message('LOCATION', lang).encode('utf-8'),
-                full_address.encode('utf-8'),
-                location.encode('utf-8'))
+                get_message('LOCATION', lang),
+                full_address,
+                location)
             stdout += line
 
         if query.get('padding', False):
@@ -191,13 +195,15 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
 
         p = Popen(cmd,  stdin=PIPE, stdout=PIPE, stderr=PIPE )
         stdout, stderr = p.communicate(stdout)
+        stdout = stdout.decode("utf-8")
+        stderr = stderr.decode("utf-8")
         if p.returncode != 0:
             error(stdout + stderr)
 
         if query.get('inverted_colors'):
             stdout = stdout.replace('<body class="">', '<body class="" style="background:white;color:#777777">')
         
-        title = "<title>%s</title>" % first.encode('utf-8')
+        title = "<title>%s</title>" % first
         opengraph = get_opengraph()
         stdout = re.sub("<head>", "<head>" + title + opengraph, stdout)
         open(filename+'.html', 'w').write(stdout)
@@ -232,6 +238,7 @@ def get_moon(location, html=False, lang=None, query=None):
     if lang:
         env['LANG'] = lang
     p = Popen(cmd, stdout=PIPE, stderr=PIPE, env=env)
+    stdout = stdout.decode("utf-8")
     stdout = p.communicate()[0]
 
     if query.get('no-terminal', False):
@@ -240,6 +247,8 @@ def get_moon(location, html=False, lang=None, query=None):
     if html:
         p = Popen(["bash", ANSI2HTML, "--palette=solarized", "--bg=dark"],  stdin=PIPE, stdout=PIPE, stderr=PIPE)
         stdout, stderr = p.communicate(stdout)
+        stdout = stdout.decode("utf-8")
+        stderr = stderr.decode("utf-8")
         if p.returncode != 0:
             error(stdout + stderr)
 
