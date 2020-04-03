@@ -469,18 +469,20 @@ def textual_information(data_parsed, geo_data, config):
 
     output.append('Timezone: %s' % timezone)
 
+    local_tz = pytz.timezone(timezone)
+
+    local_time_of = lambda x: current_sun[x]\
+                                .replace(tzinfo=pytz.utc)\
+                                .astimezone(local_tz)\
+                                .strftime("%H:%M:%S")
+
     tmp_output = []
     tmp_output.append('  Now:    %%{{NOW(%s)}}' % timezone)
-    tmp_output.append('Dawn:    %s'
-                      % str(current_sun['dawn'].strftime("%H:%M:%S")))
-    tmp_output.append('Sunrise: %s'
-                      % str(current_sun['sunrise'].strftime("%H:%M:%S")))
-    tmp_output.append('  Zenith: %s'
-                      % str(current_sun['noon'].strftime("%H:%M:%S     ")))
-    tmp_output.append('Sunset:  %s'
-                      % str(current_sun['sunset'].strftime("%H:%M:%S")))
-    tmp_output.append('Dusk:    %s'
-                      % str(current_sun['dusk'].strftime("%H:%M:%S")))
+    tmp_output.append('Dawn:    %s' % local_time_of("dawn"))
+    tmp_output.append('Sunrise: %s' % local_time_of("sunrise"))
+    tmp_output.append('  Zenith: %s     ' % local_time_of("noon"))
+    tmp_output.append('Sunset:  %s' % local_time_of("sunset"))
+    tmp_output.append('Dusk:    %s' % local_time_of("dusk"))
     tmp_output = [
         re.sub("^([A-Za-z]*:)", lambda m: colorize(m.group(1), "2"), x)
         for x in tmp_output]
