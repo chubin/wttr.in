@@ -486,8 +486,10 @@ def textual_information(data_parsed, geo_data, config):
                       % str(sun['sunset'].strftime("%H:%M:%S")))
     tmp_output.append('Dusk:    %s'
                       % str(sun['dusk'].strftime("%H:%M:%S")))
+
+    color_code = "38;5;246"
     tmp_output = [
-        re.sub("^([A-Za-z]*:)", lambda m: colorize(m.group(1), "2"), x)
+        re.sub("^([A-Za-z]*:)", lambda m: colorize(m.group(1), color_code), x)
         for x in tmp_output]
 
     output.append(
@@ -515,9 +517,9 @@ def textual_information(data_parsed, geo_data, config):
                 ))
 
     output = [
-        re.sub("^( *[A-Za-z]*:)", lambda m: colorize(m.group(1), "2"),
-               re.sub("^( +[A-Za-z]*:)", lambda m: colorize(m.group(1), "2"),
-                      re.sub(r"(\|)", lambda m: colorize(m.group(1), "2"), x)))
+        re.sub("^( *[A-Za-z]*:)", lambda m: colorize(m.group(1), color_code),
+               re.sub("^( +[A-Za-z]*:)", lambda m: colorize(m.group(1), color_code),
+                      re.sub(r"(\|)", lambda m: colorize(m.group(1), color_code), x)))
         for x in output]
 
     return "".join("%s\n" % x for x in output)
