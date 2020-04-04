@@ -20,5 +20,5 @@ pylru
 pysocks
 supervisor
 numba
-emojis
+emoji
 grapheme
