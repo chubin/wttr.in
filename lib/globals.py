@@ -122,3 +122,7 @@ def get_help_file(lang):
     if os.path.exists(help_file):
         return help_file
     return HELP_FILE
+
+def remove_ansi(sometext):
+    ansi_escape = re.compile(r'(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]')
+    return ansi_escape.sub('', sometext)

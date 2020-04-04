@@ -13,18 +13,15 @@ import os
 import re
 import time
 
+sys.path.insert(0, "..")
 from translations import get_message, FULL_TRANSLATION, PARTIAL_TRANSLATION, SUPPORTED_LANGS
 from globals import WEGO, CACHEDIR, \
                     NOT_FOUND_LOCATION, DEFAULT_LOCATION, TEST_FILE, \
-                    log, error
+                    log, error, remove_ansi
 
 def _is_invalid_location(location):
     if '.png' in location:
         return True
-
-def remove_ansi(sometext):
-    ansi_escape = re.compile(r'(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]')
-    return ansi_escape.sub('', sometext)
 
 def get_wetter(location, ip, html=False, lang=None, query=None, location_name=None, full_address=None, url=None):
 
