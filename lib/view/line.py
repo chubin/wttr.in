@@ -23,7 +23,7 @@ except ImportError:
     pass
 from constants import WWO_CODE, WEATHER_SYMBOL, WIND_DIRECTION
 from weather_data import get_weather_data
-import spark
+from . import v2
 
 PRECONFIGURED_FORMAT = {
     '1':    u'%c %t',
@@ -249,7 +249,7 @@ def format_weather_data(format_line, location, override_location, full_address, 
     if format_line == "j1":
         return render_json(data['data'])
     if format_line[:2] == "v2":
-        return spark.main(location,
+        return v2.main(location,
                           override_location=override_location,
                           full_address=full_address, data=data,
                           view=format_line)

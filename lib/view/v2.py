@@ -42,7 +42,7 @@ from babel.dates import format_datetime
 from globals import WWO_KEY
 import constants
 import translations
-import wttr_line
+from . import line as wttr_line
 
 if not sys.version_info >= (3, 0):
     reload(sys) # noqa: F821
