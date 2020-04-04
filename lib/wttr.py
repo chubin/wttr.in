@@ -194,7 +194,7 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
             cmd += ["--bg=dark"]
 
         p = Popen(cmd,  stdin=PIPE, stdout=PIPE, stderr=PIPE )
-        stdout, stderr = p.communicate(stdout)
+        stdout, stderr = p.communicate(stdout.encode("utf-8"))
         stdout = stdout.decode("utf-8")
         stderr = stderr.decode("utf-8")
         if p.returncode != 0:
@@ -238,8 +238,8 @@ def get_moon(location, html=False, lang=None, query=None):
     if lang:
         env['LANG'] = lang
     p = Popen(cmd, stdout=PIPE, stderr=PIPE, env=env)
-    stdout = stdout.decode("utf-8")
     stdout = p.communicate()[0]
+    stdout = stdout.decode("utf-8")
 
     if query.get('no-terminal', False):
         stdout = remove_ansi(stdout)

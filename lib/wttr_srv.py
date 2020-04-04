@@ -10,7 +10,7 @@ import os
 import time
 from flask import render_template, send_file, make_response
 
-import wttrin_png
+import format.png
 import parse_query
 from translations import get_message, FULL_TRANSLATION, PARTIAL_TRANSLATION, SUPPORTED_LANGS
 from buttons import add_buttons
@@ -23,7 +23,7 @@ from globals import get_help_file, log, \
 from location import is_location_blocked, location_processing
 from limits import Limits
 from wttr import get_wetter, get_moon
-from wttr_line import wttr_line
+from view.line import wttr_line
 
 import cache
 
@@ -266,7 +266,7 @@ def wttr(location, request):
                 'location': location}
             options.update(query)
 
-            cached_png_file = wttrin_png.make_wttr_in_png(png_filename, options=options)
+            cached_png_file = format.png.make_wttr_in_png(png_filename, options=options)
             response = make_response(send_file(cached_png_file,
                                                attachment_filename=png_filename,
                                                mimetype='image/png'))
