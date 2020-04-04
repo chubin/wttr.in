@@ -12,10 +12,9 @@ import sys
 import os
 import re
 import time
-import dateutil.parser
 
 from translations import get_message, FULL_TRANSLATION, PARTIAL_TRANSLATION, SUPPORTED_LANGS
-from globals import WEGO, PYPHOON, CACHEDIR, ANSI2HTML, \
+from globals import WEGO, CACHEDIR, \
                     NOT_FOUND_LOCATION, DEFAULT_LOCATION, TEST_FILE, \
                     log, error
 
@@ -215,42 +214,3 @@ def get_wetter(location, ip, html=False, lang=None, query=None, location_name=No
         filename += '.html'
 
     return open(filename).read()
-
-def get_moon(location, html=False, lang=None, query=None):
-    if query is None:
-        query = {}
-
-    date = None
-    if '@' in location:
-        date = location[location.index('@')+1:]
-        location = location[:location.index('@')]
-
-    cmd = [PYPHOON]
-    if date:
-        try:
-            dateutil.parser.parse(date)
-        except Exception as e:
-            print("ERROR: %s" % e)
-        else:
-            cmd += [date]
-
-    env = os.environ.copy()
-    if lang:
-        env['LANG'] = lang
-    p = Popen(cmd, stdout=PIPE, stderr=PIPE, env=env)
-    stdout = p.communicate()[0]
-    stdout = stdout.decode("utf-8")
-
-    if query.get('no-terminal', False):
-        stdout = remove_ansi(stdout)
-
-    if html:
-        p = Popen(["bash", ANSI2HTML, "--palette=solarized", "--bg=dark"],  stdin=PIPE, stdout=PIPE, stderr=PIPE)
-        stdout, stderr = p.communicate(stdout)
-        stdout = stdout.decode("utf-8")
-        stderr = stderr.decode("utf-8")
-        if p.returncode != 0:
-            error(stdout + stderr)
-
-    return stdout
-

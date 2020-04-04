@@ -22,14 +22,15 @@ from globals import get_help_file, log, \
                     MY_EXTERNAL_IP, QUERY_LIMITS
 from location import is_location_blocked, location_processing
 from limits import Limits
-from wttr import get_wetter, get_moon
+from wttr import get_wetter
+from view.moon import get_moon
 from view.line import wttr_line
 
 import cache
 
 if not os.path.exists(os.path.dirname(LOG_FILE)):
     os.makedirs(os.path.dirname(LOG_FILE))
-logging.basicConfig(filename=LOG_FILE, level=logging.DEBUG, format='%(asctime)s %(message)s')
+logging.basicConfig(filename=LOG_FILE, level=logging.INFO, format='%(asctime)s %(message)s')
 
 LIMITS = Limits(whitelist=[MY_EXTERNAL_IP], limits=QUERY_LIMITS)
 
