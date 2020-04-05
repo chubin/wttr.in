@@ -14,6 +14,7 @@ from __future__ import print_function
 
 import logging
 import os
+import re
 
 MYDIR = os.path.abspath(os.path.dirname(os.path.dirname('__file__')))
 
@@ -31,6 +32,7 @@ _LOGDIR = "/wttr.in/log"
 CACHEDIR = os.path.join(_DATADIR, "cache/wego/")
 IP2LCACHE = os.path.join(_DATADIR, "cache/ip2l/")
 PNG_CACHE = os.path.join(_DATADIR, "cache/png")
+LRU_CACHE = os.path.join(_DATADIR, "cache/lru")
 
 LOG_FILE = os.path.join(_LOGDIR, 'main.log')
 
