@@ -16,7 +16,7 @@ import time
 sys.path.insert(0, "..")
 from translations import get_message, FULL_TRANSLATION, PARTIAL_TRANSLATION, SUPPORTED_LANGS
 from globals import WEGO, CACHEDIR, \
-                    NOT_FOUND_LOCATION, DEFAULT_LOCATION, TEST_FILE, \
+                    NOT_FOUND_LOCATION, DEFAULT_LOCATION, TEST_FILE, ANSI2HTML, \
                     log, error, remove_ansi
 
 def _is_invalid_location(location):

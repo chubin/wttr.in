@@ -6,6 +6,7 @@ Main wttr.in rendering function implementation
 """
 
 import logging
+import io
 import os
 import time
 from flask import render_template, send_file, make_response
@@ -208,7 +209,6 @@ def _response(parsed_query, query, fast_mode=False):
             parsed_query['view'])
         return cache.store(cache_signature, response_text)
 
-
     if parsed_query.get('png_filename'):
         options = {
             'ip_addr': parsed_query['ip_addr'],
@@ -216,50 +216,36 @@ def _response(parsed_query, query, fast_mode=False):
             'location': parsed_query['location']}
         options.update(query)
 
-        cached_png_file = fmt.png.make_wttr_in_png(
+        output = fmt.png.make_wttr_in_png(
             parsed_query['png_filename'], options=options)
-        response = make_response(send_file(
-            cached_png_file,
-            attachment_filename=parsed_query['png_filename'],
-            mimetype='image/png'))
-
-        for key, value in {
-                'Cache-Control': 'no-cache, no-store, must-revalidate',
-                'Pragma': 'no-cache',
-                'Expires': '0',
-            }.items():
-            response.headers[key] = value
-
-        return response
-
-    orig_location = parsed_query['orig_location']
-    if orig_location and \
-        (orig_location.lower() == 'moon' or \
-         orig_location.lower().startswith('moon@')):
-        output = get_moon(
-            parsed_query['orig_location'],
-            html=parsed_query['html_output'],
-            lang=parsed_query['lang'],
-            query=query)
     else:
-        output = get_wetter(
-            parsed_query['location'],
-            parsed_query['ip_addr'],
-            html=parsed_query['html_output'],
-            lang=parsed_query['lang'],
-            query=query,
-            location_name=parsed_query['override_location_name'],
-            full_address=parsed_query['full_address'],
-            url=parsed_query['request_url'],)
-
-    if query.get('days', '3') != '0' and not query.get('no-follow-line'):
-        if parsed_query['html_output']:
-            output = add_buttons(output)
+        orig_location = parsed_query['orig_location']
+        if orig_location and \
+            (orig_location.lower() == 'moon' or \
+             orig_location.lower().startswith('moon@')):
+            output = get_moon(
+                parsed_query['orig_location'],
+                html=parsed_query['html_output'],
+                lang=parsed_query['lang'],
+                query=query)
         else:
-            output += '\n' + get_message('FOLLOW_ME', parsed_query['lang']) + '\n'
+            output = get_wetter(
+                parsed_query['location'],
+                parsed_query['ip_addr'],
+                html=parsed_query['html_output'],
+                lang=parsed_query['lang'],
+                query=query,
+                location_name=parsed_query['override_location_name'],
+                full_address=parsed_query['full_address'],
+                url=parsed_query['request_url'],)
+
+        if query.get('days', '3') != '0' and not query.get('no-follow-line'):
+            if parsed_query['html_output']:
+                output = add_buttons(output)
+            else:
+                output += '\n' + get_message('FOLLOW_ME', parsed_query['lang']) + '\n'
 
     return cache.store(cache_signature, output)
-    # return output
 
 def parse_request(location, request, query, fast_mode=False):
     """Parse request and provided extended information for the query,
@@ -300,6 +286,9 @@ def parse_request(location, request, query, fast_mode=False):
         'request_url': request.url,
         }
 
+    if png_filename:
+        parsed_query["png_filename"] = png_filename
+
     if not png_filename and not fast_mode:
         location, override_location_name, full_address, country, query_source_location = \
                 location_processing(location, ip_addr)
@@ -327,11 +316,26 @@ def wttr(location, request):
     it returns output in HTMLi, ANSI or other format.
     """
 
-    def _wrap_response(response_text, html_output):
-        if not isinstance(response_text, str):
+    def _wrap_response(response_text, html_output, png_filename=None):
+        if not isinstance(response_text, str) and \
+           not isinstance(response_text, bytes):
             return response_text
-        response = make_response(response_text)
-        response.mimetype = 'text/html' if html_output else 'text/plain'
+
+        if png_filename:
+            response = make_response(send_file(
+                io.BytesIO(response_text),
+                attachment_filename=png_filename,
+                mimetype='image/png'))
+
+            for key, value in {
+                    'Cache-Control': 'no-cache, no-store, must-revalidate',
+                    'Pragma': 'no-cache',
+                    'Expires': '0',
+                }.items():
+                response.headers[key] = value
+        else:
+            response = make_response(response_text)
+            response.mimetype = 'text/html' if html_output else 'text/plain'
         return response
 
     if is_location_blocked(location):
@@ -362,7 +366,12 @@ def wttr(location, request):
             response = MALFORMED_RESPONSE_HTML_PAGE
         else:
             response = get_message('CAPACITY_LIMIT_REACHED', parsed_query['lang'])
-    return _wrap_response(response, parsed_query['html_output'])
+
+        # if exception is occured, we return not a png file but text
+        del parsed_query["png_filename"]
+    return _wrap_response(
+        response, parsed_query['html_output'],
+        png_filename=parsed_query.get('png_filename'))
 
 if __name__ == "__main__":
     import doctest
