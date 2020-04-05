@@ -23,7 +23,15 @@ def _is_invalid_location(location):
     if '.png' in location:
         return True
 
-def get_wetter(location, ip, html=False, lang=None, query=None, location_name=None, full_address=None, url=None):
+def get_wetter(query, parsed_query):
+
+    location = parsed_query['location']
+    ip = parsed_query['ip_addr']
+    html = parsed_query['html_output']
+    lang = parsed_query['lang']
+    location_name = parsed_query['override_location_name']
+    full_address = parsed_query['full_address']
+    url = parsed_query['request_url']
 
     local_url = url
     local_location = location

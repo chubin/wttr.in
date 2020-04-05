@@ -10,7 +10,12 @@ import constants
 import parse_query
 import globals
 
-def get_moon(location, html=False, lang=None, query=None):
+def get_moon(query, parsed_query):
+
+    location = parsed_query['orig_location']
+    html = parsed_query['html_output']
+    lang = parsed_query['lang']
+
     if query is None:
         query = {}
 

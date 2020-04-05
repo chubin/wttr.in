@@ -260,11 +260,16 @@ def format_weather_data(format_line, location, override_location, full_address, 
     output = render_line(format_line, current_condition, query)
     return output
 
-def wttr_line(location, override_location_name, full_address, query, lang, fmt):
+def wttr_line(query, parsed_query):
     """
     Return 1line weather information for `location`
     in format `line_format`
     """
+    location = parsed_query['location']
+    override_location_name = parsed_query['override_location_name']
+    full_address = parsed_query['full_address']
+    lang = parsed_query['lang']
+    fmt = parsed_query['view']
 
     format_line = query.get('format', fmt or '')
 

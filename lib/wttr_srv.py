@@ -200,13 +200,7 @@ def _response(parsed_query, query, fast_mode=False):
     # so we handle it with all available logic
 
     if parsed_query["view"] or 'format' in query:
-        response_text = wttr_line(
-            parsed_query['location'],
-            parsed_query['override_location_name'],
-            parsed_query['full_address'],
-            query,
-            parsed_query['lang'],
-            parsed_query['view'])
+        response_text = wttr_line(query, parsed_query)
         return cache.store(cache_signature, response_text)
 
     if parsed_query.get('png_filename'):
@@ -219,25 +213,11 @@ def _response(parsed_query, query, fast_mode=False):
         output = fmt.png.make_wttr_in_png(
             parsed_query['png_filename'], options=options)
     else:
-        orig_location = parsed_query['orig_location']
-        if orig_location and \
-            (orig_location.lower() == 'moon' or \
-             orig_location.lower().startswith('moon@')):
-            output = get_moon(
-                parsed_query['orig_location'],
-                html=parsed_query['html_output'],
-                lang=parsed_query['lang'],
-                query=query)
+        loc = (parsed_query['orig_location'] or "").lower()
+        if loc == 'moon' or loc.startswith('moon@'):
+            output = get_moon(query, parsed_query)
         else:
-            output = get_wetter(
-                parsed_query['location'],
-                parsed_query['ip_addr'],
-                html=parsed_query['html_output'],
-                lang=parsed_query['lang'],
-                query=query,
-                location_name=parsed_query['override_location_name'],
-                full_address=parsed_query['full_address'],
-                url=parsed_query['request_url'],)
+            output = get_wetter(query, parsed_query)
 
         if query.get('days', '3') != '0' and not query.get('no-follow-line'):
             if parsed_query['html_output']:
