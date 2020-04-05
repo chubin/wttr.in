@@ -24,7 +24,7 @@ def _update_answer(answer):
     def _now_in_tz(timezone):
         return datetime.datetime.now(pytz.timezone(timezone)).strftime("%H:%M:%S%z")
 
-    if "%{{NOW(" in answer:
+    if isinstance(answer, str) and "%{{NOW(" in answer:
         answer = re.sub(r"%{{NOW\(([^}]*)\)}}", lambda x: _now_in_tz(x.group(1)), answer)
 
     return answer
@@ -50,9 +50,8 @@ def get(signature):
 
     value = CACHE.get(signature)
     if value:
-        if value.startswith("file:"):
-            sighash = value[5:]
-            value = _read_from_file(signature, sighash=sighash)
+        if value.startswith("file:") or value.startswith("bfile:"):
+            value = _read_from_file(signature, sighash=value)
             if not value:
                 return None
         return _update_answer(value)
@@ -65,8 +64,7 @@ def store(signature, value):
     if len(value) < MIN_SIZE_FOR_FILECACHE:
         CACHE[signature] = value
     else:
-        sighash = _store_in_file(signature, value)
-        CACHE[signature] = "file:%s" % sighash
+        CACHE[signature] = _store_in_file(signature, value)
     return _update_answer(value)
 
 def _hash(signature):
@@ -75,13 +73,24 @@ def _hash(signature):
 def _store_in_file(signature, value):
     """Store `value` for `signature` in cache file.
     Return file name (signature_hash) as the result.
+    `value` can be string as well as bytes.
+    Returned filename is prefixed with "file:" (for text files)
+    or "bfile:" (for binary files).
     """
 
     signature_hash = _hash(signature)
     filename = os.path.join(LRU_CACHE, signature_hash)
     if not os.path.exists(LRU_CACHE):
         os.makedirs(LRU_CACHE)
-    with open(filename, "w") as f_cache:
+
+    if isinstance(value, bytes):
+        mode = "wb"
+        signature_hash = "bfile:%s" % signature_hash
+    else:
+        mode = "w"
+        signature_hash = "file:%s" % signature_hash
+
+    with open(filename, mode) as f_cache:
         f_cache.write(value)
     return signature_hash
 
@@ -90,12 +99,24 @@ def _read_from_file(signature, sighash=None):
     or return None if file is not found.
     If `sighash` is specified, do not calculate file name
     from signature, but use `sighash` instead.
+
+    `sigash` can be prefixed with "file:" (for text files)
+    or "bfile:" (for binary files).
     """
 
-    signature_hash = sighash or _hash(signature)
-    filename = os.path.join(LRU_CACHE, signature_hash)
+    mode = "r"
+    if sighash:
+        if sighash.startswith("file:"):
+            sighash = sighash[5:]
+        elif sighash.startswith("bfile:"):
+            sighash = sighash[6:]
+            mode = "rb"
+    else:
+        sighash = _hash(signature)
+
+    filename = os.path.join(LRU_CACHE, sighash)
     if not os.path.exists(filename):
         return None
 
-    with open(filename, "r") as f_cache:
+    with open(filename, mode) as f_cache:
         return f_cache.read()
