@@ -1,0 +1,84 @@
+113: صَافٍ                                                         : Clear 
+113: مُشْمِسٌ                                                     : Sunny
+116: غَائِمٌ جزئياً‏                                   : Partly cloudy
+119: غَائِمٌ                                                       : Cloudy 
+122: مُلبَّد بالغُيُوم                                          : Overcast
+143: ضَبَاب خَفيف                                                : Mist
+176: مِنَ الْمُمْكِنِ سُقُوطُ أمطار متفرِّقة                    : Patchy rain possible
+179: مِنَ الْمُمْكِنِ سُقُوطُ ثُلُوج متفرِّقة                    : Patchy snow possible
+182: مِنَ الْمُمْكِنِ سُقُوطُ أمطار جَامِدَةً متفرِّقة                  : Patchy sleet possible
+185: مِنَ الْمُمْكِنِ سُقُوطُ أمطار متفرِّقة             : Patchy freezing drizzle possible
+
+
+
+200:                                    : Thundery outbreaks possible
+227: ثُلُوج غَزِيْرَةُ         : Blowing snow
+230:                                    : Blizzard
+248:                                    : Fog
+260:                                    : Freezing fog
+263:                                    : Patchy light drizzle
+266:                                    : Light drizzle
+281:                                    : Freezing drizzle
+284:                                    : Heavy freezing drizzle
+293:                                    : Patchy light rain
+296:                                    : Light rain
+299:                                    : Moderate rain at times
+302:                                    : Moderate rain
+305:                                    : Heavy rain at times
+308:                                    : Heavy rain
+311:                                    : Light freezing rain
+314:                                    : Moderate or heavy freezing rain
+317:                                    : Light sleet
+320:                                    : Moderate or heavy sleet
+323:                                    : Patchy light snow
+326:                                    : Light snow
+329:                                    : Patchy moderate snow
+332:                                    : Moderate snow
+335:                                    : Patchy heavy snow
+338:                                    : Heavy snow
+350:                                    : Ice pellets
+353:                                    : Light rain shower
+356:                                    : Moderate or heavy rain shower
+359:                                    : Torrential rain shower
+362:                                    : Light sleet showers
+365:                                    : Moderate or heavy sleet showers
+368:                                    : Light snow showers
+371:                                    : Moderate or heavy snow showers
+386:                                    : Patchy light rain with thunder
+389:                                    : Moderate or heavy rain with thunder
+392:                                    : Patchy light snow with thunder
+395:                                    : Moderate or heavy snow with thunder
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
