@@ -12,7 +12,7 @@ FULL_TRANSLATION = [
 ]
 
 PARTIAL_TRANSLATION = [
-    "az", "bg", "bs", "cy", "cs",
+    "ar", "az", "bg", "bs", "cy", "cs",
     "eo", "es", "fi", "ga", "hi", "hr",
     "hy", "is", "ja", "jv", "ka", "kk",
     "ko", "ky", "lt", "lv", "mk", "ml", "nl", "fy",
