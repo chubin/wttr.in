@@ -5,14 +5,14 @@ Translation of almost everything.
 """
 
 FULL_TRANSLATION = [
-    "af", "be", "ca", "da", "de", "el", "et",
+    "ar", "af", "be", "ca", "da", "de", "el", "et",
     "fr", "fa", "hu", "ia", "id", "it",
     "nb", "nl", "pl", "pt-br", "ro",
     "ru", "tr", "th", "uk", "vi", "zh-cn", "zh-tw"
 ]
 
 PARTIAL_TRANSLATION = [
-    "ar", "az", "bg", "bs", "cy", "cs",
+    "az", "bg", "bs", "cy", "cs",
     "eo", "es", "fi", "ga", "hi", "hr",
     "hy", "is", "ja", "jv", "ka", "kk",
     "ko", "ky", "lt", "lv", "mk", "ml", "nl", "fy",
@@ -22,7 +22,7 @@ PARTIAL_TRANSLATION = [
 ]
 
 PROXY_LANGS = [
-    "af", "az", "be", "bs", "ca",
+    "af", "ar", "az", "be", "bs", "ca",
     "cy", "el", "eo", "et", "fa",
     "fy", "he", "hr", "hu", "hy",
     "ia", "id", "is", "it", "ja", "kk",
@@ -46,11 +46,11 @@ Ons kon nie u ligging opspoor nie
 gevolglik het ons vir u na Oymyakon geneem,
 een van die koudste permanent bewoonde plekke op aarde.
 """,
-        																									                'ar': u"""
+        'ar': u"""
 تعذر علينا العثور على موقعك
 لذلك قمنا بجلبك إلي أويمياكون,
  إحدى الأماكن المَأْهُولة الأكثر برودة علي الإطلاق في هذا الكوكب.
-""",     
+""",
         'be': u"""
 Ваша месцазнаходжанне вызначыць не атрымалася,
 таму мы пакажам вам надвор'е ў Аймяконе,
@@ -278,8 +278,8 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
 
     'UNKNOWN_LOCATION': {
         'en': u'Unknown location',
-        'ar': u'موقع غير معروف',
         'af': u'Onbekende ligging',
+        'ar': u'موقع غير معروف',
         'be': u'Невядомае месцазнаходжанне',
         'bg': u'Неизвестно местоположение',
         'bs': u'Nepoznatoja lokacija',
@@ -329,8 +329,8 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
 
     'LOCATION': {
         'en': u'Location',
-        'ar': u'الموقع',
         'af': u'Ligging',
+        'ar': u'الموقع',
         'be': u'Месцазнаходжанне',
         'bg': u'Местоположение',
         'bs': u'Lokacija',
@@ -392,7 +392,7 @@ Ons sal weereens nuwe navrae kan hanteer so gou as moontlik.
 U kan vir https://twitter.com/igor_chubin volg vir opdaterings.
 ======================================================================================
 """,
-																												'ar': u"""
+        'ar': u"""
 نأسف, نفذت منا طلبات إستعلام خدمة الطقس في هذه اللحظة.
 هذا التقرير الجوي للمدينة الإفتراضية   (فقط لنريك, الشكل الذي تبدو عليه).
 سوف نحصل علي طلبات إستعلام جديدة في أقرب وقت ممكن.
@@ -637,8 +637,8 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
 
     'NEW_FEATURE': {
         'en': u'New feature: multilingual location names \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) and location search \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
-        'af': u'Nuwe eienskap: veeltalige name vir liggings \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) en ligging soek \033[92mwttr.in/~Kilimanjaro\033[0m (plaas net ~ vooraan)',
         'ar': u'ميزة جديدة : أسماء الأماكن بلغات متعددة \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) والبحث عن الأماكن \033[92mwttr.in/~Kilimanjaro\033[0m (فقط أضف ~ قبل)',
+        'af': u'Nuwe eienskap: veeltalige name vir liggings \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) en ligging soek \033[92mwttr.in/~Kilimanjaro\033[0m (plaas net ~ vooraan)',
         'be': u'Новыя магчымасці: назвы месц на любой мове \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) i пошук месц \033[92mwttr.in/~Kilimanjaro\033[0m (трэба дадаць ~ ў пачатак)',
         'bg': u'Нова функционалност: многоезични имена на места\033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и в търсенето \033[92mwttr.in/~Kilimanjaro\033[0m (добавете ~ преди)',
         'bs': u'XXXXXXXXXXXXXXXXXXXX: XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\033[92mwttr.in/станция+Восток\033[0m (XX UTF-8) XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
@@ -679,8 +679,8 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
 
     'FOLLOW_ME': {
         'en': u'Follow \033[46m\033[30m@igor_chubin\033[0m for wttr.in updates',
-        'af': u'Volg \033[46m\033[30m@igor_chubin\033[0m vir wttr.in opdaterings',
         'ar': u'تابع \033[46m\033[30m@igor_chubin\033[0m من أجل wttr.in أخر مستجدات',
+        'af': u'Volg \033[46m\033[30m@igor_chubin\033[0m vir wttr.in opdaterings',
         'be': u'Сачыце за \033[46m\033[30m@igor_chubin\033[0m за навінамі wttr.in',
         'bg': u'Последвай \033[46m\033[30m@igor_chubin\033[0m за обновления свързани с wttr.in',
         'bs': u'XXXXXX \033[46m\033[30m@igor_chubin\033[0m XXXXXXXXXXXXXXXXXXX',
