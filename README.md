@@ -30,6 +30,10 @@ Here is an actual weather report for your location (it's live!):
 (It's not your actual location - GitHub's CDN hides your real IP address with its own IP address,
 but it's still a live weather report in your language.)
 
+Or in PowerShell:
+
+    (Invoke-WebRequest http://wttr.in).Content
+
 Want to get the weather information for a specific location? You can add the desired location to the URL in your
 request like this:
 
@@ -66,6 +70,7 @@ You can also use IP-addresses (direct) or domain names (prefixed with `@`) to sp
 To get detailed information online, you can access the [/:help](http://wttr.in/:help) page:
 
     $ curl wttr.in/:help
+
 
 ### Weather Units
 
