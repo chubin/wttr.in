@@ -1,3 +1,5 @@
+import re
+
 def metric_or_imperial(query, lang, us_ip=False):
     """
     """
@@ -86,3 +88,42 @@ def parse_query(args):
 
     return result
 
+def parse_wttrin_png_name(name):
+    """
+    Parse the PNG filename and return the result as a dictionary.
+    For example:
+        input = City_200x_lang=ru.png
+        output = {
+            "lang": "ru",
+            "width": "200",
+            "filetype": "png",
+            "location": "City"
+        }
+    """
+
+    parsed = {}
+    to_be_parsed = {}
+
+    if name.lower()[-4:] == '.png':
+        parsed['filetype'] = 'png'
+        name = name[:-4]
+
+    parts = name.split('_')
+    parsed['location'] = parts[0]
+
+    for part in parts[1:]:
+        if re.match('(?:[0-9]+)x', part):
+            parsed['width'] = part[:-1]
+        elif re.match('x(?:[0-9]+)', part):
+            parsed['height'] = part[1:]
+        elif re.match(part, '(?:[0-9]+)x(?:[0-9]+)'):
+            parsed['width'], parsed['height'] = part.split('x', 1)
+        elif '=' in part:
+            arg, val = part.split('=', 1)
+            to_be_parsed[arg] = val
+        else:
+            to_be_parsed[part] = ''
+
+    parsed.update(parse_query(to_be_parsed))
+
+    return parsed
