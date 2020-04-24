@@ -1,30 +1,18 @@
 #!/usr/bin/python
 #vim: encoding=utf-8
+# pylint: disable=wrong-import-position,wrong-import-order,redefined-builtin
 
 """
 This module is used to generate png-files for wttr.in queries.
-The only exported function are:
+The only exported function is:
 
 * render_ansi(png_file, text, options=None)
-* make_wttr_in_png(png_file)
 
 `render_ansi` is the main function of the module,
 which does rendering of stream into a PNG-file.
 
-The `make_wttr_in_png` function is a temporary helper function
-which is a wraper around `render_ansi` and handles
-such tasks as caching, name parsing etc.
-
-`make_wttr_in_png` parses `png_file` name (the shortname) and extracts
-the weather query from it. It saves the weather report into the specified file.
-
 The module uses PIL for graphical tasks, and pyte for rendering
 of ANSI stream into terminal representation.
-
-TODO:
-
-    * remove make_wttr_in_png
-    * remove functions specific for wttr.in
 """
 
 from __future__ import print_function
@@ -32,7 +20,6 @@ from __future__ import print_function
 import sys
 import io
 import os
-import re
 import glob
 
 from PIL import Image, ImageFont, ImageDraw
@@ -40,13 +27,10 @@ import pyte.screens
 import emoji
 import grapheme
 
-import requests
-
 from . import unicodedata2
 
 sys.path.insert(0, "..")
 import constants
-import parse_query
 import globals
 
 COLS = 180
@@ -81,30 +65,6 @@ FONT_CAT = {
 #   * fonts-lexi-gulim (Hangul)
 #   * fonts-symbola (Braille/Emoji)
 #
-
-def make_wttr_in_png(png_name, options=None):
-    """ The function saves the weather report in the file and returns None.
-    The weather query is coded in filename (in the shortname).
-    """
-
-    parsed = _parse_wttrin_png_name(png_name)
-
-    # if location is MyLocation it should be overriden
-    # with autodetected location (from options)
-    if parsed.get('location', 'MyLocation') == 'MyLocation' \
-       or not parsed.get('location', ''):
-        del parsed['location']
-
-    if options is not None:
-        for key, val in options.items():
-            if key not in parsed:
-                parsed[key] = val
-    url = _make_wttrin_query(parsed)
-
-    headers = {'X-PNG-Query-For': options.get('ip_addr', '1.1.1.1')}
-    text = requests.get(url, headers=headers).text
-
-    return render_ansi(text, options=parsed)
 
 def render_ansi(text, options=None):
     """Render `text` (terminal sequence) in a PNG file
@@ -208,6 +168,7 @@ def _load_emojilib():
             Image.open(filename).resize((CHAR_HEIGHT, CHAR_HEIGHT))
     return emojilib
 
+# pylint: disable=too-many-locals,too-many-branches,too-many-statements
 def _gen_term(buf, graphemes, options=None):
     """Renders rendered pyte buffer `buf` and list of workaround `graphemes`
     to a PNG file, and return its content
@@ -246,7 +207,10 @@ def _gen_term(buf, graphemes, options=None):
                     fill=_color_mapping(char.bg))
 
             if char.data == "!":
-                data = graphemes[current_grapheme]
+                try:
+                    data = graphemes[current_grapheme]
+                except IndexError:
+                    pass
                 current_grapheme += 1
             else:
                 data = char.data
@@ -266,7 +230,6 @@ def _gen_term(buf, graphemes, options=None):
 
             x_pos += CHAR_WIDTH * constants.WEATHER_SYMBOL_WIDTH_VTE.get(data, 1)
         y_pos += CHAR_HEIGHT
-        #sys.stdout.write('\n')
 
     if 'transparency' in options:
         transparency = options.get('transparency', '255')
@@ -318,77 +281,3 @@ def _fix_graphemes(text):
         output += character
 
     return output, graphemes
-
-
-#
-# wttr.in related functions
-#
-
-def _parse_wttrin_png_name(name):
-    """
-    Parse the PNG filename and return the result as a dictionary.
-    For example:
-        input = City_200x_lang=ru.png
-        output = {
-            "lang": "ru",
-            "width": "200",
-            "filetype": "png",
-            "location": "City"
-        }
-    """
-
-    parsed = {}
-    to_be_parsed = {}
-
-    if name.lower()[-4:] == '.png':
-        parsed['filetype'] = 'png'
-        name = name[:-4]
-
-    parts = name.split('_')
-    parsed['location'] = parts[0]
-
-    for part in parts[1:]:
-        if re.match('(?:[0-9]+)x', part):
-            parsed['width'] = part[:-1]
-        elif re.match('x(?:[0-9]+)', part):
-            parsed['height'] = part[1:]
-        elif re.match(part, '(?:[0-9]+)x(?:[0-9]+)'):
-            parsed['width'], parsed['height'] = part.split('x', 1)
-        elif '=' in part:
-            arg, val = part.split('=', 1)
-            to_be_parsed[arg] = val
-        else:
-            to_be_parsed[part] = ''
-
-    parsed.update(parse_query.parse_query(to_be_parsed))
-
-    return parsed
-
-def _make_wttrin_query(parsed):
-    """Convert parsed data into query name
-    """
-
-    for key in ['width', 'height', 'filetype']:
-        if key in parsed:
-            del parsed[key]
-
-    location = parsed['location']
-    del parsed['location']
-
-    args = []
-    if 'options' in parsed:
-        args = [parsed['options']]
-        del parsed['options']
-    else:
-        args = []
-
-    for key, val in parsed.items():
-        args.append('%s=%s' % (key, val))
-
-    args.append('filetype=png')
-
-    url = "http://wttr.in/%s" % location
-    if args != []:
-        url += "?%s" % ("&".join(args))
-
-    return url
