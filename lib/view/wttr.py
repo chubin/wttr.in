@@ -187,9 +187,9 @@ def get_wetter(query, parsed_query):
 
         if query.get('padding', False):
             lines = [x.rstrip() for x in stdout.splitlines()]
-            max_l = max(len(remove_ansi(x).decode('utf8')) for x in lines)
+            max_l = max(len(remove_ansi(x)) for x in lines)
             last_line = " "*max_l + "   .\n"
-            stdout = " \n" + "\n".join("  %s  " %x for x in lines) + "\n" + last_line 
+            stdout = " \n" + "\n".join("  %s  " %x for x in lines) + "\n" + last_line
 
         open(filename, 'w').write(stdout)
 
