@@ -128,12 +128,14 @@ def get_answer_language_and_view(request):
     hostname = request.headers['Host']
     if hostname != 'wttr.in' and hostname.endswith('.wttr.in'):
         lang = hostname[:-8]
-        if lang == "v2":
-            view_name = "v2"
+        if lang.startswith("v2"):
+            view_name = lang
             lang = None
 
     if 'lang' in request.args:
         lang = request.args.get('lang')
+        if lang.lower() == 'none':
+            lang = None
 
     header_accept_language = request.headers.get('Accept-Language', '')
     if lang is None and header_accept_language:
@@ -141,18 +143,19 @@ def get_answer_language_and_view(request):
 
     return lang, view_name
 
-def get_output_format(request, query):
+def get_output_format(query, parsed_query):
     """
     Return preferred output format: ansi, text, html or png
     based on arguments and headers in `request`.
     Return new location (can be rewritten)
     """
 
-    if 'format' in query:
+    if ('format' in query and not query["format"].startswith("v2")) \
+        or parsed_query.get("png_filename") \
+        or query.get('force-ansi'):
         return False
-    user_agent = request.headers.get('User-Agent', '').lower()
-    if query.get('force-ansi'):
-        return False
+
+    user_agent = parsed_query.get("user_agent", "").lower()
     html_output = not any(agent in user_agent for agent in PLAIN_TEXT_AGENTS)
     return html_output
 
@@ -199,26 +202,18 @@ def _response(parsed_query, query, fast_mode=False):
     # at this point, we could not handle the query fast,
     # so we handle it with all available logic
 
+    loc = (parsed_query['orig_location'] or "").lower()
     if parsed_query["view"] or 'format' in query:
-        response_text = wttr_line(query, parsed_query)
-        return cache.store(cache_signature, response_text)
+        output = wttr_line(query, parsed_query)
+    elif loc == 'moon' or loc.startswith('moon@'):
+        output = get_moon(query, parsed_query)
+    else:
+        output = get_wetter(query, parsed_query)
 
     if parsed_query.get('png_filename'):
-        options = {
-            'ip_addr': parsed_query['ip_addr'],
-            'lang': parsed_query['lang'],
-            'location': parsed_query['location']}
-        options.update(query)
-
-        output = fmt.png.make_wttr_in_png(
-            parsed_query['png_filename'], options=options)
+        output = fmt.png.render_ansi(
+            output, options=parsed_query)
     else:
-        loc = (parsed_query['orig_location'] or "").lower()
-        if loc == 'moon' or loc.startswith('moon@'):
-            output = get_moon(query, parsed_query)
-        else:
-            output = get_wetter(query, parsed_query)
-
         if query.get('days', '3') != '0' and not query.get('no-follow-line'):
             if parsed_query['html_output']:
                 output = add_buttons(output)
@@ -251,27 +246,28 @@ def parse_request(location, request, query, fast_mode=False):
     if location and ':' in location and location[0] != ":":
         location = _cyclic_location_selection(location, query.get('period', 1))
 
-    lang, _view = get_answer_language_and_view(request)
-    html_output = get_output_format(request, query)
-
-    ip_addr = _client_ip_address(request)
     parsed_query = {
-        'ip_addr': ip_addr,
+        'ip_addr': _client_ip_address(request),
         'user_agent': request.headers.get('User-Agent', '').lower(),
-        'lang': lang,
-        'view': _view,
-        'html_output': html_output,
-        'orig_location': location,
-        'location': location,
         'request_url': request.url,
         }
 
     if png_filename:
         parsed_query["png_filename"] = png_filename
+        parsed_query.update(parse_query.parse_wttrin_png_name(png_filename))
 
-    if not png_filename and not fast_mode:
+    lang, _view = get_answer_language_and_view(request)
+
+    parsed_query["view"] = parsed_query.get("view", _view)
+    parsed_query["location"] = parsed_query.get("location", location)
+    parsed_query["orig_location"] = parsed_query["location"]
+    parsed_query["lang"] = parsed_query.get("lang", lang)
+
+    parsed_query["html_output"] = get_output_format(query, parsed_query)
+
+    if not fast_mode: # not png_filename and not fast_mode:
         location, override_location_name, full_address, country, query_source_location = \
-                location_processing(location, ip_addr)
+                location_processing(parsed_query["location"], parsed_query["ip_addr"])
 
         us_ip = query_source_location[1] == 'United States' \
                 and 'slack' not in parsed_query['user_agent']
