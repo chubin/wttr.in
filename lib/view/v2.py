@@ -89,8 +89,11 @@ def jq_query(query, data_parsed):
 
 # }}}
 # utils {{{
-def colorize(string, color_code):
-    return "\033[%sm%s\033[0m" % (color_code, string)
+def colorize(string, color_code, html_output=False):
+    if html_output:
+        return "<font color='red'>%s</font>" % (string)
+    else:
+        return "\033[%sm%s\033[0m" % (color_code, string)
 # }}}
 # draw_spark {{{
 
@@ -359,9 +362,9 @@ def add_frame(output, width, config):
     output = "\n".join(u"│"+(x or empty_line)+u"│" for x in output.splitlines()) + "\n"
 
     weather_report = \
-        translations.CAPTION[config["lang"]] \
+        translations.CAPTION[config.get("lang") or  "en"] \
         + " " \
-        + (config["override_location"] or config["location"])
+        + (config["override_location_name"] or config["location"])
 
     caption = u"┤ " + " " + weather_report + " " + u" ├"
     output = u"┌" + caption + u"─"*(width-len(caption)) + u"┐\n" \
@@ -424,7 +427,7 @@ def generate_panel(data_parsed, geo_data, config):
 
 # }}}
 # textual information {{{
-def textual_information(data_parsed, geo_data, config):
+def textual_information(data_parsed, geo_data, config, html_output=False):
     """
     Add textual information about current weather and
     astronomical conditions
@@ -447,7 +450,9 @@ def textual_information(data_parsed, geo_data, config):
             output += "," + word
 
         return output
-                
+
+    def _colorize(text, color):
+        return colorize(text, color, html_output=html_output)
 
     city = LocationInfo()
     city.latitude = geo_data["latitude"]
@@ -484,7 +489,7 @@ def textual_information(data_parsed, geo_data, config):
     tmp_output.append('Sunset:  %s' % local_time_of("sunset"))
     tmp_output.append('Dusk:    %s' % local_time_of("dusk"))
     tmp_output = [
-        re.sub("^([A-Za-z]*:)", lambda m: colorize(m.group(1), "2"), x)
+        re.sub("^([A-Za-z]*:)", lambda m: _colorize(m.group(1), "2"), x)
         for x in tmp_output]
 
     output.append(
@@ -512,9 +517,9 @@ def textual_information(data_parsed, geo_data, config):
                 ))
 
     output = [
-        re.sub("^( *[A-Za-z]*:)", lambda m: colorize(m.group(1), "2"),
-               re.sub("^( +[A-Za-z]*:)", lambda m: colorize(m.group(1), "2"),
-                      re.sub(r"(\|)", lambda m: colorize(m.group(1), "2"), x)))
+        re.sub("^( *[A-Za-z]*:)", lambda m: _colorize(m.group(1), "2"),
+               re.sub("^( +[A-Za-z]*:)", lambda m: _colorize(m.group(1), "2"),
+                      re.sub(r"(\|)", lambda m: _colorize(m.group(1), "2"), x)))
         for x in output]
 
     return "".join("%s\n" % x for x in output)
@@ -526,24 +531,40 @@ def get_geodata(location):
     return json.loads(text)
 # }}}
 
-def main(location, override_location=None, data=None, full_address=None, view=None):
-    config = {
-        "lang": "en",
-        "locale": "en_US",
-        "location": location,
-        "override_location": override_location,
-        "full_address": full_address,
-        "view": view,
-        }
+def main(query, parsed_query, data):
+    parsed_query["locale"] = "en_US"
+
+    location = parsed_query["location"]
+    html_output = parsed_query["html_output"]
 
     geo_data = get_geodata(location)
     if data is None:
-        data_parsed = get_data(config)
+        data_parsed = get_data(parsed_query)
     else:
         data_parsed = data
 
-    output = generate_panel(data_parsed, geo_data, config)
-    output += textual_information(data_parsed, geo_data, config)
+    if html_output:
+        output = """
+<html>
+<head>
+<title>Weather report for {orig_location}</title>
+<link rel="stylesheet" type="text/css" href="/files/style.css" />
+</head>
+<body>
+  <img src="/{orig_location}_format=v2_text=no.png"/>
+<pre>
+{textual_information}
+</pre>
+</body>
+</html>
+""".format(
+        orig_location=parsed_query["orig_location"],
+        textual_information=textual_information(
+            data_parsed, geo_data, parsed_query, html_output=True))
+    else:
+        output = generate_panel(data_parsed, geo_data, parsed_query)
+        if query.get('text') != "no":
+            output += textual_information(data_parsed, geo_data, parsed_query)
     return output
 
 if __name__ == '__main__':
