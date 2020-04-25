@@ -237,26 +237,27 @@ def render_json(data):
 
     return output
 
-def format_weather_data(format_line, location, override_location, full_address, data, query):
+def format_weather_data(query, parsed_query, data):
     """
     Format information about current weather `data` for `location`
     with specified in `format_line` format
     """
 
     if 'data' not in data:
-        return 'Unknown location; please try ~%s' % location
+        return 'Unknown location; please try ~%s' % parsed_query["location"]
+
+    format_line = query.get('format', parsed_query.get("view", ""))
+    if format_line in PRECONFIGURED_FORMAT:
+        format_line = PRECONFIGURED_FORMAT[format_line]
 
     if format_line == "j1":
         return render_json(data['data'])
     if format_line[:2] == "v2":
-        return v2.main(location,
-                          override_location=override_location,
-                          full_address=full_address, data=data,
-                          view=format_line)
+        return v2.main(query, parsed_query, data)
 
     current_condition = data['data']['current_condition'][0]
-    current_condition['location'] = location
-    current_condition['override_location'] = override_location
+    current_condition['location'] = parsed_query["location"]
+    current_condition['override_location'] = parsed_query["override_location"]
     output = render_line(format_line, current_condition, query)
     return output
 
@@ -266,23 +267,11 @@ def wttr_line(query, parsed_query):
     in format `line_format`
     """
     location = parsed_query['location']
-    override_location_name = parsed_query['override_location_name']
-    full_address = parsed_query['full_address']
     lang = parsed_query['lang']
-    fmt = parsed_query['view']
 
-    format_line = query.get('format', fmt or '')
-
-    if format_line in PRECONFIGURED_FORMAT:
-        format_line = PRECONFIGURED_FORMAT[format_line]
-
-    weather_data = get_weather_data(location, lang)
-
-    output = format_weather_data(
-        format_line, location, override_location_name, full_address,
-        weather_data, query)
-    output = output.rstrip("\n")+"\n"
-    return output
+    data = get_weather_data(location, lang)
+    output = format_weather_data(query, parsed_query, data)
+    return output.rstrip("\n")+"\n"
 
 def main():
     """
@@ -293,8 +282,14 @@ def main():
     query = {
         'line': sys.argv[2],
         }
+    parsed_query = {
+        "location": location,
+        "orig_location": location,
+        "language": "en",
+        "format": "v2",
+        }
 
-    sys.stdout.write(wttr_line(location, location, None, query, 'en', "v1"))
+    sys.stdout.write(wttr_line(query, parsed_query))
 
 if __name__ == '__main__':
     main()
