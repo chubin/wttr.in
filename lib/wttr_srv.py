@@ -150,7 +150,7 @@ def get_output_format(query, parsed_query):
     Return new location (can be rewritten)
     """
 
-    if ('format' in query and not query["format"].startswith("v2")) \
+    if ('view' in query and not query["view"].startswith("v2")) \
         or parsed_query.get("png_filename") \
         or query.get('force-ansi'):
         return False
@@ -202,8 +202,11 @@ def _response(parsed_query, query, fast_mode=False):
     # at this point, we could not handle the query fast,
     # so we handle it with all available logic
 
+    import json
+    print(json.dumps(parsed_query, indent=4))
+
     loc = (parsed_query['orig_location'] or "").lower()
-    if parsed_query["view"] or 'format' in query:
+    if parsed_query.get("view"):
         output = wttr_line(query, parsed_query)
     elif loc == 'moon' or loc.startswith('moon@'):
         output = get_moon(query, parsed_query)
@@ -236,6 +239,13 @@ def parse_request(location, request, query, fast_mode=False):
         `request.query_string`
         `query`                 parsed command line arguments
 
+    Parameters priorities (from low to high):
+
+        * HTTP-header
+        * Domain name
+        * URL
+        * Filename
+
     Return: dictionary with parsed parameters
     """
 
@@ -258,7 +268,7 @@ def parse_request(location, request, query, fast_mode=False):
 
     lang, _view = get_answer_language_and_view(request)
 
-    parsed_query["view"] = parsed_query.get("view", _view)
+    parsed_query["view"] = parsed_query.get("view", query.get("view", _view))
     parsed_query["location"] = parsed_query.get("location", location)
     parsed_query["orig_location"] = parsed_query["location"]
     parsed_query["lang"] = parsed_query.get("lang", lang)
@@ -289,7 +299,7 @@ def parse_request(location, request, query, fast_mode=False):
 def wttr(location, request):
     """Main rendering function, it processes incoming weather queries,
     and depending on the User-Agent string and other paramters of the query
-    it returns output in HTMLi, ANSI or other format.
+    it returns output in HTML, ANSI or other format.
     """
 
     def _wrap_response(response_text, html_output, png_filename=None):

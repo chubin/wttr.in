@@ -165,7 +165,7 @@ def get_wetter(query, parsed_query):
                 separator = u'：'
 
             if separator:
-                first = first.split(separator,1)[1]
+                first = first.split(separator, 1)[1]
                 stdout = "\n".join([first.strip()] + rest) + "\n"
 
         if query.get('no-terminal', False):

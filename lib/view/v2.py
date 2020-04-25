@@ -91,7 +91,7 @@ def jq_query(query, data_parsed):
 # utils {{{
 def colorize(string, color_code, html_output=False):
     if html_output:
-        return "<font color='red'>%s</font>" % (string)
+        return "<font color='#777777'>%s</font>" % (string)
     else:
         return "\033[%sm%s\033[0m" % (color_code, string)
 # }}}
@@ -551,7 +551,7 @@ def main(query, parsed_query, data):
 <link rel="stylesheet" type="text/css" href="/files/style.css" />
 </head>
 <body>
-  <img src="/{orig_location}_format=v2_text=no.png"/>
+  <img src="/{orig_location}_view=v2_text=no.png" width="592" height="532"/>
 <pre>
 {textual_information}
 </pre>
@@ -563,7 +563,7 @@ def main(query, parsed_query, data):
             data_parsed, geo_data, parsed_query, html_output=True))
     else:
         output = generate_panel(data_parsed, geo_data, parsed_query)
-        if query.get('text') != "no":
+        if query.get("text") != "no" and parsed_query.get("text") != "no":
             output += textual_information(data_parsed, geo_data, parsed_query)
     return output
 

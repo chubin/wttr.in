@@ -246,7 +246,7 @@ def format_weather_data(query, parsed_query, data):
     if 'data' not in data:
         return 'Unknown location; please try ~%s' % parsed_query["location"]
 
-    format_line = query.get('format', parsed_query.get("view", ""))
+    format_line = parsed_query.get("view", "")
     if format_line in PRECONFIGURED_FORMAT:
         format_line = PRECONFIGURED_FORMAT[format_line]
 

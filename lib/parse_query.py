@@ -31,7 +31,6 @@ def parse_query(args):
     result = {}
 
     reserved_args = ["lang"]
-    #q = "&".join(x for x in args.keys() if x not in reserved_args)
 
     q = ""
 
@@ -86,6 +85,11 @@ def parse_query(args):
             val = False
         result[key] = val
 
+    # currently `view` is alias for `format`
+    if "format" in result and not result.get("view"):
+        result["view"] = result["format"]
+        del result["format"]
+
     return result
 
 def parse_wttrin_png_name(name):
@@ -125,5 +129,10 @@ def parse_wttrin_png_name(name):
             to_be_parsed[part] = ''
 
     parsed.update(parse_query(to_be_parsed))
+
+    # currently `view` is alias for `format`
+    if "format" in parsed and not parsed.get("view"):
+        parsed["view"] = parsed["format"]
+        del parsed["format"]
 
     return parsed
