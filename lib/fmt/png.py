@@ -35,9 +35,9 @@ import globals
 
 COLS = 180
 ROWS = 100
-CHAR_WIDTH = 9
-CHAR_HEIGHT = 18
-FONT_SIZE = 15
+CHAR_WIDTH = 8
+CHAR_HEIGHT = 14
+FONT_SIZE = 13
 FONT_CAT = {
     'default':      "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
     'Cyrillic':     "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
