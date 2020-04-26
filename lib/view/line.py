@@ -257,7 +257,7 @@ def format_weather_data(query, parsed_query, data):
 
     current_condition = data['data']['current_condition'][0]
     current_condition['location'] = parsed_query["location"]
-    current_condition['override_location'] = parsed_query["override_location"]
+    current_condition['override_location'] = parsed_query["override_location_name"]
     output = render_line(format_line, current_condition, query)
     return output
 

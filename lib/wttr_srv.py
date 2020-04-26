@@ -201,10 +201,6 @@ def _response(parsed_query, query, fast_mode=False):
 
     # at this point, we could not handle the query fast,
     # so we handle it with all available logic
-
-    import json
-    print(json.dumps(parsed_query, indent=4))
-
     loc = (parsed_query['orig_location'] or "").lower()
     if parsed_query.get("view"):
         output = wttr_line(query, parsed_query)
@@ -354,7 +350,8 @@ def wttr(location, request):
             response = get_message('CAPACITY_LIMIT_REACHED', parsed_query['lang'])
 
         # if exception is occured, we return not a png file but text
-        del parsed_query["png_filename"]
+        if "png_filename" in parsed_query:
+            del parsed_query["png_filename"]
     return _wrap_response(
         response, parsed_query['html_output'],
         png_filename=parsed_query.get('png_filename'))
