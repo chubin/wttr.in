@@ -428,11 +428,15 @@ If you want to get weather reports as PNG files, you'll also need to install:
 
 You can install most of them using `pip`.
 
+Some python package use LLVM, so install it first:
+
+    $ apt-get install llvm-7 llvm-7-dev
+
 If `virtualenv` is used:
 
-    $ virtualenv ve
-    $ ve/bin/pip install -r requirements.txt
-    $ ve/bin/python bin/srv.py
+    $ virtualenv -p python3 ve
+    $ ve/bin/pip3 install -r requirements.txt
+    $ ve/bin/python3 bin/srv.py
 
 Also, you need to install the geoip2 database.
 You can use a free database GeoLite2 that can be downloaded from (http://dev.maxmind.com/geoip/geoip2/geolite2/).
