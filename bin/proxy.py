@@ -7,6 +7,10 @@ The proxy server acts as a backend for the wttr.in service.
 It caches the answers and handles various data sources transforming their
 answers into format supported by the wttr.in service.
 
+If WTTRIN_TEST is specified, it works in a special test mode:
+it does not fetch and does not store the data in the cache,
+but is using the fake data from "test/proxy-data".
+
 """
 from __future__ import print_function
 
@@ -35,7 +39,10 @@ from globals import PROXY_CACHEDIR, PROXY_HOST, PROXY_PORT
 from translations import PROXY_LANGS
 # pylint: enable=wrong-import-position
 
+def is_testmode():
+    """Server is running in the wttr.in test mode"""
 
+    return "WTTRIN_TEST" in os.environ
 
 def load_translations():
     """
@@ -67,8 +74,11 @@ def _find_srv_for_query(path, query):   # pylint: disable=unused-argument
     return 'http://api.worldweatheronline.com'
 
 def _load_content_and_headers(path, query):
-    timestamp = time.strftime("%Y%m%d%H", time.localtime())
-    cache_file = os.path.join(PROXY_CACHEDIR, timestamp, path, query)
+    if is_testmode():
+        cache_file = "test/proxy-data/data1"
+    else:
+        timestamp = time.strftime("%Y%m%d%H", time.localtime())
+        cache_file = os.path.join(PROXY_CACHEDIR, timestamp, path, query)
     try:
         return (open(cache_file, 'r').read(),
                 json.loads(open(cache_file+".headers", 'r').read()))
@@ -97,7 +107,7 @@ def translate(text, lang):
     Translate `text` into `lang`
     """
     translated = TRANSLATIONS.get(lang, {}).get(text, text)
-    if text.encode('utf-8') == translated:
+    if text == translated:
         print("%s: %s" % (lang, text))
     return translated
 
@@ -108,7 +118,7 @@ def cyr(to_translate):
     return cyrtranslit.to_cyrillic(to_translate)
 
 def _patch_greek(original):
-    return original.decode('utf-8').replace(u"Ηλιόλουστη/ο", u"Ηλιόλουστη").encode('utf-8')
+    return original.replace(u"Ηλιόλουστη/ο", u"Ηλιόλουστη")
 
 def add_translations(content, lang):
     """
@@ -132,16 +142,16 @@ def add_translations(content, lang):
             d['data']['current_condition'][0]['lang_%s' % lang] = \
                 [{'value': cyr(
                     d['data']['current_condition'][0]['lang_%s' % lang][0]['value']\
-                    .encode('utf-8'))}]
+                    )}]
         elif lang == 'el':
             d['data']['current_condition'][0]['lang_%s' % lang] = \
                 [{'value': _patch_greek(
                     d['data']['current_condition'][0]['lang_%s' % lang][0]['value']\
-                    .encode('utf-8'))}]
+                    )}]
         elif lang == 'sr-lat':
             d['data']['current_condition'][0]['lang_%s' % lang] = \
                 [{'value':d['data']['current_condition'][0]['lang_sr'][0]['value']\
-                            .encode('utf-8')}]
+                            }]
 
         fixed_weather = []
         for w in d['data']['weather']:  # pylint: disable=invalid-name
@@ -153,13 +163,13 @@ def add_translations(content, lang):
                         [{'value': translate(weather_condition, lang)}]
                 elif lang == 'sr':
                     h['lang_%s' % lang] = \
-                        [{'value': cyr(h['lang_%s' % lang][0]['value'].encode('utf-8'))}]
+                        [{'value': cyr(h['lang_%s' % lang][0]['value'])}]
                 elif lang == 'el':
                     h['lang_%s' % lang] = \
-                        [{'value': _patch_greek(h['lang_%s' % lang][0]['value'].encode('utf-8'))}]
+                        [{'value': _patch_greek(h['lang_%s' % lang][0]['value'])}]
                 elif lang == 'sr-lat':
                     h['lang_%s' % lang] = \
-                        [{'value': h['lang_sr'][0]['value'].encode('utf-8')}]
+                        [{'value': h['lang_sr'][0]['value']}]
                 fixed_hourly.append(h)
             w['hourly'] = fixed_hourly
             fixed_weather.append(w)
@@ -177,7 +187,7 @@ def proxy(path):
     """
 
     lang = request.args.get('lang', 'en')
-    query_string = request.query_string
+    query_string = request.query_string.decode("utf-8")
     query_string = query_string.replace('sr-lat', 'sr')
     query_string = query_string.replace('lang=None', 'lang=en')
     query_string += "&extra=localObsTime"
@@ -187,7 +197,6 @@ def proxy(path):
     if content is None:
         srv = _find_srv_for_query(path, query_string)
         url = '%s/%s?%s' % (srv, path, query_string)
-        print(url)
 
         attempts = 10
         response = None
@@ -208,9 +217,10 @@ def proxy(path):
             headers = {}
             headers['Content-Type'] = response.headers['content-type']
             _save_content_and_headers(path, query_string, response.content, headers)
-            content = add_translations(response.content, lang)
         else:
             content = "{}"
+
+    content = add_translations(content, lang)
 
     return content, 200, headers
 
