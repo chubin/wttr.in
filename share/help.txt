@@ -27,8 +27,8 @@ Units:
 View options:
 
     0                       # only current weather
-    1                       # current weather + 1 day
-    2                       # current weather + 2 days
+    1                       # current weather + today's forecast
+    2                       # current weather + today's + tomorrow's forecast
     A                       # ignore User-Agent and force ANSI output format (terminal)
     F                       # do not show the "Follow" line
     n                       # narrow version (only day and night)
