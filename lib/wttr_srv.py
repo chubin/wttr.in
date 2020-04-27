@@ -213,7 +213,9 @@ def _response(parsed_query, query, fast_mode=False):
         output = fmt.png.render_ansi(
             output, options=parsed_query)
     else:
-        if query.get('days', '3') != '0' and not query.get('no-follow-line'):
+        if query.get('days', '3') != '0' \
+            and not query.get('no-follow-line') \
+            and ((parsed_query.get("view") or "v2")[:2] in ["v2"]):
             if parsed_query['html_output']:
                 output = add_buttons(output)
             else:
