@@ -16,6 +16,8 @@ queries=(
     "/Kiev?q"
     "/Kiev?Q"
     "/Kiev_text=no_view=v2.png"
+    "/Kiev.png?1nqF"
+    "/Kiev_1nqF.png"
 )
 
 options=$(cat <<EOF
