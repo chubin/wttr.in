@@ -79,7 +79,8 @@ PLAIN_TEXT_AGENTS = [
     "lwp-request",
     "wget",
     "python-requests",
-    "OpenBSD ftp"
+    "openbsd ftp",
+    "powershell",
 ]
 
 PLAIN_TEXT_PAGES = [':help', ':bash.function', ':translation']
