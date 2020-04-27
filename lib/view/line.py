@@ -17,10 +17,8 @@ import sys
 import re
 import datetime
 import json
-try:
-    from astral import Astral, Location
-except ImportError:
-    pass
+
+from astral import moon
 from constants import WWO_CODE, WEATHER_SYMBOL, WIND_DIRECTION
 from weather_data import get_weather_data
 from . import v2
@@ -161,26 +159,32 @@ def render_location(data, query):
     location (l)
     """
 
-    return (data['override_location'] or data['location']) # .title()
+    return (data['override_location'] or data['location'])
 
 def render_moonphase(_, query):
-    """
+    """moonpahse(m)
     A symbol describing the phase of the moon
     """
-    astral = Astral()
-    moon_index = int(
-        int(32.0*astral.moon_phase(date=datetime.datetime.today())/28+2)%32/4
-    )
+    moon_phase = moon.phase(date=datetime.datetime.today())
+    moon_index = int(int(32.0*moon_phase/28+2)%32/4)
     return MOON_PHASES[moon_index]
 
 def render_moonday(_, query):
-    """
+    """moonday(M)
     An number describing the phase of the moon (days after the New Moon)
     """
-    astral = Astral()
-    return str(int(astral.moon_phase(date=datetime.datetime.today())))
+    moon_phase = moon.phase(date=datetime.datetime.today())
+    return str(int(moon_phase))
 
 def render_sunset(data, query):
+    """
+    sunset (s)
+
+    NOT YET IMPLEMENTED
+    """
+
+    return "%s"
+
     location = data['location']
     city_name = location
     astral = Astral()
