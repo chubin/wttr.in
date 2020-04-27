@@ -115,6 +115,7 @@ def parse_wttrin_png_name(name):
     parts = name.split('_')
     parsed['location'] = parts[0]
 
+    one_letter_options = ""
     for part in parts[1:]:
         if re.match('(?:[0-9]+)x', part):
             parsed['width'] = part[:-1]
@@ -126,7 +127,10 @@ def parse_wttrin_png_name(name):
             arg, val = part.split('=', 1)
             to_be_parsed[arg] = val
         else:
-            to_be_parsed[part] = ''
+            one_letter_options += part
+
+    for letter in one_letter_options:
+        to_be_parsed[letter] = ''
 
     parsed.update(parse_query(to_be_parsed))
 
