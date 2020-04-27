@@ -69,8 +69,6 @@ def parse_query(args):
         if days in q:
             result['days'] = days
 
-    result['no-caption'] = False
-    result['no-city'] = False
     if 'q' in q:
         result['no-caption'] = True
     if 'Q' in q:
@@ -83,7 +81,8 @@ def parse_query(args):
             val = True
         if val == 'False':
             val = False
-        result[key] = val
+        if val:
+            result[key] = val
 
     # currently `view` is alias for `format`
     if "format" in result and not result.get("view"):

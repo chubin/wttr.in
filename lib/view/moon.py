@@ -10,14 +10,11 @@ import constants
 import parse_query
 import globals
 
-def get_moon(query, parsed_query):
+def get_moon(parsed_query):
 
     location = parsed_query['orig_location']
     html = parsed_query['html_output']
     lang = parsed_query['lang']
-
-    if query is None:
-        query = {}
 
     date = None
     if '@' in location:
@@ -40,7 +37,7 @@ def get_moon(query, parsed_query):
     stdout = p.communicate()[0]
     stdout = stdout.decode("utf-8")
 
-    if query.get('no-terminal', False):
+    if parsed_query.get('no-terminal', False):
         stdout = globals.remove_ansi(stdout)
 
     if html:

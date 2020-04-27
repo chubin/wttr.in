@@ -205,9 +205,9 @@ def _response(parsed_query, query, fast_mode=False):
     if parsed_query.get("view"):
         output = wttr_line(query, parsed_query)
     elif loc == 'moon' or loc.startswith('moon@'):
-        output = get_moon(query, parsed_query)
+        output = get_moon(parsed_query)
     else:
-        output = get_wetter(query, parsed_query)
+        output = get_wetter(parsed_query)
 
     if parsed_query.get('png_filename'):
         output = fmt.png.render_ansi(
@@ -291,6 +291,7 @@ def parse_request(location, request, query, fast_mode=False):
             'country': country,
             'query_source_location': query_source_location})
 
+    parsed_query.update(query)
     return parsed_query
 
 
@@ -338,7 +339,6 @@ def wttr(location, request):
     # use the full track
     parsed_query = parse_request(location, request, query, fast_mode=True)
     response = _response(parsed_query, query, fast_mode=True)
-
     try:
         if not response:
             parsed_query = parse_request(location, request, query)

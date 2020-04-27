@@ -12,6 +12,7 @@ import sys
 import os
 import re
 import time
+import hashlib
 
 sys.path.insert(0, "..")
 from translations import get_message, FULL_TRANSLATION, PARTIAL_TRANSLATION, SUPPORTED_LANGS
@@ -23,7 +24,7 @@ def _is_invalid_location(location):
     if '.png' in location:
         return True
 
-def get_wetter(query, parsed_query):
+def get_wetter(parsed_query):
 
     location = parsed_query['location']
     ip = parsed_query['ip_addr']
@@ -83,7 +84,10 @@ def get_wetter(query, parsed_query):
 
         if location_name is None:
             location_name = ""
-        return "%s/%s/%s%s%s%s%s" % (CACHEDIR, location, timestamp, imperial_suffix, lang_suffix, query_line, location_name)
+
+        filename = "".join([timestamp, imperial_suffix, lang_suffix, query_line, location_name])
+        digest = hashlib.sha1(filename.encode('utf-8')).hexdigest()
+        return "%s/%s/%s" % (CACHEDIR, location, digest)
 
     def save_weather_data(location, filename, lang=None, query=None, location_name=None, full_address=None):
      
@@ -212,9 +216,9 @@ def get_wetter(query, parsed_query):
         stdout = re.sub("<head>", "<head>" + title + opengraph, stdout)
         open(filename+'.html', 'w').write(stdout)
 
-    filename = get_filename(location, lang=lang, query=query, location_name=location_name)
+    filename = get_filename(location, lang=lang, query=parsed_query, location_name=location_name)
     if not os.path.exists(filename):
-        save_weather_data(location, filename, lang=lang, query=query, location_name=location_name, full_address=full_address)
+        save_weather_data(location, filename, lang=lang, query=parsed_query, location_name=location_name, full_address=full_address)
     if html:
         filename += '.html'
 
