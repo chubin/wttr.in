@@ -264,7 +264,7 @@ def location_processing(location, ip_addr):
     # if location is not None and location.upper() in IATA_CODES:
     #     location = '~%s' % location
 
-    if location is not None and location.startswith('~'):
+    if location is not None and not location.startswith("~-,") and location.startswith('~'):
         geolocation = geolocator(location_canonical_name(location[1:]))
         if geolocation is not None:
             if not override_location_name:
