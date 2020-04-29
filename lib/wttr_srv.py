@@ -247,6 +247,12 @@ def parse_request(location, request, query, fast_mode=False):
     Return: dictionary with parsed parameters
     """
 
+    if location.startswith("b_"):
+        result = parse_query.deserialize(location)
+        result["request_url"] = request.url
+        if result:
+            return result
+
     png_filename = None
     if location is not None and location.lower().endswith(".png"):
         png_filename = location

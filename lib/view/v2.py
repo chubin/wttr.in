@@ -42,6 +42,7 @@ from babel.dates import format_datetime
 from globals import WWO_KEY
 import constants
 import translations
+import parse_query
 from . import line as wttr_line
 
 if not sys.version_info >= (3, 0):
@@ -543,6 +544,9 @@ def main(query, parsed_query, data):
     else:
         data_parsed = data
 
+    parsed_query["text"] = "no"
+    filename = "b_" + parse_query.serialize(parsed_query) + ".png"
+
     if html_output:
         output = """
 <html>
@@ -551,14 +555,14 @@ def main(query, parsed_query, data):
 <link rel="stylesheet" type="text/css" href="/files/style.css" />
 </head>
 <body>
-  <img src="/{orig_location}_view=v2_text=no.png" width="592" height="532"/>
+  <img src="/{filename}" width="592" height="532"/>
 <pre>
 {textual_information}
 </pre>
 </body>
 </html>
 """.format(
-        orig_location=parsed_query["orig_location"],
+        filename=filename, orig_location=parsed_query["orig_location"],
         textual_information=textual_information(
             data_parsed, geo_data, parsed_query, html_output=True))
     else:

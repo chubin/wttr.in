@@ -1,4 +1,35 @@
 import re
+import json
+import zlib
+import base64
+
+def serialize(parsed_query):
+    return base64.b64encode(
+        zlib.compress(
+            json.dumps(parsed_query).encode("utf-8")),
+        altchars=b"-_").decode("utf-8")
+
+def deserialize(url):
+
+    string = url[2:]
+
+    extension = None
+    if "." in string:
+        string, extension = string.split(".", 1)
+
+    try:
+        result = json.loads(
+            zlib.decompress(
+                base64.b64decode(string, altchars=b"-_")).decode("utf-8"))
+    except zlib.error:
+        return None
+
+    if extension == "png":
+        result["png_filename"] = url
+        result["html_output"] = False
+
+    return result
+
 
 def metric_or_imperial(query, lang, us_ip=False):
     """
