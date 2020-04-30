@@ -22,6 +22,9 @@ def get_moon(parsed_query):
         location = location[:location.index('@')]
 
     cmd = [globals.PYPHOON]
+    if lang:
+        cmd += ["-l", lang]
+
     if date:
         try:
             dateutil.parser.parse(date)
@@ -30,10 +33,7 @@ def get_moon(parsed_query):
         else:
             cmd += [date]
 
-    env = os.environ.copy()
-    if lang:
-        env['LANG'] = lang
-    p = Popen(cmd, stdout=PIPE, stderr=PIPE, env=env)
+    p = Popen(cmd, stdout=PIPE, stderr=PIPE)
     stdout = p.communicate()[0]
     stdout = stdout.decode("utf-8")
 
