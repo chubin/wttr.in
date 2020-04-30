@@ -544,10 +544,9 @@ def main(query, parsed_query, data):
     else:
         data_parsed = data
 
-    parsed_query["text"] = "no"
-    filename = "b_" + parse_query.serialize(parsed_query) + ".png"
-
     if html_output:
+        parsed_query["text"] = "no"
+        filename = "b_" + parse_query.serialize(parsed_query) + ".png"
         output = """
 <html>
 <head>
