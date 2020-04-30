@@ -7,6 +7,7 @@ import re
 import time
 import os
 import hashlib
+import random
 
 import pytz
 import pylru
@@ -35,9 +36,8 @@ def get_signature(user_agent, query_string, client_ip_address, lang):
     `lang`, and `client_ip_address`
     """
 
-    timestamp = int(time.time() / 1000)
-    signature = "%s:%s:%s:%s:%s" % \
-        (user_agent, query_string, client_ip_address, lang, timestamp)
+    signature = "%s:%s:%s:%s" % \
+        (user_agent, query_string, client_ip_address, lang)
     print(signature)
     return signature
 
@@ -48,8 +48,13 @@ def get(signature):
     the `_update_answer` function.
     """
 
-    value = CACHE.get(signature)
-    if value:
+    value_record = CACHE.get(signature)
+    if not value_record:
+        return None
+
+    value = value_record["val"]
+    expiry = value_record["expiry"]
+    if value and time.time() < expiry:
         if value.startswith("file:") or value.startswith("bfile:"):
             value = _read_from_file(signature, sighash=value)
             if not value:
@@ -57,14 +62,26 @@ def get(signature):
         return _update_answer(value)
     return None
 
+def _randint(minimum, maximum):
+    return random.randrange(maximum - minimum)
+
 def store(signature, value):
     """
     Store in cache `value` for `signature`
     """
-    if len(value) < MIN_SIZE_FOR_FILECACHE:
-        CACHE[signature] = value
+
+    if len(value) >= MIN_SIZE_FOR_FILECACHE:
+        value_to_store = _store_in_file(signature, value)
     else:
-        CACHE[signature] = _store_in_file(signature, value)
+        value_to_store = value
+
+    value_record = {
+        "val": value_to_store,
+        "expiry": time.time() + _randint(1000, 2000)*1000,
+        }
+
+    CACHE[signature] = value_record
+
     return _update_answer(value)
 
 def _hash(signature):
