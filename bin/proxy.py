@@ -116,7 +116,7 @@ def _save_content_and_headers(path, query, content, headers):
     if not os.path.exists(cache_dir):
         os.makedirs(cache_dir)
     open(cache_file + ".headers", 'w').write(json.dumps(headers))
-    open(cache_file, 'w').write(content)
+    open(cache_file, 'wb').write(content)
 
 def translate(text, lang):
     """
@@ -141,13 +141,18 @@ def add_translations(content, lang):
     Add `lang` translation to `content` (JSON)
     returned by the data source
     """
+
+    if content is "{}":
+        return {}
+
     languages_to_translate = TRANSLATIONS.keys()
     try:
         d = json.loads(content)         # pylint: disable=invalid-name
-    except ValueError as exception:
+    except (ValueError, TypeError) as exception:
         print("---")
         print(exception)
         print("---")
+        return {}
 
     try:
         weather_condition = d['data']['current_condition'][0]['weatherDesc'][0]['value']
@@ -233,6 +238,7 @@ def proxy(path):
             headers = {}
             headers['Content-Type'] = response.headers['content-type']
             _save_content_and_headers(path, query_string, response.content, headers)
+            content = response.content
         else:
             content = "{}"
 
