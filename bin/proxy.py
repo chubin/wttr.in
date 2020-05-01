@@ -23,6 +23,7 @@ import sys
 import os
 import time
 import json
+import hashlib
 
 import requests
 import cyrtranslit
@@ -73,29 +74,44 @@ TRANSLATIONS = load_translations()
 def _find_srv_for_query(path, query):   # pylint: disable=unused-argument
     return 'http://api.worldweatheronline.com'
 
+def _cache_file(path, query):
+    """Return cache file name for specified `path` and `query`
+    and for the current time.
+
+    Do smooth load on the server, expiration time
+    is slightly varied basing on the path+query sha1 hash digest.
+    """
+
+    digest = hashlib.sha1(("%s %s" % (path, query)).encode("utf-8")).hexdigest()
+    digest_number = ord(digest[0])
+    expiry_interval = 60*(30+digest_number)
+
+    timestamp = "%010d" % (int(time.time())//1000/expiry_interval*expiry_interval)
+    filename = os.path.join(PROXY_CACHEDIR, timestamp, path, query)
+
+    return filename
+
+
 def _load_content_and_headers(path, query):
     if is_testmode():
         cache_file = "test/proxy-data/data1"
     else:
-        timestamp = time.strftime("%Y%m%d%H", time.localtime())
-        cache_file = os.path.join(PROXY_CACHEDIR, timestamp, path, query)
+        cache_file = _cache_file(path, query)
     try:
         return (open(cache_file, 'r').read(),
                 json.loads(open(cache_file+".headers", 'r').read()))
     except IOError:
         return None, None
 
-def _touch_empty_file(path, query, content, headers):
-    timestamp = time.strftime("%Y%m%d%H", time.localtime())
-    cache_file = os.path.join(PROXY_CACHEDIR + ".empty", timestamp, path, query)
+def _touch_empty_file(path, query):
+    cache_file = _cache_file(path, query)
     cache_dir = os.path.dirname(cache_file)
     if not os.path.exists(cache_dir):
         os.makedirs(cache_dir)
     open(cache_file, 'w').write("")
 
 def _save_content_and_headers(path, query, content, headers):
-    timestamp = time.strftime("%Y%m%d%H", time.localtime())
-    cache_file = os.path.join(PROXY_CACHEDIR, timestamp, path, query)
+    cache_file = _cache_file(path, query)
     cache_dir = os.path.dirname(cache_file)
     if not os.path.exists(cache_dir):
         os.makedirs(cache_dir)
@@ -212,7 +228,7 @@ def proxy(path):
             except ValueError:
                 attempts -= 1
 
-        _touch_empty_file(path, query_string, content, headers)
+        _touch_empty_file(path, query_string)
         if response:
             headers = {}
             headers['Content-Type'] = response.headers['content-type']
