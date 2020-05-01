@@ -436,7 +436,7 @@ var (
         "el":{"Πρωί",   "Μεσημέρι", "Απόγευμα", "Βράδυ" },
         "en":{"Morning","Noon",     "Evening",  "Night" },
         "eo":{"Mateno", "Tago",     "Vespero",  "Nokto" },
-        "es":{"Mañana", "Día",      "Tarde",    "Noche" },
+        "es":{"Mañana", "Mediodía", "Tarde",    "Noche" },
         "et":{"Hommik", "Päev",     "Õhtu",     "Öösel" },
         "eu":{"Goiz",   "Eguerdi",  "Arratsalde", "Gau" },
         "fa":{    "حبص",     "رهظ",      "رصع",   "بش"  },
