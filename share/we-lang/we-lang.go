@@ -912,6 +912,9 @@ func printDay(w weather) (ret []string) {
         if config.Lang == "ko" {
             dateName = lctime.Strftime("%b %d일 %a", d)
         }
+        if config.Lang == "zh" || config.Lang == "zh-tw" || config.Lang == "zh-cn" {
+            dateName = lctime.Strftime("%b%d日%A", d)
+        }
     }
     // appendSide := 0
     // // for utf8.RuneCountInString(dateName) <= dateWidth {
