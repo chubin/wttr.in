@@ -5,7 +5,7 @@ Translation of almost everything.
 """
 
 FULL_TRANSLATION = [
-    "af", "be", "ca", "da", "de", "el", "et",
+    "ar", "af", "be", "ca", "da", "de", "el", "et",
     "fr", "fa", "hu", "ia", "id", "it",
     "nb", "nl", "pl", "pt-br", "ro",
     "ru", "tr", "th", "uk", "vi", "zh-cn", "zh-tw"
@@ -22,7 +22,7 @@ PARTIAL_TRANSLATION = [
 ]
 
 PROXY_LANGS = [
-    "af", "az", "be", "bs", "ca",
+    "af", "ar", "az", "be", "bs", "ca",
     "cy", "de", "el", "eo", "et", "fa", "fr",
     "fy", "he", "hr", "hu", "hy",
     "ia", "id", "is", "it", "ja", "kk",
@@ -45,6 +45,11 @@ one of the coldest permanently inhabited locales on the planet.
 Ons kon nie u ligging opspoor nie
 gevolglik het ons vir u na Oymyakon geneem,
 een van die koudste permanent bewoonde plekke op aarde.
+""",
+        'ar': u"""
+تعذر علينا العثور على موقعك
+لذلك قمنا بجلبك إلي أويمياكون,
+ إحدى الأماكن المَأْهُولة الأكثر برودة علي الإطلاق في هذا الكوكب.
 """,
         'be': u"""
 Ваша месцазнаходжанне вызначыць не атрымалася,
@@ -274,6 +279,7 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
     'UNKNOWN_LOCATION': {
         'en': u'Unknown location',
         'af': u'Onbekende ligging',
+        'ar': u'موقع غير معروف',
         'be': u'Невядомае месцазнаходжанне',
         'bg': u'Неизвестно местоположение',
         'bs': u'Nepoznatoja lokacija',
@@ -324,6 +330,7 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
     'LOCATION': {
         'en': u'Location',
         'af': u'Ligging',
+        'ar': u'الموقع',
         'be': u'Месцазнаходжанне',
         'bg': u'Местоположение',
         'bs': u'Lokacija',
@@ -383,6 +390,13 @@ Verskoning, ons oorskry tans die vermoë om navrae aan die weerdiens te rig.
 Hier is die weerberig van 'n voorbeeld ligging (bloot om aan u te wys hoe dit lyk).
 Ons sal weereens nuwe navrae kan hanteer so gou as moontlik.
 U kan vir https://twitter.com/igor_chubin volg vir opdaterings.
+======================================================================================
+""",
+        'ar': u"""
+نأسف, نفذت منا طلبات إستعلام خدمة الطقس في هذه اللحظة.
+هذا التقرير الجوي للمدينة الإفتراضية   (فقط لنريك, الشكل الذي تبدو عليه).
+سوف نحصل علي طلبات إستعلام جديدة في أقرب وقت ممكن.
+يمكنك متابعة https://twitter.com/igor_chubin من أجل الحصول علي أخر المستجدات.
 ======================================================================================
 """,
         'be': u"""
@@ -623,6 +637,7 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
 
     'NEW_FEATURE': {
         'en': u'New feature: multilingual location names \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) and location search \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
+        'ar': u'ميزة جديدة : أسماء الأماكن بلغات متعددة \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) والبحث عن الأماكن \033[92mwttr.in/~Kilimanjaro\033[0m (فقط أضف ~ قبل)',
         'af': u'Nuwe eienskap: veeltalige name vir liggings \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) en ligging soek \033[92mwttr.in/~Kilimanjaro\033[0m (plaas net ~ vooraan)',
         'be': u'Новыя магчымасці: назвы месц на любой мове \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) i пошук месц \033[92mwttr.in/~Kilimanjaro\033[0m (трэба дадаць ~ ў пачатак)',
         'bg': u'Нова функционалност: многоезични имена на места\033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и в търсенето \033[92mwttr.in/~Kilimanjaro\033[0m (добавете ~ преди)',
@@ -664,6 +679,7 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
 
     'FOLLOW_ME': {
         'en': u'Follow \033[46m\033[30m@igor_chubin\033[0m for wttr.in updates',
+        'ar': u'تابع \033[46m\033[30m@igor_chubin\033[0m من أجل wttr.in أخر مستجدات',
         'af': u'Volg \033[46m\033[30m@igor_chubin\033[0m vir wttr.in opdaterings',
         'be': u'Сачыце за \033[46m\033[30m@igor_chubin\033[0m за навінамі wttr.in',
         'bg': u'Последвай \033[46m\033[30m@igor_chubin\033[0m за обновления свързани с wttr.in',
@@ -704,7 +720,7 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
 }
 CAPTION = {
     "af": u"Weer verslag vir:",
-    "ar": u"ﺖﻗﺮﻳﺭ ﺡﺎﻟﺓ ﺄﻠﻄﻘﺳ",
+    "ar": u"تقرير جوي",
     "az": u"Hava proqnozu:",
     "be": u"Прагноз надвор'я для:",
     "bg": u"Прогноза за времето в:",

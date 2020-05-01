@@ -47,6 +47,8 @@ def show_text_file(name, lang):
         text = text.replace('PARTIAL_TRANSLATION', ' '.join(PARTIAL_TRANSLATION))
     elif name == ":bash.function":
         text = open(BASH_FUNCTION_FILE, 'r').read()
+    elif name == ":iterm2":
+        text = open("share/iterm2.txt", 'r').read()
     elif name == ":translation":
         text = open(TRANSLATION_FILE, 'r').read()
         text = text\

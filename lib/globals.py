@@ -83,7 +83,7 @@ PLAIN_TEXT_AGENTS = [
     "powershell",
 ]
 
-PLAIN_TEXT_PAGES = [':help', ':bash.function', ':translation']
+PLAIN_TEXT_PAGES = [':help', ':bash.function', ':translation', ':iterm2']
 
 _IP2LOCATION_KEY_FILE = os.environ['HOME'] + '/.ip2location.key'
 IP2LOCATION_KEY = None
