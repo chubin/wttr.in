@@ -29,7 +29,6 @@ PYPHOON = "/home/igor/pyphoon/bin/pyphoon-lolcat"
 _DATADIR = "/wttr.in"
 _LOGDIR = "/wttr.in/log"
 
-CACHEDIR = os.path.join(_DATADIR, "cache/wego/")
 IP2LCACHE = os.path.join(_DATADIR, "cache/ip2l/")
 PNG_CACHE = os.path.join(_DATADIR, "cache/png")
 LRU_CACHE = os.path.join(_DATADIR, "cache/lru")
@@ -43,7 +42,6 @@ BLACKLIST = os.path.join(MYDIR, "share/blacklist")
 HELP_FILE = os.path.join(MYDIR, 'share/help.txt')
 BASH_FUNCTION_FILE = os.path.join(MYDIR, 'share/bash-function.txt')
 TRANSLATION_FILE = os.path.join(MYDIR, 'share/translation.txt')
-TEST_FILE = os.path.join(MYDIR, 'share/test-NAME.txt')
 
 IATA_CODES_FILE = os.path.join(MYDIR, 'share/list-of-iata-codes.txt')
 
