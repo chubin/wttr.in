@@ -77,7 +77,7 @@ def store(signature, value):
 
     value_record = {
         "val": value_to_store,
-        "expiry": time.time() + _randint(1000, 2000)*1000,
+        "expiry": time.time() + _randint(1000, 2000),
         }
 
     CACHE[signature] = value_record
