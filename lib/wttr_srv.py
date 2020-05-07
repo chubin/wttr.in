@@ -9,6 +9,7 @@ import logging
 import io
 import os
 import time
+from gevent.threadpool import ThreadPool
 from flask import render_template, send_file, make_response
 
 import fmt.png
@@ -35,6 +36,8 @@ if not os.path.exists(os.path.dirname(LOG_FILE)):
 logging.basicConfig(filename=LOG_FILE, level=logging.INFO, format='%(asctime)s %(message)s')
 
 LIMITS = Limits(whitelist=[MY_EXTERNAL_IP], limits=QUERY_LIMITS)
+
+TASKS = ThreadPool(25)
 
 def show_text_file(name, lang):
     """
@@ -212,8 +215,14 @@ def _response(parsed_query, query, fast_mode=False):
         output = get_wetter(parsed_query)
 
     if parsed_query.get('png_filename'):
-        output = fmt.png.render_ansi(
-            output, options=parsed_query)
+        # originally it was just a usual function call,
+        # but it was a blocking call, so it was moved
+        # to separate threads:
+        #
+        #    output = fmt.png.render_ansi(
+        #        output, options=parsed_query)
+        result = TASKS.spawn(fmt.png.render_ansi, output, options=parsed_query)
+        output = result.get()
     else:
         if query.get('days', '3') != '0' \
             and not query.get('no-follow-line') \
