@@ -19,7 +19,7 @@ import datetime
 import json
 
 from astral import moon
-from constants import WWO_CODE, WEATHER_SYMBOL, WIND_DIRECTION
+from constants import WWO_CODE, WEATHER_SYMBOL, WIND_DIRECTION, WEATHER_SYMBOL_WIDTH_VTE
 from weather_data import get_weather_data
 from . import v2
 
@@ -55,12 +55,13 @@ def render_temperature(data, query):
     return temperature
 
 def render_condition(data, query):
-    """
-    condition (c)
+    """Emoji encoded weather condition (c)
     """
 
     weather_condition = WEATHER_SYMBOL[WWO_CODE[data['weatherCode']]]
-    return weather_condition
+    spaces = " "*(WEATHER_SYMBOL_WIDTH_VTE.get(weather_condition) - 1)
+
+    return weather_condition + spaces
 
 def render_condition_fullname(data, query):
     """
