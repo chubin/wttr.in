@@ -162,6 +162,14 @@ To specify your own custom output format, use the special `%`-notation:
     p    precipitation (mm),
     o    Probability of Precipitation,
     P    pressure (hPa),
+
+    D    Dawn*,
+    S    Sunrise*,
+    z    Zenith*,
+    s    Sunset*,
+    d    Dusk*.
+
+(times are shown in the local timezone)
 ```
 
 So, these two calls are the same:
