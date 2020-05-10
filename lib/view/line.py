@@ -17,8 +17,14 @@ import sys
 import re
 import datetime
 import json
+import requests
 
+from astral import LocationInfo
 from astral import moon
+from astral.sun import sun
+
+import pytz
+
 from constants import WWO_CODE, WEATHER_SYMBOL, WIND_DIRECTION, WEATHER_SYMBOL_WIDTH_VTE
 from weather_data import get_weather_data
 from . import v2
@@ -177,24 +183,41 @@ def render_moonday(_, query):
     moon_phase = moon.phase(date=datetime.datetime.today())
     return str(int(moon_phase))
 
-def render_sunset(data, query):
-    """
-    sunset (s)
+##################################
+# this part should be rewritten
+# this is just a temporary solution
 
-    NOT YET IMPLEMENTED
-    """
-
-    return "%s"
-
-    location = data['location']
-    city_name = location
-    astral = Astral()
-    location = Location(('Nuremberg', 'Germany',
-              49.453872, 11.077298, 'Europe/Berlin', 0))
-    sun = location.sun(date=datetime.datetime.today(), local=True)
+def get_geodata(location):
+    text = requests.get("http://localhost:8004/%s" % location).text
+    return json.loads(text)
 
 
-    return str(sun['sunset'])
+def render_dawn(data, query, local_time_of):
+    """dawn (D)
+    Local time of dawn"""
+    return local_time_of("dawn")
+
+def render_dusk(data, query, local_time_of):
+    """dusk (d)
+    Local time of dusk"""
+    return local_time_of("dusk")
+
+def render_sunrise(data, query, local_time_of):
+    """sunrise (S)
+    Local time of sunrise"""
+    return local_time_of("sunrise")
+
+def render_sunset(data, query, local_time_of):
+    """sunset (s)
+    Local time of sunset"""
+    return local_time_of("sunset")
+
+def render_zenith(data, query, local_time_of):
+    """zenith (z)
+    Local time of zenith"""
+    return local_time_of("noon")
+
+##################################
 
 FORMAT_SYMBOL = {
     'c':    render_condition,
@@ -205,16 +228,47 @@ FORMAT_SYMBOL = {
     'l':    render_location,
     'm':    render_moonphase,
     'M':    render_moonday,
-    's':    render_sunset,
     'p':    render_precipitation,
     'o':    render_precipitation_chance,
     'P':    render_pressure,
     }
 
+FORMAT_SYMBOL_ASTRO = {
+    'D':    render_dawn,
+    'd':    render_dusk,
+    'S':    render_sunrise,
+    's':    render_sunset,
+    'z':    render_zenith,
+}
+
 def render_line(line, data, query):
     """
     Render format `line` using `data`
     """
+
+    def get_local_time_of():
+
+        location = data["location"]
+        geo_data = get_geodata(location)
+
+        city = LocationInfo()
+        city.latitude = geo_data["latitude"]
+        city.longitude = geo_data["longitude"]
+        city.timezone = geo_data["timezone"]
+
+        timezone = city.timezone
+
+        local_tz = pytz.timezone(timezone)
+
+        datetime_day_start = datetime.datetime.now()\
+                .replace(hour=0, minute=0, second=0, microsecond=0)
+        current_sun = sun(city.observer, date=datetime_day_start)
+
+        local_time_of = lambda x: current_sun[x]\
+                                    .replace(tzinfo=pytz.utc)\
+                                    .astimezone(local_tz)\
+                                    .strftime("%H:%M:%S")
+        return local_time_of
 
     def render_symbol(match):
         """
@@ -225,13 +279,22 @@ def render_line(line, data, query):
         symbol_string = match.group(0)
         symbol = symbol_string[-1]
 
-        if symbol not in FORMAT_SYMBOL:
-            return ''
+        if symbol in FORMAT_SYMBOL:
+            render_function = FORMAT_SYMBOL[symbol]
+            return render_function(data, query)
+        if symbol in FORMAT_SYMBOL_ASTRO and local_time_of is not None:
+            render_function = FORMAT_SYMBOL_ASTRO[symbol]
+            return render_function(data, query, local_time_of)
 
-        render_function = FORMAT_SYMBOL[symbol]
-        return render_function(data, query)
+        return ''
 
-    return re.sub(r'%[^%]*[a-zA-Z]', render_symbol, line)
+    template_regexp = r'%[^%]*[a-zA-Z]'
+    for template_code in re.findall(template_regexp, line):
+        if template_code.lstrip("%") in FORMAT_SYMBOL_ASTRO:
+            local_time_of = get_local_time_of()
+            break
+
+    return re.sub(template_regexp, render_symbol, line)
 
 def render_json(data):
     output = json.dumps(data, indent=4, sort_keys=True)
