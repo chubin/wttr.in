@@ -80,12 +80,12 @@ You can override this behavior by adding `?u` or `?m` to a URL like this:
     $ curl wttr.in/Amsterdam?u
     $ curl wttr.in/Amsterdam?m
 
-## Supported output formats
+## Supported output formats and views
 
-wttr.in currently supports four output formats:
+wttr.in currently supports five output formats:
 
 * ANSI for the terminal;
-* ANSI for the terminal, one-line mode;
+* Plain-text for the terminal and scripts;
 * HTML for the browser;
 * PNG for the graphical viewers;
 * JSON for scripts and APIs.
@@ -121,53 +121,6 @@ In this example:
 You can embed a special wttr.in widget, that displays the weather condition for the current or a selected location, into a HTML page using the [wttr-switcher](https://github.com/midzer/wttr-switcher). That is how it looks like: [wttr-switcher-example](https://midzer.github.io/wttr-switcher/) or on a real world web site: https://feuerwehr-eisolzried.de/.
 
 ![Embedded wttr.in example at feuerwehr-eisolzried.de](https://user-images.githubusercontent.com/3875145/65265457-50eac180-db11-11e9-8f9b-2e1711dfc436.png)
-
-## JSON output
-
-The JSON format is a feature providing access to wttr.in data through an easy-to-parse format, without requiring the user to create a complex script to reinterpret wttr.in's graphical output.
-
-To fetch information in JSON format, use the following syntax:
-
-    $ curl wttr.in/Detroit?format=j1
-
-This will fetch information on the Detroit region in JSON format. The j1 format code is used to allow for the use of other layouts for the JSON output.
-
-The result will look something like the following:
-
-    {
-    "current_condition": [
-        {
-            "FeelsLikeC": "25",
-            "FeelsLikeF": "76",
-            "cloudcover": "100",
-            "humidity": "76",
-            "observation_time": "04:08 PM",
-            "precipMM": "0.2",
-            "pressure": "1019",
-            "temp_C": "22",
-            "temp_F": "72",
-            "uvIndex": 5,
-            "visibility": "16",
-            "weatherCode": "122",
-            "weatherDesc": [
-                {
-                    "value": "Overcast"
-                }
-            ],
-            "weatherIconUrl": [
-                {
-                    "value": ""
-                }
-            ],
-            "winddir16Point": "NNE",
-            "winddirDegree": "20",
-            "windspeedKmph": "7",
-            "windspeedMiles": "4"
-        }
-    ],
-    ...
-
-Most of these values are self-explanatory, aside from `weatherCode`. The `weatherCode` is an enumeration which you can find at either [the WorldWeatherOnline website](https://www.worldweatheronline.com/developer/api/docs/weather-icons.aspx) or [in the wttr.in source code](https://github.com/chubin/wttr.in/blob/master/lib/constants.py).
 
 ## One-line output
 
@@ -315,6 +268,54 @@ For some reason URXVT sometimes stops deciding right the word spacing and we nee
 The result, should look like:
 
 ![URXVT Emoji line](https://user-images.githubusercontent.com/24360204/63842949-1d36d480-c975-11e9-81dd-998d1329bd8a.png)
+
+## JSON output
+
+The JSON format is a feature providing access to wttr.in data through an easy-to-parse format, without requiring the user to create a complex script to reinterpret wttr.in's graphical output.
+
+To fetch information in JSON format, use the following syntax:
+
+    $ curl wttr.in/Detroit?format=j1
+
+This will fetch information on the Detroit region in JSON format. The j1 format code is used to allow for the use of other layouts for the JSON output.
+
+The result will look something like the following:
+
+    {
+    "current_condition": [
+        {
+            "FeelsLikeC": "25",
+            "FeelsLikeF": "76",
+            "cloudcover": "100",
+            "humidity": "76",
+            "observation_time": "04:08 PM",
+            "precipMM": "0.2",
+            "pressure": "1019",
+            "temp_C": "22",
+            "temp_F": "72",
+            "uvIndex": 5,
+            "visibility": "16",
+            "weatherCode": "122",
+            "weatherDesc": [
+                {
+                    "value": "Overcast"
+                }
+            ],
+            "weatherIconUrl": [
+                {
+                    "value": ""
+                }
+            ],
+            "winddir16Point": "NNE",
+            "winddirDegree": "20",
+            "windspeedKmph": "7",
+            "windspeedMiles": "4"
+        }
+    ],
+    ...
+
+Most of these values are self-explanatory, aside from `weatherCode`. The `weatherCode` is an enumeration which you can find at either [the WorldWeatherOnline website](https://www.worldweatheronline.com/developer/api/docs/weather-icons.aspx) or [in the wttr.in source code](https://github.com/chubin/wttr.in/blob/master/lib/constants.py).
+
 
 ## Moon phases
 
