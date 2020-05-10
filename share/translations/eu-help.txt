@@ -1,0 +1,66 @@
+Argibideak:
+
+    $ curl wttr.in          # eguraldia zure kokapenean
+    $ curl wttr.in/muc      # eguraldia Municheko aireportuan
+
+Onartzen diren kokapen motak:
+
+    /paris                  # hiri baten izena
+    /~Eiffel+tower          # leku famatu baten izena
+    /Москва                 # Edozein lekuko edozein hizkuntzako Unicode izena
+    /muc                    # aeroportu baten kodea (3 letra)
+    /@stackoverflow.com     # web domeinu baten izena
+    /94107                  # area kode bat
+    /-78.46,106.79          # GPS koordenadak
+
+Leku bereziak:
+
+    /moon                   # ilargiaran aldia (gehitu ,+US o ,+France herrialde hauetarako)
+    /moon@2016-10-25        # ilargiaren aldia data konkretu batean (@2016-10-25)
+
+Unitateak:
+
+    ?m                      # metrikak (SI) (leku guztietako estandarra, AEB ezik)
+    ?u                      # Lurra sailkatzeko sistema batua edo LSSB (AEB estandarra)
+    ?M                      # haizeko abiadura erakutsi (m/s)
+
+Bistaratzeko aukerak:
+
+    ?0                      # oraingo eguraldia bakarrik
+    ?1                      # oraingo eguraldia + egun bateko iragarpena
+    ?2                      # oraingo eguraldia + bi egunerako iragarpena
+    ?n                      # bertsio laburra (eguna eta gaua bakarrik)
+    ?q                      # bertsio isila ("Eguraldia..." textua barik)
+    ?Q                      # bertsio super isila ("Eguraldia ..." eta hiriaren izenik ez)
+    ?T                      # terminalaren sekuentziak desaktibatu (kolorerik ez)
+
+PNG aukerak:
+
+    /paris.png              # irudi PNG bat sortzen du
+    ?p                      # irudiaren inguruan ertz bat gehitzen du
+    ?t                      # 150 gardentasuna
+    transparency=...        # 0tik 255era gardentasuna (255 = gardentasunik ez)
+
+Elkarrekin erabili daiteken aukerak:
+
+    /Paris?0pq
+    /Paris?0pq&lang=fr
+    /Paris_0pq.png          # PNG-an aukerak _ karakteren ondoren zehazten dira
+    /Rome_0pq_lang=it.png   # aukera sekuentzia luze bat _ karakterearekin bereiz daiteke
+
+Kokapena:
+
+    $ curl fr.wttr.in/Paris
+    $ curl wttr.in/paris?lang=fr
+    $ curl -H "Accept-Language: fr" wttr.in/paris
+
+Onartzen diren hizkuntzak:
+
+    FULL_TRANSLATION (onartuak)
+    PARTIAL_TRANSLATION (abian)
+
+URL bereziak:
+
+    /:help                  # orrialde hau erakutsi
+    /:bash.function         # wttr() funtzio bat bash-en iradokitzen du
+    /:translation           # itzultzaileei buruzko informazioa erakusten du

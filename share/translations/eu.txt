@@ -1,0 +1,47 @@
+114: Oskarbia: Clear
+113: Eguzkitsu: Sunny
+116: Neurri batean hodeitsu: Partly cloudy
+119: Hodeitsu: Cloudy
+122: Iluna: Overcast
+143: Lanbroa: Mist
+176: Posible euri irregularra: Patchy rain possible
+179: Posible elurbusti irregularra: Patchy snow possible
+182: Posible elurbusti irregularra: Patchy sleet possible
+185: Posible zirimiri hotz irregularra: Patchy freezing drizzle possible
+200: Posible ekaitz agerraldi: Thundery outbreaks possible
+227: Elur-ekaitza: Blowing snow
+230: Elur-ekaitza: Blizzard
+248: Lainoa: Fog
+260: Laino hotza: Freezing fog
+263: Garo irregularra: Patchy light drizzle
+266: Garoa: Light drizzle
+281: Garo hotza: Freezing drizzle
+284: Zirimiri hotz-hotza: Heavy freezing drizzle
+293: Zirimiri irregularra: Patchy light rain
+296: Zirimiri: Light rain
+299: Noizbehinkako euri ertaina: Moderate rain at times
+302: Euri ertaina: Moderate rain
+305: Noizbehinkako euri-zaparrada: Heavy rain at times
+308: Euri-zaparrada: Heavy rain
+311: Zirimiri hotza: Light freezing rain
+314: Euri ertain edo zaparrada hotza: Moderate or heavy freezing rain
+317: Elurbusti arina: Light sleet
+320: Elurbusti ertain edo gogorra: Moderate or heavy sleet
+323: Gazura irregularra: Patchy light snow
+326: Gazura: Light snow
+329: Noizbehinkako elur ertaina: Patchy moderate snow
+332: Elur ertaina: Moderate snow
+335: Nieve pesada irregular: Patchy heavy snow
+338: Nieve pesada: Heavy snow
+350: Txingorra: Ice pellets
+353: Zaparrada arina: Light rain shower
+356: Zaparrada ertain edo gogorra: Moderate or heavy rain shower
+359: Uholde-zaparrada: Torrential rain shower
+362: Elurbusti zaparrada arina: Light sleet showers
+365: Elurbusti zaparrada ertaina edo gogorra: Moderate or heavy sleet showers
+368: Elur zaparrada arina: Light snow showers
+371: Elur zaparrada ertaina edo gogorra: Moderate or heavy snow showers
+386: Zirimiri irregularra trumoiekin: Patchy light rain with thunder
+389: Euri ertaina edo gogorra trumoiekin: Moderate or heavy rain with thunder
+392: Elur arina irregularra trumoiekin: Patchy light snow with thunder
+395: Elur ertaina edo gogorra trumoiekin: Moderate or heavy snow with thunder
