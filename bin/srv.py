@@ -3,7 +3,7 @@
 
 from gevent.pywsgi import WSGIServer
 from gevent.monkey import patch_all
-patch_all(httplib=True)
+patch_all()
 
 # pylint: disable=wrong-import-position,wrong-import-order
 import sys
