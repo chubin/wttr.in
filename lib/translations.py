@@ -101,6 +101,11 @@ No hemos logrado encontrar tu ubicación,
 asi que hemos decidido enseñarte el tiempo en Oymyakon,
 uno de los sitios más fríos y permanentemente deshabitados del planeta.
 """,
+        'eu': u"""
+Ezin izan dugu zure kokapena aurkitu,
+beraz eguraldia Oymyakonen erakustea erabaki dugu,
+munduko lekurik hotz eta hutseneraiko bat
+""",
         'fa': u"""
 ما نتونستیم مکان شما رو پیدا کنیم. به همین خاطر شما رو به اویمیاکن بردیم
 ، یکی از سردترین مکان های روی زمین که اصلا قابل سکونت نیست!
