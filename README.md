@@ -401,6 +401,19 @@ in your language.
 
 ![Queries to wttr.in in various languages](https://pbs.twimg.com/media/C7hShiDXQAES6z1.jpg)
 
+## Windows Users
+
+There are currently two Windows related issues that prevent the examples found on this page from working exactly as expected out of the box. Until Microsoft fixes the issues, there are a few workarounds. To circumvent both issues you may use a shell such as `bash` on the [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install-win10) or read on for alternative solutions.
+
+### Garbage characters in the output
+There is a limitation of the current Win32 version of `curl`. Until the [Win32 curl issue](https://github.com/chubin/wttr.in/issues/18#issuecomment-474145551) is resolved and rolled out in a future Windows release, it is recommended that you use Powershell’s `Invoke-Web-Request` command instead:
+- `(Invoke-WebRequest http://wttr.in).Content`
+
+### Missing or double wide diagonal wind direction characters
+The second issue is regarding the width of the diagonal arrow glyphs that some Windows Terminal Applications such as the default `conhost.exe` use. At the time of writing this, `ConEmu.exe`, `ConEmu64.exe` and Terminal Applications built on top of ConEmu such as Cmder (`cmder.exe`) use these double-wide glyphs by default. The result is the same with all of these programs, either a missing character for certain wind directions or a broken table in the output or both. Some third-party Terminal Applications have addressed the wind direction glyph issue but that fix depends on the font and the Terminal Application you are using.
+One way to display the diagonal wind direction glyphs in your Terminal Application is to use [Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal-preview/9n0dx20hk701?activetab=pivot:overviewtab) which is currently available in the [Microsoft Store](https://www.microsoft.com/en-us/p/windows-terminal-preview/9n0dx20hk701?activetab=pivot:overviewtab). Windows Terminal is currently a preview release and will be rolled out as the default Terminal Application in an upcoming release. If your output is still skewed after using Windows Terminal then try maximizing the terminal window.
+Another way you can display the diagonal wind direction is to swap out the problematic characters with forward and backward slashes as shown [here](https://github.com/chubin/wttr.in/issues/18#issuecomment-405640892).
+
 ## Installation
 
 To install the application:
