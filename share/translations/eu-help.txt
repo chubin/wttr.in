@@ -1,14 +1,14 @@
 Argibideak:
 
     $ curl wttr.in          # eguraldia zure kokapenean
-    $ curl wttr.in/muc      # eguraldia Municheko aireportuan
+    $ curl wttr.in/bio      # eguraldia Bilboko aireportuan
 
 Onartzen diren kokapen motak:
 
-    /paris                  # hiri baten izena
-    /~Eiffel+tower          # leku famatu baten izena
+    /bilbao                 # hiri baten izena
+    /~Bilbao+Guggenheim+museum          # leku famatu baten izena
     /Москва                 # Edozein lekuko edozein hizkuntzako Unicode izena
-    /muc                    # aeroportu baten kodea (3 letra)
+    /bio                    # aeroportu baten kodea (3 letra)
     /@stackoverflow.com     # web domeinu baten izena
     /94107                  # area kode bat
     /-78.46,106.79          # GPS koordenadak
