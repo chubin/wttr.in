@@ -10,6 +10,7 @@ Translated/improved/corrected by:
                             Grigor Khachatryan @grigortw
     * Azerbaijani:          Dmytro Nikitiuk, Elsevar Abbasov,
                             Eldar Velibekov (@welibekov on github)
+    * Basque:               Iker Sagasti (@isagasti on github)
     * Belarusian:           Igor Chubin, Anton Zhavoronkov @edogby (on github)
     * Bosnian:              Ismar Kunc @ismarkunc
     * Bulgarian:            Vladimir Vitkov @zeridon (on github)

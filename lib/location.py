@@ -9,6 +9,7 @@ precise location description.
 """
 from __future__ import print_function
 
+import sys
 import os
 import json
 import socket
@@ -35,12 +36,15 @@ def is_ip(ip_addr):
     Check if `ip_addr` looks like an IP Address
     """
 
+    if sys.version_info[0] < 3:
+        ip_addr = ip_addr.encode("utf-8")
+
     try:
-        socket.inet_pton(socket.AF_INET, ip_addr.encode("utf-8"))
+        socket.inet_pton(socket.AF_INET, ip_addr)
         return True
     except socket.error:
         try:
-            socket.inet_pton(socket.AF_INET6, ip_addr.encode("utf-8"))
+            socket.inet_pton(socket.AF_INET6, ip_addr)
             return True
         except socket.error:
             return False
@@ -260,7 +264,7 @@ def location_processing(location, ip_addr):
     # if location is not None and location.upper() in IATA_CODES:
     #     location = '~%s' % location
 
-    if location is not None and location.startswith('~'):
+    if location is not None and not location.startswith("~-,") and location.startswith('~'):
         geolocation = geolocator(location_canonical_name(location[1:]))
         if geolocation is not None:
             if not override_location_name:

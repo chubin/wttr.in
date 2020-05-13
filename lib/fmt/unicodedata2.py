@@ -1,3 +1,9 @@
+# downloaded from https://gist.github.com/2204527
+# described/recommended here:
+#
+#   http://stackoverflow.com/questions/9868792/find-out-the-unicode-script-of-a-character
+#
+
 from __future__ import print_function
 from unicodedata import *
 

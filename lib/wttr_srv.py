@@ -6,15 +6,18 @@ Main wttr.in rendering function implementation
 """
 
 import logging
+import io
 import os
 import time
+from gevent.threadpool import ThreadPool
 from flask import render_template, send_file, make_response
 
-import wttrin_png
+import fmt.png
+
 import parse_query
 from translations import get_message, FULL_TRANSLATION, PARTIAL_TRANSLATION, SUPPORTED_LANGS
 from buttons import add_buttons
-from globals import get_help_file, log, \
+from globals import get_help_file, \
                     BASH_FUNCTION_FILE, TRANSLATION_FILE, LOG_FILE, \
                     NOT_FOUND_LOCATION, \
                     MALFORMED_RESPONSE_HTML_PAGE, \
@@ -22,16 +25,19 @@ from globals import get_help_file, log, \
                     MY_EXTERNAL_IP, QUERY_LIMITS
 from location import is_location_blocked, location_processing
 from limits import Limits
-from wttr import get_wetter, get_moon
-from wttr_line import wttr_line
+from view.wttr import get_wetter
+from view.moon import get_moon
+from view.line import wttr_line
 
 import cache
 
 if not os.path.exists(os.path.dirname(LOG_FILE)):
     os.makedirs(os.path.dirname(LOG_FILE))
-logging.basicConfig(filename=LOG_FILE, level=logging.DEBUG, format='%(asctime)s %(message)s')
+logging.basicConfig(filename=LOG_FILE, level=logging.INFO, format='%(asctime)s %(message)s')
 
 LIMITS = Limits(whitelist=[MY_EXTERNAL_IP], limits=QUERY_LIMITS)
+
+TASKS = ThreadPool(25)
 
 def show_text_file(name, lang):
     """
@@ -51,12 +57,10 @@ def show_text_file(name, lang):
         text = text\
                 .replace('NUMBER_OF_LANGUAGES', str(len(SUPPORTED_LANGS)))\
                 .replace('SUPPORTED_LANGUAGES', ' '.join(SUPPORTED_LANGS))
-    return text.decode('utf-8')
+    return text
 
-def client_ip_address(request):
-    """
-    Return client ip address for `request`.
-    Flask related
+def _client_ip_address(request):
+    """Return client ip address for flask `request`.
     """
 
     if request.headers.getlist("X-PNG-Query-For"):
@@ -112,55 +116,56 @@ def _parse_language_header(header):
                 elif lang == 'en':
                     yield None, lang_tuple[1]
         try:
-            return max(supported_langs(), key=lambda lang_tuple:lang_tuple[1])[0]
+            return max(supported_langs(), key=lambda lang_tuple: lang_tuple[1])[0]
         except ValueError:
             return None
 
     return _find_supported_language(_parse_accept_language(header))
 
-def get_answer_language_and_format(request):
+def get_answer_language_and_view(request):
     """
     Return preferred answer language based on
     domain name, query arguments and headers
     """
 
     lang = None
-    fmt = None
+    view_name = None
     hostname = request.headers['Host']
     if hostname != 'wttr.in' and hostname.endswith('.wttr.in'):
         lang = hostname[:-8]
-        if lang == "v2":
-            fmt = "v2"
+        if lang.startswith("v2"):
+            view_name = lang
             lang = None
 
     if 'lang' in request.args:
         lang = request.args.get('lang')
+        if lang.lower() == 'none':
+            lang = None
 
     header_accept_language = request.headers.get('Accept-Language', '')
     if lang is None and header_accept_language:
         lang = _parse_language_header(header_accept_language)
 
-    return lang, fmt
+    return lang, view_name
 
-def get_output_format(request, query):
+def get_output_format(query, parsed_query):
     """
     Return preferred output format: ansi, text, html or png
     based on arguments and headers in `request`.
     Return new location (can be rewritten)
     """
 
-    if 'format' in query:
+    if ('view' in query and not query["view"].startswith("v2")) \
+        or parsed_query.get("png_filename") \
+        or query.get('force-ansi'):
         return False
-    # FIXME
-    user_agent = request.headers.get('User-Agent', '').lower()
-    if query.get('force-ansi'):
-        return False
+
+    user_agent = parsed_query.get("user_agent", "").lower()
     html_output = not any(agent in user_agent for agent in PLAIN_TEXT_AGENTS)
     return html_output
 
-def cyclic_location_selection(locations, period):
-    """
-    Return one of `locations` (: separated list)
+def _cyclic_location_selection(locations, period):
+    """Return one of `locations` (: separated list)
     basing on the current time and query interval `period`
     """
 
@@ -173,144 +178,202 @@ def cyclic_location_selection(locations, period):
     except ValueError:
         period = 1
 
-    index = int(time.time())/period % len(locations)
+    index = int(time.time()/period) % len(locations)
     return locations[index]
 
 
-def wttr(location, request):
+def _response(parsed_query, query, fast_mode=False):
+    """Create response text based on `parsed_query` and `query` data.
+    If `fast_mode` is True, process only requests that can
+    be handled very fast (cached and static files).
     """
-    Main rendering function, it processes incoming weather queries.
-    Depending on user agent it returns output in HTML or ANSI format.
+
+    answer = None
+    cache_signature = cache.get_signature(
+        parsed_query["user_agent"],
+        parsed_query["request_url"],
+        parsed_query["ip_addr"],
+        parsed_query["lang"])
+    answer = cache.get(cache_signature)
+
+    if parsed_query['orig_location'] in PLAIN_TEXT_PAGES:
+        answer = show_text_file(parsed_query['orig_location'], parsed_query['lang'])
+        if parsed_query['html_output']:
+            answer = render_template('index.html', body=answer)
+
+    if answer or fast_mode:
+        return answer
+
+    # at this point, we could not handle the query fast,
+    # so we handle it with all available logic
+    loc = (parsed_query['orig_location'] or "").lower()
+    if parsed_query.get("view"):
+        output = wttr_line(query, parsed_query)
+    elif loc == 'moon' or loc.startswith('moon@'):
+        output = get_moon(parsed_query)
+    else:
+        output = get_wetter(parsed_query)
+
+    if parsed_query.get('png_filename'):
+        # originally it was just a usual function call,
+        # but it was a blocking call, so it was moved
+        # to separate threads:
+        #
+        #    output = fmt.png.render_ansi(
+        #        output, options=parsed_query)
+        result = TASKS.spawn(fmt.png.render_ansi, output, options=parsed_query)
+        output = result.get()
+    else:
+        if query.get('days', '3') != '0' \
+            and not query.get('no-follow-line') \
+            and ((parsed_query.get("view") or "v2")[:2] in ["v2"]):
+            if parsed_query['html_output']:
+                output = add_buttons(output)
+            else:
+                output += '\n' + get_message('FOLLOW_ME', parsed_query['lang']) + '\n'
+
+    return cache.store(cache_signature, output)
+
+def parse_request(location, request, query, fast_mode=False):
+    """Parse request and provided extended information for the query,
+    including location data, language, output format, view, etc.
 
     Incoming data:
-        request.args
-        request.headers
-        request.remote_addr
-        request.referrer
-        request.query_string
+
+        `location`              location name extracted from the query url
+        `request.args`
+        `request.headers`
+        `request.remote_addr`
+        `request.referrer`
+        `request.query_string`
+        `query`                 parsed command line arguments
+
+    Parameters priorities (from low to high):
+
+        * HTTP-header
+        * Domain name
+        * URL
+        * Filename
+
+    Return: dictionary with parsed parameters
     """
 
-    def _wrap_response(response_text, html_output):
-        response = make_response(response_text)
-        response.mimetype = 'text/html' if html_output else 'text/plain'
-        return response
-
-    if is_location_blocked(location):
-        return ""
-
-    ip_addr = client_ip_address(request)
-
-    try:
-        LIMITS.check_ip(ip_addr)
-    except RuntimeError as exception:
-        return str(exception)
+    if location and location.startswith("b_"):
+        result = parse_query.deserialize(location)
+        result["request_url"] = request.url
+        if result:
+            return result
 
     png_filename = None
     if location is not None and location.lower().endswith(".png"):
         png_filename = location
         location = location[:-4]
+    if location and ':' in location and location[0] != ":":
+        location = _cyclic_location_selection(location, query.get('period', 1))
 
-    lang, fmt = get_answer_language_and_format(request)
-    query = parse_query.parse_query(request.args)
-    html_output = get_output_format(request, query)
-    user_agent = request.headers.get('User-Agent', '').lower()
+    parsed_query = {
+        'ip_addr': _client_ip_address(request),
+        'user_agent': request.headers.get('User-Agent', '').lower(),
+        'request_url': request.url,
+        }
 
-    # generating cache signature
-    cache_signature = cache.get_signature(user_agent, request.url, ip_addr, lang)
-    answer = cache.get(cache_signature)
-    if answer:
-        return _wrap_response(answer, html_output)
+    if png_filename:
+        parsed_query["png_filename"] = png_filename
+        parsed_query.update(parse_query.parse_wttrin_png_name(png_filename))
 
-    if location in PLAIN_TEXT_PAGES:
-        help_ = show_text_file(location, lang)
-        if html_output:
-            return _wrap_response(render_template('index.html', body=help_), html_output)
-        return _wrap_response(help_, html_output)
+    lang, _view = get_answer_language_and_view(request)
 
-    if location and ':' in location:
-        location = cyclic_location_selection(location, query.get('period', 1))
+    parsed_query["view"] = parsed_query.get("view", query.get("view", _view))
+    parsed_query["location"] = parsed_query.get("location", location)
+    parsed_query["orig_location"] = parsed_query["location"]
+    parsed_query["lang"] = parsed_query.get("lang", lang)
 
-    orig_location = location
+    parsed_query["html_output"] = get_output_format(query, parsed_query)
 
-    if not png_filename:
+    if not fast_mode: # not png_filename and not fast_mode:
         location, override_location_name, full_address, country, query_source_location = \
-                location_processing(location, ip_addr)
+                location_processing(parsed_query["location"], parsed_query["ip_addr"])
 
-        us_ip = query_source_location[1] == 'United States' and 'slack' not in user_agent
+        us_ip = query_source_location[1] == 'United States' \
+                and 'slack' not in parsed_query['user_agent']
         query = parse_query.metric_or_imperial(query, lang, us_ip=us_ip)
-
-        # logging query
-        orig_location_utf8 = (orig_location or "").encode('utf-8')
-        location_utf8 = location.encode('utf-8')
-        use_imperial = query.get('use_imperial', False)
-        log(" ".join(map(str,
-                         [ip_addr, user_agent, orig_location_utf8, location_utf8, use_imperial, lang])))
 
         if country and location != NOT_FOUND_LOCATION:
             location = "%s,%s" % (location, country)
 
-    # We are ready to return the answer
-    try:
-        if fmt or 'format' in query:
-            response_text = wttr_line(
-                location, override_location_name, full_address, query, lang, fmt)
-            fmt = fmt or query.get('format')
-            response_text = cache.store(cache_signature, response_text)
+        parsed_query.update({
+            'location': location,
+            'override_location_name': override_location_name,
+            'full_address': full_address,
+            'country': country,
+            'query_source_location': query_source_location})
 
-            return _wrap_response(
-                response_text,
-                html_output)
+    parsed_query.update(query)
+    return parsed_query
+
+
+def wttr(location, request):
+    """Main rendering function, it processes incoming weather queries,
+    and depending on the User-Agent string and other paramters of the query
+    it returns output in HTML, ANSI or other format.
+    """
+
+    def _wrap_response(response_text, html_output, png_filename=None):
+        if not isinstance(response_text, str) and \
+           not isinstance(response_text, bytes):
+            return response_text
 
         if png_filename:
-            options = {
-                'ip_addr': ip_addr,
-                'lang': lang,
-                'location': location}
-            options.update(query)
+            response = make_response(send_file(
+                io.BytesIO(response_text),
+                attachment_filename=png_filename,
+                mimetype='image/png'))
 
-            cached_png_file = wttrin_png.make_wttr_in_png(png_filename, options=options)
-            response = make_response(send_file(cached_png_file,
-                                               attachment_filename=png_filename,
-                                               mimetype='image/png'))
             for key, value in {
                     'Cache-Control': 'no-cache, no-store, must-revalidate',
                     'Pragma': 'no-cache',
                     'Expires': '0',
                 }.items():
                 response.headers[key] = value
-
-            # Trying to disable github caching
-            return response
-
-        if orig_location and (orig_location.lower() == 'moon' or orig_location.lower().startswith('moon@')):
-            output = get_moon(orig_location, html=html_output, lang=lang, query=query)
         else:
-            output = get_wetter(location, ip_addr,
-                                html=html_output,
-                                lang=lang,
-                                query=query,
-                                location_name=override_location_name,
-                                full_address=full_address,
-                                url=request.url,
-                               )
+            response = make_response(response_text)
+            response.mimetype = 'text/html' if html_output else 'text/plain'
+        return response
 
-        if query.get('days', '3') != '0' and not query.get('no-follow-line'):
-            if html_output:
-                output = add_buttons(output)
-            else:
-                #output += '\n' + get_message('NEW_FEATURE', lang).encode('utf-8')
-                output += '\n' + get_message('FOLLOW_ME', lang).encode('utf-8') + '\n'
+    if is_location_blocked(location):
+        return ""
 
-        return _wrap_response(output, html_output)
+    try:
+        LIMITS.check_ip(_client_ip_address(request))
+    except RuntimeError as exception:
+        return str(exception)
 
+    query = parse_query.parse_query(request.args)
+
+    # first, we try to process the query as fast as possible
+    # (using the cache and static files),
+    # and only if "fast_mode" was unsuccessful,
+    # use the full track
+    parsed_query = parse_request(location, request, query, fast_mode=True)
+    response = _response(parsed_query, query, fast_mode=True)
+    try:
+        if not response:
+            parsed_query = parse_request(location, request, query)
+            response = _response(parsed_query, query)
+    # pylint: disable=broad-except
     except Exception as exception:
-        # if 'Malformed response' in str(exception) \
-        #         or 'API key has reached calls per day allowed limit' in str(exception):
-            if html_output:
-                return _wrap_response(MALFORMED_RESPONSE_HTML_PAGE, html_output)
-            return _wrap_response(get_message('CAPACITY_LIMIT_REACHED', lang).encode('utf-8'), html_output)
-        # logging.error("Exception has occured", exc_info=1)
-        # return "ERROR"
+        logging.error("Exception has occured", exc_info=1)
+        if parsed_query['html_output']:
+            response = MALFORMED_RESPONSE_HTML_PAGE
+        else:
+            response = get_message('CAPACITY_LIMIT_REACHED', parsed_query['lang'])
+
+        # if exception is occured, we return not a png file but text
+        if "png_filename" in parsed_query:
+            del parsed_query["png_filename"]
+    return _wrap_response(
+        response, parsed_query['html_output'],
+        png_filename=parsed_query.get('png_filename'))
 
 if __name__ == "__main__":
     import doctest

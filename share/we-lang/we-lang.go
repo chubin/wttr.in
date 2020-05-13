@@ -303,6 +303,7 @@ var (
         "da":   "da_DK",
         "de":   "de_DE",
         "el":   "el_GR",
+        "eu":   "eu_ES",
         "eo":   "eo",
         "es":   "es_ES",
         "et":   "et_EE",
@@ -423,7 +424,7 @@ var (
 
     daytimeTranslation = map[string][]string{
         "af":{"Oggend","Middag", "Vroegaand", "Laatnag"},
-        "ar":{"صباح",   "ظهر",      "مساء",     "ليل"   },
+        "ar":{ "ﺎﻠﻠﻴﻟ", "ﺎﻠﻤﺳﺍﺀ", "ﺎﻠﻈﻫﺭ", "ﺎﻠﺼﺑﺎﺣ" },
         "az":{"Səhər",  "Gün",      "Axşam",    "Gecə"  },
         "be":{"Раніца", "Дзень",    "Вечар",    "Ноч"   },
         "bg":{"Сутрин", "Обяд",     "Вечер",    "Нощ"   },
@@ -914,6 +915,9 @@ func printDay(w weather) (ret []string) {
         dateName = lctime.Strftime("%a %d %b", d)
         if config.Lang == "ko" {
             dateName = lctime.Strftime("%b %d일 %a", d)
+        }
+        if config.Lang == "zh" || config.Lang == "zh-tw" || config.Lang == "zh-cn" {
+            dateName = lctime.Strftime("%b%d日%A", d)
         }
     }
     // appendSide := 0

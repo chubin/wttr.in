@@ -13,17 +13,17 @@ FULL_TRANSLATION = [
 
 PARTIAL_TRANSLATION = [
     "az", "bg", "bs", "cy", "cs",
-    "eo", "es", "fi", "ga", "hi", "hr",
+    "eo", "es", "eu", "fi", "ga", "hi", "hr",
     "hy", "is", "ja", "jv", "ka", "kk",
     "ko", "ky", "lt", "lv", "mk", "ml", "nl", "fy",
     "nn", "pt", "pt-br", "sk", "sl", "sr", "sr-lat",
-    "sv", "sw",  "te", "uz",
+    "sv", "sw", "te", "uz",
     "zh", "zu", "he",
 ]
 
 PROXY_LANGS = [
     "af", "ar", "az", "be", "bs", "ca",
-    "cy", "el", "eo", "et", "fa",
+    "cy", "de", "el", "eo", "et", "eu", "fa", "fr",
     "fy", "he", "hr", "hu", "hy",
     "ia", "id", "is", "it", "ja", "kk",
     "lv", "mk", "nb", "nn", "ro",

@@ -14,6 +14,7 @@ from __future__ import print_function
 
 import logging
 import os
+import re
 
 MYDIR = os.path.abspath(os.path.dirname(os.path.dirname('__file__')))
 
@@ -28,9 +29,9 @@ PYPHOON = "/home/igor/pyphoon/bin/pyphoon-lolcat"
 _DATADIR = "/wttr.in"
 _LOGDIR = "/wttr.in/log"
 
-CACHEDIR = os.path.join(_DATADIR, "cache/wego/")
 IP2LCACHE = os.path.join(_DATADIR, "cache/ip2l/")
 PNG_CACHE = os.path.join(_DATADIR, "cache/png")
+LRU_CACHE = os.path.join(_DATADIR, "cache/lru")
 
 LOG_FILE = os.path.join(_LOGDIR, 'main.log')
 
@@ -41,7 +42,6 @@ BLACKLIST = os.path.join(MYDIR, "share/blacklist")
 HELP_FILE = os.path.join(MYDIR, 'share/help.txt')
 BASH_FUNCTION_FILE = os.path.join(MYDIR, 'share/bash-function.txt')
 TRANSLATION_FILE = os.path.join(MYDIR, 'share/translation.txt')
-TEST_FILE = os.path.join(MYDIR, 'share/test-NAME.txt')
 
 IATA_CODES_FILE = os.path.join(MYDIR, 'share/list-of-iata-codes.txt')
 
@@ -77,8 +77,8 @@ PLAIN_TEXT_AGENTS = [
     "lwp-request",
     "wget",
     "python-requests",
-    "OpenBSD ftp",
-    "PowerShell"
+    "openbsd ftp",
+    "powershell",
 ]
 
 PLAIN_TEXT_PAGES = [':help', ':bash.function', ':translation', ':iterm2']
@@ -123,3 +123,7 @@ def get_help_file(lang):
     if os.path.exists(help_file):
         return help_file
     return HELP_FILE
+
+def remove_ansi(sometext):
+    ansi_escape = re.compile(r'(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]')
+    return ansi_escape.sub('', sometext)

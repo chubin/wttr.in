@@ -17,13 +17,17 @@ import sys
 import re
 import datetime
 import json
-try:
-    from astral import Astral, Location
-except ImportError:
-    pass
-from constants import WWO_CODE, WEATHER_SYMBOL, WIND_DIRECTION
+import requests
+
+from astral import LocationInfo
+from astral import moon
+from astral.sun import sun
+
+import pytz
+
+from constants import WWO_CODE, WEATHER_SYMBOL, WIND_DIRECTION, WEATHER_SYMBOL_WIDTH_VTE
 from weather_data import get_weather_data
-import spark
+from . import v2
 
 PRECONFIGURED_FORMAT = {
     '1':    u'%c %t',
@@ -57,12 +61,13 @@ def render_temperature(data, query):
     return temperature
 
 def render_condition(data, query):
-    """
-    condition (c)
+    """Emoji encoded weather condition (c)
     """
 
     weather_condition = WEATHER_SYMBOL[WWO_CODE[data['weatherCode']]]
-    return weather_condition
+    spaces = " "*(WEATHER_SYMBOL_WIDTH_VTE.get(weather_condition) - 1)
+
+    return weather_condition + spaces
 
 def render_condition_fullname(data, query):
     """
@@ -140,18 +145,18 @@ def render_wind(data, query):
         degree = ""
 
     if degree:
-        wind_direction = WIND_DIRECTION[((degree+22)%360)/45]
+        wind_direction = WIND_DIRECTION[((degree+22)%360)//45]
     else:
         wind_direction = ""
 
     if query.get('use_ms_for_wind', False):
-        unit = ' m/s'
+        unit = 'm/s'
         wind = u'%s%.1f%s' % (wind_direction, float(data['windspeedKmph'])/36.0*10.0, unit)
     elif query.get('use_imperial', False):
-        unit = ' mph'
+        unit = 'mph'
         wind = u'%s%s%s' % (wind_direction, data['windspeedMiles'], unit)
     else:
-        unit = ' km/h'
+        unit = 'km/h'
         wind = u'%s%s%s' % (wind_direction, data['windspeedKmph'], unit)
 
     return wind
@@ -161,35 +166,58 @@ def render_location(data, query):
     location (l)
     """
 
-    return (data['override_location'] or data['location']) # .title()
+    return (data['override_location'] or data['location'])
 
 def render_moonphase(_, query):
-    """
+    """moonpahse(m)
     A symbol describing the phase of the moon
     """
-    astral = Astral()
-    moon_index = int(
-        int(32.0*astral.moon_phase(date=datetime.datetime.today())/28+2)%32/4
-    )
+    moon_phase = moon.phase(date=datetime.datetime.today())
+    moon_index = int(int(32.0*moon_phase/28+2)%32/4)
     return MOON_PHASES[moon_index]
 
 def render_moonday(_, query):
-    """
+    """moonday(M)
     An number describing the phase of the moon (days after the New Moon)
     """
-    astral = Astral()
-    return str(int(astral.moon_phase(date=datetime.datetime.today())))
+    moon_phase = moon.phase(date=datetime.datetime.today())
+    return str(int(moon_phase))
 
-def render_sunset(data, query):
-    location = data['location']
-    city_name = location
-    astral = Astral()
-    location = Location(('Nuremberg', 'Germany',
-              49.453872, 11.077298, 'Europe/Berlin', 0))
-    sun = location.sun(date=datetime.datetime.today(), local=True)
+##################################
+# this part should be rewritten
+# this is just a temporary solution
+
+def get_geodata(location):
+    text = requests.get("http://localhost:8004/%s" % location).text
+    return json.loads(text)
 
 
-    return str(sun['sunset'])
+def render_dawn(data, query, local_time_of):
+    """dawn (D)
+    Local time of dawn"""
+    return local_time_of("dawn")
+
+def render_dusk(data, query, local_time_of):
+    """dusk (d)
+    Local time of dusk"""
+    return local_time_of("dusk")
+
+def render_sunrise(data, query, local_time_of):
+    """sunrise (S)
+    Local time of sunrise"""
+    return local_time_of("sunrise")
+
+def render_sunset(data, query, local_time_of):
+    """sunset (s)
+    Local time of sunset"""
+    return local_time_of("sunset")
+
+def render_zenith(data, query, local_time_of):
+    """zenith (z)
+    Local time of zenith"""
+    return local_time_of("noon")
+
+##################################
 
 FORMAT_SYMBOL = {
     'c':    render_condition,
@@ -200,16 +228,47 @@ FORMAT_SYMBOL = {
     'l':    render_location,
     'm':    render_moonphase,
     'M':    render_moonday,
-    's':    render_sunset,
     'p':    render_precipitation,
     'o':    render_precipitation_chance,
     'P':    render_pressure,
     }
 
+FORMAT_SYMBOL_ASTRO = {
+    'D':    render_dawn,
+    'd':    render_dusk,
+    'S':    render_sunrise,
+    's':    render_sunset,
+    'z':    render_zenith,
+}
+
 def render_line(line, data, query):
     """
     Render format `line` using `data`
     """
+
+    def get_local_time_of():
+
+        location = data["location"]
+        geo_data = get_geodata(location)
+
+        city = LocationInfo()
+        city.latitude = geo_data["latitude"]
+        city.longitude = geo_data["longitude"]
+        city.timezone = geo_data["timezone"]
+
+        timezone = city.timezone
+
+        local_tz = pytz.timezone(timezone)
+
+        datetime_day_start = datetime.datetime.now()\
+                .replace(hour=0, minute=0, second=0, microsecond=0)
+        current_sun = sun(city.observer, date=datetime_day_start)
+
+        local_time_of = lambda x: current_sun[x]\
+                                    .replace(tzinfo=pytz.utc)\
+                                    .astimezone(local_tz)\
+                                    .strftime("%H:%M:%S")
+        return local_time_of
 
     def render_symbol(match):
         """
@@ -220,13 +279,22 @@ def render_line(line, data, query):
         symbol_string = match.group(0)
         symbol = symbol_string[-1]
 
-        if symbol not in FORMAT_SYMBOL:
-            return ''
+        if symbol in FORMAT_SYMBOL:
+            render_function = FORMAT_SYMBOL[symbol]
+            return render_function(data, query)
+        if symbol in FORMAT_SYMBOL_ASTRO and local_time_of is not None:
+            render_function = FORMAT_SYMBOL_ASTRO[symbol]
+            return render_function(data, query, local_time_of)
 
-        render_function = FORMAT_SYMBOL[symbol]
-        return render_function(data, query)
+        return ''
 
-    return re.sub(r'%[^%]*[a-zA-Z]', render_symbol, line)
+    template_regexp = r'%[^%]*[a-zA-Z]'
+    for template_code in re.findall(template_regexp, line):
+        if template_code.lstrip("%") in FORMAT_SYMBOL_ASTRO:
+            local_time_of = get_local_time_of()
+            break
+
+    return re.sub(template_regexp, render_symbol, line)
 
 def render_json(data):
     output = json.dumps(data, indent=4, sort_keys=True)
@@ -237,47 +305,41 @@ def render_json(data):
 
     return output
 
-def format_weather_data(format_line, location, override_location, full_address, data, query):
+def format_weather_data(query, parsed_query, data):
     """
     Format information about current weather `data` for `location`
     with specified in `format_line` format
     """
 
     if 'data' not in data:
-        return 'Unknown location; please try ~%s' % location
+        return 'Unknown location; please try ~%s' % parsed_query["location"]
+
+    format_line = parsed_query.get("view", "")
+    if format_line in PRECONFIGURED_FORMAT:
+        format_line = PRECONFIGURED_FORMAT[format_line]
 
     if format_line == "j1":
         return render_json(data['data'])
     if format_line[:2] == "v2":
-        return spark.main(location,
-                          override_location=override_location,
-                          full_address=full_address, data=data,
-                          view=format_line)
+        return v2.main(query, parsed_query, data)
 
     current_condition = data['data']['current_condition'][0]
-    current_condition['location'] = location
-    current_condition['override_location'] = override_location
+    current_condition['location'] = parsed_query["location"]
+    current_condition['override_location'] = parsed_query["override_location_name"]
     output = render_line(format_line, current_condition, query)
     return output
 
-def wttr_line(location, override_location_name, full_address, query, lang, fmt):
+def wttr_line(query, parsed_query):
     """
     Return 1line weather information for `location`
     in format `line_format`
     """
+    location = parsed_query['location']
+    lang = parsed_query['lang']
 
-    format_line = query.get('format', fmt or '')
-
-    if format_line in PRECONFIGURED_FORMAT:
-        format_line = PRECONFIGURED_FORMAT[format_line]
-
-    weather_data = get_weather_data(location, lang)
-
-    output = format_weather_data(
-        format_line, location, override_location_name, full_address,
-        weather_data, query)
-    output = output.rstrip("\n")+"\n"
-    return output
+    data = get_weather_data(location, lang)
+    output = format_weather_data(query, parsed_query, data)
+    return output.rstrip("\n")+"\n"
 
 def main():
     """
@@ -288,8 +350,14 @@ def main():
     query = {
         'line': sys.argv[2],
         }
+    parsed_query = {
+        "location": location,
+        "orig_location": location,
+        "language": "en",
+        "format": "v2",
+        }
 
-    sys.stdout.write(wttr_line(location, location, None, query, 'en', "v1"))
+    sys.stdout.write(wttr_line(query, parsed_query))
 
 if __name__ == '__main__':
     main()

@@ -1,3 +1,36 @@
+import re
+import json
+import zlib
+import base64
+
+def serialize(parsed_query):
+    return base64.b64encode(
+        zlib.compress(
+            json.dumps(parsed_query).encode("utf-8")),
+        altchars=b"-_").decode("utf-8")
+
+def deserialize(url):
+
+    string = url[2:]
+
+    extension = None
+    if "." in string:
+        string, extension = string.split(".", 1)
+
+    try:
+        result = json.loads(
+            zlib.decompress(
+                base64.b64decode(string, altchars=b"-_")).decode("utf-8"))
+    except zlib.error:
+        return None
+
+    if extension == "png":
+        result["png_filename"] = url
+        result["html_output"] = False
+
+    return result
+
+
 def metric_or_imperial(query, lang, us_ip=False):
     """
     """
@@ -29,7 +62,6 @@ def parse_query(args):
     result = {}
 
     reserved_args = ["lang"]
-    #q = "&".join(x for x in args.keys() if x not in reserved_args)
 
     q = ""
 
@@ -68,8 +100,6 @@ def parse_query(args):
         if days in q:
             result['days'] = days
 
-    result['no-caption'] = False
-    result['no-city'] = False
     if 'q' in q:
         result['no-caption'] = True
     if 'Q' in q:
@@ -82,7 +112,61 @@ def parse_query(args):
             val = True
         if val == 'False':
             val = False
-        result[key] = val
+        if val:
+            result[key] = val
+
+    # currently `view` is alias for `format`
+    if "format" in result and not result.get("view"):
+        result["view"] = result["format"]
+        del result["format"]
 
     return result
 
+def parse_wttrin_png_name(name):
+    """
+    Parse the PNG filename and return the result as a dictionary.
+    For example:
+        input = City_200x_lang=ru.png
+        output = {
+            "lang": "ru",
+            "width": "200",
+            "filetype": "png",
+            "location": "City"
+        }
+    """
+
+    parsed = {}
+    to_be_parsed = {}
+
+    if name.lower()[-4:] == '.png':
+        parsed['filetype'] = 'png'
+        name = name[:-4]
+
+    parts = name.split('_')
+    parsed['location'] = parts[0]
+
+    one_letter_options = ""
+    for part in parts[1:]:
+        if re.match('(?:[0-9]+)x', part):
+            parsed['width'] = part[:-1]
+        elif re.match('x(?:[0-9]+)', part):
+            parsed['height'] = part[1:]
+        elif re.match(part, '(?:[0-9]+)x(?:[0-9]+)'):
+            parsed['width'], parsed['height'] = part.split('x', 1)
+        elif '=' in part:
+            arg, val = part.split('=', 1)
+            to_be_parsed[arg] = val
+        else:
+            one_letter_options += part
+
+    for letter in one_letter_options:
+        to_be_parsed[letter] = ''
+
+    parsed.update(parse_query(to_be_parsed))
+
+    # currently `view` is alias for `format`
+    if "format" in parsed and not parsed.get("view"):
+        parsed["view"] = parsed["format"]
+        del parsed["format"]
+
+    return parsed
