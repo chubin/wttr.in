@@ -303,7 +303,6 @@ var (
         "da":   "da_DK",
         "de":   "de_DE",
         "el":   "el_GR",
-        "eu":   "eu_ES",
         "eo":   "eo",
         "es":   "es_ES",
         "et":   "et_EE",
