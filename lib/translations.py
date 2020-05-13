@@ -23,7 +23,7 @@ PARTIAL_TRANSLATION = [
 
 PROXY_LANGS = [
     "af", "ar", "az", "be", "bs", "ca",
-    "cy", "de", "el", "eo", "et", "fa", "fr",
+    "cy", "de", "el", "eo", "et", "eu", "fa", "fr",
     "fy", "he", "hr", "hu", "hy",
     "ia", "id", "is", "it", "ja", "kk",
     "lv", "mk", "nb", "nn", "ro",
