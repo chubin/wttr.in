@@ -34,8 +34,7 @@ import pyjq
 import pytz
 import numpy as np
 from astral import LocationInfo
-from astral import moon
-from astral.sun import sun
+from astral import moon, sun
 from scipy.interpolate import interp1d
 from babel.dates import format_datetime
 
@@ -255,35 +254,54 @@ def draw_astronomical(city_name, geo_data):
         current_date = (
             datetime_day_start
             + datetime.timedelta(hours=1*time_interval)).replace(tzinfo=pytz.timezone(geo_data["timezone"]))
-        current_sun = sun(city.observer, date=current_date)
 
-        dawn = current_sun['dawn'] # .replace(tzinfo=None)
-        dusk = current_sun['dusk'] # .replace(tzinfo=None)
-        sunrise = current_sun['sunrise'] # .replace(tzinfo=None)
-        sunset = current_sun['sunset'] # .replace(tzinfo=None)
+        try:
+            dawn = sun.dawn(city.observer, date=current_date)
+        except ValueError:
+            dawn = current_date
 
+        try:
+            dusk = sun.dusk(city.observer, date=current_date)
+        except ValueError:
+            dusk = current_date + datetime.timedelta(hours=24)
+
+        try:
+            sunrise = sun.sunrise(city.observer, date=current_date)
+        except ValueError:
+            sunrise = current_date
+
+        try:
+            sunset = sun.sunset(city.observer, date=current_date)
+        except ValueError:
+            sunset = current_date + datetime.timedelta(hours=24)
+
+        char = "."
         if current_date < dawn:
             char = " "
         elif current_date > dusk:
             char = " "
-        elif dawn < current_date and current_date < sunrise:
+        elif dawn <= current_date and current_date <= sunrise:
             char = u"─"
-        elif sunset < current_date and current_date < dusk:
+        elif sunset <= current_date and current_date <= dusk:
             char = u"─"
-        elif sunrise < current_date and current_date < sunset:
+        elif sunrise <= current_date and current_date <= sunset:
             char = u"━"
 
         answer += char
 
         # moon
-        if time_interval % 3 == 0:
+        if time_interval in [0,23,47,69]: # time_interval % 3 == 0:
             moon_phase = moon.phase(
                 date=datetime_day_start + datetime.timedelta(hours=time_interval))
-            moon_phase_emoji = constants.MOON_PHASES[int(math.floor(moon_phase*1.0/28.0*8+0.5)) % len(constants.MOON_PHASES)]
-            if time_interval in [0, 24, 48, 69]:
-                moon_line += moon_phase_emoji + " "
-            else:
+            moon_phase_emoji = constants.MOON_PHASES[
+                int(math.floor(moon_phase*1.0/28.0*8+0.5)) % len(constants.MOON_PHASES)]
+        #    if time_interval in [0, 24, 48, 69]:
+            moon_line += moon_phase_emoji # + " "
+        elif time_interval % 3 == 0:
+            if time_interval not in [24,28]: #se:
                 moon_line += "   "
+            else:
+                moon_line += " "
 
 
     answer = moon_line + "\n" + answer + "\n"
@@ -465,7 +483,6 @@ def textual_information(data_parsed, geo_data, config, html_output=False):
 
     datetime_day_start = datetime.datetime.now()\
             .replace(hour=0, minute=0, second=0, microsecond=0)
-    current_sun = sun(city.observer, date=datetime_day_start)
 
     format_line = "%c %C, %t, %h, %w, %P"
     current_condition = data_parsed['data']['current_condition'][0]
@@ -477,18 +494,37 @@ def textual_information(data_parsed, geo_data, config, html_output=False):
 
     local_tz = pytz.timezone(timezone)
 
-    local_time_of = lambda x: current_sun[x]\
-                                .replace(tzinfo=pytz.utc)\
-                                .astimezone(local_tz)\
-                                .strftime("%H:%M:%S")
+    def _get_local_time_of(what):
+        _sun = {
+            "dawn": sun.dawn,
+            "sunrise": sun.sunrise,
+            "noon": sun.noon,
+            "sunset": sun.sunset,
+            "dusk": sun.dusk,
+            }[what]
+
+        current_time_of_what = _sun(city.observer, date=datetime_day_start)
+        return current_time_of_what\
+                .replace(tzinfo=pytz.utc)\
+                .astimezone(local_tz)\
+                .strftime("%H:%M:%S")
+
+    local_time_of = {}
+    for what in ["dawn", "sunrise", "noon", "sunset", "dusk"]:
+        try:
+            local_time_of[what] = _get_local_time_of(what)
+        except ValueError:
+            local_time_of[what] = "-"*8
 
     tmp_output = []
+
     tmp_output.append('  Now:    %%{{NOW(%s)}}' % timezone)
-    tmp_output.append('Dawn:    %s' % local_time_of("dawn"))
-    tmp_output.append('Sunrise: %s' % local_time_of("sunrise"))
-    tmp_output.append('  Zenith: %s     ' % local_time_of("noon"))
-    tmp_output.append('Sunset:  %s' % local_time_of("sunset"))
-    tmp_output.append('Dusk:    %s' % local_time_of("dusk"))
+    tmp_output.append('Dawn:    %s' % local_time_of["dawn"])
+    tmp_output.append('Sunrise: %s' % local_time_of["sunrise"])
+    tmp_output.append('  Zenith: %s     ' % local_time_of["noon"])
+    tmp_output.append('Sunset:  %s' % local_time_of["sunset"])
+    tmp_output.append('Dusk:    %s' % local_time_of["dusk"])
+
     tmp_output = [
         re.sub("^([A-Za-z]*:)", lambda m: _colorize(m.group(1), "2"), x)
         for x in tmp_output]

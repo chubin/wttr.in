@@ -27,12 +27,15 @@ def get_wetter(parsed_query):
     if location == NOT_FOUND_LOCATION:
         location_not_found = True
 
+    stderr = ""
+    returncode = 0
     if not location_not_found:
         stdout, stderr, returncode = _wego_wrapper(location, parsed_query)
 
-    if location_not_found or returncode != 0:
-        if ('Unable to find any matching weather'
-            ' location to the parsed_query submitted') in stderr:
+    if location_not_found or \
+        (returncode != 0 \
+            and ('Unable to find any matching weather'
+                 ' location to the parsed_query submitted') in stderr):
             stdout, stderr, returncode = _wego_wrapper(NOT_FOUND_LOCATION, parsed_query)
             location_not_found = True
             stdout += get_message('NOT_FOUND_MESSAGE', lang)
