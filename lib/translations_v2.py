@@ -33,7 +33,7 @@ V2_TRANSLATION = {
     "hy": ("Եղանակի տեսություն:",           "", "", "", "", "", "", "", ""),
     "ia": ("Reporto tempore pro:",          "Tempore", "Fuso Horari", "Alora", "Alba", "Aurora", "Zenit", "Poner del sol", "Crepusculo"),
     "id": ("Prakiraan cuaca:",              "", "", "", "", "", "", "", ""),
-    "it": ("Previsioni meteo:",             "", "", "", "", "", "", "", ""),
+    "it": ("Previsioni meteo:",             "Tempo", "Fuso orario", "Ora", "Alba", "Sorgere del Sole", "Zenit", "Tramonto", "Crepuscolo"),
     "is": ("Veðurskýrsla fyrir:",           "", "", "", "", "", "", "", ""),
     "ja": ("天気予報：",                    "天気",     "タイムゾーン", "今",       "夜明け",           "日の出",       "天頂",         "日の入",           "日暮れ"),
     "jv": ("Weather forecast for:",         "", "", "", "", "", "", "", ""),
