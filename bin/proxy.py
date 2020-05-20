@@ -155,7 +155,10 @@ def add_translations(content, lang):
         return {}
 
     try:
-        weather_condition = d['data']['current_condition'][0]['weatherDesc'][0]['value']
+        weather_condition = d['data']['current_condition'
+                ][0]['weatherDesc'][0]['value'].capitalize()
+        d['data']['current_condition'][0]['weatherDesc'][0]['value'] = \
+            weather_condition
         if lang in languages_to_translate:
             d['data']['current_condition'][0]['lang_%s' % lang] = \
                 [{'value': translate(weather_condition, lang)}]
