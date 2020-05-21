@@ -40,7 +40,10 @@ def get_wetter(parsed_query):
             location_not_found = True
             stdout += get_message('NOT_FOUND_MESSAGE', lang)
 
-    first_line, stdout = _wego_postprocessing(location, parsed_query, stdout)
+    if "\n" in stdout:
+        first_line, stdout = _wego_postprocessing(location, parsed_query, stdout)
+    else:
+        first_line = ""
 
 
     if html:
