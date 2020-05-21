@@ -84,7 +84,7 @@ def _cache_file(path, query):
 
     digest = hashlib.sha1(("%s %s" % (path, query)).encode("utf-8")).hexdigest()
     digest_number = ord(digest[0].upper())
-    expiry_interval = 60*(digest_number+10)
+    expiry_interval = 60*(digest_number+20)
 
     timestamp = "%010d" % (int(time.time())//expiry_interval*expiry_interval)
     filename = os.path.join(PROXY_CACHEDIR, timestamp, path, query)
