@@ -39,6 +39,7 @@ request like this:
 
     $ curl wttr.in/London
     $ curl wttr.in/Moscow
+    $ curl wttr.in/Salt+Lake+City
 
 If you omit the location name, you will get the report for your current location based on your IP address.
 
