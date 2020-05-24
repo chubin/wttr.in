@@ -38,7 +38,7 @@ from astral import moon, sun
 from scipy.interpolate import interp1d
 from babel.dates import format_datetime
 
-from globals import WWO_KEY
+from globals import WWO_KEY, remove_ansi
 import constants
 import translations
 import parse_query
@@ -604,6 +604,8 @@ def main(query, parsed_query, data):
         output = generate_panel(data_parsed, geo_data, parsed_query)
         if query.get("text") != "no" and parsed_query.get("text") != "no":
             output += textual_information(data_parsed, geo_data, parsed_query)
+        if parsed_query.get('no-terminal', False):
+            output = remove_ansi(output)
     return output
 
 if __name__ == '__main__':
