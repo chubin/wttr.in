@@ -142,7 +142,7 @@ def add_translations(content, lang):
     returned by the data source
     """
 
-    if content is "{}":
+    if content == "{}":
         return {}
 
     languages_to_translate = TRANSLATIONS.keys()
