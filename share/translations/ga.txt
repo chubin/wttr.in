@@ -1,0 +1,81 @@
+113: Geal                               : Clear
+113: Grianmhar                          : Sunny
+116: Breacscamallach                    : Partly cloudy
+119: Scamallach                         : Cloudy
+122: Scamallach                         : Overcast
+143: Ceochán                            : Mist
+176: Ceathanna                          : Patchy rain possible
+179: Ceathanna sneachta                 : Patchy snow possible
+182: Ceathanna flichshneachta           : Patchy sleet possible
+185: Ceathanna cloichshneachta          : Patchy freezing drizzle possible
+200: Ceathanna toirní                   : Thundery outbreaks possible
+227: Stealladh sneachta                 : Blowing snow
+230: Síobadh sneachta                   : Blizzard
+248: Ceo                                : Fog
+260: Ceo reoite                         : Freezing fog
+263: Ceobhrán                           : Patchy light drizzle
+266: Ceobhrán éadrom                    : Light drizzle
+281: Ceobhrán reoite                    : Freezing drizzle
+284: Ceobhrán reoite trom               : Heavy freezing drizzle
+293: Breachbháisteach éadrom            : Patchy light rain
+296: Báisteach éadrom                   : Light rain
+299: Báisteach mheasartha uaireanta     : Moderate rain at times
+302: Báisteach mheasartha               : Moderate rain
+305: Báisteach throm uairanta           : Heavy rain at times
+308: Báisteach throm                    : Heavy rain
+311: Báisteach reoite éadrom            : Light freezing rain
+314: Báisteach mheasartha nó reoite throm : Moderate or heavy freezing rain
+317: Flichshneachta éadrom              : Light sleet
+320: Flichshneachta measartha nó trom   : Moderate or heavy sleet
+323: Breacsneachta éadrom               : Patchy light snow
+326: Sneachta éadrom                    : Light snow
+329: Breacsneachta measartha            : Patchy moderate snow
+332: Sneachta measartha                 : Moderate snow
+335: Sneachta trom uaireanta            : Patchy heavy snow
+338: Sneachta trom                      : Heavy snow
+350: Chloichshneachta                   : Ice pellets
+353: Cith éadrom                        : Light rain shower
+356: Cith measartha no trom             : Moderate or heavy rain shower
+359: Duartan	                        : Torrential rain shower
+362: Ceathanna flichshneachta           : Light sleet showers
+365: Ceathanna flichshneachta measartha nó troma : Moderate or heavy sleet showers
+368: Ceathanna sneachta éadroma         : Light snow showers
+371: Ceathanna sneachta measartha nó troma : Moderate or heavy snow showers
+386: Ceathanna éadroma le toirneach     : Patchy light rain with thunder
+389: Báisteach measartha nó throm le tóirneach : Moderate or heavy rain with thunder
+392: Sneachta éadrom le toirneach       : Patchy light snow with thunder
+395: Sneachta measartha nó trom le toirneach : Moderate or heavy snow with thunder
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
