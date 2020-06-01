@@ -35,6 +35,7 @@ Translated/improved/corrected by:
     * Icelandic:            Óli G. @dvergur, Skúli Arnlaugsson @Arnlaugsson
     * Indonesian:           Andria Arisal @andria009
     * Interlingua:          Dustin Redmond @dustinkredmond (on github)
+    * Irish:                Robert Devereux @RobertDev (gh), Conor O'Callaghan @ivernus (gh)
     * Italian:              Diego Maniacco
     * Japanese:             @ryunix
     * Kazakh:               Akku Tutkusheva, Oleg Tropinin
