@@ -61,8 +61,9 @@ func prefetchPeakRequests(peakRequestMap *sync.Map) {
 	}
 	sleepBetweenRequests := time.Duration(prefetchInterval*1000/peakRequestLen) * time.Millisecond
 	peakRequestMap.Range(func(key interface{}, value interface{}) bool {
-		r := value.(http.Request)
-		prefetchRequest(&r)
+		go func(r http.Request) {
+			prefetchRequest(&r)
+		}(value.(http.Request))
 		peakRequestMap.Delete(key)
 		time.Sleep(sleepBetweenRequests)
 		return true
