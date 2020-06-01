@@ -121,6 +121,11 @@ Nous vous avons donc amenés à Oïmiakon,
 l'un des endroits les plus froids habités en permanence sur la planète.
 Nous espérons qu'il fait meilleur chez vous !
 """,
+        'ga': u"""
+Ní rabhamar ábalta do cheantar a aimsiú
+mar sin thugamar go dtí Oymyakon,
+tú ceann do na ceantair bhuanáitrithe is fuaire ar domhan.
+""",
         'hu': u"""
 Nem sikerült megtalálni a pozíciódat,
 így elhoztunk Ojmjakonba;
@@ -300,6 +305,7 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
         'fa': u'مکان نامعلوم',
         'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement inconnu',
+        'ga': u'Ceantar anaithnid',
         'hu': u'Ismeretlen lokáció',
         'hy': u'Անհայտ գտնվելու վայր',
         'id': u'Lokasi tidak diketahui',
@@ -352,6 +358,7 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
         'fa': u'مکان',
         'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement',
+        'en': u'Ceantar',
         'hu': u'Lokáció',
         'hy': u'Դիրք',
         'ia': u'Location',
@@ -466,6 +473,13 @@ Désolé, nous avons épuisé les requêtes vers le service météo.
 Voici un bulletin météo de l'emplacement par défaut (pour vous donner un aperçu).
 Nous serons très bientôt en mesure de faire de nouvelles requêtes.
 Vous pouvez suivre https://twitter.com/igor_chubin pour rester informé.
+======================================================================================
+""",
+        'ga': u"""
+Tá brón orainn, níl mórán iarratas le fail chuig seirbhís na haimsire faoi láthair.
+Seo duit réamhaisnéis na haimsire don chathair réamhshocraithe (chun é a thaispeaint duit).
+Gheobhaimid iarratais nua chomh luath agus is feidir.
+Lean orainn ar https://twitter.com/igor_chubin don eolas is déanaí.
 ======================================================================================
 """,
         'hu': u"""
@@ -698,6 +712,7 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
         'fa': u'برای دنبال کردن خبرهای wttr.in شناسه \033[46m\033[30m@igor_chubin\033[0m رو فالو کنید.',
         'fr': u'Suivez \033[46m\033[30m@igor_Chubin\033[0m pour rester informé sur wttr.in',
         'de': u'Folgen Sie \033[46m\033[30mhttps://twitter.com/igor_chubin\033[0m für wttr.in Updates',
+        'ga': u'Lean \033[46m\033[30m@igor_chubin\033[0m don wttr.in eolas is deanaí',
         'hu': u'Kövesd \033[46m\033[30m@igor_chubin\033[0m-t további wttr.in információkért',
         'hy': u'Նոր ֆիչռների համար հետևեք՝ \033[46m\033[30m@igor_chubin\033[0m',
         'ia': u'Seque \033[46m\033[30m@igor_chubin\033[0m por nove information de wttr.in',
