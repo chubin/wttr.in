@@ -145,7 +145,7 @@ def render_wind(data, query):
         degree = ""
 
     if degree:
-        wind_direction = WIND_DIRECTION[((degree+22)%360)//45]
+        wind_direction = WIND_DIRECTION[int(((degree+22.5)%360)/45.0)]
     else:
         wind_direction = ""
 

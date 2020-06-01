@@ -350,7 +350,7 @@ def draw_wind(data, color_data):
 
         degree = int(degree)
         if degree:
-            wind_direction = constants.WIND_DIRECTION[((degree+22)%360)//45]
+            wind_direction = constants.WIND_DIRECTION[int(((degree+22.5)%360)/45.0)]
         else:
             wind_direction = ""
 
