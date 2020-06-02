@@ -60,6 +60,7 @@ func main() {
 		response := processRequest(r)
 
 		copyHeader(w.Header(), response.Header)
+		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.WriteHeader(response.StatusCode)
 		w.Write(response.Body)
 	})
