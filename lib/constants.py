@@ -103,6 +103,65 @@ MOON_PHASES = (
     "🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘"
 )
 
+WEATHER_SYMBOL_WI_DAY = {
+    "Unknown":             "",
+    "Cloudy":              "",
+    "Fog":                 "",
+    "HeavyRain":           "",
+    "HeavyShowers":        "",
+    "HeavySnow":           "",
+    "HeavySnowShowers":    "",
+    "LightRain":           "",
+    "LightShowers":        "",
+    "LightSleet":          "",
+    "LightSleetShowers":   "",
+    "LightSnow":           "",
+    "LightSnowShowers":    "",
+    "PartlyCloudy":        "",
+    "Sunny":               "",
+    "ThunderyHeavyRain":   "",
+    "ThunderyShowers":     "",
+    "ThunderySnowShowers": "",
+    "VeryCloudy": "",
+}
+
+WEATHER_SYMBOL_WI_NIGHT = {
+    "Unknown":             "",
+    "Cloudy":              "",
+    "Fog":                 "",
+    "HeavyRain":           "",
+    "HeavyShowers":        "",
+    "HeavySnow":           "",
+    "HeavySnowShowers":    "",
+    "LightRain":           "",
+    "LightShowers":        "",
+    "LightSleet":          "",
+    "LightSleetShowers":   "",
+    "LightSnow":           "",
+    "LightSnowShowers":    "",
+    "PartlyCloudy":        "",
+    "Sunny":               "",
+    "ThunderyHeavyRain":   "",
+    "ThunderyShowers":     "",
+    "ThunderySnowShowers": "",
+    "VeryCloudy": "",
+}
+
+WIND_DIRECTION_WI = [
+    "", "", "", "", "", "", "", "",
+]
+
+WIND_SCALE_WI = [
+    "", "", "", "", "", "", "", "", "", "", "", "", "",
+]
+
+MOON_PHASES_WI = (
+    "", "", "", "", "", "", "",
+    "", "", "", "", "", "", "",
+    "", "", "", "", "", "", "",
+    "", "", "", "", "", "", "",
+)
+
 WEATHER_SYMBOL_WEGO = {
     "Unknown": [
         "    .-.      ",
