@@ -60,6 +60,21 @@ def render_temperature(data, query):
 
     return temperature
 
+def render_feel_like_temperature(data, query):
+    """
+    feel like temperature (f)
+    """
+
+    if query.get('use_imperial', False):
+        temperature = u'%s°F' % data['FeelsLikeF']
+    else:
+        temperature = u'%s°C' % data['FeelsLikeC']
+
+    if temperature[0] != '-':
+        temperature = '+' + temperature
+
+    return temperature
+
 def render_condition(data, query):
     """Emoji encoded weather condition (c)
     """
@@ -224,6 +239,7 @@ FORMAT_SYMBOL = {
     'C':    render_condition_fullname,
     'h':    render_humidity,
     't':    render_temperature,
+    'f':    render_feel_like_temperature,
     'w':    render_wind,
     'l':    render_location,
     'm':    render_moonphase,
