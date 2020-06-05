@@ -147,6 +147,9 @@ WEATHER_SYMBOL_WI_NIGHT = {
     "VeryCloudy": "",
 }
 
+WEATHER_SYMBOL_WIDTH_VTE_WI = {
+}
+
 WIND_DIRECTION_WI = [
     "", "", "", "", "", "", "", "",
 ]
