@@ -254,6 +254,12 @@ or
   $ curl wttr.in/München?format=v2
 ```
 
+or, if you prefer Nerd Fonts instead of Emoji, `v2d` (day) or `v2n` (night):
+
+```
+  $ curl v2d.wttr.in/München
+```
+
 
 ![data-reach output format](https://wttr.in/files/example-wttr-v2.png)
 
