@@ -291,6 +291,7 @@ def draw_astronomical(city_name, geo_data, config):
 
         if config.get("view") in ["v2n", "v2d"]:
             moon_phases = constants.MOON_PHASES_WI
+            moon_phases = [" %s" % x for x in moon_phases]
         else:
             moon_phases = constants.MOON_PHASES
 
@@ -330,8 +331,8 @@ def draw_emoji(data, config):
         emoji = weather_symbol.get(
             constants.WWO_CODE.get(
                 str(int(i)), "Unknown"))
-        space = " "*(3-weather_symbol_width_vte.get(emoji, 2))
-        answer += emoji + space
+        space = " "*(3-weather_symbol_width_vte.get(emoji, 1))
+        answer += space[:1] + emoji + space[1:]
     answer += "\n"
     return answer
 # }}}
