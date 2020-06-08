@@ -7,14 +7,20 @@ import (
 	"math/rand"
 	"net"
 	"net/http"
+	"strings"
 	"time"
 )
 
 func processRequest(r *http.Request) responseWithHeader {
 	var response responseWithHeader
 
-	foundInCache := false
+	if dontCache(r) {
+		return get(r)
+	}
+
 	cacheDigest := getCacheDigest(r)
+
+	foundInCache := false
 
 	savePeakRequest(cacheDigest, r)
 
@@ -107,6 +113,17 @@ func getCacheDigest(req *http.Request) string {
 	lang := req.Header.Get("Accept-Language")
 
 	return fmt.Sprintf("%s:%s%s:%s:%s", userAgent, queryHost, queryString, clientIPAddress, lang)
+}
+
+// return true if request should not be cached
+func dontCache(req *http.Request) bool {
+
+	// dont cache cyclic requests
+	loc := strings.Split(req.RequestURI, "?")[0]
+	if strings.Contains(loc, ":") {
+		return true
+	}
+	return false
 }
 
 func readUserIP(r *http.Request) string {
