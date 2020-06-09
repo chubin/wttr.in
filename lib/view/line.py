@@ -28,6 +28,7 @@ import pytz
 from constants import WWO_CODE, WEATHER_SYMBOL, WIND_DIRECTION, WEATHER_SYMBOL_WIDTH_VTE
 from weather_data import get_weather_data
 from . import v2
+from . import prometheus
 
 PRECONFIGURED_FORMAT = {
     '1':    u'%c %t',
@@ -336,6 +337,8 @@ def format_weather_data(query, parsed_query, data):
 
     if format_line == "j1":
         return render_json(data['data'])
+    if format_line == "p1":
+        return prometheus.render_prometheus(data['data'])
     if format_line[:2] == "v2":
         return v2.main(query, parsed_query, data)
 
