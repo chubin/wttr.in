@@ -16,7 +16,7 @@ def _render_current(data):
     current_condition = data["current_condition"][0]
     for field in EXPORTED_FIELDS:
         try:
-            output.append("%s(forecast=\"0h\") %s" % (field, current_condition[field]))
+            output.append("%s{forecast=\"0h\"} %s" % (field, current_condition[field]))
         except IndexError:
             pass
 
@@ -37,7 +37,7 @@ def _render_current(data):
 def render_prometheus(data):
     """
     Convert `data` into Prometheus format
-    and return it as sting.
+    and return it as string.
     """
 
     return _render_current(data)
