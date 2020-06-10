@@ -25,7 +25,7 @@ EXPORTED_FIELDS_DESC = {
     "winddir16Point":("Wind Direction on a 16-wind compass rose", "winddir_16_point"),
     }
 
-def _render_crurent(data):
+def _render_current(data):
 
     output = []
     current_condition = data["current_condition"][0]
