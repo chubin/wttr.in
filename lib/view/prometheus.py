@@ -31,16 +31,18 @@ def _render_current(data):
     current_condition = data["current_condition"][0]
     for field in EXPORTED_FIELDS:
         try:
-            output.append("# %s\n%s{forecast=\"0h\"} %s" %
-                          (EXPORTED_FIELDS[field][0],
+            output.append("# HELP %s %s\n%s{forecast=\"0h\"} %s" %
+                          (EXPORTED_FIELDS[field][1],
+                           EXPORTED_FIELDS[field][0],
                            EXPORTED_FIELDS[field][1],
                            current_condition[field]))
         except IndexError:
             pass
     for field in EXPORTED_FIELDS_DESC:
         try:
-            output.append("# %s\n%s{forecast=\"0h\", description=\"%s\"} 1" %
-                          (EXPORTED_FIELDS_DESC[field][0],
+            output.append("# HELP %s %s\n%s{forecast=\"0h\", description=\"%s\"} 1" %
+                          (EXPORTED_FIELDS_DESC[field][1],
+                           EXPORTED_FIELDS_DESC[field][0],
                            EXPORTED_FIELDS_DESC[field][1],
                            current_condition[field]))
         except IndexError:
