@@ -7,7 +7,7 @@ from datetime import datetime
 
 from fields import DESCRIPTION
 
-def _render_current(data, for_day="current"):
+def _render_current(data, for_day="current", already_seen=[]):
     "Converts data into prometheus style format"
 
     output = []
@@ -41,8 +41,11 @@ def _render_current(data, for_day="current"):
             description = f", description=\"{value}\""
             value = "1"
 
-        output.append(f"# HELP {name} {help}\n"
-                      f"{name}{{forecast=\"{for_day}\"{description}}} {value}")
+        if name not in already_seen:
+            output.append(f"# HELP {name} {help}")
+            already_seen.append(name)
+
+        output.append(f"{name}{{forecast=\"{for_day}\"{description}}} {value}")
 
     return "\n".join(output)+"\n"
 
@@ -57,8 +60,10 @@ def render_prometheus(data):
     and return it as string.
     """
 
-    answer = _render_current(data["current_condition"][0])
+    already_seen = []
+    answer = _render_current(
+        data["current_condition"][0], already_seen=already_seen)
     for i in range(3):
-        data2 = data["weather"][i]
-        answer += _render_current(data2, for_day="%sd" % i)
+        answer += _render_current(
+            data["weather"][i], for_day="%sd" % i, already_seen=already_seen)
     return answer
