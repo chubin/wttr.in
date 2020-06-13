@@ -286,9 +286,11 @@ The result, should look like:
 
 ![URXVT Emoji line](https://user-images.githubusercontent.com/24360204/63842949-1d36d480-c975-11e9-81dd-998d1329bd8a.png)
 
-## JSON output
+## Different output formats
 
-The JSON format is a feature providing access to wttr.in data through an easy-to-parse format, without requiring the user to create a complex script to reinterpret wttr.in's graphical output.
+### JSON output
+
+The JSON format is a feature providing access to *wttr.in* data through an easy-to-parse format, without requiring the user to create a complex script to reinterpret wttr.in's graphical output.
 
 To fetch information in JSON format, use the following syntax:
 
@@ -333,15 +335,15 @@ The result will look something like the following:
 
 Most of these values are self-explanatory, aside from `weatherCode`. The `weatherCode` is an enumeration which you can find at either [the WorldWeatherOnline website](https://www.worldweatheronline.com/developer/api/docs/weather-icons.aspx) or [in the wttr.in source code](https://github.com/chubin/wttr.in/blob/master/lib/constants.py).
 
-## Prometheus Metrics Output
+### Prometheus Metrics Output
 
-The [Prometheus](https://github.com/prometheus/prometheus) Metrics format is a feature providing access to wttr.in data through an easy-to-parse format for monitoring systems, without requiring the user to create a complex script to reinterpret wttr.in's graphical output.
+The [Prometheus](https://github.com/prometheus/prometheus) Metrics format is a feature providing access to *wttr.in* data through an easy-to-parse format for monitoring systems, without requiring the user to create a complex script to reinterpret wttr.in's graphical output. 
 
 To fetch information in Prometheus format, use the following syntax:
 
     $ curl wttr.in/Detroit?format=p1
 
-This will fetch information on the Detroit region in Prometheus Metrics format. The p1 format code is used to allow for the use of other layouts for the Prometheus Metrics output.
+This will fetch information on the Detroit region in Prometheus Metrics format. The `p1` format code is used to allow for the use of other layouts for the Prometheus Metrics output.
 
 A possible configuration for Prometheus could look like this:
 
@@ -361,42 +363,8 @@ The result will look something like the following:
     temperature_feels_like_celsius{forecast="current"} 7
     # HELP temperature_feels_like_fahrenheit Feels Like Temperature in Fahrenheit
     temperature_feels_like_fahrenheit{forecast="current"} 45
-    # HELP cloudcover_percentage Cloud Coverage in Percent
-    cloudcover_percentage{forecast="current"} 0
-    # HELP humidity_percentage Humidity in Percent
-    humidity_percentage{forecast="current"} 74
-    # HELP precipitation_mm Precipitation (Rainfall) in mm
-    precipitation_mm{forecast="current"} 0.1
-    # HELP pressure_hpa Air pressure in hPa
-    pressure_hpa{forecast="current"} 1026
-    # HELP temperature_celsius Temperature in Celsius
-    temperature_celsius{forecast="current"} 9
-    # HELP temperature_fahrenheit Temperature in Fahrenheit
-    temperature_fahrenheit{forecast="current"} 49
-    # HELP uv_index Ultaviolet Radiation Index
-    uv_index{forecast="current"} 1
-    # HELP visibility Visible Distance in Kilometres
-    visibility{forecast="current"} 16
-    # HELP weather_code Code to describe Weather Condition
-    weather_code{forecast="current"} 113
-    # HELP winddir_degree Wind Direction in Degree
-    winddir_degree{forecast="current"} 20
-    # HELP windspeed_kmph Wind Speed in Kilometres per Hour
-    windspeed_kmph{forecast="current"} 13
-    # HELP windspeed_mph Wind Speed in Miles per Hour
-    windspeed_mph{forecast="current"} 8
-    # HELP observation_time Minutes since start of the day the observation happened
-    observation_time{forecast="current"} 562
-    # HELP weather_desc Weather Description
-    weather_desc{forecast="current", description="Clear"} 1
-    # HELP winddir_16_point Wind Direction on a 16-wind compass rose
-    winddir_16_point{forecast="current", description="NNE"} 1
-    uv_index{forecast="0d"} 7
-    # HELP temperature_celsius_maximum Maximum Temperature in Celsius
-    temperature_celsius_maximum{forecast="0d"} 17
-    # HELP temperature_fahrenheit_maximum Maximum Temperature in Fahrenheit
-    temperature_fahrenheit_maximum{forecast="0d"} 63
-    ...
+    [truncated]
+...
 
 
 ## Moon phases
