@@ -97,7 +97,7 @@ DESCRIPTION = {
         "Minutes since start of the day untill the moon disappears below the horizon",
         "astronomy_moonset_min"),
     "sunrise": (
-        "Minutes since start of the day untill the sun appears below the horizon",
+        "Minutes since start of the day untill the sun appears above the horizon",
         "astronomy_sunrise_min"),
     "sunset": (
         "Minutes since start of the day untill the moon disappears below the horizon",
