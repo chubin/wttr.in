@@ -314,7 +314,7 @@ def render_line(line, data, query):
     return re.sub(template_regexp, render_symbol, line)
 
 def render_json(data):
-    output = json.dumps(data, indent=4, sort_keys=True)
+    output = json.dumps(data, indent=4, sort_keys=True, ensure_ascii=False)
 
     output = "\n".join(
         re.sub('"[^"]*worldweatheronline[^"]*"', '""', line) if "worldweatheronline" in line else line
