@@ -89,7 +89,8 @@ wttr.in currently supports five output formats:
 * Plain-text for the terminal and scripts;
 * HTML for the browser;
 * PNG for the graphical viewers;
-* JSON for scripts and APIs.
+* JSON for scripts and APIs;
+* Prometheus metrics for scripts and APIs.
 
 The ANSI and HTML formats are selected basing on the User-Agent string.
 The PNG format can be forced by adding `.png` to the end of the query:
@@ -285,9 +286,11 @@ The result, should look like:
 
 ![URXVT Emoji line](https://user-images.githubusercontent.com/24360204/63842949-1d36d480-c975-11e9-81dd-998d1329bd8a.png)
 
-## JSON output
+## Different output formats
 
-The JSON format is a feature providing access to wttr.in data through an easy-to-parse format, without requiring the user to create a complex script to reinterpret wttr.in's graphical output.
+### JSON output
+
+The JSON format is a feature providing access to *wttr.in* data through an easy-to-parse format, without requiring the user to create a complex script to reinterpret wttr.in's graphical output.
 
 To fetch information in JSON format, use the following syntax:
 
@@ -331,6 +334,37 @@ The result will look something like the following:
     ...
 
 Most of these values are self-explanatory, aside from `weatherCode`. The `weatherCode` is an enumeration which you can find at either [the WorldWeatherOnline website](https://www.worldweatheronline.com/developer/api/docs/weather-icons.aspx) or [in the wttr.in source code](https://github.com/chubin/wttr.in/blob/master/lib/constants.py).
+
+### Prometheus Metrics Output
+
+The [Prometheus](https://github.com/prometheus/prometheus) Metrics format is a feature providing access to *wttr.in* data through an easy-to-parse format for monitoring systems, without requiring the user to create a complex script to reinterpret wttr.in's graphical output. 
+
+To fetch information in Prometheus format, use the following syntax:
+
+    $ curl wttr.in/Detroit?format=p1
+
+This will fetch information on the Detroit region in Prometheus Metrics format. The `p1` format code is used to allow for the use of other layouts for the Prometheus Metrics output.
+
+A possible configuration for Prometheus could look like this:
+
+```
+    - job_name: 'wttr_in_detroit'
+        static_configs:
+            - targets: ['wttr.in']
+        metrics_path: '/Detroit'
+        params:
+            format: ['p1']
+```
+
+The result will look something like the following:
+
+
+    # HELP temperature_feels_like_celsius Feels Like Temperature in Celsius
+    temperature_feels_like_celsius{forecast="current"} 7
+    # HELP temperature_feels_like_fahrenheit Feels Like Temperature in Fahrenheit
+    temperature_feels_like_fahrenheit{forecast="current"} 45
+    [truncated]
+...
 
 
 ## Moon phases
