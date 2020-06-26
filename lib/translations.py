@@ -358,7 +358,7 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
         'fa': u'مکان',
         'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement',
-        'en': u'Ceantar',
+        'ga': u'Ceantar',
         'hu': u'Lokáció',
         'hy': u'Դիրք',
         'ia': u'Location',
