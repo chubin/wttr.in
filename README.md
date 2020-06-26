@@ -32,7 +32,9 @@ but it's still a live weather report in your language.)
 
 Or in PowerShell:
 
-    (Invoke-WebRequest http://wttr.in).Content
+```PowerShell
+Invoke-RestMethod http://wttr.in
+```
 
 Want to get the weather information for a specific location? You can add the desired location to the URL in your
 request like this:
