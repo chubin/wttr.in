@@ -221,7 +221,7 @@ def _response(parsed_query, query, fast_mode=False):
         #
         #    output = fmt.png.render_ansi(
         #        output, options=parsed_query)
-        result = TASKS.spawn(fmt.png.render_ansi, output, options=parsed_query)
+        result = TASKS.spawn(fmt.png.render_ansi, cache._update_answer(output), options=parsed_query)
         output = result.get()
     else:
         if query.get('days', '3') != '0' \
