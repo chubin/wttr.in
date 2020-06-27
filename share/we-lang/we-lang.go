@@ -1169,11 +1169,11 @@ func main() {
 	out := formatCond(make([]string, 5), r.Data.Cur[0], true)
 	for _, val := range out {
         if config.RightToLeft {
-            space := strings.Repeat(" ", 93)
-            fmt.Fprintln(stdout, space, val)
+            fmt.Fprint(stdout, strings.Repeat(" ", 94))
         } else {
-            fmt.Fprintln(stdout, val)
+            fmt.Fprint(stdout, " ")
         }
+        fmt.Fprintln(stdout, val)
 	}
 
 	if config.Numdays == 0 {
