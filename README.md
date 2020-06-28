@@ -276,7 +276,7 @@ Currently, you need some tweaks for some terminals, to get the best possible vis
 
 ### URXVT
 
-Depending on your configuration you might be taking all steps, or only a few. URXVT currenly doesn't support emoji related fonts, but we can get almost the same effect using *Font-Symbola*. So add to your `.Xresources` file the following line:
+Depending on your configuration you might be taking all steps, or only a few. URXVT currently doesn't support emoji related fonts, but we can get almost the same effect using *Font-Symbola*. So add to your `.Xresources` file the following line:
 ```
     xft:symbola:size=10:minspace=False
 ```
@@ -390,7 +390,7 @@ To get the moon phase information in the online mode, use `%m`:
 Keep in mid that the Unicode representation of moonphases suffers 2 caveats:
 
 - With some fonts, the representation `🌘` is ambiguous, for it either seem
-  almost-shadowed or almost-lit, depedending on whether your terminal is in
+  almost-shadowed or almost-lit, depending on whether your terminal is in
   light mode or dark mode. Relying on colored fonts like `noto-fonts` works
   around this problem.
 
