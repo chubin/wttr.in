@@ -208,7 +208,7 @@ both of them support all necessary emoji glyphs.
 
 Font configuration:
 
-```
+```xml
 $ cat ~/.config/fontconfig/fonts.conf
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
@@ -301,39 +301,40 @@ To fetch information in JSON format, use the following syntax:
 This will fetch information on the Detroit region in JSON format. The j1 format code is used to allow for the use of other layouts for the JSON output.
 
 The result will look something like the following:
-
-    {
-    "current_condition": [
-        {
-            "FeelsLikeC": "25",
-            "FeelsLikeF": "76",
-            "cloudcover": "100",
-            "humidity": "76",
-            "observation_time": "04:08 PM",
-            "precipMM": "0.2",
-            "pressure": "1019",
-            "temp_C": "22",
-            "temp_F": "72",
-            "uvIndex": 5,
-            "visibility": "16",
-            "weatherCode": "122",
-            "weatherDesc": [
-                {
-                    "value": "Overcast"
-                }
-            ],
-            "weatherIconUrl": [
-                {
-                    "value": ""
-                }
-            ],
-            "winddir16Point": "NNE",
-            "winddirDegree": "20",
-            "windspeedKmph": "7",
-            "windspeedMiles": "4"
-        }
-    ],
-    ...
+```json
+{
+	"current_condition": [
+		{
+		    "FeelsLikeC": "25",
+		    "FeelsLikeF": "76",
+		    "cloudcover": "100",
+		    "humidity": "76",
+		    "observation_time": "04:08 PM",
+		    "precipMM": "0.2",
+		    "pressure": "1019",
+		    "temp_C": "22",
+		    "temp_F": "72",
+		    "uvIndex": 5,
+		    "visibility": "16",
+		    "weatherCode": "122",
+		    "weatherDesc": [
+			{
+			    "value": "Overcast"
+			}
+		    ],
+		    "weatherIconUrl": [
+			{
+			    "value": ""
+			}
+		    ],
+		    "winddir16Point": "NNE",
+		    "winddirDegree": "20",
+		    "windspeedKmph": "7",
+		    "windspeedMiles": "4"
+		}
+	],
+...
+```
 
 Most of these values are self-explanatory, aside from `weatherCode`. The `weatherCode` is an enumeration which you can find at either [the WorldWeatherOnline website](https://www.worldweatheronline.com/developer/api/docs/weather-icons.aspx) or [in the wttr.in source code](https://github.com/chubin/wttr.in/blob/master/lib/constants.py).
 
@@ -349,7 +350,7 @@ This will fetch information on the Detroit region in Prometheus Metrics format. 
 
 A possible configuration for Prometheus could look like this:
 
-```
+```yaml
     - job_name: 'wttr_in_detroit'
         static_configs:
             - targets: ['wttr.in']
@@ -535,14 +536,16 @@ WWO key file: `~/.wwo.key`
 
 Also, you have to specify the key in the `wego` configuration:
 
-    $ cat ~/.wegorc
-    {
-        "APIKey": "00XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-        "City": "London",
-        "Numdays": 3,
-        "Imperial": false,
-        "Lang": "en"
-    }
+```json
+$ cat ~/.wegorc
+{
+	"APIKey": "00XXXXXXXXXXXXXXXXXXXXXXXXXXX",
+	"City": "London",
+	"Numdays": 3,
+	"Imperial": false,
+	"Lang": "en"
+}
+```
 
 The `City` parameter in `~/.wegorc` is ignored.
 
@@ -551,42 +554,46 @@ The `City` parameter in `~/.wegorc` is ignored.
 Configure the following environment variables that define the path to the local `wttr.in`
 installation, to the GeoLite database, and to the `wego` installation. For example:
 
-    export WTTR_MYDIR="/home/igor/wttr.in"
-    export WTTR_GEOLITE="/home/igor/wttr.in/GeoLite2-City.mmdb"
-    export WTTR_WEGO="/home/igor/go/bin/wego"
-    export WTTR_LISTEN_HOST="0.0.0.0"
-    export WTTR_LISTEN_PORT="8002"
+```bash
+export WTTR_MYDIR="/home/igor/wttr.in"
+export WTTR_GEOLITE="/home/igor/wttr.in/GeoLite2-City.mmdb"
+export WTTR_WEGO="/home/igor/go/bin/wego"
+export WTTR_LISTEN_HOST="0.0.0.0"
+export WTTR_LISTEN_PORT="8002"
+```
 
 
 ### Configure the HTTP-frontend service
 
 It's recommended that you also configure the web server that will be used to access the service:
 
-    server {
-        listen [::]:80;
-        server_name  wttr.in *.wttr.in;
-        access_log  /var/log/nginx/wttr.in-access.log  main;
-        error_log  /var/log/nginx/wttr.in-error.log;
+```nginx
+server {
+	listen [::]:80;
+	server_name  wttr.in *.wttr.in;
+	access_log  /var/log/nginx/wttr.in-access.log  main;
+	error_log  /var/log/nginx/wttr.in-error.log;
 
-        location / {
-            proxy_pass         http://127.0.0.1:8002;
+	location / {
+	    proxy_pass         http://127.0.0.1:8002;
 
-            proxy_set_header   Host             $host;
-            proxy_set_header   X-Real-IP        $remote_addr;
-            proxy_set_header   X-Forwarded-For  $remote_addr;
+	    proxy_set_header   Host             $host;
+	    proxy_set_header   X-Real-IP        $remote_addr;
+	    proxy_set_header   X-Forwarded-For  $remote_addr;
 
-            client_max_body_size       10m;
-            client_body_buffer_size    128k;
+	    client_max_body_size       10m;
+	    client_body_buffer_size    128k;
 
-            proxy_connect_timeout      90;
-            proxy_send_timeout         90;
-            proxy_read_timeout         90;
+	    proxy_connect_timeout      90;
+	    proxy_send_timeout         90;
+	    proxy_read_timeout         90;
 
-            proxy_buffer_size          4k;
-            proxy_buffers              4 32k;
-            proxy_busy_buffers_size    64k;
-            proxy_temp_file_write_size 64k;
+	    proxy_buffer_size          4k;
+	    proxy_buffers              4 32k;
+	    proxy_busy_buffers_size    64k;
+	    proxy_temp_file_write_size 64k;
 
-            expires                    off;
-        }
-    }
+	    expires                    off;
+	}
+}
+```
