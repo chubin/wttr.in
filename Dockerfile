@@ -18,7 +18,7 @@ COPY ./bin /app/bin
 COPY ./lib /app/lib
 COPY ./share /app/share
 COPY ./requirements.txt /app
-COPY ./src/we-lang/we-lang.go /app
+COPY ./share/we-lang/we-lang.go /app
 
 # There are several files that must be fetched/created manually
 # before building the image

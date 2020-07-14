@@ -5,5 +5,3 @@ data/
 log/
 .idea/
 *.swp
-*.mmdb
-*.dat
