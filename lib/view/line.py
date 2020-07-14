@@ -31,10 +31,10 @@ from . import v2
 from . import prometheus
 
 PRECONFIGURED_FORMAT = {
-    '1':    u'%c %t',
-    '2':    u'%c 🌡️%t 🌬️%w',
-    '3':    u'%l: %c %t',
-    '4':    u'%l: %c 🌡️%t 🌬️%w',
+    '1':    r'%c %t\n',
+    '2':    r'%c 🌡️%t 🌬️%w\n',
+    '3':    r'%l: %c %t\n',
+    '4':    r'%l: %c 🌡️%t 🌬️%w\n',
 }
 
 MOON_PHASES = (
@@ -305,7 +305,7 @@ def render_line(line, data, query):
 
         return ''
 
-    template_regexp = r'%[^%]*[a-zA-Z]'
+    template_regexp = r'%[a-zA-Z]'
     for template_code in re.findall(template_regexp, line):
         if template_code.lstrip("%") in FORMAT_SYMBOL_ASTRO:
             local_time_of = get_local_time_of()
@@ -358,7 +358,7 @@ def wttr_line(query, parsed_query):
 
     data = get_weather_data(location, lang)
     output = format_weather_data(query, parsed_query, data)
-    return output.rstrip("\n")+"\n"
+    return output.rstrip("\n").replace(r"\n", "\n")
 
 def main():
     """

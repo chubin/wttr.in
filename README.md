@@ -182,7 +182,7 @@ So, these two calls are the same:
 ```
     $ curl wttr.in/London?format=3
     London: ⛅️ +7⁰C
-    $ curl wttr.in/London?format="%l:+%c+%t"
+    $ curl wttr.in/London?format="%l:+%c+%t\n"
     London: ⛅️ +7⁰C
 ```
 Keep in mind, that when using in `tmux.conf`, you have to escape `%` with `%`, i.e. write there `%%` instead of `%`.
