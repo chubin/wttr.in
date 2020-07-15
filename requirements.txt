@@ -22,3 +22,4 @@ supervisor
 numba
 emoji
 grapheme
+psutil==5.7.0
