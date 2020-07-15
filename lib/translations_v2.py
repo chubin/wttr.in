@@ -49,6 +49,7 @@ V2_TRANSLATION = {
     "nb": ("Værmelding for:",               "", "", "", "", "", "", "", ""),
     "nl": ("Weerbericht voor:",             "Weer",     "Tijdzone",     "Nu",       "Dageraad",         "Zonsopkomst",  "Zenit",        "Zonsondergang",    "Schemering"),
     "nn": ("Vêrmelding for:",               "", "", "", "", "", "", "", ""),
+    "oc": ("Previsions metèo per:"          "Metèo", "Zòna orària", "Ara", "Auròra", "Alba", "Zenit", "A solelh colc", "Entrelutz"),
     "pl": ("Pogoda w:",                     "", "", "", "", "", "", "", ""),
     "pt": ("Previsão do tempo para:",       "Tempo", "Fuso horário", "Agora", "Alvorada", "Nascer do sol", "Zénite", "Pôr do sol", "Crepúsculo"),
     "pt-br": ("Previsão do tempo para:",    "Tempo", "Fuso horário", "Agora", "Alvorada", "Nascer do sol", "Zénite", "Pôr do sol", "Crepúsculo"),
