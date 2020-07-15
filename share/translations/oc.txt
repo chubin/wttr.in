@@ -1,0 +1,50 @@
+: Pluèja                                           : Rain
+: Plugeta, Raissas                                 : Light Rain, Rain Shower
+: Raissas                                          : Rain Shower
+113 : Temps clar                                   : Clear
+113 : Solelh                                       : Sunny
+116 : Parcialament nivolós                         : Partly cloudy
+119 : Nivolós                                      : Cloudy
+122 : Ennivolat                                    : Overcast
+143 : Brumós                                       : Mist
+176 : Possiblas raissas esparpalhadas              : Patchy rain possible
+179 : Possiblas nevadas esparpalhadas              : Patchy snow possible
+182 : Possiblas nèus fondudas esparpalhadas        : Patchy sleet possible
+185 : Possiblas plovinas gelibrantas esparpalhadas : Patchy freezing drizzle possible
+200 : Auratges possibles                           : Thundery outbreaks possible
+227 : Nèu e vent                                   : Blowing snow
+230 : Blisard                                      : Blizzard
+248 : Fums                                         : Fog
+260 : Nèbla gelibranta                             : Freezing fog
+263 : Plovina leugièra esparpalhada                : Patchy light drizzle
+266 : Plovina leugièra                             : Light drizzle
+281 : Plovina gelibranta                           : Freezing drizzle
+284 : Fòrta plovina gelibranta                     : Heavy freezing drizzle
+293 : Plugeta fina                                 : Patchy light rain
+296 : Plovina                                      : Light rain
+299 : Pluèja moderada intermitenta                 : Moderate rain at times
+302 : Pluèja moderada                              : Moderate rain
+305 : Forte pluie intermittente                    : Heavy rain at times
+308 : Raissa                                       : Heavy rain
+311 : Pluie verglaçante légère                     : Light freezing rain
+314 : Pluie verglaçante modérée à forte            : Moderate or heavy freezing rain
+317 : Chutes légères de neige fondue               : Light sleet
+320 : Chutes de neige fondue modérées à fortes     : Moderate or heavy sleet
+323 : Chutes de neige éparses et légères           : Patchy light snow
+326 : Chutes de neige légères                      : Light snow
+329 : Chutes de neige éparses et modérées          : Patchy moderate snow
+332 : Chutes de neige modérées                     : Moderate snow
+335 : Fortes chutes de neige éparses               : Patchy heavy snow
+338 : Fortes chutes de neige                       : Heavy snow
+350 : Pèiras de glaça                              : Ice pellets
+353 : Pluèja leugièra                              : Light rain shower
+356 : Pluèja moderada a fòrta                      : Moderate or heavy rain shower
+359 : Pluèja torrenciala                           : Torrential rain shower
+362 : Granissa leugièra                            : Light sleet showers
+365 : Granissa moderada a fòrta                    : Moderate or heavy sleet showers
+368 : Nevadas leugièra                             : Light snow showers
+371 : Granissa moderada a violenta                 : Moderate or heavy snow showers
+386 : Pluèja auratjosa leugièra esparpalhada       : Patchy light rain with thunder
+389 : Pluèja auratjosa moderada a violenta         : Moderate or heavy rain with thunder
+392 : Nevada auratjosa esparpalhada e leugièra     : Patchy light snow with thunder
+395 : Nevada auratjosa moderada a violenta         : Moderate or heavy snow with thunder

@@ -1,0 +1,66 @@
+Usatge:
+
+    $ curl wttr.in          # emplaçament actual
+    $ curl wttr.in/cdg      # metèo a l'aeropòrt de Paris - Charles de Gaulle
+
+Types d'emplacements acceptés:
+
+    /toulouse               # nom de la vila
+    /~Eiffel+tower          # emplaçament qual que siá
+    /Москва                 # nom Unicode o emplaçament qual que siá dins quala que siá lenga
+    /muc                    # còde aeropòrt (3 letras)
+    /@stackoverflow.com     # nom de domeni
+    /94107                  # còde postal (sonque pels Estats Units)
+    /-78.46,106.79          # coordenadas GPS
+
+Emplacements particuliers:
+
+    /moon                   # phases de la lune (ajouter ,+US ou ,+France pour accéder aux villes du même nom)
+    /moon@2016-10-25        # phases de la lune pour cette date (@2016-10-25)
+
+Unitats:
+
+    ?m                      # sistèma metric (per defaut pertot levat als Estats Units d d'America)
+    ?u                      # USCS (par défaut pour les États-Unis d'Amérique)
+    ?M                      # affiche la vitesse du vent en m/s
+
+Opcion d'afichatge:
+
+    ?0                      # uèi solament
+    ?1                      # uèi + deman
+    ?2                      # uèi + 2 jorns
+    ?n                      # version courte (seulement le jour et la nuit)
+    ?q                      # version silencieuse (pas d'en-tête "Prévisions météo pour")
+    ?Q                      # version super-silencieuse (pas d'en-tête "Prévisions météo pour", pas de nom de la ville)
+    ?T                      # séquences d'échappement pour terminaux désactivées (pas de couleurs)
+
+Opcions PNG:
+
+    /paris.png              # génère un fichier PNG
+    ?p                      # ajoute un cadre autour de la sortie
+    ?t                      # transparency 150 (transparence 150)
+    transparency=...        # transparence de 0 à 255 (255 = pas de transparence)
+
+Combiner les options:
+
+    /Toulouse?0pq
+    /Toulouse?0pq&lang=oc
+    /Toulouse_0pq.png        # dans le mode PNG les options sont spécifiées après _
+    /Rome_0pq_lang=it.png   # les options longues sont séparées par des underscores _
+
+Localizacion:
+
+    $ curl fr.wttr.in/Toulouse
+    $ curl wttr.in/toulouse?lang=oc
+    $ curl -H "Accept-Language: oc" wttr.in/toulouse
+
+Lengas suportadas:
+
+    FULL_TRANSLATION (Support complèt)
+    PARTIAL_TRANSLATION (Support incomplèt)
+
+URLs particularas:
+
+    /:help                  # mostra aquesta pagina
+    /:bash.function         # foncion bash recomandada wttr()
+    /:translation           # mostra las informacions sus la traduccion de wttr.in
