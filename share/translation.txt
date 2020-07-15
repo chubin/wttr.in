@@ -45,6 +45,7 @@ Translated/improved/corrected by:
     * Macedonian:           Matej Plavevski @MatejMecka
     * Norwegian:            Fredrik Fjeld @fredrikfjeld
     * Nynorsk:              Kevin Brubeck Unhammer (https://unhammer.org/k/)
+    * Occitan:              @Quenty-tolosan (gh)
     * Persian:              Javad @threadripper_
     * Polish:               Wojtek Łukasiewicz @wojtuch (on github)
     * Portuguese:           Fernando Bitti Loureiro @fbitti (on github)
