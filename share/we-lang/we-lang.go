@@ -20,23 +20,23 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"github.com/mattn/go-colorable"
 	"github.com/klauspost/lctime"
+	"github.com/mattn/go-colorable"
 	"github.com/mattn/go-runewidth"
 )
 
 type configuration struct {
-	APIKey   string
-	City     string
-	Numdays  int
-	Imperial bool
-    WindUnit bool
-	Inverse  bool
-	Lang     string
-    Narrow   bool
-    LocationName string
-    WindMS  bool
-    RightToLeft bool
+	APIKey       string
+	City         string
+	Numdays      int
+	Imperial     bool
+	WindUnit     bool
+	Inverse      bool
+	Lang         string
+	Narrow       bool
+	LocationName string
+	WindMS       bool
+	RightToLeft  bool
 }
 
 type cond struct {
@@ -290,203 +290,203 @@ var (
 		"\033[38;5;251m _ - _ - _ - \033[0m",
 		"             "}
 
-    locale = map[string]string{
-        "af":   "af_ZA",
-        "ar":   "ar_TN",
-        "az":   "az_AZ",
-        "be":   "be_BY",
-        "bg":   "bg_BG",
-        "bs":   "bs_BA",
-        "ca":   "ca_ES",
-        "cs":   "cs_CZ",
-        "cy":   "cy_GB",
-        "da":   "da_DK",
-        "de":   "de_DE",
-        "el":   "el_GR",
-        "eo":   "eo",
-        "es":   "es_ES",
-        "et":   "et_EE",
-        "eu":   "eu_ES",
-        "fa":   "fa_IR",
-        "fi":   "fi_FI",
-        "fr":   "fr_FR",
-        "fy":   "fy_NL",
-        "ga":   "ga_IE",
-        "he":   "he_IL",
-        "hr":   "hr_HR",
-        "hu":   "hu_HU",
-        "hy":   "hy_AM",
-        "ia":   "ia",
-        "id":   "id_ID",
-        "is":   "is_IS",
-        "it":   "it_IT",
-        "ja":   "ja_JP",
-        "jv":   "en_US",
-        "ka":   "ka_GE",
-        "ko":   "ko_KR",
-        "kk":   "kk_KZ",
-        "ky":   "ky_KG",
-        "lt":   "lt_LT",
-        "lv":   "lv_LV",
-        "mk":   "mk_MK",
-        "ml":   "ml_IN",
-        "nb":   "nb_NO",
-        "nl":   "nl_NL",
-        "nn":   "nn_NO",
-        "pt":   "pt_PT",
-        "pt-br":"pt_BR",
-        "pl":   "pl_PL",
-        "ro":   "ro_RO",
-        "ru":   "ru_RU",
-        "sv":   "sv_SE",
-        "sk":   "sk_SK",
-        "sl":   "sl_SI",
-        "sr":   "sr_RS",
-        "sr-lat":   "sr_RS@latin",
-        "sw":   "sw_KE",
-        "th":   "th_TH",
-        "tr":   "tr_TR",
-        "uk":   "uk_UA",
-        "uz":   "uz_UZ",
-        "vi":   "vi_VN",
-        "zu":   "zu_ZA",
-        "zh":   "zh_CN",
-        "zh-cn":"zh_CN",
-        "zh-tw":"zh_TW",
-    }
+	locale = map[string]string{
+		"af":     "af_ZA",
+		"ar":     "ar_TN",
+		"az":     "az_AZ",
+		"be":     "be_BY",
+		"bg":     "bg_BG",
+		"bs":     "bs_BA",
+		"ca":     "ca_ES",
+		"cs":     "cs_CZ",
+		"cy":     "cy_GB",
+		"da":     "da_DK",
+		"de":     "de_DE",
+		"el":     "el_GR",
+		"eo":     "eo",
+		"es":     "es_ES",
+		"et":     "et_EE",
+		"eu":     "eu_ES",
+		"fa":     "fa_IR",
+		"fi":     "fi_FI",
+		"fr":     "fr_FR",
+		"fy":     "fy_NL",
+		"ga":     "ga_IE",
+		"he":     "he_IL",
+		"hr":     "hr_HR",
+		"hu":     "hu_HU",
+		"hy":     "hy_AM",
+		"ia":     "ia",
+		"id":     "id_ID",
+		"is":     "is_IS",
+		"it":     "it_IT",
+		"ja":     "ja_JP",
+		"jv":     "en_US",
+		"ka":     "ka_GE",
+		"ko":     "ko_KR",
+		"kk":     "kk_KZ",
+		"ky":     "ky_KG",
+		"lt":     "lt_LT",
+		"lv":     "lv_LV",
+		"mk":     "mk_MK",
+		"ml":     "ml_IN",
+		"nb":     "nb_NO",
+		"nl":     "nl_NL",
+		"nn":     "nn_NO",
+		"pt":     "pt_PT",
+		"pt-br":  "pt_BR",
+		"pl":     "pl_PL",
+		"ro":     "ro_RO",
+		"ru":     "ru_RU",
+		"sv":     "sv_SE",
+		"sk":     "sk_SK",
+		"sl":     "sl_SI",
+		"sr":     "sr_RS",
+		"sr-lat": "sr_RS@latin",
+		"sw":     "sw_KE",
+		"th":     "th_TH",
+		"tr":     "tr_TR",
+		"uk":     "uk_UA",
+		"uz":     "uz_UZ",
+		"vi":     "vi_VN",
+		"zu":     "zu_ZA",
+		"zh":     "zh_CN",
+		"zh-cn":  "zh_CN",
+		"zh-tw":  "zh_TW",
+	}
 
-    localizedCaption = map[string]string{
-        "af": "Weer verslag vir:",
-        "ar": "تقرير حالة ألطقس",
-        "az": "Hava proqnozu:",
-        "be": "Прагноз надвор'я для:",
-        "bg": "Прогноза за времето в:",
-        "bs": "Vremenske prognoze za:",
-        "ca": "Informe del temps per a:",
-        "cs": "Předpověď počasí pro:",
-        "cy": "Adroddiad tywydd ar gyfer:",
-        "da": "Vejret i:",
-        "de": "Wetterbericht für:",
-        "el": "Πρόγνωση καιρού για:",
-        "eo": "Veterprognozo por:",
-        "es": "El tiempo en:",
-        "et": "Ilmaprognoos:",
-        "eu": "Eguraldia:",
-        "fa": "اوه و بآ تیعضو شرازگ",
-        "fi": "Säätiedotus:",
-        "fr": "Prévisions météo pour:",
-        "fy": "Waarberjocht foar:",
-        "ga": "Réamhaisnéis na haimsire do:",
-        "he": ":ריוואה גזמ תיזחת",
-        "hr": "Vremenska prognoza za:",
-        "hu": "Időjárás előrejelzés:",
-        "hy": "Եղանակի տեսություն:",
-        "ia": "Le tempore a:",
-        "id": "Prakiraan cuaca:",
-        "it": "Previsioni meteo:",
-        "is": "Veðurskýrsla fyrir:",
-        "ja": "天気予報：",
-        "jv": "Weather forecast for:",
-        "ka": "ამინდის პროგნოზი:",
-        "kk": "Ауа райы:",
-        "ko": "일기 예보：",
-        "ky": "Аба ырайы:",
-        "lt": "Orų prognozė:",
-        "lv": "Laika ziņas:",
-        "mk": "Прогноза за времето во:",
-        "ml": "കാലാവസ്ഥ റിപ്പോർട്ട്:",
-        "nb": "Værmelding for:",
-        "nl": "Weerbericht voor:",
-        "nn": "Vêrmelding for:",
-        "pl": "Pogoda w:",
-        "pt": "Previsão do tempo para:",
-        "pt-br": "Previsão do tempo para:",
-        "ro": "Prognoza meteo pentru:",
-        "ru": "Прогноз погоды:",
-        "sk": "Predpoveď počasia pre:",
-        "sl": "Vremenska napoved za",
-        "sr": "Временска прогноза за:",
-        "sr-lat":"Vremenska prognoza za:",
-        "sv": "Väderleksprognos för:",
-        "sw": "Ripoti ya hali ya hewa, jiji la:",
-        "te": "వాతావరణ సమాచారము:",
-        "th": "รายงานสภาพอากาศ:",
-        "tr": "Hava beklentisi:",
-        "uk": "Прогноз погоди для:",
-        "uz": "Ob-havo bashorati:",
-        "vi": "Báo cáo thời tiết:",
-        "zu": "Isimo sezulu:",
-        "zh": "天气预报：",
-        "zh-cn": "天气预报：",
-        "zh-tw": "天氣預報：",
-    }
+	localizedCaption = map[string]string{
+		"af":     "Weer verslag vir:",
+		"ar":     "تقرير حالة ألطقس",
+		"az":     "Hava proqnozu:",
+		"be":     "Прагноз надвор'я для:",
+		"bg":     "Прогноза за времето в:",
+		"bs":     "Vremenske prognoze za:",
+		"ca":     "Informe del temps per a:",
+		"cs":     "Předpověď počasí pro:",
+		"cy":     "Adroddiad tywydd ar gyfer:",
+		"da":     "Vejret i:",
+		"de":     "Wetterbericht für:",
+		"el":     "Πρόγνωση καιρού για:",
+		"eo":     "Veterprognozo por:",
+		"es":     "El tiempo en:",
+		"et":     "Ilmaprognoos:",
+		"eu":     "Eguraldia:",
+		"fa":     "اوه و بآ تیعضو شرازگ",
+		"fi":     "Säätiedotus:",
+		"fr":     "Prévisions météo pour:",
+		"fy":     "Waarberjocht foar:",
+		"ga":     "Réamhaisnéis na haimsire do:",
+		"he":     ":ריוואה גזמ תיזחת",
+		"hr":     "Vremenska prognoza za:",
+		"hu":     "Időjárás előrejelzés:",
+		"hy":     "Եղանակի տեսություն:",
+		"ia":     "Le tempore a:",
+		"id":     "Prakiraan cuaca:",
+		"it":     "Previsioni meteo:",
+		"is":     "Veðurskýrsla fyrir:",
+		"ja":     "天気予報：",
+		"jv":     "Weather forecast for:",
+		"ka":     "ამინდის პროგნოზი:",
+		"kk":     "Ауа райы:",
+		"ko":     "일기 예보：",
+		"ky":     "Аба ырайы:",
+		"lt":     "Orų prognozė:",
+		"lv":     "Laika ziņas:",
+		"mk":     "Прогноза за времето во:",
+		"ml":     "കാലാവസ്ഥ റിപ്പോർട്ട്:",
+		"nb":     "Værmelding for:",
+		"nl":     "Weerbericht voor:",
+		"nn":     "Vêrmelding for:",
+		"pl":     "Pogoda w:",
+		"pt":     "Previsão do tempo para:",
+		"pt-br":  "Previsão do tempo para:",
+		"ro":     "Prognoza meteo pentru:",
+		"ru":     "Прогноз погоды:",
+		"sk":     "Predpoveď počasia pre:",
+		"sl":     "Vremenska napoved za",
+		"sr":     "Временска прогноза за:",
+		"sr-lat": "Vremenska prognoza za:",
+		"sv":     "Väderleksprognos för:",
+		"sw":     "Ripoti ya hali ya hewa, jiji la:",
+		"te":     "వాతావరణ సమాచారము:",
+		"th":     "รายงานสภาพอากาศ:",
+		"tr":     "Hava beklentisi:",
+		"uk":     "Прогноз погоди для:",
+		"uz":     "Ob-havo bashorati:",
+		"vi":     "Báo cáo thời tiết:",
+		"zu":     "Isimo sezulu:",
+		"zh":     "天气预报：",
+		"zh-cn":  "天气预报：",
+		"zh-tw":  "天氣預報：",
+	}
 
-    daytimeTranslation = map[string][]string{
-        "af":{"Oggend","Middag", "Vroegaand", "Laatnag"},
-        "ar":{ "ﺎﻠﻠﻴﻟ", "ﺎﻠﻤﺳﺍﺀ", "ﺎﻠﻈﻫﺭ", "ﺎﻠﺼﺑﺎﺣ" },
-        "az":{"Səhər",  "Gün",      "Axşam",    "Gecə"  },
-        "be":{"Раніца", "Дзень",    "Вечар",    "Ноч"   },
-        "bg":{"Сутрин", "Обяд",     "Вечер",    "Нощ"   },
-        "bs":{"Ujutro", "Dan",      "Večer",    "Noć"   },
-        "cs":{"Ráno",   "Ve dne",   "Večer",    "V noci"},
-        "ca":{"Matí",   "Dia",      "Tarda",    "Nit"   },
-        "cy":{"Bore",   "Dydd",     "Hwyr",     "Nos"   },
-        "da":{"Morgen", "Middag",   "Aften",    "Nat"   },
-        "de":{"Früh",   "Mittag",   "Abend",    "Nacht" },
-        "el":{"Πρωί",   "Μεσημέρι", "Απόγευμα", "Βράδυ" },
-        "en":{"Morning","Noon",     "Evening",  "Night" },
-        "eo":{"Mateno", "Tago",     "Vespero",  "Nokto" },
-        "es":{"Mañana", "Mediodía", "Tarde",    "Noche" },
-        "et":{"Hommik", "Päev",     "Õhtu",     "Öösel" },
-        "eu":{"Goiza", "Eguerdia", "Arratsaldea", "Gaua" },
-        "fa":{    "حبص",     "رهظ",      "رصع",   "بش"  },
-        "fi":{"Aamu",   "Keskipäivä", "Ilta",   "Yö"    },
-        "fr":{"Matin",  "Après-midi", "Soir",   "Nuit"  },
-        "fy":{"Moarns",  "Middeis", "Jûns",     "Nachts"},
-        "ga":{"Maidin",  "Nóin",    "Tráthnóna","Oíche"},
-        "he":{ "רקוב",  "םוֹיְ",      "ברֶעֶ",      "הלָיְלַ"  },
-        "hr":{"Jutro",  "Dan",      "Večer",    "Noć"   },
-        "hu":{"Reggel", "Dél",      "Este",     "Éjszaka"},
-        "hy":{"Առավոտ", "Կեսօր",    "Երեկո",    "Գիշեր" },
-        "ia":{"Matino", "Mediedie", "Vespere", "Nocte"},
-        "id":{"Pagi",   "Hari",     "Petang",   "Malam" },
-        "it":{"Mattina","Pomeriggio", "Sera",   "Notte" },
-        "is":{"Morgunn","Dagur",    "Kvöld",    "Nótt"  },
-        "ja":{"朝",     "昼",       "夕",       "夜"    },
-        "jv":{"Morning","Noon",     "Evening",  "Night" },
-        "ka":{"დილა",   "დღე",      "საღამო",   "ღამე"  },
-        "kk":{"Таң",    "Күндіз",   "Кеш",      "Түн"   },
-        "ko":{"아침",   "낮",       "저녁",     "밤"    },
-        "ky":{"Эртең",  "Күн",      "Кеч",      "Түн"   },
-        "lt":{"Rytas",  "Diena",    "Vakaras",  "Naktis"},
-        "lv":{"Rīts",   "Diena",    "Vakars",   "Nakts" },
-        "mk":{"Утро",   "Пладне",   "Вечер",    "Ноќ"   },
-        "ml":{ "മോണിംഗ്", "മധ്യാഹ്നം", "വൈകുന്നേരം", "രാത്രി",},
-        "nl":{"'s Ochtends","'s Middags", "'s Avonds", "'s Nachts"},
-        "nb":{"Morgen", "Middag",   "Kveld",    "Natt"  },
-        "nn":{"Morgon", "Middag",   "Kveld",    "Natt"  },
-        "pl":{"Ranek",  "Dzień",    "Wieczór",  "Noc"   },
-        "pt":{"Manhã",  "Meio-dia", "Tarde",    "Noite" },
-        "pt-br":{"Manhã",  "Meio-dia", "Tarde",    "Noite" },
-        "ro":{"Dimineaţă","Amiază", "Seară",    "Noapte"},
-        "ru":{"Утро",   "День",     "Вечер",    "Ночь"  },
-        "sk":{"Ráno",   "Cez deň",  "Večer",    "V noci"},
-        "sl":{"Jutro",  "Dan",      "Večer",    "Noč"   },
-        "sr":{"Јутро",  "Подне",    "Вече",     "Ноћ"   },
-        "sr-lat":{"Jutro", "Podne", "Veče",     "Noć"   },
-        "sv":{"Morgon", "Eftermiddag","Kväll",  "Natt"  },
-        "sw":{"Asubuhi","Adhuhuri", "Jioni",    "Usiku" },
-        "te":{"ఉదయం", "రోజు", "సాయంత్రం", "రాత్రి" },
-        "th":{"เช้า",    "วัน",       "เย็น",      "คืน"    },
-        "tr":{"Sabah",  "Öğle",     "Akşam",    "Gece"  },
-        "uk":{"Ранок",  "День",     "Вечір",    "Ніч"   },
-        "uz":{"Ertalab","Kunduzi",  "Kechqurun","Kecha" },
-        "vi":{"Sáng",   "Trưa",     "Chiều",    "Tối"   },
-        "zh":   {"早上",   "中午",     "傍晚",     "夜间"    },
-        "zh-cn":{"早上",   "中午",     "傍晚",     "夜间"    },
-        "zh-tw":{"早上",   "中午",     "傍晚",     "夜間"    },
-        "zu":{"Morning","Noon",     "Evening",  "Night" },
-    }
+	daytimeTranslation = map[string][]string{
+		"af":     {"Oggend", "Middag", "Vroegaand", "Laatnag"},
+		"ar":     {"ﺎﻠﻠﻴﻟ", "ﺎﻠﻤﺳﺍﺀ", "ﺎﻠﻈﻫﺭ", "ﺎﻠﺼﺑﺎﺣ"},
+		"az":     {"Səhər", "Gün", "Axşam", "Gecə"},
+		"be":     {"Раніца", "Дзень", "Вечар", "Ноч"},
+		"bg":     {"Сутрин", "Обяд", "Вечер", "Нощ"},
+		"bs":     {"Ujutro", "Dan", "Večer", "Noć"},
+		"cs":     {"Ráno", "Ve dne", "Večer", "V noci"},
+		"ca":     {"Matí", "Dia", "Tarda", "Nit"},
+		"cy":     {"Bore", "Dydd", "Hwyr", "Nos"},
+		"da":     {"Morgen", "Middag", "Aften", "Nat"},
+		"de":     {"Früh", "Mittag", "Abend", "Nacht"},
+		"el":     {"Πρωί", "Μεσημέρι", "Απόγευμα", "Βράδυ"},
+		"en":     {"Morning", "Noon", "Evening", "Night"},
+		"eo":     {"Mateno", "Tago", "Vespero", "Nokto"},
+		"es":     {"Mañana", "Mediodía", "Tarde", "Noche"},
+		"et":     {"Hommik", "Päev", "Õhtu", "Öösel"},
+		"eu":     {"Goiza", "Eguerdia", "Arratsaldea", "Gaua"},
+		"fa":     {"حبص", "رهظ", "رصع", "بش"},
+		"fi":     {"Aamu", "Keskipäivä", "Ilta", "Yö"},
+		"fr":     {"Matin", "Après-midi", "Soir", "Nuit"},
+		"fy":     {"Moarns", "Middeis", "Jûns", "Nachts"},
+		"ga":     {"Maidin", "Nóin", "Tráthnóna", "Oíche"},
+		"he":     {"רקוב", "םוֹיְ", "ברֶעֶ", "הלָיְלַ"},
+		"hr":     {"Jutro", "Dan", "Večer", "Noć"},
+		"hu":     {"Reggel", "Dél", "Este", "Éjszaka"},
+		"hy":     {"Առավոտ", "Կեսօր", "Երեկո", "Գիշեր"},
+		"ia":     {"Matino", "Mediedie", "Vespere", "Nocte"},
+		"id":     {"Pagi", "Hari", "Petang", "Malam"},
+		"it":     {"Mattina", "Pomeriggio", "Sera", "Notte"},
+		"is":     {"Morgunn", "Dagur", "Kvöld", "Nótt"},
+		"ja":     {"朝", "昼", "夕", "夜"},
+		"jv":     {"Morning", "Noon", "Evening", "Night"},
+		"ka":     {"დილა", "დღე", "საღამო", "ღამე"},
+		"kk":     {"Таң", "Күндіз", "Кеш", "Түн"},
+		"ko":     {"아침", "낮", "저녁", "밤"},
+		"ky":     {"Эртең", "Күн", "Кеч", "Түн"},
+		"lt":     {"Rytas", "Diena", "Vakaras", "Naktis"},
+		"lv":     {"Rīts", "Diena", "Vakars", "Nakts"},
+		"mk":     {"Утро", "Пладне", "Вечер", "Ноќ"},
+		"ml":     {"മോണിംഗ്", "മധ്യാഹ്നം", "വൈകുന്നേരം", "രാത്രി"},
+		"nl":     {"'s Ochtends", "'s Middags", "'s Avonds", "'s Nachts"},
+		"nb":     {"Morgen", "Middag", "Kveld", "Natt"},
+		"nn":     {"Morgon", "Middag", "Kveld", "Natt"},
+		"pl":     {"Ranek", "Dzień", "Wieczór", "Noc"},
+		"pt":     {"Manhã", "Meio-dia", "Tarde", "Noite"},
+		"pt-br":  {"Manhã", "Meio-dia", "Tarde", "Noite"},
+		"ro":     {"Dimineaţă", "Amiază", "Seară", "Noapte"},
+		"ru":     {"Утро", "День", "Вечер", "Ночь"},
+		"sk":     {"Ráno", "Cez deň", "Večer", "V noci"},
+		"sl":     {"Jutro", "Dan", "Večer", "Noč"},
+		"sr":     {"Јутро", "Подне", "Вече", "Ноћ"},
+		"sr-lat": {"Jutro", "Podne", "Veče", "Noć"},
+		"sv":     {"Morgon", "Eftermiddag", "Kväll", "Natt"},
+		"sw":     {"Asubuhi", "Adhuhuri", "Jioni", "Usiku"},
+		"te":     {"ఉదయం", "రోజు", "సాయంత్రం", "రాత్రి"},
+		"th":     {"เช้า", "วัน", "เย็น", "คืน"},
+		"tr":     {"Sabah", "Öğle", "Akşam", "Gece"},
+		"uk":     {"Ранок", "День", "Вечір", "Ніч"},
+		"uz":     {"Ertalab", "Kunduzi", "Kechqurun", "Kecha"},
+		"vi":     {"Sáng", "Trưa", "Chiều", "Tối"},
+		"zh":     {"早上", "中午", "傍晚", "夜间"},
+		"zh-cn":  {"早上", "中午", "傍晚", "夜间"},
+		"zh-tw":  {"早上", "中午", "傍晚", "夜間"},
+		"zu":     {"Morning", "Noon", "Evening", "Night"},
+	}
 )
 
 // Add this languages:
@@ -500,9 +500,9 @@ var (
 // )
 
 const (
-    wuri      = "http://127.0.0.1:5001/premium/v1/weather.ashx?"
-    suri      = "http://127.0.0.1:5001/premium/v1/search.ashx?"
-    slotcount = 4
+	wuri      = "http://127.0.0.1:5001/premium/v1/weather.ashx?"
+	suri      = "http://127.0.0.1:5001/premium/v1/search.ashx?"
+	slotcount = 4
 )
 
 func configload() error {
@@ -526,11 +526,11 @@ func pad(s string, mustLen int) (ret string) {
 	realLen := utf8.RuneCountInString(ansiEsc.ReplaceAllLiteralString(s, ""))
 	delta := mustLen - realLen
 	if delta > 0 {
-        if config.RightToLeft {
-            ret = strings.Repeat(" ", delta) + ret + "\033[0m"
-        } else {
-            ret += "\033[0m" + strings.Repeat(" ", delta)
-        }
+		if config.RightToLeft {
+			ret = strings.Repeat(" ", delta) + ret + "\033[0m"
+		} else {
+			ret += "\033[0m" + strings.Repeat(" ", delta)
+		}
 	} else if delta < 0 {
 		toks := ansiEsc.Split(s, 2)
 		tokLen := utf8.RuneCountInString(toks[0])
@@ -546,108 +546,108 @@ func pad(s string, mustLen int) (ret string) {
 
 func formatTemp(c cond) string {
 	color := func(temp int, explicit_plus bool) string {
-        var col = 0
-        if !config.Inverse {
-            col = 21
-            switch temp {
-            case -15, -14, -13:
-                col = 27
-            case -12, -11, -10:
-                col = 33
-            case -9, -8, -7:
-                col = 39
-            case -6, -5, -4:
-                col = 45
-            case -3, -2, -1:
-                col = 51
-            case 0, 1:
-                col = 50
-            case 2, 3:
-                col = 49
-            case 4, 5:
-                col = 48
-            case 6, 7:
-                col = 47
-            case 8, 9:
-                col = 46
-            case 10, 11, 12:
-                col = 82
-            case 13, 14, 15:
-                col = 118
-            case 16, 17, 18:
-                col = 154
-            case 19, 20, 21:
-                col = 190
-            case 22, 23, 24:
-                col = 226
-            case 25, 26, 27:
-                col = 220
-            case 28, 29, 30:
-                col = 214
-            case 31, 32, 33:
-                col = 208
-            case 34, 35, 36:
-                col = 202
-            default:
-                if temp > 0 {
-                    col = 196
-                }
-            }
-        } else {
-            col = 16
-            switch temp {
-            case -15, -14, -13:
-                col = 17
-            case -12, -11, -10:
-                col = 18
-            case -9, -8, -7:
-                col = 19
-            case -6, -5, -4:
-                col = 20
-            case -3, -2, -1:
-                col = 21
-            case 0, 1:
-                col = 30
-            case 2, 3:
-                col = 28
-            case 4, 5:
-                col = 29
-            case 6, 7:
-                col = 30
-            case 8, 9:
-                col = 34
-            case 10, 11, 12:
-                col = 35
-            case 13, 14, 15:
-                col = 36
-            case 16, 17, 18:
-                col = 40
-            case 19, 20, 21:
-                col = 59
-            case 22, 23, 24:
-                col = 100
-            case 25, 26, 27:
-                col = 101
-            case 28, 29, 30:
-                col = 94
-            case 31, 32, 33:
-                col = 166
-            case 34, 35, 36:
-                col = 52
-            default:
-                if temp > 0 {
-                    col = 196
-                }
-            }
-        }
+		var col = 0
+		if !config.Inverse {
+			col = 21
+			switch temp {
+			case -15, -14, -13:
+				col = 27
+			case -12, -11, -10:
+				col = 33
+			case -9, -8, -7:
+				col = 39
+			case -6, -5, -4:
+				col = 45
+			case -3, -2, -1:
+				col = 51
+			case 0, 1:
+				col = 50
+			case 2, 3:
+				col = 49
+			case 4, 5:
+				col = 48
+			case 6, 7:
+				col = 47
+			case 8, 9:
+				col = 46
+			case 10, 11, 12:
+				col = 82
+			case 13, 14, 15:
+				col = 118
+			case 16, 17, 18:
+				col = 154
+			case 19, 20, 21:
+				col = 190
+			case 22, 23, 24:
+				col = 226
+			case 25, 26, 27:
+				col = 220
+			case 28, 29, 30:
+				col = 214
+			case 31, 32, 33:
+				col = 208
+			case 34, 35, 36:
+				col = 202
+			default:
+				if temp > 0 {
+					col = 196
+				}
+			}
+		} else {
+			col = 16
+			switch temp {
+			case -15, -14, -13:
+				col = 17
+			case -12, -11, -10:
+				col = 18
+			case -9, -8, -7:
+				col = 19
+			case -6, -5, -4:
+				col = 20
+			case -3, -2, -1:
+				col = 21
+			case 0, 1:
+				col = 30
+			case 2, 3:
+				col = 28
+			case 4, 5:
+				col = 29
+			case 6, 7:
+				col = 30
+			case 8, 9:
+				col = 34
+			case 10, 11, 12:
+				col = 35
+			case 13, 14, 15:
+				col = 36
+			case 16, 17, 18:
+				col = 40
+			case 19, 20, 21:
+				col = 59
+			case 22, 23, 24:
+				col = 100
+			case 25, 26, 27:
+				col = 101
+			case 28, 29, 30:
+				col = 94
+			case 31, 32, 33:
+				col = 166
+			case 34, 35, 36:
+				col = 52
+			default:
+				if temp > 0 {
+					col = 196
+				}
+			}
+		}
 		if config.Imperial {
 			temp = (temp*18 + 320) / 10
 		}
-                if explicit_plus {
-                    return fmt.Sprintf("\033[38;5;%03dm+%d\033[0m", col, temp)
-                } else {
-                    return fmt.Sprintf("\033[38;5;%03dm%d\033[0m", col, temp)
-                }
+		if explicit_plus {
+			return fmt.Sprintf("\033[38;5;%03dm+%d\033[0m", col, temp)
+		} else {
+			return fmt.Sprintf("\033[38;5;%03dm%d\033[0m", col, temp)
+		}
 	}
 	t := c.TempC
 	if t == 0 {
@@ -655,37 +655,37 @@ func formatTemp(c cond) string {
 	}
 
 	hyphen := " - "
-    // if (config.Lang == "sl") {
-    //     hyphen = "-"
-    // }
+	// if (config.Lang == "sl") {
+	//     hyphen = "-"
+	// }
 	hyphen = ".."
 
-        explicit_plus := false
+	explicit_plus := false
 	if c.FeelsLikeC < t {
-                if c.FeelsLikeC < 0 && t > 0 {
-                    explicit_plus = true
-                }
+		if c.FeelsLikeC < 0 && t > 0 {
+			explicit_plus = true
+		}
 		return pad(fmt.Sprintf("%s%s%s °%s", color(c.FeelsLikeC, false), hyphen, color(t, explicit_plus), unitTemp[config.Imperial]), 15)
 	} else if c.FeelsLikeC > t {
-                if t < 0 && c.FeelsLikeC > 0 {
-                    explicit_plus = true
-                }
+		if t < 0 && c.FeelsLikeC > 0 {
+			explicit_plus = true
+		}
 		return pad(fmt.Sprintf("%s%s%s °%s", color(t, false), hyphen, color(c.FeelsLikeC, explicit_plus), unitTemp[config.Imperial]), 15)
 	}
 	return pad(fmt.Sprintf("%s °%s", color(c.FeelsLikeC, false), unitTemp[config.Imperial]), 15)
 }
 
 func formatWind(c cond) string {
-    windInRightUnits := func(spd int) int {
-        if config.WindMS {
-            spd = (spd * 1000) / 3600
-        } else {
-            if config.Imperial {
-                spd = (spd * 1000) / 1609
-            }
-        }
-        return spd
-    }
+	windInRightUnits := func(spd int) int {
+		if config.WindMS {
+			spd = (spd * 1000) / 3600
+		} else {
+			if config.Imperial {
+				spd = (spd * 1000) / 1609
+			}
+		}
+		return spd
+	}
 	color := func(spd int) string {
 		var col = 46
 		switch spd {
@@ -712,28 +712,28 @@ func formatWind(c cond) string {
 				col = 196
 			}
 		}
-        spd = windInRightUnits(spd)
+		spd = windInRightUnits(spd)
 
 		return fmt.Sprintf("\033[38;5;%03dm%d\033[0m", col, spd)
 	}
 
-    unitWindString := unitWind[0]
-    if config.WindMS {
-        unitWindString = unitWind[2]
-    } else {
-        if config.Imperial {
-            unitWindString = unitWind[1]
-        }
-    }
+	unitWindString := unitWind[0]
+	if config.WindMS {
+		unitWindString = unitWind[2]
+	} else {
+		if config.Imperial {
+			unitWindString = unitWind[1]
+		}
+	}
 
-    hyphen := " - "
-    // if (config.Lang == "sl") {
-    //     hyphen = "-"
-    // }
-    hyphen = "-"
+	hyphen := " - "
+	// if (config.Lang == "sl") {
+	//     hyphen = "-"
+	// }
+	hyphen = "-"
 
-    cWindGustKmph := fmt.Sprintf("%s", color(c.WindGustKmph))
-    cWindspeedKmph := fmt.Sprintf("%s", color(c.WindspeedKmph))
+	cWindGustKmph := fmt.Sprintf("%s", color(c.WindGustKmph))
+	cWindspeedKmph := fmt.Sprintf("%s", color(c.WindspeedKmph))
 	if windInRightUnits(c.WindGustKmph) > windInRightUnits(c.WindspeedKmph) {
 		return pad(fmt.Sprintf("%s %s%s%s %s", windDir[c.Winddir16Point], cWindspeedKmph, hyphen, cWindGustKmph, unitWindString), 15)
 	}
@@ -765,91 +765,91 @@ func formatCond(cur []string, c cond, current bool) (ret []string) {
 	} else {
 		icon = i
 	}
-    if config.Inverse {
-        // inverting colors
-        for i, _ := range icon {
-            icon[i] = strings.Replace(icon[i], "38;5;226",  "38;5;94", -1)
-            icon[i] = strings.Replace(icon[i], "38;5;250",  "38;5;243", -1)
-            icon[i] = strings.Replace(icon[i], "38;5;21",   "38;5;18", -1)
-            icon[i] = strings.Replace(icon[i], "38;5;255",  "38;5;245", -1)
-            icon[i] = strings.Replace(icon[i], "38;5;111",  "38;5;63", -1)
-            icon[i] = strings.Replace(icon[i], "38;5;251",  "38;5;238", -1)
-        }
-    }
+	if config.Inverse {
+		// inverting colors
+		for i, _ := range icon {
+			icon[i] = strings.Replace(icon[i], "38;5;226", "38;5;94", -1)
+			icon[i] = strings.Replace(icon[i], "38;5;250", "38;5;243", -1)
+			icon[i] = strings.Replace(icon[i], "38;5;21", "38;5;18", -1)
+			icon[i] = strings.Replace(icon[i], "38;5;255", "38;5;245", -1)
+			icon[i] = strings.Replace(icon[i], "38;5;111", "38;5;63", -1)
+			icon[i] = strings.Replace(icon[i], "38;5;251", "38;5;238", -1)
+		}
+	}
 	//desc := fmt.Sprintf("%-15.15v", c.WeatherDesc[0].Value)
 	desc := c.WeatherDesc[0].Value
-    if config.RightToLeft {
-        for runewidth.StringWidth(desc) < 15 {
-            desc = " " + desc
-        }
-        for runewidth.StringWidth(desc) > 15 {
-            _, size := utf8.DecodeLastRuneInString(desc)
-            desc = desc[size:len(desc)]
-        }
-    } else {
-        for runewidth.StringWidth(desc) < 15 {
-            desc += " "
-        }
-        for runewidth.StringWidth(desc) > 15 {
-            _, size := utf8.DecodeLastRuneInString(desc)
-            desc = desc[:len(desc)-size]
-        }
-    }
-	if current {
-        if config.RightToLeft {
-            desc = c.WeatherDesc[0].Value
-            if runewidth.StringWidth(desc) < 15 {
-                desc = strings.Repeat(" ", 15 - runewidth.StringWidth(desc)) + desc
-            }
-        } else {
-            desc = c.WeatherDesc[0].Value
-        }
+	if config.RightToLeft {
+		for runewidth.StringWidth(desc) < 15 {
+			desc = " " + desc
+		}
+		for runewidth.StringWidth(desc) > 15 {
+			_, size := utf8.DecodeLastRuneInString(desc)
+			desc = desc[size:len(desc)]
+		}
 	} else {
-        if config.RightToLeft {
-            if frstRune, size := utf8.DecodeRuneInString(desc); frstRune != ' ' {
-                desc = "…" + desc[size:len(desc)]
-                for runewidth.StringWidth(desc) < 15 {
-                    desc = " " + desc
-                }
-            }
-        } else {
-            if lastRune, size := utf8.DecodeLastRuneInString(desc); lastRune != ' ' {
-                desc = desc[:len(desc)-size] + "…"
-                //for numberOfSpaces < runewidth.StringWidth(fmt.Sprintf("%c", lastRune)) - 1 {
-                for runewidth.StringWidth(desc) < 15 {
-                    desc = desc + " "
-                }
-            }
-        }
+		for runewidth.StringWidth(desc) < 15 {
+			desc += " "
+		}
+		for runewidth.StringWidth(desc) > 15 {
+			_, size := utf8.DecodeLastRuneInString(desc)
+			desc = desc[:len(desc)-size]
+		}
 	}
-    if (config.RightToLeft) {
-        ret = append(ret, fmt.Sprintf("%v %v %v", cur[0], desc,          icon[0]))
-        ret = append(ret, fmt.Sprintf("%v %v %v", cur[1], formatTemp(c), icon[1]))
-        ret = append(ret, fmt.Sprintf("%v %v %v", cur[2], formatWind(c), icon[2]))
-        ret = append(ret, fmt.Sprintf("%v %v %v", cur[3], formatVisibility(c), icon[3]))
-        ret = append(ret, fmt.Sprintf("%v %v %v", cur[4], formatRain(c), icon[4]))
-    } else {
-        ret = append(ret, fmt.Sprintf("%v %v %v", cur[0], icon[0], desc))
-        ret = append(ret, fmt.Sprintf("%v %v %v", cur[1], icon[1], formatTemp(c)))
-        ret = append(ret, fmt.Sprintf("%v %v %v", cur[2], icon[2], formatWind(c)))
-        ret = append(ret, fmt.Sprintf("%v %v %v", cur[3], icon[3], formatVisibility(c)))
-        ret = append(ret, fmt.Sprintf("%v %v %v", cur[4], icon[4], formatRain(c)))
-    }
+	if current {
+		if config.RightToLeft {
+			desc = c.WeatherDesc[0].Value
+			if runewidth.StringWidth(desc) < 15 {
+				desc = strings.Repeat(" ", 15-runewidth.StringWidth(desc)) + desc
+			}
+		} else {
+			desc = c.WeatherDesc[0].Value
+		}
+	} else {
+		if config.RightToLeft {
+			if frstRune, size := utf8.DecodeRuneInString(desc); frstRune != ' ' {
+				desc = "…" + desc[size:len(desc)]
+				for runewidth.StringWidth(desc) < 15 {
+					desc = " " + desc
+				}
+			}
+		} else {
+			if lastRune, size := utf8.DecodeLastRuneInString(desc); lastRune != ' ' {
+				desc = desc[:len(desc)-size] + "…"
+				//for numberOfSpaces < runewidth.StringWidth(fmt.Sprintf("%c", lastRune)) - 1 {
+				for runewidth.StringWidth(desc) < 15 {
+					desc = desc + " "
+				}
+			}
+		}
+	}
+	if config.RightToLeft {
+		ret = append(ret, fmt.Sprintf("%v %v %v", cur[0], desc, icon[0]))
+		ret = append(ret, fmt.Sprintf("%v %v %v", cur[1], formatTemp(c), icon[1]))
+		ret = append(ret, fmt.Sprintf("%v %v %v", cur[2], formatWind(c), icon[2]))
+		ret = append(ret, fmt.Sprintf("%v %v %v", cur[3], formatVisibility(c), icon[3]))
+		ret = append(ret, fmt.Sprintf("%v %v %v", cur[4], formatRain(c), icon[4]))
+	} else {
+		ret = append(ret, fmt.Sprintf("%v %v %v", cur[0], icon[0], desc))
+		ret = append(ret, fmt.Sprintf("%v %v %v", cur[1], icon[1], formatTemp(c)))
+		ret = append(ret, fmt.Sprintf("%v %v %v", cur[2], icon[2], formatWind(c)))
+		ret = append(ret, fmt.Sprintf("%v %v %v", cur[3], icon[3], formatVisibility(c)))
+		ret = append(ret, fmt.Sprintf("%v %v %v", cur[4], icon[4], formatRain(c)))
+	}
 	return
 }
 
 func justifyCenter(s string, width int) string {
-    appendSide := 0
-    for runewidth.StringWidth(s) <= width {
-        if appendSide == 1 {
-            s = s + " "
-            appendSide = 0
-        } else {
-            s = " " + s
-            appendSide = 1
-        }
-    }
-    return s
+	appendSide := 0
+	for runewidth.StringWidth(s) <= width {
+		if appendSide == 1 {
+			s = s + " "
+			appendSide = 0
+		} else {
+			s = " " + s
+			appendSide = 1
+		}
+	}
+	return s
 }
 
 func reverse(s string) string {
@@ -879,18 +879,18 @@ func printDay(w weather) (ret []string) {
 		}
 	}
 
-    if config.RightToLeft {
-        slots[0], slots[3] = slots[3], slots[0]
-        slots[1], slots[2] = slots[2], slots[1]
-    }
+	if config.RightToLeft {
+		slots[0], slots[3] = slots[3], slots[0]
+		slots[1], slots[2] = slots[2], slots[1]
+	}
 
 	for i, s := range slots {
-        if config.Narrow {
-            if i == 0 || i == 2 {
-                continue;
-            }
-        }
-        ret = formatCond(ret, s, false)
+		if config.Narrow {
+			if i == 0 || i == 2 {
+				continue
+			}
+		}
+		ret = formatCond(ret, s, false)
 		for i := range ret {
 			ret[i] = ret[i] + "│"
 		}
@@ -899,80 +899,80 @@ func printDay(w weather) (ret []string) {
 	d, _ := time.Parse("2006-01-02", w.Date)
 	// dateFmt := "┤ " + d.Format("Mon 02. Jan") + " ├"
 
-    if val, ok := locale[config.Lang]; ok {
-        lctime.SetLocale(val)
-    } else {
-        lctime.SetLocale("en_US")
-    }
-    dateName := ""
-    if config.RightToLeft {
-        dow := lctime.Strftime("%a", d)
-        day := lctime.Strftime("%d", d)
-        month := lctime.Strftime("%b", d)
-        dateName = reverse(month) + " " + day + " " + reverse(dow)
-    } else {
-        dateName = lctime.Strftime("%a %d %b", d)
-        if config.Lang == "ko" {
-            dateName = lctime.Strftime("%b %d일 %a", d)
-        }
-        if config.Lang == "zh" || config.Lang == "zh-tw" || config.Lang == "zh-cn" {
-            dateName = lctime.Strftime("%b%d日%A", d)
-        }
-    }
-    // appendSide := 0
-    // // for utf8.RuneCountInString(dateName) <= dateWidth {
-    // for runewidth.StringWidth(dateName) <= dateWidth {
-    //     if appendSide == 1 {
-    //         dateName = dateName + " "
-    //         appendSide = 0
-    //     } else {
-    //         dateName = " " + dateName
-    //         appendSide = 1
-    //     }
-    // }
+	if val, ok := locale[config.Lang]; ok {
+		lctime.SetLocale(val)
+	} else {
+		lctime.SetLocale("en_US")
+	}
+	dateName := ""
+	if config.RightToLeft {
+		dow := lctime.Strftime("%a", d)
+		day := lctime.Strftime("%d", d)
+		month := lctime.Strftime("%b", d)
+		dateName = reverse(month) + " " + day + " " + reverse(dow)
+	} else {
+		dateName = lctime.Strftime("%a %d %b", d)
+		if config.Lang == "ko" {
+			dateName = lctime.Strftime("%b %d일 %a", d)
+		}
+		if config.Lang == "zh" || config.Lang == "zh-tw" || config.Lang == "zh-cn" {
+			dateName = lctime.Strftime("%b%d日%A", d)
+		}
+	}
+	// appendSide := 0
+	// // for utf8.RuneCountInString(dateName) <= dateWidth {
+	// for runewidth.StringWidth(dateName) <= dateWidth {
+	//     if appendSide == 1 {
+	//         dateName = dateName + " "
+	//         appendSide = 0
+	//     } else {
+	//         dateName = " " + dateName
+	//         appendSide = 1
+	//     }
+	// }
 
 	dateFmt := "┤" + justifyCenter(dateName, 12) + "├"
 
-    trans := daytimeTranslation["en"]
-    if t, ok := daytimeTranslation[config.Lang]; ok {
-        trans = t
-    }
-    if (config.Narrow) {
+	trans := daytimeTranslation["en"]
+	if t, ok := daytimeTranslation[config.Lang]; ok {
+		trans = t
+	}
+	if config.Narrow {
 
-        names := "│      "+ justifyCenter(trans[1], 16) +
-                 "└──────┬──────┘" +justifyCenter(trans[3], 16) + "      │"
+		names := "│      " + justifyCenter(trans[1], 16) +
+			"└──────┬──────┘" + justifyCenter(trans[3], 16) + "      │"
 
-        ret = append([]string{
-            "                        ┌─────────────┐                        ",
-            "┌───────────────────────" + dateFmt + "───────────────────────┐",
-            names,
-            "├──────────────────────────────┼──────────────────────────────┤"},
-            ret...)
+		ret = append([]string{
+			"                        ┌─────────────┐                        ",
+			"┌───────────────────────" + dateFmt + "───────────────────────┐",
+			names,
+			"├──────────────────────────────┼──────────────────────────────┤"},
+			ret...)
 
-        return append(ret,
-            "└──────────────────────────────┴──────────────────────────────┘")
+		return append(ret,
+			"└──────────────────────────────┴──────────────────────────────┘")
 
-    } else {
+	} else {
 
-        names := ""
-        if config.RightToLeft {
-            names = "│"+ justifyCenter(trans[3], 29) + "│      "+ justifyCenter(trans[2], 16) +
-                     "└──────┬──────┘" +justifyCenter(trans[1], 16) + "      │"+justifyCenter(trans[0], 29)+"│"
-        } else {
-            names = "│"+ justifyCenter(trans[0], 29) + "│      "+ justifyCenter(trans[1], 16) +
-                     "└──────┬──────┘" +justifyCenter(trans[2], 16) + "      │"+justifyCenter(trans[3], 29)+"│"
-        }
+		names := ""
+		if config.RightToLeft {
+			names = "│" + justifyCenter(trans[3], 29) + "│      " + justifyCenter(trans[2], 16) +
+				"└──────┬──────┘" + justifyCenter(trans[1], 16) + "      │" + justifyCenter(trans[0], 29) + "│"
+		} else {
+			names = "│" + justifyCenter(trans[0], 29) + "│      " + justifyCenter(trans[1], 16) +
+				"└──────┬──────┘" + justifyCenter(trans[2], 16) + "      │" + justifyCenter(trans[3], 29) + "│"
+		}
 
-        ret = append([]string{
-            "                                                       ┌─────────────┐                                                       ",
-            "┌──────────────────────────────┬───────────────────────" + dateFmt + "───────────────────────┬──────────────────────────────┐",
-            names,
-            "├──────────────────────────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────┤"},
-            ret...)
+		ret = append([]string{
+			"                                                       ┌─────────────┐                                                       ",
+			"┌──────────────────────────────┬───────────────────────" + dateFmt + "───────────────────────┬──────────────────────────────┐",
+			names,
+			"├──────────────────────────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────┤"},
+			ret...)
 
-        return append(ret,
-            "└──────────────────────────────┴──────────────────────────────┴──────────────────────────────┴──────────────────────────────┘")
-    }
+		return append(ret,
+			"└──────────────────────────────┴──────────────────────────────┴──────────────────────────────┴──────────────────────────────┘")
+	}
 	return
 }
 
@@ -1142,24 +1142,24 @@ func main() {
 		}
 		log.Fatal("Malformed response.")
 	}
-    locationName := r.Data.Req[0].Query
-    if config.LocationName != "" {
-        locationName = config.LocationName
-    }
-    if config.Lang == "he" || config.Lang == "ar" || config.Lang == "fa" {
-        config.RightToLeft = true
-    }
+	locationName := r.Data.Req[0].Query
+	if config.LocationName != "" {
+		locationName = config.LocationName
+	}
+	if config.Lang == "he" || config.Lang == "ar" || config.Lang == "fa" {
+		config.RightToLeft = true
+	}
 	if caption, ok := localizedCaption[config.Lang]; !ok {
-        // r.Data.Req[0].Type, 
-	    fmt.Printf("Weather report: %s\n\n", locationName)
+		// r.Data.Req[0].Type,
+		fmt.Printf("Weather report: %s\n\n", locationName)
 	} else {
-        if (config.RightToLeft) {
-            caption = locationName + " " + caption
-            space := strings.Repeat(" ", 125 - runewidth.StringWidth(caption))
-            fmt.Printf("%s%s\n\n", space, caption)
-        } else {
-            fmt.Printf("%s %s\n\n", caption, locationName)
-        }
+		if config.RightToLeft {
+			caption = locationName + " " + caption
+			space := strings.Repeat(" ", 125-runewidth.StringWidth(caption))
+			fmt.Printf("%s%s\n\n", space, caption)
+		} else {
+			fmt.Printf("%s %s\n\n", caption, locationName)
+		}
 	}
 	stdout := colorable.NewColorableStdout()
 
@@ -1168,12 +1168,12 @@ func main() {
 	}
 	out := formatCond(make([]string, 5), r.Data.Cur[0], true)
 	for _, val := range out {
-        if config.RightToLeft {
-            fmt.Fprint(stdout, strings.Repeat(" ", 94))
-        } else {
-            fmt.Fprint(stdout, " ")
-        }
-        fmt.Fprintln(stdout, val)
+		if config.RightToLeft {
+			fmt.Fprint(stdout, strings.Repeat(" ", 94))
+		} else {
+			fmt.Fprint(stdout, " ")
+		}
+		fmt.Fprintln(stdout, val)
 	}
 
 	if config.Numdays == 0 {
