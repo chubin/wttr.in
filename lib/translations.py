@@ -26,7 +26,7 @@ PROXY_LANGS = [
     "cy", "de", "el", "eo", "et", "eu", "fa", "fr",
     "fy", "ga", "he", "hr", "hu", "hy",
     "ia", "id", "is", "it", "ja", "kk",
-    "lv", "mk", "nb", "nn", "ro",
+    "lv", "mk", "nb", "nn", "oc", "ro",
     "ru", "sl", "th", "pt-br", "uk", "uz",
     "vi", "zh-cn", "zh-tw",
 ]
