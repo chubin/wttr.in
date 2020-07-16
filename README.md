@@ -478,7 +478,11 @@ wttr.in has the following external dependencies:
 * [wego](https://github.com/schachmat/wego), weather client for terminal
 
 After you install [golang](https://golang.org/doc/install), install `wego`:
+    ** Will require to add $GOROOT, $GOPATH and $GOBIN to .bash_profile or .zshrc **
 
+    $ go get -u github.com/mattn/go-colorable
+    $ go get -u github.com/klauspost/lctime
+    $ go get -u github.com/mattn/go-runewidth
     $ go get -u github.com/schachmat/wego
     $ go install github.com/schachmat/wego
 
