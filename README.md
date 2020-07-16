@@ -488,6 +488,10 @@ After you install [golang](https://golang.org/doc/install), install `wego`:
 
 ### Install Python dependencies
 
+#### MAC OSX
+
+You must install `automake` instead of `autoconf` when installing locally.
+
 Python requirements:
 
 * Flask
