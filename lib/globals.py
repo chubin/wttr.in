@@ -83,12 +83,24 @@ PLAIN_TEXT_AGENTS = [
 
 PLAIN_TEXT_PAGES = [':help', ':bash.function', ':translation', ':iterm2']
 
+_IPLOCATION_ORDER = os.environ.get(
+    "WTTR_IPLOCATION_ORDER",
+    'geoip,ip2location,ipinfo')
+IPLOCATION_ORDER = _IPLOCATION_ORDER.split(',')
+
 _IP2LOCATION_KEY_FILE = os.environ.get(
     "WTTR_IP2LOCATION_KEY_FILE",
     os.environ['HOME'] + '/.ip2location.key')
 IP2LOCATION_KEY = None
 if os.path.exists(_IP2LOCATION_KEY_FILE):
     IP2LOCATION_KEY = open(_IP2LOCATION_KEY_FILE, 'r').read().strip()
+
+_IPINFO_KEY_FILE = os.environ.get(
+    "WTTR_IPINFO_KEY_FILE",
+    os.environ['HOME'] + '/.ipinfo.key')
+IPINFO_TOKEN = None
+if os.path.exists(_IPINFO_KEY_FILE):
+    IPINFO_TOKEN = open(_IPINFO_KEY_FILE, 'r').read().strip()
 
 _WWO_KEY_FILE = os.environ.get(
     "WTTR_WWO_KEY_FILE",
