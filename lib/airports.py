@@ -1,7 +1,7 @@
 import csv
 import os
 
-AIRPORTS_DAT_FILE = '{}/airports.dat'.format(os.getenv('WTTR_MYDIR'))
+AIRPORTS_DAT_FILE = f"{os.getenv('WTTR_MYDIR')}/airports.dat"
 
 def load_aiports_index():
     file_ = open(AIRPORTS_DAT_FILE, "r")
