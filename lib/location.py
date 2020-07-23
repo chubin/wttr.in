@@ -69,7 +69,6 @@ def geolocator(location):
     Return a GPS pair for specified `location` or None
     if nothing can't be found
     """
-
     try:
         geo = requests.get('%s/%s' % (GEOLOCATOR_SERVICE, location)).text
     except requests.exceptions.ConnectionError as exception:

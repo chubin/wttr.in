@@ -23,7 +23,7 @@ COPY ./share/we-lang/we-lang.go /app
 # There are several files that must be fetched/created manually
 # before building the image
 COPY ./.wegorc /root
-COPY ./.ip2location.key /root
+# COPY ./.ip2location.key /root
 COPY ./airports.dat /app
 COPY ./GeoLite2-City.mmdb /app
 
@@ -51,4 +51,4 @@ ENV WTTR_LISTEN_PORT="8002"
 
 EXPOSE 8002
 
-CMD ["/usr/local/bin/supervisord"]
+CMD ["/usr/local/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]

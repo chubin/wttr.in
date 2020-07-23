@@ -235,6 +235,7 @@ $ cat ~/.config/fontconfig/fonts.conf
 ```
 
 (to apply the configuration, run `fc-cache -f -v`)
+(If using MACO OSX run `brew install fontcon`)
 
 ## Data-rich output format
 
@@ -565,7 +566,7 @@ installation, to the GeoLite database, and to the `wego` installation. For examp
 ```bash
 export WTTR_MYDIR="/home/igor/wttr.in"
 export WTTR_GEOLITE="/home/igor/wttr.in/GeoLite2-City.mmdb"
-export WTTR_WEGO="/home/igor/go/bin/wego"
+export WTTR_WEGO="~/go/bin/wego"
 export WTTR_LISTEN_HOST="0.0.0.0"
 export WTTR_LISTEN_PORT="8002"
 ```

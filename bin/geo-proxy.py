@@ -10,13 +10,13 @@ import sys
 import os
 import json
 
+MYDIR = os.path.abspath(
+    os.path.dirname(os.path.dirname('__file__')))
+sys.path.append("%s/lib/" % MYDIR)
+
+from globals import GEO_PROXY_CACHEDIR
 from flask import Flask, request, render_template, send_from_directory, send_file, make_response, jsonify, Response
 app = Flask(__name__)
-
-MYDIR = os.path.abspath(os.path.dirname('__file__'))
-sys.path.append(os.path.join(MYDIR, 'lib'))
-
-CACHEDIR = os.path.join(MYDIR, 'cache')
 
 from geopy.geocoders import Nominatim #, Mapzen
 #geomapzen = Mapzen("mapzen-RBNbmcZ") # Nominatim()
@@ -31,7 +31,7 @@ tf = timezonefinder.TimezoneFinder()
 def load_cache(location_string):
     try:
         location_string = location_string.replace('/', '_')
-        cachefile = os.path.join(CACHEDIR, location_string)
+        cachefile = os.path.join(GEO_PROXY_CACHEDIR, location_string)
 
         return json.loads(open(cachefile, 'r').read())
     except:
@@ -47,7 +47,11 @@ def shorten_full_address(address):
 
 def save_cache(location_string, answer):
     location_string = location_string.replace('/', '_')
-    cachefile = os.path.join(CACHEDIR, location_string)
+    cachefile = os.path.join(GEO_PROXY_CACHEDIR, location_string)
+
+    if not os.path.exists(GEO_PROXY_CACHEDIR):
+        os.makedirs(GEO_PROXY_CACHEDIR)
+
     open(cachefile, 'w').write(json.dumps(answer))
 
 def query_osm(location_string):
@@ -75,7 +79,6 @@ def add_timezone_information(geo_data):
 
 @app.route("/<string:location>")
 def find_location(location):
-
     airport_gps_location = airports.get_airport_gps_location(location.upper().lstrip('~'))
     is_airport = False
     if airport_gps_location is not None:
@@ -95,7 +98,6 @@ def find_location(location):
     
     if is_airport:
         answer['address'] = shorten_full_address(answer['address'])
-
     if "timezone" not in answer:
        answer = add_timezone_information(answer)
 

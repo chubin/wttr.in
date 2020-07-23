@@ -51,29 +51,16 @@ def get_wetter(parsed_query):
     return stdout
 
 def _wego_wrapper(location, parsed_query):
-
     lang = parsed_query['lang']
     location_name = parsed_query['override_location_name']
 
-    cmd = [WEGO, '--city=%s' % location]
-
-    if parsed_query.get('inverted_colors'):
-        cmd += ['-inverse']
-
-    if parsed_query.get('use_ms_for_wind'):
-        cmd += ['-wind_in_ms']
-
-    if parsed_query.get('narrow'):
-        cmd += ['-narrow']
+    cmd = [WEGO, '-location=%s' % location]
 
     if lang and lang in SUPPORTED_LANGS:
-        cmd += ['-lang=%s'%lang]
+        cmd += ['-owm-lang', lang, '-wwo-lang', lang, '-forecast-lang', lang]
 
     if parsed_query.get('use_imperial', False):
-        cmd += ['-imperial']
-
-    if location_name:
-        cmd += ['-location_name', location_name]
+        cmd += ['-units', 'imperial']
 
     proc = Popen(cmd, stdout=PIPE, stderr=PIPE)
     stdout, stderr = proc.communicate()

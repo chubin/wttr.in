@@ -5,3 +5,5 @@ data/
 log/
 .idea/
 *.swp
+wttr_cache/
+cache

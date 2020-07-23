@@ -23,17 +23,17 @@ if "WTTR_GEOLITE" in os.environ:
 else:
     GEOLITE = os.path.join(MYDIR, "GeoLite2-City.mmdb")
 
-WEGO = os.environ.get("WTTR_WEGO", "/home/igor/go/bin/we-lang")
-PYPHOON = "/home/igor/pyphoon/bin/pyphoon-lolcat"
+WEGO = os.environ.get("WTTR_WEGO")
+PYPHOON = os.environ.get("PYPHOON")
 
-_DATADIR = "wttr.in"
-_LOGDIR = "wttr.in/log"
+_DATADIR = "wttr_cache"
+_LOGDIR = "{}/log".format(_DATADIR)
 
 IP2LCACHE = os.path.join(_DATADIR, "cache/ip2l/")
 PNG_CACHE = os.path.join(_DATADIR, "cache/png")
 LRU_CACHE = os.path.join(_DATADIR, "cache/lru")
 
-LOG_FILE = os.path.join(_LOGDIR, 'main.log')
+LOG_FILE = os.path.join(_LOGDIR, 'main.log') 
 
 ALIASES = os.path.join(MYDIR, "share/aliases")
 ANSI2HTML = os.path.join(MYDIR, "share/ansi2html.sh")
@@ -47,7 +47,6 @@ IATA_CODES_FILE = os.path.join(MYDIR, 'share/list-of-iata-codes.txt')
 
 TEMPLATES = os.path.join(MYDIR, 'share/templates')
 STATIC = os.path.join(MYDIR, 'share/static')
-
 NOT_FOUND_LOCATION = "not found"
 DEFAULT_LOCATION = "oymyakon"
 
@@ -68,6 +67,8 @@ except (TypeError, ValueError):
 PROXY_HOST = "127.0.0.1"
 PROXY_PORT = 5001
 PROXY_CACHEDIR = os.path.join(_DATADIR, "cache/proxy-wwo/")
+
+GEO_PROXY_CACHEDIR = os.path.join(_DATADIR, "cache/geo-proxy/")
 
 MY_EXTERNAL_IP = '5.9.243.187'
 
