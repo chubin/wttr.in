@@ -45,6 +45,8 @@ def get_wetter(parsed_query):
     else:
         first_line = ""
 
+    # This is where you append date to stdout
+    # stdout["timestamp"] = date().epochTime() - example
 
     if html:
         return _htmlize(stdout, first_line, parsed_query)
@@ -66,6 +68,11 @@ def _wego_wrapper(location, parsed_query):
     stdout, stderr = proc.communicate()
     stdout = stdout.decode("utf-8")
     stderr = stderr.decode("utf-8")
+
+    # Make another call to get maps: http://maps.openweathermap.org/maps/2.0/weather/{op}/{z}/{x}/{y}
+    # Check for error on API call, if none, add weather maps converted to ascii, to stdout
+    # https://github.com/SketchingDev/image-to-ascii-converter/blob/master/sketchingdev/image_to_ascii/converter.py#L50
+    # May need to convert for web display
 
     return stdout, stderr, proc.returncode
 

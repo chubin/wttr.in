@@ -14,7 +14,7 @@ from flask import Flask, request, send_from_directory
 APP = Flask(__name__)
 
 MYDIR = os.path.abspath(
-    os.path.dirname(os.path.dirname('__file__')))
+    os.path.dirname(os.path.dirname(__file__)))
 sys.path.append("%s/lib/" % MYDIR)
 
 import wttr_srv

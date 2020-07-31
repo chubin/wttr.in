@@ -33,7 +33,7 @@ APP = Flask(__name__)
 
 
 MYDIR = os.path.abspath(
-    os.path.dirname(os.path.dirname('__file__')))
+    os.path.dirname(os.path.dirname(__file__)))
 sys.path.append("%s/lib/" % MYDIR)
 
 from globals import PROXY_CACHEDIR, PROXY_HOST, PROXY_PORT
@@ -52,7 +52,7 @@ def load_translations():
     translations = {}
 
     for f_name in PROXY_LANGS:
-        f_name = 'share/translations/%s.txt' % f_name
+        f_name = '/root/app/share/translations/%s.txt' % f_name
         translation = {}
         lang = f_name.split('/')[-1].split('.', 1)[0]
         with open(f_name, "r") as f_file:
@@ -224,6 +224,7 @@ def proxy(path):
 
         attempts = 10
         response = None
+        print(url)
         while attempts:
             try:
                 response = requests.get(url, timeout=2)

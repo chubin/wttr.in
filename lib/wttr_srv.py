@@ -189,12 +189,16 @@ def _response(parsed_query, query, fast_mode=False):
     """
 
     answer = None
+    # Create a date object
     cache_signature = cache.get_signature(
         parsed_query["user_agent"],
         parsed_query["request_url"],
         parsed_query["ip_addr"],
         parsed_query["lang"])
     answer = cache.get(cache_signature)
+
+    # First look to see if date exists in answer(cache) date key
+    # if nonexistent set answer = None
 
     if parsed_query['orig_location'] in PLAIN_TEXT_PAGES:
         answer = show_text_file(parsed_query['orig_location'], parsed_query['lang'])
@@ -341,6 +345,11 @@ def wttr(location, request):
         else:
             response = make_response(response_text)
             response.mimetype = 'text/html' if html_output else 'text/plain'
+
+        # here is where you would take the date from make_response or you can check what is in 'response' to see if a date key iss available to use
+        # then append formatted date, into response.BODY underneath header
+        # Cached date: Searched date (make_response)
+        # Retrieved date (response created by Flask)
         return response
 
     if is_location_blocked(location):

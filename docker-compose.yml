@@ -1,0 +1,16 @@
+version: '3.1'
+services:
+    wttr:
+        container_name: wttr.in
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args: 
+                OWM_API: ${OWM_API} 
+                WWO_API: ${WWO_API} 
+                FORCAST_API: ${FORCAST_API} 
+                IP2_LOCATION_API: ${IP2_LOCATION_API} 
+        ports: 
+            - "8002:8002"
+        volumes:
+            - .:/root/app

@@ -7,3 +7,6 @@ log/
 *.swp
 wttr_cache/
 cache
+GeoLite2-City.mmdb
+.env
+__pycache__

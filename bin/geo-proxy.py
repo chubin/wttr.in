@@ -11,7 +11,7 @@ import os
 import json
 
 MYDIR = os.path.abspath(
-    os.path.dirname(os.path.dirname('__file__')))
+    os.path.dirname(os.path.dirname(__file__)))
 sys.path.append("%s/lib/" % MYDIR)
 
 from globals import GEO_PROXY_CACHEDIR
@@ -87,6 +87,7 @@ def find_location(location):
 
     location = location.replace('+', ' ')
     answer = load_cache(location)
+
     loaded_answer = None
 
     if answer is not None:
@@ -98,6 +99,7 @@ def find_location(location):
     
     if is_airport:
         answer['address'] = shorten_full_address(answer['address'])
+    print(answer)
     if "timezone" not in answer:
        answer = add_timezone_information(answer)
 
