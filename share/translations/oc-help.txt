@@ -15,8 +15,8 @@ Types d'emplacements acceptés:
 
 Emplacements particuliers:
 
-    /moon                   # passa de la luna (ajustar ,+US o ,+France per accedir a las vilas del meteis nom)
-    /moon@2016-10-25        # passa de la luna per aquesta data (@2016-10-25)
+    /moon                   # passas de la luna (ajustar ,+US o ,+France per accedir a las vilas del meteis nom)
+    /moon@2016-10-25        # passas de la luna per aquesta data (@2016-10-25)
 
 Unitats:
 
