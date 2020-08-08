@@ -15,38 +15,38 @@ Types d'emplacements acceptés:
 
 Emplacements particuliers:
 
-    /moon                   # phases de la lune (ajouter ,+US ou ,+France pour accéder aux villes du même nom)
-    /moon@2016-10-25        # phases de la lune pour cette date (@2016-10-25)
+    /moon                   # passa de la luna (ajustar ,+US o ,+France per accedir a las vilas del meteis nom)
+    /moon@2016-10-25        # passa de la luna per aquesta data (@2016-10-25)
 
 Unitats:
 
     ?m                      # sistèma metric (per defaut pertot levat als Estats Units d d'America)
-    ?u                      # USCS (par défaut pour les États-Unis d'Amérique)
-    ?M                      # affiche la vitesse du vent en m/s
+    ?u                      # USCS (per defaut pels Estats-Units d'America)
+    ?M                      # afichar la velocitat del vent en m/s
 
 Opcion d'afichatge:
 
     ?0                      # uèi solament
     ?1                      # uèi + deman
     ?2                      # uèi + 2 jorns
-    ?n                      # version courte (seulement le jour et la nuit)
-    ?q                      # version silencieuse (pas d'en-tête "Prévisions météo pour")
+    ?n                      # version corta (sonque pel jorn e la nuèch)
+    ?q                      # version silenciosa (cap d'entèsta "Previsions metèo per")
     ?Q                      # version super-silencieuse (pas d'en-tête "Prévisions météo pour", pas de nom de la ville)
-    ?T                      # séquences d'échappement pour terminaux désactivées (pas de couleurs)
+    ?T                      # sequéncias d'ecapament pels terminals desactivadas (cap de colors)
 
 Opcions PNG:
 
-    /paris.png              # génère un fichier PNG
-    ?p                      # ajoute un cadre autour de la sortie
-    ?t                      # transparency 150 (transparence 150)
-    transparency=...        # transparence de 0 à 255 (255 = pas de transparence)
+    /paris.png              # gnèra un fichièr PNG
+    ?p                      # ajuta un quadre altorn de la sortida
+    ?t                      # transparéncia 150 (transparence 150)
+    transparency=...        # transparéncia de 0 fins a 255 (255 = cap de transparéncia)
 
-Combiner les options:
+Combinar las opcions:
 
     /Toulouse?0pq
     /Toulouse?0pq&lang=oc
-    /Toulouse_0pq.png        # dans le mode PNG les options sont spécifiées après _
-    /Rome_0pq_lang=it.png   # les options longues sont séparées par des underscores _
+    /Toulouse_0pq.png        # dins lo mòde PNG las opcions son especificadas après _
+    /Rome_0pq_lang=it.png   # las opcions longas son separadas per de underscores _
 
 Localizacion:
 
