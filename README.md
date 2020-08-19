@@ -388,7 +388,7 @@ To get the moon phase information in the online mode, use `%m`:
     $ curl wttr.in/London?format=%m
     🌖
 
-Keep in mid that the Unicode representation of moonphases suffers 2 caveats:
+Keep in mind that the Unicode representation of moonphases suffers 2 caveats:
 
 - With some fonts, the representation `🌘` is ambiguous, for it either seem
   almost-shadowed or almost-lit, depending on whether your terminal is in
