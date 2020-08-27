@@ -344,12 +344,12 @@ def wttr(location, request):
         return response
 
     if is_location_blocked(location):
-        return ""
+        return ("", 403) # Forbidden
 
     try:
         LIMITS.check_ip(_client_ip_address(request))
     except RuntimeError as exception:
-        return str(exception)
+        return (str(exception), 429) # Too many requests
 
     query = parse_query.parse_query(request.args)
 
@@ -359,6 +359,8 @@ def wttr(location, request):
     # use the full track
     parsed_query = parse_request(location, request, query, fast_mode=True)
     response = _response(parsed_query, query, fast_mode=True)
+
+    http_code = 200
     try:
         if not response:
             parsed_query = parse_request(location, request, query)
@@ -368,15 +370,17 @@ def wttr(location, request):
         logging.error("Exception has occured", exc_info=1)
         if parsed_query['html_output']:
             response = MALFORMED_RESPONSE_HTML_PAGE
+            http_code = 500 # Internal Server Error
         else:
             response = get_message('CAPACITY_LIMIT_REACHED', parsed_query['lang'])
+            http_code = 503 # Service Unavailable
 
         # if exception is occured, we return not a png file but text
         if "png_filename" in parsed_query:
             del parsed_query["png_filename"]
-    return _wrap_response(
+    return (_wrap_response(
         response, parsed_query['html_output'],
-        png_filename=parsed_query.get('png_filename'))
+        png_filename=parsed_query.get('png_filename')), http_code)
 
 if __name__ == "__main__":
     import doctest
