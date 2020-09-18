@@ -16,16 +16,6 @@ RUN true && \
 # Results in /app/we-lang
 
 
-# FROM ubuntu:18.04
-# RUN apt-get update && \
-#     apt-get install -y curl \
-#                        git \
-#                        python \
-#                        python-pip \
-#                        python-dev \
-#                        autoconf \
-#                        libtool \
-#                        gawk
 FROM alpine:3
 
 WORKDIR /app
@@ -67,13 +57,6 @@ COPY --from=builder /app/we-lang /app/bin/we-lang
 COPY ./bin /app/bin
 COPY ./lib /app/lib
 COPY ./share /app/share
-
-# These files should be mounted by the user at runtime:
-# /root/.wegorc
-# /root/.ip2location.key (optional)
-# /app/airports.dat
-# /app/GeoLite2-City.mmdb
-
 COPY share/docker/supervisord.conf /etc/supervisor/supervisord.conf
 
 ENV WTTR_MYDIR="/app"
