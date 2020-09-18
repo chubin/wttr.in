@@ -8,8 +8,7 @@ COPY ./share/we-lang/we-lang.go /app
 RUN apk add --no-cache git
 
 
-RUN true && \ 
-    go get -u github.com/mattn/go-colorable && \
+RUN go get -u github.com/mattn/go-colorable && \
     go get -u github.com/klauspost/lctime && \
     go get -u github.com/mattn/go-runewidth && \
     CGO_ENABLED=0 go build /app/we-lang.go
