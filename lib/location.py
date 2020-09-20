@@ -250,6 +250,19 @@ def is_location_blocked(location):
     return location is not None and location.lower() in LOCATION_BLACK_LIST
 
 
+def get_hemisphere(location):
+    """
+    Return hemisphere of the location (True = North, False = South).
+    Assume North and return True if location can't be found.
+    """
+    location_string = location[0]
+    if location[1] is not None:
+        location_string += ",%s" % location[1]
+    geolocation = geolocator(location_string)
+    if geolocation is None:
+        return True
+    return geolocation["latitude"] > 0
+
 def location_processing(location, ip_addr):
     """
     """
@@ -280,6 +293,12 @@ def location_processing(location, ip_addr):
             location, country = NOT_FOUND_LOCATION, None
 
     query_source_location = get_location(ip_addr)
+
+    # For moon queries, hemisphere must be found
+    # True for North, False for South
+    hemisphere = False
+    if location is not None and (location.lower()+"@").startswith("moon@"):
+        hemisphere = get_hemisphere(query_source_location)
 
     country = None
     if not location or location == 'MyLocation':
@@ -331,4 +350,5 @@ def location_processing(location, ip_addr):
             override_location_name, \
             full_address, \
             country, \
-            query_source_location
+            query_source_location, \
+            hemisphere

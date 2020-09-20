@@ -294,7 +294,7 @@ def parse_request(location, request, query, fast_mode=False):
     parsed_query["html_output"] = get_output_format(query, parsed_query)
 
     if not fast_mode: # not png_filename and not fast_mode:
-        location, override_location_name, full_address, country, query_source_location = \
+        location, override_location_name, full_address, country, query_source_location, hemisphere = \
                 location_processing(parsed_query["location"], parsed_query["ip_addr"])
 
         us_ip = query_source_location[1] == 'United States' \
@@ -309,7 +309,8 @@ def parse_request(location, request, query, fast_mode=False):
             'override_location_name': override_location_name,
             'full_address': full_address,
             'country': country,
-            'query_source_location': query_source_location})
+            'query_source_location': query_source_location,
+            'hemisphere': hemisphere})
 
     parsed_query.update(query)
     return parsed_query
