@@ -105,7 +105,14 @@ def ipcache(ip_addr):
 
     if os.path.exists(cached):
         location = open(cached, 'r').read().split(';')
-    return location
+        if len(location) > 3:
+            return location[3], location[1]
+        elif len(location) > 1:
+            return location[0], location[1]
+        else:
+            return location[0], None
+
+    return None, None
 
 def ip2location(ip_addr):
     "Convert IP address `ip_addr` to a location name"
@@ -125,12 +132,11 @@ def ip2location(ip_addr):
             pass
 
     if location and ';' in location:
+        ipcachewrite(ip_addr, location)
         location = location.split(';')[3], location.split(';')[1]
     else:
         location = location, None
 
-    if location:
-        ipcachewrite(ip_addr, location)
     return location
 
 
