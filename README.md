@@ -525,6 +525,19 @@ $ echo 'YOUR_IP2LOCATION_KEY' > ~/.ip2location.key
 If you don't have this file, the service will be silently skipped (it is not a big problem,
 because the MaxMind database is pretty good).
 
+### Installation with Docker
+
+* Install Docker
+* Build Docker Image
+* These files should be mounted by the user at runtime:
+
+```
+/root/.wegorc
+/root/.ip2location.key (optional)
+/app/airports.dat
+/app/GeoLite2-City.mmdb
+```
+
 ### Get a WorldWeatherOnline key and configure wego
 
 To get a WorldWeatherOnline API key, you must register here:
