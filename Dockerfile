@@ -50,7 +50,7 @@ RUN apk add --no-cache --virtual .build \
     mkdir -p /etc/supervisor/conf.d && \
     chmod -R o+rw /var/log/supervisor && \
     chmod -R o+rw /var/run && \
-    pip install -r requirements.txt && \
+    pip install -r requirements.txt --no-cache-dir && \
     apk del --no-cache -r .build
 
 COPY --from=builder /app/we-lang /app/bin/we-lang
