@@ -292,6 +292,7 @@ def parse_request(location, request, query, fast_mode=False):
     parsed_query["lang"] = parsed_query.get("lang", lang)
 
     parsed_query["html_output"] = get_output_format(query, parsed_query)
+    parsed_query["json_output"] = (parsed_query.get("view", "") or "").startswith("j")
 
     if not fast_mode: # not png_filename and not fast_mode:
         location, override_location_name, full_address, country, query_source_location, hemisphere = \
@@ -322,7 +323,7 @@ def wttr(location, request):
     it returns output in HTML, ANSI or other format.
     """
 
-    def _wrap_response(response_text, html_output, png_filename=None):
+    def _wrap_response(response_text, html_output, json_output, png_filename=None):
         if not isinstance(response_text, str) and \
            not isinstance(response_text, bytes):
             return response_text
@@ -341,7 +342,12 @@ def wttr(location, request):
                 response.headers[key] = value
         else:
             response = make_response(response_text)
-            response.mimetype = 'text/html' if html_output else 'text/plain'
+            if html_output:
+                response.mimetype = "text/html"
+            elif json_output:
+                response.mimetype = "application/json"
+            else:
+                response.mimetype = "text/plain"
         return response
 
     if is_location_blocked(location):
@@ -380,7 +386,7 @@ def wttr(location, request):
         if "png_filename" in parsed_query:
             del parsed_query["png_filename"]
     return (_wrap_response(
-        response, parsed_query['html_output'],
+        response, parsed_query['html_output'], parsed_query['json_output'],
         png_filename=parsed_query.get('png_filename')), http_code)
 
 if __name__ == "__main__":
