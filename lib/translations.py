@@ -690,7 +690,7 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
         'bg': u'Последвай \033[46m\033[30m@igor_chubin\033[0m за обновления свързани с wttr.in',
         'bs': u'XXXXXX \033[46m\033[30m@igor_chubin\033[0m XXXXXXXXXXXXXXXXXXX',
         'ca': u'Segueix \033[46m\033[30m@igor_chubin\033[0m per actualitzacions de wttr.in',
-        'es': u'Sigue \033[46m\033[30m@igor_chubin\033[0m para enterarte de las novedades de wttr.in',
+        'es': u'Sigue a \033[46m\033[30m@igor_chubin\033[0m para enterarte de las novedades de wttr.in',
         'cy': u'Dilyner \033[46m\033[30m@igor_Chubin\033[0m am diweddariadau wttr.in',
         'fa': u'برای دنبال کردن خبرهای wttr.in شناسه \033[46m\033[30m@igor_chubin\033[0m رو فالو کنید.',
         'fr': u'Suivez \033[46m\033[30m@igor_Chubin\033[0m pour rester informé sur wttr.in',
