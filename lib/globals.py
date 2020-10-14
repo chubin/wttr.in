@@ -8,6 +8,7 @@ External environment variables:
     WTTR_WEGO
     WTTR_LISTEN_HOST
     WTTR_LISTEN_PORT
+    WTTR_USER_AGENT
 
 """
 from __future__ import print_function
@@ -106,8 +107,11 @@ _WWO_KEY_FILE = os.environ.get(
     "WTTR_WWO_KEY_FILE",
     os.environ['HOME'] + '/.wwo.key')
 WWO_KEY = "key-is-not-specified"
+USE_METNO = True
+USER_AGENT = os.environ.get("WTTR_USER_AGENT", "")
 if os.path.exists(_WWO_KEY_FILE):
     WWO_KEY = open(_WWO_KEY_FILE, 'r').read().strip()
+    USE_METNO = False
 
 def error(text):
     "log error `text` and raise a RuntimeError exception"
