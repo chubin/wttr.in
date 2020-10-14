@@ -22,6 +22,7 @@ V2_TRANSLATION = {
     "eo": ("Veterprognozo por:",            "Vetero",   "Horzono",      "Nun",      "Tagiĝo",           "Sunleviĝo",    "Zenito",       "Sunsubiro",        "Krepusko"),
     "es": ("El tiempo en:",                 "Clima", "Zona horaria", "Ahora", "Alborada", "Amanecer", "Cenit", "Atardecer", "Anochecer"),
     "et": ("Ilmaprognoos:",                 "Ilm", "Ajatsoon", "Hetkel", "Koit", "Päikesetõus", "Seniit", "Päikeseloojang", "Eha"),
+    "eu": ("Eguraldia:",                    "Ordu-eremua", "Orain", "Egunsentia", "Eguzkia", "Zenit", "Ilunabarra", "Ilunabarra"),
     "fa": ("اوه و بآ تیعضو شرازگ",          "", "", "", "", "", "", "", ""),
     "fi": ("Säätiedotus:",                  "", "", "", "", "", "", "", ""),
     "fr": ("Prévisions météo pour :",       "Météo", "Fuseau Horaire", "Heure", "Aube", "Lever du Soleil", "Zénith", "Coucher du Soleil", "Crépuscule"),
