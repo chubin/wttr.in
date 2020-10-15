@@ -8,6 +8,7 @@ pylint
 cyrtranslit
 astral
 timezonefinder==2.1.2
+pytz
 pyte
 python-dateutil
 diagram

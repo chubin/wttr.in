@@ -36,7 +36,8 @@ MYDIR = os.path.abspath(
     os.path.dirname(os.path.dirname('__file__')))
 sys.path.append("%s/lib/" % MYDIR)
 
-from globals import PROXY_CACHEDIR, PROXY_HOST, PROXY_PORT
+from globals import PROXY_CACHEDIR, PROXY_HOST, PROXY_PORT, USE_METNO, USER_AGENT
+from metno import create_standard_json_from_metno, metno_request
 from translations import PROXY_LANGS
 # pylint: enable=wrong-import-position
 
@@ -71,7 +72,12 @@ def load_translations():
     return translations
 TRANSLATIONS = load_translations()
 
+def _is_metno():
+    return USE_METNO
+
 def _find_srv_for_query(path, query):   # pylint: disable=unused-argument
+    if _is_metno():
+        return 'https://api.met.no'
     return 'http://api.worldweatheronline.com'
 
 def _cache_file(path, query):
@@ -84,7 +90,7 @@ def _cache_file(path, query):
 
     digest = hashlib.sha1(("%s %s" % (path, query)).encode("utf-8")).hexdigest()
     digest_number = ord(digest[0].upper())
-    expiry_interval = 60*(digest_number+10)
+    expiry_interval = 60*(digest_number+40)
 
     timestamp = "%010d" % (int(time.time())//expiry_interval*expiry_interval)
     filename = os.path.join(PROXY_CACHEDIR, timestamp, path, query)
@@ -142,7 +148,7 @@ def add_translations(content, lang):
     returned by the data source
     """
 
-    if content is "{}":
+    if content == "{}":
         return {}
 
     languages_to_translate = TRANSLATIONS.keys()
@@ -155,7 +161,10 @@ def add_translations(content, lang):
         return {}
 
     try:
-        weather_condition = d['data']['current_condition'][0]['weatherDesc'][0]['value']
+        weather_condition = d['data']['current_condition'
+                ][0]['weatherDesc'][0]['value'].capitalize()
+        d['data']['current_condition'][0]['weatherDesc'][0]['value'] = \
+            weather_condition
         if lang in languages_to_translate:
             d['data']['current_condition'][0]['lang_%s' % lang] = \
                 [{'value': translate(weather_condition, lang)}]
@@ -201,18 +210,7 @@ def add_translations(content, lang):
         print(exception)
     return content
 
-@APP.route("/<path:path>")
-def proxy(path):
-    """
-    Main proxy function. Handles incoming HTTP queries.
-    """
-
-    lang = request.args.get('lang', 'en')
-    query_string = request.query_string.decode("utf-8")
-    query_string = query_string.replace('sr-lat', 'sr')
-    query_string = query_string.replace('lang=None', 'lang=en')
-    query_string += "&extra=localObsTime"
-    query_string += "&includelocation=yes"
+def _fetch_content_and_headers(path, query_string, **kwargs):
     content, headers = _load_content_and_headers(path, query_string)
 
     if content is None:
@@ -223,7 +221,7 @@ def proxy(path):
         response = None
         while attempts:
             try:
-                response = requests.get(url, timeout=2)
+                response = requests.get(url, timeout=2, **kwargs)
             except requests.ReadTimeout:
                 attempts -= 1
                 continue
@@ -243,6 +241,34 @@ def proxy(path):
             content = "{}"
     else:
         print("cache found")
+    return content, headers
+
+
+@APP.route("/<path:path>")
+def proxy(path):
+    """
+    Main proxy function. Handles incoming HTTP queries.
+    """
+
+    lang = request.args.get('lang', 'en')
+    query_string = request.query_string.decode("utf-8")
+    query_string = query_string.replace('sr-lat', 'sr')
+    query_string = query_string.replace('lang=None', 'lang=en')
+    content = ""
+    headers = ""
+    if _is_metno():
+        path, query, days = metno_request(path, query_string)
+        if USER_AGENT == '':
+            raise ValueError('User agent must be set to adhere to metno ToS: https://api.met.no/doc/TermsOfService')
+        content, headers = _fetch_content_and_headers(path, query, headers={
+                                   'User-Agent': USER_AGENT
+                               })
+        content = create_standard_json_from_metno(content, days)
+    else:
+        # WWO tweaks
+        query_string += "&extra=localObsTime"
+        query_string += "&includelocation=yes"
+        content, headers = _fetch_content_and_headers(path, query)
 
     content = add_translations(content, lang)
 
@@ -251,6 +277,15 @@ def proxy(path):
 if __name__ == "__main__":
     #app.run(host='0.0.0.0', port=5001, debug=False)
     #app.debug = True
-    bind_addr = "0.0.0.0"
-    SERVER = WSGIServer((bind_addr, PROXY_PORT), APP)
-    SERVER.serve_forever()
+    if len(sys.argv) == 1:
+        bind_addr = "0.0.0.0"
+        SERVER = WSGIServer((bind_addr, PROXY_PORT), APP)
+        SERVER.serve_forever()
+    else:
+        print('running single request from command line arg')
+        APP.testing = True
+        with APP.test_client() as c:
+            resp = c.get(sys.argv[1])
+            print('Status: ' + resp.status)
+            # print('Headers: ' + dumps(resp.headers))
+            print(resp.data.decode('utf-8'))

@@ -17,7 +17,7 @@ import requests
 import geoip2.database
 
 from globals import GEOLITE, GEOLOCATOR_SERVICE, IP2LCACHE, IP2LOCATION_KEY, NOT_FOUND_LOCATION, \
-                    ALIASES, BLACKLIST, IATA_CODES_FILE
+                    ALIASES, BLACKLIST, IATA_CODES_FILE, IPLOCATION_ORDER, IPINFO_TOKEN
 
 GEOIP_READER = geoip2.database.Reader(GEOLITE)
 
@@ -88,9 +88,15 @@ def geolocator(location):
 
     return None
 
-def ip2location(ip_addr):
-    "Convert IP address `ip_addr` to a location name"
 
+def ipcachewrite(ip_addr, location):
+    cached = os.path.join(IP2LCACHE, ip_addr)
+    if not os.path.exists(IP2LCACHE):
+        os.makedirs(IP2LCACHE)
+    with open(cached, 'w') as file:
+        file.write(location[0] + ';' + location[1])
+
+def ipcache(ip_addr):
     cached = os.path.join(IP2LCACHE, ip_addr)
     if not os.path.exists(IP2LCACHE):
         os.makedirs(IP2LCACHE)
@@ -98,33 +104,57 @@ def ip2location(ip_addr):
     location = None
 
     if os.path.exists(cached):
-        location = open(cached, 'r').read()
-    else:
-        # if IP2LOCATION_KEY is not set, do not the query,
-        # because the query wont be processed anyway
-        if IP2LOCATION_KEY:
-            try:
-                ip2location_response = requests\
-                        .get('http://api.ip2location.com/?ip=%s&key=%s&package=WS3' \
-                                % (ip_addr, IP2LOCATION_KEY)).text
-                if ';' in ip2location_response:
-                    open(cached, 'w').write(ip2location_response)
-                location = ip2location_response
-            except requests.exceptions.ConnectionError:
-                pass
+        location = open(cached, 'r').read().split(';')
+        if len(location) > 3:
+            return location[3], location[1]
+        elif len(location) > 1:
+            return location[0], location[1]
+        else:
+            return location[0], None
+
+    return None, None
+
+def ip2location(ip_addr):
+    "Convert IP address `ip_addr` to a location name"
+
+    location = ipcache(ip_addr)
+    if location:
+        return location
+
+    # if IP2LOCATION_KEY is not set, do not the query,
+    # because the query wont be processed anyway
+    if IP2LOCATION_KEY:
+        try:
+            location = requests\
+                    .get('http://api.ip2location.com/?ip=%s&key=%s&package=WS3' \
+                         % (ip_addr, IP2LOCATION_KEY)).text
+        except requests.exceptions.ConnectionError:
+            pass
 
     if location and ';' in location:
+        ipcachewrite(ip_addr, location)
         location = location.split(';')[3], location.split(';')[1]
     else:
         location = location, None
 
     return location
 
-def get_location(ip_addr):
-    """
-    Return location pair (CITY, COUNTRY) for `ip_addr`
-    """
 
+def ipinfo(ip_addr):
+    location = ipcache(ip_addr)
+    if location:
+        return location
+    if IPINFO_TOKEN:
+        r = requests.get('https://ipinfo.io/%s/json?token=%s' %
+                         (ip_addr, IPINFO_TOKEN))
+        if r.status_code == 200:
+            location = r.json()["city"], r.json()["country"]
+    if location:
+        ipcachewrite(ip_addr, location)
+    return location
+
+
+def geoip(ip_addr):
     try:
         response = GEOIP_READER.city(ip_addr)
         country = response.country.name
@@ -132,7 +162,34 @@ def get_location(ip_addr):
     except geoip2.errors.AddressNotFoundError:
         country = None
         city = None
+    return city, country
 
+def workaround(city, country):
+    # workaround for the strange bug with the country name
+    # maybe some other countries has this problem too
+    #
+    # Having these in a separate function will help if this gets to
+    # be a problem
+    if country == 'Russian Federation':
+        country = 'Russia'
+    return city, country
+
+def get_location(ip_addr):
+    """
+    Return location pair (CITY, COUNTRY) for `ip_addr`
+    """
+    for method in IPLOCATION_ORDER:
+        if method == 'geoip':
+            city, country = geoip(ip_addr)
+        elif method == 'ip2location':
+            city, country = ip2location(ip_addr)
+        elif method == 'ipinfo':
+            city, country = ipinfo(ip_addr)
+        else:
+            print("ERROR: invalid iplocation method speficied: %s" % method)
+        if city is not None:
+            city, country = workaround(city, country)
+            return city, country
     #
     # temporary disabled it because of geoip services capcacity
     #
@@ -143,18 +200,9 @@ def get_location(ip_addr):
     #        city = location.raw.get('address', {}).get('city')
     #    except:
     #        pass
-    if city is None:
-        city, country = ip2location(ip_addr)
 
-    # workaround for the strange bug with the country name
-    # maybe some other countries has this problem too
-    if country == 'Russian Federation':
-        country = 'Russia'
-
-    if city:
-        return city, country
-    else:
-        return NOT_FOUND_LOCATION, None
+    # No methods resulted in a location - return default
+    return NOT_FOUND_LOCATION, None
 
 
 def location_canonical_name(location):
@@ -202,6 +250,19 @@ def is_location_blocked(location):
     return location is not None and location.lower() in LOCATION_BLACK_LIST
 
 
+def get_hemisphere(location):
+    """
+    Return hemisphere of the location (True = North, False = South).
+    Assume North and return True if location can't be found.
+    """
+    location_string = location[0]
+    if location[1] is not None:
+        location_string += ",%s" % location[1]
+    geolocation = geolocator(location_string)
+    if geolocation is None:
+        return True
+    return geolocation["latitude"] > 0
+
 def location_processing(location, ip_addr):
     """
     """
@@ -232,6 +293,12 @@ def location_processing(location, ip_addr):
             location, country = NOT_FOUND_LOCATION, None
 
     query_source_location = get_location(ip_addr)
+
+    # For moon queries, hemisphere must be found
+    # True for North, False for South
+    hemisphere = False
+    if location is not None and (location.lower()+"@").startswith("moon@"):
+        hemisphere = get_hemisphere(query_source_location)
 
     country = None
     if not location or location == 'MyLocation':
@@ -283,4 +350,5 @@ def location_processing(location, ip_addr):
             override_location_name, \
             full_address, \
             country, \
-            query_source_location
+            query_source_location, \
+            hemisphere

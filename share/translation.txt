@@ -31,10 +31,12 @@ Translated/improved/corrected by:
     * German:               Igor Chubin, @MAGICC (https://kthx.at)
     * Greek:                Panayotis Vryonis and @Petewg (on github)
     * Hebrew:               E.R.
+    * Hindi:                Aakash Gajjar @skyme5 (gh)
     * Hungarian:            Mark Petruska
     * Icelandic:            Óli G. @dvergur, Skúli Arnlaugsson @Arnlaugsson
     * Indonesian:           Andria Arisal @andria009
     * Interlingua:          Dustin Redmond @dustinkredmond (on github)
+    * Irish:                Robert Devereux @RobertDev (gh), Conor O'Callaghan @ivernus (gh)
     * Italian:              Diego Maniacco
     * Japanese:             @ryunix
     * Kazakh:               Akku Tutkusheva, Oleg Tropinin
@@ -43,6 +45,7 @@ Translated/improved/corrected by:
     * Macedonian:           Matej Plavevski @MatejMecka
     * Norwegian:            Fredrik Fjeld @fredrikfjeld
     * Nynorsk:              Kevin Brubeck Unhammer (https://unhammer.org/k/)
+    * Occitan:              Quentin PAGÈS @Quenty-tolosan (gh)
     * Persian:              Javad @threadripper_
     * Polish:               Wojtek Łukasiewicz @wojtuch (on github)
     * Portuguese:           Fernando Bitti Loureiro @fbitti (on github)

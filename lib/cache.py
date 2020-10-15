@@ -34,7 +34,19 @@ def get_signature(user_agent, query_string, client_ip_address, lang):
     """
     Get cache signature based on `user_agent`, `url_string`,
     `lang`, and `client_ip_address`
+    Return `None` if query should not be cached.
     """
+
+    if "?" in query_string:
+        location = query_string.split("?", 1)[0]
+    else:
+        location = query_string
+    if location.startswith("http://"):
+        location = location[7:]
+    elif location.startswith("https://"):
+        location = location[8:]
+    if ":" in location:
+        return None
 
     signature = "%s:%s:%s:%s" % \
         (user_agent, query_string, client_ip_address, lang)
@@ -47,6 +59,9 @@ def get(signature):
     stored in the cache. Otherwise update it, using
     the `_update_answer` function.
     """
+
+    if not signature:
+        return None
 
     value_record = CACHE.get(signature)
     if not value_record:
@@ -69,6 +84,8 @@ def store(signature, value):
     """
     Store in cache `value` for `signature`
     """
+    if not signature:
+        return _update_answer(value)
 
     if len(value) >= MIN_SIZE_FOR_FILECACHE:
         value_to_store = _store_in_file(signature, value)

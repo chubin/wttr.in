@@ -28,12 +28,13 @@ import pytz
 from constants import WWO_CODE, WEATHER_SYMBOL, WIND_DIRECTION, WEATHER_SYMBOL_WIDTH_VTE
 from weather_data import get_weather_data
 from . import v2
+from . import prometheus
 
 PRECONFIGURED_FORMAT = {
-    '1':    u'%c %t',
-    '2':    u'%c 🌡️%t 🌬️%w',
-    '3':    u'%l: %c %t',
-    '4':    u'%l: %c 🌡️%t 🌬️%w',
+    '1':    r'%c %t\n',
+    '2':    r'%c 🌡️%t 🌬️%w\n',
+    '3':    r'%l: %c %t\n',
+    '4':    r'%l: %c 🌡️%t 🌬️%w\n',
 }
 
 MOON_PHASES = (
@@ -54,6 +55,21 @@ def render_temperature(data, query):
         temperature = u'%s°F' % data['temp_F']
     else:
         temperature = u'%s°C' % data['temp_C']
+
+    if temperature[0] != '-':
+        temperature = '+' + temperature
+
+    return temperature
+
+def render_feel_like_temperature(data, query):
+    """
+    feel like temperature (f)
+    """
+
+    if query.get('use_imperial', False):
+        temperature = u'%s°F' % data['FeelsLikeF']
+    else:
+        temperature = u'%s°C' % data['FeelsLikeC']
 
     if temperature[0] != '-':
         temperature = '+' + temperature
@@ -145,7 +161,7 @@ def render_wind(data, query):
         degree = ""
 
     if degree:
-        wind_direction = WIND_DIRECTION[((degree+22)%360)//45]
+        wind_direction = WIND_DIRECTION[int(((degree+22.5)%360)/45.0)]
     else:
         wind_direction = ""
 
@@ -224,6 +240,7 @@ FORMAT_SYMBOL = {
     'C':    render_condition_fullname,
     'h':    render_humidity,
     't':    render_temperature,
+    'f':    render_feel_like_temperature,
     'w':    render_wind,
     'l':    render_location,
     'm':    render_moonphase,
@@ -288,7 +305,7 @@ def render_line(line, data, query):
 
         return ''
 
-    template_regexp = r'%[^%]*[a-zA-Z]'
+    template_regexp = r'%[a-zA-Z]'
     for template_code in re.findall(template_regexp, line):
         if template_code.lstrip("%") in FORMAT_SYMBOL_ASTRO:
             local_time_of = get_local_time_of()
@@ -297,7 +314,7 @@ def render_line(line, data, query):
     return re.sub(template_regexp, render_symbol, line)
 
 def render_json(data):
-    output = json.dumps(data, indent=4, sort_keys=True)
+    output = json.dumps(data, indent=4, sort_keys=True, ensure_ascii=False)
 
     output = "\n".join(
         re.sub('"[^"]*worldweatheronline[^"]*"', '""', line) if "worldweatheronline" in line else line
@@ -320,6 +337,8 @@ def format_weather_data(query, parsed_query, data):
 
     if format_line == "j1":
         return render_json(data['data'])
+    if format_line == "p1":
+        return prometheus.render_prometheus(data['data'])
     if format_line[:2] == "v2":
         return v2.main(query, parsed_query, data)
 
@@ -339,7 +358,7 @@ def wttr_line(query, parsed_query):
 
     data = get_weather_data(location, lang)
     output = format_weather_data(query, parsed_query, data)
-    return output.rstrip("\n")+"\n"
+    return output.rstrip("\n").replace(r"\n", "\n")
 
 def main():
     """

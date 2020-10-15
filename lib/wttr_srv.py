@@ -17,7 +17,7 @@ import fmt.png
 import parse_query
 from translations import get_message, FULL_TRANSLATION, PARTIAL_TRANSLATION, SUPPORTED_LANGS
 from buttons import add_buttons
-from globals import get_help_file, \
+from globals import get_help_file, remove_ansi, \
                     BASH_FUNCTION_FILE, TRANSLATION_FILE, LOG_FILE, \
                     NOT_FOUND_LOCATION, \
                     MALFORMED_RESPONSE_HTML_PAGE, \
@@ -221,7 +221,7 @@ def _response(parsed_query, query, fast_mode=False):
         #
         #    output = fmt.png.render_ansi(
         #        output, options=parsed_query)
-        result = TASKS.spawn(fmt.png.render_ansi, output, options=parsed_query)
+        result = TASKS.spawn(fmt.png.render_ansi, cache._update_answer(output), options=parsed_query)
         output = result.get()
     else:
         if query.get('days', '3') != '0' \
@@ -230,7 +230,10 @@ def _response(parsed_query, query, fast_mode=False):
             if parsed_query['html_output']:
                 output = add_buttons(output)
             else:
-                output += '\n' + get_message('FOLLOW_ME', parsed_query['lang']) + '\n'
+                message = get_message('FOLLOW_ME', parsed_query['lang'])
+                if parsed_query.get('no-terminal', False):
+                    message = remove_ansi(message)
+                output += '\n' + message + '\n'
 
     return cache.store(cache_signature, output)
 
@@ -289,9 +292,10 @@ def parse_request(location, request, query, fast_mode=False):
     parsed_query["lang"] = parsed_query.get("lang", lang)
 
     parsed_query["html_output"] = get_output_format(query, parsed_query)
+    parsed_query["json_output"] = (parsed_query.get("view", "") or "").startswith("j")
 
     if not fast_mode: # not png_filename and not fast_mode:
-        location, override_location_name, full_address, country, query_source_location = \
+        location, override_location_name, full_address, country, query_source_location, hemisphere = \
                 location_processing(parsed_query["location"], parsed_query["ip_addr"])
 
         us_ip = query_source_location[1] == 'United States' \
@@ -306,7 +310,8 @@ def parse_request(location, request, query, fast_mode=False):
             'override_location_name': override_location_name,
             'full_address': full_address,
             'country': country,
-            'query_source_location': query_source_location})
+            'query_source_location': query_source_location,
+            'hemisphere': hemisphere})
 
     parsed_query.update(query)
     return parsed_query
@@ -318,7 +323,7 @@ def wttr(location, request):
     it returns output in HTML, ANSI or other format.
     """
 
-    def _wrap_response(response_text, html_output, png_filename=None):
+    def _wrap_response(response_text, html_output, json_output, png_filename=None):
         if not isinstance(response_text, str) and \
            not isinstance(response_text, bytes):
             return response_text
@@ -337,16 +342,21 @@ def wttr(location, request):
                 response.headers[key] = value
         else:
             response = make_response(response_text)
-            response.mimetype = 'text/html' if html_output else 'text/plain'
+            if html_output:
+                response.mimetype = "text/html"
+            elif json_output:
+                response.mimetype = "application/json"
+            else:
+                response.mimetype = "text/plain"
         return response
 
     if is_location_blocked(location):
-        return ""
+        return ("", 403) # Forbidden
 
     try:
         LIMITS.check_ip(_client_ip_address(request))
     except RuntimeError as exception:
-        return str(exception)
+        return (str(exception), 429) # Too many requests
 
     query = parse_query.parse_query(request.args)
 
@@ -356,6 +366,8 @@ def wttr(location, request):
     # use the full track
     parsed_query = parse_request(location, request, query, fast_mode=True)
     response = _response(parsed_query, query, fast_mode=True)
+
+    http_code = 200
     try:
         if not response:
             parsed_query = parse_request(location, request, query)
@@ -365,15 +377,17 @@ def wttr(location, request):
         logging.error("Exception has occured", exc_info=1)
         if parsed_query['html_output']:
             response = MALFORMED_RESPONSE_HTML_PAGE
+            http_code = 500 # Internal Server Error
         else:
             response = get_message('CAPACITY_LIMIT_REACHED', parsed_query['lang'])
+            http_code = 503 # Service Unavailable
 
         # if exception is occured, we return not a png file but text
         if "png_filename" in parsed_query:
             del parsed_query["png_filename"]
-    return _wrap_response(
-        response, parsed_query['html_output'],
-        png_filename=parsed_query.get('png_filename'))
+    return (_wrap_response(
+        response, parsed_query['html_output'], parsed_query['json_output'],
+        png_filename=parsed_query.get('png_filename')), http_code)
 
 if __name__ == "__main__":
     import doctest

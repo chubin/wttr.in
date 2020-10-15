@@ -15,6 +15,7 @@ def get_moon(parsed_query):
     location = parsed_query['orig_location']
     html = parsed_query['html_output']
     lang = parsed_query['lang']
+    hemisphere = parsed_query['hemisphere']
 
     date = None
     if '@' in location:
@@ -24,6 +25,9 @@ def get_moon(parsed_query):
     cmd = [globals.PYPHOON]
     if lang:
         cmd += ["-l", lang]
+
+    if not hemisphere:
+        cmd += ["-s", "south"]
 
     if date:
         try:

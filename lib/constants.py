@@ -103,6 +103,68 @@ MOON_PHASES = (
     "🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘"
 )
 
+WEATHER_SYMBOL_WI_DAY = {
+    "Unknown":             "",
+    "Cloudy":              "",
+    "Fog":                 "",
+    "HeavyRain":           "",
+    "HeavyShowers":        "",
+    "HeavySnow":           "",
+    "HeavySnowShowers":    "",
+    "LightRain":           "",
+    "LightShowers":        "",
+    "LightSleet":          "",
+    "LightSleetShowers":   "",
+    "LightSnow":           "",
+    "LightSnowShowers":    "",
+    "PartlyCloudy":        "",
+    "Sunny":               "",
+    "ThunderyHeavyRain":   "",
+    "ThunderyShowers":     "",
+    "ThunderySnowShowers": "",
+    "VeryCloudy": "",
+}
+
+WEATHER_SYMBOL_WI_NIGHT = {
+    "Unknown":             "",
+    "Cloudy":              "",
+    "Fog":                 "",
+    "HeavyRain":           "",
+    "HeavyShowers":        "",
+    "HeavySnow":           "",
+    "HeavySnowShowers":    "",
+    "LightRain":           "",
+    "LightShowers":        "",
+    "LightSleet":          "",
+    "LightSleetShowers":   "",
+    "LightSnow":           "",
+    "LightSnowShowers":    "",
+    "PartlyCloudy":        "",
+    "Sunny":               "",
+    "ThunderyHeavyRain":   "",
+    "ThunderyShowers":     "",
+    "ThunderySnowShowers": "",
+    "VeryCloudy": "",
+}
+
+WEATHER_SYMBOL_WIDTH_VTE_WI = {
+}
+
+WIND_DIRECTION_WI = [
+    "", "", "", "", "", "", "", "",
+]
+
+WIND_SCALE_WI = [
+    "", "", "", "", "", "", "", "", "", "", "", "", "",
+]
+
+MOON_PHASES_WI = (
+    "", "", "", "", "", "", "",
+    "", "", "", "", "", "", "",
+    "", "", "", "", "", "", "",
+    "", "", "", "", "", "", "",
+)
+
 WEATHER_SYMBOL_WEGO = {
     "Unknown": [
         "    .-.      ",
@@ -168,7 +230,7 @@ WEATHER_SYMBOL_WEGO = {
         "\033[38;5;226m _`/\"\"\033[38;5;250m.-.    \033[0m",
         "\033[38;5;226m  ,\\_\033[38;5;250m(   ).  \033[0m",
         "\033[38;5;226m   /\033[38;5;250m(___(__) \033[0m",
-        "\033[38;5;228;5m    ⚡\033[38;5;111;25m‘‘\033[38;5;228;5m⚡\033[38;5;111;25m‘‘ \033[0m",
+        "\033[38;5;228;5m    ⚡\033[38;5;111;25m‘ ‘\033[38;5;228;5m⚡\033[38;5;111;25m‘ ‘ \033[0m",
         "\033[38;5;111m    ‘ ‘ ‘ ‘  \033[0m"],
     "ThunderyHeavyRain": [
         "\033[38;5;240;1m     .-.     \033[0m",

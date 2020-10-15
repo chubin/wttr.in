@@ -8,6 +8,7 @@ External environment variables:
     WTTR_WEGO
     WTTR_LISTEN_HOST
     WTTR_LISTEN_PORT
+    WTTR_USER_AGENT
 
 """
 from __future__ import print_function
@@ -24,7 +25,7 @@ else:
     GEOLITE = os.path.join(MYDIR, 'data', "GeoLite2-City.mmdb")
 
 WEGO = os.environ.get("WTTR_WEGO", "/home/igor/go/bin/we-lang")
-PYPHOON = "/home/igor/pyphoon/bin/pyphoon-lolcat"
+PYPHOON = "pyphoon-lolcat"
 
 _DATADIR = "/wttr.in"
 _LOGDIR = "/wttr.in/log"
@@ -83,15 +84,34 @@ PLAIN_TEXT_AGENTS = [
 
 PLAIN_TEXT_PAGES = [':help', ':bash.function', ':translation', ':iterm2']
 
-_IP2LOCATION_KEY_FILE = os.environ['HOME'] + '/.ip2location.key'
+_IPLOCATION_ORDER = os.environ.get(
+    "WTTR_IPLOCATION_ORDER",
+    'geoip,ip2location,ipinfo')
+IPLOCATION_ORDER = _IPLOCATION_ORDER.split(',')
+
+_IP2LOCATION_KEY_FILE = os.environ.get(
+    "WTTR_IP2LOCATION_KEY_FILE",
+    os.environ['HOME'] + '/.ip2location.key')
 IP2LOCATION_KEY = None
 if os.path.exists(_IP2LOCATION_KEY_FILE):
     IP2LOCATION_KEY = open(_IP2LOCATION_KEY_FILE, 'r').read().strip()
 
-_WWO_KEY_FILE = os.environ['HOME'] + '/.wwo.key'
+_IPINFO_KEY_FILE = os.environ.get(
+    "WTTR_IPINFO_KEY_FILE",
+    os.environ['HOME'] + '/.ipinfo.key')
+IPINFO_TOKEN = None
+if os.path.exists(_IPINFO_KEY_FILE):
+    IPINFO_TOKEN = open(_IPINFO_KEY_FILE, 'r').read().strip()
+
+_WWO_KEY_FILE = os.environ.get(
+    "WTTR_WWO_KEY_FILE",
+    os.environ['HOME'] + '/.wwo.key')
 WWO_KEY = "key-is-not-specified"
+USE_METNO = True
+USER_AGENT = os.environ.get("WTTR_USER_AGENT", "")
 if os.path.exists(_WWO_KEY_FILE):
     WWO_KEY = open(_WWO_KEY_FILE, 'r').read().strip()
+    USE_METNO = False
 
 def error(text):
     "log error `text` and raise a RuntimeError exception"

@@ -32,13 +32,16 @@ but it's still a live weather report in your language.)
 
 Or in PowerShell:
 
-    (Invoke-WebRequest http://wttr.in).Content
+```PowerShell
+Invoke-RestMethod http://wttr.in
+```
 
 Want to get the weather information for a specific location? You can add the desired location to the URL in your
 request like this:
 
     $ curl wttr.in/London
     $ curl wttr.in/Moscow
+    $ curl wttr.in/Salt+Lake+City
 
 If you omit the location name, you will get the report for your current location based on your IP address.
 
@@ -88,7 +91,8 @@ wttr.in currently supports five output formats:
 * Plain-text for the terminal and scripts;
 * HTML for the browser;
 * PNG for the graphical viewers;
-* JSON for scripts and APIs.
+* JSON for scripts and APIs;
+* Prometheus metrics for scripts and APIs.
 
 The ANSI and HTML formats are selected basing on the User-Agent string.
 The PNG format can be forced by adding `.png` to the end of the query:
@@ -154,13 +158,13 @@ To specify your own custom output format, use the special `%`-notation:
     c    Weather condition,
     C    Weather condition textual name,
     h    Humidity,
-    t    Temperature,
+    t    Temperature (Actual),
+    f    Temperature (Feels Like),
     w    Wind,
     l    Location,
     m    Moonphase 🌑🌒🌓🌔🌕🌖🌗🌘,
     M    Moonday,
     p    precipitation (mm),
-    o    Probability of Precipitation,
     P    pressure (hPa),
 
     D    Dawn*,
@@ -169,7 +173,7 @@ To specify your own custom output format, use the special `%`-notation:
     s    Sunset*,
     d    Dusk*.
 
-(times are shown in the local timezone)
+(*times are shown in the local timezone)
 ```
 
 So, these two calls are the same:
@@ -177,7 +181,7 @@ So, these two calls are the same:
 ```
     $ curl wttr.in/London?format=3
     London: ⛅️ +7⁰C
-    $ curl wttr.in/London?format="%l:+%c+%t"
+    $ curl wttr.in/London?format="%l:+%c+%t\n"
     London: ⛅️ +7⁰C
 ```
 Keep in mind, that when using in `tmux.conf`, you have to escape `%` with `%`, i.e. write there `%%` instead of `%`.
@@ -203,7 +207,7 @@ both of them support all necessary emoji glyphs.
 
 Font configuration:
 
-```
+```xml
 $ cat ~/.config/fontconfig/fonts.conf
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
@@ -253,6 +257,12 @@ or
   $ curl wttr.in/München?format=v2
 ```
 
+or, if you prefer Nerd Fonts instead of Emoji, `v2d` (day) or `v2n` (night):
+
+```
+  $ curl v2d.wttr.in/München
+```
+
 
 ![data-reach output format](https://wttr.in/files/example-wttr-v2.png)
 
@@ -265,7 +275,7 @@ Currently, you need some tweaks for some terminals, to get the best possible vis
 
 ### URXVT
 
-Depending on your configuration you might be taking all steps, or only a few. URXVT currenly doesn't support emoji related fonts, but we can get almost the same effect using *Font-Symbola*. So add to your `.Xresources` file the following line:
+Depending on your configuration you might be taking all steps, or only a few. URXVT currently doesn't support emoji related fonts, but we can get almost the same effect using *Font-Symbola*. So add to your `.Xresources` file the following line:
 ```
     xft:symbola:size=10:minspace=False
 ```
@@ -277,9 +287,11 @@ The result, should look like:
 
 ![URXVT Emoji line](https://user-images.githubusercontent.com/24360204/63842949-1d36d480-c975-11e9-81dd-998d1329bd8a.png)
 
-## JSON output
+## Different output formats
 
-The JSON format is a feature providing access to wttr.in data through an easy-to-parse format, without requiring the user to create a complex script to reinterpret wttr.in's graphical output.
+### JSON output
+
+The JSON format is a feature providing access to *wttr.in* data through an easy-to-parse format, without requiring the user to create a complex script to reinterpret wttr.in's graphical output.
 
 To fetch information in JSON format, use the following syntax:
 
@@ -288,41 +300,73 @@ To fetch information in JSON format, use the following syntax:
 This will fetch information on the Detroit region in JSON format. The j1 format code is used to allow for the use of other layouts for the JSON output.
 
 The result will look something like the following:
-
-    {
-    "current_condition": [
-        {
-            "FeelsLikeC": "25",
-            "FeelsLikeF": "76",
-            "cloudcover": "100",
-            "humidity": "76",
-            "observation_time": "04:08 PM",
-            "precipMM": "0.2",
-            "pressure": "1019",
-            "temp_C": "22",
-            "temp_F": "72",
-            "uvIndex": 5,
-            "visibility": "16",
-            "weatherCode": "122",
-            "weatherDesc": [
-                {
-                    "value": "Overcast"
-                }
-            ],
-            "weatherIconUrl": [
-                {
-                    "value": ""
-                }
-            ],
-            "winddir16Point": "NNE",
-            "winddirDegree": "20",
-            "windspeedKmph": "7",
-            "windspeedMiles": "4"
-        }
-    ],
-    ...
+```json
+{
+	"current_condition": [
+		{
+		    "FeelsLikeC": "25",
+		    "FeelsLikeF": "76",
+		    "cloudcover": "100",
+		    "humidity": "76",
+		    "observation_time": "04:08 PM",
+		    "precipMM": "0.2",
+		    "pressure": "1019",
+		    "temp_C": "22",
+		    "temp_F": "72",
+		    "uvIndex": 5,
+		    "visibility": "16",
+		    "weatherCode": "122",
+		    "weatherDesc": [
+			{
+			    "value": "Overcast"
+			}
+		    ],
+		    "weatherIconUrl": [
+			{
+			    "value": ""
+			}
+		    ],
+		    "winddir16Point": "NNE",
+		    "winddirDegree": "20",
+		    "windspeedKmph": "7",
+		    "windspeedMiles": "4"
+		}
+	],
+...
+```
 
 Most of these values are self-explanatory, aside from `weatherCode`. The `weatherCode` is an enumeration which you can find at either [the WorldWeatherOnline website](https://www.worldweatheronline.com/developer/api/docs/weather-icons.aspx) or [in the wttr.in source code](https://github.com/chubin/wttr.in/blob/master/lib/constants.py).
+
+### Prometheus Metrics Output
+
+The [Prometheus](https://github.com/prometheus/prometheus) Metrics format is a feature providing access to *wttr.in* data through an easy-to-parse format for monitoring systems, without requiring the user to create a complex script to reinterpret wttr.in's graphical output. 
+
+To fetch information in Prometheus format, use the following syntax:
+
+    $ curl wttr.in/Detroit?format=p1
+
+This will fetch information on the Detroit region in Prometheus Metrics format. The `p1` format code is used to allow for the use of other layouts for the Prometheus Metrics output.
+
+A possible configuration for Prometheus could look like this:
+
+```yaml
+    - job_name: 'wttr_in_detroit'
+        static_configs:
+            - targets: ['wttr.in']
+        metrics_path: '/Detroit'
+        params:
+            format: ['p1']
+```
+
+The result will look something like the following:
+
+
+    # HELP temperature_feels_like_celsius Feels Like Temperature in Celsius
+    temperature_feels_like_celsius{forecast="current"} 7
+    # HELP temperature_feels_like_fahrenheit Feels Like Temperature in Fahrenheit
+    temperature_feels_like_fahrenheit{forecast="current"} 45
+    [truncated]
+...
 
 
 ## Moon phases
@@ -343,10 +387,10 @@ To get the moon phase information in the online mode, use `%m`:
     $ curl wttr.in/London?format=%m
     🌖
 
-Keep in mid that the Unicode representation of moonphases suffers 2 caveats:
+Keep in mind that the Unicode representation of moonphases suffers 2 caveats:
 
 - With some fonts, the representation `🌘` is ambiguous, for it either seem
-  almost-shadowed or almost-lit, depedending on whether your terminal is in
+  almost-shadowed or almost-lit, depending on whether your terminal is in
   light mode or dark mode. Relying on colored fonts like `noto-fonts` works
   around this problem.
 
@@ -480,6 +524,19 @@ $ echo 'YOUR_IP2LOCATION_KEY' > ~/.ip2location.key
 If you don't have this file, the service will be silently skipped (it is not a big problem,
 because the MaxMind database is pretty good).
 
+### Installation with Docker
+
+* Install Docker
+* Build Docker Image
+* These files should be mounted by the user at runtime:
+
+```
+/root/.wegorc
+/root/.ip2location.key (optional)
+/app/airports.dat
+/app/GeoLite2-City.mmdb
+```
+
 ### Get a WorldWeatherOnline key and configure wego
 
 To get a WorldWeatherOnline API key, you must register here:
@@ -491,14 +548,16 @@ WWO key file: `~/.wwo.key`
 
 Also, you have to specify the key in the `wego` configuration:
 
-    $ cat ~/.wegorc
-    {
-        "APIKey": "00XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-        "City": "London",
-        "Numdays": 3,
-        "Imperial": false,
-        "Lang": "en"
-    }
+```json
+$ cat ~/.wegorc
+{
+	"APIKey": "00XXXXXXXXXXXXXXXXXXXXXXXXXXX",
+	"City": "London",
+	"Numdays": 3,
+	"Imperial": false,
+	"Lang": "en"
+}
+```
 
 The `City` parameter in `~/.wegorc` is ignored.
 
@@ -507,42 +566,46 @@ The `City` parameter in `~/.wegorc` is ignored.
 Configure the following environment variables that define the path to the local `wttr.in`
 installation, to the GeoLite database, and to the `wego` installation. For example:
 
-    export WTTR_MYDIR="/home/igor/wttr.in"
-    export WTTR_GEOLITE="/home/igor/wttr.in/GeoLite2-City.mmdb"
-    export WTTR_WEGO="/home/igor/go/bin/wego"
-    export WTTR_LISTEN_HOST="0.0.0.0"
-    export WTTR_LISTEN_PORT="8002"
+```bash
+export WTTR_MYDIR="/home/igor/wttr.in"
+export WTTR_GEOLITE="/home/igor/wttr.in/GeoLite2-City.mmdb"
+export WTTR_WEGO="/home/igor/go/bin/wego"
+export WTTR_LISTEN_HOST="0.0.0.0"
+export WTTR_LISTEN_PORT="8002"
+```
 
 
 ### Configure the HTTP-frontend service
 
 It's recommended that you also configure the web server that will be used to access the service:
 
-    server {
-        listen [::]:80;
-        server_name  wttr.in *.wttr.in;
-        access_log  /var/log/nginx/wttr.in-access.log  main;
-        error_log  /var/log/nginx/wttr.in-error.log;
+```nginx
+server {
+	listen [::]:80;
+	server_name  wttr.in *.wttr.in;
+	access_log  /var/log/nginx/wttr.in-access.log  main;
+	error_log  /var/log/nginx/wttr.in-error.log;
 
-        location / {
-            proxy_pass         http://127.0.0.1:8002;
+	location / {
+	    proxy_pass         http://127.0.0.1:8002;
 
-            proxy_set_header   Host             $host;
-            proxy_set_header   X-Real-IP        $remote_addr;
-            proxy_set_header   X-Forwarded-For  $remote_addr;
+	    proxy_set_header   Host             $host;
+	    proxy_set_header   X-Real-IP        $remote_addr;
+	    proxy_set_header   X-Forwarded-For  $remote_addr;
 
-            client_max_body_size       10m;
-            client_body_buffer_size    128k;
+	    client_max_body_size       10m;
+	    client_body_buffer_size    128k;
 
-            proxy_connect_timeout      90;
-            proxy_send_timeout         90;
-            proxy_read_timeout         90;
+	    proxy_connect_timeout      90;
+	    proxy_send_timeout         90;
+	    proxy_read_timeout         90;
 
-            proxy_buffer_size          4k;
-            proxy_buffers              4 32k;
-            proxy_busy_buffers_size    64k;
-            proxy_temp_file_write_size 64k;
+	    proxy_buffer_size          4k;
+	    proxy_buffers              4 32k;
+	    proxy_busy_buffers_size    64k;
+	    proxy_temp_file_write_size 64k;
 
-            expires                    off;
-        }
-    }
+	    expires                    off;
+	}
+}
+```

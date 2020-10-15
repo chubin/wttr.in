@@ -6,7 +6,7 @@ Usage:
 Supported location types:
 
     /paris                  # city name
-    /~Eiffel+tower          # any location
+    /~Eiffel+tower          # any location (+ for spaces)
     /Москва                 # Unicode name of any location in any language
     /muc                    # airport code (3 letters)
     /@stackoverflow.com     # domain name

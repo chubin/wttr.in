@@ -38,7 +38,7 @@ from astral import moon, sun
 from scipy.interpolate import interp1d
 from babel.dates import format_datetime
 
-from globals import WWO_KEY
+from globals import WWO_KEY, remove_ansi
 import constants
 import translations
 import parse_query
@@ -239,7 +239,7 @@ def draw_time(geo_data):
 
 # }}}
 # draw_astronomical {{{
-def draw_astronomical(city_name, geo_data):
+def draw_astronomical(city_name, geo_data, config):
     datetime_day_start = datetime.datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
 
     city = LocationInfo()
@@ -289,12 +289,18 @@ def draw_astronomical(city_name, geo_data):
 
         answer += char
 
+        if config.get("view") in ["v2n", "v2d"]:
+            moon_phases = constants.MOON_PHASES_WI
+            moon_phases = [" %s" % x for x in moon_phases]
+        else:
+            moon_phases = constants.MOON_PHASES
+
         # moon
         if time_interval in [0,23,47,69]: # time_interval % 3 == 0:
             moon_phase = moon.phase(
                 date=datetime_day_start + datetime.timedelta(hours=time_interval))
-            moon_phase_emoji = constants.MOON_PHASES[
-                int(math.floor(moon_phase*1.0/28.0*8+0.5)) % len(constants.MOON_PHASES)]
+            moon_phase_emoji = moon_phases[
+                int(math.floor(moon_phase*1.0/28.0*8+0.5)) % len(moon_phases)]
         #    if time_interval in [0, 24, 48, 69]:
             moon_line += moon_phase_emoji # + " "
         elif time_interval % 3 == 0:
@@ -309,19 +315,29 @@ def draw_astronomical(city_name, geo_data):
     return answer
 # }}}
 # draw_emoji {{{
-def draw_emoji(data):
+def draw_emoji(data, config):
     answer = ""
+    if config.get("view") == "v2n":
+        weather_symbol = constants.WEATHER_SYMBOL_WI_NIGHT
+        weather_symbol_width_vte = constants.WEATHER_SYMBOL_WIDTH_VTE_WI
+    elif config.get("view") == "v2d":
+        weather_symbol = constants.WEATHER_SYMBOL_WI_NIGHT
+        weather_symbol_width_vte = constants.WEATHER_SYMBOL_WIDTH_VTE_WI
+    else:
+        weather_symbol = constants.WEATHER_SYMBOL
+        weather_symbol_width_vte = constants.WEATHER_SYMBOL_WIDTH_VTE
+
     for i in data:
-        emoji = constants.WEATHER_SYMBOL.get(
+        emoji = weather_symbol.get(
             constants.WWO_CODE.get(
                 str(int(i)), "Unknown"))
-        space = " "*(3-constants.WEATHER_SYMBOL_WIDTH_VTE.get(emoji))
-        answer += emoji + space
+        space = " "*(3-weather_symbol_width_vte.get(emoji, 1))
+        answer += space[:1] + emoji + space[1:]
     answer += "\n"
     return answer
 # }}}
 # draw_wind {{{
-def draw_wind(data, color_data):
+def draw_wind(data, color_data, config):
 
     def _color_code_for_wind_speed(wind_speed):
 
@@ -346,11 +362,16 @@ def draw_wind(data, color_data):
     answer = ""
     answer_line2 = ""
 
+    if config.get("view") in ["v2n", "v2d"]:
+        wind_direction_list = constants.WIND_DIRECTION_WI
+    else:
+        wind_direction_list = constants.WIND_DIRECTION
+
     for j, degree in enumerate(data):
 
         degree = int(degree)
         if degree:
-            wind_direction = constants.WIND_DIRECTION[((degree+22)%360)//45]
+            wind_direction = wind_direction_list[int(((degree+22.5)%360)/45.0)]
         else:
             wind_direction = ""
 
@@ -430,14 +451,14 @@ def generate_panel(data_parsed, geo_data, config):
     output += "\n"
 
     data = jq_query(weather_code_query, data_parsed)
-    output += draw_emoji(data)
+    output += draw_emoji(data, config)
 
     data = jq_query(wind_direction_query, data_parsed)
     color_data = jq_query(wind_speed_query, data_parsed)
-    output += draw_wind(data, color_data)
+    output += draw_wind(data, color_data, config)
     output += "\n"
 
-    output += draw_astronomical(config["location"], geo_data)
+    output += draw_astronomical(config["location"], geo_data, config)
     output += "\n"
 
     output = add_frame(output, max_width, config)
@@ -604,6 +625,8 @@ def main(query, parsed_query, data):
         output = generate_panel(data_parsed, geo_data, parsed_query)
         if query.get("text") != "no" and parsed_query.get("text") != "no":
             output += textual_information(data_parsed, geo_data, parsed_query)
+        if parsed_query.get('no-terminal', False):
+            output = remove_ansi(output)
     return output
 
 if __name__ == '__main__':

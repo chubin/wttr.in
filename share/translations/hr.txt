@@ -1,3 +1,4 @@
+:     Kiša                                : Rain
 113 : Vedro                               : Clear
 113 : Sunčano                             : Sunny
 116 : Djelomično oblačno                  : Partly cloudy
