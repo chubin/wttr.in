@@ -11,7 +11,7 @@ Desteklenen konum tipleri:
     /esb                    # havalimanı kodu (3 harfli)
     /@stackoverflow.com     # alan adı
     /06800                  # posta kodları
-    /39.925325,32.836987    # Yer belirleme sistemi(GPS) koordinatları
+    /39.925325,32.836987    # Yer belirleme sistemi (GPS) koordinatları
 
 Özel konumlar:
 
@@ -22,15 +22,15 @@ Desteklenen konum tipleri:
 
     ?m                      # metrik sistem (SI) (ABD dışında her yer için varsayılan)
     ?u                      # USCS (ABD için varsayılan)
-    ?M                      # Rüzgar hızını metre/saniye(m/s) olarak göster
+    ?M                      # Rüzgar hızını metre/saniye (m/s) olarak göster
 
 Seçenekleri görüntüle:
 
     ?0                      # sadece bugün için hava durumu
     ?1                      # Bugün ve 1 gün sonrası için hava durumu
     ?2                      # Bugün ve 2 gün sonrası için hava durumu
-    ?A                      # Kullanıcı aracısı(User-Agent) bilgilerini göz ardı eder ve terminalde ANSI formatında çıktı için zorlar
-    ?F                      # "Follow(Takip et)" satırını göstermez
+    ?A                      # Kullanıcı aracısı (User-Agent) bilgilerini göz ardı eder ve terminalde ANSI formatında çıktı için zorlar
+    ?F                      # "Follow (Takip et)" satırını göstermez
     ?n                      # dar görünüm (sadece gece ve gündüz)
     ?q                      # sessiz görünüm ("Hava durumu" yazısı yok)
     ?Q                      # aşırı sessiz görünüm ("Hava durumu" yazısı ve şehir adı yok)
@@ -45,14 +45,14 @@ PNG seçenekleri:
 
 Seçenekler birleştirilebilir:
 
-    /Istanbul?0pq
-    /Istanbul?0pq&lang=fr
-    /Istanbul_0pq.png       # PNG dosya modları _ karakterinden sonra belirtilir
-    /izmir_0pq_lang=it.png  # uzun seçenekler alt çizgi ile ayrılır
+    /istanbul?0pq
+    /istanbul?0pq&lang=tr
+    /istanbul_0pq.png       # PNG dosya modları _ karakterinden sonra belirtilir
+    /izmir_0pq_lang=tr.png  # uzun seçenekler alt çizgi ile ayrılır
 
 Yerelleştirme:
 
-    $ curl tr.wttr.in/Istanbul
+    $ curl tr.wttr.in/istanbul
     $ curl wttr.in/izmir?lang=tr
     $ curl -H "Accept-Language: tr" wttr.in/izmir
 
