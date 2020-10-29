@@ -21,6 +21,10 @@ from globals import GEOLITE, GEOLOCATOR_SERVICE, IP2LCACHE, IP2LOCATION_KEY, NOT
 
 GEOIP_READER = geoip2.database.Reader(GEOLITE)
 
+def _debug_log(s):
+    with open("/tmp/debug.log", "a") as f:
+        f.write(s+"\n")
+
 def ascii_only(string):
     "Check if `string` contains only ASCII symbols"
 
@@ -94,7 +98,7 @@ def ipcachewrite(ip_addr, location):
     if not os.path.exists(IP2LCACHE):
         os.makedirs(IP2LCACHE)
     with open(cached, 'w') as file:
-        file.write(location[0] + ';' + location[1])
+        file.write(location) # location[0] + ';' + location[1])
 
 def ipcache(ip_addr):
     cached = os.path.join(IP2LCACHE, ip_addr)
@@ -118,22 +122,23 @@ def ip2location(ip_addr):
     "Convert IP address `ip_addr` to a location name"
 
     location = ipcache(ip_addr)
-    if location:
+    if location[0]:
         return location
 
     # if IP2LOCATION_KEY is not set, do not the query,
     # because the query wont be processed anyway
+    location_string = None
     if IP2LOCATION_KEY:
         try:
-            location = requests\
+            location_string = requests\
                     .get('http://api.ip2location.com/?ip=%s&key=%s&package=WS3' \
                          % (ip_addr, IP2LOCATION_KEY)).text
         except requests.exceptions.ConnectionError:
             pass
 
-    if location and ';' in location:
-        ipcachewrite(ip_addr, location)
-        location = location.split(';')[3], location.split(';')[1]
+    if location_string and ';' in location_string:
+        ipcachewrite(ip_addr, location_string)
+        location = location_string.split(';')[3], location_string.split(';')[1]
     else:
         location = location, None
 
