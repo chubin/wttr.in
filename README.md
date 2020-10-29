@@ -235,7 +235,7 @@ $ cat ~/.config/fontconfig/fonts.conf
 
 (to apply the configuration, run `fc-cache -f -v`)
 
-## Data-rich output format
+## Data-rich output format (v2)
 
 In the experimental data-rich output format, that is available under the view code `v2`,
 a lot of additional weather and astronomical information is available:
@@ -286,6 +286,47 @@ For some reason URXVT sometimes stops deciding right the word spacing and we nee
 The result, should look like:
 
 ![URXVT Emoji line](https://user-images.githubusercontent.com/24360204/63842949-1d36d480-c975-11e9-81dd-998d1329bd8a.png)
+
+## Map view (v3)
+
+In the experimental map view, that is available under the view code `v3`,
+weather information about a geographical region is available:
+
+```
+    $ curl v3.wttr.in/Bayern.sxl
+```
+
+![v3.wttr.in/Bayern](https://v3.wttr.in/Bayern.png)
+
+or directly in browser:
+
+*   https://v3.wttr.in/Bayern
+
+The map view currently supports three formats:
+
+* PNG (for browser and messangers);
+* Sixel (terminal inline images support);
+* IIP (terminal with iterm2 inline images protocol support).
+
+Terminal with inline images protocols support:
+
+| Terminal              | Environment    | Images support | Protocol |
+| --------------------- | --------- | ------------- | --------- |
+| uxterm                |   X11     |   yes         |   Sixel   |
+| mlterm                |   X11     |   yes         |   Sixel   |
+| kitty                 |   X11     |   yes         |   Kitty   |
+| wezterm               |   X11     |   yes         |   IIP     |
+| aminal                |   X11     |   yes         |   Sixel   |
+| Jexer                 |   X11     |   yes         |   Sixel   |
+| GNOME Terminal        |   X11     |   in-progress |   Sixel   |
+| alacritty             |   X11     |   [in-progress](https://github.com/alacritty/alacritty/issues/910) |  Sixel   |
+| DomTerm               |   Web     |   yes         |   Sixel   |
+| Yaft                  |   FB      |   yes         |   Sixel   |
+| iTerm2                |   Mac OS X|   yes         |   IIP     |
+| mintty                | Windows   |   yes         |   Sixel   |
+| Windows Terminal  |   Windows     |   [in-progress](https://github.com/microsoft/terminal/issues/448) |   Sixel   |
+| [RLogin](http://nanno.dip.jp/softlib/man/rlogin/) | Windows | yes         |   Sixel   |   |
+
 
 ## Different output formats
 
