@@ -310,6 +310,8 @@ The map view currently supports three formats:
 
 Terminal with inline images protocols support:
 
+⟶ *Detailed article: [Images in terminal](doc/terminal-images.md)*
+
 | Terminal              | Environment    | Images support | Protocol |
 | --------------------- | --------- | ------------- | --------- |
 | uxterm                |   X11     |   yes         |   Sixel   |
@@ -318,7 +320,7 @@ Terminal with inline images protocols support:
 | wezterm               |   X11     |   yes         |   IIP     |
 | aminal                |   X11     |   yes         |   Sixel   |
 | Jexer                 |   X11     |   yes         |   Sixel   |
-| GNOME Terminal        |   X11     |   in-progress |   Sixel   |
+| GNOME Terminal        |   X11     |   [in-progress](https://gitlab.gnome.org/GNOME/vte/-/issues/253) |   Sixel   |
 | alacritty             |   X11     |   [in-progress](https://github.com/alacritty/alacritty/issues/910) |  Sixel   |
 | DomTerm               |   Web     |   yes         |   Sixel   |
 | Yaft                  |   FB      |   yes         |   Sixel   |
