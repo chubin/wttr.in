@@ -3,7 +3,7 @@
 116: Parcialmente nublado: Partly cloudy
 119: Nublado: Cloudy
 122: Cubierto de nubes: Overcast
-143: Bruma: Mist
+143: Niebla: Mist
 176: Posible lluvia irregular: Patchy rain possible
 179: Posible aguanieve irregular: Patchy snow possible
 182: Posible aguanieve irregular: Patchy sleet possible
