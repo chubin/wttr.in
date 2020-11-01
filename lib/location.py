@@ -160,18 +160,12 @@ def ipinfo(ip_addr):
 
 
 def geoip(ip_addr):
-    location = ipcache(ip_addr)
-    if location:
-        return location
-
     try:
         response = GEOIP_READER.city(ip_addr)
-        location = response.city.name, response.subdivisions.name, response.country.name
+        city, region, country = response.city.name, response.subdivisions.name, response.country.name
     except geoip2.errors.AddressNotFoundError:
-        location = None, None, None
-    if location:
-        ipcachewrite(ip_addr, location)
-    return location
+        return None, None, None
+    return city, region, country
 
 def workaround(city, region, country):
     # workaround for the strange bug with the country name
