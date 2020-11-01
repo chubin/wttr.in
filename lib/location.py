@@ -185,7 +185,7 @@ def workaround(city, region, country):
 
 def get_location(ip_addr):
     """
-    Return location pair (CITY, COUNTRY) for `ip_addr`
+    Return location triple (CITY, REGION, COUNTRY) for `ip_addr`
     """
     for method in IPLOCATION_ORDER:
         if method == 'geoip':
