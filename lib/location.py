@@ -133,9 +133,10 @@ def ip2location(ip_addr):
 
     if location and ';' in location:
         ipcachewrite(ip_addr, location)
-        location = location.split(';')[3], location.split(';')[1]
+        _, country, region, city = location.split(';')
+        location = city, region, country
     else:
-        location = location, None
+        location = location, None, None
 
     return location
 
