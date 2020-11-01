@@ -187,6 +187,10 @@ def get_location(ip_addr):
     """
     Return location triple (CITY, REGION, COUNTRY) for `ip_addr`
     """
+    location = ipcache(ip_addr)
+    if location:
+        return location
+
     for method in IPLOCATION_ORDER:
         if method == 'geoip':
             city, region, country = geoip(ip_addr)
@@ -195,10 +199,13 @@ def get_location(ip_addr):
         elif method == 'ipinfo':
             city, region, country = ipinfo(ip_addr)
         else:
-            print("ERROR: invalid iplocation method speficied: %s" % method)
-        if city is not None:
-            city, region, country = workaround(city, region, country)
-            return city, region, country
+            print("ERROR: invalid iplocation method specified: %s" % method)
+
+    if all((city, region, country)):
+        ipcachewrite(ip_addr, (city, region, country))
+        # cache write used to happen before workaround, preserve that
+        city, region, country = workaround(city, region, country)
+        return city, region, country
     #
     # temporary disabled it because of geoip services capcacity
     #
