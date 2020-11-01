@@ -174,7 +174,7 @@ def geoip(ip_addr):
         city = None
     return city, region, country
 
-def workaround(city, country):
+def workaround(city, region, country):
     # workaround for the strange bug with the country name
     # maybe some other countries has this problem too
     #
@@ -182,7 +182,7 @@ def workaround(city, country):
     # be a problem
     if country == 'Russian Federation':
         country = 'Russia'
-    return city, country
+    return city, region, country
 
 def get_location(ip_addr):
     """
