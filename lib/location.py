@@ -293,8 +293,8 @@ def location_processing(location, ip_addr):
                 socket.gethostbyname(
                     location.lstrip('~ ')[1:]))
             location = '~' + location
-            if country:
-                location += ", %s" % country
+            if region and country:
+                location += ", %s, %s" % (region, country)
             hide_full_address = not force_show_full_address
         except:
             location, region, country = NOT_FOUND_LOCATION, None, None
@@ -318,7 +318,7 @@ def location_processing(location, ip_addr):
         # here too
         if location:
             location = '~' + location
-            if country:
+            if region and country:
                 location += ", %s, %s" % (region, country)
             hide_full_address = not force_show_full_address
 
