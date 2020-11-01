@@ -10,12 +10,12 @@ Tipos de ubicación soportados:
     /Москва                 # el nombre Unicode de cualquier sitio en cualquier idioma
     /muc                    # el código de un aeropuerto (3 letras)
     /@stackoverflow.com     # el nombre de un dominio web
-    /94107                  # un código de area
+    /94107                  # un código de área
     /-78.46,106.79          # coordenadas de GPS
 
 Sitios especiales:
 
-    /moon                   # la fase de la luna (añade ,+US o ,+France para estos paises)
+    /moon                   # la fase de la luna (añade ,+US o ,+France para estos países)
     /moon@2016-10-25        # la fase de la luna en una fecha específica (@2016-10-25)
 
 Unidades:
@@ -61,6 +61,6 @@ Idiomas soportados:
 
 URLs especiales:
 
-    /:help                  # muestra esta página
+    /:help                  # muestra la página de ayuda
     /:bash.function         # sugiere una función wttr() en bash
     /:translation           # muestra información acerca de los traductores
