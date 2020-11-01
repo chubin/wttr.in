@@ -155,6 +155,10 @@ def ipinfo(ip_addr):
 
 
 def geoip(ip_addr):
+    location = ipcache(ip_addr)
+    if location:
+        return location
+
     try:
         response = GEOIP_READER.city(ip_addr)
         country = response.country.name
