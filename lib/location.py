@@ -168,8 +168,8 @@ def geoip(ip_addr):
         location = response.city.name, response.subdivisions.name, response.country.name
     except geoip2.errors.AddressNotFoundError:
         location = None, None, None
-        region = None
-        city = None
+    if location:
+        ipcachewrite(ip_addr, location)
     return location
 
 def workaround(city, region, country):
