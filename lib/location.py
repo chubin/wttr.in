@@ -321,7 +321,7 @@ def location_processing(location, ip_addr):
         if location:
             location = '~' + location
             if country:
-                location += ", %s" % country
+                location += ", %s, %s" % (region, country)
             hide_full_address = not force_show_full_address
 
     if location and not location.startswith('~'):
