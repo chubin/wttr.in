@@ -94,7 +94,8 @@ def ipcachewrite(ip_addr, location):
     if not os.path.exists(IP2LCACHE):
         os.makedirs(IP2LCACHE)
     with open(cached, 'w') as file:
-        file.write(location[0] + ';' + location[1])
+        file.write(location[0] + ';' + location[1] + ';' + location[2])
+        # like ip2location format, but reversed
 
 def ipcache(ip_addr):
     cached = os.path.join(IP2LCACHE, ip_addr)
