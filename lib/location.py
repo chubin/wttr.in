@@ -90,10 +90,15 @@ def geolocator(location):
 
 
 def ipcachewrite(ip_addr, location):
-    cached = os.path.join(IP2LCACHE, ip_addr)
+    """ Write a retrieved ip+location into cache
+        Can stress some filesystems after long term use, see
+        https://stackoverflow.com/questions/466521/how-many-files-can-i-put-in-a-directory
+    """
+    cachefile = os.path.join(IP2LCACHE, ip_addr)
     if not os.path.exists(IP2LCACHE):
         os.makedirs(IP2LCACHE)
-    with open(cached, 'w') as file:
+
+    with open(cachefile, 'w') as file:
         file.write(location[0] + ';' + location[1] + ';' + location[2])
         # like ip2location format, but reversed
 
