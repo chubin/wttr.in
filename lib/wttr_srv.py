@@ -298,7 +298,7 @@ def parse_request(location, request, query, fast_mode=False):
         location, override_location_name, full_address, country, query_source_location, hemisphere = \
                 location_processing(parsed_query["location"], parsed_query["ip_addr"])
 
-        us_ip = query_source_location[1] == 'United States' \
+        us_ip = query_source_location[2] == 'United States' \
                 and 'slack' not in parsed_query['user_agent']
         query = parse_query.metric_or_imperial(query, lang, us_ip=us_ip)
 
