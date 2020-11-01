@@ -149,7 +149,10 @@ def ipinfo(ip_addr):
         r = requests.get('https://ipinfo.io/%s/json?token=%s' %
                          (ip_addr, IPINFO_TOKEN))
         if r.status_code == 200:
-            location = r.json()["city"], r.json()["country"]
+            r_json = r.json()
+            location = r_json["city"], r_json["region"], r_json["country"]
+        else:
+            location = None, None, None
     if location:
         ipcachewrite(ip_addr, location)
     return location
