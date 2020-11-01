@@ -158,11 +158,13 @@ def geoip(ip_addr):
     try:
         response = GEOIP_READER.city(ip_addr)
         country = response.country.name
+        region = response.subdivisions.name
         city = response.city.name
     except geoip2.errors.AddressNotFoundError:
         country = None
+        region = None
         city = None
-    return city, country
+    return city, region, country
 
 def workaround(city, country):
     # workaround for the strange bug with the country name
