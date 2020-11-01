@@ -291,7 +291,7 @@ def location_processing(location, ip_addr):
 
     if location and location.lstrip('~ ').startswith('@'):
         try:
-            location, country = get_location(
+            location, region, country = get_location(
                 socket.gethostbyname(
                     location.lstrip('~ ')[1:]))
             location = '~' + location
@@ -299,7 +299,7 @@ def location_processing(location, ip_addr):
                 location += ", %s" % country
             hide_full_address = not force_show_full_address
         except:
-            location, country = NOT_FOUND_LOCATION, None
+            location, region, country = NOT_FOUND_LOCATION, None, None
 
     query_source_location = get_location(ip_addr)
 
@@ -314,7 +314,8 @@ def location_processing(location, ip_addr):
         location = ip_addr
 
     if is_ip(location):
-        location, country = get_location(location)
+        location, region, country = get_location(location)
+        # location is just city here
 
         # here too
         if location:
