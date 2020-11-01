@@ -116,30 +116,23 @@ def ipcache(ip_addr):
     return None, None
 
 def ip2location(ip_addr):
-    "Convert IP address `ip_addr` to a location name"
-
-    location = ipcache(ip_addr)
-    if location:
-        return location
-
-    # if IP2LOCATION_KEY is not set, do not the query,
+    """Convert IP address `ip_addr` to a location name"""
+    # if IP2LOCATION_KEY is not set, do not query,
     # because the query wont be processed anyway
-    if IP2LOCATION_KEY:
-        try:
-            location = requests\
-                    .get('http://api.ip2location.com/?ip=%s&key=%s&package=WS3' \
-                         % (ip_addr, IP2LOCATION_KEY)).text
-        except requests.exceptions.ConnectionError:
-            pass
-
-    if location and ';' in location:
-        ipcachewrite(ip_addr, location)
-        _, country, region, city = location.split(';')
-        location = city, region, country
-    else:
-        location = location, None, None
-
-    return location
+    if not IP2LOCATION_KEY:
+        return None, None, None
+    try:
+        r = requests.get(
+            'http://api.ip2location.com/?ip=%s&key=%s&package=WS3'
+            % (ip_addr, IP2LOCATION_KEY))
+        r.raise_for_status()
+        location = r.text
+        if location and ';' in location:
+            _, country, region, city = location.split(';')
+            location = city, region, country
+    except requests.exceptions.RequestException:
+        return None, None, None
+    return city, region, country
 
 
 def ipinfo(ip_addr):
