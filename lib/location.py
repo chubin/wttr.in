@@ -188,16 +188,16 @@ def get_location(ip_addr):
     """
     for method in IPLOCATION_ORDER:
         if method == 'geoip':
-            city, country = geoip(ip_addr)
+            city, region, country = geoip(ip_addr)
         elif method == 'ip2location':
-            city, country = ip2location(ip_addr)
+            city, region, country = ip2location(ip_addr)
         elif method == 'ipinfo':
-            city, country = ipinfo(ip_addr)
+            city, region, country = ipinfo(ip_addr)
         else:
             print("ERROR: invalid iplocation method speficied: %s" % method)
         if city is not None:
-            city, country = workaround(city, country)
-            return city, country
+            city, region, country = workaround(city, region, country)
+            return city, region, country
     #
     # temporary disabled it because of geoip services capcacity
     #
@@ -210,7 +210,7 @@ def get_location(ip_addr):
     #        pass
 
     # No methods resulted in a location - return default
-    return NOT_FOUND_LOCATION, None
+    return NOT_FOUND_LOCATION, None, None
 
 
 def location_canonical_name(location):
