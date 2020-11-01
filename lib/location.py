@@ -103,22 +103,22 @@ def ipcachewrite(ip_addr, location):
         # like ip2location format, but reversed
 
 def ipcache(ip_addr):
-    cached = os.path.join(IP2LCACHE, ip_addr)
+    """ Retrieve a location from cache by ip addr
+        Returns a triple of (CITY, REGION, COUNTRY) or None
+    """
+    cachefile = os.path.join(IP2LCACHE, ip_addr)
     if not os.path.exists(IP2LCACHE):
         os.makedirs(IP2LCACHE)
 
-    location = None
+    if os.path.exists(cachefile):
+        try:
+            city, region, country = open(cachefile, 'r').read().split(';')
+            return city, region, country
+        except ValueError:
+            # cache entry is malformed: should be city;region;country
+            return None
+    return None
 
-    if os.path.exists(cached):
-        location = open(cached, 'r').read().split(';')
-        if len(location) > 3:
-            return location[3], location[1]
-        elif len(location) > 1:
-            return location[0], location[1]
-        else:
-            return location[0], None
-
-    return None, None
 
 def ip2location(ip_addr):
     """Convert IP address `ip_addr` to a location name"""
