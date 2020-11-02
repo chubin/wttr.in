@@ -67,7 +67,7 @@ def location_normalize(location):
 def geolocator(location):
     """
     Return a GPS pair for specified `location` or None
-    if nothing can't be found
+    if nothing can be found
     """
 
     try:
@@ -262,9 +262,9 @@ def get_hemisphere(location):
     Return hemisphere of the location (True = North, False = South).
     Assume North and return True if location can't be found.
     """
-    location_string = location[0]
-    if location[1] is not None:
-        location_string += ",%s" % location[1]
+    if all(location):
+        location_string = ", ".join(location)
+
     geolocation = geolocator(location_string)
     if geolocation is None:
         return True
