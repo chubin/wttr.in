@@ -42,6 +42,8 @@ The map view currently supports three formats:
 | Windows Terminal  |   Windows     |   [in-progress](https://github.com/microsoft/terminal/issues/448) |   Sixel   |
 | [RLogin](http://nanno.dip.jp/softlib/man/rlogin/) | Windows | yes         |   Sixel   |   |
 
+Support in all VTE-based terminals: termite, terminator, etc is more or less the same as in the GNOME Terminal
+
 ## Notes
 
 ### xterm/uxterm
