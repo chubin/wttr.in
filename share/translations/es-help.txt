@@ -29,9 +29,11 @@ Opciones de visualización:
     ?0                      # solamente el clima actual
     ?1                      # el clima actual + la previsión de 1 día
     ?2                      # el clima actual + la previsión de 2 días
+    ?A                      # ignora al agente del usuario y fuerza el formato de salida ANSI (terminal)
+    ?F                      # no muestra la linea de "Seguir"
     ?n                      # versión corta (solo el día y la noche)
     ?q                      # versión silenciosa (sin el texto de "El tiempo en")
-    ?Q                      # versión supersilenciosa (ni "El tiempo en" ni el nombre de la ciudad)
+    ?Q                      # versión super silenciosa (sin "El tiempo en" ni el nombre de la ciudad)
     ?T                      # desactiva las secuencias de terminal (sin colores)
 
 Opciones de PNG:
