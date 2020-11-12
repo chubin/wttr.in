@@ -322,6 +322,7 @@ Terminal with inline images protocols support:
 | Jexer                 |   X11     |   yes         |   Sixel   |
 | GNOME Terminal        |   X11     |   [in-progress](https://gitlab.gnome.org/GNOME/vte/-/issues/253) |   Sixel   |
 | alacritty             |   X11     |   [in-progress](https://github.com/alacritty/alacritty/issues/910) |  Sixel   |
+| foot                  |  Wayland  |   yes         |   Sixel   |
 | DomTerm               |   Web     |   yes         |   Sixel   |
 | Yaft                  |   FB      |   yes         |   Sixel   |
 | iTerm2                |   Mac OS X|   yes         |   IIP     |
