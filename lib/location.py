@@ -196,6 +196,8 @@ def get_location(ip_addr):
             location = ipinfo(ip_addr)
         else:
             print("ERROR: invalid iplocation method specified: %s" % method)
+        if location is not None:
+            break
 
     if location is not None and all(location):
         ipcachewrite(ip_addr, location)
