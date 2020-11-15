@@ -185,22 +185,25 @@ def get_location(ip_addr):
     if location:
         return location
 
+    # location from iplocators have the following order:
+    # (CITY, REGION, COUNTRY, CCODE, LAT, LONG)
     for method in IPLOCATION_ORDER:
         if method == 'geoip':
-            city, region, country = geoip(ip_addr)
+            location = geoip(ip_addr)
         elif method == 'ip2location':
-            city, region, country = ip2location(ip_addr)
+            location = ip2location(ip_addr)
         elif method == 'ipinfo':
-            city, region, country = ipinfo(ip_addr)
+            location = ipinfo(ip_addr)
         else:
             print("ERROR: invalid iplocation method specified: %s" % method)
 
-    if all((city, region, country)):
-        ipcachewrite(ip_addr, (city, region, country))
+    if location is not None and all(location):
+        ipcachewrite(ip_addr, location)
         # cache write used to happen before workaround, preserve that
-        city, region, country = workaround(city, region, country)
-        return city, region, country
-    #
+        location[2] = workaround(location[2])
+        return location[:3]  # city, region, country
+        # ccode is cached but not needed for location
+
     # temporary disabled it because of geoip services capcacity
     #
     #if city is None and response.location:
