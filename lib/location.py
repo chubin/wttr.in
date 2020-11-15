@@ -128,19 +128,18 @@ def ip2location(ip_addr):
     # if IP2LOCATION_KEY is not set, do not query,
     # because the query wont be processed anyway
     if not IP2LOCATION_KEY:
-        return None, None, None
+        return None
     try:
         r = requests.get(
-            'http://api.ip2location.com/?ip=%s&key=%s&package=WS3'
+            'http://api.ip2location.com/?ip=%s&key=%s&package=WS5'
             % (ip_addr, IP2LOCATION_KEY))
         r.raise_for_status()
         location = r.text
         if location and ';' in location:
-            _, country, region, city = location.split(';')
-            location = city, region, country
+            ccode, country, region, city, lat, long, *_ = location.split(';')
     except requests.exceptions.RequestException:
-        return None, None, None
-    return city, region, country
+        return None
+    return city, region, country, ccode, lat, long
 
 
 def ipinfo(ip_addr):
