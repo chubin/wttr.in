@@ -102,12 +102,13 @@ def ipcachewrite(ip_addr, location):
         os.makedirs(IP2LCACHE)
 
     with open(cachefile, 'w') as file:
-        file.write(location[0] + ';' + location[1] + ';' + location[2])
-        # like ip2location format, but reversed
+        file.write(location[3] + ';' + location[2] + ';' + location[1] + ';' + location[0] + ';' + location[4] + ';' + location[5])
+        # like ip2location format
 
 def ipcache(ip_addr):
     """ Retrieve a location from cache by ip addr
         Returns a triple of (CITY, REGION, COUNTRY) or None
+        TODO: When cache becomes more robust, transition to using latlong
     """
     cachefile = os.path.join(IP2LCACHE, ip_addr)
     if not os.path.exists(IP2LCACHE):
@@ -115,10 +116,11 @@ def ipcache(ip_addr):
 
     if os.path.exists(cachefile):
         try:
-            city, region, country = open(cachefile, 'r').read().split(';')
+            _, country, region, city, *_ = open(cachefile, 'r').read().split(';')
             return city, region, country
         except ValueError:
-            # cache entry is malformed: should be city;region;country
+            # cache entry is malformed: should be
+            # [ccode];country;region;city;[lat];[long];...
             return None
     return None
 
