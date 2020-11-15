@@ -22,6 +22,8 @@ from globals import GEOLITE, GEOLOCATOR_SERVICE, IP2LCACHE, IP2LOCATION_KEY, NOT
 
 GEOIP_READER = geoip2.database.Reader(GEOLITE)
 
+COUNTRY_MAP = {"Russian Federation": "Russia"}
+
 def ascii_only(string):
     "Check if `string` contains only ASCII symbols"
 
@@ -165,15 +167,11 @@ def geoip(ip_addr):
         return None, None, None
     return city, region, country
 
-def workaround(city, region, country):
-    # workaround for the strange bug with the country name
+def workaround(country):
+    # workaround for strange bug with the country name
     # maybe some other countries has this problem too
-    #
-    # Having these in a separate function will help if this gets to
-    # be a problem
-    if country == 'Russian Federation':
-        country = 'Russia'
-    return city, region, country
+    country = COUNTRY_MAP.get(country) or country
+    return country
 
 def get_location(ip_addr):
     """
