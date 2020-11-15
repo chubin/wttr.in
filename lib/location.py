@@ -144,18 +144,22 @@ def ip2location(ip_addr):
 
 def ipinfo(ip_addr):
     if not IPINFO_TOKEN:
-        return None, None, None
+        return None
     try:
         r = requests.get(
             'https://ipinfo.io/%s/json?token=%s'
             % (ip_addr, IPINFO_TOKEN))
         r.raise_for_status()
         r_json = r.json()
-        city, region, country = r_json["city"], r_json["region"], r_json["country"]
+        # can't do two unpackings on one line
+        city, region, country, ccode  = r_json["city"], r_json["region"], '', r_json["country"],
+        lat, long = r_json["loc"].split(',')
+        # NOTE: ipinfo only provides ISO codes for countries
+        country = pycountry.countries.get(alpha_2=ccode).name
     except (requests.exceptions.RequestException, ValueError):
         # latter is thrown by failure to parse json in reponse
-        return None, None, None
-    return city, region, country
+        return None
+    return city, region, country, ccode, lat, long
 
 
 def geoip(ip_addr):
