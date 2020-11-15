@@ -28,6 +28,7 @@ import pytz
 from constants import WWO_CODE, WEATHER_SYMBOL, WIND_DIRECTION, WEATHER_SYMBOL_WIDTH_VTE
 from weather_data import get_weather_data
 from . import v2
+from . import v3
 from . import prometheus
 
 PRECONFIGURED_FORMAT = {
@@ -341,11 +342,14 @@ def format_weather_data(query, parsed_query, data):
         return prometheus.render_prometheus(data['data'])
     if format_line[:2] == "v2":
         return v2.main(query, parsed_query, data)
+    if format_line[:2] == "v3":
+        return v3.main(query, parsed_query, data)
 
     current_condition = data['data']['current_condition'][0]
     current_condition['location'] = parsed_query["location"]
     current_condition['override_location'] = parsed_query["override_location_name"]
     output = render_line(format_line, current_condition, query)
+    output = output.rstrip("\n").replace(r"\n", "\n")
     return output
 
 def wttr_line(query, parsed_query):
@@ -358,7 +362,7 @@ def wttr_line(query, parsed_query):
 
     data = get_weather_data(location, lang)
     output = format_weather_data(query, parsed_query, data)
-    return output.rstrip("\n").replace(r"\n", "\n")
+    return output
 
 def main():
     """

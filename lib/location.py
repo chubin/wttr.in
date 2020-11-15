@@ -24,6 +24,10 @@ GEOIP_READER = geoip2.database.Reader(GEOLITE)
 
 COUNTRY_MAP = {"Russian Federation": "Russia"}
 
+def _debug_log(s):
+    with open("/tmp/debug.log", "a") as f:
+        f.write(s+"\n")
+
 def ascii_only(string):
     "Check if `string` contains only ASCII symbols"
 
@@ -100,7 +104,6 @@ def ipcachewrite(ip_addr, location):
     cachefile = os.path.join(IP2LCACHE, ip_addr)
     if not os.path.exists(IP2LCACHE):
         os.makedirs(IP2LCACHE)
-
     with open(cachefile, 'w') as file:
         file.write(location[3] + ';' + location[2] + ';' + location[1] + ';' + location[0] + ';' + location[4] + ';' + location[5])
         # like ip2location format

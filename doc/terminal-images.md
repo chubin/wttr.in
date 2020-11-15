@@ -33,12 +33,16 @@ The map view currently supports three formats:
 | Jexer                 |   X11     |   yes         |   Sixel   |
 | GNOME Terminal        |   X11     |   [in-progress](https://gitlab.gnome.org/GNOME/vte/-/issues/253) |   Sixel   |
 | alacritty             |   X11     |   [in-progress](https://github.com/alacritty/alacritty/issues/910) |  Sixel   |
+| st                    |   X11     | [stixel](https://github.com/vizs/stixel) or [st-sixel](https://github.com/galatolofederico/st-sixel)     |   Sixel   |
+| Konsole               |   X11     |   [requested](https://bugs.kde.org/show_bug.cgi?id=391781) | Sixel   |
 | DomTerm               |   Web     |   yes         |   Sixel   |
 | Yaft                  |   FB      |   yes         |   Sixel   |
 | iTerm2                |   Mac OS X|   yes         |   IIP     |
 | mintty                | Windows   |   yes         |   Sixel   |
 | Windows Terminal  |   Windows     |   [in-progress](https://github.com/microsoft/terminal/issues/448) |   Sixel   |
 | [RLogin](http://nanno.dip.jp/softlib/man/rlogin/) | Windows | yes         |   Sixel   |   |
+
+Support in all VTE-based terminals: termite, terminator, etc is more or less the same as in the GNOME Terminal
 
 ## Notes
 
