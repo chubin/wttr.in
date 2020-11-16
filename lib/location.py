@@ -1,11 +1,35 @@
 """
 All location related functions and converters.
 
-The main entry point is `location_processing`
-which gets `location` and `source_ip_address`
-and basing on this information generates
-precise location description.
+The main entry point is `location_processing` which gets `location` and
+`source_ip_address` and basing on this information generates precise location
+description.
 
+     [query]      -->   [location]      -->  [(lat,long)] -->
+                            ^
+                            |
+     [ip-address] --> _get_location()
+
+To resolve IP address into location, the module uses function `_get_location()`,
+which subsequenlty utilizes one of the three methods:
+
+* `_geoip2()` (local sqlite database);
+* `_ip2location()` (an external paid service);
+* `_ipinfo()` (an external free service).
+
+IP-address resolution data is saved in cache (_ipcachewrite, _ipcache).
+Cache entry format:
+
+    COUNTRY_CODE;COUNTRY;REGION;CITY[;REST]
+
+To resolve location name into a (lat,long) pair,
+an external service is used, which is wrapped
+with a function `_geolocator()`.
+
+Exports:
+
+    location_processing
+    is_location_blocked
 """
 from __future__ import print_function
 
