@@ -116,12 +116,21 @@ def _ipcachewrite(ip_addr, location):
     """ Write a retrieved ip+location into cache
         Can stress some filesystems after long term use, see
         https://stackoverflow.com/questions/466521/how-many-files-can-i-put-in-a-directory
+
+        Expects a location of the form:
+            `(city, region, country, country_code, <lat>, <long>)`
+        Writes a cache entry of the form:
+            `country_code;country;region;city;<lat>;<long>`
+
+        The latitude and longitude are optional elements.
     """
     cachefile = os.path.join(IP2LCACHE, ip_addr)
     if not os.path.exists(IP2LCACHE):
         os.makedirs(IP2LCACHE)
     with open(cachefile, 'w') as file:
-        file.write(location[3] + ';' + location[2] + ';' + location[1] + ';' + location[0] + ';' + location[4] + ';' + location[5])
+        file.write(location[3] + ';' + location[2] + ';' + location[1] + ';' + location[0])
+        if len(location) > 4:
+            file.write(';' + location[4] + ';' + location[5])
         # like ip2location format
 
 
