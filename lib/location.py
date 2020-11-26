@@ -153,15 +153,16 @@ def _ip2location(ip_addr):
         return None
     try:
         r = requests.get(
-            'http://api.ip2location.com/?ip=%s&key=%s&package=WS5'
+            'http://api.ip2location.com/?ip=%s&key=%s&package=WS3'  # WS5 provides latlong
             % (ip_addr, IP2LOCATION_KEY))
         r.raise_for_status()
         location = r.text
         if location and ';' in location:
-            ccode, country, region, city, lat, long, *_ = location.split(';')
+            # ccode, country, region, city, lat, long, *_ = location.split(';')
+            ccode, country, region, city, *_ = location.split(';')
     except requests.exceptions.RequestException:
         return None
-    return city, region, country, ccode, lat, long
+    return city, region, country, ccode  # , lat, long
 
 
 def _ipinfo(ip_addr):
