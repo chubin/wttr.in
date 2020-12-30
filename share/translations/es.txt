@@ -16,7 +16,7 @@
 263: Llovizna ligera irregular: Patchy light drizzle
 266: Llovizna ligera: Light drizzle
 281: Llovizna helada: Freezing drizzle
-284: Llovizna fuertemente helada: Heavy freezing drizzle
+284: Llovizna muy helada: Heavy freezing drizzle
 293: Lluvia ligera irregular: Patchy light rain
 296: Lluvia ligera: Light rain
 299: Lluvia moderada ocasional: Moderate rain at times
@@ -33,9 +33,9 @@
 332: Nieve moderada: Moderate snow
 335: Nieve pesada irregular: Patchy heavy snow
 338: Nieve pesada: Heavy snow
-350: Gránulos de hielo: Ice pellets
+350: Perdigones de hielo: Ice pellets
 353: Aguacero ligero: Light rain shower
-356: Aguacero moderada o fuerte: Moderate or heavy rain shower
+356: Aguacero moderado o fuerte: Moderate or heavy rain shower
 359: Aguacero torrencial: Torrential rain shower
 362: Aguacero ligero con aguanieve: Light sleet showers
 365: Aguacero con aguanieve moderado o fuerte: Moderate or heavy sleet showers

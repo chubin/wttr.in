@@ -1,52 +1,52 @@
 Instrucciones:
 
-    $ curl wttr.in          # el clima en su ubicación actual
-    $ curl wttr.in/muc      # el clima en el aeropuerto de Múnich
+    $ curl wttr.in          # El clima en su ubicación actual
+    $ curl wttr.in/muc      # El clima en el aeropuerto de Múnich
 
 Tipos de ubicación soportados:
 
-    /paris                  # el nombre de una ciudad
-    /~Eiffel+tower          # el nombre de cualquier sitio famoso
-    /Москва                 # el nombre Unicode de cualquier sitio en cualquier idioma
-    /muc                    # el código de un aeropuerto (3 letras)
-    /@stackoverflow.com     # el nombre de un dominio web
-    /94107                  # un código de area
-    /-78.46,106.79          # coordenadas de GPS
+    /paris                  # El nombre de una ciudad
+    /~Eiffel+tower          # El nombre de cualquier sitio famoso
+    /Москва                 # El nombre en Unicode de cualquier sitio en cualquier idioma
+    /muc                    # El código de un aeropuerto (3 letras)
+    /@stackoverflow.com     # El nombre de un dominio web
+    /94107                  # Un código de area
+    /-78.46,106.79          # Coordenadas de GPS
 
 Sitios especiales:
 
-    /moon                   # la fase de la luna (añade ,+US o ,+France para estos paises)
-    /moon@2016-10-25        # la fase de la luna en una fecha específica (@2016-10-25)
+    /moon                   # La fase de la luna (añade ,+US o ,+France para estos paises)
+    /moon@2016-10-25        # La fase de la luna en una fecha específica (@2016-10-25)
 
 Unidades:
 
-    ?m                      # métricas (SI) (el estándar en todos los sitios excepto en EEUU)
+    ?m                      # Métricas (SI) (el estándar en todos los sitios excepto en EEUU)
     ?u                      # Sistema Unificado de Clasificación del Suelo o USCS (el estándar en EEUU)
-    ?M                      # mostrar la velocidad del viento en m/s
+    ?M                      # Mostrar la velocidad del viento en m/s
 
 Opciones de visualización:
 
-    ?0                      # solamente el clima actual
-    ?1                      # el clima actual + la previsión de 1 día
-    ?2                      # el clima actual + la previsión de 2 días
-    ?n                      # versión corta (solo el día y la noche)
-    ?q                      # versión silenciosa (sin el texto de "El tiempo en")
-    ?Q                      # versión supersilenciosa (ni "El tiempo en" ni el nombre de la ciudad)
-    ?T                      # desactiva las secuencias de terminal (sin colores)
+    ?0                      # Solamente el clima actual
+    ?1                      # El clima actual + la previsión del día siguiente
+    ?2                      # El clima actual + la previsión de los dos días siguientes
+    ?n                      # Versión corta (solo día y noche)
+    ?q                      # Versión silenciosa (sin el texto de "El tiempo en")
+    ?Q                      # Versión supersilenciosa (ni "El tiempo en" ni el nombre de la ciudad)
+    ?T                      # Desactiva las secuencias de terminal (sin colores)
 
 Opciones de PNG:
 
-    /paris.png              # genera una imagen PNG
-    ?p                      # añade un borde alrededor de la imagen
-    ?t                      # transparencia 150
-    transparency=...        # transparencia de 0 a 255 (255 = sin transparencia)
+    /paris.png              # Genera una imagen PNG
+    ?p                      # Añade un borde alrededor de la imagen
+    ?t                      # Transparencia = 150
+    transparency=...        # Transparencia de 0 a 255 (255 = sin transparencia)
 
 Las opciones se pueden utilizar conjuntamente:
 
     /Paris?0pq
     /Paris?0pq&lang=fr
-    /Paris_0pq.png          # en PNG las opciones se especifican después del carácter _
-    /Rome_0pq_lang=it.png   # una larga secuencia de opciones se puede separar por el carácter _
+    /Paris_0pq.png          # En modo PNG las opciones se especifican después del carácter _ (guión bajo)
+    /Rome_0pq_lang=it.png   # Una larga secuencia de opciones se puede separar por el carácter _ (guión bajo)
 
 Ubicación:
 
@@ -61,6 +61,6 @@ Idiomas soportados:
 
 URLs especiales:
 
-    /:help                  # muestra esta página
-    /:bash.function         # sugiere una función wttr() en bash
-    /:translation           # muestra información acerca de los traductores
+    /:help                  # Muestra esta página
+    /:bash.function         # Muestra una función wttr() sugerida en bash
+    /:translation           # Muestra información acerca de los traductores
