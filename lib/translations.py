@@ -98,7 +98,7 @@ Wir hoffen, dass Sie besseres Wetter haben!
 """,
         'es': u"""
 No hemos logrado encontrar tu ubicación,
-asi que hemos decidido enseñarte el tiempo en Oymyakon,
+así que hemos decidido enseñarte el tiempo en Oimiakón,
 uno de los sitios más fríos y permanentemente deshabitados del planeta.
 """,
         'eu': u"""
@@ -693,7 +693,7 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
         'bg': u'Нова функционалност: многоезични имена на места\033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и в търсенето \033[92mwttr.in/~Kilimanjaro\033[0m (добавете ~ преди)',
         'bs': u'XXXXXXXXXXXXXXXXXXXX: XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\033[92mwttr.in/станция+Восток\033[0m (XX UTF-8) XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
         'ca': u'Noves funcionalitats: noms d\'ubicació multilingües \033[92mwttr.in/станция+Восток\033[0m (en UTF-8) i la ubicació de recerca \033[92mwttr.in/~Kilimanjaro\033[0m (només cal afegir ~ abans)',
-        'es': u'Nuevas funcionalidades: los nombres de las ubicaciones en varios idiomas \033[92mwttr.in/станция+Восток\033[0m (em UTF-8) y la búsqueda por ubicaciones \033[92mwttr.in/~Kilimanjaro\033[0m (tan solo inserte ~ en frente)',
+        'es': u'Nuevas funcionalidades: los nombres de las ubicaciones en varios idiomas \033[92mwttr.in/станция+Восток\033[0m (em UTF-8) y la búsqueda por ubicaciones \033[92mwttr.in/~Kilimanjaro\033[0m (tan solo inserte ~ al principio)',
         'fa': u'قابلیت جدید: پشتیبانی از نام چند زبانه مکانها \033[92mwttr.in/станция+Восток\033[0m (در فرمت UTF-8) و جسجتوی مکان ها \033[92mwttr.in/~Kilimanjaro\033[0m (فقط قبل از اون ~ اضافه کنید)',
         'fr': u'Nouvelles fonctionnalités: noms d\'emplacements multilingues \033[92mwttr.in/станция+Восток\033[0m (en UTF-8) et recherche d\'emplacement \033[92mwttr.in/~Kilimanjaro\033[0m (ajouter ~ devant)',
         'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
@@ -737,7 +737,7 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
         'bg': u'Последвай \033[46m\033[30m@igor_chubin\033[0m за обновления свързани с wttr.in',
         'bs': u'XXXXXX \033[46m\033[30m@igor_chubin\033[0m XXXXXXXXXXXXXXXXXXX',
         'ca': u'Segueix \033[46m\033[30m@igor_chubin\033[0m per actualitzacions de wttr.in',
-        'es': u'Seguir \033[46m\033[30m@igor_chubin\033[0m para recibir las novedades de wttr.in',
+        'es': u'Sigue a \033[46m\033[30m@igor_chubin\033[0m para enterarte de las novedades de wttr.in',
         'eu': u'\033[46m\033[30m@igor_chubin\033[0m jarraitu wttr.in berriak jasotzeko',
         'cy': u'Dilyner \033[46m\033[30m@igor_Chubin\033[0m am diweddariadau wttr.in',
         'fa': u'برای دنبال کردن خبرهای wttr.in شناسه \033[46m\033[30m@igor_chubin\033[0m رو فالو کنید.',
@@ -787,9 +787,9 @@ CAPTION = {
     "da": u"Vejret i:",
     "de": u"Wetterbericht für:",
     "el": u"Πρόγνωση καιρού για:",
-    "en": u"weather report for:",
+    "en": u"Weather report for:",
     "eo": u"Veterprognozo por:",
-    "es": u"El pronóstico del tiempo en:",
+    "es": u"Pronóstico del tiempo en:",
     "et": u"Ilmaprognoos:",
     "eu": u"Eguraldiaren iragarpena:",
     "fa": u"گزارش آب و هئا برای شما:",

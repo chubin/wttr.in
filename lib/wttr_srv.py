@@ -133,7 +133,7 @@ def get_answer_language_and_view(request):
     hostname = request.headers['Host']
     if hostname != 'wttr.in' and hostname.endswith('.wttr.in'):
         lang = hostname[:-8]
-        if lang.startswith("v2"):
+        if lang.startswith("v2") or lang.startswith("v3"):
             view_name = lang
             lang = None
 
@@ -155,7 +155,9 @@ def get_output_format(query, parsed_query):
     Return new location (can be rewritten)
     """
 
-    if ('view' in query and not query["view"].startswith("v2")) \
+    if ('view' in query
+            and not query["view"].startswith("v2")
+            and not query["view"].startswith("v3")) \
         or parsed_query.get("png_filename") \
         or query.get('force-ansi'):
         return False
@@ -215,18 +217,19 @@ def _response(parsed_query, query, fast_mode=False):
         output = get_wetter(parsed_query)
 
     if parsed_query.get('png_filename'):
-        # originally it was just a usual function call,
-        # but it was a blocking call, so it was moved
-        # to separate threads:
-        #
-        #    output = fmt.png.render_ansi(
-        #        output, options=parsed_query)
-        result = TASKS.spawn(fmt.png.render_ansi, cache._update_answer(output), options=parsed_query)
-        output = result.get()
+        if parsed_query.get("view") != "v3":
+            # originally it was just a usual function call,
+            # but it was a blocking call, so it was moved
+            # to separate threads:
+            #
+            #    output = fmt.png.render_ansi(
+            #        output, options=parsed_query)
+            result = TASKS.spawn(fmt.png.render_ansi, cache._update_answer(output), options=parsed_query)
+            output = result.get()
     else:
         if query.get('days', '3') != '0' \
             and not query.get('no-follow-line') \
-            and ((parsed_query.get("view") or "v2")[:2] in ["v2"]):
+            and ((parsed_query.get("view") or "v2")[:2] in ["v2", "v3"]):
             if parsed_query['html_output']:
                 output = add_buttons(output)
             else:
