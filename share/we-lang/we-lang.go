@@ -548,7 +548,7 @@ func pad(s string, mustLen int) (ret string) {
 }
 
 func formatTemp(c cond) string {
-	color := func(temp int, explicit_plus bool) string {
+	color := func(temp int, explicitPlus bool) string {
 		var col = 0
 		if !config.Inverse {
 			col = 21
@@ -646,11 +646,10 @@ func formatTemp(c cond) string {
 		if config.Imperial {
 			temp = (temp*18 + 320) / 10
 		}
-		if explicit_plus {
+		if explicitPlus {
 			return fmt.Sprintf("\033[38;5;%03dm+%d\033[0m", col, temp)
-		} else {
-			return fmt.Sprintf("\033[38;5;%03dm%d\033[0m", col, temp)
 		}
+		return fmt.Sprintf("\033[38;5;%03dm%d\033[0m", col, temp)
 	}
 	t := c.TempC
 	if t == 0 {
@@ -663,17 +662,17 @@ func formatTemp(c cond) string {
 	// }
 	hyphen = ".."
 
-	explicit_plus := false
+	explicitPlus := false
 	if c.FeelsLikeC < t {
 		if c.FeelsLikeC < 0 && t > 0 {
-			explicit_plus = true
+			explicitPlus = true
 		}
-		return pad(fmt.Sprintf("%s%s%s °%s", color(c.FeelsLikeC, false), hyphen, color(t, explicit_plus), unitTemp[config.Imperial]), 15)
+		return pad(fmt.Sprintf("%s%s%s °%s", color(c.FeelsLikeC, false), hyphen, color(t, explicitPlus), unitTemp[config.Imperial]), 15)
 	} else if c.FeelsLikeC > t {
 		if t < 0 && c.FeelsLikeC > 0 {
-			explicit_plus = true
+			explicitPlus = true
 		}
-		return pad(fmt.Sprintf("%s%s%s °%s", color(t, false), hyphen, color(c.FeelsLikeC, explicit_plus), unitTemp[config.Imperial]), 15)
+		return pad(fmt.Sprintf("%s%s%s °%s", color(t, false), hyphen, color(c.FeelsLikeC, explicitPlus), unitTemp[config.Imperial]), 15)
 	}
 	return pad(fmt.Sprintf("%s °%s", color(c.FeelsLikeC, false), unitTemp[config.Imperial]), 15)
 }
@@ -735,8 +734,8 @@ func formatWind(c cond) string {
 	// }
 	hyphen = "-"
 
-	cWindGustKmph := fmt.Sprintf("%s", color(c.WindGustKmph))
-	cWindspeedKmph := fmt.Sprintf("%s", color(c.WindspeedKmph))
+	cWindGustKmph := color(c.WindGustKmph)
+	cWindspeedKmph := color(c.WindspeedKmph)
 	if windInRightUnits(c.WindGustKmph) > windInRightUnits(c.WindspeedKmph) {
 		return pad(fmt.Sprintf("%s %s%s%s %s", windDir[c.Winddir16Point], cWindspeedKmph, hyphen, cWindGustKmph, unitWindString), 15)
 	}
@@ -770,7 +769,7 @@ func formatCond(cur []string, c cond, current bool) (ret []string) {
 	}
 	if config.Inverse {
 		// inverting colors
-		for i, _ := range icon {
+		for i := range icon {
 			icon[i] = strings.Replace(icon[i], "38;5;226", "38;5;94", -1)
 			icon[i] = strings.Replace(icon[i], "38;5;250", "38;5;243", -1)
 			icon[i] = strings.Replace(icon[i], "38;5;21", "38;5;18", -1)
@@ -787,7 +786,7 @@ func formatCond(cur []string, c cond, current bool) (ret []string) {
 		}
 		for runewidth.StringWidth(desc) > 15 {
 			_, size := utf8.DecodeLastRuneInString(desc)
-			desc = desc[size:len(desc)]
+			desc = desc[size:]
 		}
 	} else {
 		for runewidth.StringWidth(desc) < 15 {
@@ -810,7 +809,7 @@ func formatCond(cur []string, c cond, current bool) (ret []string) {
 	} else {
 		if config.RightToLeft {
 			if frstRune, size := utf8.DecodeRuneInString(desc); frstRune != ' ' {
-				desc = "…" + desc[size:len(desc)]
+				desc = "…" + desc[size:]
 				for runewidth.StringWidth(desc) < 15 {
 					desc = " " + desc
 				}
@@ -955,28 +954,26 @@ func printDay(w weather) (ret []string) {
 		return append(ret,
 			"└──────────────────────────────┴──────────────────────────────┘")
 
-	} else {
-
-		names := ""
-		if config.RightToLeft {
-			names = "│" + justifyCenter(trans[3], 29) + "│      " + justifyCenter(trans[2], 16) +
-				"└──────┬──────┘" + justifyCenter(trans[1], 16) + "      │" + justifyCenter(trans[0], 29) + "│"
-		} else {
-			names = "│" + justifyCenter(trans[0], 29) + "│      " + justifyCenter(trans[1], 16) +
-				"└──────┬──────┘" + justifyCenter(trans[2], 16) + "      │" + justifyCenter(trans[3], 29) + "│"
-		}
-
-		ret = append([]string{
-			"                                                       ┌─────────────┐                                                       ",
-			"┌──────────────────────────────┬───────────────────────" + dateFmt + "───────────────────────┬──────────────────────────────┐",
-			names,
-			"├──────────────────────────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────┤"},
-			ret...)
-
-		return append(ret,
-			"└──────────────────────────────┴──────────────────────────────┴──────────────────────────────┴──────────────────────────────┘")
 	}
-	return
+
+	names := ""
+	if config.RightToLeft {
+		names = "│" + justifyCenter(trans[3], 29) + "│      " + justifyCenter(trans[2], 16) +
+			"└──────┬──────┘" + justifyCenter(trans[1], 16) + "      │" + justifyCenter(trans[0], 29) + "│"
+	} else {
+		names = "│" + justifyCenter(trans[0], 29) + "│      " + justifyCenter(trans[1], 16) +
+			"└──────┬──────┘" + justifyCenter(trans[2], 16) + "      │" + justifyCenter(trans[3], 29) + "│"
+	}
+
+	ret = append([]string{
+		"                                                       ┌─────────────┐                                                       ",
+		"┌──────────────────────────────┬───────────────────────" + dateFmt + "───────────────────────┬──────────────────────────────┐",
+		names,
+		"├──────────────────────────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────┤"},
+		ret...)
+
+	return append(ret,
+		"└──────────────────────────────┴──────────────────────────────┴──────────────────────────────┴──────────────────────────────┘")
 }
 
 func unmarshalLang(body []byte, r *resp) error {
@@ -1031,10 +1028,9 @@ func unmarshalLang(body []byte, r *resp) error {
 	var buf bytes.Buffer
 	if err := json.NewEncoder(&buf).Encode(rv); err != nil {
 		return err
-	} else {
-		if err = json.NewDecoder(&buf).Decode(r); err != nil {
-			return err
-		}
+	}
+	if err := json.NewDecoder(&buf).Decode(r); err != nil {
+		return err
 	}
 	return nil
 }
@@ -1084,7 +1080,7 @@ func getDataFromAPI() (ret resp) {
 		var out bytes.Buffer
 		json.Indent(&out, body, "", "  ")
 		out.WriteTo(os.Stderr)
-		fmt.Println("\n")
+		fmt.Print("\n\n")
 	}
 
 	if config.Lang == "" {
