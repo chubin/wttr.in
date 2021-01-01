@@ -551,10 +551,12 @@ func formatTemp(c cond) string {
 	color := func(temp int, explicitPlus bool) string {
 		var col = 0
 		if !config.Inverse {
-			col = 21
+			// Extemely cold temperature must be shown with violet
+			// because dark blue is too dark
+			col = 165
 			switch temp {
 			case -15, -14, -13:
-				col = 27
+				col = 171
 			case -12, -11, -10:
 				col = 33
 			case -9, -8, -7:
