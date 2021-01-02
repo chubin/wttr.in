@@ -126,11 +126,17 @@ def _save_content_and_headers(path, query, content, headers):
 
 def translate(text, lang):
     """
-    Translate `text` into `lang`
+    Translate `text` into `lang`.
+    If `text` is comma-separated, translate each term independently.
+    If no translation found, leave it untouched.
     """
+
+    if "," in text:
+        terms = text.split(",")
+        translated_terms = [translate(term.strip(), lang) for term in terms]
+        return ", ".join(translated_terms)
+
     translated = TRANSLATIONS.get(lang, {}).get(text.lower(), text)
-    if text == translated:
-        print("%s: %s" % (lang, text))
     return translated
 
 def cyr(to_translate):
