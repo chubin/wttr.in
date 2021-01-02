@@ -36,9 +36,28 @@ def get_wetter(parsed_query):
         (returncode != 0 \
             and ('Unable to find any matching weather'
                  ' location to the parsed_query submitted') in stderr):
-            stdout, stderr, returncode = _wego_wrapper(NOT_FOUND_LOCATION, parsed_query)
-            location_not_found = True
-            stdout += get_message('NOT_FOUND_MESSAGE', lang)
+        stdout, stderr, returncode = _wego_wrapper(DEFAULT_LOCATION, parsed_query)
+        location_not_found = True
+
+        not_found_header = """
+>>>    _  _    ___  _  _     
+>>>   | || |  / _ \| || |      
+>>>   | || |_| | | | || |_      
+>>>   |__   _| |_| |__   _|      
+>>>      |_|  \___/   |_|    
+>>>                       
+>>>   404 %s: %s
+>>>                 
+""" % (get_message("UNKNOWN_LOCATION", lang).upper(), parsed_query['override_location_name'])
+
+        not_found_header = "\n".join("\033[48;5;91m" + x + "   \033[0m"
+                                     for x in not_found_header.splitlines()[1:])
+
+        not_found_footer = get_message('NOT_FOUND_MESSAGE', lang)
+        not_found_footer = "\n".join("\033[48;5;91m " + x + " \033[0m"
+                                     for x in not_found_footer.splitlines() if x) + "\n"
+
+        stdout = not_found_header + "\n----\n" + stdout + not_found_footer
 
     if "\n" in stdout:
         first_line, stdout = _wego_postprocessing(location, parsed_query, stdout)
@@ -53,7 +72,10 @@ def get_wetter(parsed_query):
 def _wego_wrapper(location, parsed_query):
 
     lang = parsed_query['lang']
-    location_name = parsed_query['override_location_name']
+    if location == DEFAULT_LOCATION:
+        location_name = DEFAULT_LOCATION.capitalize()
+    else:
+        location_name = parsed_query['override_location_name']
 
     cmd = [WEGO, '--city=%s' % location]
 

@@ -375,6 +375,10 @@ def wttr(location, request):
         if not response:
             parsed_query = parse_request(location, request, query)
             response = _response(parsed_query, query)
+
+            if parsed_query["location"] == NOT_FOUND_LOCATION:
+                http_code = 404
+
     # pylint: disable=broad-except
     except Exception as exception:
         logging.error("Exception has occured", exc_info=1)
