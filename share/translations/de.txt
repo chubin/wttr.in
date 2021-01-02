@@ -1,7 +1,7 @@
-: Schneeverfrachtung                                : Low drifting snow
+: Schneeverwehung                                   : Low drifting snow
 : Nebelfelder                                       : Patches of fog
 : Nieselregen                                       : Drizzle
-: Leichter nieselregen                              : Light drizzle
+: Leichter Nieselregen                              : Light drizzle
 : Schnee                                            : Snow
 : Regen                                             : Rain
 : Leichter Regen                                    : Light Rain
