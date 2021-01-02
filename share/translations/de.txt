@@ -47,5 +47,5 @@
 371: Gemäßigter oder starker Schneefall             : Moderate or heavy snow showers
 386: Stellenweise leichter Regen mit Gewitter       : Patchy light rain with thunder
 389: Gemäßigter oder starker Regen mit Gewitter     : Moderate or heavy rain with thunder
-392: Stellenweise leichter Schnefall mit Gewitter   : Patchy light snow with thunder
-395: Gemäßigter oder starker Schnefall mit Gewitter : Moderate or heavy snow with thunder
+392: Stellenweise leichter Schneefall mit Gewitter   : Patchy light snow with thunder
+395: Gemäßigter oder starker Schneefall mit Gewitter : Moderate or heavy snow with thunder
