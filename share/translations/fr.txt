@@ -1,3 +1,4 @@
+: Neige                                            : Snow
 : Pluie                                            : Rain
 : Pluie légère, Averses                            : Light Rain, Rain Shower
 : Averses                                          : Rain Shower

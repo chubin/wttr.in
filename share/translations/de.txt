@@ -1,3 +1,4 @@
+: Schnee                                            : Snow
 : Regen                                             : Rain
 : leichter Regen, Regenschauer                      : Light Rain, Rain Shower
 : Regenschauer                                      : Rain Shower
