@@ -68,7 +68,7 @@ def load_translations():
                 orig = orig.strip()
 
                 translation[orig] = trans
-        translations[lang] = translation
+        translations[lang.lower()] = translation
     return translations
 TRANSLATIONS = load_translations()
 
@@ -128,7 +128,7 @@ def translate(text, lang):
     """
     Translate `text` into `lang`
     """
-    translated = TRANSLATIONS.get(lang, {}).get(text, text)
+    translated = TRANSLATIONS.get(lang, {}).get(text.lower(), text)
     if text == translated:
         print("%s: %s" % (lang, text))
     return translated
