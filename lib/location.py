@@ -409,3 +409,21 @@ def location_processing(location, ip_addr):
             country, \
             query_source_location, \
             hemisphere
+
+
+def _main_():
+    """ Validate cache entries. Print names of invalid cache entries
+        and move it to the "broken-entries" directory."""
+
+    import glob
+    import shutil
+
+    for filename in glob.glob(os.path.join(IP2LCACHE, "*")):
+        ip_address = os.path.basename(filename)
+        if not _ipcache(ip_address):
+            print(ip_address)
+            shutil.move(filename, os.path.join("/wttr.in/cache/ip2l-broken", ip_address))
+
+
+if __name__ == "__main__":
+    _main_()
