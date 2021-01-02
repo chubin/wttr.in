@@ -206,7 +206,7 @@ def _geoip(ip_addr):
     try:
         response = GEOIP_READER.city(ip_addr)
         city, region, country, ccode, lat, long = response.city.name, response.subdivisions.name, response.country.name, response.country.iso_code, response.location.latitude, response.location.longitude
-    except geoip2.errors.AddressNotFoundError:
+    except (geoip2.errors.AddressNotFoundError, AttributeError):
         return None
     return [city, region, country, ccode, lat, long]
 
@@ -320,6 +320,34 @@ def _get_hemisphere(location):
     return geolocation["latitude"] > 0
 
 
+def _fully_qualified_location(location, region, country):
+    """ Return fully qualified location name with `region` and `country`,
+        as a string.
+    """
+
+    # If country is not specified, location stays as is
+    if not country:
+        return location
+
+    # Canonify/shorten country name
+    if country == "United Kingdom of Great Britain and Northern Ireland":
+        country = "United Kingdom"
+    elif country == "Russian Federation":
+        country = "Russia"
+    elif country == "United States of America":
+        country = "United States"
+
+    # In United States region is important, because there are a lot of
+    # locations with the same name in different regions.
+    # In the rest of the world, usage of region name may decrease chances
+    # or correct name resolution, so for the moment `region` is used
+    # only for the United States
+    if country == "United States" and region:
+        location += ", %s, %s" % (region, country)
+    else:
+        location += ", %s" % country
+    return location
+
 def location_processing(location, ip_addr):
     """
     """
@@ -343,8 +371,7 @@ def location_processing(location, ip_addr):
                 socket.gethostbyname(
                     location.lstrip('~ ')[1:]))
             location = '~' + location
-            if region and country:
-                location += ", %s, %s" % (region, country)
+            location = _fully_qualified_location(location, region, country)
             hide_full_address = not force_show_full_address
         except:
             location, region, country = NOT_FOUND_LOCATION, None, None
@@ -368,8 +395,7 @@ def location_processing(location, ip_addr):
         # here too
         if location:
             location = '~' + location
-            if region and country:
-                location += ", %s, %s" % (region, country)
+            location = _fully_qualified_location(location, region, country)
             hide_full_address = not force_show_full_address
 
     if location and not location.startswith('~'):
@@ -381,7 +407,7 @@ def location_processing(location, ip_addr):
     # up to this point it is possible that the name
     # contains some unicode symbols
     # here we resolve them
-    if location is not None:
+    if location is not None and location != NOT_FOUND_LOCATION:
         location = "~" + location.lstrip('~ ')
         if not override_location_name:
             override_location_name = location.lstrip('~')
@@ -426,4 +452,5 @@ def _main_():
 
 
 if __name__ == "__main__":
-    _main_()
+    #_main_()
+    print(_get_location("104.26.4.59"))
