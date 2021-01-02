@@ -128,10 +128,10 @@ def _ipcachewrite(ip_addr, location):
     if not os.path.exists(IP2LCACHE):
         os.makedirs(IP2LCACHE)
     with open(cachefile, 'w') as file:
+        # like ip2location format
         file.write(location[3] + ';' + location[2] + ';' + location[1] + ';' + location[0])
         if len(location) > 4:
-            file.write(';' + location[4] + ';' + location[5])
-        # like ip2location format
+            file.write(';'.join(location[4:]))
 
 
 def _ipcache(ip_addr):
@@ -155,7 +155,14 @@ def _ipcache(ip_addr):
 
 
 def _ip2location(ip_addr):
-    """Convert IP address `ip_addr` to a location name"""
+    """ Convert IP address `ip_addr` to a location name using ip2location.
+        Return list of location data fields:
+
+            [ccode, country, region, city, rest...]
+
+        Return `None` if an error occured.
+    """
+
     # if IP2LOCATION_KEY is not set, do not query,
     # because the query wont be processed anyway
     if not IP2LOCATION_KEY:
@@ -166,13 +173,14 @@ def _ip2location(ip_addr):
             % (ip_addr, IP2LOCATION_KEY))
         r.raise_for_status()
         location = r.text
-        if location and ';' in location:
-            # ccode, country, region, city, lat, long, *_ = location.split(';')
-            ccode, country, region, city, *_ = location.split(';')
+
+        parts = location.split(';')
+        if len(parts) >= 4:
+            #       ccode,    country,  region,   city,       (rest)
+            return [parts[3], parts[2], parts[1], parts[0]] + parts[4:]
+        return None
     except requests.exceptions.RequestException:
         return None
-    return city, region, country, ccode  # , lat, long
-
 
 def _ipinfo(ip_addr):
     if not IPINFO_TOKEN:
@@ -191,7 +199,7 @@ def _ipinfo(ip_addr):
     except (requests.exceptions.RequestException, ValueError):
         # latter is thrown by failure to parse json in reponse
         return None
-    return city, region, country, ccode, lat, long
+    return [city, region, country, ccode, lat, long]
 
 
 def _geoip(ip_addr):
@@ -200,7 +208,7 @@ def _geoip(ip_addr):
         city, region, country, ccode, lat, long = response.city.name, response.subdivisions.name, response.country.name, response.country.iso_code, response.location.latitude, response.location.longitude
     except geoip2.errors.AddressNotFoundError:
         return None
-    return city, region, country, ccode, lat, long
+    return [city, region, country, ccode, lat, long]
 
 
 def _country_name_workaround(country):
