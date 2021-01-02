@@ -301,7 +301,7 @@ def parse_request(location, request, query, fast_mode=False):
         location, override_location_name, full_address, country, query_source_location, hemisphere = \
                 location_processing(parsed_query["location"], parsed_query["ip_addr"])
 
-        us_ip = query_source_location[1] in ["United States", "United States of America"] \
+        us_ip = query_source_location[2] in ["United States", "United States of America"] \
                 and 'slack' not in parsed_query['user_agent']
         query = parse_query.metric_or_imperial(query, lang, us_ip=us_ip)
 
@@ -375,6 +375,10 @@ def wttr(location, request):
         if not response:
             parsed_query = parse_request(location, request, query)
             response = _response(parsed_query, query)
+
+            if parsed_query["location"] == NOT_FOUND_LOCATION:
+                http_code = 404
+
     # pylint: disable=broad-except
     except Exception as exception:
         logging.error("Exception has occured", exc_info=1)
