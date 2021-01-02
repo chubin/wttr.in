@@ -1,3 +1,5 @@
+   : Стелющийся туман                            : Shallow fog                         :
+   : Ледяной дождь                               : Freezing rain                       :
    : Проливной дождь                             : Rain shower                         :
 113: Ясно                                        : Clear                               :
 113: Солнечно                                    : Sunny                               :
