@@ -1,3 +1,7 @@
+   : Снегопад                                    : Low drifting snow                   :
+   : Местами туман                               : Patches of fog                      :
+   : Морось                                      : Drizzle                             :
+   : Лёгкая морось                               : Light drizzle                       :
    : Снег                                        : Snow                                :
    : Стелющийся туман                            : Shallow fog                         :
    : Ледяной дождь                               : Freezing rain                       :

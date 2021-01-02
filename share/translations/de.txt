@@ -1,6 +1,10 @@
+: Schneeverfrachtung                                : Low drifting snow
+: Nebelfelder                                       : Patches of fog
+: Nieselregen                                       : Drizzle
+: Leichter nieselregen                              : Light drizzle
 : Schnee                                            : Snow
 : Regen                                             : Rain
-: leichter Regen, Regenschauer                      : Light Rain, Rain Shower
+: Leichter Regen                                    : Light Rain
 : Regenschauer                                      : Rain Shower
 113: Wolkenlos                                      : Clear
 113: Sonnig                                         : Sunny
