@@ -422,6 +422,7 @@ def generate_panel(data_parsed, geo_data, config):
     precip_mm_query = "[.data.weather[] | .hourly[]] | .[].precipMM"
     precip_chance_query = "[.data.weather[] | .hourly[]] | .[].chanceofrain"
     feels_like_query = "[.data.weather[] | .hourly[]] | .[].FeelsLikeC"
+    temp_query = "[.data.weather[] | .hourly[]] | .[].tempC"
     weather_code_query = "[.data.weather[] | .hourly[]] | .[].weatherCode"
     wind_direction_query = "[.data.weather[] | .hourly[]] | .[].winddirDegree"
     wind_speed_query = "[.data.weather[] | .hourly[]] | .[].windspeedKmph"
@@ -435,7 +436,8 @@ def generate_panel(data_parsed, geo_data, config):
     output += "\n"
     output += "\n"
 
-    data = jq_query(feels_like_query, data_parsed)
+    #data = jq_query(feels_like_query, data_parsed)
+    data = jq_query(temp_query, data_parsed)
     data_interpolated = interpolate_data(data, max_width)
     output += draw_diagram(data_interpolated, 10, max_width)
 
