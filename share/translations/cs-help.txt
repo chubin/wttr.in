@@ -1,0 +1,69 @@
+Použití:
+
+    $ curl wttr.in          # lokální informace
+    $ curl wttr.in/muc      # počasí v letšiti v Mnichově
+
+Podporované typy lokací:
+
+    /paris                  # název města
+    /~Eiffel+tower          # jakákoliv lokace (+ pro mezery)
+    /Москва                 # Unicode názvy pro lokace (včetně češtiny)
+    /muc                    # kód letiště (3 písmena)
+    /@stackoverflow.com     # doména
+    /94107                  # kód areálu
+    /-78.46,106.79          # GPS souřadnice
+
+Speciální lokace:
+
+    /moon                   # Fáze měsíce (přidejte ,+US nebo ,+France pro tyto města)
+    /moon@2016-10-25        # Fáze měsíce pro datum (@2016-10-25)
+
+Jednotky:
+
+    m                       # metrické (SI) (used by default everywhere except US)
+    u                       # USCS (used by default in US)
+    M                       # zobrazení rychlosti větru v m/s
+
+Nastavení zobrazení:
+
+    0                       # pouze momentální počasí
+    1                       # momentální počasí + dnešní předpověď
+    2                       # momentální počasí + dnešní + zítřejší předpověď
+    A                       # ignorovat User-Agent a používát ANSI výstup (terminál)
+    F                       # nezobrazovat řádek "Odebírat"
+    n                       # zmenšená verze (jen den a noc)
+    q                       # tichá verze (bez textu "Předpověď počasí")
+    Q                       # extra tichá verze (bez textu "Předpověď počasí" a názvu města)
+    T                       # vypnutí barev
+
+nastavení PNG:
+
+    /paris.png              # vygeneruje PNG
+    p                       # přidá rámeček
+    t                       # průhlednost 150
+    transparency=...        # průhlednost od 0 do 255 (255 = neprůhledný)
+
+Nastavení se dá kombinovat:
+
+    /Paris?0pq
+    /Paris?0pq&lang=fr
+    /Paris_0pq.png          # v PNG se nastavení přidává za _
+    /Rome_0pq_lang=it.png   # dlouhé nastavení se odděluje _
+
+Lokalizace:
+
+    $ curl fr.wttr.in/Paris
+    $ curl wttr.in/paris?lang=fr
+    $ curl -H "Accept-Language: fr" wttr.in/paris
+
+Podporované jazyky:
+
+    ar af be ca da de el et fr fa hi hu ia id it nb nl oc pl pt-br ro ru tr th uk vi zh-cn zh-tw (supported)
+    az bg bs cy cs eo es eu fi ga hi hr hy is ja jv ka kk ko ky lt lv mk ml nl fy nn pt pt-br sk sl sr sr-lat sv sw te uz zh zu he (in progress)
+
+Speciální URL:
+
+    /:help                  # tato stránka
+    /:bash.function         # zobrazí doporučenou bash funkci wttr()
+    /:translation           # zobrazí informace o překladech
+
