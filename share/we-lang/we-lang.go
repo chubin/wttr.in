@@ -292,6 +292,7 @@ var (
 
 	locale = map[string]string{
 		"af":     "af_ZA",
+		"am":	  "am_ET",
 		"ar":     "ar_TN",
 		"az":     "az_AZ",
 		"be":     "be_BY",
@@ -358,6 +359,7 @@ var (
 
 	localizedCaption = map[string]string{
 		"af":     "Weer verslag vir:",
+		"am":	  "የአየር ሁኔታ ዘገባ ለ ፥",
 		"ar":     "تقرير حالة ألطقس",
 		"az":     "Hava proqnozu:",
 		"be":     "Прагноз надвор'я для:",
@@ -425,6 +427,7 @@ var (
 
 	daytimeTranslation = map[string][]string{
 		"af":     {"Oggend", "Middag", "Vroegaand", "Laatnag"},
+		"am":	  {"ጠዋት", "ከሰዓት በኋላ", "ምሽት", "ሌሊት"},
 		"ar":     {"ﺎﻠﻠﻴﻟ", "ﺎﻠﻤﺳﺍﺀ", "ﺎﻠﻈﻫﺭ", "ﺎﻠﺼﺑﺎﺣ"},
 		"az":     {"Səhər", "Gün", "Axşam", "Gecə"},
 		"be":     {"Раніца", "Дзень", "Вечар", "Ноч"},
