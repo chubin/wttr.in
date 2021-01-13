@@ -1,30 +1,30 @@
-113:                                    : Clear
+113: ጥርት ያለ                           : Clear
 113: ፀሐያማ                             : Sunny
 116: ከፊል ደመናማ                        : Partly cloudy
 119: ደመናማ                             : Cloudy
 122: ደመናማ                             : Overcast
-143:                                    : Mist
-176:                                    : Patchy rain possible
-179:                                    : Patchy snow possible
+143: ጭጋግ                              : Mist
+176: ዝናብ ሊዘንብ ይችላል                   : Patchy rain possible
+179: በረዶ ሊጥል ይችላል                    : Patchy snow possible
 182:                                    : Patchy sleet possible
 185:                                    : Patchy freezing drizzle possible
 200:                                    : Thundery outbreaks possible
 227: ነፋሻማ በረዶ                         : Blowing snow
 230: በረዶ አዘል አውሎ ነፋስ                : Blizzard
 248: ጭጋግ                              : Fog
-260:                                    : Freezing fog
+260: በረዶ ጭጋግ                         : Freezing fog
 263: ቀላል ካፍያ                          : Patchy light drizzle
 266: ቀላል ካፍያ                          : Light drizzle
-281: ካፍያ                               : Freezing drizzle
-284:                                    : Heavy freezing drizzle
+281: በረዶ ካፍያ                          : Freezing drizzle
+284: ከባድ በረዶ ካፍያ                      : Heavy freezing drizzle
 293:                                    : Patchy light rain
 296: ቀላል ዝናብ                          : Light rain
 299:                                    : Moderate rain at times
 302: መለስተኛ ዝናብ                       : Moderate rain
 305:                                    : Heavy rain at times
 308: ከባድ ዝናብ                          : Heavy rain
-311:                                    : Light freezing rain
-314:                                    : Moderate or heavy freezing rain
+311: ቀላል የበረዶ ዝናብ                    : Light freezing rain
+314: መለስተኛ ወይም ከባድ የበረዶ ዝናብ       : Moderate or heavy freezing rain
 317:                                    : Light sleet
 320:                                    : Moderate or heavy sleet
 323:                                    : Patchy light snow
@@ -33,10 +33,10 @@
 332: መለስተኛ በረዶ                        : Moderate snow
 335:                                    : Patchy heavy snow
 338: ከባድ በረዶ                           : Heavy snow
-350:                                    : Ice pellets
-353:                                    : Light rain shower
-356:                                    : Moderate or heavy rain shower
-359:                                    : Torrential rain shower
+350: የበረዶ እንክብሎች                     : Ice pellets
+353: ቀላል የዝናብ ካፍያ                    : Light rain shower
+356: መለስተኛ ወይም ከባድ የዝናብ ካፍያ       : Moderate or heavy rain shower
+359: ዶፍ ዝናብ                           : Torrential rain shower
 362:                                    : Light sleet showers
 365:                                    : Moderate or heavy sleet showers
 368: ቀላል የበረዶ ካፍያ                     : Light snow showers
