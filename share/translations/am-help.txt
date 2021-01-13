@@ -1,0 +1,67 @@
+አጠቃቀም:
+
+    $ curl wttr.in          # አሁን ያሉበት አካባቢ
+    $ curl wttr.in/add      # የአየር ሁነታ በቦሌ አዲስ አበባ አለምአቀፍ ኤርፖርት 
+
+ተቀባይነት ያላቸው ቦታዎች:
+
+    /paris                  # የከተማ ስም
+    /~Eiffel+tower          # ማንኛውም ቦታ
+    /Москва                 # nom Unicode ou emplacement quelconque dans n'importe quelle langue
+    /muc                    # የኤርፖርት ኮድ (3 lettres)
+    /@stackoverflow.com     # nom de domaine
+    /94107                  # የፖስታ ኮድ (ለአሜሪካ ብቻ)
+    /-78.46,106.79          # coordonnées GPS
+
+Emplacements particuliers:
+
+    /moon                   # phases de la lune (ajouter ,+US ou ,+France pour accéder aux villes du même nom)
+    /moon@2016-10-25        # phases de la lune pour cette date (@2016-10-25)
+
+Unités:
+
+    ?m                      # système métrique (par défaut partout sauf pour les États-Unis d'Amérique)
+    ?u                      # USCS (par défaut pour les États-Unis d'Amérique)
+    ?M                      # affiche la vitesse du vent en m/s
+
+Option d'affichage:
+
+    ?0                      # aujourd'hui seulement
+    ?1                      # aujourd'hui + demain
+    ?2                      # aujourd'hui + 2 jours
+    ?n                      # version courte (seulement le jour et la nuit)
+    ?q                      # version silencieuse (pas d'en-tête "Prévisions météo pour")
+    ?Q                      # version super-silencieuse (pas d'en-tête "Prévisions météo pour", pas de nom de la ville)
+    ?T                      # séquences d'échappement pour terminaux désactivées (pas de couleurs)
+
+የPNG አማራጮች:
+
+    /paris.png              # génère un fichier PNG
+    ?p                      # ajoute un cadre autour de la sortie
+    ?t                      # transparency 150 (transparence 150)
+    transparency=...        # transparence de 0 à 255 (255 = pas de transparence)
+
+Combiner les options:
+
+    /Paris?0pq
+    /Paris?0pq&lang=fr
+    /Paris_0pq.png          # dans le mode PNG les options sont spécifiées après _
+    /Rome_0pq_lang=it.png   # les options longues sont séparées par des underscores _
+
+Localisation:
+
+    $ curl fr.wttr.in/Paris
+    $ curl wttr.in/paris?lang=fr
+    $ curl -H "Accept-Language: fr" wttr.in/paris
+
+ቋንቋዎች:
+
+    FULL_TRANSLATION (ሙሉ በሙሉ የተተረጎሙ)
+    PARTIAL_TRANSLATION (በከፊል የተተረጎሙ)
+
+URLs particulières:
+
+    /:help                  # affiche cette page
+    /:bash.function         # fonction bash recommandée wttr()
+    /:translation           # affiche les informations sur la traduction de wttr.in
+
