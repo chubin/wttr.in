@@ -204,9 +204,12 @@ def _ipinfo(ip_addr):
 
 def _geoip(ip_addr):
     try:
+        _debug_log("[_geoip] %s search" % ip_addr)
         response = GEOIP_READER.city(ip_addr)
-        city, region, country, ccode, lat, long = response.city.name, response.subdivisions.name, response.country.name, response.country.iso_code, response.location.latitude, response.location.longitude
-    except (geoip2.errors.AddressNotFoundError, AttributeError):
+        # print(response.subdivisions)
+        city, region, country, ccode, lat, long = response.city.name, response.subdivisions[0].names["en"], response.country.name, response.country.iso_code, response.location.latitude, response.location.longitude
+        _debug_log("[_geoip] %s found" % ip_addr)
+    except (geoip2.errors.AddressNotFoundError):
         return None
     return [city, region, country, ccode, lat, long]
 
