@@ -32,8 +32,10 @@ Exports:
     is_location_blocked
 """
 
+
 from __future__ import print_function
 
+import datetime
 import json
 import os
 import socket
@@ -46,12 +48,15 @@ import requests
 from globals import GEOLITE, GEOLOCATOR_SERVICE, IP2LCACHE, IP2LOCATION_KEY, NOT_FOUND_LOCATION, \
                     ALIASES, BLACKLIST, IATA_CODES_FILE, IPLOCATION_ORDER, IPINFO_TOKEN
 
+
 GEOIP_READER = geoip2.database.Reader(GEOLITE)
 COUNTRY_MAP = {"Russian Federation": "Russia"}
 
+
 def _debug_log(s):
-    with open("/tmp/debug.log", "a") as f:
-        f.write(s+"\n")
+    if os.environ.get("WTTR_DEBUG_LOCATION"):
+        with open("/tmp/location-debug.log", "a") as f:
+            f.write("%s %s\n" % (datetime.datetime.now(),s))
 
 
 def _is_ip(ip_addr):
@@ -140,8 +145,6 @@ def _ipcache(ip_addr):
         TODO: When cache becomes more robust, transition to using latlong
     """
     cachefile = os.path.join(IP2LCACHE, ip_addr)
-    if not os.path.exists(IP2LCACHE):
-        os.makedirs(IP2LCACHE)
 
     if os.path.exists(cachefile):
         try:
@@ -151,6 +154,8 @@ def _ipcache(ip_addr):
             # cache entry is malformed: should be
             # [ccode];country;region;city;[lat];[long];...
             return None
+    else:
+        _debug_log("[_ipcache] %s not found" % ip_addr)
     return None
 
 
@@ -168,6 +173,7 @@ def _ip2location(ip_addr):
     if not IP2LOCATION_KEY:
         return None
     try:
+        _debug_log("[_ip2location] %s search" % ip_addr)
         r = requests.get(
             'http://api.ip2location.com/?ip=%s&key=%s&package=WS3'  # WS5 provides latlong
             % (ip_addr, IP2LOCATION_KEY))
@@ -177,10 +183,12 @@ def _ip2location(ip_addr):
         parts = location.split(';')
         if len(parts) >= 4:
             #       ccode,    country,  region,   city,       (rest)
+            _debug_log("[_ip2location] %s found" % ip_addr)
             return [parts[3], parts[2], parts[1], parts[0]] + parts[4:]
         return None
     except requests.exceptions.RequestException:
         return None
+
 
 def _ipinfo(ip_addr):
     if not IPINFO_TOKEN:
@@ -272,6 +280,7 @@ def _location_canonical_name(location):
         return LOCATION_ALIAS[location.lower()]
     return location
 
+
 def _load_aliases(aliases_filename):
     """
     Load aliases from the aliases file
@@ -287,6 +296,7 @@ def _load_aliases(aliases_filename):
             aliases_db[_location_normalize(from_)] = _location_normalize(to_)
     return aliases_db
 
+
 def _load_iata_codes(iata_codes_filename):
     """
     Load IATA codes from the IATA codes file
@@ -297,9 +307,11 @@ def _load_iata_codes(iata_codes_filename):
             result.append(line.strip())
     return set(result)
 
+
 LOCATION_ALIAS = _load_aliases(ALIASES)
 LOCATION_BLACK_LIST = [x.strip() for x in open(BLACKLIST, 'r').readlines()]
 IATA_CODES = _load_iata_codes(IATA_CODES_FILE)
+
 
 def is_location_blocked(location):
     """
@@ -350,6 +362,7 @@ def _fully_qualified_location(location, region, country):
     else:
         location += ", %s" % country
     return location
+
 
 def location_processing(location, ip_addr):
     """
@@ -450,10 +463,8 @@ def _main_():
     for filename in glob.glob(os.path.join(IP2LCACHE, "*")):
         ip_address = os.path.basename(filename)
         if not _ipcache(ip_address):
-            print(ip_address)
             shutil.move(filename, os.path.join("/wttr.in/cache/ip2l-broken", ip_address))
 
 
 if __name__ == "__main__":
-    #_main_()
-    print(_get_location("104.26.4.59"))
+    print(_geoip("173.216.90.56"))
