@@ -1,0 +1,55 @@
+: Unášený sníh                                      : Low drifting snow
+: Částečná mlha                                     : Patches of fog
+: Mrholení                                          : Drizzle
+: Slabé mrholení                                    : Light drizzle
+: Sníh                                              : Snow
+: Déšť                                              : Rain
+: Lehký déšť                                        : Light Rain
+: Dešťová sprcha                                    : Rain Shower
+113: Jasno                                          : Clear
+113: Slunečno                                       : Sunny
+116: Částečně zataženo                              : Partly cloudy
+119: Zataženo                                       : Cloudy
+122: Zamračeno                                      : Overcast
+143: MLha                                           : Mist
+176: Možnost deště                                  : Patchy rain possible
+179: Možnost sněžení                                : Patchy snow possible
+182: Možnost kroup                                  : Patchy sleet possible
+185: Možnost mrazivého mrholení                     : Patchy freezing drizzle possible
+200:                                                : Thundery outbreaks possible
+227: Padající sníh                                  : Blowing snow
+230: Vánice                                         : Blizzard
+248: Mlha                                           : Fog
+260: Mrazivá mlha                                   : Freezing fog
+263: Nepravidelné slabé mrholení                    : Patchy light drizzle
+266: Slabé mrholení                                 : Light drizzle
+281: Mrazivé mrholení                               : Freezing drizzle
+284: Silné mrazivé mrholení                         : Heavy freezing drizzle
+293: Nepravidelný slabý déšť                        : Patchy light rain
+296: Slabý déšť                                     : Light rain
+299: Občasný déšť                                   : Moderate rain at times
+302: Déšť                                           : Moderate rain
+305: Občasný hustý déšť                             : Heavy rain at times
+308: Silný déšť                                     : Heavy rain
+311: Slabý mrazivý déšť                             : Light freezing rain
+314: Smíšený mrazivý déšť                           : Moderate or heavy freezing rain
+317: Slabé kroupění                                 : Light sleet
+320: Smíšené kroupění                               : Moderate or heavy sleet
+323: Nepravidelné slabé sněžení                     : Patchy light snow
+326: Slabé sněžení                                  : Light snow
+329: Nepravidelné sněžení                           : Patchy moderate snow
+332: Sněžení                                        : Moderate snow
+335: Nepravidelné husté sněžení                     : Patchy heavy snow
+338: Silné sněžení                                  : Heavy snow
+350: Kroupy                                         : Ice pellets
+353: Lehká déšťová sprcha                           : Light rain shower
+356: Smíšený déšťová sprcha                         : Moderate or heavy rain shower
+359: Přívalová déšťová sprcha                       : Torrential rain shower
+362: Slabé přeháňková sprcha                        : Light sleet showers
+365: Silné přeháňková sprcha                        : Moderate or heavy sleet showers
+368: Slabé sprcha se sněžením                       : Light snow showers
+371: Silné sprcha se sněžením                       : Moderate or heavy snow showers
+386: Nepravidelná slabá bouřka                      : Patchy light rain with thunder
+389: Silná bouřka                                   : Moderate or heavy rain with thunder
+392: Nepravidelný slabá bouřka se sněžením          : Patchy light snow with thunder
+395: Silné sněžení s bouřkou                        : Moderate or heavy snow with thunder
