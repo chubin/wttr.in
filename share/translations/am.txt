@@ -1,0 +1,81 @@
+113: ጥርት ያለ                           : Clear
+113: ፀሐያማ                             : Sunny
+116: ከፊል ደመናማ                        : Partly cloudy
+119: ደመናማ                             : Cloudy
+122: ደመናማ                             : Overcast
+143: ጭጋግ                              : Mist
+176: ዝናብ ሊዘንብ ይችላል                   : Patchy rain possible
+179: በረዶ ሊጥል ይችላል                    : Patchy snow possible
+182: አልፎ አልፎ በረዶ አዘል ዝናብ ሊዘንብ ይችላል : Patchy sleet possible
+185: አልፎ አልፎ በረዶ አዘል ካፍያ ሊጥል ይችላል : Patchy freezing drizzle possible
+200:                                    : Thundery outbreaks possible
+227: ነፋሻማ በረዶ                         : Blowing snow
+230: በረዶ አዘል አውሎ ነፋስ                : Blizzard
+248: ጭጋግ                              : Fog
+260: በረዶ ጭጋግ                         : Freezing fog
+263: ቀላል ካፍያ                          : Patchy light drizzle
+266: ቀላል ካፍያ                          : Light drizzle
+281: በረዶ ካፍያ                          : Freezing drizzle
+284: ከባድ በረዶ ካፍያ                      : Heavy freezing drizzle
+293: አልፎ አልፎ ቀላል ዝናብ                 : Patchy light rain
+296: ቀላል ዝናብ                          : Light rain
+299: አልፎ አልፎ መለስተኛ ዝናብ              : Moderate rain at times
+302: መለስተኛ ዝናብ                       : Moderate rain
+305: አልፎ አልፎ ከባድ ዝናብ                : Heavy rain at times
+308: ከባድ ዝናብ                          : Heavy rain
+311: ቀላል የበረዶ ዝናብ                    : Light freezing rain
+314: መለስተኛ ወይም ከባድ የበረዶ ዝናብ       : Moderate or heavy freezing rain
+317:                                    : Light sleet
+320:                                    : Moderate or heavy sleet
+323: አልፎ አልፎ ቀላል በረዶ                 : Patchy light snow
+326: ቀላል በረዶ                           : Light snow
+329: አልፎ አልፎ መለስተኛ በረዶ              : Patchy moderate snow
+332: መለስተኛ በረዶ                        : Moderate snow
+335: አልፎ አልፎ ከባድ በረዶ                 : Patchy heavy snow
+338: ከባድ በረዶ                           : Heavy snow
+350: የበረዶ እንክብሎች                     : Ice pellets
+353: ቀላል የዝናብ ካፍያ                    : Light rain shower
+356: መለስተኛ ወይም ከባድ የዝናብ ካፍያ       : Moderate or heavy rain shower
+359: ዶፍ ዝናብ                           : Torrential rain shower
+362:                                    : Light sleet showers
+365:                                    : Moderate or heavy sleet showers
+368: ቀላል የበረዶ ካፍያ                     : Light snow showers
+371: መለስተኛ ወይም ከባድ የበረዶ ካፍያ        : Moderate or heavy snow showers
+386: ቀላል ዝናብ ከነጎድጓድ ጋር               : Patchy light rain with thunder
+389: መለስተኛ ወይም ከባድ ዝናብ ከነጎድጓድ ጋር  : Moderate or heavy rain with thunder
+392: ቀላል በረዶ ከነጎድጓድ ጋር                : Patchy light snow with thunder
+395: መለስተኛ ወይም ከባድ በረዶ ከነጎድጓድ ጋር   : Moderate or heavy snow with thunder
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
