@@ -45,3 +45,10 @@
 389: Zivatar                             : Moderate or heavy rain with thunder
 392: Szórványos hózivatar                : Patchy light snow with thunder
 395: Hózivatar                           : Moderate or heavy snow with thunder
+   : Hóvúvás                             : Low drifting snow
+   : Ködfoltok                           : Patches of fog
+   : Szitálás                            : Drizzle
+   : Gyenge szitálás                     : Light drizzle
+   : Havazás                             : Snow
+   : Eső                                 : Rain
+   : Gyenge eső                          : Light Rain
