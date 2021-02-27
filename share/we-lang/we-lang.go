@@ -661,24 +661,44 @@ func formatTemp(c cond) string {
 		t = c.TempC2
 	}
 
-	hyphen := " - "
+	// hyphen := " - "
+
 	// if (config.Lang == "sl") {
 	//     hyphen = "-"
 	// }
-	hyphen = ".."
 
-	explicitPlus := false
-	if c.FeelsLikeC < t {
-		if c.FeelsLikeC < 0 && t > 0 {
-			explicitPlus = true
-		}
-		return pad(fmt.Sprintf("%s%s%s °%s", color(c.FeelsLikeC, false), hyphen, color(t, explicitPlus), unitTemp[config.Imperial]), 15)
-	} else if c.FeelsLikeC > t {
-		if t < 0 && c.FeelsLikeC > 0 {
-			explicitPlus = true
-		}
-		return pad(fmt.Sprintf("%s%s%s °%s", color(t, false), hyphen, color(c.FeelsLikeC, explicitPlus), unitTemp[config.Imperial]), 15)
-	}
+	// hyphen = ".."
+
+	explicitPlus1 := false
+	explicitPlus2 := false
+	if c.FeelsLikeC != t {
+                if t > 0 {
+                    explicitPlus1 = true
+                }
+                if c.FeelsLikeC > 0 {
+                    explicitPlus2 = true
+                }
+                if explicitPlus1 {
+                    explicitPlus2 = false
+                }
+		return pad(
+                        fmt.Sprintf("%s(%s) °%s",
+                            color(t, explicitPlus1),
+                            color(c.FeelsLikeC, explicitPlus2),
+                            unitTemp[config.Imperial]),
+                        15)
+        }
+	// if c.FeelsLikeC < t {
+	// 	if c.FeelsLikeC < 0 && t > 0 {
+	// 		explicitPlus = true
+	// 	}
+	// 	return pad(fmt.Sprintf("%s%s%s °%s", color(c.FeelsLikeC, false), hyphen, color(t, explicitPlus), unitTemp[config.Imperial]), 15)
+	// } else if c.FeelsLikeC > t {
+	// 	if t < 0 && c.FeelsLikeC > 0 {
+	// 		explicitPlus = true
+	// 	}
+	// 	return pad(fmt.Sprintf("%s%s%s °%s", color(t, false), hyphen, color(c.FeelsLikeC, explicitPlus), unitTemp[config.Imperial]), 15)
+	// }
 	return pad(fmt.Sprintf("%s °%s", color(c.FeelsLikeC, false), unitTemp[config.Imperial]), 15)
 }
 
