@@ -59,5 +59,5 @@ uxterm -ti vt340
 To view images in kitty:
 
 ```
-curl -ks v3.wttr.in/Tabasco.png | kitty icat --align=left
+curl -s v3.wttr.in/Tabasco.png | kitty icat --align=left
 ```
