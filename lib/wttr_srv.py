@@ -375,6 +375,8 @@ def wttr(location, request):
         if not response:
             parsed_query = parse_request(location, request, query)
             response = _response(parsed_query, query)
+            #if not response or (isinstance(response, str) and not response.strip()):
+            #    return RuntimeError("Empty answer")
 
             if parsed_query["location"] == NOT_FOUND_LOCATION:
                 http_code = 404
