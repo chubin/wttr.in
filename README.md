@@ -186,6 +186,9 @@ So, these two calls are the same:
 ```
 Keep in mind, that when using in `tmux.conf`, you have to escape `%` with `%`, i.e. write there `%%` instead of `%`.
 
+The output does not contain new line by defalt, when the %-notation is used, but it does contain it when preconfigured format (`1`,`2`,`3` etc.)
+are used. To have the new line in the output when the %-notation is used, use '\n' and single quotes when doing a query from the shell.
+
 In programs, that are querying the service automatically (such as tmux), it is better to use some reasonable update interval. In tmux, you can configure it with `status-interval`.
 
 If several, `:` separated locations, are specified in the query, specify update period
@@ -233,7 +236,10 @@ $ cat ~/.config/fontconfig/fonts.conf
 </fontconfig>
 ```
 
-(to apply the configuration, run `fc-cache -f -v`)
+(to apply the configuration, run `fc-cache -f -v`).
+
+In some cases, `tmux` and the terminal understandinf of some emoji characters may differ, which may
+cause strange effects similar to that described in #579.
 
 ## Data-rich output format (v2)
 
