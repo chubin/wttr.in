@@ -468,9 +468,14 @@ def _main_():
 
     for filename in glob.glob(os.path.join(IP2LCACHE, "*")):
         ip_address = os.path.basename(filename)
-        if not _ipcache(ip_address):
-            shutil.move(filename, os.path.join("/wttr.in/cache/ip2l-broken", ip_address))
+        data = _ipcache(ip_address)
+        if data:
+            city, region, country = data
+            if any(x in city for x in "0123456789"):
+                print(city)
+                shutil.move(filename, os.path.join("/wttr.in/cache/ip2l-broken-format", ip_address))
 
 
 if __name__ == "__main__":
-    print(_geoip("173.216.90.56"))
+    _main_()
+    #print(_geoip("173.216.90.56"))
