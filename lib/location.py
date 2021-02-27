@@ -136,7 +136,7 @@ def _ipcachewrite(ip_addr, location):
         # like ip2location format
         file.write(location[3] + ';' + location[2] + ';' + location[1] + ';' + location[0])
         if len(location) > 4:
-            file.write(';'.join(location[4:]))
+            file.write(';' + ';'.join(map(str, location[4:])))
 
 
 def _ipcache(ip_addr):
