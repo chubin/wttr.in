@@ -217,6 +217,12 @@ def _geoip(ip_addr):
         # print(response.subdivisions)
         city, region, country, ccode, lat, long = response.city.name, response.subdivisions[0].names["en"], response.country.name, response.country.iso_code, response.location.latitude, response.location.longitude
         _debug_log("[_geoip] %s found" % ip_addr)
+    except IndexError:
+        # Tuple error
+        try:
+            city, region, country, ccode, lat, long = response.city.name, None, response.country.name, response.country.iso_code, response.location.latitude, response.location.longitude
+        except IndexError:
+            return None
     except (geoip2.errors.AddressNotFoundError):
         return None
     return [city, region, country, ccode, lat, long]
