@@ -2,6 +2,7 @@
 : Nebelfelder                                       : Patches of fog
 : Nieselregen                                       : Drizzle
 : Leichter Nieselregen                              : Light drizzle
+: Leichter Nieselregen und Regen                    : Light drizzle and rain
 : Schnee                                            : Snow
 : Regen                                             : Rain
 : Leichter Regen                                    : Light Rain
