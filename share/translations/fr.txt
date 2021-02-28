@@ -2,6 +2,11 @@
 : Pluie                                            : Rain
 : Pluie légère, Averses                            : Light Rain, Rain Shower
 : Averses                                          : Rain Shower
+: Nappes de brouillard                             : Patches of fog
+: Bruine                                           : Drizzle
+: Bruine légère                                    : Light drizzle
+: Chasse-neige basse                               : Low drifting snow
+: Pluie légère avec neige                          : Light rain and snow
 113 : Temps clair                                  : Clear
 113 : Ensoleillé                                   : Sunny
 116 : Partiellement couvert                        : Partly cloudy
