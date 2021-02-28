@@ -10,4 +10,5 @@ to select data source basing on location, or on the user's preferences.
 * Windy.com
 * yr.no
 * [BBC WeatherFeeds](https://support.bbc.co.uk/platform/feeds/WeatherFeeds.htm)
+* http://www.bom.gov.au
 
