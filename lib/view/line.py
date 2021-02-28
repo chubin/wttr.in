@@ -234,6 +234,16 @@ def render_zenith(data, query, local_time_of):
     Local time of zenith"""
     return local_time_of("noon")
 
+def render_local_time(data, query, local_time_of):
+    """local_time (T)
+    Local time"""
+    return "%{{NOW("+ local_time_of("TZ") +")}}"
+
+def render_local_timezone(data, query, local_time_of):
+    """local_time (Z)
+    Local time"""
+    return local_time_of("TZ")
+
 ##################################
 
 FORMAT_SYMBOL = {
@@ -257,6 +267,9 @@ FORMAT_SYMBOL_ASTRO = {
     'S':    render_sunrise,
     's':    render_sunset,
     'z':    render_zenith,
+
+    'T':    render_local_time,
+    'Z':    render_local_timezone,
 }
 
 def render_line(line, data, query):
@@ -282,7 +295,8 @@ def render_line(line, data, query):
                 .replace(hour=0, minute=0, second=0, microsecond=0)
         current_sun = sun(city.observer, date=datetime_day_start)
 
-        local_time_of = lambda x: current_sun[x]\
+        local_time_of = lambda x: city.timezone if x == "TZ" else \
+                                     current_sun[x]\
                                     .replace(tzinfo=pytz.utc)\
                                     .astimezone(local_tz)\
                                     .strftime("%H:%M:%S")

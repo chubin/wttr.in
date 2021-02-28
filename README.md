@@ -171,7 +171,9 @@ To specify your own custom output format, use the special `%`-notation:
     S    Sunrise*,
     z    Zenith*,
     s    Sunset*,
-    d    Dusk*.
+    d    Dusk*,
+    T    current time*,
+    Z    local timezone.
 
 (*times are shown in the local timezone)
 ```
