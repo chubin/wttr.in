@@ -6,6 +6,9 @@
    : Стелющийся туман                            : Shallow fog                         :
    : Ледяной дождь                               : Freezing rain                       :
    : Проливной дождь                             : Rain shower                         :
+   : Лёгкий снег с дождём                        : Light rain and snow                 :
+   : Снег с дождём                               : Snow shower                         :
+   : Сильный снег с дождём                       : Heave snow shower                   :
 113: Ясно                                        : Clear                               :
 113: Солнечно                                    : Sunny                               :
 116: Переменная облачность                       : Partly cloudy                       :
