@@ -25,7 +25,7 @@ from astral.sun import sun
 
 import pytz
 
-from constants import WWO_CODE, WEATHER_SYMBOL, WIND_DIRECTION, WEATHER_SYMBOL_WIDTH_VTE
+from constants import WWO_CODE, WEATHER_SYMBOL, WIND_DIRECTION, WEATHER_SYMBOL_WIDTH_VTE, WEATHER_SYMBOL_PLAIN
 from weather_data import get_weather_data
 from . import v2
 from . import v3
@@ -77,11 +77,14 @@ def render_feel_like_temperature(data, query):
 
     return temperature
 
-def render_condition(data, query):
+def render_condition(data, query, plain=False):
     """Emoji encoded weather condition (c)
     """
 
-    weather_condition = WEATHER_SYMBOL[WWO_CODE[data['weatherCode']]]
+    if plain:
+        weather_condition = WEATHER_SYMBOL_PLAIN[WWO_CODE[data['weatherCode']]]
+    else:
+        weather_condition = WEATHER_SYMBOL[WWO_CODE[data['weatherCode']]]
     spaces = " "*(WEATHER_SYMBOL_WIDTH_VTE.get(weather_condition) - 1)
 
     return weather_condition + spaces

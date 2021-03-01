@@ -147,8 +147,7 @@ WEATHER_SYMBOL_WI_NIGHT = {
     "VeryCloudy": "",
 }
 
-# https://github.com/chubin/wttr.in/issues/270#issue-409067058
-WEATHER_SYMBOL_TEXT = {
+WEATHER_SYMBOL_PLAIN = {
     "Unknown":             "?",
     "Cloudy":              "mm",
     "Fog":                 "=",
@@ -165,7 +164,7 @@ WEATHER_SYMBOL_TEXT = {
     "PartlyCloudy":        "m",
     "Sunny":               "o",
     "ThunderyHeavyRain":   "/!/",
-    "ThunderyShowers":     "",
+    "ThunderyShowers":     "!/",
     "ThunderySnowShowers": "*!*",
     "VeryCloudy": "mmm",
 }
