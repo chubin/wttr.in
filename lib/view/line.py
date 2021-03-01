@@ -77,14 +77,11 @@ def render_feel_like_temperature(data, query):
 
     return temperature
 
-def render_condition(data, query, plain=False):
+def render_condition(data, query):
     """Emoji encoded weather condition (c)
     """
 
-    if plain:
-        weather_condition = WEATHER_SYMBOL_PLAIN[WWO_CODE[data['weatherCode']]]
-    else:
-        weather_condition = WEATHER_SYMBOL[WWO_CODE[data['weatherCode']]]
+    weather_condition = WEATHER_SYMBOL[WWO_CODE[data['weatherCode']]]
     spaces = " "*(WEATHER_SYMBOL_WIDTH_VTE.get(weather_condition) - 1)
 
     return weather_condition + spaces
@@ -108,6 +105,15 @@ def render_condition_fullname(data, query):
         weather_condition = ''
 
     return weather_condition
+
+def render_condition_plain(data, query):
+    """Plain text weather condition (x)
+    """
+
+    weather_condition = WEATHER_SYMBOL_PLAIN[WWO_CODE[data['weatherCode']]]
+    spaces = " "*(WEATHER_SYMBOL_WIDTH_VTE.get(weather_condition) - 1)
+
+    return weather_condition + spaces
 
 def render_humidity(data, query):
     """
@@ -252,6 +258,7 @@ def render_local_timezone(data, query, local_time_of):
 FORMAT_SYMBOL = {
     'c':    render_condition,
     'C':    render_condition_fullname,
+    'x':    render_condition_plain,
     'h':    render_humidity,
     't':    render_temperature,
     'f':    render_feel_like_temperature,
