@@ -147,6 +147,29 @@ WEATHER_SYMBOL_WI_NIGHT = {
     "VeryCloudy": "",
 }
 
+# https://github.com/chubin/wttr.in/issues/270#issue-409067058
+WEATHER_SYMBOL_TEXT = {
+    "Unknown":             "?",
+    "Cloudy":              "mm",
+    "Fog":                 "=",
+    "HeavyRain":           "///",
+    "HeavyShowers":        "//",
+    "HeavySnow":           "**",
+    "HeavySnowShowers":    "*/*",
+    "LightRain":           "/",
+    "LightShowers":        ".",
+    "LightSleet":          "x",
+    "LightSleetShowers":   "x/",
+    "LightSnow":           "*",
+    "LightSnowShowers":    "*/",
+    "PartlyCloudy":        "m",
+    "Sunny":               "o",
+    "ThunderyHeavyRain":   "/!/",
+    "ThunderyShowers":     "",
+    "ThunderySnowShowers": "*!*",
+    "VeryCloudy": "mmm",
+}
+
 WEATHER_SYMBOL_WIDTH_VTE_WI = {
 }
 
