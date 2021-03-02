@@ -164,7 +164,7 @@ To specify your own custom output format, use the special `%`-notation:
     l    Location,
     m    Moonphase 🌑🌒🌓🌔🌕🌖🌗🌘,
     M    Moonday,
-    p    precipitation (mm),
+    p    precipitation (mm/3 hours),
     P    pressure (hPa),
 
     D    Dawn*,
