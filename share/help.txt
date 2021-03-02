@@ -13,7 +13,7 @@ Supported location types:
     /94107                  # area codes
     /-78.46,106.79          # GPS coordinates
 
-Special locations:
+Moon phase information:
 
     /moon                   # Moon phase (add ,+US or ,+France for these cities)
     /moon@2016-10-25        # Moon phase for the date (@2016-10-25)
