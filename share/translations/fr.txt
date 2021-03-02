@@ -6,7 +6,7 @@
 : Bruine                                           : Drizzle
 : Bruine légère                                    : Light drizzle
 : Chasse-neige basse                               : Low drifting snow
-: Pluie légère avec neige                          : Light rain and snow
+: Pluie et neige légères                           : Light rain and snow
 113 : Temps clair                                  : Clear
 113 : Ensoleillé                                   : Sunny
 116 : Partiellement couvert                        : Partly cloudy
