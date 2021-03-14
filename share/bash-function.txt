@@ -23,7 +23,7 @@ wttr() {
   command shift
   local args=""
   for p in $WTTR_PARAMS "$@"; do
-    args+=" --data-urlencode '$p' "
+    args+=" --data-urlencode $p "
   done
   curl -fGsS -H "Accept-Language: ${LANG%_*}" $args --compressed "wttr.in/${location}"
 }
