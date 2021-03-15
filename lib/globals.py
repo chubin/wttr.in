@@ -80,6 +80,8 @@ PLAIN_TEXT_AGENTS = [
     "python-requests",
     "openbsd ftp",
     "powershell",
+    "fetch",
+    "aiohttp",
 ]
 
 PLAIN_TEXT_PAGES = [':help', ':bash.function', ':translation', ':iterm2']
