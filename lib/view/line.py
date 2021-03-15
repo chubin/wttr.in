@@ -111,9 +111,8 @@ def render_condition_plain(data, query):
     """
 
     weather_condition = WEATHER_SYMBOL_PLAIN[WWO_CODE[data['weatherCode']]]
-    spaces = " "*(WEATHER_SYMBOL_WIDTH_VTE.get(weather_condition) - 1)
 
-    return weather_condition + spaces
+    return weather_condition
 
 def render_humidity(data, query):
     """
