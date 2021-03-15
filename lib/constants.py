@@ -147,6 +147,28 @@ WEATHER_SYMBOL_WI_NIGHT = {
     "VeryCloudy": "",
 }
 
+WEATHER_SYMBOL_PLAIN = {
+    "Unknown":             "?",
+    "Cloudy":              "mm",
+    "Fog":                 "=",
+    "HeavyRain":           "///",
+    "HeavyShowers":        "//",
+    "HeavySnow":           "**",
+    "HeavySnowShowers":    "*/*",
+    "LightRain":           "/",
+    "LightShowers":        ".",
+    "LightSleet":          "x",
+    "LightSleetShowers":   "x/",
+    "LightSnow":           "*",
+    "LightSnowShowers":    "*/",
+    "PartlyCloudy":        "m",
+    "Sunny":               "o",
+    "ThunderyHeavyRain":   "/!/",
+    "ThunderyShowers":     "!/",
+    "ThunderySnowShowers": "*!*",
+    "VeryCloudy": "mmm",
+}
+
 WEATHER_SYMBOL_WIDTH_VTE_WI = {
 }
 
