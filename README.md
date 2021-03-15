@@ -157,6 +157,7 @@ To specify your own custom output format, use the special `%`-notation:
 ```
     c    Weather condition,
     C    Weather condition textual name,
+    x    weather contidion, plain-text symbol,
     h    Humidity,
     t    Temperature (Actual),
     f    Temperature (Feels Like),
