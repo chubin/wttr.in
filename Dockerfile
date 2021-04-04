@@ -4,6 +4,7 @@ FROM golang:1-alpine as builder
 WORKDIR /app
 
 COPY ./share/we-lang/we-lang.go /app
+COPY ./share/we-lang/go.mod /app
 
 RUN apk add --no-cache git
 
