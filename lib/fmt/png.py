@@ -163,7 +163,7 @@ def _load_emojilib():
 
     emojilib = {}
     for filename in glob.glob("share/emoji/*.png"):
-        character = os.path.basename(filename)[:-4]
+        character = os.path.basename(filename)[:-3]
         emojilib[character] = \
             Image.open(filename).resize((CHAR_HEIGHT, CHAR_HEIGHT))
     return emojilib
@@ -183,7 +183,11 @@ def _gen_term(buf, graphemes, options=None):
     cols = max(len(x) for x in buf)
     rows = len(buf)
 
-    image = Image.new('RGB', (cols * CHAR_WIDTH, rows * CHAR_HEIGHT))
+    bg_color = 0
+    if "background" in options:
+        bg_color = _color_mapping(options["background"])
+
+    image = Image.new('RGB', (cols * CHAR_WIDTH, rows * CHAR_HEIGHT), color=bg_color)
 
     buf = buf[-ROWS:]
 
