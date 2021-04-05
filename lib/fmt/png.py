@@ -85,14 +85,17 @@ def render_ansi(text, options=None):
 
     return _gen_term(buf, graphemes, options=options)
 
-def _color_mapping(color):
+def _color_mapping(color, inverse=False):
     """Convert pyte color to PIL color
 
     Return: tuple of color values (R,G,B)
     """
 
     if color == 'default':
+        if inverse:
+            return 'black'
         return 'lightgray'
+
     if color in ['green', 'black', 'cyan', 'blue', 'brown']:
         return color
     try:
@@ -185,7 +188,7 @@ def _gen_term(buf, graphemes, options=None):
 
     bg_color = 0
     if "background" in options:
-        bg_color = _color_mapping(options["background"])
+        bg_color = _color_mapping(options["background"], options.get("inverted_colors"))
 
     image = Image.new('RGB', (cols * CHAR_WIDTH, rows * CHAR_HEIGHT), color=bg_color)
 
@@ -203,12 +206,12 @@ def _gen_term(buf, graphemes, options=None):
     for line in buf:
         x_pos = 0
         for char in line:
-            current_color = _color_mapping(char.fg)
+            current_color = _color_mapping(char.fg, options.get("inverted_colors"))
             if char.bg != 'default':
                 draw.rectangle(
                     ((x_pos, y_pos),
                      (x_pos+CHAR_WIDTH, y_pos+CHAR_HEIGHT)),
-                    fill=_color_mapping(char.bg))
+                    fill=_color_mapping(char.bg, options.get("inverted_colors")))
 
             if char.data == "!":
                 try:
