@@ -36,7 +36,7 @@ MYDIR = os.path.abspath(
     os.path.dirname(os.path.dirname('__file__')))
 sys.path.append("%s/lib/" % MYDIR)
 
-from globals import PROXY_CACHEDIR, PROXY_HOST, PROXY_PORT, USE_METNO, USER_AGENT
+from globals import PROXY_CACHEDIR, PROXY_HOST, PROXY_PORT, USE_METNO, USER_AGENT, MISSING_TRANSLATION_LOG
 from metno import create_standard_json_from_metno, metno_request
 from translations import PROXY_LANGS
 # pylint: enable=wrong-import-position
@@ -131,10 +131,22 @@ def translate(text, lang):
     If no translation found, leave it untouched.
     """
 
+    def _log_unknown_translation(lang, text):
+        with open(MISSING_TRANSLATION_LOG, "a") as f_missing_translation:
+            f_missing_translation.write("%s %s\n" % (lang, text))
+
     if "," in text:
         terms = text.split(",")
         translated_terms = [translate(term.strip(), lang) for term in terms]
         return ", ".join(translated_terms)
+
+    if lang not in TRANSLATIONS:
+        _log_unknown_translation(lang, "UNKNOWN_LANGUAGE")
+        return text
+
+    if text.lower() not in TRANSLATIONS.get(lang, {}):
+        _log_unknown_translation(lang, text)
+        return text
 
     translated = TRANSLATIONS.get(lang, {}).get(text.lower(), text)
     return translated

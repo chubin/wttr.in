@@ -35,6 +35,7 @@ PNG_CACHE = os.path.join(_DATADIR, "cache/png")
 LRU_CACHE = os.path.join(_DATADIR, "cache/lru")
 
 LOG_FILE = os.path.join(_LOGDIR, 'main.log')
+MISSING_TRANSLATION_LOG = os.path.join(_LOGDIR, 'missing-translation.log')
 
 ALIASES = os.path.join(MYDIR, "share/aliases")
 ANSI2HTML = os.path.join(MYDIR, "share/ansi2html.sh")
