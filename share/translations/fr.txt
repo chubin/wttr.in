@@ -1,3 +1,16 @@
+: Fortes pluies et orages de grêle                 : Heavy rain and hail with thunderstorm
+: Fortes pluies orageuses                          : Heavy rain with thunderstorm
+: Orages de pluie et grêle légères                 : Light rain and hail with thunderstorm
+: Pluie légère et averses                          : Light rain and snow shower
+: Pluies légères orageuses                         : Light rain with thunderstorm
+: Chutes de neige légères                          : Light snow shower
+: Nappes de brouillard                             : Parftial fog
+: Orage de pluie et de grêle                       : Rain and hail with thunderstorm
+: Pluies orageuses                                 : Rain with thunderstorm
+: Brouillard léger                                 : Shallow fog
+: Brume                                            : Smoke
+: Grains                                           : Squalls
+: Orages proches                                   : Thunderstorm in vicinity
 : Neige                                            : Snow
 : Pluie                                            : Rain
 : Pluie légère, Averses                            : Light Rain, Rain Shower
