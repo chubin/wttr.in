@@ -24,6 +24,11 @@
 : Pluie et orages                                  : Rain with thunderstorm
 : Averse de pluie et neige mêlées                  : Rain and snow shower
 : Orage                                            : Thunderstorm
+: Bruine et pluie                                  : Drizzle and rain
+: Orage de grêle                                   : Hail with thunderstorm
+: Brume                                            : Haze
+: Bruine legère et pluie                           : Light drizzle and rain
+: Orage, pluie légère et grèle / neige roulée      : Light rain and small hail/snow pallets with thunderstorm
 113 : Temps clair                                  : Clear
 113 : Ensoleillé                                   : Sunny
 116 : Partiellement couvert                        : Partly cloudy
