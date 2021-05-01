@@ -45,36 +45,3 @@
 389: أمطار مُعْتَدِلَةُ أو كَثيفة متفرِّقة مَصحوبة بالرَعد    : Moderate or heavy rain with thunder
 392: ثُلُوج خَفيفة متفرِّقة مَصحوبة بالرَعد                : Patchy light snow with thunder
 395: ثُلُوج مُعْتَدِلَةُ أو كَثيفة متفرِّقة مَصحوبة بالرَعد     : Moderate or heavy snow with thunder 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
