@@ -45,37 +45,3 @@
 389: Pioggia moderata o intensa con tuoni e fulmini :  Moderate or heavy rain with thunder
 392: Neve leggera a zone con tuoni                  :  Patchy light snow with thunder
 395: Neve moderata o pesante con tuoni              :  Moderate or heavy snow with thunder
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

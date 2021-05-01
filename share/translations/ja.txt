@@ -46,37 +46,3 @@
 389: 雷を伴う雨または強い雨             : Moderate or heavy rain with thunder
 392: 所により雷を伴う弱い雪             : Patchy light snow with thunder
 395: 雷を伴う雪または強い雪             : Moderate or heavy snow with thunder
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -45,38 +45,3 @@
 389: Ploaie moderată sau furtună cu tunete          :  Moderate or heavy rain with thunder
 392: Ninsoare ușoară cu tunete pe alocuri           :  Patchy light snow with thunder
 395: Ninsoare moderată sau abundentă cu tunete      :  Moderate or heavy snow with thunder
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

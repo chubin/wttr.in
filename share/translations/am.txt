@@ -45,37 +45,3 @@
 389: መለስተኛ ወይም ከባድ ዝናብ ከነጎድጓድ ጋር  : Moderate or heavy rain with thunder
 392: ቀላል በረዶ ከነጎድጓድ ጋር                : Patchy light snow with thunder
 395: መለስተኛ ወይም ከባድ በረዶ ከነጎድጓድ ጋር   : Moderate or heavy snow with thunder
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

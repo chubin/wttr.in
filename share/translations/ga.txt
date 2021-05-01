@@ -45,37 +45,3 @@
 389: Báisteach measartha nó throm le tóirneach : Moderate or heavy rain with thunder
 392: Sneachta éadrom le toirneach       : Patchy light snow with thunder
 395: Sneachta measartha nó trom le toirneach : Moderate or heavy snow with thunder
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

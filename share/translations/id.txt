@@ -45,37 +45,3 @@
 389: Hujan dengan petir                     : Moderate or heavy rain with thunder
 392: Salju ringan dengan petir tidak merata : Patchy light snow with thunder
 395: Salju dengan petir                     : Moderate or heavy snow with thunder
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

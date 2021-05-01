@@ -45,37 +45,3 @@
 389:                                    : Moderate or heavy rain with thunder
 392:                                    : Patchy light snow with thunder
 395:                                    : Moderate or heavy snow with thunder
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

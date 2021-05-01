@@ -45,37 +45,3 @@
 389: ฝนตกและมีฟ้าผ่าปานกลางหรือหนัก               : Moderate or heavy rain with thunder :
 392: หิมะตกและมีฟ้าผ่าเป็นหย่อม ๆ                  : Patchy light snow with thunder      :
 395: หิมะตกและมีฟ้าผ่าปานกลางหรือหนัก              : Moderate or heavy snow with thunder :
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

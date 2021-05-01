@@ -45,37 +45,3 @@
 389: Umiarkowane lub silne opady deszczu i burza z piorunami  : Moderate or heavy rain with thunder
 392: Miejscowe lekkie opady śniegu i burza z piorunami        : Patchy light snow with thunder
 395: Umiarkowane lub silne opady śniegu i burza z piorunami   : Moderate or heavy snow with thunder
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

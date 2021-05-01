@@ -46,37 +46,3 @@
 389: Glaw cymedrol neu trwm gyda mellt  : Moderate or heavy rain with thunder
 392: Eira ysgafn anghyson gyda mellt    : Patchy light snow with thunder
 395: Eira cymedrol neu trwm gyda mellt  : Moderate or heavy snow with thunder
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
