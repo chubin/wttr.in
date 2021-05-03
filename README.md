@@ -94,7 +94,12 @@ wttr.in currently supports five output formats:
 * JSON for scripts and APIs;
 * Prometheus metrics for scripts and APIs.
 
-The ANSI and HTML formats are selected basing on the User-Agent string.
+The ANSI and HTML formats are selected based on the User-Agent string.
+
+To force plain text, which disables colors:
+
+    $ curl wttr.in/?T
+
 The PNG format can be forced by adding `.png` to the end of the query:
 
     $ wget wttr.in/Paris.png
@@ -157,24 +162,24 @@ To specify your own custom output format, use the special `%`-notation:
 ```
     c    Weather condition,
     C    Weather condition textual name,
-    x    weather contidion, plain-text symbol,
+    x    Weather condition, plain-text symbol,
     h    Humidity,
     t    Temperature (Actual),
     f    Temperature (Feels Like),
     w    Wind,
     l    Location,
-    m    Moonphase 🌑🌒🌓🌔🌕🌖🌗🌘,
-    M    Moonday,
-    p    precipitation (mm/3 hours),
-    P    pressure (hPa),
+    m    Moon phase 🌑🌒🌓🌔🌕🌖🌗🌘,
+    M    Moon day,
+    p    Precipitation (mm/3 hours),
+    P    Pressure (hPa),
 
     D    Dawn*,
     S    Sunrise*,
     z    Zenith*,
     s    Sunset*,
     d    Dusk*,
-    T    current time*,
-    Z    local timezone.
+    T    Current time*,
+    Z    Local timezone.
 
 (*times are shown in the local timezone)
 ```
@@ -208,7 +213,7 @@ To see emojis in terminal, you need:
 1. Terminal support for emojis (was added to Cairo 1.15.8);
 2. Font with emojis support.
 
-For the Emoji font, we recommend *Noto Color Emoji*, and a good alternative option would be the *Emoji One* font;
+For the emoji font, we recommend *Noto Color Emoji*, and a good alternative option would be the *Emoji One* font;
 both of them support all necessary emoji glyphs.
 
 Font configuration:
@@ -249,9 +254,9 @@ cause strange effects similar to that described in #579.
 In the experimental data-rich output format, that is available under the view code `v2`,
 a lot of additional weather and astronomical information is available:
 
-* Temperature, and precepetation changes forecast throughout the days;
+* Temperature, and precipitation changes forecast throughout the days;
 * Moonphase for today and the next three days;
-* The current weather condition, temperature, humidity, windspeed and direction, pressure;
+* The current weather condition, temperature, humidity, wind speed and direction, pressure;
 * Timezone;
 * Dawn, sunrise, noon, sunset, dusk time for he selected location;
 * Precise geographical coordinates for the selected location.
@@ -313,7 +318,7 @@ or directly in browser:
 
 The map view currently supports three formats:
 
-* PNG (for browser and messangers);
+* PNG (for browser and messengers);
 * Sixel (terminal inline images support);
 * IIP (terminal with iterm2 inline images protocol support).
 
@@ -429,18 +434,18 @@ in the full-output mode:
 
     $ curl wttr.in/Moon
 
-Get the Moon phase for a particular date by adding `@YYYY-MM-DD`:
+Get the moon phase for a particular date by adding `@YYYY-MM-DD`:
 
     $ curl wttr.in/Moon@2016-12-25
 
-The Moon phase information uses [pyphoon](https://github.com/chubin/pyphoon) as its backend.
+The moon phase information uses [pyphoon](https://github.com/chubin/pyphoon) as its backend.
 
 To get the moon phase information in the online mode, use `%m`:
 
     $ curl wttr.in/London?format=%m
     🌖
 
-Keep in mind that the Unicode representation of moonphases suffers 2 caveats:
+Keep in mind that the Unicode representation of moon phases suffers 2 caveats:
 
 - With some fonts, the representation `🌘` is ambiguous, for it either seem
   almost-shadowed or almost-lit, depending on whether your terminal is in
