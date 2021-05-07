@@ -23,7 +23,7 @@ Translated/improved/corrected by:
     * Croatian:             Siniša Kusić @ku5ic
     * Czech:                Juraj Kakody
     * Danish:               Kim Schulz @kimusan (on github)
-    * Dutch:                Youri Claes
+    * Dutch:                Youri Claes, Edwin Martin @edwinm
     * Esperanto:            Igor Chubin
     * Estonian:             Jaan Jänesmäe @janesmae (on github)
     * Finnish:              @Maxifi
