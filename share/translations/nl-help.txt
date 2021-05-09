@@ -1,45 +1,55 @@
 Gebruik:
 
     $ curl wttr.in              # huidige locatie
-    $ curl wttr.in/muc          # het weer in Munic's vliegveld
+    $ curl wttr.in/muc          # weer op de luchthaven van München
 
-Ondersteunde locatie soorten:
+Ondersteunde locatiesoorten:
 
     /paris                      # stadsnaam
-    /~Eiffel+tower              # elke locatie
-    /Москва                     # Unicode naam van elke locatie in elke taal
-    /muc                        # vliegveld codes (3 letters)
+    /~Eiffel+tower              # elke locatie (+ for spaties)
+    /Москва                     # Unicodenaam van elke locatie in elke taal
+    /muc                        # vliegveldcode (3 letters)
     /@stackoverflow.com         # domeinnaam
-    /94107                      # gebieds code
-    /-78.46,106.76              # GPS coördinaten
+    /94107                      # gebiedscode
+    /-78.46,106.76              # GPS-coördinaten
 
-Specialen locaties:
+Maanstand informatie:
 
-    /moon                       # Maanstand (voeg ,+US or ,+France voor deze plekken)
+    /moon                       # Maanstand (voeg ,+US of ,+France toe voor deze plekken)
     /moon@2016-10-25            # Maanstand op deze datum (@2016-10-25)
 
 Eenheden:
 
-    ?m                          # metriek (SI) (gebruikt als standaard overal behalve US)
-    ?u                          # USCS (standaard in US)
-    ?M                          # laat wind snelheid in m/s zien
+    m                          # metriek (SI) (overal gebruikt als standaard behalve in US)
+    u                          # USCS (standaard in US)
+    M                          # laat windsnelheid in m/s zien
 
 Beeld opties:
 
-    ?0                          # alleen huidig weer
-    ?1                          # huidig weer + 1 dag
-    ?2                          # huidig weer + 2 dag
-    ?n                          # smalle versie (alleen dag en nacht)
-    ?q                          # stille versie (geen "Weerbericht" tekst)
-    ?Q                          # superstille versie (geen " Weerbericht", geen stadsnaam)
-    ?T                          # wissel terminal volgorde off (geen kleur)
+    0                          # alleen huidig weer
+    1                          # huidig weer + verwachting voor vandaag
+    2                          # huidig weer + verwachting voor vandaag en morgen
+    A                          # negeer User-Agent en forceer ANSI uitvoerformaat (terminal)
+    F                          # Toon niet de "Follow" regel
+    n                          # smalle versie (alleen dag en nacht)
+    q                          # stille versie (geen "Weerbericht" tekst)
+    Q                          # superstille versie (geen "Weerbericht", geen stadsnaam)
+    T                          # schakel terminalcodes uit (geen kleur)
 
 PNG opties:
 
-    /paris.png                  # genereerd een PNG bestand
-    ?p                          # voegt een frame rond de output
+    /paris.png                  # genereert een PNG-bestand
+    ?p                          # voegt een rand toe rond de uitvoer
     ?t                          # transparantie 150
-    transparency=...            # transparantie van 0 to 255 (255 is niet doorzichtig)
+    transparency=...            # transparantie van 0 to 255 (255 is ondoorzichtig)
+    background=...              # achtergrondkleur in formaat RRGGBB, bijv. 00aaaa
+
+  Opties kunnen worden gecombineerd:
+
+      /Paris?0pq
+      /Paris?0pq&lang=fr
+      /Paris_0pq.png          # in PNG het bestandstype specificeren achter _
+      /Rome_0pq_lang=it.png   # lange opties worden gescheiden met _
 
 Lokalisatie:
 
@@ -49,12 +59,12 @@ Lokalisatie:
 
 Ondersteunde talen:
 
-	de fr id it nb ru (ondersteund)
-    ar az be bg bs ca cy cs da el eo es et fi hi hr hu hy is ja jv ka kk ko ky lt lv mk ml nl nn pt pl ro sk sl sr sr-lat sv sw th tr uk uz vi zh zu he (mee bezig)
+    FULL_TRANSLATION (supported)
+    PARTIAL_TRANSLATION (in progress)
 
 Speciale URLs:
 
-	/:help						# laat help pagina zien
-	/:bash.function				# laat voorgestelde wttr() functie zien voor in bash
-	/:translation				# laat the informatie van de vertalers zien
+	/:help						# toon helppagina
+	/:bash.function		# toon voorgestelde wttr() bash-functie
+	/:translation			# toon informatie van de vertalers
 
