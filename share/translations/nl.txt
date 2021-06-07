@@ -1,3 +1,34 @@
+: Zware regen en hagel met onweer                      : Heavy rain and hail with thunderstorm
+: Zware regen met onweer                               : Heavy rain with thunderstorm
+: Lichte regen en hagel met onweer                     : Light rain and hail with thunderstorm
+: Lichte regen en sneeuwbui                            : Light rain and snow shower
+: Lichte regen met onweer                              : Light rain with thunderstorm
+: Lichte sneeuwbui                                     : Light snow shower
+: Plaatselijke mist                                    : Parftial fog
+: Regen en hagel met onweer                            : Rain and hail with thunderstorm
+: Regen met onweer                                     : Rain with thunderstorm
+: Lichte mist                                          : Shallow fog
+: Nevel                                                : Smoke
+: Windstoten                                           : Squalls
+: Onweer in de buurt                                   : Thunderstorm in vicinity
+: Sneeuw                                               : Snow
+: Regen                                                : Rain
+: Lichte regen, regenbuien                             : Light Rain, Rain Shower
+: Regenbuien                                           : Rain Shower
+: Plaatselijke mist                                    : Patches of fog
+: Motregen                                             : Drizzle
+: Lichte motregen                                      : Light drizzle
+: Laag stuifsneeuw                                     : Low drifting snow
+: Lichte regen en sneeuw                               : Light rain and snow
+: Buien in de buurt                                    : Shower in vicinity
+: Regen met onweer                                     : Rain with thunderstorm
+: Regen en sneeuwbuien                                 : Rain and snow shower
+: Onweer                                               : Thunderstorm
+: Motregen en regen                                    : Drizzle and rain
+: Hagel met onweer                                     : Hail with thunderstorm
+: Nevel                                                : Haze
+: Lichte motregen en regen                             : Light drizzle and rain
+: Lichte regen en korrelhagel/sneeuwpallets met onweer : Light rain and small hail/snow pallets with thunderstorm
 113: Helder                               : Clear
 113: Zonnig                               : Sunny
 116: Deels bewolkt                        : Partly cloudy
