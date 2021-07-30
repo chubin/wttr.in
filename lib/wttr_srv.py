@@ -57,6 +57,7 @@ def show_text_file(name, lang):
         text = text\
                 .replace('NUMBER_OF_LANGUAGES', str(len(SUPPORTED_LANGS)))\
                 .replace('SUPPORTED_LANGUAGES', ' '.join(SUPPORTED_LANGS))
+    logging.debug(f'Showing text for {name}')
     return text
 
 def _client_ip_address(request):
@@ -199,25 +200,32 @@ def _response(parsed_query, query, fast_mode=False):
     answer = cache.get(cache_signature)
 
     if parsed_query['orig_location'] in PLAIN_TEXT_PAGES:
+        logging.debug('Returning static data page')
         answer = show_text_file(parsed_query['orig_location'], parsed_query['lang'])
         if parsed_query['html_output']:
             answer = render_template('index.html', body=answer)
 
     if answer or fast_mode:
+        logging.debug('Returning cached result. Or failing on fast_mode.')
         return answer
 
     # at this point, we could not handle the query fast,
     # so we handle it with all available logic
     loc = (parsed_query['orig_location'] or "").lower()
+    logging.debug(f'No luck with cache for "{loc}", getting data for real.')
     if parsed_query.get("view"):
+        logging.debug(f'Querying wttr_line: {query}')
         output = wttr_line(query, parsed_query)
     elif loc == 'moon' or loc.startswith('moon@'):
+        logging.debug(f'Querying moon')
         output = get_moon(parsed_query)
     else:
+        logging.debug(f'Querying wetter')
         output = get_wetter(parsed_query)
 
     if parsed_query.get('png_filename'):
         if parsed_query.get("view") != "v3":
+            logging.debug(f'Rendering results into a png')
             # originally it was just a usual function call,
             # but it was a blocking call, so it was moved
             # to separate threads:
@@ -230,6 +238,7 @@ def _response(parsed_query, query, fast_mode=False):
         if query.get('days', '3') != '0' \
             and not query.get('no-follow-line') \
             and ((parsed_query.get("view") or "v2")[:2] in ["v2", "v3"]):
+            logging.debug(f'Follow section not disabled, rendering schwag.')
             if parsed_query['html_output']:
                 output = add_buttons(output)
             else:
@@ -237,7 +246,7 @@ def _response(parsed_query, query, fast_mode=False):
                 if parsed_query.get('no-terminal', False):
                     message = remove_ansi(message)
                 output += '\n' + message + '\n'
-
+    logging.debug(f'Slow mode complete')
     return cache.store(cache_signature, output)
 
 def parse_request(location, request, query, fast_mode=False):
@@ -374,7 +383,9 @@ def wttr(location, request):
     try:
         if not response:
             parsed_query = parse_request(location, request, query)
+            logging.debug(f'Query: {parsed_query}')
             response = _response(parsed_query, query)
+            logging.debug(f'Result: {response}')
             #if not response or (isinstance(response, str) and not response.strip()):
             #    return RuntimeError("Empty answer")
 

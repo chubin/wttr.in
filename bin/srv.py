@@ -21,7 +21,7 @@ import wttr_srv
 from globals import TEMPLATES, STATIC, LISTEN_HOST, LISTEN_PORT
 # pylint: enable=wrong-import-position,wrong-import-order
 
-from view.v3 import v3_file
+# from view.v3 import v3_file
 
 MY_LOADER = jinja2.ChoiceLoader([
     APP.jinja_loader,
@@ -30,12 +30,12 @@ MY_LOADER = jinja2.ChoiceLoader([
 
 APP.jinja_loader = MY_LOADER
 
-@APP.route('/v3/<string:location>')
-def send_v3(location):
-    filepath = v3_file(location)
-    if filepath.startswith("ERROR"):
-        return filepath.rstrip("\n") + "\n"
-    return send_file(filepath)
+# @APP.route('/v3/<string:location>')
+# def send_v3(location):
+#     filepath = v3_file(location)
+#     if filepath.startswith("ERROR"):
+#         return filepath.rstrip("\n") + "\n"
+#     return send_file(filepath)
 
 @APP.route('/files/<path:path>')
 def send_static(path):

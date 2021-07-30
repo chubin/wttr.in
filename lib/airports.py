@@ -1,9 +1,9 @@
 import csv
 
-AIRPORTS_DAT_FILE = '/home/igor/wttrin-geo/share/airports.dat'
+from globals import AIRPORTS_DAT
 
 def load_aiports_index():
-    file_ = open(AIRPORTS_DAT_FILE, "r")
+    file_ = open(AIRPORTS_DAT, "r")
     reader = csv.reader(file_)
     airport_index = {}
 
