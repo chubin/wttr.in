@@ -58,7 +58,7 @@ Translated/improved/corrected by:
     * Spanish:              Fernando Bitti Loureiro @fbitti (on github)
     * Swedish:              John Eriksson
     * Swahili:              Joel Mukuthu
-    * Turkish:              Atabey Kaygun, Yilmaz @edigu, Volkan Tokmak(@volkanto)
+    * Turkish:              Atabey Kaygun, Yilmaz @edigu, Volkan Tokmak(@volkanto), Oğuz Ersen
     * Thai:                 Vatunyoo Suwannapisit @kerlos
     * Ukrainian:            Igor Chubin, Serhiy @pavse
     * Uzbek:                Shukhrat Mukimov
