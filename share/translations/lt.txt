@@ -1,0 +1,47 @@
+113: Giedra                                  : Clear                               :
+113: Saulėta                                 : Sunny                               :
+116: Nepastoviai debesuota                   : Partly cloudy                       :
+119: Debesuota su pragiedruliais             : Cloudy                              :
+122: Debesuota                               : Overcast                            :
+143: Migla                                   : Mist                                :
+176: Galimas silpnas lietus                  : Patchy rain possible                :
+179: Galimas nedidelis snygis                : Patchy snow possible                :
+182: Galima nedidelė šlapdriba               : Patchy sleet possible               :
+185: Galima nedidelė lijundra                : Patchy freezing drizzle possible    :
+200: Spėjama perkūnija                       : Thundery outbreaks possible         :
+227: Pustymas                                : Blowing snow                        :
+230: Pūga                                    : Blizzard                            :
+248: Rūkas                                   : Fog                                 :
+260: Šarma                                   : Freezing fog                        :
+263: Protarpiais dulksna                     : Patchy light drizzle                :
+266: Dulksna                                 : Light drizzle                       :
+281: Lijundra                                : Freezing drizzle                    :
+284: Stipri lijundra                         : Heavy freezing drizzle              :
+293: Protarpiais silpnas lietus              : Patchy light rain                   :
+296: Silpnas lietus                          : Light rain                          :
+299: Protarpiais lietus                      : Moderate rain at times              :
+302: Lietus                                  : Moderate rain                       :
+305: Protarpiais stiprus lietus              : Heavy rain at times                 :
+308: Stiprus lietus                          : Heavy rain                          :
+311: Silpna lijundra                         : Light freezing rain                 :
+314: Vidutinė arba stipri lijundra           : Moderate or heavy freezing rain     :
+317: Lengva šlapdriba                        : Light sleet                         :
+320: Vidutinė arba stipri šlapdriba          : Moderate or heavy sleet             :
+323: Protarpiais lengvas snygis              : Patchy light snow                   :
+326: Lengvas snygis                          : Light snow                          :
+329: Protarpiais vidutinis snygis            : Patchy moderate snow                :
+332: Snygis                                  : Moderate snow                       :
+335: Protarpiais stiprus snygis              : Patchy heavy snow                   :
+338: Stiprus snygis                          : Heavy snow                          :
+350: Kruša                                   : Ice pellets                         :
+353: Nesmarki liūtis                         : Light rain shower                   :
+356: Vidutinė arba smarki liūtis             : Moderate or heavy rain shower       :
+359: Smarki liūtis                           : Torrential rain shower              :
+362: Protarpiais lengva šlapdriba            : Light sleet showers                 :
+365: Protarpiais vidutinė/smarki šlapdriba   : Moderate or heavy sleet showers     :
+368: Protarpiais lengvas snygis              : Light snow showers                  :
+371: Protarpiais vidutinis/sunkus snygis     : Moderate or heavy snow showers      :
+386: Protarpiais lengvas lietūs su perkūnija : Patchy light rain with thunder      :
+389: Vidutinis/sunkus lietus su perkūnija    : Moderate or heavy rain with thunder :
+392: Protarpiais lengvas snygis su perkūija  : Patchy light snow with thunder      :
+395: Vidutinis/sunkus snygis su perkūnija    : Moderate or heavy snow with thunder :
