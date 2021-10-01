@@ -43,6 +43,7 @@ Translated/improved/corrected by:
     * Kazakh:               Akku Tutkusheva, Oleg Tropinin
     * Korean:               Jeremy Bae @opt9, Jung Winter @res_tin
     * Latvian:              Gunārs Danovskis
+    * Lithuanian	    Juras Rutavičius
     * Macedonian:           Matej Plavevski @MatejMecka
     * Norwegian:            Fredrik Fjeld @fredrikfjeld
     * Nynorsk:              Kevin Brubeck Unhammer (https://unhammer.org/k/)
