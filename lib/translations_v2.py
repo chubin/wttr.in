@@ -28,7 +28,7 @@ V2_TRANSLATION = {
     "fi": ("Säätiedotus:",                  "", "", "", "", "", "", "", ""),
     "fr": ("Prévisions météo pour :",       "Météo", "Fuseau Horaire", "Heure", "Aube", "Lever du Soleil", "Zénith", "Coucher du Soleil", "Crépuscule"),
     "fy": ("Waarberjocht foar:",            "", "", "", "", "", "", "", ""),
-    "ga": ("Réamhaisnéis na haimsire do:",  "", "", "", "", "", "", "", ""),
+    "ga": ("Réamhaisnéis na haimsire do:",  "Aimsir", "Crios ama", "Anois", "Breacadh an lae", "Éirí na gréine", "Forar", "Dul faoi na gréine", "Coineascar"),
     "he": (":ריוואה גזמ תיזחת",             "", "", "", "", "", "", "", ""),
     "hi": ("मौसम की जानकारी",               "मौसम", "समय मण्डल", "अभी", "उदय", "सूर्योदय", "चरम बिन्दु", "सूर्यास्त", "संध्याकाल"),
     "hr": ("Vremenska prognoza za:",        "", "", "", "", "", "", "", ""),
