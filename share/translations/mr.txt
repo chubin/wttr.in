@@ -1,0 +1,80 @@
+﻿
+: मुसळधार पाऊस, गारा व झंझावात		: Heavy rain and hail with thunderstorm
+: मुसळधार पाऊस व झंझावात		: Heavy rain with thunderstorm
+: हलका पाऊस, गारा व झंझावात		: Light rain and hail with thunderstorm
+: हलका पाऊस व हिमवर्षाव		: Light rain and snow shower
+: हलका पाऊस व झंझावात		: Light rain with thunderstorm
+: हलका हिमवर्षाव		: Light snow shower
+
+: आंशिक दाट धुके		: Parftial fog
+: पाऊस, गारा व झंझावात		                      : Rain and hail with thunderstorm
+: पाऊस व झंझावात		                      : Rain with thunderstorm
+: उथळ दाट धुके                                : Shallow fog
+: धूर                                            : Smoke
+: चंडवात                                           : Squalls
+: झंझावात जवळपास                                   : Thunderstorm in vicinity
+: हिमवर्षाव                                            : Snow
+: पाऊस                                             : Rain
+: हलका पाऊस, पावसाच्या सरी                    : Light Rain, Rain Shower
+: पावसाच्या सरी                                          : Rain Shower
+: तुरळक दाट धुके                                : Patches of fog
+: रिमझिम                                           : Drizzle
+: हलका रिमझिम पाऊस                                    : Light drizzle
+: कमी वाहणारे बर्फ                               : Low drifting snow
+: हलका पाऊस आणि बर्फ                           : Light rain and snow
+: पावसाची सर जवळपास                                  : Shower in vicinity
+: पाऊस व झंझावात                                  : Rain with thunderstorm
+: पाऊस व हिमवर्षाव                  : Rain and snow shower
+: झंझावात                                            : Thunderstorm
+: रिमझिम व पाऊस                                  : Drizzle and rain
+: गारा व झंझावात                                   : Hail with thunderstorm
+: विरळ धुके                                            : Haze
+: हलका रिमझिम व पाऊस                           : Light drizzle and rain
+: झंझावात सह हलका पाऊस व लहान गारा      : Light rain and small hail/snow pallets with thunderstorm
+113 : स्वच्छ                                  : Clear
+113 : ऊन                                   : Sunny
+116 : काहीसे ढगाळ                        : Partly cloudy
+119 : ढगाळ                                      : Cloudy
+122 : खिन्न                                      : Overcast
+143 : धुके                                      : Mist
+176 : तुरळक पावसाची शक्यता                     : Patchy rain possible
+179 : तुरळक बर्फाची शक्यता            : Patchy snow possible
+182 : तुरळक हिमयुक्त पावसाची शक्यता     : Patchy sleet possible
+185 : तुरळक थंड रिमझिमची शक्यता          : Patchy freezing drizzle possible
+200 : झंझावाताची शक्यता                              : Thundery outbreaks possible
+227 : वाहणारा बर्फ                                    : Blowing snow
+230 : हिमवादळ                                     : Blizzard
+248 : दाट धुके                                  : Fog
+260 : थंड दाट धुके                           : Freezing fog
+263 : Bruines éparses et légères                   : Patchy light drizzle
+266 : Bruine légère                                : Light drizzle
+281 : Bruine givrante                              : Freezing drizzle
+284 : Forte bruine givrante                        : Heavy freezing drizzle
+293 : Pluies éparses et légères                    : Patchy light rain
+296 : Pluie légère                                 : Light rain
+299 : Pluie modérée intermittente                  : Moderate rain at times
+302 : Pluie modérée                                : Moderate rain
+305 : Forte pluie intermittente                    : Heavy rain at times
+308 : Forte pluie                                  : Heavy rain
+311 : Pluie verglaçante légère                     : Light freezing rain
+314 : Pluie verglaçante modérée à forte            : Moderate or heavy freezing rain
+317 : Chutes légères de neige fondue               : Light sleet
+320 : Chutes de neige fondue modérées à fortes     : Moderate or heavy sleet
+323 : Chutes de neige éparses et légères           : Patchy light snow
+326 : Chutes de neige légères                      : Light snow
+329 : Chutes de neige éparses et modérées          : Patchy moderate snow
+332 : Chutes de neige modérées                     : Moderate snow
+335 : Fortes chutes de neige éparses               : Patchy heavy snow
+338 : Fortes chutes de neige                       : Heavy snow
+350 : Grésil                                       : Ice pellets
+353 : Averses légères                              : Light rain shower
+356 : Averses modérées à fortes                    : Moderate or heavy rain shower
+359 : Averses torrentielles                        : Torrential rain shower
+362 : Averses légères de neige fondue              : Light sleet showers
+365 : Averses de neige fondue modérées à fortes    : Moderate or heavy sleet showers
+368 : Averses de neige légères                     : Light snow showers
+371 : Averses de neige modérées à fortes           : Moderate or heavy snow showers
+386 : Pluies orageuses légères et éparses          : Patchy light rain with thunder
+389 : Pluies orageuses modérées à fortes           : Moderate or heavy rain with thunder
+392 : Chutes de neige orageuses légères et éparses : Patchy light snow with thunder
+395 : Chutes de neige orageuses modérées à fortes  : Moderate or heavy snow with thunder
