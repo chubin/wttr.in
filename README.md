@@ -78,10 +78,11 @@ To get detailed information online, you can access the [/:help](http://wttr.in/:
 ### Weather Units
 
 By default the USCS units are used for the queries from the USA and the metric system for the rest of the world.
-You can override this behavior by adding `?u` or `?m` to a URL like this:
+You can override this behavior by adding `?u`, `?m` or `?M`   to a URL like this:
 
-    $ curl wttr.in/Amsterdam?u
-    $ curl wttr.in/Amsterdam?m
+    $ curl wttr.in/Amsterdam?u  # USCS (used by default in US)
+    $ curl wttr.in/Amsterdam?m  # metric (SI) (used by default everywhere except US)
+    $ curl wttr.in/Amsterdam?M  # metric (SI), but show wind speed in m/s
 
 ## Supported output formats and views
 
