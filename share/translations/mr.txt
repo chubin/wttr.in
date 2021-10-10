@@ -33,7 +33,7 @@
 113 : ऊन                        : Sunny
 116 : काहीसे ढगाळ                   : Partly cloudy
 119 : ढगाळ                       : Cloudy
-122 : खिन्न                       : Overcast
+122 : मळभ                       : Overcast
 143 : धुके                        : Mist
 176 : तुरळक पावसाची शक्यता            : Patchy rain possible
 179 : तुरळक बर्फाची शक्यता            : Patchy snow possible
