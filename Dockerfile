@@ -30,7 +30,7 @@ RUN apk add --no-cache --virtual .build \
     g++ \
     gcc \
     jpeg-dev \
-    llvm10-dev\
+    llvm11-dev\
     make \
     zlib-dev \
     && apk add --no-cache \
@@ -41,7 +41,7 @@ RUN apk add --no-cache --virtual .build \
     py3-gevent \
     zlib \
     jpeg \
-    llvm10 \
+    llvm11 \
     libtool \
     supervisor \
     py3-numpy-dev \
