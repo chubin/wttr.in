@@ -1,0 +1,78 @@
+: तेज बारिश और गरज के साथ ओलावृष्टि                    : Heavy rain and hail with thunderstorm
+: गरज के साथ तेज बारिश                              : Heavy rain with thunderstorm
+: गरज के साथ हल्की बारिश और ओलावृष्टि                  : Light rain and hail with thunderstorm
+: हल्की बारिश और बर्फ की बौछार                        : Light rain and snow shower
+: गरज के साथ हल्की बारिश                             : Light rain with thunderstorm
+: हल्की बर्फ़ की बौछार                                 : Light snow shower
+: आंशिक कोहरा                                      : Paftial fog
+: गरज के साथ बारिश और ओलावृष्टि                       : Rain and hail with thunderstorm
+: गरज के साथ बारिश                                 : Rain with thunderstorm
+: उथला कोहरा                                 : Shallow fog
+: धुआं                                            : Smoke
+: तूफ़ान                                           : Squalls
+: आसपास में आंधी                                  : Thunderstorm in vicinity
+: हिमपात                                            : Snow
+: वर्षा                                            : Rain
+: हल्की बारिश, बारिश की बौछार                         : Light Rain, Rain Shower
+: बारिश की बौछार                                    : Rain Shower
+: कोहरे के धब्बे                                       : Patches of fog
+: बूंदा बांदी                                           : Drizzle
+: हल्की बूंदाबांदी                                    : Light drizzle
+: कम बहती बर्फ                                     : Low drifting snow
+: हल्की बारिश और हिमपात                              : Light rain and snow
+: आस-पास शावर                                  : Shower in vicinity
+: गरज के साथ बारिश                                  : Rain with thunderstorm
+: बारिश और बर्फ की बौछार                            : Rain and snow shower
+: आंधी तूफान                                            : Thunderstorm
+: बूंदा बांदी और बारिश                                  : Drizzle and rain
+: गरज के साथ ओलावृष्टि                                   : Hail with thunderstorm
+: धुंध                                            : Haze
+: हल्की बूंदा बांदी और बारिश                           : Light drizzle and rain
+: गरज के साथ हल्की बारिश और छोटे-छोटे ओले/बर्फ की पट्टियां     : Light rain and small hail/snow pallets with thunderstorm
+113 :स्पष्ट                                  : Clear
+113 : धूपदार                                   : Sunny
+116 : आंशिक रूप से बादल छाएंगे                        : Partly cloudy
+119 : बादल                                      : Cloudy
+122 : घटाटोप                                      : Overcast
+143 : कोहरा                                      : Mist
+176 : हल्की बारिश संभव                     : Patchy rain possible
+179 : हल्की बर्फ़बारी संभव            : Patchy snow possible
+182 : पैची स्लीव संभव     : Patchy sleet possible
+185 : जमने वाली हल्की बूंदाबांदी संभव          : Patchy freezing drizzle possible
+200 :गरज का प्रकोप संभव                             : Thundery outbreaks possible
+227 : उड़ाने बर्फ                                    : Blowing snow
+230 : बर्फानी तूफान                                     : Blizzard
+248 : कोहरा                                   : Fog
+260 : अत्यधिक ठंडा कोहरा                           : Freezing fog
+263 : हल्की हल्की बूंदा बांदी                   : Patchy light drizzle
+266 : हल्की बूंदाबांदी                                : Light drizzle
+281 : जमा देने वाली हवा                              : Freezing drizzle
+284 : भारी जमने वाली बूंदा बांदी                        : Heavy freezing drizzle
+293 : हल्की हल्की बारिश                  : Patchy light rain
+296 : हलकी बारिश                                 : Light rain
+299 : अंतराल पर मध्यम बारिश                  : Moderate rain at times
+302 : औसत दर्जे की वर्षा                                : Moderate rain
+305 : रुक-रुक कर हो रही भारी बारिश                    : Heavy rain at times
+308 : भारी वर्षा                                        : Heavy rain
+311 : बर्फ़ीली बारिश, रोशनी: Light freezing rain
+314 : मध्यम से भारी जमने वाली बारिश            : Moderate or heavy freezing rain
+317 : हल्की ओलावृष्टि हिमपात               : Light sleet
+320 : मध्यम से भारी नींद     : Moderate or heavy sleet
+323 : छिटपुट और हल्की बर्फबारी           : Patchy light snow
+326 : हल्की बर्फबारी                      : Light snow
+329 : छिटपुट और मध्यम हिमपात          : Patchy moderate snow
+332 : मध्यम हिमपात                     : Moderate snow
+335 : भारी छिटपुट हिमपात               : Patchy heavy snow
+338 : भारी हिमपात                       : Heavy snow
+350 : ओले के साथ वर्षा                                       : Ice pellets
+353 : हल्की बोछारे                              : Light rain shower
+356 : मध्यम से भारी वर्षा                    : Moderate or heavy rain shower
+359 : मूसलाधार बारिश                        : Torrential rain shower
+362 : हल्की नींद की बौछारें              : Light sleet showers
+365 : मध्यम से भारी वर्षा    : Moderate or heavy sleet showers
+368 : हल्की बर्फ़बारी                     : Light snow showers
+371 : मध्यम से भारी हिमपात           : Moderate or heavy snow showers
+386 : हल्की और छिटपुट आंधी बारिश          : Patchy light rain with thunder
+389 : मध्यम से तेज़ आंधी           : Moderate or heavy rain with thunder
+392 : हल्की और बिखरी हुई तूफानी बर्फबारी : Patchy light snow with thunder
+395 : मध्यम से भारी तूफानी हिमपात  : Moderate or heavy snow with thunder
