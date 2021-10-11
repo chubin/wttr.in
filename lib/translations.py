@@ -15,7 +15,7 @@ PARTIAL_TRANSLATION = [
     "az", "bg", "bs", "cy", "cs",
     "eo", "es", "eu", "fi", "ga", "hi", "hr",
     "hy", "is", "ja", "jv", "ka", "kk",
-    "ko", "ky", "lv", "mk", "ml", "nl", "fy",
+    "ko", "ky", "lv", "mk", "ml", "mr", "nl", "fy",
     "nn", "pt", "pt-br", "sk", "sl", "sr", 
     "sr-lat", "sv", "sw", "te", "uz", "zh",
     "zu", "he",
@@ -26,7 +26,7 @@ PROXY_LANGS = [
     "cy", "de", "el", "eo", "et", "eu", "fa", "fr",
     "fy", "ga", "he", "hr", "hu", "hy",
     "ia", "id", "is", "it", "ja", "kk",
-    "lt", "lv", "mk", "nb", "nn", "oc", 
+    "lt", "lv", "mk", "mr", "nb", "nn", "oc",
     "ro", "ru", "sl", "th", "pt-br", "uk", 
     "uz", "vi", "zh-cn", "zh-tw",
 ]
