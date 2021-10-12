@@ -4,10 +4,10 @@ wttr.in is a console-oriented weather forecast service that supports various inf
 representation methods like terminal-oriented ANSI-sequences for console HTTP clients
 (curl, httpie, or wget), HTML for web browsers, or PNG for graphical viewers.
 
-wttr.in uses [wego](http://github.com/schachmat/wego) for visualization
+wttr.in uses [wego](https://github.com/schachmat/wego) for visualization
 and various data sources for weather forecast information.
 
-You can see it running here: [wttr.in](http://wttr.in).
+You can see it running here: [wttr.in](https://wttr.in).
 
 ## Usage
 
@@ -25,7 +25,7 @@ You can access the service from a shell or from a Web browser like this:
 
 Here is an actual weather report for your location (it's live!):
 
-![Weather Report](http://wttr.in/MyLocation.png?)
+![Weather Report](https://wttr.in/MyLocation.png?)
 
 (It's not your actual location - GitHub's CDN hides your real IP address with its own IP address,
 but it's still a live weather report in your language.)
@@ -33,7 +33,7 @@ but it's still a live weather report in your language.)
 Or in PowerShell:
 
 ```PowerShell
-Invoke-RestMethod http://wttr.in
+Invoke-RestMethod https://wttr.in
 ```
 
 Want to get the weather information for a specific location? You can add the desired location to the URL in your
@@ -70,7 +70,7 @@ You can also use IP-addresses (direct) or domain names (prefixed with `@`) to sp
     $ curl wttr.in/@github.com
     $ curl wttr.in/@msu.ru
 
-To get detailed information online, you can access the [/:help](http://wttr.in/:help) page:
+To get detailed information online, you can access the [/:help](https://wttr.in/:help) page:
 
     $ curl wttr.in/:help
 
@@ -498,7 +498,7 @@ The third option is to choose the language using the DNS name used in the query:
 
 wttr.in is currently translated into 54 languages, and the number of supported languages is constantly growing.
 
-See [/:translation](http://wttr.in/:translation) to learn more about the translation process,
+See [/:translation](https://wttr.in/:translation) to learn more about the translation process,
 to see the list of supported languages and contributors, or to know how you can help to translate wttr.in
 in your language.
 
@@ -510,7 +510,7 @@ There are currently two Windows related issues that prevent the examples found o
 
 ### Garbage characters in the output
 There is a limitation of the current Win32 version of `curl`. Until the [Win32 curl issue](https://github.com/chubin/wttr.in/issues/18#issuecomment-474145551) is resolved and rolled out in a future Windows release, it is recommended that you use Powershell’s `Invoke-Web-Request` command instead:
-- `(Invoke-WebRequest http://wttr.in).Content`
+- `(Invoke-WebRequest https://wttr.in).Content`
 
 ### Missing or double wide diagonal wind direction characters
 The second issue is regarding the width of the diagonal arrow glyphs that some Windows Terminal Applications such as the default `conhost.exe` use. At the time of writing this, `ConEmu.exe`, `ConEmu64.exe` and Terminal Applications built on top of ConEmu such as Cmder (`cmder.exe`) use these double-wide glyphs by default. The result is the same with all of these programs, either a missing character for certain wind directions or a broken table in the output or both. Some third-party Terminal Applications have addressed the wind direction glyph issue but that fix depends on the font and the Terminal Application you are using.
