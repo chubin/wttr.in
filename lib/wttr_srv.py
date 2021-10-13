@@ -10,7 +10,7 @@ import io
 import os
 import time
 from gevent.threadpool import ThreadPool
-from flask import render_template, send_file, make_response
+from flask import render_template, send_file, make_response, request, redirect
 
 import fmt.png
 
@@ -38,6 +38,14 @@ logging.basicConfig(filename=LOG_FILE, level=logging.INFO, format='%(asctime)s %
 LIMITS = Limits(whitelist=[MY_EXTERNAL_IP], limits=QUERY_LIMITS)
 
 TASKS = ThreadPool(25)
+
+
+@app.before_request
+def force_https():
+    if not request.is_secure:
+        url = request.url.replace('http://', 'https://', 1)
+        code = 301
+        return redirect(url, code=code)
 
 def show_text_file(name, lang):
     """
