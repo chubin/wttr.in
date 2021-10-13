@@ -1,0 +1,66 @@
+Fampiasana azy:
+
+    $ curl wttr.in                # toetr'andro eo amin'ny toerana misy anao
+    $ curl wttr.in/antananarivo   # totr'andro any Antananarivo
+
+Karazana toerana azo ampesaina:
+
+    /fianarantsoa           # nom de la ville
+    /~Eiffel+tower          # anaran-toerana rehetra
+    /Москва                 # anarana Unikody na anaran-toerana rehetra amin'ny fiteny rehetra
+    /tnr                    # kaody ny seranam-piaramanidina (litera 3)
+    /@stackoverflow.com     # anarana domaina (rohy)
+    /94107                  # Kaody postaly (hoan'ny Etazonia iany)
+    /-78.46,106.79          # coordonnées GPS
+
+Toerana somary miavaka:
+
+    /moon                   # Dignana ny volana(ampio ,+US ou ,+France raha toa ka misy toerana mitondra anio anarana io)
+    /moon@2016-10-25        # Dignana ny volana hoan'ny daty iray(@2016-10-25)
+
+Refy:
+
+    ?m                      # rafitra metrika (fampiasain'ny rehetra afatsy ny Amerika Avaratra)
+    ?u                      # USCS (Fampiasan'ny Etazonia)
+    ?M                      # mampiseho ny hafainganam-pandehan'ny rivotra amin'ny metatra isan-segondra
+
+Fomba fampisehoana:
+
+    ?0                      # androany fotsiny
+    ?1                      # androany sy rampitso
+    ?2                      # androany miampy roa andro
+    ?n                      # kinova fohy (atoandro sy ariva fotsiny)
+    ?q                      # kinova tsotra (tsisy "Vinavina ny totrandro androany")
+    ?Q                      # version super-silencieuse (pas d'en-tête "Prévisions météo pour", pas de nom de la ville)
+    ?T                      # séquences d'échappement pour terminaux désactivées (pas de couleurs)
+
+Fomba fampisehoana sary PNG:
+
+    /antananarivo.png       # mamoka sary PNG
+    ?p                      # manisy kadra manodidina ilay seho mivoaka
+    ?t                      # transparency 150 (fangaraharana 150)
+    transparency=...        # fangaraharana ao anatin'ny 0 atramin'ny 255 (255 = tsisy fangaraharana)
+
+Manambatra anireo safidy:
+
+    /antananarivo?0pq
+    /antananarivo?0pq&lang=mg
+    /antananarivo_0pq.png          # raha toa ka mampiasa fampisehoana aminn'ny sary PNG dia asina tsipik'ambany `_` manelanelana azy
+    /Rome_0pq_lang=it.png          # ireo safidy lava dia sarahina amin'ny tsipik'ambany `_` ian'ny koa 
+
+Toerana:
+
+    $ curl fr.wttr.in/antananarivo
+    $ curl wttr.in/antananarivo?lang=mg
+    $ curl -H "Accept-Language: mg" wttr.in/paris
+
+Langues supportées:
+
+    FULL_TRANSLATION (Voadika teny tanteraka)
+    PARTIAL_TRANSLATION (Voadika teny ampahany)
+
+URLs particulières:
+
+    /:help                  # mampiseho ito pejy ito
+    /:bash.function         # sosokevitra fonction bash wttr()
+    /:translation           # mampahafantra ny momba ny fandikanteny ao amin'ny wttr.in
