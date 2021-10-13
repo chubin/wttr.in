@@ -1,0 +1,77 @@
+: Oram-be manavandra sy oram-baratra                            : Heavy rain and hail with thunderstorm
+: Oram-be sy oram-baratra                                       : Heavy rain with thunderstorm
+: Oram-baratra malefaka sy  manavandra                          : Light rain and hail with thunderstorm
+: Orana malefaka sy ranomandry                                  : Light rain and snow shower
+: Oranam-baratra malefaka                                       : Light rain with thunderstorm
+: Orana malefaka ranomandry                                     : Light snow shower
+: Zavona ampahany                                               : Partial fog
+: Oram-baratra manavandra                                       : Rain and hail with thunderstorm
+: Zavona malefaka                                               : Shallow fog
+: Zavona                                                        : Smoke
+: Oram-baratra                                                  : Squalls
+: Orages proches                                                : Thunderstorm in vicinity
+: Oram-panala                                                   : Snow
+: Orana                                                         : Rain
+: Orana malefaka                                                : Light Rain, Rain Shower
+: Ranonorana                                                    : Rain Shower
+: Vongan-zavona                                                 : Patches of fog
+: Pitipitik'orana                                               : Drizzle
+: Pitipitik'orana                                               : Light drizzle
+: Oram-panala mitsoka ambany                                    : Low drifting snow
+: Oram-panala malefaka                                          : Light rain and snow
+: Oram-be manakaiky                                             : Shower in vicinity
+: Oram-baratra                                                  : Rain with thunderstorm
+: Oram-be sy oram-panala                                        : Rain and snow shower
+: Ora-mikija                                                    : Thunderstorm
+: Pitipitik'orana                                               : Drizzle and rain
+: Oram-be manavandra                                            : Hail with thunderstorm
+: Zavona                                                        : Haze
+: Zavona arahin'orana                                           : Light drizzle and rain
+: Ora-mikija, orana malefaka et avandra / Oram-panala           : Light rain and small hail/snow pallets with thunderstorm
+113 : Tsara ny andro                                            : Clear
+113 : Masoandro mibalika                                        : Sunny
+116 : Rakodrahona ampahany                                      : Partly cloudy
+119 : Rakodrahona                                               : Cloudy
+122 : Manjombona                                                : Overcast
+143 : Zavona                                                    : Mist
+176 : Mety hanorana matevina                                    : Patchy rain possible
+179 : Mety hisy oram-panala matevina                            : Patchy snow possible
+182 : Mety hanerika kely                                        : Patchy sleet possible
+185 : Mety hisy zavona mandry sy matevina                       : Patchy freezing drizzle possible
+200 : Mety hisy Ora-mikija                                      : Thundery outbreaks possible
+227 : Oram-panala                                               : Blowing snow
+230 : Tafiotran’orampanala                                      : Blizzard
+248 : Zavona                                                    : Fog
+260 : Zavona mangatsiaka                                        : Freezing fog
+263 : Zavona matevina                                           : Patchy light drizzle
+266 : Zavona malefakaa                                          : Light drizzle
+281 : Zavona mandry                                             : Freezing drizzle
+284 : Zavona mangatsika mafy                                    : Heavy freezing drizzle
+293 : Orana matevina                                            : Patchy light rain
+296 : Orana malefaka                                            : Light rain
+299 : Orana malefaka miverimberina                              : Moderate rain at times
+302 : Orana malefaka                                            : Moderate rain
+305 : Oram-be miverimberina                                     : Heavy rain at times
+308 : Oram-be                                                   : Heavy rain
+311 : Orana mangatsiaka                                         : Light freezing rain
+314 : Orana malefaka na mafy mangatsiaka                        : Moderate or heavy freezing rain
+317 : Tafiotran’orampanala maivana                              : Light sleet
+320 : Tafiotran’orampanala malefaka na mafy                     : Moderate or heavy sleet
+323 : Oram-panala matevina                                      : Patchy light snow
+326 : Oram-panala maivana                                       : Light snow
+329 : Oram-panala malefaka                                      : Patchy moderate snow
+332 : Latsakoram-panala malefaka                                : Moderate snow
+335 : Oram-panala mavesatra sy matevina                         : Patchy heavy snow
+338 : Oram-panala mafy                                          : Heavy snow
+350 : Pitipitika ranomandro                                     : Ice pellets
+353 : Oram-be malefaka                                          : Light rain shower
+356 : Orana antoniny sy mavesatra                               : Moderate or heavy rain shower
+359 : Oram-be mikija                                            : Torrential rain shower
+362 : Pitipitik'oram-panala mikija                              : Light sleet showers
+365 : Pitipitik'oram-panala malefaka na mavesatra               : Moderate or heavy sleet showers
+368 : Pitipitik'oram-panala maivana                             : Light snow showers
+371 : Rotsak'oram-panala maivana sy mavesatra                   : Moderate or heavy snow showers
+386 : Oram-baratra matevina                                     : Patchy light rain with thunder
+389 : Oram-baratra malefaka na mavesatra                        : Moderate or heavy rain with thunder
+392 : Rotsak'oram-panala maivana arahim-baratra                 : Patchy light snow with thunder
+395 : Rotsak'oram-panala malefaka na mavesatra arahim-baratra   : Moderate or heavy snow with thunder
