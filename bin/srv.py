@@ -10,8 +10,16 @@ import sys
 import os
 import jinja2
 
-from flask import Flask, request, send_from_directory, send_file
+from flask import Flask, request, send_from_directory, send_file, redirect
+
 APP = Flask(__name__)
+
+@APP.before_request
+def force_https():
+    if not request.is_secure:
+        url = request.url.replace('http://', 'https://', 1)
+        code = 301
+        return redirect(url, code=code)
 
 MYDIR = os.path.abspath(
     os.path.dirname(os.path.dirname('__file__')))
