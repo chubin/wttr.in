@@ -5,10 +5,13 @@ to select data source basing on location, or on the user's preferences.
 
 ## Possible data sources
 
-* OpenWeatherMap
-* AccuWeather
-* Windy.com
-* yr.no
+* [Open weather map](https://openweathermap.org/)
+* [Accu weather](https://www.accuweather.com/)
+* [Windy](https://www.windy.com/?26.953,75.711,5)
+* [Yr](https://www.yr.no/nb)
 * [BBC WeatherFeeds](https://support.bbc.co.uk/platform/feeds/WeatherFeeds.htm)
-* http://www.bom.gov.au
-
+* [Bom](http://www.bom.gov.au)
+* [IMD](https://mausam.imd.gov.in/)
+* [darksky](https://darksky.net/forecast/40.7127,-74.0059/us12/en)
+* [weather bug](https://www.weatherbug.com/)
+* [weather underground](https://www.wunderground.com/)
