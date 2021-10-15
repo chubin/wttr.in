@@ -29,6 +29,8 @@ Ustawienia wyświetlania:
     ?0                      # Pokaż jedynie aktualną pogodę
     ?1                      # Pokaż pogodę na jutro
     ?2                      # Pokaż pogodę na pojutrze
+    ?A                      # Zignoruj User-Agent i wymuś format wyjścia ANSI (terminal)
+    ?F                      # nie pokazuj linii "Subskrybuj"
     ?n                      # Wersja kompaktowa (tylko noc i dzień)
     ?q                      # Wersja okrojona (bez tekstu 'Pogoda w')
     ?Q                      # Wersja bardziej okrojona (bez tekstu 'Pogoda w' i nazwy miasta)
@@ -36,10 +38,11 @@ Ustawienia wyświetlania:
 
 Opcje PNG:
 
-    /paris.png              # generuje plik PNG
-    ?p                      # dodaje obramowanie do obrazka
+    /paris.png              # Generuje plik PNG
+    ?p                      # Dodaje obramowanie do obrazka
     ?t                      # Przezroczystość 150
     transparency=...        # Przezroczystość między 0 a 255 (255 = brak przezroczystości)
+    background=...          # Kolor tła w formie RRGGBB
 
 Opcje mogą być ze sobą łączone:
 
