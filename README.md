@@ -333,7 +333,7 @@ Terminal with inline images protocols support:
 | mlterm                |   X11     |   yes         |   Sixel   |
 | kitty                 |   X11     |   yes         |   Kitty   |
 | wezterm               |   X11     |   yes         |   IIP     |
-| aminal                |   X11     |   yes         |   Sixel   |
+| Darktile              |   X11     |   yes         |   Sixel   |
 | Jexer                 |   X11     |   yes         |   Sixel   |
 | GNOME Terminal        |   X11     |   [in-progress](https://gitlab.gnome.org/GNOME/vte/-/issues/253) |   Sixel   |
 | alacritty             |   X11     |   [in-progress](https://github.com/alacritty/alacritty/issues/910) |  Sixel   |
