@@ -10,6 +10,7 @@ to select data source basing on location, or on the user's preferences.
 * [Windy](https://www.windy.com/?26.953,75.711,5)
 * [Yr](https://www.yr.no/nb)
 * [BBC WeatherFeeds](https://support.bbc.co.uk/platform/feeds/WeatherFeeds.htm)
+* https://weather.gc.ca
 * [Bom](http://www.bom.gov.au)
 * [IMD](https://mausam.imd.gov.in/)
 * [darksky](https://darksky.net/forecast/40.7127,-74.0059/us12/en)
