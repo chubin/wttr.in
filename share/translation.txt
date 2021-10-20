@@ -43,6 +43,7 @@ Translated/improved/corrected by:
     * Kazakh:               Akku Tutkusheva, Oleg Tropinin
     * Korean:               Jeremy Bae @opt9, Jung Winter @res_tin
     * Latvian:              Gunārs Danovskis
+    * Lithuanian	    Juras Rutavičius
     * Macedonian:           Matej Plavevski @MatejMecka
     * Norwegian:            Fredrik Fjeld @fredrikfjeld
     * Nynorsk:              Kevin Brubeck Unhammer (https://unhammer.org/k/)
@@ -58,7 +59,7 @@ Translated/improved/corrected by:
     * Spanish:              Fernando Bitti Loureiro @fbitti (on github)
     * Swedish:              John Eriksson
     * Swahili:              Joel Mukuthu
-    * Turkish:              Atabey Kaygun, Yilmaz @edigu, Volkan Tokmak(@volkanto)
+    * Turkish:              Atabey Kaygun, Yilmaz @edigu, Volkan Tokmak(@volkanto), Oğuz Ersen
     * Thai:                 Vatunyoo Suwannapisit @kerlos
     * Ukrainian:            Igor Chubin, Serhiy @pavse
     * Uzbek:                Shukhrat Mukimov

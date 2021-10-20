@@ -6,19 +6,19 @@ Translation of almost everything.
 
 FULL_TRANSLATION = [
     "am", "ar", "af", "be", "ca", "da", "de", "el", "et",
-    "fr", "fa", "hi", "hu", "ia", "id", "it",
+    "fr", "fa", "hi", "hu", "ia", "id", "it", "lt",
     "nb", "nl", "oc", "pl", "pt-br", "ro",
-    "ru", "tr", "th", "uk", "vi", "zh-cn", "zh-tw"
+    "ru", "tr", "th", "uk", "vi", "zh-cn", "zh-tw",
 ]
 
 PARTIAL_TRANSLATION = [
     "az", "bg", "bs", "cy", "cs",
     "eo", "es", "eu", "fi", "ga", "hi", "hr",
     "hy", "is", "ja", "jv", "ka", "kk",
-    "ko", "ky", "lt", "lv", "mk", "ml", "nl", "fy",
-    "nn", "pt", "pt-br", "sk", "sl", "sr", "sr-lat",
-    "sv", "sw", "te", "uz",
-    "zh", "zu", "he",
+    "ko", "ky", "lv", "mk", "ml", "mr", "nl", "fy",
+    "nn", "pt", "pt-br", "sk", "sl", "sr", 
+    "sr-lat", "sv", "sw", "te", "uz", "zh",
+    "zu", "he",
 ]
 
 PROXY_LANGS = [
@@ -26,9 +26,9 @@ PROXY_LANGS = [
     "cy", "de", "el", "eo", "et", "eu", "fa", "fr",
     "fy", "ga", "he", "hr", "hu", "hy",
     "ia", "id", "is", "it", "ja", "kk",
-    "lv", "mk", "nb", "nn", "oc", "ro",
-    "ru", "sl", "th", "pt-br", "uk", "uz",
-    "vi", "zh-cn", "zh-tw",
+    "lt", "lv", "mk", "mr", "nb", "nn", "oc",
+    "ro", "ru", "sl", "th", "pt-br", "uk", 
+    "uz", "vi", "zh-cn", "zh-tw",
 ]
 
 SUPPORTED_LANGS = FULL_TRANSLATION + PARTIAL_TRANSLATION
@@ -176,6 +176,11 @@ Ci auguriamo che le condizioni dove lei si trova siano migliori!
 지정된 장소를 찾을 수 없습니다,
 대신 오이먀콘의 일기 예보를 표시합니다,
 오이먀콘은 지구상에서 가장 추운 곳에 위치한 마을입니다!
+""",
+        'lt': u"""
+Mums nepavyko rasti jūsų vietovės,
+todėl mes nukreipėme jus į Omjakoną,
+vieną iš šalčiausių nuolatinių gyvenviečių planetoje.
 """,
         'lv': u"""
 Mēs nevarējām atrast jūsu atrašanās vietu tādēļ nogādājām jūs Oimjakonā,
@@ -332,6 +337,7 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
         'ja': u'未知の場所です',
         'ko': u'알 수 없는 장소',
         'kk': u'',
+        'lt': u'Nežinoma vietovė',
         'lv': u'Nezināma atrašanās vieta',
         'mk': u'Непозната локација',
         'nb': u'Ukjent sted',
@@ -387,6 +393,7 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
         'ja': u'位置情報',
         'ko': u'위치',
         'kk': u'',
+        'lt': u'Vietovė',
         'lv': u'Atrašanās vieta',
         'mk': u'Локација',
         'nb': u'Sted',
@@ -558,6 +565,13 @@ Potete seguire https://twitter.com/igor_chubin per gli aggiornamenti.
 업데이트 소식을 원하신다면 https://twitter.com/igor_chubin 을 팔로우 해주세요.
 ======================================================================================
 """,
+        'lt': u"""
+Atsiprašome, šiuo metu pasiekėme orų prognozės paslaugos užklausų ribą.
+Štai orų prognozė numatomam miestui (tam, kad parodytume, kaip ji atrodo).
+Naujas užklausas priimsime, kai tik galėsime.
+Atnaujinimus galite sekti https://twitter.com/igor_chubin
+======================================================================================
+""",
         'lv': u"""
 Atvainojiet, uz doto brīdi mēs esam mazliet noslogoti.
 Šeit ir laika ziņas noklusējuma pilsētai (lai parādītu jums, kā izskatās izveidotais ziņojums).
@@ -723,6 +737,7 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
         'it': u'Nuove funzionalità: nomi delle località multilingue \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) e ricerca della località \033[92mwttr.in/~Kilimanjaro\033[0m (basta premettere ~)',
         'ko': u'새로운 기능: 다국어로 대응된 위치 \033[92mwttr.in/서울\033[0m (UTF-8에서) 장소 검색 \033[92mwttr.in/~Kilimanjaro\033[0m (앞에 ~를 붙이세요)',
         'kk': u'',
+        'lt': u'Naujiena: daugiakalbiai vietovių pavadinimai \033[92mwttr.in/станция+Восток\033[0m (UTF-8) ir vietovių paieška \033[92mwttr.in/~Kilimanjaro\033[0m (tiesiog priekyje pridėkite ~)',
         'lv': u'Jaunums: Daudzvalodu atrašanās vietu nosaukumi \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) un dabas objektu meklēšana \033[92mwttr.in/~Kilimanjaro\033[0m (tikai priekšā pievieno ~)',
         'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
         'oc': u'Novèla foncionalitat : nom de lòc multilenga \033[92mwttr.in/станция+Восток\033[0m (en UTF-8) e recèrca de lòc \033[92mwttr.in/~Kilimanjaro\033[0m (solament ajustatz ~ abans)',        
@@ -766,6 +781,7 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
         'it': u'Seguite \033[46m\033[30m@igor_chubin\033[0m per aggiornamenti a wttr.in',
         'ko': u'wttr.in의 업데이트 소식을 원하신다면 \033[46m\033[30m@igor_chubin\033[0m 을 팔로우 해주세요',
         'kk': u'',
+        'lt': u'wttr.in atnaujinimus sekite \033[46m\033[30m@igor_chubin\033[0m',
         'lv': u'Seko \033[46m\033[30m@igor_chubin\033[0m , lai uzzinātu wttr.in jaunumus',
         'mk': u'Следете \033[46m\033[30m@igor_chubin\033[0m за wttr.in новости',
         'nb': u'Følg \033[46m\033[30m@igor_chubin\033[0m for wttr.in oppdateringer',

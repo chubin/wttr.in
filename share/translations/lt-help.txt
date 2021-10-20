@@ -1,0 +1,69 @@
+Naudojimas:
+
+    $ curl wttr.in          # dabartinė vietovė
+    $ curl wttr.in/plq      # oras Palangos oro uoste
+
+Palaikomos vietovių rūšys:
+
+    /panemunė               # miesto pavadinimas
+    /~Eiffel+tower          # bet kuri vietovė (+ vietoj tarpų)
+    /Магілёў                # bet kurios vietovės pavadinimas Unikodu
+    /plq                    # oro uosto kodas (3 raidės)
+    /@stackoverflow.com     # domeno vardas
+    /94107                  # pašto kodas (tik JAV)
+    /-78.46,106.79          # GPS koordinatės
+
+Mėnulio fazių informacija:
+
+    /moon                   # Mėnulio fazė (pridėkite ,+US arba +,France šio pavadinimo miestams)
+    /moon@2016-10-25        # Mėnulio fazė datai (@2016-10-25)
+
+Matai:
+
+    ?m                      # metrai (SI) (pagal nutylėjimą, naudojama visu išskyrus JAV)
+    ?u                      # USCS (pagal nutylėjimą, naudojama JAV)
+    ?M                      # vėjo greitis m/s
+
+Rodymo parinktys:
+
+    ?0                      # tik faktiniai orai
+    ?1                      # faktiniai orai + šiandienos prognozė
+    ?2                      # faktiniai orai + šiandienos + rytojaus prognozės
+    A                       # ignoruoti naudotojo agentą (User-Agent) ir priverstinai formatuoti išvestį į ANSI (terminale)
+    F                       # nerodyti eilutės apie atnaujinimų sekimą
+    n                       # siaura versija (tik diena ir naktis)
+    q                       # tylesnė versija (be teksto „Orų prognozė“)
+    Q                       # labai tyli versija (be teksto „Orų prognozė“ ir be vietovės pavadinimo
+    T                       # išjungti terminalo sekas (be spalvų)
+
+PNG parinktys:
+
+    /panemunė.png           # sukurti PNG failą
+    p                       # apvesti išvestį rėmeliu
+    t                       # skaidrumas 150
+    transparency=...        # skaidrumas nuo 0 iki 255 (255 = neskaidrus)
+    background=...	    # fono spalva RRGGBB forma, pvz., 00aaaa
+
+Parinktis galima jungti:
+
+    /Panemunė?0pq
+    /Panemunė?0pq&lang=lt
+    /Panemunė_0pq.png          # PNG failo pobūdis nurodomas po _
+    /Rēzekne_0pq_lang=lv.png   # ilgavardės parinktys atskiriamos apatiniu brūkšniu
+
+Kalbos:
+
+    $ curl lt.wttr.in/Panemunė
+    $ curl wttr.in/panemunė?lang=lt
+    $ curl -H "Accept-Language: lt" wttr.in/panemunė
+
+Palaikomos kalbos
+
+    FULL_TRANSLATION (išverstos)
+    PARTIAL_TRANSLATION (tebeverčiamos)
+
+Ypatingi URL:
+
+    /:help                  # rodyti šį puslapį
+    /:bash.function         # rodyti rekomenduojamą bash funkciją wttr()
+    /:translation           # rodyti informaciją apie vertėjus
