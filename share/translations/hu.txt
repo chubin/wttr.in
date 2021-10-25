@@ -52,3 +52,4 @@
    : Havazás                             : Snow
    : Eső                                 : Rain
    : Gyenge eső                          : Light Rain
+   : Talajmenti köd                      : Shallow fog
