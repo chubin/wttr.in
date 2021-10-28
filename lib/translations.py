@@ -8,7 +8,7 @@ FULL_TRANSLATION = [
     "am", "ar", "af", "be", "ca", "da", "de", "el", "et",
     "fr", "fa", "hi", "hu", "ia", "id", "it", "lt",
     "nb", "nl", "oc", "pl", "pt-br", "ro",
-    "ru", "tr", "th", "uk", "vi", "zh-cn", "zh-tw",
+    "ru", "tr", "th", "uk", "vi", "zh-cn", "zh-tw", "mg",
 ]
 
 PARTIAL_TRANSLATION = [
@@ -18,7 +18,7 @@ PARTIAL_TRANSLATION = [
     "ko", "ky", "lv", "mk", "ml", "mr", "nl", "fy",
     "nn", "pt", "pt-br", "sk", "sl", "sr", 
     "sr-lat", "sv", "sw", "te", "uz", "zh",
-    "zu", "he",
+    "zu", "he", 
 ]
 
 PROXY_LANGS = [
@@ -28,7 +28,7 @@ PROXY_LANGS = [
     "ia", "id", "is", "it", "ja", "kk",
     "lt", "lv", "mk", "mr", "nb", "nn", "oc",
     "ro", "ru", "sl", "th", "pt-br", "uk", 
-    "uz", "vi", "zh-cn", "zh-tw",
+    "uz", "vi", "zh-cn", "zh-tw", "mg",
 ]
 
 SUPPORTED_LANGS = FULL_TRANSLATION + PARTIAL_TRANSLATION
@@ -304,6 +304,10 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
 所以我們帶您到奧伊米亞康，
 這個星球上有人類定居最冷之處。
 """,
+        'mg': u"""
+Tsy hita ny toerana misy anao koa nentinay tany Oymyakon ianao,
+iray amin'ireo toerana mangatsiaka indrindra tsisy mponina eto an-tany.
+""",
     },
 
     'UNKNOWN_LOCATION': {
@@ -361,6 +365,7 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
         'zh': u'未知地点',
         'vi': u'Địa điểm không xác định',
         'zh-tw': u'未知位置',
+        'mg': u'Toerana tsy fantatra',
     },
 
     'LOCATION': {
@@ -416,6 +421,7 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
         'uk': u'Місцезнаходження',
         'vi': u'Địa điểm',
         'zh-tw': u'位置',
+        'mg': u'Toerana',
     },
 
     'CAPACITY_LIMIT_REACHED': {
@@ -705,6 +711,13 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
 您可以追蹤 https://twitter.com/igor_chubin 以取得更新。
 ======================================================================================
 """,
+        'mg': u"""
+Miala tsiny fa misedra olana ny sampan-draharaha momba ny toetrandro amin'izao fotoana izao.
+Ity ny tatitra momba ny toetr'andro ho an'ny tanàna mahazatra (mba hampisehoana anao ny endriny).
+Haivaly aminao haingana ny fangatahanao.
+Azonao atao ny manaraka ny pejy https://twitter.com/igor_chubin.
+======================================================================================
+""",
     },
 
     # Historical messages:
@@ -755,6 +768,7 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
         'uk': u'Спробуйте: назви місць будь-якою мовою \033[92mwttr.in/станція+Восток\033[0m (в UTF-8) та пошук місць \033[92mwttr.in/~Kilimanjaro\033[0m (потрібно додати ~ спочатку)',
         'vi': u'Chức năng mới: tên địa điểm đa ngôn ngữ \033[92mwttr.in/станция+Восток\033[0m (dùng UTF-8) và tìm kiếm địa điểm \033[92mwttr.in/~Kilimanjaro\033[0m (chỉ cần thêm ~ phía trước)',
         'zh-tw': u'新功能：多語言地點名稱 \033[92mwttr.in/станция+Восток\033[0m （使用 UTF-8 編碼）與位置搜尋 \033[92mwttr.in/~Kilimanjaro\033[0m （只要在地點前加 ~ 就可以了）',
+        'mg': u'Fanatsrana vaovao: anarana toerana amin\'ny fiteny maro\033[92mwttr.in/станция+Восток\033[0m (en UTF-8) sy fitadiavana toerana \033[92mwttr.in/~Kilimanjaro\033[0m (ampio ~ fotsiny eo aloha)',
     },
 
     'FOLLOW_ME': {
@@ -802,6 +816,7 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
         'uk': u'Нові можливості wttr.in публікуються тут: \033[46m\033[30m@igor_chubin\033[0m',
         'vi': u'Theo dõi \033[46m\033[30m@igor_chubin\033[0m để cập nhật thông tin về wttr.in',
         'zh-tw': u'追蹤 \033[46m\033[30m@igor_chubin\033[0m 以取得更多 wttr.in 的動態',
+        'mg': u'Araho ao ny pejy \033[46m\033[30m@igor_Chubin\033[0m raha toa ka te hahazo vaovao momban\'ny wttr.in',
     },
 }
 CAPTION = {
@@ -871,6 +886,7 @@ CAPTION = {
     "zh": u"天气预报：",
     "zu": u"Isimo sezulu:",
     "zh-tw": u"天氣報告：",
+    "mg": u"Toetr\'andro any :",
 }
 
 def get_message(message_name, lang):
