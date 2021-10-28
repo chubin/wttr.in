@@ -355,6 +355,7 @@ var (
 		"zh":     "zh_CN",
 		"zh-cn":  "zh_CN",
 		"zh-tw":  "zh_TW",
+		"mg":     "mg_MG",
 	}
 
 	localizedCaption = map[string]string{
@@ -424,6 +425,7 @@ var (
 		"zh":     "天气预报：",
 		"zh-cn":  "天气预报：",
 		"zh-tw":  "天氣預報：",
+		"mg":     "Vinavina toetr'andro hoan'ny:",
 	}
 
 	daytimeTranslation = map[string][]string{
@@ -494,6 +496,7 @@ var (
 		"zh-cn":  {"早上", "中午", "傍晚", "夜间"},
 		"zh-tw":  {"早上", "中午", "傍晚", "夜間"},
 		"zu":     {"Morning", "Noon", "Evening", "Night"},
+		"mg":     {"Maraina", "Tolakandro", "Ariva", "Alina"},
 	}
 )
 
