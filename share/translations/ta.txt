@@ -1,0 +1,78 @@
+: இடியுடன் கூடிய கனமழை மற்றும் ஆலங்கட்டி மழை          : Heavy rain and hail with thunderstorm
+: இடியுடன் கூடிய கனமழை                              : Heavy rain with thunderstorm
+: லேசான மழை மற்றும் இடியுடன் கூடிய ஆலங்கட்டி மழை      : Light rain and hail with thunderstorm
+: லேசான மழை மற்றும் பனி மழை                        : Light rain and snow shower
+: லேசான மழை மற்றும் இடியுடன் கூடிய மழை               : Light rain with thunderstorm
+: லேசான பனி மழை                                   : Light snow shower
+: பகுதி மூடுபனி                                       : Partial fog
+: இடியுடன் கூடிய ஆலங்கட்டி மழை                       : Rain and hail with thunderstorm
+: இடியுடன் கூடிய மழை                                : Rain with thunderstorm
+: லேசான மூடுபனி                                     : Shallow fog
+: புகை                                             : Smoke
+: பலமான காற்று                                      : Squalls
+: இடியுடன் கூடிய மழை அருகில்                          : Thunderstorm in vicinity
+: பனி                                              : Snow
+: மழை                                             : Rain
+: லேசான மழை, மழை பொழிவு                          : Light Rain, Rain Shower
+: மழை பொழிவு                                       : Rain Shower
+: மூடுபனி திட்டுகள்                                    : Patches of fog
+: தூறல்                                             : Drizzle
+: லேசான தூறல்                                      : Light drizzle
+: குறைந்த பனிப்பொழிவு                                : Low drifting snow
+: லேசான மழை மற்றும் பனி                             : Light rain and snow
+: அருகாமையில் மழை                                  : Shower in vicinity
+: இடியுடன் கூடிய மழை                                : Rain with thunderstorm
+: மழை மற்றும் பனி மழை                               : Rain and snow shower
+: இடியுடன் கூடிய மழை                                 : Thunderstorm
+: தூறல் மற்றும் மழை                                  : Drizzle and rain
+: இடியுடன் கூடிய ஆலங்கட்டி மழை                       : Hail with thunderstorm
+: மூட்டம்                                            : Haze
+: லேசான தூறல் மற்றும் மழை                            : Light drizzle and rain
+: லேசான தூறல் மற்றும் இடியுடன் கூடிய சிறிய ஆலங்கட்டி மழை/பனிப் பலகைகள்       : Light rain and small hail/snow pallets with thunderstorm
+113 : தெளிந்த வானம்                                 : Clear
+113 : வெயில்                                        : Sunny
+116 : ஒரளவு மேகமூட்டம்                               : Partly cloudy
+119 : மேகமூட்டம்                                     : Cloudy
+122 : முற்றிலும் மேகமூட்டம்                             : Overcast
+143 : பனி மூட்டம்                                    : Mist
+176 : சீரற்ற மழை சாத்தியம்                             : Patchy rain possible
+179 : சீரற்ற பனி சாத்தியம்                              : Patchy snow possible
+182 : பனிப்பொழிவு சாத்தியம்                            : Patchy sleet possible
+185 : உறைபனி தூறல் சாத்தியம்                         : Patchy freezing drizzle possible
+200 : இடியுடன் கூடிய மழை சாத்தியமாகும்                  : Thundery outbreaks possible
+227 : வீசும் பனி                                     : Blowing snow
+230 : பனிப்புயல்                                      : Blizzard
+248 : மூடுபனி                                       : Fog
+260 : உறைபனி மூடுபனி                               : Freezing fog
+263 : மெல்லிய தூறல்                                 : Patchy light drizzle
+266 : லேசான தூறல்                                  : Light drizzle
+281 : உறையும் தூறல்                                 : Freezing drizzle
+284 : கடும் உறைபனி தூறல்                            : Heavy freezing drizzle
+293 : சீரற்ற லேசான மழை                             : Patchy light rain
+296 : லேசான மழை                                  : Light rain
+299 : அவ்வப்போது மிதமான மழை பெய்யும்                 : Moderate rain at times
+302 : மிதமான மழை                                  : Moderate rain
+305 : அவ்வப்போது பலத்த மழை                         : Heavy rain at times
+308 : பலத்த மழை                                    : Heavy rain
+311 : லேசான உறைபனி மழை                          : Light freezing rain
+314 : மிதமான அல்லது கடுமையான உறைபனி மழை          : Moderate or heavy freezing rain
+317 : லேசான தூறல்                                  : Light sleet
+320 : மிதமான அல்லது கடுமையான தூறல்                 : Moderate or heavy sleet
+323 : சீரற்ற லேசான பனி                              : Patchy light snow
+326 : லேசான பனி                                   : Light snow
+329 : சீரற்ற மிதமான பனி                              : Patchy moderate snow
+332 : மிதமான பனி                                   : Moderate snow
+335 : சீரற்ற கடுமையான பனி                            : Patchy heavy snow
+338 : கடுமையான பனி                                 : Heavy snow
+350 : பனி துகள்கள்                                   : Ice pellets
+353 : லேசான சாரல் மழை                              : Light rain shower
+356 : மிதமான அல்லது கடுமையான சாரல் மழை             : Moderate or heavy rain shower
+359 : சாரல் மழை                                    : Torrential rain shower
+362 : லேசான தூறல் மழை                             : Light sleet showers
+365 : மிதமான அல்லது கனத்த தூறல் மழை பெய்யும்         : Moderate or heavy sleet showers
+368 : லேசான பனி மழை                              : Light snow showers
+371 : மிதமான அல்லது கனத்த பனி மழை                  : Moderate or heavy snow showers
+386 : சீரற்ற இடியுடன் கூடிய லேசான மழை                 : Patchy light rain with thunder
+389 : இடியுடன் கூடிய மிதமான அல்லது பலத்த மழை         : Moderate or heavy rain with thunder
+392 : சீரற்ற இடியுடன் கூடிய லேசான பனி                  : Patchy light snow with thunder
+395 : மிதமான அல்லது கனத்த இடியுடன் கூடிய பனி          : Moderate or heavy snow with thunder
