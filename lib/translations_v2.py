@@ -47,7 +47,7 @@ V2_TRANSLATION = {
     "lt": ("Orų prognozė:",                 "Orai",     "Laiko zona",   "Dabar",    "Aušra",            "Saulėtekis",   "Zenitas",      "Saulėlydis",       "Sutemos"),
     "lv": ("Laika ziņas:",                  "", "", "", "", "", "", "", ""),
     "mk": ("Прогноза за времето во:",       "", "", "", "", "", "", "", ""),
-    "ml": ("കാലാവസ്ഥ റിപ്പോർട്ട്:",                 "", "", "", "", "", "", "", ""),
+    "ml": ("കാലാവസ്ഥ റിപ്പോർട്ട്:",       "കാലാവസ്", "സമയ മേഖല", "ഇപ്പോൾ", "പ്രഭാതത്തെ", "സൂര്യോദയം", "പരമോന്നത", "സൂര്യാസ്തമയം", "സന്ധ്യ"),
     "nb": ("Værmelding for:",               "", "", "", "", "", "", "", ""),
     "nl": ("Weerbericht voor:",             "Weer",     "Tijdzone",     "Nu",       "Dageraad",         "Zonsopkomst",  "Zenit",        "Zonsondergang",    "Schemering"),
     "nn": ("Vêrmelding for:",               "", "", "", "", "", "", "", ""),
