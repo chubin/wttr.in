@@ -4,7 +4,7 @@
 : Lichte regen en sneeuwbui                            : Light rain and snow shower
 : Lichte regen met onweer                              : Light rain with thunderstorm
 : Lichte sneeuwbui                                     : Light snow shower
-: Plaatselijke mist                                    : Parftial fog
+: Plaatselijke mist                                    : Partial fog
 : Regen en hagel met onweer                            : Rain and hail with thunderstorm
 : Regen met onweer                                     : Rain with thunderstorm
 : Lichte mist                                          : Shallow fog
