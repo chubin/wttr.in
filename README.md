@@ -80,6 +80,13 @@ You can override this behavior by adding `?u` or `?m` to a URL like this:
     $ curl wttr.in/Amsterdam?u
     $ curl wttr.in/Amsterdam?m
 
+If you have several options to pass, write them without delimiters in between for the one-letter options,
+and use `&` as a delimiter for the options with values:
+
+    $ curl 'wttr.in/Amsterdam?2m&lang=nl`
+
+It would be a rough equivalent of `-m2 --lang nl` for the GNU CLI syntax.
+
 ## Supported output formats and views
 
 wttr.in currently supports five output formats:
