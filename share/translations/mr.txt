@@ -4,7 +4,7 @@
     : हलका पाऊस व हिमवर्षाव          : Light rain and snow shower
     : हलका पाऊस व झंझावात            : Light rain with thunderstorm
     : हलका हिमवर्षाव                : Light snow shower
-    : आंशिक दाट धुके                 : Parftial fog
+    : आंशिक दाट धुके                 : Partial fog
     : पाऊस, गारा व झंझावात            : Rain and hail with thunderstorm
     : पाऊस व झंझावात                : Rain with thunderstorm
     : उथळ दाट धुके                 : Shallow fog
