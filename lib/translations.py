@@ -12,7 +12,7 @@ FULL_TRANSLATION = [
 ]
 
 PARTIAL_TRANSLATION = [
-    "az", "bg", "bn", "bs", "cy", "cs",
+    "az", "bg", "bs", "cy", "cs",
     "eo", "es", "eu", "fi", "ga", "hi", "hr",
     "hy", "is", "ja", "jv", "ka", "kk",
     "ko", "ky", "lv", "mk", "ml", "mr", "nl", "fy",
@@ -66,7 +66,7 @@ een van die koudste permanent bewoonde plekke op aarde.
 така че ви доведохме в Оймякон,
 едно от най-студените постоянно обитавани места на планетата.
 """,
-'bn' : u"""
+        'bn' : u"""
 দুঃখিত, আপনার অবস্থান আমরা খুঁজে পাইনি।
 তাই, আমরা আপনাকে নিয়ে এসেছি ওয়মিয়াকনে, 
 যা পৃথিবীর শীতলতম স্থায়ী জন-বসতিগুলোর একটি। 
@@ -467,7 +467,7 @@ U kan vir https://twitter.com/igor_chubin volg vir opdaterings.
 Ще осогурим допълнителни заявки максимално бързо.
 Може да последвате https://twitter.com/igor_chubin за обновления.
 """,
-'bn': u"""
+        'bn': u"""
 দুঃখিত, এই মুহুর্তে আবহাওয়া পরিসেবাতে  আমাদের কুইরী শেষ হয়ে আসছে। 
 এখানে ডিফল্ট শহরের আবহাওয়ার প্রতিবেদন রয়েছে (এটি দেখতে কেমন তা আপনাকে দেখানোর জন্য)। 
 আমরা খুব দ্রুত নতুন কুইরী পাওয়ার ব্যবস্থা করছি। 
@@ -826,7 +826,7 @@ CAPTION = {
     "az": u"Hava proqnozu:",
     "be": u"Прагноз надвор'я для:",
     "bg": u"Прогноза за времето в:",
-    "bn": u"",
+    "bn": u"আবহাওয়ার প্রতিবেদন:",
     "bs": u"Vremenske prognoze za:",
     "ca": u"Informe del temps per a:",
     "cs": u"Předpověď počasí pro:",
@@ -834,7 +834,7 @@ CAPTION = {
     "da": u"Vejret i:",
     "de": u"Wetterbericht für:",
     "el": u"Πρόγνωση καιρού για:",
-    "en": u"আবহাওয়ার প্রতিবেদন:",
+    "en": u"Weather report for:",
     "eo": u"Veterprognozo por:",
     "es": u"Pronóstico del tiempo en:",
     "et": u"Ilmaprognoos:",
