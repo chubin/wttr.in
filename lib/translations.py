@@ -6,9 +6,9 @@ Translation of almost everything.
 
 FULL_TRANSLATION = [
     "am", "ar", "af", "be", "bn",  "ca", "da", "de", "el", "et",
-    "fr", "fa", "hi", "hu", "ia", "id", "it", "lt",
+    "fr", "fa", "hi", "hu", "ia", "id", "it", "lt", "mg",
     "nb", "nl", "oc", "pl", "pt-br", "ro",
-    "ru", "ta", "tr", "th", "uk", "vi", "zh-cn", "zh-tw", "mg",
+    "ru", "ta", "tr", "th", "uk", "vi", "zh-cn", "zh-tw",
 ]
 
 PARTIAL_TRANSLATION = [
@@ -26,9 +26,9 @@ PROXY_LANGS = [
     "cy", "de", "el", "eo", "et", "eu", "fa", "fr",
     "fy", "ga", "he", "hr", "hu", "hy",
     "ia", "id", "is", "it", "ja", "kk",
-    "lt", "lv", "mk", "mr", "nb", "nn", "oc",
+    "lt", "lv", "mg", "mk", "mr", "nb", "nn", "oc",
     "ro", "ru", "sl", "th", "pt-br", "uk", 
-    "uz", "vi", "zh-cn", "zh-tw", "mg",
+    "uz", "vi", "zh-cn", "zh-tw",
 ]
 
 SUPPORTED_LANGS = FULL_TRANSLATION + PARTIAL_TRANSLATION

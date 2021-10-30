@@ -133,7 +133,7 @@ def translate(text, lang):
 
     def _log_unknown_translation(lang, text):
         with open(MISSING_TRANSLATION_LOG % lang, "a") as f_missing_translation:
-            f_missing_translation.write(text)
+            f_missing_translation.write(text+"\n")
 
     if "," in text:
         terms = text.split(",")

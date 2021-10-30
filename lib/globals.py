@@ -83,6 +83,7 @@ PLAIN_TEXT_AGENTS = [
     "powershell",
     "fetch",
     "aiohttp",
+    "http_get",
 ]
 
 PLAIN_TEXT_PAGES = [':help', ':bash.function', ':translation', ':iterm2']
