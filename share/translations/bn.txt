@@ -1,0 +1,78 @@
+: বজ্রঝড়ের সঙ্গে ভারী বৃষ্টি ও শিলাবৃষ্টি                            : Heavy rain and hail with thunderstorm
+: বজ্রঝড়ের সঙ্গে ভারী বৃষ্টি                                   : Heavy rain with thunderstorm
+: বজ্রঝড়ের সঙ্গে হালকা বৃষ্টি ও শিলাবৃষ্টি                           : Light rain and hail with thunderstorm
+: হালকা বৃষ্টি আর তুষারপাত                                  : Light rain and snow shower
+: বজ্রবিদ্যুৎ সহ হালকা বৃষ্টি                                  : Light rain with thunderstorm
+: হালকা তুষারপাত                                        : Light snow shower
+: আংশিক কুয়াশা                                         : Partial fog
+: বজ্রবিদ্যুৎ সহ বৃষ্টি ও শিলাবৃষ্টি                       : Rain and hail with thunderstorm
+: বজ্রবিদ্যুৎ সহ বৃষ্টি                                 : Rain with thunderstorm
+: অগভীর কুয়াশা                                 : Shallow fog
+: ধোঁয়া                                            : Smoke
+: আকস্মিক ঝড়ো বাতাস                                           : Squalls
+: আশেপাশে বজ্রঝড়                                   : Thunderstorm in vicinity
+: তুষার                                            : Snow
+: বৃষ্টি                                            : Rain
+: হালকা বৃষ্টি, ঝরনা বৃষ্টি                            : Light Rain, Rain Shower
+: মাঝারী বৃষ্টিপাত                                          : Rain Shower
+: টুকরো টুকরো কুয়াশা                             : Patches of fog
+: গুঁড়ি গুঁড়ি বৃষ্টি                                          : Drizzle
+: হালকা গুঁড়ি গুঁড়ি বৃষ্টি                                   : Light drizzle
+: হালকা ভাসমান তুষার                               : Low drifting snow
+: হালকা বৃষ্টি ও তুষারপাত                        : Light rain and snow
+: আশেপাশে বৃষ্টিপাত                                   : Shower in vicinity
+: বজ্রবিদ্যুৎ সহ বৃষ্টি                                  : Rain with thunderstorm
+: বৃষ্টি ও তুষারপাত                  : Rain and snow shower
+: বজ্রঝড়                                            : Thunderstorm
+: গুঁড়ি গুঁড়ি মাঝারী বৃষ্টি                                 : Drizzle and rain
+: বজ্রঝড়ের সঙ্গে শিলাবৃষ্টি                                   : Hail with thunderstorm
+: কুয়াশা                                            : Haze
+: হালকা গুঁড়ি গুঁড়ি বৃষ্টি                           : Light drizzle and rain
+: হালকা বৃষ্টি এবং বজ্রঝড় সহ ছোট শিলাবৃষ্টি/তুষারপাত      : Light rain and small hail/snow pallets with thunderstorm
+113 : পরিষ্কার                                  : Clear
+113 : রৌদ্রজ্জ্বল                                    : Sunny
+116 : আংশিক মেঘলা                        : Partly cloudy
+119 : মেঘলা                                      : Cloudy
+122 : মেঘাচ্ছন্ন                                      : Overcast
+143 : কুয়াশা                                      : Mist
+176 : অল্প বৃষ্টি হতে পারে                     : Patchy rain possible
+179 : অল্প তুষারপাত হতে পারে            : Patchy snow possible
+182 : অল্প শিলাবৃষ্টি হতে পারে     : Patchy sleet possible
+185 : ঠাণ্ডা হিমশীতল বৃষ্টির সম্ভাবনা          : Patchy freezing drizzle possible
+200 : বজ্রপাতের প্রাদুর্ভাবের সম্ভাবনা                             : Thundery outbreaks possible
+227 : উড়ন্ত তুষার                                    : Blowing snow
+230 : তুষারঝড়                                     : Blizzard
+248 : কুয়াশা                                   : Fog
+260 : হিমশীতল কুয়াশা                         : Freezing fog
+263 : খণ্ড খণ্ড হালকা গুঁড়ি গুঁড়ি বৃষ্টি                   : Patchy light drizzle
+266 : হালকা গুঁড়ি গুঁড়ি বৃষ্টি                                : Light drizzle
+281 : হিমশীতল গুঁড়ি গুঁড়ি বৃষ্টি                            : Freezing drizzle
+284 : ভারী হিমশীতল গুঁড়ি গুঁড়ি বৃষ্টি                        : Heavy freezing drizzle
+293 : খণ্ড খণ্ড হালকা বৃষ্টি                    : Patchy light rain
+296 : হালকা বৃষ্টি                                 : Light rain
+299 : মাঝে মাঝে মাঝারি বৃষ্টি                  : Moderate rain at times
+302 : মাঝারি বৃষ্টি                                : Moderate rain
+305 : মাঝে মাঝে ভারী বৃষ্টি                    : Heavy rain at times
+308 : ভারী বৃষ্টি                                  : Heavy rain
+311 : হিমশীতল হালকা বৃষ্টি                     : Light freezing rain
+314 : মাঝারি বা ভারী হিমায়িত বৃষ্টি            : Moderate or heavy freezing rain
+317 : হালকা  শিলা               : Light sleet
+320 : মাঝারি বা ভারী শিলাবৃষ্টি    : Moderate or heavy sleet
+323 : খণ্ড খণ্ড হালকা তুষারপাত           : Patchy light snow
+326 : হালকা তুষারপাত                      : Light snow
+329 : খণ্ড খণ্ড মাঝারি তুষারপাত        : Patchy moderate snow
+332 : মাঝারি তুষারপাত                     : Moderate snow
+335 : খণ্ড খণ্ড ভারী তুষারপাত               : Patchy heavy snow
+338 : ভারী তুষারপাত                       : Heavy snow
+350 : বরফ প্যালেট                                       : Ice pellets
+353 : হালকা বৃষ্টির ঝরনা                              : Light rain shower
+356 : মাঝারি বা ভারী বৃষ্টির ঝরনা                    : Moderate or heavy rain shower
+359 : মুষলধারে বৃষ্টি                        : Torrential rain shower
+362 : হালকা বরফমিশ্রিত ঝিরঝির বৃষ্টি              : Light sleet showers
+365 : মাঝারি বা ভারী বরফমিশ্রিত ঝিরঝির বৃষ্টি    : Moderate or heavy sleet showers
+368 : হাল্কা তুষারপাত                     : Light snow showers
+371 : মাঝারি বা ভারী তুষারপাত           : Moderate or heavy snow showers
+386 : বজ্রসহ খণ্ড খণ্ড হালকা বৃষ্টি          : Patchy light rain with thunder
+389 : বজ্রসহ মাঝারি বা ভারী বৃষ্টি           : Moderate or heavy rain with thunder
+392 : বজ্রপাত সহ খণ্ড খণ্ড হালকা তুষারপাত : Patchy light snow with thunder
+395 : মাঝারি বা ভারী তুষারপাত সহ বজ্রপাত  : Moderate or heavy snow with thunder

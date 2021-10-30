@@ -8,7 +8,7 @@ FULL_TRANSLATION = [
     "am", "ar", "af", "be", "ca", "da", "de", "el", "et",
     "fr", "fa", "hi", "hu", "ia", "id", "it", "lt",
     "nb", "nl", "oc", "pl", "pt-br", "ro",
-    "ru", "tr", "th", "uk", "vi", "zh-cn", "zh-tw", "mg",
+    "ru", "ta", "tr", "th", "uk", "vi", "zh-cn", "zh-tw", "mg",
 ]
 
 PARTIAL_TRANSLATION = [
@@ -308,6 +308,11 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
 Tsy hita ny toerana misy anao koa nentinay tany Oymyakon ianao,
 iray amin'ireo toerana mangatsiaka indrindra tsisy mponina eto an-tany.
 """,
+        'ta': u"""
+உங்கள் இருப்பிடத்தை எங்களால் கண்டுபிடிக்க முடியவில்லை
+எனவே நாங்கள் உங்களை ஓமியாகோனுக்கு அழைத்து வந்தோம்.
+கிரகத்தின் குளிர்ந்த நிரந்தரமாக வசிக்கும் இடங்களில் ஒன்று.
+""",
     },
 
     'UNKNOWN_LOCATION': {
@@ -366,6 +371,7 @@ iray amin'ireo toerana mangatsiaka indrindra tsisy mponina eto an-tany.
         'vi': u'Địa điểm không xác định',
         'zh-tw': u'未知位置',
         'mg': u'Toerana tsy fantatra',
+        'ta': u'தெரியாத இடம்',
     },
 
     'LOCATION': {
@@ -422,6 +428,7 @@ iray amin'ireo toerana mangatsiaka indrindra tsisy mponina eto an-tany.
         'vi': u'Địa điểm',
         'zh-tw': u'位置',
         'mg': u'Toerana',
+        'ta': u'இடம்',
     },
 
     'CAPACITY_LIMIT_REACHED': {
@@ -716,7 +723,12 @@ Miala tsiny fa misedra olana ny sampan-draharaha momba ny toetrandro amin'izao f
 Ity ny tatitra momba ny toetr'andro ho an'ny tanàna mahazatra (mba hampisehoana anao ny endriny).
 Haivaly aminao haingana ny fangatahanao.
 Azonao atao ny manaraka ny pejy https://twitter.com/igor_chubin.
-======================================================================================
+""",
+        'ta': u"""
+மன்னிக்கவும், தற்போது வானிலை சேவைக்கான வினவல்கள் எங்களிடம் இல்லை.
+இயல்புநிலை நகரத்திற்கான வானிலை அறிக்கை இதோ (அது எப்படி இருக்கும் என்பதை உங்களுக்குக் காண்பிப்பதற்காக).
+கூடிய விரைவில் புதிய வினவல்களைப் பெறுவோம்.
+புதுப்பிப்புகளுக்கு நீங்கள் https://twitter.com/igor_chubin ஐப் பின்தொடரலாம்.
 """,
     },
 
@@ -769,6 +781,7 @@ Azonao atao ny manaraka ny pejy https://twitter.com/igor_chubin.
         'vi': u'Chức năng mới: tên địa điểm đa ngôn ngữ \033[92mwttr.in/станция+Восток\033[0m (dùng UTF-8) và tìm kiếm địa điểm \033[92mwttr.in/~Kilimanjaro\033[0m (chỉ cần thêm ~ phía trước)',
         'zh-tw': u'新功能：多語言地點名稱 \033[92mwttr.in/станция+Восток\033[0m （使用 UTF-8 編碼）與位置搜尋 \033[92mwttr.in/~Kilimanjaro\033[0m （只要在地點前加 ~ 就可以了）',
         'mg': u'Fanatsrana vaovao: anarana toerana amin\'ny fiteny maro\033[92mwttr.in/станция+Восток\033[0m (en UTF-8) sy fitadiavana toerana \033[92mwttr.in/~Kilimanjaro\033[0m (ampio ~ fotsiny eo aloha)',
+        'ta': u'புதிய அம்சம்: பன்மொழி இருப்பிடப் பெயர்கள் \033[92mwttr.in/станция+Восток\033[0m (UTF-8 இல்) மற்றும் இருப்பிடத் தேடல் \033[92mwttr.in/~Kilimanjaro\033[0m (முன் ~ஐச் சேர்க்கவும்)',
     },
 
     'FOLLOW_ME': {
@@ -817,6 +830,7 @@ Azonao atao ny manaraka ny pejy https://twitter.com/igor_chubin.
         'vi': u'Theo dõi \033[46m\033[30m@igor_chubin\033[0m để cập nhật thông tin về wttr.in',
         'zh-tw': u'追蹤 \033[46m\033[30m@igor_chubin\033[0m 以取得更多 wttr.in 的動態',
         'mg': u'Araho ao ny pejy \033[46m\033[30m@igor_Chubin\033[0m raha toa ka te hahazo vaovao momban\'ny wttr.in',
+        'ta': u'wttr.in புதுப்பிப்புகளுக்கு \033[46m\033[30m@igor_chubin\033[0m ஐப் பின்தொடரவும்',
     },
 }
 CAPTION = {
@@ -887,6 +901,7 @@ CAPTION = {
     "zu": u"Isimo sezulu:",
     "zh-tw": u"天氣報告：",
     "mg": u"Toetr\'andro any :",
+    "ta": u"வானிலை அறிக்கை:",
 }
 
 def get_message(message_name, lang):

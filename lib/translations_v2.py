@@ -47,7 +47,7 @@ V2_TRANSLATION = {
     "lt": ("Orų prognozė:",                 "Orai",     "Laiko zona",   "Dabar",    "Aušra",            "Saulėtekis",   "Zenitas",      "Saulėlydis",       "Sutemos"),
     "lv": ("Laika ziņas:",                  "", "", "", "", "", "", "", ""),
     "mk": ("Прогноза за времето во:",       "", "", "", "", "", "", "", ""),
-    "ml": ("കാലാവസ്ഥ റിപ്പോർട്ട്:",                 "", "", "", "", "", "", "", ""),
+    "ml": ("കാലാവസ്ഥ റിപ്പോർട്ട്:",       "കാലാവസ്", "സമയ മേഖല", "ഇപ്പോൾ", "പ്രഭാതത്തെ", "സൂര്യോദയം", "പരമോന്നത", "സൂര്യാസ്തമയം", "സന്ധ്യ"),
     "nb": ("Værmelding for:",               "", "", "", "", "", "", "", ""),
     "nl": ("Weerbericht voor:",             "Weer",     "Tijdzone",     "Nu",       "Dageraad",         "Zonsopkomst",  "Zenit",        "Zonsondergang",    "Schemering"),
     "nn": ("Vêrmelding for:",               "", "", "", "", "", "", "", ""),
@@ -73,4 +73,5 @@ V2_TRANSLATION = {
     "zh-tw": ("天氣預報：",                 "天氣", "時區", "目前", "黎明", "日出", "日正當中", "日落", "黃昏"),
     "zu": ("Isimo sezulu:",                 "", "", "", "", "", "", "", ""),
     "mg": ("Vinavina toetr'andro hoany :",  "Toetr'andro", "Faritra ora", "Ora", "Mangirandratsy", "Maneno akoho", "Mitatao vovonana", "Masoandro milentika", "Crépuscule"),
+    "ta": ("வானிலை அறிக்கை:",           "வானிலை",  "நேரம் மண்டலம்",     "இப்போது",      "விடியல்",             "சூரிய உதயம்",      "ஜெனித்",       "சூரிய அஸ்தமனம்",           "அந்தி"),
     }
