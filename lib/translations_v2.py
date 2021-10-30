@@ -72,5 +72,6 @@ V2_TRANSLATION = {
     "zh": ("天气预报：",                    "天气", "时区", "当前", "黎明", "日出", "正午", "日落", "黄昏"),
     "zh-tw": ("天氣預報：",                 "天氣", "時區", "目前", "黎明", "日出", "日正當中", "日落", "黃昏"),
     "zu": ("Isimo sezulu:",                 "", "", "", "", "", "", "", ""),
+    "mg": ("Vinavina toetr'andro hoany :",  "Toetr'andro", "Faritra ora", "Ora", "Mangirandratsy", "Maneno akoho", "Mitatao vovonana", "Masoandro milentika", "Crépuscule"),
     "ta": ("வானிலை அறிக்கை:",           "வானிலை",  "நேரம் மண்டலம்",     "இப்போது",      "விடியல்",             "சூரிய உதயம்",      "ஜெனித்",       "சூரிய அஸ்தமனம்",           "அந்தி"),
     }
