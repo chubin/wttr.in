@@ -84,6 +84,13 @@ You can override this behavior by adding `?u`, `?m` or `?M`   to a URL like this
     $ curl wttr.in/Amsterdam?m  # metric (SI) (used by default everywhere except US)
     $ curl wttr.in/Amsterdam?M  # metric (SI), but show wind speed in m/s
 
+If you have several options to pass, write them without delimiters in between for the one-letter options,
+and use `&` as a delimiter for the long options with values:
+
+    $ curl 'wttr.in/Amsterdam?m2&lang=nl`
+
+It would be a rough equivalent of `-m2 --lang nl` for the GNU CLI syntax.
+
 ## Supported output formats and views
 
 wttr.in currently supports five output formats:
