@@ -5,7 +5,7 @@ Translation of almost everything.
 """
 
 FULL_TRANSLATION = [
-    "am", "ar", "af", "be", "ca", "da", "de", "el", "et",
+    "am", "ar", "af", "be", "bn",  "ca", "da", "de", "el", "et",
     "fr", "fa", "hi", "hu", "ia", "id", "it", "lt",
     "nb", "nl", "oc", "pl", "pt-br", "ro",
     "ru", "ta", "tr", "th", "uk", "vi", "zh-cn", "zh-tw", "mg",
@@ -22,7 +22,7 @@ PARTIAL_TRANSLATION = [
 ]
 
 PROXY_LANGS = [
-    "af", "am", "ar", "az", "be", "bs", "ca",
+    "af", "am", "ar", "az", "be", "bn", "bs", "ca",
     "cy", "de", "el", "eo", "et", "eu", "fa", "fr",
     "fy", "ga", "he", "hr", "hu", "hy",
     "ia", "id", "is", "it", "ja", "kk",
@@ -65,6 +65,11 @@ een van die koudste permanent bewoonde plekke op aarde.
 Не успяхме да открием вашето местоположение
 така че ви доведохме в Оймякон,
 едно от най-студените постоянно обитавани места на планетата.
+""",
+        'bn' : u"""
+দুঃখিত, আপনার অবস্থান আমরা খুঁজে পাইনি।
+তাই, আমরা আপনাকে নিয়ে এসেছি ওয়মিয়াকনে, 
+যা পৃথিবীর শীতলতম স্থায়ী জন-বসতিগুলোর একটি। 
 """,
         'bs': u"""
 Nismo mogli pronaći vašu lokaciju,
@@ -322,6 +327,7 @@ iray amin'ireo toerana mangatsiaka indrindra tsisy mponina eto an-tany.
         'ar': u'موقع غير معروف',
         'be': u'Невядомае месцазнаходжанне',
         'bg': u'Неизвестно местоположение',
+        'bn': u'অজানা অবস্থান',
         'bs': u'Nepoznatoja lokacija',
         'ca': u'Ubicació desconeguda',
         'cs': u'Neznámá poloha',
@@ -380,6 +386,7 @@ iray amin'ireo toerana mangatsiaka indrindra tsisy mponina eto an-tany.
         'ar': u'الموقع',
         'be': u'Месцазнаходжанне',
         'bg': u'Местоположение',
+        'bn': u'অবস্থান',
         'bs': u'Lokacija',
         'ca': u'Ubicació',
         'cs': u'Poloha',
@@ -472,6 +479,12 @@ U kan vir https://twitter.com/igor_chubin volg vir opdaterings.
 Ето доклад за града по подразбиране (просто да видите как изглежда).
 Ще осогурим допълнителни заявки максимално бързо.
 Може да последвате https://twitter.com/igor_chubin за обновления.
+""",
+        'bn': u"""
+দুঃখিত, এই মুহুর্তে আবহাওয়া পরিসেবাতে  আমাদের কুইরী শেষ হয়ে আসছে। 
+এখানে ডিফল্ট শহরের আবহাওয়ার প্রতিবেদন রয়েছে (এটি দেখতে কেমন তা আপনাকে দেখানোর জন্য)। 
+আমরা খুব দ্রুত নতুন কুইরী পাওয়ার ব্যবস্থা করছি। 
+আপডেটের জন্য আপনি https://twitter.com/igor_chubin অনুসরণ করতে পারেন। 
 """,
         'bs': u"""
 Žao mi je, mi ponestaje upita i vremenska prognoza u ovom trenutku.
@@ -743,6 +756,7 @@ Azonao atao ny manaraka ny pejy https://twitter.com/igor_chubin.
         'af': u'Nuwe eienskap: veeltalige name vir liggings \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) en ligging soek \033[92mwttr.in/~Kilimanjaro\033[0m (plaas net ~ vooraan)',
         'be': u'Новыя магчымасці: назвы месц на любой мове \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) i пошук месц \033[92mwttr.in/~Kilimanjaro\033[0m (трэба дадаць ~ ў пачатак)',
         'bg': u'Нова функционалност: многоезични имена на места\033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и в търсенето \033[92mwttr.in/~Kilimanjaro\033[0m (добавете ~ преди)',
+        'bn': u'নতুন ফিচার : বহুভাষিক অবস্থানের নাম \ 033 [92mwttr.in/станция+Восток\033 [0m (UTF-8)] এবং অবস্থান অনুসন্ধান \ 033 [92mwttr.in/~Kilimanjaro\033 [0m (শুধু আগে ~ যোগ করুন)',
         'bs': u'XXXXXXXXXXXXXXXXXXXX: XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\033[92mwttr.in/станция+Восток\033[0m (XX UTF-8) XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
         'ca': u'Noves funcionalitats: noms d\'ubicació multilingües \033[92mwttr.in/станция+Восток\033[0m (en UTF-8) i la ubicació de recerca \033[92mwttr.in/~Kilimanjaro\033[0m (només cal afegir ~ abans)',
         'es': u'Nuevas funcionalidades: los nombres de las ubicaciones en varios idiomas \033[92mwttr.in/станция+Восток\033[0m (em UTF-8) y la búsqueda por ubicaciones \033[92mwttr.in/~Kilimanjaro\033[0m (tan solo inserte ~ al principio)',
@@ -791,6 +805,7 @@ Azonao atao ny manaraka ny pejy https://twitter.com/igor_chubin.
         'am': u'ለተጨማሪ wttr.in ዜና እና መረጃ \033[46m\033[30m@igor_chubin\033[0m ን ይከተሉ',
         'be': u'Сачыце за \033[46m\033[30m@igor_chubin\033[0m за навінамі wttr.in',
         'bg': u'Последвай \033[46m\033[30m@igor_chubin\033[0m за обновления свързани с wttr.in',
+        'bn': u'wttr.in আপডেটের জন্য \033[46m\033[30m@igor_chubin\033[0m কে অনুসরণ করুন',
         'bs': u'XXXXXX \033[46m\033[30m@igor_chubin\033[0m XXXXXXXXXXXXXXXXXXX',
         'ca': u'Segueix \033[46m\033[30m@igor_chubin\033[0m per actualitzacions de wttr.in',
         'es': u'Sigue a \033[46m\033[30m@igor_chubin\033[0m para enterarte de las novedades de wttr.in',
@@ -840,6 +855,7 @@ CAPTION = {
     "az": u"Hava proqnozu:",
     "be": u"Прагноз надвор'я для:",
     "bg": u"Прогноза за времето в:",
+    "bn": u"আবহাওয়ার প্রতিবেদন:",
     "bs": u"Vremenske prognoze za:",
     "ca": u"Informe del temps per a:",
     "cs": u"Předpověď počasí pro:",
