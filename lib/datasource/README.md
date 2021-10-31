@@ -16,3 +16,4 @@ to select data source basing on location, or on the user's preferences.
 * [darksky](https://darksky.net/forecast/40.7127,-74.0059/us12/en)
 * [weather bug](https://www.weatherbug.com/)
 * [weather underground](https://www.wunderground.com/)
+* [brightsky](https://brightsky.dev/)
