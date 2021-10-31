@@ -17,3 +17,10 @@ to select data source basing on location, or on the user's preferences.
 * [weather bug](https://www.weatherbug.com/)
 * [weather underground](https://www.wunderground.com/)
 * [brightsky](https://brightsky.dev/)
+
+## Air Quality sources
+
+* http://aqicn.org/
+* https://docs.airnowapi.org/
+* https://www2.purpleair.com/community/faq#hc-access-the-json
+
