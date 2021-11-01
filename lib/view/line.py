@@ -359,7 +359,10 @@ def format_weather_data(query, parsed_query, data):
     if format_line in PRECONFIGURED_FORMAT:
         format_line = PRECONFIGURED_FORMAT[format_line]
 
-    if format_line == "j1":
+    if format_line in ["j1", "j2"]:
+        # j2 is a lightweight j1, without 'weather' (weather forecast)
+        if "weather" in data["data"] and format_line == "j2":
+            del data["data"]["weather"]
         return render_json(data['data'])
     if format_line == "p1":
         return prometheus.render_prometheus(data['data'])
