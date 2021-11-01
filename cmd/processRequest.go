@@ -14,6 +14,10 @@ import (
 func processRequest(r *http.Request) responseWithHeader {
 	var response responseWithHeader
 
+	if response, ok := redirectInsecure(r); ok {
+		return *response
+	}
+
 	if dontCache(r) {
 		return get(r)
 	}
@@ -120,8 +124,56 @@ func dontCache(req *http.Request) bool {
 
 	// dont cache cyclic requests
 	loc := strings.Split(req.RequestURI, "?")[0]
-	if strings.Contains(loc, ":") {
-		return true
+	return strings.Contains(loc, ":")
+}
+
+// redirectInsecure returns redirection response, and bool value, if redirection was needed,
+// if the query comes from a browser, and it is insecure.
+//
+// Insecure queries are marked by the frontend web server
+// with X-Forwarded-Proto header:
+//
+//    proxy_set_header   X-Forwarded-Proto $scheme;
+//
+//
+func redirectInsecure(req *http.Request) (*responseWithHeader, bool) {
+	if isPlainTextAgent(req.Header.Get("User-Agent")) {
+		return nil, false
+	}
+
+	if strings.ToLower(req.Header.Get("X-Forwarded-Proto")) == "https" {
+		return nil, false
+	}
+
+	target := "https://" + req.Host + req.URL.Path
+	if len(req.URL.RawQuery) > 0 {
+		target += "?" + req.URL.RawQuery
+	}
+
+	body := []byte(fmt.Sprintf(`<HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<TITLE>301 Moved</TITLE></HEAD><BODY>
+<H1>301 Moved</H1>
+The document has moved
+<A HREF="%s">here</A>.
+</BODY></HTML>
+`, target))
+
+	return &responseWithHeader{
+		InProgress: false,
+		Expires:    time.Now().Add(time.Duration(randInt(1000, 1500)) * time.Second),
+		Body:       body,
+		Header:     http.Header{"Location": []string{target}},
+		StatusCode: 301,
+	}, true
+}
+
+// isPlainTextAgent returns true if userAgent is a plain-text agent
+func isPlainTextAgent(userAgent string) bool {
+	userAgentLower := strings.ToLower(userAgent)
+	for _, signature := range plainTextAgents {
+		if strings.Contains(userAgentLower, signature) {
+			return true
+		}
 	}
 	return false
 }
