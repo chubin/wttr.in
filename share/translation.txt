@@ -59,6 +59,7 @@ Translated/improved/corrected by:
     * Spanish:              Fernando Bitti Loureiro @fbitti (on github)
     * Swedish:              John Eriksson
     * Swahili:              Joel Mukuthu
+    * Tamil:                Parthiban @parthi1984 (on github)
     * Turkish:              Atabey Kaygun, Yilmaz @edigu, Volkan Tokmak(@volkanto), Oğuz Ersen
     * Thai:                 Vatunyoo Suwannapisit @kerlos
     * Ukrainian:            Igor Chubin, Serhiy @pavse
