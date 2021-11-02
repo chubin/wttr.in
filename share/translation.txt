@@ -14,6 +14,7 @@ Translated/improved/corrected by:
     * Basque:               Iker Sagasti (@isagasti on github)
     * Belarusian:           Igor Chubin, Anton Zhavoronkov @edogby (on github)
     * Bosnian:              Ismar Kunc @ismarkunc
+    * Bengali:              Nazia Tasnim (@appledora on github)
     * Bulgarian:            Vladimir Vitkov @zeridon (on github)
     * Brazilian-PT:         Tupã Negreiros @TupaNegreiros (on github)
     * Catalan:              Angel Jarabo @legna29A
