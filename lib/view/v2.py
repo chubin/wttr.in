@@ -419,13 +419,19 @@ def generate_panel(data_parsed, geo_data, config):
 
     max_width = 72
 
+    if config.get("use_imperial"):
+        feels_like_query = "[.data.weather[] | .hourly[]] | .[].FeelsLikeF"
+        temp_query = "[.data.weather[] | .hourly[]] | .[].tempF"
+        wind_speed_query = "[.data.weather[] | .hourly[]] | .[].windspeedMiles"
+    else:
+        feels_like_query = "[.data.weather[] | .hourly[]] | .[].FeelsLikeC"
+        temp_query = "[.data.weather[] | .hourly[]] | .[].tempC"
+        wind_speed_query = "[.data.weather[] | .hourly[]] | .[].windspeedKmph"
+
     precip_mm_query = "[.data.weather[] | .hourly[]] | .[].precipMM"
     precip_chance_query = "[.data.weather[] | .hourly[]] | .[].chanceofrain"
-    feels_like_query = "[.data.weather[] | .hourly[]] | .[].FeelsLikeC"
-    temp_query = "[.data.weather[] | .hourly[]] | .[].tempC"
     weather_code_query = "[.data.weather[] | .hourly[]] | .[].weatherCode"
     wind_direction_query = "[.data.weather[] | .hourly[]] | .[].winddirDegree"
-    wind_speed_query = "[.data.weather[] | .hourly[]] | .[].windspeedKmph"
 
     output = ""
 
@@ -509,7 +515,7 @@ def textual_information(data_parsed, geo_data, config, html_output=False):
 
     format_line = "%c %C, %t, %h, %w, %P"
     current_condition = data_parsed['data']['current_condition'][0]
-    query = {}
+    query = config
     weather_line = wttr_line.render_line(format_line, current_condition, query)
     output.append('Weather: %s' % weather_line)
 
