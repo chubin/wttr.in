@@ -54,7 +54,7 @@ func processRequest(r *http.Request) responseWithHeader {
 	if !foundInCache {
 		lruCache.Add(cacheDigest, responseWithHeader{InProgress: true})
 		response = get(r)
-		if response.StatusCode == 200 || response.StatusCode == 304 {
+		if response.StatusCode == 200 || response.StatusCode == 304 || response.StatusCode == 404 {
 			lruCache.Add(cacheDigest, response)
 		} else {
 			log.Printf("REMOVE: %d response for %s from cache\n", response.StatusCode, cacheDigest)
