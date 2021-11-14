@@ -4,8 +4,9 @@ wttr.in is a console-oriented weather forecast service that supports various inf
 representation methods like terminal-oriented ANSI-sequences for console HTTP clients
 (curl, httpie, or wget), HTML for web browsers, or PNG for graphical viewers.
 
-wttr.in uses [wego](https://github.com/schachmat/wego) for visualization
-and various data sources for weather forecast information.
+Originally started as a small project, a wrapper for [wego](https://github.com/schachmat/wego),
+intended to demonstrate the power of the console-oriented services,
+*wttr.in* became a popular weather reporting service, handling tens millions of queries daily.
 
 You can see it running here: [wttr.in](https://wttr.in).
 
