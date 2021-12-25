@@ -46,6 +46,7 @@ Translated/improved/corrected by:
     * Latvian:              Gunārs Danovskis
     * Lithuanian	    Juras Rutavičius
     * Macedonian:           Matej Plavevski @MatejMecka
+    * Marathi:              Sanket Pandit Garade (@sanketgarade on github)
     * Norwegian:            Fredrik Fjeld @fredrikfjeld
     * Nynorsk:              Kevin Brubeck Unhammer (https://unhammer.org/k/)
     * Occitan:              Quentin PAGÈS @Quenty-tolosan (gh)

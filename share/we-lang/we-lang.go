@@ -334,6 +334,7 @@ var (
 		"mg":     "mg_MG",
 		"mk":     "mk_MK",
 		"ml":     "ml_IN",
+		"mr":     "mr_IN",
 		"nb":     "nb_NO",
 		"nl":     "nl_NL",
 		"nn":     "nn_NO",
