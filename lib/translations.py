@@ -196,6 +196,11 @@ vienā no aukstākajām apdzīvotajām vietām uz planētas.
 затоа ве однесовме во Ојмајкон,
 еден од најладните трајно населени места на планетата.
 """,
+        'mr': u"""
+आमहाला तुमचे स्थळ सापडले नाही.
+म्हणून आम्ही तुम्हाला ओयम्याकोन येथे आणले आहे,
+जे कि आपल्या ग्रहावरील सर्वात थंड वस्तिस्थानांपैकी एक आहे.
+""",
         'nb': u"""
 Vi kunne ikke finne din lokasjon,
 så her får du Ojmjakon, et av de kaldeste bebodde stedene på planeten.
@@ -355,6 +360,7 @@ iray amin'ireo toerana mangatsiaka indrindra tsisy mponina eto an-tany.
         'lt': u'Nežinoma vietovė',
         'lv': u'Nezināma atrašanās vieta',
         'mk': u'Непозната локација',
+        'mr': u'अज्ञात स्थळ',
         'nb': u'Ukjent sted',
         'nl': u'Onbekende locatie',
         'oc': u'Emplaçament desconegut',        
@@ -414,6 +420,7 @@ iray amin'ireo toerana mangatsiaka indrindra tsisy mponina eto an-tany.
         'lt': u'Vietovė',
         'lv': u'Atrašanās vieta',
         'mk': u'Локација',
+        'mr': u'स्थळ',
         'nb': u'Sted',
         'nl': u'Locatie',
         'oc': u'Emplaçament',        
@@ -612,6 +619,13 @@ Jūs varat sekot https://twitter.com/igor_chubin lai redzētu visus jaunumus.
 Следете го https://twitter.com/igor_chubin за известувања
 ======================================================================================
 """,
+        'mr': u"""
+क्षमस्व, याक्षणी आम्ही हवामान सेवेशी संपर्क करू शकत नाही.
+हा एका पूर्वनिर्धारित शहराचा हवामान अहवाल आहे (केवळ तो कसा दिसतो हे दाखवण्याकरिता).
+आम्ही लवकरात लवकर सेवा पुनः चालू करण्याचा प्रयत्न करू.
+अद्यावत माहितीसाठी तुम्ही https://twitter.com/igor_chubin चे अनुसरण करू शकता.
+======================================================================================
+""",
         'nb': u"""
 Beklager, vi kan ikke nå værtjenesten for øyeblikket.
 Her er værmeldingen for standardbyen så du får se hvordan tjenesten ser ut.
@@ -779,6 +793,7 @@ Azonao atao ny manaraka ny pejy https://twitter.com/igor_chubin.
         'lt': u'Naujiena: daugiakalbiai vietovių pavadinimai \033[92mwttr.in/станция+Восток\033[0m (UTF-8) ir vietovių paieška \033[92mwttr.in/~Kilimanjaro\033[0m (tiesiog priekyje pridėkite ~)',
         'lv': u'Jaunums: Daudzvalodu atrašanās vietu nosaukumi \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) un dabas objektu meklēšana \033[92mwttr.in/~Kilimanjaro\033[0m (tikai priekšā pievieno ~)',
         'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
+        'mr': u'नवीन वैशिष्ट्य: स्थळांची बहुभाषिक नावे \033[92mwttr.in/станция+Восток\033[0m (UTF-8 मध्ये) आणि स्थळ शोध \033[92mwttr.in/~Kilimanjaro\033[0m (फक्त आधी ~ जोडा)',
         'oc': u'Novèla foncionalitat : nom de lòc multilenga \033[92mwttr.in/станция+Восток\033[0m (en UTF-8) e recèrca de lòc \033[92mwttr.in/~Kilimanjaro\033[0m (solament ajustatz ~ abans)',        
         'pl': u'Nowa funkcjonalność: wielojęzyczne nazwy lokalizacji \033[92mwttr.in/станция+Восток\033[0m (w UTF-8) i szukanie lokalizacji \033[92mwttr.in/~Kilimanjaro\033[0m (poprzedź zapytanie ~ - znakiem tyldy)',
         'pt': u'Nova funcionalidade: nomes de localidades em várias línguas \033[92mwttr.in/станция+Восток\033[0m (em UTF-8) e procura por localidades \033[92mwttr.in/~Kilimanjaro\033[0m (é só colocar ~ antes)',
@@ -826,6 +841,7 @@ Azonao atao ny manaraka ny pejy https://twitter.com/igor_chubin.
         'lt': u'wttr.in atnaujinimus sekite \033[46m\033[30m@igor_chubin\033[0m',
         'lv': u'Seko \033[46m\033[30m@igor_chubin\033[0m , lai uzzinātu wttr.in jaunumus',
         'mk': u'Следете \033[46m\033[30m@igor_chubin\033[0m за wttr.in новости',
+        'mr': u'wttr.in च्या अद्यावत माहितीसाठी  \033[46m\033[30m@igor_chubin\033[0m चे अनुसरण करा',
         'nb': u'Følg \033[46m\033[30m@igor_chubin\033[0m for wttr.in oppdateringer',
         'nl': u'Volg \033[46m\033[30m@igor_chubin\033[0m voor wttr.in updates',
         'oc': u'Seguissètz \033[46m\033[30m@igor_Chubin\033[0m per demorar informat sus wttr.in',        
@@ -892,6 +908,7 @@ CAPTION = {
     "lv": u"Laika ziņas:",
     "mk": u"Прогноза за времето во:",
     "ml": u"കാലാവസ്ഥ റിപ്പോർട്ട്:",
+    "mr": u"हवामान अहवाल:",
     "nb": u"Værmelding for:",
     "nl": u"Weerbericht voor:",
     "nn": u"Vêrmelding for:",
