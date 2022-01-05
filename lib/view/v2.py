@@ -321,7 +321,7 @@ def draw_emoji(data, config):
         weather_symbol = constants.WEATHER_SYMBOL_WI_NIGHT
         weather_symbol_width_vte = constants.WEATHER_SYMBOL_WIDTH_VTE_WI
     elif config.get("view") == "v2d":
-        weather_symbol = constants.WEATHER_SYMBOL_WI_NIGHT
+        weather_symbol = constants.WEATHER_SYMBOL_WI_DAY
         weather_symbol_width_vte = constants.WEATHER_SYMBOL_WIDTH_VTE_WI
     else:
         weather_symbol = constants.WEATHER_SYMBOL
