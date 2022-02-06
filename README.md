@@ -10,6 +10,8 @@ intended to demonstrate the power of the console-oriented services,
 
 You can see it running here: [wttr.in](https://wttr.in).
 
+[documentation](https://wttr.in/:help) | [usage](https://github.com/chubin/wttr.in#usage) | [one-line output](https://github.com/chubin/wttr.in#one-line-output) | [data-rich output format](https://github.com/chubin/wttr.in#data-rich-output-format-v2) | [map view](https://github.com/chubin/wttr.in#map-view-v3) | [output formats](https://github.com/chubin/wttr.in#different-output-formats) | [moon phases](https://github.com/chubin/wttr.in#moon-phases) | [Internationalization](https://github.com/chubin/wttr.in#internationalization-and-localization) | [Windows issues](https://github.com/chubin/wttr.in#internationalization-and-localization) | [Installation](https://github.com/chubin/wttr.in#installation)
+
 ## Usage
 
 You can access the service from a shell or from a Web browser like this:
