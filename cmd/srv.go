@@ -23,6 +23,7 @@ var plainTextAgents = []string{
 	"httpie",
 	"lwp-request",
 	"wget",
+	"python-httpx",
 	"python-requests",
 	"openbsd ftp",
 	"powershell",
