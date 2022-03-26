@@ -79,6 +79,7 @@ PLAIN_TEXT_AGENTS = [
     "lwp-request",
     "wget",
     "python-requests",
+    "python-httpx",
     "openbsd ftp",
     "powershell",
     "fetch",
