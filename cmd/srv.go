@@ -30,6 +30,7 @@ var plainTextAgents = []string{
 	"fetch",
 	"aiohttp",
 	"http_get",
+	"xh",
 }
 
 var lruCache *lru.Cache
