@@ -219,6 +219,10 @@ set -g status-right "$WEATHER ..."
 ```
 ![wttr.in in tmux status bar](https://wttr.in/files/example-tmux-status-line.png)
 
+Wttr.in & Conky data in an IRC client (Weechat) status bar.
+
+![wttr.in in weechat status bar](https://i.imgur.com/2J0H2h1.png)
+
 To see emojis in terminal, you need:
 
 1. Terminal support for emojis (was added to Cairo 1.15.8);
