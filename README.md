@@ -219,6 +219,15 @@ set -g status-right "$WEATHER ..."
 ```
 ![wttr.in in tmux status bar](https://wttr.in/files/example-tmux-status-line.png)
 
+It can be embedded into an IRC ([Weechat](https://github.com/weechat/weechat)) client's status bar assuming you have one setup, seen running here in a ([Kitty](https://github.com/kovidgoyal/kitty)) terminal.
+```
+/alias add wttr /exec -pipe "/set plugins.var.python.text_item.wttr all" url:wttr.in/Montreal?format=%l:+%c+%f+%h+%p+%P+%m+%w+%S+%s
+/trigger add wttr timer 60000;0;0 "" "" "/wttr"
+/eval /set weechat.bar.status.items ${weechat.bar.status.items},wttr
+/eval /set weechat.startup.command_after_plugins ${weechat.startup.command_after_plugins};/wttr
+```
+![wttr.in in weechat status bar](https://i.imgur.com/IyvbxjL.png)
+
 To see emojis in terminal, you need:
 
 1. Terminal support for emojis (was added to Cairo 1.15.8);
