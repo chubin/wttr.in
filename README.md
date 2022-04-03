@@ -144,6 +144,9 @@ You can embed a special wttr.in widget, that displays the weather condition for 
 
 ## One-line output
 
+One-line output format is convenient to be used to show weather info
+in status bar of different programs, such as *tmux*, *weechat*, etc.
+
 For one-line output format, specify additional URL parameter `format`:
 
 ```
@@ -203,7 +206,10 @@ So, these two calls are the same:
     $ curl wttr.in/London?format="%l:+%c+%t\n"
     London: ⛅️ +7⁰C
 ```
-Keep in mind, that when using in `tmux.conf`, you have to escape `%` with `%`, i.e. write there `%%` instead of `%`.
+
+### tmux
+
+When using in `tmux.conf`, you have to escape `%` with `%`, i.e. write there `%%` instead of `%`.
 
 The output does not contain new line by default, when the %-notation is used, but it does contain it when preconfigured format (`1`,`2`,`3` etc.)
 are used. To have the new line in the output when the %-notation is used, use '\n' and single quotes when doing a query from the shell.
@@ -219,7 +225,10 @@ set -g status-right "$WEATHER ..."
 ```
 ![wttr.in in tmux status bar](https://wttr.in/files/example-tmux-status-line.png)
 
-It can be embedded into an IRC ([Weechat](https://github.com/weechat/weechat)) client's status bar assuming you have one setup, seen running here in a ([Kitty](https://github.com/kovidgoyal/kitty)) terminal.
+### Weechat
+
+To embedded into an IRC ([Weechat](https://github.com/weechat/weechat)) client's status bar:
+
 ```
 /alias add wttr /exec -pipe "/set plugins.var.python.text_item.wttr all" url:wttr.in/Montreal?format=%l:+%c+%f+%h+%p+%P+%m+%w+%S+%s
 /trigger add wttr timer 60000;0;0 "" "" "/wttr"
@@ -227,6 +236,8 @@ It can be embedded into an IRC ([Weechat](https://github.com/weechat/weechat)) c
 /eval /set weechat.startup.command_after_plugins ${weechat.startup.command_after_plugins};/wttr
 ```
 ![wttr.in in weechat status bar](https://i.imgur.com/IyvbxjL.png)
+
+### Emojis support
 
 To see emojis in terminal, you need:
 
