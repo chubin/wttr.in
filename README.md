@@ -1,3 +1,4 @@
+#Readme
 *wttr.in — the right way to ~check~ `curl` the weather!*
 
 wttr.in is a console-oriented weather forecast service that supports various information
@@ -10,7 +11,42 @@ intended to demonstrate the power of the console-oriented services,
 
 You can see it running here: [wttr.in](https://wttr.in).
 
-[Documentation](https://wttr.in/:help) | [Usage](https://github.com/chubin/wttr.in#usage) | [One-line output](https://github.com/chubin/wttr.in#one-line-output) | [Data-rich output format](https://github.com/chubin/wttr.in#data-rich-output-format-v2) | [Map view](https://github.com/chubin/wttr.in#map-view-v3) | [Output formats](https://github.com/chubin/wttr.in#different-output-formats) | [Moon phases](https://github.com/chubin/wttr.in#moon-phases) | [Internationalization](https://github.com/chubin/wttr.in#internationalization-and-localization) | [Windows issues](https://github.com/chubin/wttr.in#internationalization-and-localization) | [Installation](https://github.com/chubin/wttr.in#installation)
+## INDEX
+`├── 0 - `[Documentation](https://wttr.in/:help) 								
+`├── 1 - `[Usage](https://github.com/chubin/wttr.in#usage)
+`│        ├── 1.1 - `[Weather Units](https://github.com/chubin/wttr.in#Weather-Units)
+`│        └── 1.2 - `[Supported output formats and views](https://github.com/chubin/wttr.in#Supported-output-formats-and-views)
+`│`
+`├── 2 - `[One-line output](https://github.com/chubin/wttr.in#one-line-output)
+`│        ├── 2.1 - `[tmux](https://github.com/chubin/wttr.in#tmux)
+`│        ├── 2.2 - `[Weechat](https://github.com/chubin/wttr.in#Weechat)
+`│        └── 2.3 - `[Emojis support](https://github.com/chubin/wttr.in#Emojis-support)
+`│`
+`├── 3 - `Data-rich output format (v2)
+`│        └── 3.1 - `URXVT
+`│`
+`├── 4 - `[Map view](https://github.com/chubin/wttr.in#map-view-v3)
+`├── 5 - `Different output formats
+`│        ├── 5.1 - `JSON output
+`│        └── 5.2 - `Prometheus Metrics Output
+`│`
+`├── 6 - `[Moon phases](https://github.com/chubin/wttr.in#moon-phases)
+`├── 7 - `[Internationalization](https://github.com/chubin/wttr.in#internationalization-and-localization)
+`├── 8 - `[Windows issues](https://github.com/chubin/wttr.in#internationalization-and-localization)
+`│        ├── 8.1 - `Garbage characters in the output
+`│        └── 8.2 - `Missing or double wide diagonal wind direction characters
+`│`
+`└── 9 - `[Installation](https://github.com/chubin/wttr.in#installation)
+`         ├── 9.1 - `Install external dependencies
+`         ├── 9.2 - `Install Python dependencies
+`         ├── 9.3 - `Configure IP2Location (optional)
+`         ├── 9.4 - `Installation with Docker
+`         ├── 9.5 - `Get a WorldWeatherOnline key and configure wego
+`         ├── 9.6 - `Configure wttr.in
+`         └── 9.7 - `Configure the HTTP-frontend service
+
+======================================================================
+
 
 ## Usage
 
