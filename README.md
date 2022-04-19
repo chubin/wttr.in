@@ -227,7 +227,7 @@ set -g status-right "$WEATHER ..."
 
 ### Weechat
 
-To embedded into an IRC ([Weechat](https://github.com/weechat/weechat)) client's status bar:
+To embed in to an IRC ([Weechat](https://github.com/weechat/weechat)) client's existing status bar:
 
 ```
 /alias add wttr /exec -pipe "/set plugins.var.python.text_item.wttr all" url:wttr.in/Montreal?format=%l:+%c+%f+%h+%p+%P+%m+%w+%S+%s
