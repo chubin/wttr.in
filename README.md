@@ -25,6 +25,7 @@ You can see it running here: [wttr.in](https://wttr.in).
 
 
 ## INDEX
+
 `├── 0 - `[Documentation](https://wttr.in/:help)<br>
 `├── 1 - `[Usage](https://github.com/chubin/wttr.in#usage)<br>
 `│        ├── 1.1 - `[Weather Units](https://github.com/chubin/wttr.in#Weather-Units)<br>
