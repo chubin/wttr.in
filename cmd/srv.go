@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net"
 	"net/http"
@@ -10,10 +11,27 @@ import (
 	lru "github.com/hashicorp/golang-lru"
 )
 
+const serverPort = 8083
 const uplinkSrvAddr = "127.0.0.1:9002"
 const uplinkTimeout = 30
 const prefetchInterval = 300
 const lruCacheSize = 12800
+
+// plainTextAgents contains signatures of the plain-text agents
+var plainTextAgents = []string{
+	"curl",
+	"httpie",
+	"lwp-request",
+	"wget",
+	"python-httpx",
+	"python-requests",
+	"openbsd ftp",
+	"powershell",
+	"fetch",
+	"aiohttp",
+	"http_get",
+	"xh",
+}
 
 var lruCache *lru.Cache
 
@@ -65,5 +83,5 @@ func main() {
 		w.Write(response.Body)
 	})
 
-	log.Fatal(http.ListenAndServe(":8082", nil))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", serverPort), nil))
 }

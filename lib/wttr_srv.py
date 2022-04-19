@@ -215,6 +215,8 @@ def _response(parsed_query, query, fast_mode=False):
     logging.debug(f'No luck with cache for "{loc}", getting data for real.')
     if parsed_query.get("view"):
         logging.debug(f'Querying wttr_line: {query}')
+        if not parsed_query.get("location"):
+            parsed_query["location"] = loc
         output = wttr_line(query, parsed_query)
     elif loc == 'moon' or loc.startswith('moon@'):
         logging.debug(f'Querying moon')

@@ -3,45 +3,46 @@ Komut Satırı Kullanımı:
     $ curl wttr.in          # bulunduğunuz konum
     $ curl wttr.in/esb      # Esenboğa havalimanında hava durumu
 
-Desteklenen konum tipleri:
+Desteklenen konum türleri:
 
     /istanbul               # şehir adı
-    /~Anıtkabir             # herhangi bir konum
-    /Москва                 # Herhangi bir dilde herhangi bir unicode konum
+    /~Anıtkabir             # herhangi bir konum (boşluk için + kullanın)
+    /Москва                 # herhangi bir dildeki herhangi bir konumun Unicode adı
     /esb                    # havalimanı kodu (3 harfli)
-    /@stackoverflow.com     # alan adı
+    /@stackoverflow.com     # etki alanı adı
     /06800                  # posta kodları
     /39.925325,32.836987    # Yer belirleme sistemi (GPS) koordinatları
 
-Özel konumlar:
+Ay evresi bilgisi:
 
-    /moon                   # Ay evresi (Şehir veya ülke için +TR veya +İstanbul ekleyin)
+    /moon                   # Ay evresi (bu isimdeki şehirler için ,+US veya ,+France ekleyin)
     /moon@2016-10-25        # Belirli bir tarih için ay evresi (@2016-10-25)
 
 Ölçü birimleri:
 
-    ?m                      # metrik sistem (SI) (ABD dışında her yer için varsayılan)
-    ?u                      # USCS (ABD için varsayılan)
-    ?M                      # Rüzgar hızını metre/saniye (m/s) olarak göster
+    m                       # metrik sistem (SI) (ABD dışında her yer için varsayılan)
+    u                       # USCS (ABD için varsayılan)
+    M                       # Rüzgar hızını metre/saniye (m/s) olarak göster
 
 Seçenekleri görüntüle:
 
-    ?0                      # sadece bugün için hava durumu
-    ?1                      # Bugün ve 1 gün sonrası için hava durumu
-    ?2                      # Bugün ve 2 gün sonrası için hava durumu
-    ?A                      # Kullanıcı aracısı (User-Agent) bilgilerini göz ardı eder ve terminalde ANSI formatında çıktı için zorlar
-    ?F                      # "Follow (Takip et)" satırını göstermez
-    ?n                      # dar görünüm (sadece gece ve gündüz)
-    ?q                      # sessiz görünüm ("Hava durumu" yazısı yok)
-    ?Q                      # aşırı sessiz görünüm ("Hava durumu" yazısı ve şehir adı yok)
-    ?T                      # terminal geçişlerini kapatır (renkler yok)
+    0                       # yalnızca bugün için hava durumu
+    1                       # Bugün ve 1 gün sonrası için hava durumu
+    2                       # Bugün ve 2 gün sonrası için hava durumu
+    A                       # Kullanıcı aracısı (User-Agent) bilgilerini göz ardı eder ve terminalde ANSI çıktı biçimini zorlar
+    F                       # "Follow (Takip et)" satırını göstermez
+    n                       # dar görünüm (yalnızca gece ve gündüz)
+    q                       # sessiz görünüm ("Hava durumu" yazısı yok)
+    Q                       # aşırı sessiz görünüm ("Hava durumu" yazısı ve şehir adı yok)
+    T                       # terminal geçişlerini kapatır (renkler yok)
 
 PNG seçenekleri:
 
     /istanbul.png           # bir PNG dosyası üretir
-    ?p                      # çıktı etrafına bir çerçeve ekler
-    ?t                      # 150 birim saydamlık
+    p                       # çıktı etrafına bir çerçeve ekler
+    t                       # 150 birim saydamlık
     transparency=...        # 0 ila 255 arasında saydamlık (255 = saydam değil)
+    background=...          # KKYYMM biçiminde arka plan rengi, örn. 00aaaa
 
 Seçenekler birleştirilebilir:
 
@@ -64,5 +65,6 @@ Desteklenen diller:
 Özel adresler:
 
     /:help                  # bu sayfayı göster
-    /:bash.function         # önerilen bash fonksiyonu wttr() içeriğini göster
+    /:bash.function         # tavsiye edilen wttr() bash fonksiyonunu göster
     /:translation           # çevirmenler hakkındaki bilgileri göster
+

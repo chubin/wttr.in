@@ -292,11 +292,12 @@ var (
 
 	locale = map[string]string{
 		"af":     "af_ZA",
-		"am":	  "am_ET",
+		"am":     "am_ET",
 		"ar":     "ar_TN",
 		"az":     "az_AZ",
 		"be":     "be_BY",
 		"bg":     "bg_BG",
+		"bn":     "bn_IN",
 		"bs":     "bs_BA",
 		"ca":     "ca_ES",
 		"cs":     "cs_CZ",
@@ -314,6 +315,7 @@ var (
 		"fy":     "fy_NL",
 		"ga":     "ga_IE",
 		"he":     "he_IL",
+		"hi":     "hi_IN",
 		"hr":     "hr_HR",
 		"hu":     "hu_HU",
 		"hy":     "hy_AM",
@@ -324,46 +326,50 @@ var (
 		"ja":     "ja_JP",
 		"jv":     "en_US",
 		"ka":     "ka_GE",
-		"ko":     "ko_KR",
 		"kk":     "kk_KZ",
+		"ko":     "ko_KR",
 		"ky":     "ky_KG",
 		"lt":     "lt_LT",
 		"lv":     "lv_LV",
+		"mg":     "mg_MG",
 		"mk":     "mk_MK",
 		"ml":     "ml_IN",
+		"mr":     "mr_IN",
 		"nb":     "nb_NO",
 		"nl":     "nl_NL",
 		"nn":     "nn_NO",
 		"oc":     "oc_FR",
-		"pt":     "pt_PT",
-		"pt-br":  "pt_BR",
 		"pl":     "pl_PL",
+		"pt-br":  "pt_BR",
+		"pt":     "pt_PT",
 		"ro":     "ro_RO",
 		"ru":     "ru_RU",
-		"sv":     "sv_SE",
 		"sk":     "sk_SK",
 		"sl":     "sl_SI",
-		"sr":     "sr_RS",
 		"sr-lat": "sr_RS@latin",
+		"sr":     "sr_RS",
+		"sv":     "sv_SE",
 		"sw":     "sw_KE",
+		"ta":     "ta_IN",
 		"th":     "th_TH",
 		"tr":     "tr_TR",
 		"uk":     "uk_UA",
 		"uz":     "uz_UZ",
 		"vi":     "vi_VN",
-		"zu":     "zu_ZA",
-		"zh":     "zh_CN",
 		"zh-cn":  "zh_CN",
 		"zh-tw":  "zh_TW",
+		"zh":     "zh_CN",
+		"zu":     "zu_ZA",
 	}
 
 	localizedCaption = map[string]string{
 		"af":     "Weer verslag vir:",
-		"am":	  "የአየር ሁኔታ ዘገባ ለ ፥",
+		"am":     "የአየር ሁኔታ ዘገባ ለ ፥",
 		"ar":     "تقرير حالة ألطقس",
 		"az":     "Hava proqnozu:",
 		"be":     "Прагноз надвор'я для:",
 		"bg":     "Прогноза за времето в:",
+		"bn":     "আবহাওয়া সঙ্ক্রান্ত তথ্য",
 		"bs":     "Vremenske prognoze za:",
 		"ca":     "Informe del temps per a:",
 		"cs":     "Předpověď počasí pro:",
@@ -381,6 +387,7 @@ var (
 		"fy":     "Waarberjocht foar:",
 		"ga":     "Réamhaisnéis na haimsire do:",
 		"he":     ":ריוואה גזמ תיזחת",
+		"hi":     "मौसम की जानकारी",
 		"hr":     "Vremenska prognoza za:",
 		"hu":     "Időjárás előrejelzés:",
 		"hy":     "Եղանակի տեսություն:",
@@ -398,6 +405,7 @@ var (
 		"lv":     "Laika ziņas:",
 		"mk":     "Прогноза за времето во:",
 		"ml":     "കാലാവസ്ഥ റിപ്പോർട്ട്:",
+		"mr":     "हवामानाचा अंदाज:",
 		"nb":     "Værmelding for:",
 		"nl":     "Weerbericht voor:",
 		"nn":     "Vêrmelding for:",
@@ -413,6 +421,7 @@ var (
 		"sr-lat": "Vremenska prognoza za:",
 		"sv":     "Väderleksprognos för:",
 		"sw":     "Ripoti ya hali ya hewa, jiji la:",
+		"ta":     "வானிலை அறிக்கை",
 		"te":     "వాతావరణ సమాచారము:",
 		"th":     "รายงานสภาพอากาศ:",
 		"tr":     "Hava beklentisi:",
@@ -423,15 +432,17 @@ var (
 		"zh":     "天气预报：",
 		"zh-cn":  "天气预报：",
 		"zh-tw":  "天氣預報：",
+		"mg":     "Vinavina toetr'andro hoan'ny:",
 	}
 
 	daytimeTranslation = map[string][]string{
 		"af":     {"Oggend", "Middag", "Vroegaand", "Laatnag"},
-		"am":	  {"ጠዋት", "ከሰዓት በኋላ", "ምሽት", "ሌሊት"},
+		"am":     {"ጠዋት", "ከሰዓት በኋላ", "ምሽት", "ሌሊት"},
 		"ar":     {"ﺎﻠﻠﻴﻟ", "ﺎﻠﻤﺳﺍﺀ", "ﺎﻠﻈﻫﺭ", "ﺎﻠﺼﺑﺎﺣ"},
 		"az":     {"Səhər", "Gün", "Axşam", "Gecə"},
 		"be":     {"Раніца", "Дзень", "Вечар", "Ноч"},
 		"bg":     {"Сутрин", "Обяд", "Вечер", "Нощ"},
+		"bn":     {"সকাল", "দুপুর", "সন্ধ্যা", "রাত্রি"},
 		"bs":     {"Ujutro", "Dan", "Večer", "Noć"},
 		"cs":     {"Ráno", "Ve dne", "Večer", "V noci"},
 		"ca":     {"Matí", "Dia", "Tarda", "Nit"},
@@ -450,6 +461,7 @@ var (
 		"fy":     {"Moarns", "Middeis", "Jûns", "Nachts"},
 		"ga":     {"Maidin", "Nóin", "Tráthnóna", "Oíche"},
 		"he":     {"רקוב", "םוֹיְ", "ברֶעֶ", "הלָיְלַ"},
+		"hi":     {"प्रातःकाल", "दोपहर", "सायंकाल", "रात"},
 		"hr":     {"Jutro", "Dan", "Večer", "Noć"},
 		"hu":     {"Reggel", "Dél", "Este", "Éjszaka"},
 		"hy":     {"Առավոտ", "Կեսօր", "Երեկո", "Գիշեր"},
@@ -466,7 +478,8 @@ var (
 		"lt":     {"Rytas", "Diena", "Vakaras", "Naktis"},
 		"lv":     {"Rīts", "Diena", "Vakars", "Nakts"},
 		"mk":     {"Утро", "Пладне", "Вечер", "Ноќ"},
-		"ml":     {"മോണിംഗ്", "മധ്യാഹ്നം", "വൈകുന്നേരം", "രാത്രി"},
+		"ml":     {"രാവിലെ", "മധ്യാഹ്നം", "വൈകുന്നേരം", "രാത്രി"},
+		"mr":     {"सकाळ", "दुपार", "संध्याकाळ", "रात्र"},
 		"nl":     {"'s Ochtends", "'s Middags", "'s Avonds", "'s Nachts"},
 		"nb":     {"Morgen", "Middag", "Kveld", "Natt"},
 		"nn":     {"Morgon", "Middag", "Kveld", "Natt"},
@@ -482,6 +495,7 @@ var (
 		"sr-lat": {"Jutro", "Podne", "Veče", "Noć"},
 		"sv":     {"Morgon", "Eftermiddag", "Kväll", "Natt"},
 		"sw":     {"Asubuhi", "Adhuhuri", "Jioni", "Usiku"},
+		"ta":     {"காலை", "நண்பகல்", "சாயங்காலம்", "இரவு"},
 		"te":     {"ఉదయం", "రోజు", "సాయంత్రం", "రాత్రి"},
 		"th":     {"เช้า", "วัน", "เย็น", "คืน"},
 		"tr":     {"Sabah", "Öğle", "Akşam", "Gece"},
@@ -492,6 +506,7 @@ var (
 		"zh-cn":  {"早上", "中午", "傍晚", "夜间"},
 		"zh-tw":  {"早上", "中午", "傍晚", "夜間"},
 		"zu":     {"Morning", "Noon", "Evening", "Night"},
+		"mg":     {"Maraina", "Tolakandro", "Ariva", "Alina"},
 	}
 )
 
@@ -672,22 +687,22 @@ func formatTemp(c cond) string {
 	explicitPlus1 := false
 	explicitPlus2 := false
 	if c.FeelsLikeC != t {
-                if t > 0 {
-                    explicitPlus1 = true
-                }
-                if c.FeelsLikeC > 0 {
-                    explicitPlus2 = true
-                }
-                if explicitPlus1 {
-                    explicitPlus2 = false
-                }
+		if t > 0 {
+			explicitPlus1 = true
+		}
+		if c.FeelsLikeC > 0 {
+			explicitPlus2 = true
+		}
+		if explicitPlus1 {
+			explicitPlus2 = false
+		}
 		return pad(
-                        fmt.Sprintf("%s(%s) °%s",
-                            color(t, explicitPlus1),
-                            color(c.FeelsLikeC, explicitPlus2),
-                            unitTemp[config.Imperial]),
-                        15)
-        }
+			fmt.Sprintf("%s(%s) °%s",
+				color(t, explicitPlus1),
+				color(c.FeelsLikeC, explicitPlus2),
+				unitTemp[config.Imperial]),
+			15)
+	}
 	// if c.FeelsLikeC < t {
 	// 	if c.FeelsLikeC < 0 && t > 0 {
 	// 		explicitPlus = true

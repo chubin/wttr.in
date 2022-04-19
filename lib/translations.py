@@ -5,30 +5,30 @@ Translation of almost everything.
 """
 
 FULL_TRANSLATION = [
-    "am", "ar", "af", "be", "ca", "da", "de", "el", "et",
-    "fr", "fa", "hi", "hu", "ia", "id", "it",
+    "am", "ar", "af", "be", "bn",  "ca", "da", "de", "el", "et",
+    "fr", "fa", "hi", "hu", "ia", "id", "it", "lt", "mg",
     "nb", "nl", "oc", "pl", "pt-br", "ro",
-    "ru", "tr", "th", "uk", "vi", "zh-cn", "zh-tw"
+    "ru", "ta", "tr", "th", "uk", "vi", "zh-cn", "zh-tw",
 ]
 
 PARTIAL_TRANSLATION = [
     "az", "bg", "bs", "cy", "cs",
     "eo", "es", "eu", "fi", "ga", "hi", "hr",
     "hy", "is", "ja", "jv", "ka", "kk",
-    "ko", "ky", "lt", "lv", "mk", "ml", "nl", "fy",
-    "nn", "pt", "pt-br", "sk", "sl", "sr", "sr-lat",
-    "sv", "sw", "te", "uz",
-    "zh", "zu", "he",
+    "ko", "ky", "lv", "mk", "ml", "mr", "nl", "fy",
+    "nn", "pt", "pt-br", "sk", "sl", "sr", 
+    "sr-lat", "sv", "sw", "te", "uz", "zh",
+    "zu", "he", 
 ]
 
 PROXY_LANGS = [
-    "af", "am", "ar", "az", "be", "bs", "ca",
+    "af", "am", "ar", "az", "be", "bn", "bs", "ca",
     "cy", "de", "el", "eo", "et", "eu", "fa", "fr",
     "fy", "ga", "he", "hr", "hu", "hy",
     "ia", "id", "is", "it", "ja", "kk",
-    "lv", "mk", "nb", "nn", "oc", "ro",
-    "ru", "sl", "th", "pt-br", "uk", "uz",
-    "vi", "zh-cn", "zh-tw",
+    "lt", "lv", "mg", "mk", "mr", "nb", "nn", "oc",
+    "ro", "ru", "sl", "th", "pt-br", "uk", 
+    "uz", "vi", "zh-cn", "zh-tw",
 ]
 
 SUPPORTED_LANGS = FULL_TRANSLATION + PARTIAL_TRANSLATION
@@ -65,6 +65,11 @@ een van die koudste permanent bewoonde plekke op aarde.
 Не успяхме да открием вашето местоположение
 така че ви доведохме в Оймякон,
 едно от най-студените постоянно обитавани места на планетата.
+""",
+        'bn' : u"""
+দুঃখিত, আপনার অবস্থান আমরা খুঁজে পাইনি।
+তাই, আমরা আপনাকে নিয়ে এসেছি ওয়মিয়াকনে, 
+যা পৃথিবীর শীতলতম স্থায়ী জন-বসতিগুলোর একটি। 
 """,
         'bs': u"""
 Nismo mogli pronaći vašu lokaciju,
@@ -177,6 +182,11 @@ Ci auguriamo che le condizioni dove lei si trova siano migliori!
 대신 오이먀콘의 일기 예보를 표시합니다,
 오이먀콘은 지구상에서 가장 추운 곳에 위치한 마을입니다!
 """,
+        'lt': u"""
+Mums nepavyko rasti jūsų vietovės,
+todėl mes nukreipėme jus į Omjakoną,
+vieną iš šalčiausių nuolatinių gyvenviečių planetoje.
+""",
         'lv': u"""
 Mēs nevarējām atrast jūsu atrašanās vietu tādēļ nogādājām jūs Oimjakonā,
 vienā no aukstākajām apdzīvotajām vietām uz planētas.
@@ -185,6 +195,11 @@ vienā no aukstākajām apdzīvotajām vietām uz planētas.
 Неможевме да ја пронајдеме вашата локација,
 затоа ве однесовме во Ојмајкон,
 еден од најладните трајно населени места на планетата.
+""",
+        'mr': u"""
+आमहाला तुमचे स्थळ सापडले नाही.
+म्हणून आम्ही तुम्हाला ओयम्याकोन येथे आणले आहे,
+जे कि आपल्या ग्रहावरील सर्वात थंड वस्तिस्थानांपैकी एक आहे.
 """,
         'nb': u"""
 Vi kunne ikke finne din lokasjon,
@@ -299,6 +314,15 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
 所以我們帶您到奧伊米亞康，
 這個星球上有人類定居最冷之處。
 """,
+        'mg': u"""
+Tsy hita ny toerana misy anao koa nentinay tany Oymyakon ianao,
+iray amin'ireo toerana mangatsiaka indrindra tsisy mponina eto an-tany.
+""",
+        'ta': u"""
+உங்கள் இருப்பிடத்தை எங்களால் கண்டுபிடிக்க முடியவில்லை
+எனவே நாங்கள் உங்களை ஓமியாகோனுக்கு அழைத்து வந்தோம்.
+கிரகத்தின் குளிர்ந்த நிரந்தரமாக வசிக்கும் இடங்களில் ஒன்று.
+""",
     },
 
     'UNKNOWN_LOCATION': {
@@ -308,6 +332,7 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
         'ar': u'موقع غير معروف',
         'be': u'Невядомае месцазнаходжанне',
         'bg': u'Неизвестно местоположение',
+        'bn': u'অজানা অবস্থান',
         'bs': u'Nepoznatoja lokacija',
         'ca': u'Ubicació desconeguda',
         'cs': u'Neznámá poloha',
@@ -332,8 +357,10 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
         'ja': u'未知の場所です',
         'ko': u'알 수 없는 장소',
         'kk': u'',
+        'lt': u'Nežinoma vietovė',
         'lv': u'Nezināma atrašanās vieta',
         'mk': u'Непозната локација',
+        'mr': u'अज्ञात स्थळ',
         'nb': u'Ukjent sted',
         'nl': u'Onbekende locatie',
         'oc': u'Emplaçament desconegut',        
@@ -355,6 +382,8 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
         'zh': u'未知地点',
         'vi': u'Địa điểm không xác định',
         'zh-tw': u'未知位置',
+        'mg': u'Toerana tsy fantatra',
+        'ta': u'தெரியாத இடம்',
     },
 
     'LOCATION': {
@@ -363,6 +392,7 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
         'ar': u'الموقع',
         'be': u'Месцазнаходжанне',
         'bg': u'Местоположение',
+        'bn': u'অবস্থান',
         'bs': u'Lokacija',
         'ca': u'Ubicació',
         'cs': u'Poloha',
@@ -387,8 +417,10 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
         'ja': u'位置情報',
         'ko': u'위치',
         'kk': u'',
+        'lt': u'Vietovė',
         'lv': u'Atrašanās vieta',
         'mk': u'Локација',
+        'mr': u'स्थळ',
         'nb': u'Sted',
         'nl': u'Locatie',
         'oc': u'Emplaçament',        
@@ -409,6 +441,8 @@ một trong những nơi lạnh nhất có người sinh sống trên trái đ�
         'uk': u'Місцезнаходження',
         'vi': u'Địa điểm',
         'zh-tw': u'位置',
+        'mg': u'Toerana',
+        'ta': u'இடம்',
     },
 
     'CAPACITY_LIMIT_REACHED': {
@@ -452,6 +486,12 @@ U kan vir https://twitter.com/igor_chubin volg vir opdaterings.
 Ето доклад за града по подразбиране (просто да видите как изглежда).
 Ще осогурим допълнителни заявки максимално бързо.
 Може да последвате https://twitter.com/igor_chubin за обновления.
+""",
+        'bn': u"""
+দুঃখিত, এই মুহুর্তে আবহাওয়া পরিসেবাতে  আমাদের কুইরী শেষ হয়ে আসছে। 
+এখানে ডিফল্ট শহরের আবহাওয়ার প্রতিবেদন রয়েছে (এটি দেখতে কেমন তা আপনাকে দেখানোর জন্য)। 
+আমরা খুব দ্রুত নতুন কুইরী পাওয়ার ব্যবস্থা করছি। 
+আপডেটের জন্য আপনি https://twitter.com/igor_chubin অনুসরণ করতে পারেন। 
 """,
         'bs': u"""
 Žao mi je, mi ponestaje upita i vremenska prognoza u ovom trenutku.
@@ -558,6 +598,13 @@ Potete seguire https://twitter.com/igor_chubin per gli aggiornamenti.
 업데이트 소식을 원하신다면 https://twitter.com/igor_chubin 을 팔로우 해주세요.
 ======================================================================================
 """,
+        'lt': u"""
+Atsiprašome, šiuo metu pasiekėme orų prognozės paslaugos užklausų ribą.
+Štai orų prognozė numatomam miestui (tam, kad parodytume, kaip ji atrodo).
+Naujas užklausas priimsime, kai tik galėsime.
+Atnaujinimus galite sekti https://twitter.com/igor_chubin
+======================================================================================
+""",
         'lv': u"""
 Atvainojiet, uz doto brīdi mēs esam mazliet noslogoti.
 Šeit ir laika ziņas noklusējuma pilsētai (lai parādītu jums, kā izskatās izveidotais ziņojums).
@@ -570,6 +617,13 @@ Jūs varat sekot https://twitter.com/igor_chubin lai redzētu visus jaunumus.
 Еве една временска прогноза за град (за да видите како изгледа).
 Ќе добиеме нови барања најбрзо што можеме.
 Следете го https://twitter.com/igor_chubin за известувања
+======================================================================================
+""",
+        'mr': u"""
+क्षमस्व, याक्षणी आम्ही हवामान सेवेशी संपर्क करू शकत नाही.
+हा एका पूर्वनिर्धारित शहराचा हवामान अहवाल आहे (केवळ तो कसा दिसतो हे दाखवण्याकरिता).
+आम्ही लवकरात लवकर सेवा पुनः चालू करण्याचा प्रयत्न करू.
+अद्यावत माहितीसाठी तुम्ही https://twitter.com/igor_chubin चे अनुसरण करू शकता.
 ======================================================================================
 """,
         'nb': u"""
@@ -691,6 +745,18 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
 您可以追蹤 https://twitter.com/igor_chubin 以取得更新。
 ======================================================================================
 """,
+        'mg': u"""
+Miala tsiny fa misedra olana ny sampan-draharaha momba ny toetrandro amin'izao fotoana izao.
+Ity ny tatitra momba ny toetr'andro ho an'ny tanàna mahazatra (mba hampisehoana anao ny endriny).
+Haivaly aminao haingana ny fangatahanao.
+Azonao atao ny manaraka ny pejy https://twitter.com/igor_chubin.
+""",
+        'ta': u"""
+மன்னிக்கவும், தற்போது வானிலை சேவைக்கான வினவல்கள் எங்களிடம் இல்லை.
+இயல்புநிலை நகரத்திற்கான வானிலை அறிக்கை இதோ (அது எப்படி இருக்கும் என்பதை உங்களுக்குக் காண்பிப்பதற்காக).
+கூடிய விரைவில் புதிய வினவல்களைப் பெறுவோம்.
+புதுப்பிப்புகளுக்கு நீங்கள் https://twitter.com/igor_chubin ஐப் பின்தொடரலாம்.
+""",
     },
 
     # Historical messages:
@@ -704,6 +770,7 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
         'af': u'Nuwe eienskap: veeltalige name vir liggings \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) en ligging soek \033[92mwttr.in/~Kilimanjaro\033[0m (plaas net ~ vooraan)',
         'be': u'Новыя магчымасці: назвы месц на любой мове \033[92mwttr.in/станция+Восток\033[0m (в UTF-8) i пошук месц \033[92mwttr.in/~Kilimanjaro\033[0m (трэба дадаць ~ ў пачатак)',
         'bg': u'Нова функционалност: многоезични имена на места\033[92mwttr.in/станция+Восток\033[0m (в UTF-8) и в търсенето \033[92mwttr.in/~Kilimanjaro\033[0m (добавете ~ преди)',
+        'bn': u'নতুন ফিচার : বহুভাষিক অবস্থানের নাম \ 033 [92mwttr.in/станция+Восток\033 [0m (UTF-8)] এবং অবস্থান অনুসন্ধান \ 033 [92mwttr.in/~Kilimanjaro\033 [0m (শুধু আগে ~ যোগ করুন)',
         'bs': u'XXXXXXXXXXXXXXXXXXXX: XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\033[92mwttr.in/станция+Восток\033[0m (XX UTF-8) XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
         'ca': u'Noves funcionalitats: noms d\'ubicació multilingües \033[92mwttr.in/станция+Восток\033[0m (en UTF-8) i la ubicació de recerca \033[92mwttr.in/~Kilimanjaro\033[0m (només cal afegir ~ abans)',
         'es': u'Nuevas funcionalidades: los nombres de las ubicaciones en varios idiomas \033[92mwttr.in/станция+Восток\033[0m (em UTF-8) y la búsqueda por ubicaciones \033[92mwttr.in/~Kilimanjaro\033[0m (tan solo inserte ~ al principio)',
@@ -723,8 +790,10 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
         'it': u'Nuove funzionalità: nomi delle località multilingue \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) e ricerca della località \033[92mwttr.in/~Kilimanjaro\033[0m (basta premettere ~)',
         'ko': u'새로운 기능: 다국어로 대응된 위치 \033[92mwttr.in/서울\033[0m (UTF-8에서) 장소 검색 \033[92mwttr.in/~Kilimanjaro\033[0m (앞에 ~를 붙이세요)',
         'kk': u'',
+        'lt': u'Naujiena: daugiakalbiai vietovių pavadinimai \033[92mwttr.in/станция+Восток\033[0m (UTF-8) ir vietovių paieška \033[92mwttr.in/~Kilimanjaro\033[0m (tiesiog priekyje pridėkite ~)',
         'lv': u'Jaunums: Daudzvalodu atrašanās vietu nosaukumi \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) un dabas objektu meklēšana \033[92mwttr.in/~Kilimanjaro\033[0m (tikai priekšā pievieno ~)',
         'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
+        'mr': u'नवीन वैशिष्ट्य: स्थळांची बहुभाषिक नावे \033[92mwttr.in/станция+Восток\033[0m (UTF-8 मध्ये) आणि स्थळ शोध \033[92mwttr.in/~Kilimanjaro\033[0m (फक्त आधी ~ जोडा)',
         'oc': u'Novèla foncionalitat : nom de lòc multilenga \033[92mwttr.in/станция+Восток\033[0m (en UTF-8) e recèrca de lòc \033[92mwttr.in/~Kilimanjaro\033[0m (solament ajustatz ~ abans)',        
         'pl': u'Nowa funkcjonalność: wielojęzyczne nazwy lokalizacji \033[92mwttr.in/станция+Восток\033[0m (w UTF-8) i szukanie lokalizacji \033[92mwttr.in/~Kilimanjaro\033[0m (poprzedź zapytanie ~ - znakiem tyldy)',
         'pt': u'Nova funcionalidade: nomes de localidades em várias línguas \033[92mwttr.in/станция+Восток\033[0m (em UTF-8) e procura por localidades \033[92mwttr.in/~Kilimanjaro\033[0m (é só colocar ~ antes)',
@@ -740,6 +809,8 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
         'uk': u'Спробуйте: назви місць будь-якою мовою \033[92mwttr.in/станція+Восток\033[0m (в UTF-8) та пошук місць \033[92mwttr.in/~Kilimanjaro\033[0m (потрібно додати ~ спочатку)',
         'vi': u'Chức năng mới: tên địa điểm đa ngôn ngữ \033[92mwttr.in/станция+Восток\033[0m (dùng UTF-8) và tìm kiếm địa điểm \033[92mwttr.in/~Kilimanjaro\033[0m (chỉ cần thêm ~ phía trước)',
         'zh-tw': u'新功能：多語言地點名稱 \033[92mwttr.in/станция+Восток\033[0m （使用 UTF-8 編碼）與位置搜尋 \033[92mwttr.in/~Kilimanjaro\033[0m （只要在地點前加 ~ 就可以了）',
+        'mg': u'Fanatsrana vaovao: anarana toerana amin\'ny fiteny maro\033[92mwttr.in/станция+Восток\033[0m (en UTF-8) sy fitadiavana toerana \033[92mwttr.in/~Kilimanjaro\033[0m (ampio ~ fotsiny eo aloha)',
+        'ta': u'புதிய அம்சம்: பன்மொழி இருப்பிடப் பெயர்கள் \033[92mwttr.in/станция+Восток\033[0m (UTF-8 இல்) மற்றும் இருப்பிடத் தேடல் \033[92mwttr.in/~Kilimanjaro\033[0m (முன் ~ஐச் சேர்க்கவும்)',
     },
 
     'FOLLOW_ME': {
@@ -749,6 +820,7 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
         'am': u'ለተጨማሪ wttr.in ዜና እና መረጃ \033[46m\033[30m@igor_chubin\033[0m ን ይከተሉ',
         'be': u'Сачыце за \033[46m\033[30m@igor_chubin\033[0m за навінамі wttr.in',
         'bg': u'Последвай \033[46m\033[30m@igor_chubin\033[0m за обновления свързани с wttr.in',
+        'bn': u'wttr.in আপডেটের জন্য \033[46m\033[30m@igor_chubin\033[0m কে অনুসরণ করুন',
         'bs': u'XXXXXX \033[46m\033[30m@igor_chubin\033[0m XXXXXXXXXXXXXXXXXXX',
         'ca': u'Segueix \033[46m\033[30m@igor_chubin\033[0m per actualitzacions de wttr.in',
         'es': u'Sigue a \033[46m\033[30m@igor_chubin\033[0m para enterarte de las novedades de wttr.in',
@@ -766,8 +838,10 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
         'it': u'Seguite \033[46m\033[30m@igor_chubin\033[0m per aggiornamenti a wttr.in',
         'ko': u'wttr.in의 업데이트 소식을 원하신다면 \033[46m\033[30m@igor_chubin\033[0m 을 팔로우 해주세요',
         'kk': u'',
+        'lt': u'wttr.in atnaujinimus sekite \033[46m\033[30m@igor_chubin\033[0m',
         'lv': u'Seko \033[46m\033[30m@igor_chubin\033[0m , lai uzzinātu wttr.in jaunumus',
         'mk': u'Следете \033[46m\033[30m@igor_chubin\033[0m за wttr.in новости',
+        'mr': u'wttr.in च्या अद्यावत माहितीसाठी  \033[46m\033[30m@igor_chubin\033[0m चे अनुसरण करा',
         'nb': u'Følg \033[46m\033[30m@igor_chubin\033[0m for wttr.in oppdateringer',
         'nl': u'Volg \033[46m\033[30m@igor_chubin\033[0m voor wttr.in updates',
         'oc': u'Seguissètz \033[46m\033[30m@igor_Chubin\033[0m per demorar informat sus wttr.in',        
@@ -786,6 +860,8 @@ Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật th�
         'uk': u'Нові можливості wttr.in публікуються тут: \033[46m\033[30m@igor_chubin\033[0m',
         'vi': u'Theo dõi \033[46m\033[30m@igor_chubin\033[0m để cập nhật thông tin về wttr.in',
         'zh-tw': u'追蹤 \033[46m\033[30m@igor_chubin\033[0m 以取得更多 wttr.in 的動態',
+        'mg': u'Araho ao ny pejy \033[46m\033[30m@igor_Chubin\033[0m raha toa ka te hahazo vaovao momban\'ny wttr.in',
+        'ta': u'wttr.in புதுப்பிப்புகளுக்கு \033[46m\033[30m@igor_chubin\033[0m ஐப் பின்தொடரவும்',
     },
 }
 CAPTION = {
@@ -795,6 +871,7 @@ CAPTION = {
     "az": u"Hava proqnozu:",
     "be": u"Прагноз надвор'я для:",
     "bg": u"Прогноза за времето в:",
+    "bn": u"আবহাওয়ার প্রতিবেদন:",
     "bs": u"Vremenske prognoze za:",
     "ca": u"Informe del temps per a:",
     "cs": u"Předpověď počasí pro:",
@@ -831,6 +908,7 @@ CAPTION = {
     "lv": u"Laika ziņas:",
     "mk": u"Прогноза за времето во:",
     "ml": u"കാലാവസ്ഥ റിപ്പോർട്ട്:",
+    "mr": u"हवामान अहवाल:",
     "nb": u"Værmelding for:",
     "nl": u"Weerbericht voor:",
     "nn": u"Vêrmelding for:",
@@ -855,6 +933,8 @@ CAPTION = {
     "zh": u"天气预报：",
     "zu": u"Isimo sezulu:",
     "zh-tw": u"天氣報告：",
+    "mg": u"Toetr\'andro any :",
+    "ta": u"வானிலை அறிக்கை:",
 }
 
 def get_message(message_name, lang):

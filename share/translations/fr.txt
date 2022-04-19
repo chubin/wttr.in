@@ -4,7 +4,7 @@
 : Pluie légère et averses                          : Light rain and snow shower
 : Pluies légères orageuses                         : Light rain with thunderstorm
 : Chutes de neige légères                          : Light snow shower
-: Nappes de brouillard                             : Parftial fog
+: Nappes de brouillard                             : Partial fog
 : Orage de pluie et de grêle                       : Rain and hail with thunderstorm
 : Pluies orageuses                                 : Rain with thunderstorm
 : Brouillard léger                                 : Shallow fog

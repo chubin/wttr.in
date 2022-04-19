@@ -334,6 +334,8 @@ def _get_hemisphere(location):
     """
     if all(location):
         location_string = ", ".join(location)
+    else:
+        return True
 
     geolocation = _geolocator(location_string)
     if geolocation is None:

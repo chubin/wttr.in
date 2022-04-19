@@ -14,6 +14,7 @@ Translated/improved/corrected by:
     * Basque:               Iker Sagasti (@isagasti on github)
     * Belarusian:           Igor Chubin, Anton Zhavoronkov @edogby (on github)
     * Bosnian:              Ismar Kunc @ismarkunc
+    * Bengali:              Nazia Tasnim (@appledora on github)
     * Bulgarian:            Vladimir Vitkov @zeridon (on github)
     * Brazilian-PT:         Tupã Negreiros @TupaNegreiros (on github)
     * Catalan:              Angel Jarabo @legna29A
@@ -43,7 +44,9 @@ Translated/improved/corrected by:
     * Kazakh:               Akku Tutkusheva, Oleg Tropinin
     * Korean:               Jeremy Bae @opt9, Jung Winter @res_tin
     * Latvian:              Gunārs Danovskis
+    * Lithuanian	    Juras Rutavičius
     * Macedonian:           Matej Plavevski @MatejMecka
+    * Marathi:              Sanket Pandit Garade (@sanketgarade on github)
     * Norwegian:            Fredrik Fjeld @fredrikfjeld
     * Nynorsk:              Kevin Brubeck Unhammer (https://unhammer.org/k/)
     * Occitan:              Quentin PAGÈS @Quenty-tolosan (gh)
@@ -58,7 +61,10 @@ Translated/improved/corrected by:
     * Spanish:              Fernando Bitti Loureiro @fbitti (on github)
     * Swedish:              John Eriksson
     * Swahili:              Joel Mukuthu
-    * Turkish:              Atabey Kaygun, Yilmaz @edigu, Volkan Tokmak(@volkanto)
+    * Tamil:                Parthiban @parthi1984 (on github)
+    * Telugu:               Pavan Srinivas Mamidala @pavansrinivasmamidala (on github),
+                            Vishal Boddu @bodduv (on github)
+    * Turkish:              Atabey Kaygun, Yilmaz @edigu, Volkan Tokmak(@volkanto), Oğuz Ersen
     * Thai:                 Vatunyoo Suwannapisit @kerlos
     * Ukrainian:            Igor Chubin, Serhiy @pavse
     * Uzbek:                Shukhrat Mukimov

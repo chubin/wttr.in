@@ -85,10 +85,13 @@ PLAIN_TEXT_AGENTS = [
     "lwp-request",
     "wget",
     "python-requests",
+    "python-httpx",
     "openbsd ftp",
     "powershell",
     "fetch",
     "aiohttp",
+    "http_get",
+    "xh",
 ]
 
 PLAIN_TEXT_PAGES = [':help', ':bash.function', ':translation', ':iterm2']
