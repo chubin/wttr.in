@@ -9,6 +9,7 @@ External environment variables:
     WTTR_LISTEN_HOST
     WTTR_LISTEN_PORT
     WTTR_USER_AGENT
+    WTTR_AIRPORTS_DAT
 
 """
 from __future__ import print_function
@@ -18,17 +19,22 @@ import os
 import re
 
 MYDIR = os.path.abspath(os.path.dirname(os.path.dirname('__file__')))
+_DATADIR = os.path.join(MYDIR, 'data')
+_LOGDIR = os.path.join(MYDIR, 'log')
 
 if "WTTR_GEOLITE" in os.environ:
     GEOLITE = os.environ["WTTR_GEOLITE"]
 else:
-    GEOLITE = os.path.join(MYDIR, 'data', "GeoLite2-City.mmdb")
+    GEOLITE = os.path.join(_DATADIR, "GeoLite2-City.mmdb")
 
-WEGO = os.environ.get("WTTR_WEGO", "/home/igor/go/bin/we-lang")
+if "WTTR_AIRPORTS_DAT" in os.environ:
+    AIRPORTS_DAT = os.environ["WTTR_AIRPORTS_DAT"]
+else:
+    AIRPORTS_DAT = os.path.join(_DATADIR, "airports.dat")
+
+WEGO = os.environ.get("WTTR_WEGO", os.path.join(MYDIR, 'bin', 'we-lang'))
 PYPHOON = "pyphoon-lolcat"
 
-_DATADIR = "/wttr.in"
-_LOGDIR = "/wttr.in/log"
 
 IP2LCACHE = os.path.join(_DATADIR, "cache/ip2l/")
 PNG_CACHE = os.path.join(_DATADIR, "cache/png")

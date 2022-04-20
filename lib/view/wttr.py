@@ -8,6 +8,7 @@ The module is a wrapper for the modified Wego program.
 
 import sys
 import re
+import logging
 
 from gevent.subprocess import Popen, PIPE
 
@@ -22,6 +23,7 @@ def get_wetter(parsed_query):
     location = parsed_query['location']
     html = parsed_query['html_output']
     lang = parsed_query['lang']
+    logging.debug(f'get_wetter for {location}')
 
     location_not_found = False
     if location == NOT_FOUND_LOCATION:
@@ -30,8 +32,11 @@ def get_wetter(parsed_query):
     stderr = ""
     returncode = 0
     if not location_not_found:
+        logging.debug('Valid location, querying wego')
         stdout, stderr, returncode = _wego_wrapper(location, parsed_query)
 
+    if returncode != 0:
+        logging.debug(f'Wego failed with "{location}": {stderr}')
     if location_not_found or \
         (returncode != 0 \
             and ('Unable to find any matching weather'
@@ -77,7 +82,7 @@ def _wego_wrapper(location, parsed_query):
     else:
         location_name = parsed_query['override_location_name']
 
-    cmd = [WEGO, '--city=%s' % location]
+    cmd = [WEGO, '--location=%s' % location]
 
     if parsed_query.get('inverted_colors'):
         cmd += ['-inverse']
@@ -94,9 +99,7 @@ def _wego_wrapper(location, parsed_query):
     if parsed_query.get('use_imperial', False):
         cmd += ['-imperial']
 
-    if location_name:
-        cmd += ['-location_name', location_name]
-
+    logging.debug(f'wego cmd: "{cmd}"')
     proc = Popen(cmd, stdout=PIPE, stderr=PIPE)
     stdout, stderr = proc.communicate()
     stdout = stdout.decode("utf-8")
@@ -158,12 +161,16 @@ def _htmlize(ansi_output, title, parsed_query):
     if not parsed_query.get('inverted_colors'):
         cmd += ["--bg=dark"]
 
+    logging.debug(f'Running ansi2html: "{cmd}"')
     proc = Popen(cmd, stdin=PIPE, stdout=PIPE, stderr=PIPE)
     stdout, stderr = proc.communicate(ansi_output.encode("utf-8"))
     stdout = stdout.decode("utf-8")
     stderr = stderr.decode("utf-8")
     if proc.returncode != 0:
+        logging.error(f'ansi2html failed: {stderr}')
         error(stdout + stderr)
+    else:
+        logging.debug(f'ansi2html did not fail: "{stderr}" and produced output: {stdout}')
 
     if parsed_query.get('inverted_colors'):
         stdout = stdout.replace(

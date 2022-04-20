@@ -617,13 +617,14 @@ because the MaxMind database is pretty good).
 
 * Install Docker
 * Build Docker Image
+   ```
+   docker build . --build-arg geolite_license_key=************
+   ```
 * These files should be mounted by the user at runtime:
 
 ```
 /root/.wegorc
 /root/.ip2location.key (optional)
-/app/airports.dat
-/app/GeoLite2-City.mmdb
 ```
 
 ### Get a WorldWeatherOnline key and configure wego

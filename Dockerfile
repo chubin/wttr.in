@@ -1,71 +1,68 @@
 # Build stage
-FROM golang:1-alpine as builder
+FROM golang:1-buster as builder
 
 WORKDIR /app
 
 COPY ./share/we-lang/we-lang.go /app
 COPY ./share/we-lang/go.mod /app
 
-RUN apk add --no-cache git
+RUN apt update && apt install -y git
 
 
 RUN go get -u github.com/mattn/go-colorable && \
     go get -u github.com/klauspost/lctime && \
     go get -u github.com/mattn/go-runewidth && \
-    CGO_ENABLED=0 go build /app/we-lang.go
-# Results in /app/we-lang
+    go get -u github.com/schachmat/wego && \
+    CGO_ENABLED=0 go build /app/we-lang.go && \
+    cp $GOPATH/bin/wego /app/wego
+# Results in /app/we-lang & /app/wego
 
 
-FROM alpine:3
+FROM python:3.9-slim-buster
 
 WORKDIR /app
 
-COPY ./requirements.txt /app
-
-ENV LLVM_CONFIG=/usr/bin/llvm10-config
-
-RUN apk add --no-cache --virtual .build \
-    autoconf \
-    automake \
-    g++ \
-    gcc \
-    jpeg-dev \
-    llvm11-dev\
-    make \
-    zlib-dev \
-    && apk add --no-cache \
-    python3 \
-    py3-pip \
-    py3-scipy \
-    py3-wheel \
-    py3-gevent \
-    zlib \
-    jpeg \
-    llvm11 \
-    libtool \
-    supervisor \
-    py3-numpy-dev \
-    python3-dev && \
-    mkdir -p /app/cache && \
-    mkdir -p /var/log/supervisor && \
-    mkdir -p /etc/supervisor/conf.d && \
-    chmod -R o+rw /var/log/supervisor && \
-    chmod -R o+rw /var/run && \
-    pip install -r requirements.txt --no-cache-dir && \
-    apk del --no-cache -r .build
+RUN mkdir -p cache data log \
+      /var/log/supervisor && \
+    chmod -R o+rw /var/log/supervisor /var/run cache log
 
 COPY --from=builder /app/we-lang /app/bin/we-lang
+COPY --from=builder /app/wego /app/bin/wego
 COPY ./bin /app/bin
 COPY ./lib /app/lib
 COPY ./share /app/share
 COPY share/docker/supervisord.conf /etc/supervisor/supervisord.conf
 
+# Get GeoLite2 & airports.dat
+ARG geolite_license_key
+RUN ( apt update && apt install -y wget && \
+  cd data/ && \
+  wget "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=${geolite_license_key}&suffix=tar.gz" -O - | tar -xz --strip=1 --wildcards --no-anchored '*.mmdb' && \
+  wget "https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat" -O airports.dat )
+
+
+COPY ./requirements.txt /app
+# Python build time dependencies
+RUN apt install -y \
+    build-essential \
+    autoconf \
+    libtool \
+    git \
+    # Runtime deps
+    gawk \
+    tzdata && \
+    pip install -r requirements.txt --no-cache-dir && \
+    apt remove -y \
+    build-essential \
+    autoconf \
+    libtool \
+    git && \
+    apt autoremove -y
+
 ENV WTTR_MYDIR="/app"
-ENV WTTR_GEOLITE="/app/GeoLite2-City.mmdb"
-ENV WTTR_WEGO="/app/bin/we-lang"
 ENV WTTR_LISTEN_HOST="0.0.0.0"
 ENV WTTR_LISTEN_PORT="8002"
 
 EXPOSE 8002
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
+CMD ["/usr/local/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
