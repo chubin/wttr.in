@@ -31,6 +31,7 @@ def get_wetter(parsed_query):
     returncode = 0
     if not location_not_found:
         stdout, stderr, returncode = _wego_wrapper(location, parsed_query)
+        first_line, stdout = _wego_postprocessing(location, parsed_query, stdout)
 
     if location_not_found or \
         (returncode != 0 \
@@ -57,13 +58,8 @@ def get_wetter(parsed_query):
         not_found_footer = "\n".join("\033[48;5;91m " + x + " \033[0m"
                                      for x in not_found_footer.splitlines() if x) + "\n"
 
-        stdout = not_found_header + "\n----\n" + stdout + not_found_footer
-
-    if "\n" in stdout:
         first_line, stdout = _wego_postprocessing(location, parsed_query, stdout)
-    else:
-        first_line = ""
-
+        stdout = not_found_header + "\n----\n" + stdout + not_found_footer
 
     if html:
         return _htmlize(stdout, first_line, parsed_query)
