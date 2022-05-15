@@ -84,6 +84,7 @@ def parse_query(args):
     if 'm' in q:
         result['use_metric'] = True
     if 'M' in q:
+        result['use_metric'] = True
         result['use_ms_for_wind'] = True
     if 'u' in q:
         result['use_imperial'] = True
