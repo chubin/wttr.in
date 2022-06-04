@@ -865,17 +865,9 @@ func formatCond(cur []string, c cond, current bool) (ret []string) {
 		}
 	}
 	if config.RightToLeft {
-		ret = append(ret, fmt.Sprintf("%v %v %v", cur[0], desc, icon[0]))
-		ret = append(ret, fmt.Sprintf("%v %v %v", cur[1], formatTemp(c), icon[1]))
-		ret = append(ret, fmt.Sprintf("%v %v %v", cur[2], formatWind(c), icon[2]))
-		ret = append(ret, fmt.Sprintf("%v %v %v", cur[3], formatVisibility(c), icon[3]))
-		ret = append(ret, fmt.Sprintf("%v %v %v", cur[4], formatRain(c), icon[4]))
+		ret = append(ret, fmt.Sprintf("%v %v %v", cur[0], desc, icon[0]), fmt.Sprintf("%v %v %v", cur[1], formatTemp(c), icon[1]), fmt.Sprintf("%v %v %v", cur[2], formatWind(c), icon[2]), fmt.Sprintf("%v %v %v", cur[3], formatVisibility(c), icon[3]), fmt.Sprintf("%v %v %v", cur[4], formatRain(c), icon[4]))
 	} else {
-		ret = append(ret, fmt.Sprintf("%v %v %v", cur[0], icon[0], desc))
-		ret = append(ret, fmt.Sprintf("%v %v %v", cur[1], icon[1], formatTemp(c)))
-		ret = append(ret, fmt.Sprintf("%v %v %v", cur[2], icon[2], formatWind(c)))
-		ret = append(ret, fmt.Sprintf("%v %v %v", cur[3], icon[3], formatVisibility(c)))
-		ret = append(ret, fmt.Sprintf("%v %v %v", cur[4], icon[4], formatRain(c)))
+		ret = append(ret, fmt.Sprintf("%v %v %v", cur[0], icon[0], desc), fmt.Sprintf("%v %v %v", cur[1], icon[1], formatTemp(c)), fmt.Sprintf("%v %v %v", cur[2], icon[2], formatWind(c)), fmt.Sprintf("%v %v %v", cur[3], icon[3], formatVisibility(c)), fmt.Sprintf("%v %v %v", cur[4], icon[4], formatRain(c)))
 	}
 	return
 }
@@ -1095,9 +1087,7 @@ func getDataFromAPI() (ret resp) {
 	if len(config.City) > 0 {
 		params = append(params, "q="+url.QueryEscape(config.City))
 	}
-	params = append(params, "format=json")
-	params = append(params, "num_of_days="+strconv.Itoa(config.Numdays))
-	params = append(params, "tp=3")
+	params = append(params, "format=json", "num_of_days="+strconv.Itoa(config.Numdays), "tp=3")
 	if config.Lang != "" {
 		params = append(params, "lang="+config.Lang)
 	}
