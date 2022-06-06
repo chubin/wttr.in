@@ -239,6 +239,16 @@ To embed in to an IRC ([Weechat](https://github.com/weechat/weechat)) client's e
 ```
 ![wttr.in in weechat status bar](https://i.imgur.com/IyvbxjL.png)
 
+
+### conky
+
+Conky usage example:
+
+```
+${texeci 1800 curl wttr.in/kyiv_0pq_lang=uk.png | convert - -transparent black $HOME/.config/conky/out.png}
+${image $HOME/.config/conky/out.png -p 0,0}
+```
+
 ### Emojis support
 
 To see emojis in terminal, you need:
