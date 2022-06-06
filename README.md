@@ -29,7 +29,7 @@ You can access the service from a shell or from a Web browser like this:
 
 Here is an actual weather report for your location (it's live!):
 
-![Weather Report](https://wttr.in/MyLocation.png?)
+![Weather Report](https://wttr.in/San-Francisco.png?)
 
 (It's not your actual location - GitHub's CDN hides your real IP address with its own IP address,
 but it's still a live weather report in your language.)
@@ -248,6 +248,8 @@ Conky usage example:
 ${texeci 1800 curl wttr.in/kyiv_0pq_lang=uk.png | convert - -transparent black $HOME/.config/conky/out.png}
 ${image $HOME/.config/conky/out.png -p 0,0}
 ```
+
+![wttr.in in weechat status bar](https://user-images.githubusercontent.com/3875145/172178453-9e9ed9e3-9815-426a-9a21-afdd6e279fc8.png)
 
 ### Emojis support
 
