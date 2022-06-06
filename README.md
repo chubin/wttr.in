@@ -245,7 +245,8 @@ To embed in to an IRC ([Weechat](https://github.com/weechat/weechat)) client's e
 Conky usage example:
 
 ```
-${texeci 1800 curl wttr.in/kyiv_0pq_lang=uk.png | convert - -transparent black $HOME/.config/conky/out.png}
+${texeci 1800 curl wttr.in/kyiv_0pq_lang=uk.png 
+  | convert - -transparent black $HOME/.config/conky/out.png}
 ${image $HOME/.config/conky/out.png -p 0,0}
 ```
 
