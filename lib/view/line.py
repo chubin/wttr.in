@@ -167,6 +167,14 @@ def render_pressure(data, query):
         answer += 'hPa'
     return answer
 
+def render_uv_index(data, query):
+    """
+    UV Index (u)
+    """
+
+    answer = data.get('uvIndex', '')
+    return answer
+
 def render_wind(data, query):
     """
     wind (w)
@@ -284,6 +292,7 @@ FORMAT_SYMBOL = {
     'p':    render_precipitation,
     'o':    render_precipitation_chance,
     'P':    render_pressure,
+    "u":    render_uv_index,
     }
 
 FORMAT_SYMBOL_ASTRO = {

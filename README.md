@@ -59,11 +59,8 @@ You can see it running here: [wttr.in](https://wttr.in).
 `         ├── 9.6 - `Configure wttr.in<br>
 `         └── 9.7 - `Configure the HTTP-frontend service<br>
 <br>
-======================================================================
 
-
-======================================================================
-
+[Documentation](https://wttr.in/:help) | [Usage](https://github.com/chubin/wttr.in#usage) | [One-line output](https://github.com/chubin/wttr.in#one-line-output) | [Data-rich output format](https://github.com/chubin/wttr.in#data-rich-output-format-v2) | [Map view](https://github.com/chubin/wttr.in#map-view-v3) | [Output formats](https://github.com/chubin/wttr.in#different-output-formats) | [Moon phases](https://github.com/chubin/wttr.in#moon-phases) | [Internationalization](https://github.com/chubin/wttr.in#internationalization-and-localization) | [Windows issues](https://github.com/chubin/wttr.in#windows-users) | [Installation](https://github.com/chubin/wttr.in#installation)
 
 ## Usage
 
@@ -239,6 +236,7 @@ To specify your own custom output format, use the special `%`-notation:
     M    Moon day,
     p    Precipitation (mm/3 hours),
     P    Pressure (hPa),
+    u    UV index (1-12),
 
     D    Dawn*,
     S    Sunrise*,

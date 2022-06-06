@@ -22,7 +22,7 @@ WORKDIR /app
 
 COPY ./requirements.txt /app
 
-ENV LLVM_CONFIG=/usr/bin/llvm10-config
+ENV LLVM_CONFIG=/usr/bin/llvm11-config
 
 RUN apk add --no-cache --virtual .build \
     autoconf \
