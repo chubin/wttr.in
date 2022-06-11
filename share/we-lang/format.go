@@ -223,12 +223,12 @@ func formatWind(c cond) string {
 		return fmt.Sprintf("\033[38;5;%03dm%d\033[0m", col, spd)
 	}
 
-	unitWindString := unitWind[0]
+	unitWindString := unitWind(0, config.Lang)
 	if config.WindMS {
-		unitWindString = unitWind[2]
+		unitWindString = unitWind(2, config.Lang)
 	} else {
 		if config.Imperial {
-			unitWindString = unitWind[1]
+			unitWindString = unitWind(1, config.Lang)
 		}
 	}
 
@@ -250,7 +250,7 @@ func formatVisibility(c cond) string {
 	if config.Imperial {
 		c.VisibleDistKM = (c.VisibleDistKM * 621) / 1000
 	}
-	return pad(fmt.Sprintf("%d %s", c.VisibleDistKM, unitVis[config.Imperial]), 15)
+	return pad(fmt.Sprintf("%d %s", c.VisibleDistKM, unitVis(config.Imperial, config.Lang)), 15)
 }
 
 func formatRain(c cond) string {
@@ -259,9 +259,13 @@ func formatRain(c cond) string {
 		rainUnit = float32(c.PrecipMM) * 0.039
 	}
 	if c.ChanceOfRain != "" {
-		return pad(fmt.Sprintf("%.1f %s | %s%%", rainUnit, unitRain[config.Imperial], c.ChanceOfRain), 15)
+		return pad(fmt.Sprintf(
+			"%.1f %s | %s%%",
+			rainUnit,
+			unitRain(config.Imperial, config.Lang),
+			c.ChanceOfRain), 15)
 	}
-	return pad(fmt.Sprintf("%.1f %s", rainUnit, unitRain[config.Imperial]), 15)
+	return pad(fmt.Sprintf("%.1f %s", rainUnit, unitRain(config.Imperial, config.Lang)), 15)
 }
 
 func formatCond(cur []string, c cond, current bool) (ret []string) {

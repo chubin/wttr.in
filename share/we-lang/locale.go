@@ -220,24 +220,98 @@ var (
 		"mg":     {"Maraina", "Tolakandro", "Ariva", "Alina"},
 	}
 
-	unitRain = map[bool]string{
-		false: "mm",
-		true:  "in",
-	}
-
 	unitTemp = map[bool]string{
 		false: "C",
 		true:  "F",
 	}
 
-	unitVis = map[bool]string{
-		false: "km",
-		true:  "mi",
+	localizedRain = map[string]map[bool]string{
+		"en": map[bool]string{
+			false: "mm",
+			true:  "in",
+		},
+		"be": map[bool]string{
+			false: "мм",
+			true:  "in",
+		},
+		"ru": map[bool]string{
+			false: "мм",
+			true:  "in",
+		},
+		"uk": map[bool]string{
+			false: "мм",
+			true:  "in",
+		},
 	}
 
-	unitWind = map[int]string{
-		0: "km/h",
-		1: "mph",
-		2: "m/s",
+	localizedVis = map[string]map[bool]string{
+		"en": map[bool]string{
+			false: "km",
+			true:  "mi",
+		},
+		"be": map[bool]string{
+			false: "км",
+			true:  "mi",
+		},
+		"ru": map[bool]string{
+			false: "км",
+			true:  "mi",
+		},
+		"uk": map[bool]string{
+			false: "км",
+			true:  "mi",
+		},
+	}
+
+	localizedWind = map[string]map[int]string{
+		"en": map[int]string{
+			0: "km/h",
+			1: "mph",
+			2: "m/s",
+		},
+		"be": map[int]string{
+			0: "км/г",
+			1: "mph",
+			2: "м/c",
+		},
+		"ru": map[int]string{
+			0: "км/ч",
+			1: "mph",
+			2: "м/c",
+		},
+		"tr": map[int]string{
+			0: "km/sa",
+			1: "mph",
+			2: "m/s",
+		},
+		"uk": map[int]string{
+			0: "км/год",
+			1: "mph",
+			2: "м/c",
+		},
 	}
 )
+
+func unitWind(unit int, lang string) string {
+	translation, ok := localizedWind[lang]
+	if !ok {
+		translation = localizedWind[lang]
+	}
+	return translation[unit]
+}
+
+func unitVis(unit bool, lang string) string {
+	translation, ok := localizedVis[lang]
+	if !ok {
+		translation = localizedVis[lang]
+	}
+	return translation[unit]
+}
+
+func unitRain(unit bool, lang string) string {
+	translation, ok := localizedRain[lang]
+	if !ok {
+		translation = localizedRain[lang]
+	}
+	return translation[unit]
+}
