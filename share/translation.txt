@@ -5,7 +5,7 @@ wttr.in is translated in NUMBER_OF_LANGUAGES languages:
 Translated/improved/corrected by:
 
     * Afrikaans:            Casper Labuschage @casperl (on github)
-    * Arabic                Besher Aladdam @akai54 (on github)
+    * Arabic                Besher Aladdam @akai54 (on github), Ahmed D. ALi @_nakanakaii
     * Arhamic               Robel Kassa @rawbubble
     * Armenian:             Aram Bayadyan @aramix, Mikayel Ghazaryan @mkdotam,
                             Grigor Khachatryan @grigortw
