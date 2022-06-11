@@ -468,10 +468,10 @@ U kan vir https://twitter.com/igor_chubin volg vir opdaterings.
 ======================================================================================
 """,
         'ar': u"""
-نأسف, نفذت منا طلبات إستعلام خدمة الطقس في هذه اللحظة.
-هذا التقرير الجوي للمدينة الإفتراضية   (فقط لنريك, الشكل الذي تبدو عليه).
-سوف نحصل علي طلبات إستعلام جديدة في أقرب وقت ممكن.
-يمكنك متابعة https://twitter.com/igor_chubin من أجل الحصول علي أخر المستجدات.
+عذرًا ، استعلامات خدمة الطقس نفذت في الوقت الحالي.
+هذا هو تقرير الطقس للمدينة الافتراضية (فقط لتظهر لك كيف تبدو).
+سوف نتلقى استعلامات جديدة في أقرب وقت ممكن.
+يمكنك متابعة https://twitter.com/igor_chubin لآخر المستجدات.
 ======================================================================================
 """,
         'be': u"""
@@ -815,7 +815,7 @@ Azonao atao ny manaraka ny pejy https://twitter.com/igor_chubin.
 
     'FOLLOW_ME': {
         'en': u'Follow \033[46m\033[30m@igor_chubin\033[0m for wttr.in updates',
-        'ar': u'تابع \033[46m\033[30m@igor_chubin\033[0m من أجل wttr.in أخر مستجدات',
+        'ar': u'لآخر المستجدات تابع \033[46m\033[30m@igor_chubin\033[0m',
         'af': u'Volg \033[46m\033[30m@igor_chubin\033[0m vir wttr.in opdaterings',
         'am': u'ለተጨማሪ wttr.in ዜና እና መረጃ \033[46m\033[30m@igor_chubin\033[0m ን ይከተሉ',
         'be': u'Сачыце за \033[46m\033[30m@igor_chubin\033[0m за навінамі wttr.in',
@@ -867,7 +867,7 @@ Azonao atao ny manaraka ny pejy https://twitter.com/igor_chubin.
 CAPTION = {
     "af": u"Weer verslag vir:",
     "am": u"የአየር ሁኔታ ሪፖርት ለ",
-    "ar": u"تقرير جوي",
+    "ar": u"تقرير حالة الطقس",
     "az": u"Hava proqnozu:",
     "be": u"Прагноз надвор'я для:",
     "bg": u"Прогноза за времето в:",
