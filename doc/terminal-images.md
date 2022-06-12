@@ -34,7 +34,7 @@ The map view currently supports three formats:
 | GNOME Terminal        |   X11     |   [in-progress](https://gitlab.gnome.org/GNOME/vte/-/issues/253) |   Sixel   |
 | alacritty             |   X11     |   [in-progress](https://github.com/alacritty/alacritty/issues/910) |  Sixel   |
 | st                    |   X11     | [stixel](https://github.com/vizs/stixel) or [st-sixel](https://github.com/galatolofederico/st-sixel)     |   Sixel   |
-| Konsole               |   X11     |   [requested](https://bugs.kde.org/show_bug.cgi?id=391781) | Sixel   |
+| Konsole               |   X11     |   yes         |   Sixel   |
 | DomTerm               |   Web     |   yes         |   Sixel   |
 | Yaft                  |   FB      |   yes         |   Sixel   |
 | iTerm2                |   Mac OS X|   yes         |   IIP     |
