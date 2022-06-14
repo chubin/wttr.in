@@ -36,6 +36,7 @@ PRECONFIGURED_FORMAT = {
     '2':    r'%c 🌡️%t 🌬️%w\n',
     '3':    r'%l: %c %t\n',
     '4':    r'%l: %c 🌡️%t 🌬️%w\n',
+    '69':   r'nice',
 }
 
 MOON_PHASES = (
