@@ -6,7 +6,7 @@ Translation of almost everything.
 
 FULL_TRANSLATION = [
     "am", "ar", "af", "be", "bn",  "ca", "da", "de", "el", "et",
-    "fr", "fa", "hi", "hu", "ia", "id", "it", "lt", "mg",
+    "fr", "fa", "gl", "hi", "hu", "ia", "id", "it", "lt", "mg",
     "nb", "nl", "oc", "pl", "pt-br", "ro",
     "ru", "ta", "tr", "th", "uk", "vi", "zh-cn", "zh-tw",
 ]
@@ -16,9 +16,9 @@ PARTIAL_TRANSLATION = [
     "eo", "es", "eu", "fi", "ga", "hi", "hr",
     "hy", "is", "ja", "jv", "ka", "kk",
     "ko", "ky", "lv", "mk", "ml", "mr", "nl", "fy",
-    "nn", "pt", "pt-br", "sk", "sl", "sr", 
+    "nn", "pt", "pt-br", "sk", "sl", "sr",
     "sr-lat", "sv", "sw", "te", "uz", "zh",
-    "zu", "he", 
+    "zu", "he",
 ]
 
 PROXY_LANGS = [
@@ -118,6 +118,11 @@ munduko lekurik hotz eta hutseneraiko bat
         'fa': u"""
 ما نتونستیم مکان شما رو پیدا کنیم. به همین خاطر شما رو به اویمیاکن بردیم
 ، یکی از سردترین مکان های روی زمین که اصلا قابل سکونت نیست!
+""",
+        'gl': u"""
+Non logramos atopar a túa localización
+polo que te trouxemos até Oimiakón,
+un dos lugares máis fríos e permamentemente deshabitados do planeta.
 """,
         'fi': u"""
 Emme löytänyt sijaintiasi, joten toimme sinut Oimjakoniin,
@@ -347,6 +352,7 @@ iray amin'ireo toerana mangatsiaka indrindra tsisy mponina eto an-tany.
         'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement inconnu',
         'ga': u'Ceantar anaithnid',
+        'gl': u'Localización descoñecida',
         'hi': u'अज्ञात स्थान',
         'hu': u'Ismeretlen lokáció',
         'hy': u'Անհայտ գտնվելու վայր',
@@ -407,6 +413,7 @@ iray amin'ireo toerana mangatsiaka indrindra tsisy mponina eto an-tany.
         'fi': u'Tuntematon sijainti',
         'fr': u'Emplacement',
         'ga': u'Ceantar',
+        'gl': u'Localización',
         'hi': u'स्थान',
         'hu': u'Lokáció',
         'hy': u'Դիրք',
@@ -547,6 +554,13 @@ Tá brón orainn, níl mórán iarratas le fail chuig seirbhís na haimsire faoi
 Seo duit réamhaisnéis na haimsire don chathair réamhshocraithe (chun é a thaispeaint duit).
 Gheobhaimid iarratais nua chomh luath agus is feidir.
 Lean orainn ar https://twitter.com/igor_chubin don eolas is déanaí.
+======================================================================================
+""",
+        'gl': u"""
+Desculpa, estamos a chegar ao límite de peticións ao servizo meteorolóxico neste momento.
+Aquí está a previsión do tempo para a cidade por defecto (tan só para amosarche un exemplo).
+Imos obter máis peticións tan pronto como poidamos.
+Podes seguir https://twitter.com/igor_chubin para estares actualizada.
 ======================================================================================
 """,
         'hi': u"""
@@ -776,6 +790,7 @@ Azonao atao ny manaraka ny pejy https://twitter.com/igor_chubin.
         'es': u'Nuevas funcionalidades: los nombres de las ubicaciones en varios idiomas \033[92mwttr.in/станция+Восток\033[0m (em UTF-8) y la búsqueda por ubicaciones \033[92mwttr.in/~Kilimanjaro\033[0m (tan solo inserte ~ al principio)',
         'fa': u'قابلیت جدید: پشتیبانی از نام چند زبانه مکانها \033[92mwttr.in/станция+Восток\033[0m (در فرمت UTF-8) و جسجتوی مکان ها \033[92mwttr.in/~Kilimanjaro\033[0m (فقط قبل از اون ~ اضافه کنید)',
         'fr': u'Nouvelles fonctionnalités: noms d\'emplacements multilingues \033[92mwttr.in/станция+Восток\033[0m (en UTF-8) et recherche d\'emplacement \033[92mwttr.in/~Kilimanjaro\033[0m (ajouter ~ devant)',
+        'gl': u'Nova funcionalidade: nomes de localizacións en varios idiomas\033[92mwttr.in/станция+Восток\033[0m (en UTF-8) e procuras de localizacións \033[92mwttr.in/~Kilimanjaro\033[0m (engade ~ antes)',
         'mk': u'Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)',
         'nb': u'Ny funksjon: flerspråklige stedsnavn \033[92mwttr.in/станция+Восток\033[0m (i UTF-8) og lokasjonssøk \033[92mwttr.in/~Kilimanjaro\033[0m (bare legg til ~ foran)',
         'nl': u'Nieuwe functie: tweetalige locatie namen \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) en locatie zoeken \033[92mwttr.in/~Kilimanjaro\033[0m (zet er gewoon een ~ voor)',
@@ -830,6 +845,7 @@ Azonao atao ny manaraka ny pejy https://twitter.com/igor_chubin.
         'fr': u'Suivez \033[46m\033[30m@igor_Chubin\033[0m pour rester informé sur wttr.in',
         'de': u'Folgen Sie \033[46m\033[30mhttps://twitter.com/igor_chubin\033[0m für wttr.in Updates',
         'ga': u'Lean \033[46m\033[30m@igor_chubin\033[0m don wttr.in eolas is deanaí',
+        'gl': u'Segue a \033[46m\033[30m@igor_chubin\033[0m para actualizacións sobre wttr.in',
         'hi': u'अपडेट के लिए फॉलो करें \033[46m\033[30m@igor_chubin\033[0m',
         'hu': u'Kövesd \033[46m\033[30m@igor_chubin\033[0m-t további wttr.in információkért',
         'hy': u'Նոր ֆիչռների համար հետևեք՝ \033[46m\033[30m@igor_chubin\033[0m',
