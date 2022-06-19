@@ -41,7 +41,7 @@
 227: Позёмок                                     : Blowing snow                        :
 230: Метель                                      : Blizzard                            :
 248: Туман                                       : Fog                                 :
-260: Переохлажденный туман                       : Freezing fog                        :
+260: Переохлаждённый туман                       : Freezing fog                        :
 263: Местами слабая морось                       : Patchy light drizzle                :
 266: Слабая морось                               : Light drizzle                       :
 281: Замерзающая морось                          : Freezing drizzle                    :
@@ -52,8 +52,8 @@
 302: Умеренный дождь                             : Moderate rain                       :
 305: Временами сильный дождь                     : Heavy rain at times                 :
 308: Сильный дождь                               : Heavy rain                          :
-311: Слабый переохлажденный дождь                : Light freezing rain                 :
-314: Умеренный или сильный переохлажденный дождь : Moderate or heavy freezing rain     :
+311: Слабый переохлаждённый дождь                : Light freezing rain                 :
+314: Умеренный или сильный переохлаждённый дождь : Moderate or heavy freezing rain     :
 317: Небольшой дождь со снегом                   : Light sleet                         :
 320: Умеренный или сильный дождь со снегом       : Moderate or heavy sleet             :
 323: Местами небольшой снег                      : Patchy light snow                   :
