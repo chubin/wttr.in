@@ -7,8 +7,26 @@
    : Ледяной дождь                               : Freezing rain                       :
    : Проливной дождь                             : Rain shower                         :
    : Лёгкий снег с дождём                        : Light rain and snow                 :
-   : Снег с дождём                               : Snow shower                         :
-   : Сильный снег с дождём                       : Heave snow shower                   :
+   : Снег                                        : Snow shower                         :
+   : Сильный снег                                : Heavy snow shower                   :
+   : Дымка                                       : Haze                                :
+   : Снег с ливнем                               : Heavy rain and snow shower          :
+   : Снег с ливнем и грозой                      : Heavy rain and snow with thunderstorm:
+   : Ливень с грозой                             : Heavy rain with thunderstorm        :
+   : Морось с грозой и градом                    : Light rain and hail with thunderstorm:
+   : Сильный снег с моросью                      : Light rain and snow shower          :
+   : Морось с грозой                             : Light rain with thunderstorm        :
+   : Небольшой снег                              : Light snow shower                   :
+   : Местами туман                               : Partial fog                         :
+   : Дождь с грозой и градом                     : Rain and hail with thunderstorm     :
+   : Дождь с грозой и несильным градом           : Rain and small hail/snow pallets with thunderstorm:
+   : Снег с дождём                               : Rain and snow shower                :
+   : Дождь с грозой                              : Rain with thunderstorm              :
+   : Гроза поблизости                            : Shower in vicinity                  :
+   : Дымка                                       : Smoke                               :
+   : Шквальный ветер                             : Squalls                             :
+   : Гроза                                       : Thunderstorm                        :
+   : Дождь поблизости                            : Thunderstorm in vicinity            :
 113: Ясно                                        : Clear                               :
 113: Солнечно                                    : Sunny                               :
 116: Переменная облачность                       : Partly cloudy                       :
