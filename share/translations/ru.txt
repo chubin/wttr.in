@@ -1,76 +1,76 @@
-   : Снегопад                                    : Low drifting snow                   :
-   : Местами туман                               : Patches of fog                      :
-   : Морось                                      : Drizzle                             :
-   : Лёгкая морось                               : Light drizzle                       :
-   : Снег                                        : Snow                                :
-   : Стелющийся туман                            : Shallow fog                         :
-   : Ледяной дождь                               : Freezing rain                       :
-   : Проливной дождь                             : Rain shower                         :
-   : Лёгкий снег с дождём                        : Light rain and snow                 :
-   : Снег                                        : Snow shower                         :
-   : Сильный снег                                : Heavy snow shower                   :
-   : Дымка                                       : Haze                                :
-   : Снег с ливнем                               : Heavy rain and snow shower          :
-   : Снег с ливнем и грозой                      : Heavy rain and snow with thunderstorm:
-   : Ливень с грозой                             : Heavy rain with thunderstorm        :
-   : Морось с грозой и градом                    : Light rain and hail with thunderstorm:
-   : Сильный снег с моросью                      : Light rain and snow shower          :
-   : Морось с грозой                             : Light rain with thunderstorm        :
-   : Небольшой снег                              : Light snow shower                   :
-   : Местами туман                               : Partial fog                         :
-   : Дождь с грозой и градом                     : Rain and hail with thunderstorm     :
-   : Дождь с грозой и несильным градом           : Rain and small hail/snow pallets with thunderstorm:
-   : Снег с дождём                               : Rain and snow shower                :
-   : Дождь с грозой                              : Rain with thunderstorm              :
-   : Гроза поблизости                            : Shower in vicinity                  :
-   : Дымка                                       : Smoke                               :
-   : Шквальный ветер                             : Squalls                             :
-   : Гроза                                       : Thunderstorm                        :
-   : Дождь поблизости                            : Thunderstorm in vicinity            :
-113: Ясно                                        : Clear                               :
-113: Солнечно                                    : Sunny                               :
-116: Переменная облачность                       : Partly cloudy                       :
-119: Облачно                                     : Cloudy                              :
-122: Пасмурно                                    : Overcast                            :
-143: Дымка                                       : Mist                                :
-176: Местами дождь                               : Patchy rain possible                :
-179: Местами снег                                : Patchy snow possible                :
-182: Местами дождь со снегом                     : Patchy sleet possible               :
-185: Местами замерзающая морось                  : Patchy freezing drizzle possible    :
-200: Местами грозы                               : Thundery outbreaks possible         :
-227: Позёмок                                     : Blowing snow                        :
-230: Метель                                      : Blizzard                            :
-248: Туман                                       : Fog                                 :
-260: Переохлаждённый туман                       : Freezing fog                        :
-263: Местами слабая морось                       : Patchy light drizzle                :
-266: Слабая морось                               : Light drizzle                       :
-281: Замерзающая морось                          : Freezing drizzle                    :
-284: Сильная замерзающая морось                  : Heavy freezing drizzle              :
-293: Местами небольшой дождь                     : Patchy light rain                   :
-296: Небольшой дождь                             : Light rain                          :
-299: Временами умеренный дождь                   : Moderate rain at times              :
-302: Умеренный дождь                             : Moderate rain                       :
-305: Временами сильный дождь                     : Heavy rain at times                 :
-308: Сильный дождь                               : Heavy rain                          :
-311: Слабый переохлаждённый дождь                : Light freezing rain                 :
-314: Умеренный или сильный переохлаждённый дождь : Moderate or heavy freezing rain     :
-317: Небольшой дождь со снегом                   : Light sleet                         :
-320: Умеренный или сильный дождь со снегом       : Moderate or heavy sleet             :
-323: Местами небольшой снег                      : Patchy light snow                   :
-326: Небольшой снег                              : Light snow                          :
-329: Местами умеренный снег                      : Patchy moderate snow                :
-332: Умеренный снег                              : Moderate snow                       :
-335: Местами сильный снег                        : Patchy heavy snow                   :
-338: Сильный снег                                : Heavy snow                          :
-350: Ледяной дождь                               : Ice pellets                         :
-353: Небольшой ливневый дождь                    : Light rain shower                   :
-356: Умеренный или сильный ливневый дождь        : Moderate or heavy rain shower       :
-359: Очень сильный ливень                        : Torrential rain shower              :
-362: Небольшой ливневый дождь со снегом          : Light sleet showers                 :
-365: Небольшой снег                              : Moderate or heavy sleet showers     :
-368: Небольшой ливневый дождь со снегом          : Light snow showers                  :
-371: Умеренный или сильный снежный ливень        : Moderate or heavy snow showers      :
-386: Местами небольшой дождь с грозой            : Patchy light rain with thunder      :
-389: Умеренный или сильный дождь с грозой        : Moderate or heavy rain with thunder :
-392: Местами небольшой снег с грозой             : Patchy light snow with thunder      :
-395: Умеренный или сильный снег с грозой         : Moderate or heavy snow with thunder :
+   : Снегопад                                    : Low drifting snow                                  :
+   : Местами туман                               : Patches of fog                                     :
+   : Морось                                      : Drizzle                                            :
+   : Лёгкая морось                               : Light drizzle                                      :
+   : Снег                                        : Snow                                               :
+   : Стелющийся туман                            : Shallow fog                                        :
+   : Ледяной дождь                               : Freezing rain                                      :
+   : Проливной дождь                             : Rain shower                                        :
+   : Лёгкий снег с дождём                        : Light rain and snow                                :
+   : Снег                                        : Snow shower                                        :
+   : Сильный снег                                : Heavy snow shower                                  :
+   : Дымка                                       : Haze                                               :
+   : Снег с ливнем                               : Heavy rain and snow shower                         :
+   : Снег с ливнем и грозой                      : Heavy rain and snow with thunderstorm              :
+   : Ливень с грозой                             : Heavy rain with thunderstorm                       :
+   : Морось с грозой и градом                    : Light rain and hail with thunderstorm              :
+   : Сильный снег с моросью                      : Light rain and snow shower                         :
+   : Морось с грозой                             : Light rain with thunderstorm                       :
+   : Небольшой снег                              : Light snow shower                                  :
+   : Местами туман                               : Partial fog                                        :
+   : Дождь с грозой и градом                     : Rain and hail with thunderstorm                    :
+   : Дождь с грозой и несильным градом           : Rain and small hail/snow pallets with thunderstorm :
+   : Снег с дождём                               : Rain and snow shower                               :
+   : Дождь с грозой                              : Rain with thunderstorm                             :
+   : Гроза поблизости                            : Shower in vicinity                                 :
+   : Дымка                                       : Smoke                                              :
+   : Шквальный ветер                             : Squalls                                            :
+   : Гроза                                       : Thunderstorm                                       :
+   : Дождь поблизости                            : Thunderstorm in vicinity                           :
+113: Ясно                                        : Clear                                              :
+113: Солнечно                                    : Sunny                                              :
+116: Переменная облачность                       : Partly cloudy                                      :
+119: Облачно                                     : Cloudy                                             :
+122: Пасмурно                                    : Overcast                                           :
+143: Дымка                                       : Mist                                               :
+176: Местами дождь                               : Patchy rain possible                               :
+179: Местами снег                                : Patchy snow possible                               :
+182: Местами дождь со снегом                     : Patchy sleet possible                              :
+185: Местами замерзающая морось                  : Patchy freezing drizzle possible                   :
+200: Местами грозы                               : Thundery outbreaks possible                        :
+227: Позёмок                                     : Blowing snow                                       :
+230: Метель                                      : Blizzard                                           :
+248: Туман                                       : Fog                                                :
+260: Переохлаждённый туман                       : Freezing fog                                       :
+263: Местами слабая морось                       : Patchy light drizzle                               :
+266: Слабая морось                               : Light drizzle                                      :
+281: Замерзающая морось                          : Freezing drizzle                                   :
+284: Сильная замерзающая морось                  : Heavy freezing drizzle                             :
+293: Местами небольшой дождь                     : Patchy light rain                                  :
+296: Небольшой дождь                             : Light rain                                         :
+299: Временами умеренный дождь                   : Moderate rain at times                             :
+302: Умеренный дождь                             : Moderate rain                                      :
+305: Временами сильный дождь                     : Heavy rain at times                                :
+308: Сильный дождь                               : Heavy rain                                         :
+311: Слабый переохлаждённый дождь                : Light freezing rain                                :
+314: Умеренный или сильный переохлаждённый дождь : Moderate or heavy freezing rain                    :
+317: Небольшой дождь со снегом                   : Light sleet                                        :
+320: Умеренный или сильный дождь со снегом       : Moderate or heavy sleet                            :
+323: Местами небольшой снег                      : Patchy light snow                                  :
+326: Небольшой снег                              : Light snow                                         :
+329: Местами умеренный снег                      : Patchy moderate snow                               :
+332: Умеренный снег                              : Moderate snow                                      :
+335: Местами сильный снег                        : Patchy heavy snow                                  :
+338: Сильный снег                                : Heavy snow                                         :
+350: Ледяной дождь                               : Ice pellets                                        :
+353: Небольшой ливневый дождь                    : Light rain shower                                  :
+356: Умеренный или сильный ливневый дождь        : Moderate or heavy rain shower                      :
+359: Очень сильный ливень                        : Torrential rain shower                             :
+362: Небольшой ливневый дождь со снегом          : Light sleet showers                                :
+365: Небольшой снег                              : Moderate or heavy sleet showers                    :
+368: Небольшой ливневый дождь со снегом          : Light snow showers                                 :
+371: Умеренный или сильный снежный ливень        : Moderate or heavy snow showers                     :
+386: Местами небольшой дождь с грозой            : Patchy light rain with thunder                     :
+389: Умеренный или сильный дождь с грозой        : Moderate or heavy rain with thunder                :
+392: Местами небольшой снег с грозой             : Patchy light snow with thunder                     :
+395: Умеренный или сильный снег с грозой         : Moderate or heavy snow with thunder                :
