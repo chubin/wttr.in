@@ -1,4 +1,4 @@
-   : Снегопад                                    : Low drifting snow                                  :
+   : Позёмок                                     : Low drifting snow                                  :
    : Местами туман                               : Patches of fog                                     :
    : Морось                                      : Drizzle                                            :
    : Лёгкая морось                               : Light drizzle                                      :
