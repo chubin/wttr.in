@@ -55,7 +55,7 @@ Translated/improved/corrected by:
     * Polish:               Wojtek Łukasiewicz @wojtuch (on github)
     * Portuguese:           Fernando Bitti Loureiro @fbitti (on github)
     * Romanian:             Gabriel Moruz
-    * Russian:              Igor Chubin
+    * Russian:              Igor Chubin, @layerex (on github)
     * Serbian:              Milan Stevanović @FathVader
     * Slovak:               Juraj Kakody
     * Slovenian:            B.S.
