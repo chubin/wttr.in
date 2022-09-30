@@ -59,7 +59,7 @@ GEOLOCATOR_SERVICE = 'http://localhost:8004'
 
 # number of queries from the same IP address is limited
 # (minute, hour, day) limitations:
-QUERY_LIMITS = (300, 3600, 24*3600)
+QUERY_LIMITS = (300, 3600, 24 * 3600)
 
 LISTEN_HOST = os.environ.get("WTTR_LISTEN_HOST", "")
 try:
@@ -109,15 +109,32 @@ IPINFO_TOKEN = None
 if os.path.exists(_IPINFO_KEY_FILE):
     IPINFO_TOKEN = open(_IPINFO_KEY_FILE, 'r').read().strip()
 
+### DATA SOURCES ###
+# TODO: Add more data sources.
+# If `len(AVAILABLE_DATA_SOURCES) == 0`, DEFAULT_DATA_SOURCE should be used.
+DEFAULT_DATA_SOURCE = {
+    "name": "METNO",
+    "url": "https://api.met.no",
+    "key": None
+}
+AVAILABLE_DATA_SOURCES = []
+
 _WWO_KEY_FILE = os.environ.get(
     "WTTR_WWO_KEY_FILE",
     os.environ['HOME'] + '/.wwo.key')
-WWO_KEY = "key-is-not-specified"
-USE_METNO = True
+WWO_KEY = None
 USER_AGENT = os.environ.get("WTTR_USER_AGENT", "")
 if os.path.exists(_WWO_KEY_FILE):
     WWO_KEY = open(_WWO_KEY_FILE, 'r').read().strip()
-    USE_METNO = False
+    tmp = {
+        "name": "WTTR",
+        "url": "http://api.worldweatheronline.com",
+        "key": WWO_KEY
+    }
+    AVAILABLE_DATA_SOURCES.append(tmp)
+
+
+### END DATA SOURCES ###
 
 def error(text):
     "log error `text` and raise a RuntimeError exception"
@@ -127,6 +144,7 @@ def error(text):
     logging.error("ERROR %s", text)
     raise RuntimeError(text)
 
+
 def log(text):
     "log error `text` and do not raise any exceptions"
 
@@ -134,13 +152,15 @@ def log(text):
         print(text)
         logging.info(text)
 
+
 def debug_log(text):
     """
     Write `text` to the debug log
     """
 
     with open('/tmp/wttr.in-debug.log', 'a') as f_debug:
-        f_debug.write(text+'\n')
+        f_debug.write(text + '\n')
+
 
 def get_help_file(lang):
     "Return help file for `lang`"
@@ -149,6 +169,7 @@ def get_help_file(lang):
     if os.path.exists(help_file):
         return help_file
     return HELP_FILE
+
 
 def remove_ansi(sometext):
     ansi_escape = re.compile(r'(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]')
