@@ -1,4 +1,4 @@
-#vim: fileencoding=utf-8
+# vim: fileencoding=utf-8
 
 """
 
@@ -16,6 +16,7 @@ from __future__ import print_function
 
 from gevent.pywsgi import WSGIServer
 from gevent.monkey import patch_all
+
 patch_all()
 
 # pylint: disable=wrong-import-position,wrong-import-order
@@ -29,22 +30,26 @@ import requests
 import cyrtranslit
 
 from flask import Flask, request
-APP = Flask(__name__)
 
+APP = Flask(__name__)
 
 MYDIR = os.path.abspath(
     os.path.dirname(os.path.dirname('__file__')))
 sys.path.append("%s/lib/" % MYDIR)
 
-from globals import PROXY_CACHEDIR, PROXY_HOST, PROXY_PORT, USE_METNO, USER_AGENT, MISSING_TRANSLATION_LOG
+from globals import PROXY_CACHEDIR, PROXY_HOST, PROXY_PORT, AVAILABLE_DATA_SOURCES, DEFAULT_DATA_SOURCE, USER_AGENT, \
+    MISSING_TRANSLATION_LOG
 from metno import create_standard_json_from_metno, metno_request
 from translations import PROXY_LANGS
+
+
 # pylint: enable=wrong-import-position
 
 def is_testmode():
     """Server is running in the wttr.in test mode"""
 
     return "WTTRIN_TEST" in os.environ
+
 
 def load_translations():
     """
@@ -70,15 +75,16 @@ def load_translations():
                 translation[orig.lower()] = trans
         translations[lang] = translation
     return translations
+
+
 TRANSLATIONS = load_translations()
 
-def _is_metno():
-    return USE_METNO
 
-def _find_srv_for_query(path, query):   # pylint: disable=unused-argument
-    if _is_metno():
-        return 'https://api.met.no'
-    return 'http://api.worldweatheronline.com'
+# TODO: Add combined datastream to stop the program using the first item in AVAILABLE_DATA_SOURCES.
+def _get_data_source():
+    if len(AVAILABLE_DATA_SOURCES) == 0:
+        return DEFAULT_DATA_SOURCE["url"]
+    return DEFAULT_DATA_SOURCE[0]["url"]
 
 def _cache_file(path, query):
     """Return cache file name for specified `path` and `query`
@@ -90,9 +96,9 @@ def _cache_file(path, query):
 
     digest = hashlib.sha1(("%s %s" % (path, query)).encode("utf-8")).hexdigest()
     digest_number = ord(digest[0].upper())
-    expiry_interval = 60*(digest_number+90)
+    expiry_interval = 60 * (digest_number + 90)
 
-    timestamp = "%010d" % (int(time.time())//expiry_interval*expiry_interval)
+    timestamp = "%010d" % (int(time.time()) // expiry_interval * expiry_interval)
     filename = os.path.join(PROXY_CACHEDIR, timestamp, path, query)
 
     return filename
@@ -105,9 +111,10 @@ def _load_content_and_headers(path, query):
         cache_file = _cache_file(path, query)
     try:
         return (open(cache_file, 'r').read(),
-                json.loads(open(cache_file+".headers", 'r').read()))
+                json.loads(open(cache_file + ".headers", 'r').read()))
     except IOError:
         return None, None
+
 
 def _touch_empty_file(path, query):
     cache_file = _cache_file(path, query)
@@ -116,6 +123,7 @@ def _touch_empty_file(path, query):
         os.makedirs(cache_dir)
     open(cache_file, 'w').write("")
 
+
 def _save_content_and_headers(path, query, content, headers):
     cache_file = _cache_file(path, query)
     cache_dir = os.path.dirname(cache_file)
@@ -123,6 +131,7 @@ def _save_content_and_headers(path, query, content, headers):
         os.makedirs(cache_dir)
     open(cache_file + ".headers", 'w').write(json.dumps(headers))
     open(cache_file, 'wb').write(content)
+
 
 def translate(text, lang):
     """
@@ -133,7 +142,7 @@ def translate(text, lang):
 
     def _log_unknown_translation(lang, text):
         with open(MISSING_TRANSLATION_LOG % lang, "a") as f_missing_translation:
-            f_missing_translation.write(text+"\n")
+            f_missing_translation.write(text + "\n")
 
     if "," in text:
         terms = text.split(",")
@@ -151,14 +160,17 @@ def translate(text, lang):
     translated = TRANSLATIONS.get(lang, {}).get(text.lower(), text)
     return translated
 
+
 def cyr(to_translate):
     """
     Transliterate `to_translate` from latin into cyrillic
     """
     return cyrtranslit.to_cyrillic(to_translate)
 
+
 def _patch_greek(original):
     return original.replace(u"Ηλιόλουστη/ο", u"Ηλιόλουστη")
+
 
 def add_translations(content, lang):
     """
@@ -171,7 +183,7 @@ def add_translations(content, lang):
 
     languages_to_translate = TRANSLATIONS.keys()
     try:
-        d = json.loads(content)         # pylint: disable=invalid-name
+        d = json.loads(content)  # pylint: disable=invalid-name
     except (ValueError, TypeError) as exception:
         print("---")
         print(exception)
@@ -180,7 +192,7 @@ def add_translations(content, lang):
 
     try:
         weather_condition = d['data']['current_condition'
-                ][0]['weatherDesc'][0]['value'].capitalize()
+        ][0]['weatherDesc'][0]['value'].capitalize()
         d['data']['current_condition'][0]['weatherDesc'][0]['value'] = \
             weather_condition
         if lang in languages_to_translate:
@@ -189,22 +201,22 @@ def add_translations(content, lang):
         elif lang == 'sr':
             d['data']['current_condition'][0]['lang_%s' % lang] = \
                 [{'value': cyr(
-                    d['data']['current_condition'][0]['lang_%s' % lang][0]['value']\
+                    d['data']['current_condition'][0]['lang_%s' % lang][0]['value'] \
                     )}]
         elif lang == 'el':
             d['data']['current_condition'][0]['lang_%s' % lang] = \
                 [{'value': _patch_greek(
-                    d['data']['current_condition'][0]['lang_%s' % lang][0]['value']\
+                    d['data']['current_condition'][0]['lang_%s' % lang][0]['value'] \
                     )}]
         elif lang == 'sr-lat':
             d['data']['current_condition'][0]['lang_%s' % lang] = \
-                [{'value':d['data']['current_condition'][0]['lang_sr'][0]['value']\
-                            }]
+                [{'value': d['data']['current_condition'][0]['lang_sr'][0]['value'] \
+                  }]
 
         fixed_weather = []
         for w in d['data']['weather']:  # pylint: disable=invalid-name
             fixed_hourly = []
-            for h in w['hourly']:       # pylint: disable=invalid-name
+            for h in w['hourly']:  # pylint: disable=invalid-name
                 weather_condition = h['weatherDesc'][0]['value']
                 if lang in languages_to_translate:
                     h['lang_%s' % lang] = \
@@ -228,11 +240,12 @@ def add_translations(content, lang):
         print(exception)
     return content
 
+
 def _fetch_content_and_headers(path, query_string, **kwargs):
     content, headers = _load_content_and_headers(path, query_string)
 
     if content is None:
-        srv = _find_srv_for_query(path, query_string)
+        srv = _get_data_source()
         url = '%s/%s?%s' % (srv, path, query_string)
 
         attempts = 10
@@ -274,13 +287,13 @@ def proxy(path):
     query_string = query_string.replace('lang=None', 'lang=en')
     content = ""
     headers = ""
-    if _is_metno():
+    if _get_data_source():
         path, query, days = metno_request(path, query_string)
         if USER_AGENT == '':
             raise ValueError('User agent must be set to adhere to metno ToS: https://api.met.no/doc/TermsOfService')
         content, headers = _fetch_content_and_headers(path, query, headers={
-                                   'User-Agent': USER_AGENT
-                               })
+            'User-Agent': USER_AGENT
+        })
         content = create_standard_json_from_metno(content, days)
     else:
         # WWO tweaks
@@ -292,9 +305,10 @@ def proxy(path):
 
     return content, 200, headers
 
+
 if __name__ == "__main__":
-    #app.run(host='0.0.0.0', port=5001, debug=False)
-    #app.debug = True
+    # app.run(host='0.0.0.0', port=5001, debug=False)
+    # app.debug = True
     if len(sys.argv) == 1:
         bind_addr = "0.0.0.0"
         SERVER = WSGIServer((bind_addr, PROXY_PORT), APP)
