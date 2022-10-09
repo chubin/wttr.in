@@ -148,7 +148,7 @@ def _script_category(char):
         default, Cyrillic, Greek, Han, Hiragana
     """
 
-    if char in emoji.UNICODE_EMOJI:
+    if emoji.is_emoji(char):
         return "Emoji"
 
     cat = unicodedata2.script_cat(char)[0]
