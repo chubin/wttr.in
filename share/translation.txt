@@ -31,6 +31,7 @@ Translated/improved/corrected by:
     * Finnish:              @Maxifi
     * French:               Igor Chubin, @daftaupe, @iago-lito
     * Frisian:              Anne Douwe Bouma @anned20 (on github)
+    * Galician              Diego Blanco @diego-treitos (on github)
     * German:               Igor Chubin, @MAGICC (https://kthx.at)
     * Greek:                Panayotis Vryonis and @Petewg (on github)
     * Hebrew:               E.R.
