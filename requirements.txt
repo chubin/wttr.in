@@ -24,3 +24,10 @@ numba
 emoji
 grapheme
 pycountry
+django
+computer vision
+convolutional neural network
+regression
+numpy
+scikitlearn
+NaiveBayes
