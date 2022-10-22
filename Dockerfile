@@ -3,19 +3,16 @@ FROM golang:1-alpine as builder
 
 WORKDIR /app
 
-COPY ./share/we-lang/we-lang.go /app
-COPY ./share/we-lang/go.mod /app
+COPY ./share/we-lang/ /app
 
 RUN apk add --no-cache git
-
 
 RUN go get -u github.com/mattn/go-colorable && \
     go get -u github.com/klauspost/lctime && \
     go get -u github.com/mattn/go-runewidth && \
-    CGO_ENABLED=0 go build /app/we-lang.go
-# Results in /app/we-lang
+    cd /app && CGO_ENABLED=0 go build .
 
-
+# Application stage
 FROM alpine:3
 
 WORKDIR /app
@@ -54,7 +51,7 @@ RUN apk add --no-cache --virtual .build \
     pip install -r requirements.txt --no-cache-dir && \
     apk del --no-cache -r .build
 
-COPY --from=builder /app/we-lang /app/bin/we-lang
+COPY --from=builder /app/wttr.in /app/bin/wttr.in
 COPY ./bin /app/bin
 COPY ./lib /app/lib
 COPY ./share /app/share
@@ -62,7 +59,7 @@ COPY share/docker/supervisord.conf /etc/supervisor/supervisord.conf
 
 ENV WTTR_MYDIR="/app"
 ENV WTTR_GEOLITE="/app/GeoLite2-City.mmdb"
-ENV WTTR_WEGO="/app/bin/we-lang"
+ENV WTTR_WEGO="/app/bin/wttr.in"
 ENV WTTR_LISTEN_HOST="0.0.0.0"
 ENV WTTR_LISTEN_PORT="8002"
 
