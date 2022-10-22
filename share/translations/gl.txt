@@ -1,0 +1,47 @@
+113: Despexado                          : Clear
+113: Solleiro                           : Sunny
+116: Parcialmente Nubrado               : Partly cloudy
+119: Nubrado                            : Cloudy
+122: Cuberto                            : Overcast
+143: Neboa                              : Mist
+176: Posibel choiva                     : Patchy rain possible
+179: Posibel neve                       : Patchy snow possible
+182: Posibel auganeve                   : Patchy sleet possible
+185: Posibel barruzo xeado              : Patchy freezing drizzle possible
+200: Posibeis treboadas                 : Thundery outbreaks possible
+227: Cebrisca                           : Blowing snow
+230: Treboada de neve                   : Blizzard
+248: Brétema                            : Fog
+260: Brétema xeada                      : Freezing fog
+263: Barruzo lixeiro casual             : Patchy light drizzle
+266: Barruzo lixeiro                    : Light drizzle
+281: Barruzo xeado                      : Freezing drizzle
+284: Barruzo xeado forte                : Heavy freezing drizzle
+293: Chuvisca casual                    : Patchy light rain
+296: Chuvisca                           : Light rain
+299: Choiva casual                      : Moderate rain at times
+302: Choiva                             : Moderate rain
+305: Dioivo casual                      : Heavy rain at times
+308: Dioivo                             : Heavy rain
+311: Orballo xeado                      : Light freezing rain
+314: Xistra                             : Moderate or heavy freezing rain
+317: Auganeve lixeira                   : Light sleet
+320: Auganeve                           : Moderate or heavy sleet
+323: Nevarisca casual                   : Patchy light snow
+326: Nevarisca                          : Light snow
+329: Nevada casual                      : Patchy moderate snow
+332: Nevada                             : Moderate snow
+335: Nevada forte casual                : Patchy heavy snow
+338: Nevada forte                       : Heavy snow
+350: Sarabia                            : Ice pellets
+353: Orballo                            : Light rain shower
+356: Bategada                           : Moderate or heavy rain shower
+359: Choiva torrencial                  : Torrential rain shower
+362: Torba                              : Light sleet showers
+365: Torba forte                        : Moderate or heavy sleet showers
+368: Choiva con neve lixeira            : Light snow showers
+371: Choiva con neve forte              : Moderate or heavy snow showers
+386: Barruzo casual con tronos          : Patchy light rain with thunder
+389: Treboada                           : Moderate or heavy rain with thunder
+392: Nevarisca casual con tronos        : Patchy light snow with thunder
+395: Nevada con tronos                  : Moderate or heavy snow with thunder
