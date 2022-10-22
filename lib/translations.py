@@ -24,7 +24,7 @@ PARTIAL_TRANSLATION = [
 PROXY_LANGS = [
     "af", "am", "ar", "az", "be", "bn", "bs", "ca",
     "cy", "de", "el", "eo", "et", "eu", "fa", "fr",
-    "fy", "ga", "he", "hr", "hu", "hy",
+    "fy", "ga", "gl", "he", "hr", "hu", "hy",
     "ia", "id", "is", "it", "ja", "kk",
     "lt", "lv", "mg", "mk", "mr", "nb", "nn", "oc",
     "ro", "ru", "sl", "th", "pt-br", "uk", 
@@ -119,11 +119,6 @@ munduko lekurik hotz eta hutseneraiko bat
 ما نتونستیم مکان شما رو پیدا کنیم. به همین خاطر شما رو به اویمیاکن بردیم
 ، یکی از سردترین مکان های روی زمین که اصلا قابل سکونت نیست!
 """,
-        'gl': u"""
-Non logramos atopar a túa localización
-polo que te trouxemos até Oimiakón,
-un dos lugares máis fríos e permamentemente deshabitados do planeta.
-""",
         'fi': u"""
 Emme löytänyt sijaintiasi, joten toimme sinut Oimjakoniin,
 yhteen maailman kylmimmistä pysyvästi asutetuista paikoista.
@@ -139,6 +134,11 @@ Nous espérons qu'il fait meilleur chez vous !
 Ní rabhamar ábalta do cheantar a aimsiú
 mar sin thugamar go dtí Oymyakon,
 tú ceann do na ceantair bhuanáitrithe is fuaire ar domhan.
+""",
+        'gl': u"""
+Non logramos atopar a túa localización
+polo que te trouxemos até Oimiakón,
+un dos lugares máis fríos e permamentemente deshabitados do planeta.
 """,
         'hi': u"""
 हम आपका स्थान खोजने में असमर्थ है,
