@@ -15,7 +15,7 @@ V2_TRANSLATION = {
     "bg": ("Прогноза за времето в:",        "", "", "", "", "", "", "", ""),
     "bn" : ("আবহাওয়া প্রতিবেদন:", "আবহাওয়া", "টাইমজোন", "এখন", "ভোর", "সূর্যোদয়", "সুবিন্দু", "সূর্যাস্ত", "সন্ধ্যা"),
     "bs": ("Vremenske prognoze za:",        "", "", "", "", "", "", "", ""),
-    "ca": ("Informe del temps per a:",      "", "", "", "", "", "", "", ""),
+    "ca": ("Informe del temps per a:",      "Oratge", "Zona horària", "Ara", "Albada", "Sortida", "Zenit", "Posta", "Crepuscle"),
     "cs": ("Předpověď počasí pro:",         "", "", "", "", "", "", "", ""),
     "cy": ("Adroddiad tywydd ar gyfer:",    "", "", "", "", "", "", "", ""),
     "da": ("Vejret i:",                     "Vejret", "Tidszone", "Nu", "Daggry", "Solopgang", "Zenit", "Solnedgang", "Skumring"),
