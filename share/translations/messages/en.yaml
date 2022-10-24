@@ -1,0 +1,62 @@
+lang:
+    name: English
+    code: "en"
+    issue: ""
+    translators:
+        - "Igor Chubin @igor_chubin"
+    locale: "en_US"
+
+translated:
+    help: true
+    weather: true
+    messages: true
+
+messages:
+    
+    caption: 'Weather report for:'
+
+    location: Location
+
+    unknown_location: Unknown location
+
+    capacity_limit_reached: |2
+
+      Sorry, we are running out of queries to the weather service at the moment.
+      Here is the weather report for the default city (just to show you what it looks like).
+      We will get new queries as soon as possible.
+      You can follow https://twitter.com/igor_chubin for the updates.
+      ======================================================================================
+
+    follow_me: |-
+      Follow \\e[46m\\e[30m@igor_chubin\\e[0m for wttr.in updates
+
+    new_feature: |-
+      New feature: multilingual location names \\e[92mwttr.in/станция+Восток\\e[0m (in UTF-8) and location search \\e[92mwttr.in/~Kilimanjaro\\e[0m (just add ~ before)
+
+    not_found_message: |2
+
+      We were unable to find your location
+      so we have brought you to Oymyakon,
+      one of the coldest permanently inhabited locales on the planet.
+
+
+views:
+
+    v1:
+
+      morning: "Morning"
+      noon: "Noon"
+      evening: "Evening"
+      night: "Night"
+
+    v2:
+
+      weather_report_for: "Weather report for:"
+      weather: "Weather"
+      timezone: "Timezone"
+      now: "Now"
+      dawn: "Dawn"
+      sunrise: "Sunrise"
+      zenith: "Zenith"
+      sunset: "Sunset"
+      dusk: "Dusk"
