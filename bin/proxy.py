@@ -36,10 +36,13 @@ MYDIR = os.path.abspath(
     os.path.dirname(os.path.dirname('__file__')))
 sys.path.append("%s/lib/" % MYDIR)
 
-from globals import PROXY_CACHEDIR, PROXY_HOST, PROXY_PORT, USE_METNO, USER_AGENT, MISSING_TRANSLATION_LOG
+import proxy_log
+from globals import PROXY_CACHEDIR, PROXY_HOST, PROXY_PORT, USE_METNO, USER_AGENT, MISSING_TRANSLATION_LOG, PROXY_LOG_FILE
 from metno import create_standard_json_from_metno, metno_request
 from translations import PROXY_LANGS
 # pylint: enable=wrong-import-position
+
+proxy_logger = proxy_log.LoggerWWO(PROXY_LOG_FILE)
 
 def is_testmode():
     """Server is running in the wttr.in test mode"""
@@ -233,10 +236,11 @@ def _fetch_content_and_headers(path, query_string, **kwargs):
 
     if content is None:
         srv = _find_srv_for_query(path, query_string)
-        url = '%s/%s?%s' % (srv, path, query_string)
+        url = "%s/%s?%s" % (srv, path, query_string)
 
         attempts = 10
         response = None
+        error = ""
         while attempts:
             try:
                 response = requests.get(url, timeout=2, **kwargs)
@@ -244,11 +248,18 @@ def _fetch_content_and_headers(path, query_string, **kwargs):
                 attempts -= 1
                 continue
             try:
-                json.loads(response.content)
+                data = json.loads(response.content)
+                error = data.get("data", {}).get("error", "")
+                try:
+                    error = error[0]["msg"]
+                except (ValueError, IndexError):
+                    error = "invalid error format: %s" % error
                 break
             except ValueError:
                 attempts -= 1
+                error = "invalid response"
 
+        proxy_logger.log(query_string, error)
         _touch_empty_file(path, query_string)
         if response:
             headers = {}
