@@ -13,50 +13,50 @@ translated:
 
 messages:
     
-    caption: 'Weather report for:'
+    caption: 'આન માટે હવામાન અહેવાલ:'
 
-    location: Location
+    location: સ્થાન
 
-    unknown_location: Unknown location
+    unknown_location: અજ્ઞાત સ્થાન
 
     capacity_limit_reached: |2
 
-      Sorry, we are running out of queries to the weather service at the moment.
-      Here is the weather report for the default city (just to show you what it looks like).
-      We will get new queries as soon as possible.
-      You can follow https://twitter.com/igor_chubin for the updates.
+      માફ કરશો, અમે અત્યારે હવામાન અહેવાલો આપી શકતા નથી.
+      આ સામાન્ય શહેર માટે હવામાન છે (હવામાનની આગાહી કેવી દેખાય છે).
+      અમે હવામાનના અહેવાલો ઝડપથી આપીશું
+      તમે અપડેટ્સ માટે https://twitter.com/igor_chubin ને ફોલો કરી શકો છો.
       ======================================================================================
 
     follow_me: |-
-      Follow \\e[46m\\e[30m@igor_chubin\\e[0m for wttr.in updates
+      wttr.in બદલાવો માટે અનુસરો \\e[46m\\e[30m@igor_chubin\\e[0m.
 
     new_feature: |-
-      New feature: multilingual location names \\e[92mwttr.in/станция+Восток\\e[0m (in UTF-8) and location search \\e[92mwttr.in/~Kilimanjaro\\e[0m (just add ~ before)
+      નવી સુવિધા: બહુભાષી સ્થાન નામો \\e[92mwttr.in/станция+Восток\\e[0m (in UTF-8) અને સ્થાન શોધ \\e[92mwttr.in/~Kilimanjaro\\e[0m (પહેલાં ઉમેરો ~)
 
     not_found_message: |2
 
-      We were unable to find your location
-      so we have brought you to Oymyakon,
-      one of the coldest permanently inhabited locales on the planet.
-
+      અમે તમારું સ્થાન શોધી શક્યા નથી
+      તેથી અમે તમને ઓમ્યાકોન લાવ્યા છીએ,
+      ગ્રહ પર સૌથી ઠંડા કાયમી વસવાટ કરેલા સ્થાનોમાંથી એક.
+# The last line may not be translated as accurately as I would have liked.
 
 views:
 
     v1:
 
-      morning: "Morning"
-      noon: "Noon"
-      evening: "Evening"
-      night: "Night"
+      morning: "સવારે"
+      noon: "બપોર"
+      evening: "સાંજ"
+      night: "રાત"
 
     v2:
 
-      weather_report_for: "Weather report for:"
-      weather: "Weather"
-      timezone: "Timezone"
-      now: "Now"
-      dawn: "Dawn"
-      sunrise: "Sunrise"
-      zenith: "Zenith"
-      sunset: "Sunset"
-      dusk: "Dusk"
+      weather_report_for: "આન માટે હવામાન અહેવાલ:"
+      weather: "હવામાન"
+      timezone: "સમયઝોન"
+      now: "હવે"
+      dawn: "પરોઢ"
+      sunrise: "સૂર્યોદય"
+      zenith: "પરાકાષ્ઠા"
+      sunset: "સૂર્યાસ્ત"
+      dusk: "સાંજ"
