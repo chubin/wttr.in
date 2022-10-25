@@ -273,18 +273,8 @@ def _fetch_content_and_headers(path, query_string, **kwargs):
     return content, headers
 
 
-@APP.route("/<path:path>")
-def proxy(path):
-    """
-    Main proxy function. Handles incoming HTTP queries.
-    """
+def _make_query(path, query_string):
 
-    lang = request.args.get('lang', 'en')
-    query_string = request.query_string.decode("utf-8")
-    query_string = query_string.replace('sr-lat', 'sr')
-    query_string = query_string.replace('lang=None', 'lang=en')
-    content = ""
-    headers = ""
     if _is_metno():
         path, query, days = metno_request(path, query_string)
         if USER_AGENT == '':
@@ -299,6 +289,25 @@ def proxy(path):
         query_string += "&includelocation=yes"
         content, headers = _fetch_content_and_headers(path, query_string)
 
+    return content, headers
+
+@APP.route("/<path:path>")
+def proxy(path):
+    """
+    Main proxy function. Handles incoming HTTP queries.
+    """
+
+    lang = request.args.get('lang', 'en')
+    query_string = request.query_string.decode("utf-8")
+    query_string = query_string.replace('sr-lat', 'sr')
+    query_string = query_string.replace('lang=None', 'lang=en')
+    content = ""
+    headers = ""
+
+    content, headers = _make_query(path, query_string)
+
+    # _log_query(path, query_string, error)
+
     content = add_translations(content, lang)
 
     return content, 200, headers
@@ -306,6 +315,7 @@ def proxy(path):
 if __name__ == "__main__":
     #app.run(host='0.0.0.0', port=5001, debug=False)
     #app.debug = True
+
     if len(sys.argv) == 1:
         bind_addr = "0.0.0.0"
         SERVER = WSGIServer((bind_addr, PROXY_PORT), APP)
