@@ -37,12 +37,13 @@ MYDIR = os.path.abspath(
 sys.path.append("%s/lib/" % MYDIR)
 
 import proxy_log
-from globals import PROXY_CACHEDIR, PROXY_HOST, PROXY_PORT, USE_METNO, USER_AGENT, MISSING_TRANSLATION_LOG, PROXY_LOG_FILE
+import globals
+from globals import PROXY_CACHEDIR, PROXY_HOST, PROXY_PORT, USE_METNO, USER_AGENT, MISSING_TRANSLATION_LOG
 from metno import create_standard_json_from_metno, metno_request
 from translations import PROXY_LANGS
 # pylint: enable=wrong-import-position
 
-proxy_logger = proxy_log.LoggerWWO(PROXY_LOG_FILE)
+proxy_logger = proxy_log.LoggerWWO(globals.PROXY_LOG_ACCESS, globals.PROXY_LOG_ERRORS)
 
 def is_testmode():
     """Server is running in the wttr.in test mode"""
@@ -250,10 +251,11 @@ def _fetch_content_and_headers(path, query_string, **kwargs):
             try:
                 data = json.loads(response.content)
                 error = data.get("data", {}).get("error", "")
-                try:
-                    error = error[0]["msg"]
-                except (ValueError, IndexError):
-                    error = "invalid error format: %s" % error
+                if error:
+                    try:
+                        error = error[0]["msg"]
+                    except (ValueError, IndexError):
+                        error = "invalid error format: %s" % error
                 break
             except ValueError:
                 attempts -= 1

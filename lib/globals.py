@@ -35,7 +35,9 @@ PNG_CACHE = os.path.join(_DATADIR, "cache/png")
 LRU_CACHE = os.path.join(_DATADIR, "cache/lru")
 
 LOG_FILE = os.path.join(_LOGDIR, 'main.log')
-PROXY_LOG_FILE = os.path.join(_LOGDIR, 'proxy.log')
+
+PROXY_LOG_ACCESS = os.path.join(_LOGDIR, 'proxy-access.log')
+PROXY_LOG_ERRORS = os.path.join(_LOGDIR, 'proxy-errors.log')
 
 MISSING_TRANSLATION_LOG = os.path.join(_LOGDIR, 'missing-translation/%s.log')
 
