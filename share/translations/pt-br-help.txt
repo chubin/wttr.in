@@ -3,24 +3,24 @@ Instruções:
     $ curl wttr.in          # o tempo na sua localização atual
     $ curl wttr.in/muc      # o tempo no aeroporto de Munique
 
-Tipos de localização suportados:
+Tipos de locais suportados:
 
     /paris                  # o nome de uma cidade
-    /~Eiffel+tower          # o nome de qualquer lugar famoso
-    /Москва                 # nome Unicode de qualquer lugar em qualquer idioma
+    /~Eiffel+tower          # o nome de um lugar famoso
+    /Москва                 # o nome Unicode de qualquer lugar em qualquer idioma
     /muc                    # o código de um aeroporto (3 letras)
     /@stackoverflow.com     # o nome de um domínio web
     /94107                  # um código de área
-    /-78.46,106.79          # coordenadas do GPS
+    /-78.46,106.79          # as coordenadas do GPS de um lugar
 
 Lugares especiais:
 
-    /moon                   # A fase da lua (crescente ,+US ou ,+France para estas cidades)
-    /moon@2016-10-25        # A fase da lua em uma determinada data (@2016-10-25)
+    /moon                   # a fase da ua (crescente ,+US ou ,+France para estas cidades)
+    /moon@2016-10-25        # a fase da Lua em uma determinada data (@2016-10-25)
 
 Unidades:
 
-    ?m                      # métricas (SI) (o padrão em todos os lugares exceto nos EUA)
+    ?m                      # Sistema Internacional de Unidades (SI) (o padrão em todos os lugares exceto nos EUA)
     ?u                      # Sistema Unificado de Clasificaçāo de Solo ou USCS (o padrão nos EUA)
     ?M                      # mostrar a velocidade do vento em m/s
 
@@ -48,13 +48,13 @@ As opções podem ser usadas em conjunto:
     /Paris_0pq.png          # em PNG as opções se especificam depois do caracter _
     /Rome_0pq_lang=it.png   # uma longa sequência de opções podem ser separadas pelo caracter _
 
-Localizaçāo:
+Tradução:
 
     $ curl fr.wttr.in/Paris
     $ curl wttr.in/paris?lang=fr
     $ curl -H "Accept-Language: fr" wttr.in/paris
 
-Línguas suportadas:
+Idiomas suportadas:
 
     FULL_TRANSLATION (suportadas)
     PARTIAL_TRANSLATION (em andamento)
@@ -63,5 +63,4 @@ URLs especiais:
 
     /:help                  # mostra esta página
     /:bash.function         # sugere uma função wttr() em bash
-    /:translation           # mostra informação a respeito dos tradutores
-
+    /:translation           # mostra informações a respeito dos tradutores
