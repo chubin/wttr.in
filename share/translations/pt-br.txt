@@ -17,8 +17,8 @@
 266: Chuvisco                                     :  Light drizzle
 281: Chuvisco gelado                              :  Freezing drizzle
 284: Chuvisco muito gelado                        :  Heavy freezing drizzle
-293: Garoa irregular                              :  Patchy light rain
-296: Garoa                                        :  Light rain
+293: Chuvisco irregular                              :  Patchy light rain
+296: Chuvisco                                     :  Light rain
 299: Chuva moderada ocasional                     :  Moderate rain at times
 302: Chuva moderada                               :  Moderate rain
 305: Chuva forte ocasional                        :  Heavy rain at times
@@ -34,48 +34,14 @@
 335: Neve forte irregular                         :  Patchy heavy snow
 338: Neve forte                                   :  Heavy snow
 350: Pelotas de gelo                              :  Ice pellets
-353: Chuveiro de garoa                            :  Light rain shower
-356: Chuveiro de chuva moderada ou forte          :  Moderate or heavy rain shower
-359: Chuveiro de chuva torrencial                 :  Torrential rain shower
-362: Chuveiro de granizo fraco                    :  Light sleet showers
-365: Chuveiro de granizo moderada ou forte        :  Moderate or heavy sleet showers
-368: Chuveiro de neve fraca                       :  Light snow showers
-371: Chuveiro de neve moderada ou forte           :  Moderate or heavy snow showers
+353: Chuva fraca                                  :  Light rain shower
+356: Chuva moderada ou forte                      :  Moderate or heavy rain shower
+359: Chuva torrencial                             :  Torrential rain shower
+362: Chuva de granizo fraco                       :  Light sleet showers
+365: Chuva de granizo moderada ou forte           :  Moderate or heavy sleet showers
+368: Chuva com neve fraca                         :  Light snow showers
+371: Chuva com neve moderada ou forte             :  Moderate or heavy snow showers
 386: Tempestate com garoa irregular               :  Patchy light rain with thunder
 389: Tempestade com chuva moderada ou forte       :  Moderate or heavy rain with thunder
 392: Tempestade com neve fraca                    :  Patchy light snow with thunder
 395: Tempestade com neve moderada ou forte        :  Moderate or heavy snow with thunder
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
