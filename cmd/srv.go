@@ -73,7 +73,14 @@ func copyHeader(dst, src http.Header) {
 }
 
 func main() {
+	logger := NewRequestLogger(
+		Conf.Logging.AccessLog,
+		time.Duration(Conf.Logging.Interval)*time.Second)
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		if err := logger.Log(r); err != nil {
+			log.Println(err)
+		}
 		// printStat()
 		response := processRequest(r)
 
