@@ -95,6 +95,7 @@ func (rl *RequestLogger) flush() error {
 	return nil
 }
 
+// String returns string representation of logEntry.
 func (e *logEntry) String() string {
 	return fmt.Sprintf(
 		"%s %s %s %s",

@@ -11,7 +11,6 @@ import (
 	lru "github.com/hashicorp/golang-lru"
 )
 
-const serverPort = 8083
 const uplinkSrvAddr = "127.0.0.1:9002"
 const uplinkTimeout = 30
 const prefetchInterval = 300
@@ -90,5 +89,5 @@ func main() {
 		w.Write(response.Body)
 	})
 
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", serverPort), nil))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", Conf.Server.PortHTTP), nil))
 }
