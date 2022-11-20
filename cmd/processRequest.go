@@ -11,11 +11,14 @@ import (
 	"time"
 )
 
-func processRequest(r *http.Request) responseWithHeader {
-	var response responseWithHeader
+func processRequest(r *http.Request) (*responseWithHeader, error) {
+	var (
+		response *responseWithHeader
+		err      error
+	)
 
-	if response, ok := redirectInsecure(r); ok {
-		return *response
+	if resp, ok := redirectInsecure(r); ok {
+		return resp, nil
 	}
 
 	if dontCache(r) {
@@ -40,31 +43,36 @@ func processRequest(r *http.Request) responseWithHeader {
 			}
 			time.Sleep(30 * time.Millisecond)
 			cacheBody, ok = lruCache.Get(cacheDigest)
-			cacheEntry = cacheBody.(responseWithHeader)
+			if ok && cacheBody != nil {
+				cacheEntry = cacheBody.(responseWithHeader)
+			}
 		}
 		if cacheEntry.InProgress {
 			log.Printf("TIMEOUT: %s\n", cacheDigest)
 		}
 		if ok && !cacheEntry.InProgress && cacheEntry.Expires.After(time.Now()) {
-			response = cacheEntry
+			response = &cacheEntry
 			foundInCache = true
 		}
 	}
 
 	if !foundInCache {
 		lruCache.Add(cacheDigest, responseWithHeader{InProgress: true})
-		response = get(r)
+		response, err = get(r)
+		if err != nil {
+			return nil, err
+		}
 		if response.StatusCode == 200 || response.StatusCode == 304 || response.StatusCode == 404 {
-			lruCache.Add(cacheDigest, response)
+			lruCache.Add(cacheDigest, *response)
 		} else {
 			log.Printf("REMOVE: %d response for %s from cache\n", response.StatusCode, cacheDigest)
 			lruCache.Remove(cacheDigest)
 		}
 	}
-	return response
+	return response, nil
 }
 
-func get(req *http.Request) responseWithHeader {
+func get(req *http.Request) (*responseWithHeader, error) {
 
 	client := &http.Client{}
 
@@ -72,7 +80,7 @@ func get(req *http.Request) responseWithHeader {
 
 	proxyReq, err := http.NewRequest(req.Method, queryURL, req.Body)
 	if err != nil {
-		log.Printf("Request: %s\n", err)
+		return nil, err
 	}
 
 	// proxyReq.Header.Set("Host", req.Host)
@@ -89,23 +97,22 @@ func get(req *http.Request) responseWithHeader {
 	}
 
 	res, err := client.Do(proxyReq)
-
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		log.Println(err)
+		return nil, err
 	}
 
-	return responseWithHeader{
+	return &responseWithHeader{
 		InProgress: false,
 		Expires:    time.Now().Add(time.Duration(randInt(1000, 1500)) * time.Second),
 		Body:       body,
 		Header:     res.Header,
 		StatusCode: res.StatusCode,
-	}
+	}, nil
 }
 
 // implementation of the cache.get_signature of original wttr.in

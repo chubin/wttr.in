@@ -143,7 +143,15 @@ func main() {
 			log.Println(err)
 		}
 		// printStat()
-		response := processRequest(r)
+		response, err := processRequest(r)
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		if response.StatusCode == 0 {
+			log.Println("status code 0", response)
+			return
+		}
 
 		copyHeader(w.Header(), response.Header)
 		w.Header().Set("Access-Control-Allow-Origin", "*")
