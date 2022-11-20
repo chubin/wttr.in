@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"crypto/tls"
 	"fmt"
 	"log"
 	"net"
@@ -72,12 +73,36 @@ func copyHeader(dst, src http.Header) {
 }
 
 func serveHTTP(mux *http.ServeMux, port int, errs chan<- error) {
-	errs <- http.ListenAndServe(fmt.Sprintf(":%d", port), mux)
+	srv := &http.Server{
+		Addr:         fmt.Sprintf(":%d", port),
+		ReadTimeout:  5 * time.Second,
+		WriteTimeout: 10 * time.Second,
+		IdleTimeout:  1 * time.Second,
+		Handler:      mux,
+	}
+	// srv.SetKeepAlivesEnabled(false)
+	errs <- srv.ListenAndServe()
 }
 
 func serveHTTPS(mux *http.ServeMux, port int, errs chan<- error) {
-	errs <- http.ListenAndServeTLS(fmt.Sprintf(":%d", port),
-		Conf.Server.TLSCertFile, Conf.Server.TLSKeyFile, mux)
+	tlsConfig := &tls.Config{
+		// CipherSuites: []uint16{
+		// 	tls.TLS_CHACHA20_POLY1305_SHA256,
+		// 	tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
+		// 	tls.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
+		// },
+		// MinVersion: tls.VersionTLS13,
+	}
+	srv := &http.Server{
+		Addr:         fmt.Sprintf(":%d", port),
+		ReadTimeout:  5 * time.Second,
+		WriteTimeout: 20 * time.Second,
+		IdleTimeout:  1 * time.Second,
+		TLSConfig:    tlsConfig,
+		Handler:      mux,
+	}
+	// srv.SetKeepAlivesEnabled(false)
+	errs <- srv.ListenAndServeTLS(Conf.Server.TLSCertFile, Conf.Server.TLSKeyFile)
 }
 
 func main() {
