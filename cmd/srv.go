@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/tls"
 	"fmt"
+	"io"
 	"log"
 	"net"
 	"net/http"
@@ -16,6 +17,7 @@ const uplinkSrvAddr = "127.0.0.1:9002"
 const uplinkTimeout = 30
 const prefetchInterval = 300
 const lruCacheSize = 12800
+const logLineStart = "LOG_LINE_START "
 
 // plainTextAgents contains signatures of the plain-text agents
 var plainTextAgents = []string{
@@ -72,19 +74,19 @@ func copyHeader(dst, src http.Header) {
 	}
 }
 
-func serveHTTP(mux *http.ServeMux, port int, errs chan<- error) {
+func serveHTTP(mux *http.ServeMux, port int, logFile io.Writer, errs chan<- error) {
 	srv := &http.Server{
 		Addr:         fmt.Sprintf(":%d", port),
+		ErrorLog:     log.New(logFile, logLineStart, log.LstdFlags),
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 10 * time.Second,
 		IdleTimeout:  1 * time.Second,
 		Handler:      mux,
 	}
-	// srv.SetKeepAlivesEnabled(false)
 	errs <- srv.ListenAndServe()
 }
 
-func serveHTTPS(mux *http.ServeMux, port int, errs chan<- error) {
+func serveHTTPS(mux *http.ServeMux, port int, logFile io.Writer, errs chan<- error) {
 	tlsConfig := &tls.Config{
 		// CipherSuites: []uint16{
 		// 	tls.TLS_CHACHA20_POLY1305_SHA256,
@@ -95,13 +97,13 @@ func serveHTTPS(mux *http.ServeMux, port int, errs chan<- error) {
 	}
 	srv := &http.Server{
 		Addr:         fmt.Sprintf(":%d", port),
+		ErrorLog:     log.New(logFile, logLineStart, log.LstdFlags),
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 20 * time.Second,
 		IdleTimeout:  1 * time.Second,
 		TLSConfig:    tlsConfig,
 		Handler:      mux,
 	}
-	// srv.SetKeepAlivesEnabled(false)
 	errs <- srv.ListenAndServeTLS(Conf.Server.TLSCertFile, Conf.Server.TLSKeyFile)
 }
 
@@ -120,7 +122,21 @@ func main() {
 
 		// numberOfServers started. If 0, exit.
 		numberOfServers int
+
+		errorsLog *LogSuppressor = NewLogSuppressor(
+			Conf.Logging.ErrorsLog,
+			[]string{
+				"error reading preface from client",
+				"TLS handshake error from",
+			},
+			logLineStart,
+		)
 	)
+
+	err := errorsLog.Open()
+	if err != nil {
+		log.Fatalln("errors log:", err)
+	}
 
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if err := logger.Log(r); err != nil {
@@ -136,11 +152,11 @@ func main() {
 	})
 
 	if Conf.Server.PortHTTP != 0 {
-		go serveHTTP(mux, Conf.Server.PortHTTP, errs)
+		go serveHTTP(mux, Conf.Server.PortHTTP, errorsLog, errs)
 		numberOfServers++
 	}
 	if Conf.Server.PortHTTPS != 0 {
-		go serveHTTPS(mux, Conf.Server.PortHTTPS, errs)
+		go serveHTTPS(mux, Conf.Server.PortHTTPS, errorsLog, errs)
 		numberOfServers++
 	}
 	if numberOfServers == 0 {

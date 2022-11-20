@@ -12,6 +12,9 @@ type Logging struct {
 	// AccessLog path.
 	AccessLog string
 
+	// ErrorsLog path.
+	ErrorsLog string
+
 	// Interval between access log flushes, in seconds.
 	Interval int
 }
@@ -38,6 +41,7 @@ type Server struct {
 var Conf = Config{
 	Logging{
 		AccessLog: "/wttr.in/log/access.log",
+		ErrorsLog: "/wttr.in/log/errors.log",
 		Interval:  300,
 	},
 	Server{
