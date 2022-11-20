@@ -145,7 +145,7 @@ func redirectInsecure(req *http.Request) (*responseWithHeader, bool) {
 		return nil, false
 	}
 
-	if strings.ToLower(req.Header.Get("X-Forwarded-Proto")) == "https" {
+	if req.TLS != nil || strings.ToLower(req.Header.Get("X-Forwarded-Proto")) == "https" {
 		return nil, false
 	}
 
