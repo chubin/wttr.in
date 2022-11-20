@@ -55,10 +55,10 @@ func syncMapLen(sm *sync.Map) int {
 
 func prefetchPeakRequests(peakRequestMap *sync.Map) {
 	peakRequestLen := syncMapLen(peakRequestMap)
-	log.Printf("PREFETCH: Prefetching %d requests\n", peakRequestLen)
 	if peakRequestLen == 0 {
 		return
 	}
+	log.Printf("PREFETCH: Prefetching %d requests\n", peakRequestLen)
 	sleepBetweenRequests := time.Duration(prefetchInterval*1000/peakRequestLen) * time.Millisecond
 	peakRequestMap.Range(func(key interface{}, value interface{}) bool {
 		go func(r http.Request) {
