@@ -26,6 +26,12 @@ type Server struct {
 	// PortHTTP is port where the HTTPS server must listen.
 	// If 0, HTTPS is disabled.
 	PortHTTPS int
+
+	// TLSCertFile contains path to cert file for TLS Server.
+	TLSCertFile string
+
+	// TLSCertFile contains path to key file for TLS Server.
+	TLSKeyFile string
 }
 
 // Conf contains the current configuration.
@@ -35,7 +41,9 @@ var Conf = Config{
 		Interval:  300,
 	},
 	Server{
-		PortHTTP:  8083,
-		PortHTTPS: 0,
+		PortHTTP:    8083,
+		PortHTTPS:   8084,
+		TLSCertFile: "/wttr.in/etc/fullchain.pem",
+		TLSKeyFile:  "/wttr.in/etc/privkey.pem",
 	},
 }

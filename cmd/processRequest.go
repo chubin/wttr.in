@@ -84,6 +84,10 @@ func get(req *http.Request) responseWithHeader {
 		}
 	}
 
+	if proxyReq.Header.Get("X-Forwarded-For") == "" {
+		proxyReq.Header.Set("X-Forwarded-For", ipFromAddr(req.RemoteAddr))
+	}
+
 	res, err := client.Do(proxyReq)
 
 	if err != nil {
@@ -196,4 +200,13 @@ func readUserIP(r *http.Request) string {
 
 func randInt(min int, max int) int {
 	return min + rand.Intn(max-min)
+}
+
+// ipFromAddr returns IP address from a ADDR:PORT pair.
+func ipFromAddr(s string) string {
+	pos := strings.LastIndex(s, ":")
+	if pos == -1 {
+		return s
+	}
+	return s[:pos]
 }

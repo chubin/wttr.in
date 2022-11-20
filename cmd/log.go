@@ -47,6 +47,9 @@ func (rl *RequestLogger) Log(r *http.Request) error {
 		URI:       r.RequestURI,
 		UserAgent: r.Header.Get("User-Agent"),
 	}
+	if r.TLS != nil {
+		le.Proto = "https"
+	}
 
 	rl.m.Lock()
 	rl.buf[le]++

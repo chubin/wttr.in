@@ -71,12 +71,33 @@ func copyHeader(dst, src http.Header) {
 	}
 }
 
-func main() {
-	logger := NewRequestLogger(
-		Conf.Logging.AccessLog,
-		time.Duration(Conf.Logging.Interval)*time.Second)
+func serveHTTP(mux *http.ServeMux, port int, errs chan<- error) {
+	errs <- http.ListenAndServe(fmt.Sprintf(":%d", port), mux)
+}
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+func serveHTTPS(mux *http.ServeMux, port int, errs chan<- error) {
+	errs <- http.ListenAndServeTLS(fmt.Sprintf(":%d", port),
+		Conf.Server.TLSCertFile, Conf.Server.TLSKeyFile, mux)
+}
+
+func main() {
+	var (
+		// mux is main HTTP/HTTP requests multiplexer.
+		mux *http.ServeMux = http.NewServeMux()
+
+		// logger is optimized requests logger.
+		logger *RequestLogger = NewRequestLogger(
+			Conf.Logging.AccessLog,
+			time.Duration(Conf.Logging.Interval)*time.Second)
+
+		// errs is the servers errors channel.
+		errs chan error = make(chan error, 1)
+
+		// numberOfServers started. If 0, exit.
+		numberOfServers int
+	)
+
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if err := logger.Log(r); err != nil {
 			log.Println(err)
 		}
@@ -89,5 +110,17 @@ func main() {
 		w.Write(response.Body)
 	})
 
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", Conf.Server.PortHTTP), nil))
+	if Conf.Server.PortHTTP != 0 {
+		go serveHTTP(mux, Conf.Server.PortHTTP, errs)
+		numberOfServers++
+	}
+	if Conf.Server.PortHTTPS != 0 {
+		go serveHTTPS(mux, Conf.Server.PortHTTPS, errs)
+		numberOfServers++
+	}
+	if numberOfServers == 0 {
+		log.Println("no servers configured; exiting")
+		return
+	}
+	log.Fatal(<-errs) // block until one of the servers writes an error
 }
