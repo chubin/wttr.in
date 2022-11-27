@@ -9,8 +9,6 @@ import (
 	"net"
 	"net/http"
 	"time"
-
-	lru "github.com/hashicorp/golang-lru"
 )
 
 const uplinkSrvAddr = "127.0.0.1:9002"
@@ -35,24 +33,7 @@ var plainTextAgents = []string{
 	"xh",
 }
 
-var lruCache *lru.Cache
-
-type responseWithHeader struct {
-	InProgress bool      // true if the request is being processed
-	Expires    time.Time // expiration time of the cache entry
-
-	Body       []byte
-	Header     http.Header
-	StatusCode int // e.g. 200
-}
-
 func init() {
-	var err error
-	lruCache, err = lru.New(lruCacheSize)
-	if err != nil {
-		panic(err)
-	}
-
 	dialer := &net.Dialer{
 		Timeout:   uplinkTimeout * time.Second,
 		KeepAlive: uplinkTimeout * time.Second,
@@ -62,8 +43,6 @@ func init() {
 	http.DefaultTransport.(*http.Transport).DialContext = func(ctx context.Context, network, _ string) (net.Conn, error) {
 		return dialer.DialContext(ctx, network, uplinkSrvAddr)
 	}
-
-	initPeakHandling()
 }
 
 func copyHeader(dst, src http.Header) {
@@ -117,6 +96,8 @@ func main() {
 			Conf.Logging.AccessLog,
 			time.Duration(Conf.Logging.Interval)*time.Second)
 
+		rp *RequestProcessor
+
 		// errs is the servers errors channel.
 		errs chan error = make(chan error, 1)
 
@@ -131,19 +112,28 @@ func main() {
 			},
 			logLineStart,
 		)
+
+		err error
 	)
 
-	err := errorsLog.Open()
+	rp, err = NewRequestProcessor()
+	if err != nil {
+		log.Fatalln("log processor initialization:", err)
+	}
+
+	err = errorsLog.Open()
 	if err != nil {
 		log.Fatalln("errors log:", err)
 	}
+
+	rp.Start()
 
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if err := logger.Log(r); err != nil {
 			log.Println(err)
 		}
 		// printStat()
-		response, err := processRequest(r)
+		response, err := rp.ProcessRequest(r)
 		if err != nil {
 			log.Println(err)
 			return

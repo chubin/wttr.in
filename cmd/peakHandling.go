@@ -9,28 +9,31 @@ import (
 	"github.com/robfig/cron"
 )
 
-var peakRequest30 sync.Map
-var peakRequest60 sync.Map
-
-func initPeakHandling() {
+func (rp *RequestProcessor) startPeakHandling() {
 	c := cron.New()
 	// cronTime := fmt.Sprintf("%d,%d * * * *", 30-prefetchInterval/60, 60-prefetchInterval/60)
-	c.AddFunc("24 * * * *", prefetchPeakRequests30)
-	c.AddFunc("54 * * * *", prefetchPeakRequests60)
+	c.AddFunc(
+		"24 * * * *",
+		func() { rp.prefetchPeakRequests(&rp.peakRequest30) },
+	)
+	c.AddFunc(
+		"54 * * * *",
+		func() { rp.prefetchPeakRequests(&rp.peakRequest60) },
+	)
 	c.Start()
 }
 
-func savePeakRequest(cacheDigest string, r *http.Request) {
+func (rp *RequestProcessor) savePeakRequest(cacheDigest string, r *http.Request) {
 	_, min, _ := time.Now().Clock()
 	if min == 30 {
-		peakRequest30.Store(cacheDigest, *r)
+		rp.peakRequest30.Store(cacheDigest, *r)
 	} else if min == 0 {
-		peakRequest60.Store(cacheDigest, *r)
+		rp.peakRequest60.Store(cacheDigest, *r)
 	}
 }
 
-func prefetchRequest(r *http.Request) {
-	processRequest(r)
+func (rp *RequestProcessor) prefetchRequest(r *http.Request) {
+	rp.ProcessRequest(r)
 }
 
 func syncMapLen(sm *sync.Map) int {
@@ -53,7 +56,7 @@ func syncMapLen(sm *sync.Map) int {
 	return count
 }
 
-func prefetchPeakRequests(peakRequestMap *sync.Map) {
+func (rp *RequestProcessor) prefetchPeakRequests(peakRequestMap *sync.Map) {
 	peakRequestLen := syncMapLen(peakRequestMap)
 	if peakRequestLen == 0 {
 		return
@@ -62,18 +65,10 @@ func prefetchPeakRequests(peakRequestMap *sync.Map) {
 	sleepBetweenRequests := time.Duration(prefetchInterval*1000/peakRequestLen) * time.Millisecond
 	peakRequestMap.Range(func(key interface{}, value interface{}) bool {
 		go func(r http.Request) {
-			prefetchRequest(&r)
+			rp.prefetchRequest(&r)
 		}(value.(http.Request))
 		peakRequestMap.Delete(key)
 		time.Sleep(sleepBetweenRequests)
 		return true
 	})
-}
-
-func prefetchPeakRequests30() {
-	prefetchPeakRequests(&peakRequest30)
-}
-
-func prefetchPeakRequests60() {
-	prefetchPeakRequests(&peakRequest60)
 }

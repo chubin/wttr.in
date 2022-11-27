@@ -8,12 +8,48 @@ import (
 	"net"
 	"net/http"
 	"strings"
+	"sync"
 	"time"
+
+	lru "github.com/hashicorp/golang-lru"
 )
 
-func processRequest(r *http.Request) (*responseWithHeader, error) {
+type ResponseWithHeader struct {
+	InProgress bool      // true if the request is being processed
+	Expires    time.Time // expiration time of the cache entry
+
+	Body       []byte
+	Header     http.Header
+	StatusCode int // e.g. 200
+}
+
+// RequestProcessor handles incoming requests.
+type RequestProcessor struct {
+	peakRequest30 sync.Map
+	peakRequest60 sync.Map
+	lruCache      *lru.Cache
+}
+
+// NewRequestProcessor returns new RequestProcessor.
+func NewRequestProcessor() (*RequestProcessor, error) {
+	lruCache, err := lru.New(lruCacheSize)
+	if err != nil {
+		return nil, err
+	}
+
+	return &RequestProcessor{
+		lruCache: lruCache,
+	}, nil
+}
+
+// Start starts async request processor jobs, such as peak handling.
+func (rp *RequestProcessor) Start() {
+	rp.startPeakHandling()
+}
+
+func (rp *RequestProcessor) ProcessRequest(r *http.Request) (*ResponseWithHeader, error) {
 	var (
-		response *responseWithHeader
+		response *ResponseWithHeader
 		err      error
 	)
 
@@ -29,11 +65,11 @@ func processRequest(r *http.Request) (*responseWithHeader, error) {
 
 	foundInCache := false
 
-	savePeakRequest(cacheDigest, r)
+	rp.savePeakRequest(cacheDigest, r)
 
-	cacheBody, ok := lruCache.Get(cacheDigest)
+	cacheBody, ok := rp.lruCache.Get(cacheDigest)
 	if ok {
-		cacheEntry := cacheBody.(responseWithHeader)
+		cacheEntry := cacheBody.(ResponseWithHeader)
 
 		// if after all attempts we still have no answer,
 		// we try to make the query on our own
@@ -42,9 +78,9 @@ func processRequest(r *http.Request) (*responseWithHeader, error) {
 				break
 			}
 			time.Sleep(30 * time.Millisecond)
-			cacheBody, ok = lruCache.Get(cacheDigest)
+			cacheBody, ok = rp.lruCache.Get(cacheDigest)
 			if ok && cacheBody != nil {
-				cacheEntry = cacheBody.(responseWithHeader)
+				cacheEntry = cacheBody.(ResponseWithHeader)
 			}
 		}
 		if cacheEntry.InProgress {
@@ -57,22 +93,22 @@ func processRequest(r *http.Request) (*responseWithHeader, error) {
 	}
 
 	if !foundInCache {
-		lruCache.Add(cacheDigest, responseWithHeader{InProgress: true})
+		rp.lruCache.Add(cacheDigest, ResponseWithHeader{InProgress: true})
 		response, err = get(r)
 		if err != nil {
 			return nil, err
 		}
 		if response.StatusCode == 200 || response.StatusCode == 304 || response.StatusCode == 404 {
-			lruCache.Add(cacheDigest, *response)
+			rp.lruCache.Add(cacheDigest, *response)
 		} else {
 			log.Printf("REMOVE: %d response for %s from cache\n", response.StatusCode, cacheDigest)
-			lruCache.Remove(cacheDigest)
+			rp.lruCache.Remove(cacheDigest)
 		}
 	}
 	return response, nil
 }
 
-func get(req *http.Request) (*responseWithHeader, error) {
+func get(req *http.Request) (*ResponseWithHeader, error) {
 
 	client := &http.Client{}
 
@@ -106,7 +142,7 @@ func get(req *http.Request) (*responseWithHeader, error) {
 		return nil, err
 	}
 
-	return &responseWithHeader{
+	return &ResponseWithHeader{
 		InProgress: false,
 		Expires:    time.Now().Add(time.Duration(randInt(1000, 1500)) * time.Second),
 		Body:       body,
@@ -147,7 +183,7 @@ func dontCache(req *http.Request) bool {
 //    proxy_set_header   X-Forwarded-Proto $scheme;
 //
 //
-func redirectInsecure(req *http.Request) (*responseWithHeader, bool) {
+func redirectInsecure(req *http.Request) (*ResponseWithHeader, bool) {
 	if isPlainTextAgent(req.Header.Get("User-Agent")) {
 		return nil, false
 	}
@@ -169,7 +205,7 @@ The document has moved
 </BODY></HTML>
 `, target))
 
-	return &responseWithHeader{
+	return &ResponseWithHeader{
 		InProgress: false,
 		Expires:    time.Now().Add(time.Duration(randInt(1000, 1500)) * time.Second),
 		Body:       body,
