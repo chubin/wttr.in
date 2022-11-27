@@ -28,6 +28,8 @@ type RequestProcessor struct {
 	peakRequest30 sync.Map
 	peakRequest60 sync.Map
 	lruCache      *lru.Cache
+	stats         *Stats
+	router        Router
 }
 
 // NewRequestProcessor returns new RequestProcessor.
@@ -37,9 +39,15 @@ func NewRequestProcessor() (*RequestProcessor, error) {
 		return nil, err
 	}
 
-	return &RequestProcessor{
+	rp := &RequestProcessor{
 		lruCache: lruCache,
-	}, nil
+		stats:    NewStats(),
+	}
+
+	// Initialize routes.
+	rp.router.AddPath("/:stats", rp.stats)
+
+	return rp, nil
 }
 
 // Start starts async request processor jobs, such as peak handling.
@@ -53,11 +61,23 @@ func (rp *RequestProcessor) ProcessRequest(r *http.Request) (*ResponseWithHeader
 		err      error
 	)
 
+	rp.stats.Inc("total")
+
+	// Main routing logic.
+	if rh := rp.router.Route(r); rh != nil {
+		result := rh.Response(r)
+		if result != nil {
+			return result, nil
+		}
+	}
+
 	if resp, ok := redirectInsecure(r); ok {
+		rp.stats.Inc("redirects")
 		return resp, nil
 	}
 
 	if dontCache(r) {
+		rp.stats.Inc("uncached")
 		return get(r)
 	}
 
@@ -69,6 +89,7 @@ func (rp *RequestProcessor) ProcessRequest(r *http.Request) (*ResponseWithHeader
 
 	cacheBody, ok := rp.lruCache.Get(cacheDigest)
 	if ok {
+		rp.stats.Inc("cache1")
 		cacheEntry := cacheBody.(ResponseWithHeader)
 
 		// if after all attempts we still have no answer,
@@ -93,7 +114,17 @@ func (rp *RequestProcessor) ProcessRequest(r *http.Request) (*ResponseWithHeader
 	}
 
 	if !foundInCache {
+		// Handling query.
+		format := r.URL.Query().Get("format")
+		if len(format) != 0 {
+			rp.stats.Inc("format")
+			if format == "j1" {
+				rp.stats.Inc("format=j1")
+			}
+		}
+
 		rp.lruCache.Add(cacheDigest, ResponseWithHeader{InProgress: true})
+
 		response, err = get(r)
 		if err != nil {
 			return nil, err
