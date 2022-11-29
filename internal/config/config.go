@@ -1,4 +1,4 @@
-package main
+package config
 
 // Config of the program.
 type Config struct {

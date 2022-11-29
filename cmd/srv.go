@@ -9,6 +9,8 @@ import (
 	"net"
 	"net/http"
 	"time"
+
+	"github.com/chubin/wttr.in/internal/config"
 )
 
 const uplinkSrvAddr = "127.0.0.1:9002"
@@ -67,6 +69,7 @@ func serveHTTP(mux *http.ServeMux, port int, logFile io.Writer, errs chan<- erro
 
 func serveHTTPS(mux *http.ServeMux, port int, logFile io.Writer, errs chan<- error) {
 	tlsConfig := &tls.Config{
+
 		// CipherSuites: []uint16{
 		// 	tls.TLS_CHACHA20_POLY1305_SHA256,
 		// 	tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
@@ -83,7 +86,7 @@ func serveHTTPS(mux *http.ServeMux, port int, logFile io.Writer, errs chan<- err
 		TLSConfig:    tlsConfig,
 		Handler:      mux,
 	}
-	errs <- srv.ListenAndServeTLS(Conf.Server.TLSCertFile, Conf.Server.TLSKeyFile)
+	errs <- srv.ListenAndServeTLS(config.Conf.Server.TLSCertFile, config.Conf.Server.TLSKeyFile)
 }
 
 func main() {
@@ -93,8 +96,8 @@ func main() {
 
 		// logger is optimized requests logger.
 		logger *RequestLogger = NewRequestLogger(
-			Conf.Logging.AccessLog,
-			time.Duration(Conf.Logging.Interval)*time.Second)
+			config.Conf.Logging.AccessLog,
+			time.Duration(config.Conf.Logging.Interval)*time.Second)
 
 		rp *RequestProcessor
 
@@ -105,7 +108,7 @@ func main() {
 		numberOfServers int
 
 		errorsLog *LogSuppressor = NewLogSuppressor(
-			Conf.Logging.ErrorsLog,
+			config.Conf.Logging.ErrorsLog,
 			[]string{
 				"error reading preface from client",
 				"TLS handshake error from",
@@ -149,12 +152,12 @@ func main() {
 		w.Write(response.Body)
 	})
 
-	if Conf.Server.PortHTTP != 0 {
-		go serveHTTP(mux, Conf.Server.PortHTTP, errorsLog, errs)
+	if config.Conf.Server.PortHTTP != 0 {
+		go serveHTTP(mux, config.Conf.Server.PortHTTP, errorsLog, errs)
 		numberOfServers++
 	}
-	if Conf.Server.PortHTTPS != 0 {
-		go serveHTTPS(mux, Conf.Server.PortHTTPS, errorsLog, errs)
+	if config.Conf.Server.PortHTTPS != 0 {
+		go serveHTTPS(mux, config.Conf.Server.PortHTTPS, errorsLog, errs)
 		numberOfServers++
 	}
 	if numberOfServers == 0 {
