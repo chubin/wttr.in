@@ -6,6 +6,8 @@ import (
 	"net/http"
 	"sync"
 	"time"
+
+	"github.com/chubin/wttr.in/internal/routing"
 )
 
 // Stats holds processed requests statistics.
@@ -77,9 +79,8 @@ func (c *Stats) Show() []byte {
 	return b.Bytes()
 }
 
-func (c *Stats) Response(*http.Request) *ResponseWithHeader {
-	return &ResponseWithHeader{
-		Body:       c.Show(),
-		StatusCode: 200,
+func (c *Stats) Response(*http.Request) *routing.Cadre {
+	return &routing.Cadre{
+		Body: c.Show(),
 	}
 }
