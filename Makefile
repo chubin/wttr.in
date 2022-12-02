@@ -1,2 +1,2 @@
-srv: cmd/*.go internal/routing/*.go
+srv: cmd/*.go internal/*/*.go
 	go build -o srv ./cmd/
