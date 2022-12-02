@@ -11,10 +11,6 @@ import (
 	"github.com/chubin/wttr.in/internal/config"
 )
 
-const uplinkSrvAddr = "127.0.0.1:9002"
-const uplinkTimeout = 30
-const prefetchInterval = 300
-const lruCacheSize = 12800
 const logLineStart = "LOG_LINE_START "
 
 // plainTextAgents contains signatures of the plain-text agents
@@ -105,7 +101,7 @@ func main() {
 		err error
 	)
 
-	rp, err = NewRequestProcessor()
+	rp, err = NewRequestProcessor(config.Conf)
 	if err != nil {
 		log.Fatalln("log processor initialization:", err)
 	}

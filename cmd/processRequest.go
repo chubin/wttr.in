@@ -12,6 +12,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/chubin/wttr.in/internal/config"
 	"github.com/chubin/wttr.in/internal/routing"
 
 	lru "github.com/hashicorp/golang-lru"
@@ -34,24 +35,25 @@ type RequestProcessor struct {
 	stats             *Stats
 	router            routing.Router
 	upstreamTransport *http.Transport
+	config            *config.Config
 }
 
 // NewRequestProcessor returns new RequestProcessor.
-func NewRequestProcessor() (*RequestProcessor, error) {
-	lruCache, err := lru.New(lruCacheSize)
+func NewRequestProcessor(config *config.Config) (*RequestProcessor, error) {
+	lruCache, err := lru.New(config.Cache.Size)
 	if err != nil {
 		return nil, err
 	}
 
 	dialer := &net.Dialer{
-		Timeout:   uplinkTimeout * time.Second,
-		KeepAlive: uplinkTimeout * time.Second,
+		Timeout:   time.Duration(config.Uplink.Timeout) * time.Second,
+		KeepAlive: time.Duration(config.Uplink.Timeout) * time.Second,
 		DualStack: true,
 	}
 
 	transport := &http.Transport{
 		DialContext: func(ctx context.Context, network, _ string) (net.Conn, error) {
-			return dialer.DialContext(ctx, network, uplinkSrvAddr)
+			return dialer.DialContext(ctx, network, config.Uplink.Address)
 		},
 	}
 
@@ -59,6 +61,7 @@ func NewRequestProcessor() (*RequestProcessor, error) {
 		lruCache:          lruCache,
 		stats:             NewStats(),
 		upstreamTransport: transport,
+		config:            config,
 	}
 
 	// Initialize routes.
