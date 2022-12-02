@@ -1,12 +1,10 @@
 package main
 
 import (
-	"context"
 	"crypto/tls"
 	"fmt"
 	"io"
 	"log"
-	"net"
 	"net/http"
 	"time"
 
@@ -33,18 +31,6 @@ var plainTextAgents = []string{
 	"aiohttp",
 	"http_get",
 	"xh",
-}
-
-func init() {
-	dialer := &net.Dialer{
-		Timeout:   uplinkTimeout * time.Second,
-		KeepAlive: uplinkTimeout * time.Second,
-		DualStack: true,
-	}
-
-	http.DefaultTransport.(*http.Transport).DialContext = func(ctx context.Context, network, _ string) (net.Conn, error) {
-		return dialer.DialContext(ctx, network, uplinkSrvAddr)
-	}
 }
 
 func copyHeader(dst, src http.Header) {
