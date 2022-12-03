@@ -2,16 +2,25 @@ package main
 
 import (
 	"crypto/tls"
+	"errors"
 	"fmt"
 	"io"
 	"log"
 	"net/http"
 	"time"
 
+	"github.com/alecthomas/kong"
+
 	"github.com/chubin/wttr.in/internal/config"
 	"github.com/chubin/wttr.in/internal/logging"
 	"github.com/chubin/wttr.in/internal/processor"
 )
+
+var cli struct {
+	ConfigCheck bool   `name:"config-check" help:"Check configuration"`
+	ConfigDump  bool   `name:"config-dump" help:"Dump configuration"`
+	ConfigFile  string `name:"config-file" arg:"" optional:"" help:"Name of configuration file"`
+}
 
 const logLineStart = "LOG_LINE_START "
 
