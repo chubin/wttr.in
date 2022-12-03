@@ -44,7 +44,7 @@ func serveHTTP(mux *http.ServeMux, port int, logFile io.Writer, errs chan<- erro
 	errs <- srv.ListenAndServe()
 }
 
-func serveHTTPS(mux *http.ServeMux, port int, logFile io.Writer, errs chan<- error) {
+func serveHTTPS(mux *http.ServeMux, port int, certFile, keyFile string, logFile io.Writer, errs chan<- error) {
 	tlsConfig := &tls.Config{
 
 		// CipherSuites: []uint16{
@@ -63,18 +63,16 @@ func serveHTTPS(mux *http.ServeMux, port int, logFile io.Writer, errs chan<- err
 		TLSConfig:    tlsConfig,
 		Handler:      mux,
 	}
-	errs <- srv.ListenAndServeTLS(config.Conf.Server.TLSCertFile, config.Conf.Server.TLSKeyFile)
+	errs <- srv.ListenAndServeTLS(certFile, keyFile)
 }
 
-func main() {
+func serve(conf *config.Config) error {
 	var (
 		// mux is main HTTP/HTTP requests multiplexer.
 		mux *http.ServeMux = http.NewServeMux()
 
 		// logger is optimized requests logger.
-		logger *logging.RequestLogger = logging.NewRequestLogger(
-			config.Conf.Logging.AccessLog,
-			time.Duration(config.Conf.Logging.Interval)*time.Second)
+		logger *logging.RequestLogger
 
 		rp *processor.RequestProcessor
 
@@ -84,19 +82,26 @@ func main() {
 		// numberOfServers started. If 0, exit.
 		numberOfServers int
 
-		errorsLog *logging.LogSuppressor = logging.NewLogSuppressor(
-			config.Conf.Logging.ErrorsLog,
-			[]string{
-				"error reading preface from client",
-				"TLS handshake error from",
-			},
-			logLineStart,
-		)
+		errorsLog *logging.LogSuppressor
 
 		err error
 	)
 
-	rp, err = processor.NewRequestProcessor(config.Conf)
+	// logger is optimized requests logger.
+	logger = logging.NewRequestLogger(
+		conf.Logging.AccessLog,
+		time.Duration(conf.Logging.Interval)*time.Second)
+
+	errorsLog = logging.NewLogSuppressor(
+		conf.Logging.ErrorsLog,
+		[]string{
+			"error reading preface from client",
+			"TLS handshake error from",
+		},
+		logLineStart,
+	)
+
+	rp, err = processor.NewRequestProcessor(conf)
 	if err != nil {
 		log.Fatalln("log processor initialization:", err)
 	}
@@ -129,17 +134,45 @@ func main() {
 		w.Write(response.Body)
 	})
 
-	if config.Conf.Server.PortHTTP != 0 {
-		go serveHTTP(mux, config.Conf.Server.PortHTTP, errorsLog, errs)
+	if conf.Server.PortHTTP != 0 {
+		go serveHTTP(mux, conf.Server.PortHTTP, errorsLog, errs)
 		numberOfServers++
 	}
-	if config.Conf.Server.PortHTTPS != 0 {
-		go serveHTTPS(mux, config.Conf.Server.PortHTTPS, errorsLog, errs)
+	if conf.Server.PortHTTPS != 0 {
+		go serveHTTPS(mux, conf.Server.PortHTTPS, conf.Server.TLSCertFile, conf.Server.TLSKeyFile, errorsLog, errs)
 		numberOfServers++
 	}
 	if numberOfServers == 0 {
-		log.Println("no servers configured; exiting")
+		return errors.New("no servers configured")
+	}
+	return <-errs // block until one of the servers writes an error
+}
+
+func main() {
+	var (
+		conf *config.Config
+		err  error
+	)
+
+	ctx := kong.Parse(&cli)
+
+	if cli.ConfigFile != "" {
+		conf, err = config.Load(cli.ConfigFile)
+		if err != nil {
+			log.Fatalf("reading config from %s: %s\n", cli.ConfigFile, err)
+		}
+	} else {
+		conf = config.Default()
+	}
+
+	if cli.ConfigDump {
+		fmt.Print(string(conf.Dump()))
+	}
+
+	if cli.ConfigCheck || cli.ConfigDump {
 		return
 	}
-	log.Fatal(<-errs) // block until one of the servers writes an error
+
+	err = serve(conf)
+	ctx.FatalIfErrorf(err)
 }

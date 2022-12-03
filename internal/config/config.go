@@ -1,5 +1,14 @@
 package config
 
+import (
+	"log"
+	"os"
+
+	"gopkg.in/yaml.v3"
+
+	"github.com/chubin/wttr.in/internal/util"
+)
+
 // Config of the program.
 type Config struct {
 	Cache
@@ -12,13 +21,13 @@ type Config struct {
 type Logging struct {
 
 	// AccessLog path.
-	AccessLog string
+	AccessLog string `yaml:"accessLog,omitempty"`
 
 	// ErrorsLog path.
-	ErrorsLog string
+	ErrorsLog string `yaml:"errorsLog,omitempty"`
 
 	// Interval between access log flushes, in seconds.
-	Interval int
+	Interval int `yaml:"interval,omitempty"`
 }
 
 // Server configuration.
@@ -26,36 +35,36 @@ type Server struct {
 
 	// PortHTTP is port where HTTP server must listen.
 	// If 0, HTTP is disabled.
-	PortHTTP int
+	PortHTTP int `yaml:"portHTTP,omitempty"`
 
 	// PortHTTP is port where the HTTPS server must listen.
 	// If 0, HTTPS is disabled.
-	PortHTTPS int
+	PortHTTPS int `yaml:"portHTTPS,omitempty"`
 
 	// TLSCertFile contains path to cert file for TLS Server.
-	TLSCertFile string
+	TLSCertFile string `yaml:"tlsCertFile,omitempty"`
 
 	// TLSCertFile contains path to key file for TLS Server.
-	TLSKeyFile string
+	TLSKeyFile string `yaml:"tlsKeyFile,omitempty"`
 }
 
 // Uplink configuration.
 type Uplink struct {
 	// Address contains address of the uplink server in form IP:PORT.
-	Address string
+	Address string `yaml:"address,omitempty"`
 
 	// Timeout for upstream queries.
-	Timeout int
+	Timeout int `yaml:"timeout,omitempty"`
 
 	// PrefetchInterval contains time (in milliseconds) indicating,
 	// how long the prefetch procedure should take.
-	PrefetchInterval int
+	PrefetchInterval int `yaml:"prefetchInterval,omitempty"`
 }
 
 // Cache configuration.
 type Cache struct {
 	// Size of the main cache.
-	Size int
+	Size int `yaml:"size,omitempty"`
 }
 
 // Default contains the default configuration.
@@ -83,5 +92,32 @@ func Default() *Config {
 	}
 }
 
-// Conf contains the current configuration
-var Conf = Default()
+// Load config from file.
+func Load(filename string) (*Config, error) {
+	var (
+		config Config
+		data   []byte
+		err    error
+	)
+
+	data, err = os.ReadFile(filename)
+	if err != nil {
+		return nil, err
+	}
+
+	err = util.YamlUnmarshalStrict(data, &config)
+	if err != nil {
+		return nil, err
+	}
+
+	return &config, nil
+}
+
+func (c *Config) Dump() []byte {
+	data, err := yaml.Marshal(c)
+	if err != nil {
+		// should never happen.
+		log.Fatalln("config.Dump():", err)
+	}
+	return data
+}
