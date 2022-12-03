@@ -1,4 +1,4 @@
-package main
+package logging
 
 import (
 	"fmt"
@@ -6,6 +6,8 @@ import (
 	"os"
 	"sync"
 	"time"
+
+	"github.com/chubin/wttr.in/internal/util"
 )
 
 // Logging request.
@@ -43,7 +45,7 @@ func NewRequestLogger(filename string, period time.Duration) *RequestLogger {
 func (rl *RequestLogger) Log(r *http.Request) error {
 	le := logEntry{
 		Proto:     "http",
-		IP:        readUserIP(r),
+		IP:        util.ReadUserIP(r),
 		URI:       r.RequestURI,
 		UserAgent: r.Header.Get("User-Agent"),
 	}

@@ -1,4 +1,4 @@
-package main
+package processor
 
 import (
 	"log"

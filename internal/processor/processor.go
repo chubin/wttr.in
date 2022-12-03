@@ -1,4 +1,4 @@
-package main
+package processor
 
 import (
 	"context"
@@ -12,12 +12,29 @@ import (
 	"sync"
 	"time"
 
+	lru "github.com/hashicorp/golang-lru"
+
 	"github.com/chubin/wttr.in/internal/config"
 	"github.com/chubin/wttr.in/internal/routing"
 	"github.com/chubin/wttr.in/internal/stats"
-
-	lru "github.com/hashicorp/golang-lru"
+	"github.com/chubin/wttr.in/internal/util"
 )
+
+// plainTextAgents contains signatures of the plain-text agents.
+var plainTextAgents = []string{
+	"curl",
+	"httpie",
+	"lwp-request",
+	"wget",
+	"python-httpx",
+	"python-requests",
+	"openbsd ftp",
+	"powershell",
+	"fetch",
+	"aiohttp",
+	"http_get",
+	"xh",
+}
 
 type responseWithHeader struct {
 	InProgress bool      // true if the request is being processed
@@ -213,7 +230,7 @@ func getCacheDigest(req *http.Request) string {
 	queryHost := req.Host
 	queryString := req.RequestURI
 
-	clientIPAddress := readUserIP(req)
+	clientIPAddress := util.ReadUserIP(req)
 
 	lang := req.Header.Get("Accept-Language")
 
@@ -277,22 +294,6 @@ func isPlainTextAgent(userAgent string) bool {
 		}
 	}
 	return false
-}
-
-func readUserIP(r *http.Request) string {
-	IPAddress := r.Header.Get("X-Real-Ip")
-	if IPAddress == "" {
-		IPAddress = r.Header.Get("X-Forwarded-For")
-	}
-	if IPAddress == "" {
-		IPAddress = r.RemoteAddr
-		var err error
-		IPAddress, _, err = net.SplitHostPort(IPAddress)
-		if err != nil {
-			log.Printf("ERROR: userip: %q is not IP:port\n", IPAddress)
-		}
-	}
-	return IPAddress
 }
 
 func randInt(min int, max int) int {

@@ -9,25 +9,11 @@ import (
 	"time"
 
 	"github.com/chubin/wttr.in/internal/config"
+	"github.com/chubin/wttr.in/internal/logging"
+	"github.com/chubin/wttr.in/internal/processor"
 )
 
 const logLineStart = "LOG_LINE_START "
-
-// plainTextAgents contains signatures of the plain-text agents
-var plainTextAgents = []string{
-	"curl",
-	"httpie",
-	"lwp-request",
-	"wget",
-	"python-httpx",
-	"python-requests",
-	"openbsd ftp",
-	"powershell",
-	"fetch",
-	"aiohttp",
-	"http_get",
-	"xh",
-}
 
 func copyHeader(dst, src http.Header) {
 	for k, vv := range src {
@@ -77,11 +63,11 @@ func main() {
 		mux *http.ServeMux = http.NewServeMux()
 
 		// logger is optimized requests logger.
-		logger *RequestLogger = NewRequestLogger(
+		logger *logging.RequestLogger = logging.NewRequestLogger(
 			config.Conf.Logging.AccessLog,
 			time.Duration(config.Conf.Logging.Interval)*time.Second)
 
-		rp *RequestProcessor
+		rp *processor.RequestProcessor
 
 		// errs is the servers errors channel.
 		errs chan error = make(chan error, 1)
@@ -89,7 +75,7 @@ func main() {
 		// numberOfServers started. If 0, exit.
 		numberOfServers int
 
-		errorsLog *LogSuppressor = NewLogSuppressor(
+		errorsLog *logging.LogSuppressor = logging.NewLogSuppressor(
 			config.Conf.Logging.ErrorsLog,
 			[]string{
 				"error reading preface from client",
@@ -101,7 +87,7 @@ func main() {
 		err error
 	)
 
-	rp, err = NewRequestProcessor(config.Conf)
+	rp, err = processor.NewRequestProcessor(config.Conf)
 	if err != nil {
 		log.Fatalln("log processor initialization:", err)
 	}
