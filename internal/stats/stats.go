@@ -1,4 +1,4 @@
-package main
+package stats
 
 import (
 	"bytes"
@@ -17,8 +17,8 @@ type Stats struct {
 	startTime time.Time
 }
 
-// NewStats returns new Stats.
-func NewStats() *Stats {
+// New returns new Stats.
+func New() *Stats {
 	return &Stats{
 		v:         map[string]int{},
 		startTime: time.Now(),

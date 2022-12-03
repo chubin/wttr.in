@@ -14,6 +14,7 @@ import (
 
 	"github.com/chubin/wttr.in/internal/config"
 	"github.com/chubin/wttr.in/internal/routing"
+	"github.com/chubin/wttr.in/internal/stats"
 
 	lru "github.com/hashicorp/golang-lru"
 )
@@ -32,7 +33,7 @@ type RequestProcessor struct {
 	peakRequest30     sync.Map
 	peakRequest60     sync.Map
 	lruCache          *lru.Cache
-	stats             *Stats
+	stats             *stats.Stats
 	router            routing.Router
 	upstreamTransport *http.Transport
 	config            *config.Config
@@ -59,7 +60,7 @@ func NewRequestProcessor(config *config.Config) (*RequestProcessor, error) {
 
 	rp := &RequestProcessor{
 		lruCache:          lruCache,
-		stats:             NewStats(),
+		stats:             stats.New(),
 		upstreamTransport: transport,
 		config:            config,
 	}
