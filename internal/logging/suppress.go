@@ -19,6 +19,8 @@ type LogSuppressor struct {
 
 // NewLogSuppressor creates a new LogSuppressor for specified
 // filename and lines to be suppressed.
+//
+// If filename is empty, log entries will be printed to stderr.
 func NewLogSuppressor(filename string, suppress []string, linePrefix string) *LogSuppressor {
 	return &LogSuppressor{
 		filename:   filename,
@@ -29,6 +31,9 @@ func NewLogSuppressor(filename string, suppress []string, linePrefix string) *Lo
 
 // Open opens log file.
 func (ls *LogSuppressor) Open() error {
+	if ls.filename == "" {
+		return nil
+	}
 	var err error
 	ls.logFile, err = os.OpenFile(ls.filename, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
 	return err
@@ -36,6 +41,9 @@ func (ls *LogSuppressor) Open() error {
 
 // Close closes log file.
 func (ls *LogSuppressor) Close() error {
+	if ls.filename == "" {
+		return nil
+	}
 	return ls.logFile.Close()
 }
 
@@ -45,6 +53,10 @@ func (ls *LogSuppressor) Write(p []byte) (n int, err error) {
 	var (
 		output string
 	)
+
+	if ls.filename == "" {
+		return os.Stdin.Write(p)
+	}
 
 	ls.m.Lock()
 	defer ls.m.Unlock()

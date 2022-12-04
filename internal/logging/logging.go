@@ -32,6 +32,9 @@ type logEntry struct {
 
 // NewRequestLogger returns a new RequestLogger for the specified log file.
 // Flush logging entries after period of time.
+//
+// If filename is empty, no log will be written, and all logging entries
+// will be silently dropped.
 func NewRequestLogger(filename string, period time.Duration) *RequestLogger {
 	return &RequestLogger{
 		buf:      map[logEntry]int{},
@@ -74,23 +77,25 @@ func (rl *RequestLogger) flush() error {
 		return nil
 	}
 
-	// Generate log output.
-	output := ""
-	for k, hitsNumber := range rl.buf {
-		output += fmt.Sprintf("%s %3d %s\n", time.Now().Format(time.RFC3339), hitsNumber, k.String())
-	}
+	if rl.filename != "" {
+		// Generate log output.
+		output := ""
+		for k, hitsNumber := range rl.buf {
+			output += fmt.Sprintf("%s %3d %s\n", time.Now().Format(time.RFC3339), hitsNumber, k.String())
+		}
 
-	// Open log file.
-	f, err := os.OpenFile(rl.filename, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
+		// Open log file.
+		f, err := os.OpenFile(rl.filename, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+		if err != nil {
+			return err
+		}
+		defer f.Close()
 
-	// Save output to log file.
-	_, err = f.Write([]byte(output))
-	if err != nil {
-		return err
+		// Save output to log file.
+		_, err = f.Write([]byte(output))
+		if err != nil {
+			return err
+		}
 	}
 
 	// Flush buffer.
