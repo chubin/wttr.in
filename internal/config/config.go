@@ -12,6 +12,7 @@ import (
 // Config of the program.
 type Config struct {
 	Cache
+	Geo
 	Logging
 	Server
 	Uplink
@@ -67,11 +68,20 @@ type Cache struct {
 	Size int `yaml:"size,omitempty"`
 }
 
+// Geo contains geolocation configuration.
+type Geo struct {
+	// IPCache contains the path to the IP Geodata cache.
+	IPCache string `yaml:"ipCache,omitempty"`
+}
+
 // Default contains the default configuration.
 func Default() *Config {
 	return &Config{
 		Cache{
 			Size: 12800,
+		},
+		Geo{
+			IPCache: "/wttr.in/cache/ip2l",
 		},
 		Logging{
 			AccessLog: "/wttr.in/log/access.log",

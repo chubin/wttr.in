@@ -15,6 +15,7 @@ import (
 	lru "github.com/hashicorp/golang-lru"
 
 	"github.com/chubin/wttr.in/internal/config"
+	geoip "github.com/chubin/wttr.in/internal/geo/ip"
 	"github.com/chubin/wttr.in/internal/routing"
 	"github.com/chubin/wttr.in/internal/stats"
 	"github.com/chubin/wttr.in/internal/util"
@@ -54,6 +55,7 @@ type RequestProcessor struct {
 	router            routing.Router
 	upstreamTransport *http.Transport
 	config            *config.Config
+	geoIPCache        *geoip.Cache
 }
 
 // NewRequestProcessor returns new RequestProcessor.
@@ -80,6 +82,7 @@ func NewRequestProcessor(config *config.Config) (*RequestProcessor, error) {
 		stats:             stats.New(),
 		upstreamTransport: transport,
 		config:            config,
+		geoIPCache:        geoip.NewCache(config),
 	}
 
 	// Initialize routes.
@@ -159,6 +162,13 @@ func (rp *RequestProcessor) ProcessRequest(r *http.Request) (*responseWithHeader
 			if format == "j1" {
 				rp.stats.Inc("format=j1")
 			}
+		}
+
+		// How many IP addresses are known.
+		ip := util.ReadUserIP(r)
+		_, err = rp.geoIPCache.Read(ip)
+		if err == nil {
+			rp.stats.Inc("geoip")
 		}
 
 		rp.lruCache.Add(cacheDigest, responseWithHeader{InProgress: true})

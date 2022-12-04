@@ -75,6 +75,7 @@ func (c *Stats) Show() []byte {
 	fmt.Fprintf(&b, "%-20s: %d\n", "Upstream queries", c.v["total"]-c.v["cache1"])
 	fmt.Fprintf(&b, "%-20s: %d\n", "Queries with format", c.v["format"])
 	fmt.Fprintf(&b, "%-20s: %d\n", "Queries with format=j1", c.v["format=j1"])
+	fmt.Fprintf(&b, "%-20s: %d\n", "Queries with known IP", c.v["geoip"])
 
 	return b.Bytes()
 }
