@@ -12,6 +12,7 @@ import (
 	"github.com/alecthomas/kong"
 
 	"github.com/chubin/wttr.in/internal/config"
+	geoip "github.com/chubin/wttr.in/internal/geo/ip"
 	"github.com/chubin/wttr.in/internal/logging"
 	"github.com/chubin/wttr.in/internal/processor"
 )
@@ -20,6 +21,8 @@ var cli struct {
 	ConfigCheck bool   `name:"config-check" help:"Check configuration"`
 	ConfigDump  bool   `name:"config-dump" help:"Dump configuration"`
 	ConfigFile  string `name:"config-file" arg:"" optional:"" help:"Name of configuration file"`
+
+	ConvertGeoIPCache bool `name:"convert-geo-ip-cache" help:"Convert Geo IP data cache to SQlite"`
 }
 
 const logLineStart = "LOG_LINE_START "
@@ -170,6 +173,12 @@ func main() {
 	}
 
 	if cli.ConfigCheck || cli.ConfigDump {
+		return
+	}
+
+	if cli.ConvertGeoIPCache {
+		geoIPCache := geoip.NewCache(conf)
+		ctx.FatalIfErrorf(geoIPCache.ConvertCache())
 		return
 	}
 

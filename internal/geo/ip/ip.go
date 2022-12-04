@@ -22,12 +22,13 @@ var (
 
 // Location information.
 type Location struct {
-	CountryCode string
-	Country     string
-	Region      string
-	City        string
-	Latitude    float64
-	Longitude   float64
+	IP          string  `db:"ip,key"`
+	CountryCode string  `db:"countryCode"`
+	Country     string  `db:"country"`
+	Region      string  `db:"region"`
+	City        string  `db:"city"`
+	Latitude    float64 `db:"latitude"`
+	Longitude   float64 `db:"longitude"`
 }
 
 // Cache provides access to the IP Geodata cache.
@@ -59,7 +60,7 @@ func (c *Cache) Read(addr string) (*Location, error) {
 	if err != nil {
 		return nil, ErrNotFound
 	}
-	return parseCacheEntry(string(bytes))
+	return parseCacheEntry(addr, string(bytes))
 }
 
 // cacheFile retuns path to the cache entry for addr.
@@ -69,7 +70,7 @@ func (c *Cache) cacheFile(addr string) string {
 
 // parseCacheEntry parses the location cache entry s,
 // and return location, or error, if the cache entry is invalid.
-func parseCacheEntry(s string) (*Location, error) {
+func parseCacheEntry(addr, s string) (*Location, error) {
 	var (
 		lat  float64 = -1000
 		long float64 = -1000
@@ -94,6 +95,7 @@ func parseCacheEntry(s string) (*Location, error) {
 	}
 
 	return &Location{
+		IP:          addr,
 		CountryCode: parts[0],
 		Country:     parts[1],
 		Region:      parts[2],

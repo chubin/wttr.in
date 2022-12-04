@@ -72,6 +72,9 @@ type Cache struct {
 type Geo struct {
 	// IPCache contains the path to the IP Geodata cache.
 	IPCache string `yaml:"ipCache,omitempty"`
+
+	// IPCacheDB contains the path to the SQLite DB with the IP Geodata cache.
+	IPCacheDB string `yaml:"ipCacheDB,omitempty"`
 }
 
 // Default contains the default configuration.
@@ -81,7 +84,8 @@ func Default() *Config {
 			Size: 12800,
 		},
 		Geo{
-			IPCache: "/wttr.in/cache/ip2l",
+			IPCache:   "/wttr.in/cache/ip2l",
+			IPCacheDB: "/wttr.in/cache/geoip.db",
 		},
 		Logging{
 			AccessLog: "/wttr.in/log/access.log",
