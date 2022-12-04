@@ -87,6 +87,8 @@ func NewRequestProcessor(config *config.Config) (*RequestProcessor, error) {
 
 	// Initialize routes.
 	rp.router.AddPath("/:stats", rp.stats)
+	rp.router.AddPath("/:geo-ip-get", rp.geoIPCache)
+	rp.router.AddPath("/:geo-ip-put", rp.geoIPCache)
 
 	return rp, nil
 }

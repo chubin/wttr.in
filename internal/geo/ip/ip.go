@@ -2,12 +2,17 @@ package ip
 
 import (
 	"errors"
+	"log"
+	"net/http"
 	"os"
 	"path"
+	"regexp"
 	"strconv"
 	"strings"
 
 	"github.com/chubin/wttr.in/internal/config"
+	"github.com/chubin/wttr.in/internal/routing"
+	"github.com/chubin/wttr.in/internal/util"
 )
 
 var (
@@ -96,4 +101,65 @@ func parseCacheEntry(s string) (*Location, error) {
 		Latitude:    lat,
 		Longitude:   long,
 	}, nil
+}
+
+// Reponse provides routing interface to the geo cache.
+//
+// Temporary workaround to switch IP addresses handling to the Go server.
+// Handles two queries:
+//
+//		/:geo-ip-put?ip=IP&value=VALUE
+//      /:geo-ip-get?ip=IP
+//
+func (c *Cache) Response(r *http.Request) *routing.Cadre {
+	var (
+		respERR = &routing.Cadre{Body: []byte("ERR")}
+		respOK  = &routing.Cadre{Body: []byte("OK")}
+	)
+
+	if ip := util.ReadUserIP(r); ip != "127.0.0.1" {
+		log.Printf("geoIP access from %s rejected\n", ip)
+		return nil
+	}
+
+	if r.URL.Path == "/:geo-ip-put" {
+		ip := r.URL.Query().Get("ip")
+		value := r.URL.Query().Get("value")
+		if !validIP4(ip) || value == "" {
+			log.Printf("invalid geoIP put query: ip='%s' value='%s'\n", ip, value)
+			return respERR
+		}
+
+		err := c.putRaw(ip, value)
+		if err != nil {
+			return respERR
+		}
+		return respOK
+	}
+	if r.URL.Path == "/:geo-ip-get" {
+		ip := r.URL.Query().Get("ip")
+		if !validIP4(ip) {
+			return respERR
+		}
+
+		result, err := c.getRaw(ip)
+		if err != nil {
+			return respERR
+		}
+		return &routing.Cadre{Body: result}
+	}
+	return nil
+}
+
+func (c *Cache) getRaw(addr string) ([]byte, error) {
+	return os.ReadFile(c.cacheFile(addr))
+}
+
+func (c *Cache) putRaw(addr, value string) error {
+	return os.WriteFile(c.cacheFile(addr), []byte(value), 0644)
+}
+
+func validIP4(ipAddress string) bool {
+	re, _ := regexp.Compile(`^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$`)
+	return re.MatchString(strings.Trim(ipAddress, " "))
 }
