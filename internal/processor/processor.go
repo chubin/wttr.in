@@ -104,7 +104,10 @@ func (rp *RequestProcessor) ProcessRequest(r *http.Request) (*responseWithHeader
 		err      error
 	)
 
-	rp.stats.Inc("total")
+	ip := util.ReadUserIP(r)
+	if ip != "127.0.0.1" {
+		rp.stats.Inc("total")
+	}
 
 	// Main routing logic.
 	if rh := rp.router.Route(r); rh != nil {
@@ -167,7 +170,6 @@ func (rp *RequestProcessor) ProcessRequest(r *http.Request) (*responseWithHeader
 		}
 
 		// How many IP addresses are known.
-		ip := util.ReadUserIP(r)
 		_, err = rp.geoIPCache.Read(ip)
 		if err == nil {
 			rp.stats.Inc("geoip")
