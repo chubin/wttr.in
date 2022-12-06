@@ -68,7 +68,7 @@ func TestParseCacheEntry(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		result, err := parseCacheEntry(tt.addr, tt.input)
+		result, err := NewLocationFromString(tt.addr, tt.input)
 		if tt.err == nil {
 			require.NoError(t, err)
 			require.Equal(t, *result, tt.expected)

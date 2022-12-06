@@ -59,6 +59,9 @@ func NewCache(config *config.Config) (*Cache, error) {
 		return nil, err
 	}
 
+	// Needed for "upsert" implementation in Put()
+	db.UseErrorParser()
+
 	return &Cache{
 		config: config,
 		db:     db,
@@ -89,7 +92,7 @@ func (c *Cache) readFromCacheFile(addr string) (*Location, error) {
 	if err != nil {
 		return nil, ErrNotFound
 	}
-	return parseCacheEntry(addr, string(bytes))
+	return NewLocationFromString(addr, string(bytes))
 }
 
 func (c *Cache) readFromCacheDB(addr string) (*Location, error) {
@@ -103,14 +106,42 @@ func (c *Cache) readFromCacheDB(addr string) (*Location, error) {
 	return &result, nil
 }
 
+func (c *Cache) Put(addr string, loc *Location) error {
+	if c.config.Geo.CacheType == types.CacheTypeDB {
+		return c.putToCacheDB(addr, loc)
+	}
+	return c.putToCacheFile(addr, loc)
+}
+
+func (c *Cache) putToCacheDB(addr string, loc *Location) error {
+	err := c.db.Insert(loc).Do()
+	// it should work like this:
+	//
+	//   target := dberror.UniqueConstraint{}
+	//   if errors.As(err, &target) {
+	//
+	// See: https://github.com/samonzeweb/godb/pull/23
+	//
+	// But for some reason it does not work,
+	// so the dirty hack is used:
+	if strings.Contains(fmt.Sprint(err), "UNIQUE constraint failed") {
+		return c.db.Update(loc).Do()
+	}
+	return err
+}
+
+func (c *Cache) putToCacheFile(addr string, loc *Location) error {
+	return os.WriteFile(c.cacheFile(addr), []byte(loc.String()), 0644)
+}
+
 // cacheFile retuns path to the cache entry for addr.
 func (c *Cache) cacheFile(addr string) string {
 	return path.Join(c.config.Geo.IPCache, addr)
 }
 
-// parseCacheEntry parses the location cache entry s,
+// NewLocationFromString parses the location cache entry s,
 // and return location, or error, if the cache entry is invalid.
-func parseCacheEntry(addr, s string) (*Location, error) {
+func NewLocationFromString(addr, s string) (*Location, error) {
 	var (
 		lat  float64 = -1000
 		long float64 = -1000
@@ -172,7 +203,12 @@ func (c *Cache) Response(r *http.Request) *routing.Cadre {
 			return respERR
 		}
 
-		err := c.putRaw(ip, value)
+		location, err := NewLocationFromString(ip, value)
+		if err != nil {
+			return respERR
+		}
+
+		err = c.Put(ip, location)
 		if err != nil {
 			return respERR
 		}
@@ -191,10 +227,6 @@ func (c *Cache) Response(r *http.Request) *routing.Cadre {
 		return &routing.Cadre{Body: []byte(result.String())}
 	}
 	return nil
-}
-
-func (c *Cache) putRaw(addr, value string) error {
-	return os.WriteFile(c.cacheFile(addr), []byte(value), 0644)
 }
 
 func validIP4(ipAddress string) bool {
