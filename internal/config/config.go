@@ -6,6 +6,7 @@ import (
 
 	"gopkg.in/yaml.v3"
 
+	"github.com/chubin/wttr.in/internal/types"
 	"github.com/chubin/wttr.in/internal/util"
 )
 
@@ -75,6 +76,8 @@ type Geo struct {
 
 	// IPCacheDB contains the path to the SQLite DB with the IP Geodata cache.
 	IPCacheDB string `yaml:"ipCacheDB,omitempty"`
+
+	CacheType types.CacheType `yaml:"cacheType,omitempty"`
 }
 
 // Default contains the default configuration.
@@ -86,6 +89,7 @@ func Default() *Config {
 		Geo{
 			IPCache:   "/wttr.in/cache/ip2l",
 			IPCacheDB: "/wttr.in/cache/geoip.db",
+			CacheType: types.CacheTypeFiles,
 		},
 		Logging{
 			AccessLog: "/wttr.in/log/access.log",

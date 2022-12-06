@@ -177,7 +177,10 @@ func main() {
 	}
 
 	if cli.ConvertGeoIPCache {
-		geoIPCache := geoip.NewCache(conf)
+		geoIPCache, err := geoip.NewCache(conf)
+		if err != nil {
+			ctx.FatalIfErrorf(err)
+		}
 		ctx.FatalIfErrorf(geoIPCache.ConvertCache())
 		return
 	}

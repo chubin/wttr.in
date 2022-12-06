@@ -2,6 +2,7 @@ package ip
 
 import (
 	"errors"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -12,7 +13,10 @@ import (
 
 	"github.com/chubin/wttr.in/internal/config"
 	"github.com/chubin/wttr.in/internal/routing"
+	"github.com/chubin/wttr.in/internal/types"
 	"github.com/chubin/wttr.in/internal/util"
+	"github.com/samonzeweb/godb"
+	"github.com/samonzeweb/godb/adapters/sqlite"
 )
 
 var (
@@ -31,16 +35,34 @@ type Location struct {
 	Longitude   float64 `db:"longitude"`
 }
 
+func (l *Location) String() string {
+	if l.Latitude == -1000 {
+		return fmt.Sprintf(
+			"%s;%s;%s;%s",
+			l.CountryCode, l.CountryCode, l.Region, l.City)
+	}
+	return fmt.Sprintf(
+		"%s;%s;%s;%s;%v;%v",
+		l.CountryCode, l.CountryCode, l.Region, l.City, l.Latitude, l.Longitude)
+}
+
 // Cache provides access to the IP Geodata cache.
 type Cache struct {
 	config *config.Config
+	db     *godb.DB
 }
 
 // NewCache returns new cache reader for the specified config.
-func NewCache(config *config.Config) *Cache {
+func NewCache(config *config.Config) (*Cache, error) {
+	db, err := godb.Open(sqlite.Adapter, config.Geo.IPCacheDB)
+	if err != nil {
+		return nil, err
+	}
+
 	return &Cache{
 		config: config,
-	}
+		db:     db,
+	}, nil
 }
 
 // Read returns location information from the cache, if found,
@@ -56,11 +78,29 @@ func NewCache(config *config.Config) *Cache {
 //     DE;Germany;Free and Hanseatic City of Hamburg;Hamburg;53.5736;9.9782
 //
 func (c *Cache) Read(addr string) (*Location, error) {
+	if c.config.Geo.CacheType == types.CacheTypeDB {
+		return c.readFromCacheDB(addr)
+	}
+	return c.readFromCacheFile(addr)
+}
+
+func (c *Cache) readFromCacheFile(addr string) (*Location, error) {
 	bytes, err := os.ReadFile(c.cacheFile(addr))
 	if err != nil {
 		return nil, ErrNotFound
 	}
 	return parseCacheEntry(addr, string(bytes))
+}
+
+func (c *Cache) readFromCacheDB(addr string) (*Location, error) {
+	result := Location{}
+	err := c.db.Select(&result).
+		Where("IP = ?", addr).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
 }
 
 // cacheFile retuns path to the cache entry for addr.
@@ -144,17 +184,13 @@ func (c *Cache) Response(r *http.Request) *routing.Cadre {
 			return respERR
 		}
 
-		result, err := c.getRaw(ip)
-		if err != nil {
+		result, err := c.Read(ip)
+		if result == nil || err != nil {
 			return respERR
 		}
-		return &routing.Cadre{Body: result}
+		return &routing.Cadre{Body: []byte(result.String())}
 	}
 	return nil
-}
-
-func (c *Cache) getRaw(addr string) ([]byte, error) {
-	return os.ReadFile(c.cacheFile(addr))
 }
 
 func (c *Cache) putRaw(addr, value string) error {

@@ -77,12 +77,17 @@ func NewRequestProcessor(config *config.Config) (*RequestProcessor, error) {
 		},
 	}
 
+	geoCache, err := geoip.NewCache(config)
+	if err != nil {
+		return nil, err
+	}
+
 	rp := &RequestProcessor{
 		lruCache:          lruCache,
 		stats:             stats.New(),
 		upstreamTransport: transport,
 		config:            config,
-		geoIPCache:        geoip.NewCache(config),
+		geoIPCache:        geoCache,
 	}
 
 	// Initialize routes.
