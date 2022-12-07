@@ -89,7 +89,7 @@ func Default() *Config {
 		Geo{
 			IPCache:   "/wttr.in/cache/ip2l",
 			IPCacheDB: "/wttr.in/cache/geoip.db",
-			CacheType: types.CacheTypeFiles,
+			CacheType: types.CacheTypeDB,
 		},
 		Logging{
 			AccessLog: "/wttr.in/log/access.log",
