@@ -13,6 +13,7 @@ import (
 
 	"github.com/chubin/wttr.in/internal/config"
 	geoip "github.com/chubin/wttr.in/internal/geo/ip"
+	geoloc "github.com/chubin/wttr.in/internal/geo/location"
 	"github.com/chubin/wttr.in/internal/logging"
 	"github.com/chubin/wttr.in/internal/processor"
 )
@@ -20,7 +21,9 @@ import (
 var cli struct {
 	ConfigCheck bool   `name:"config-check" help:"Check configuration"`
 	ConfigDump  bool   `name:"config-dump" help:"Dump configuration"`
-	ConfigFile  string `name:"config-file" arg:"" optional:"" help:"Name of configuration file"`
+	GeoResolve  string `name:"geo-resolve" help:"Resolve location"`
+
+	ConfigFile string `name:"config-file" arg:"" optional:"" help:"Name of configuration file"`
 
 	ConvertGeoIPCache bool `name:"convert-geo-ip-cache" help:"Convert Geo IP data cache to SQlite"`
 }
@@ -183,6 +186,16 @@ func main() {
 		}
 		ctx.FatalIfErrorf(geoIPCache.ConvertCache())
 		return
+	}
+
+	if cli.GeoResolve != "" {
+		sr := geoloc.NewSearcher(conf)
+		loc, err := sr.Search(cli.GeoResolve)
+		ctx.FatalIfErrorf(err)
+		if loc != nil {
+			fmt.Println(*loc)
+
+		}
 	}
 
 	err = serve(conf)
