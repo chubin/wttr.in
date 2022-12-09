@@ -78,6 +78,16 @@ type Geo struct {
 	IPCacheDB string `yaml:"ipCacheDB,omitempty"`
 
 	CacheType types.CacheType `yaml:"cacheType,omitempty"`
+
+	Nominatim []Nominatim
+}
+
+type Nominatim struct {
+	Name string
+
+	URL string
+
+	Token string
 }
 
 // Default contains the default configuration.
@@ -90,6 +100,13 @@ func Default() *Config {
 			IPCache:   "/wttr.in/cache/ip2l",
 			IPCacheDB: "/wttr.in/cache/geoip.db",
 			CacheType: types.CacheTypeDB,
+			Nominatim: []Nominatim{
+				{
+					Name:  "locationiq",
+					URL:   "https://eu1.locationiq.com/v1/search",
+					Token: os.Getenv("NOMINATIM_LOCATIONIQ"),
+				},
+			},
 		},
 		Logging{
 			AccessLog: "/wttr.in/log/access.log",
