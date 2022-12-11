@@ -1,7 +1,6 @@
 package ip
 
 import (
-	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -17,11 +16,6 @@ import (
 	"github.com/chubin/wttr.in/internal/util"
 	"github.com/samonzeweb/godb"
 	"github.com/samonzeweb/godb/adapters/sqlite"
-)
-
-var (
-	ErrNotFound          = errors.New("cache entry not found")
-	ErrInvalidCacheEntry = errors.New("invalid cache entry format")
 )
 
 // Location information.
@@ -69,8 +63,8 @@ func NewCache(config *config.Config) (*Cache, error) {
 }
 
 // Read returns location information from the cache, if found,
-// or ErrNotFound if not found. If the entry is found, but its format
-// is invalid, ErrInvalidCacheEntry is returned.
+// or types.ErrNotFound if not found. If the entry is found, but its format
+// is invalid, types.ErrInvalidCacheEntry is returned.
 //
 // Format:
 //
@@ -81,7 +75,7 @@ func NewCache(config *config.Config) (*Cache, error) {
 //     DE;Germany;Free and Hanseatic City of Hamburg;Hamburg;53.5736;9.9782
 //
 func (c *Cache) Read(addr string) (*Location, error) {
-	if c.config.Geo.CacheType == types.CacheTypeDB {
+	if c.config.Geo.IPCacheType == types.CacheTypeDB {
 		return c.readFromCacheDB(addr)
 	}
 	return c.readFromCacheFile(addr)
@@ -90,7 +84,7 @@ func (c *Cache) Read(addr string) (*Location, error) {
 func (c *Cache) readFromCacheFile(addr string) (*Location, error) {
 	bytes, err := os.ReadFile(c.cacheFile(addr))
 	if err != nil {
-		return nil, ErrNotFound
+		return nil, types.ErrNotFound
 	}
 	return NewLocationFromString(addr, string(bytes))
 }
@@ -107,7 +101,7 @@ func (c *Cache) readFromCacheDB(addr string) (*Location, error) {
 }
 
 func (c *Cache) Put(addr string, loc *Location) error {
-	if c.config.Geo.CacheType == types.CacheTypeDB {
+	if c.config.Geo.IPCacheType == types.CacheTypeDB {
 		return c.putToCacheDB(addr, loc)
 	}
 	return c.putToCacheFile(addr, loc)
@@ -150,18 +144,18 @@ func NewLocationFromString(addr, s string) (*Location, error) {
 
 	parts := strings.Split(s, ";")
 	if len(parts) < 4 {
-		return nil, ErrInvalidCacheEntry
+		return nil, types.ErrInvalidCacheEntry
 	}
 
 	if len(parts) >= 6 {
 		lat, err = strconv.ParseFloat(parts[4], 64)
 		if err != nil {
-			return nil, ErrInvalidCacheEntry
+			return nil, types.ErrInvalidCacheEntry
 		}
 
 		long, err = strconv.ParseFloat(parts[5], 64)
 		if err != nil {
-			return nil, ErrInvalidCacheEntry
+			return nil, types.ErrInvalidCacheEntry
 		}
 	}
 

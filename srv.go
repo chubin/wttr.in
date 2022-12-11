@@ -25,7 +25,8 @@ var cli struct {
 
 	ConfigFile string `name:"config-file" arg:"" optional:"" help:"Name of configuration file"`
 
-	ConvertGeoIPCache bool `name:"convert-geo-ip-cache" help:"Convert Geo IP data cache to SQlite"`
+	ConvertGeoIPCache       bool `name:"convert-geo-ip-cache" help:"Convert Geo IP data cache to SQlite"`
+	ConvertGeoLocationCache bool `name:"convert-geo-location-cache" help:"Convert Geo Location data cache to SQlite"`
 }
 
 const logLineStart = "LOG_LINE_START "
@@ -185,6 +186,15 @@ func main() {
 			ctx.FatalIfErrorf(err)
 		}
 		ctx.FatalIfErrorf(geoIPCache.ConvertCache())
+		return
+	}
+
+	if cli.ConvertGeoLocationCache {
+		geoLocCache, err := geoloc.NewCache(conf)
+		if err != nil {
+			ctx.FatalIfErrorf(err)
+		}
+		ctx.FatalIfErrorf(geoLocCache.ConvertCache())
 		return
 	}
 

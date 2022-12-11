@@ -15,6 +15,7 @@ require (
 	github.com/smartystreets/assertions v1.2.0 // indirect
 	github.com/smartystreets/goconvey v1.6.4 // indirect
 	github.com/stretchr/testify v1.8.1 // indirect
+	github.com/zsefvlol/timezonemapper v1.0.0 // indirect
 	golang.org/x/crypto v0.0.0-20201002170205-7f63de1d35b0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

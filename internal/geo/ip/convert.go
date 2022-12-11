@@ -3,17 +3,18 @@ package ip
 import (
 	"fmt"
 	"log"
-	"os"
 	"path/filepath"
 
 	"github.com/samonzeweb/godb"
 	"github.com/samonzeweb/godb/adapters/sqlite"
+
+	"github.com/chubin/wttr.in/internal/util"
 )
 
 func (c *Cache) ConvertCache() error {
 	dbfile := c.config.Geo.IPCacheDB
 
-	err := removeDBIfExists(dbfile)
+	err := util.RemoveFileIfExists(dbfile)
 	if err != nil {
 		return err
 	}
@@ -29,7 +30,7 @@ func (c *Cache) ConvertCache() error {
 	}
 
 	log.Println("listing cache entries...")
-	files, err := filepath.Glob(filepath.Join(c.config.Geo.IPCache, "*"))
+	files, err := filepath.Glob(filepath.Join(c.config.Geo.LocationCache, "*"))
 	if err != nil {
 		return err
 	}
@@ -72,28 +73,12 @@ func (c *Cache) ConvertCache() error {
 func createTable(db *godb.DB, tableName string) error {
 	createTable := fmt.Sprintf(
 		`create table %s (
-	    ip             text not null primary key,
-        countryCode    text not null,
-        country        text not null,
-        region         text not null,
-        city           text not null,
-        latitude       text not null,
-        longitude      text not null);
+	    name           text not null primary key,
+        fullName       text not null,
+        lat            text not null,
+        long           text not null);
 	`, tableName)
 
 	_, err := db.CurrentDB().Exec(createTable)
 	return err
-}
-
-func removeDBIfExists(filename string) error {
-	_, err := os.Stat(filename)
-	if err != nil {
-		if !os.IsNotExist(err) {
-			return err
-		}
-		// no db file
-		return nil
-	}
-
-	return os.Remove(filename)
 }

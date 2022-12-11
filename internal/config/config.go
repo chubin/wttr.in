@@ -77,7 +77,15 @@ type Geo struct {
 	// IPCacheDB contains the path to the SQLite DB with the IP Geodata cache.
 	IPCacheDB string `yaml:"ipCacheDB,omitempty"`
 
-	CacheType types.CacheType `yaml:"cacheType,omitempty"`
+	IPCacheType types.CacheType `yaml:"cacheType,omitempty"`
+
+	// LocationCache contains the path to the Location Geodata cache.
+	LocationCache string `yaml:"locationCache,omitempty"`
+
+	// LocationCacheDB contains the path to the SQLite DB with the Location Geodata cache.
+	LocationCacheDB string `yaml:"locationCacheDB,omitempty"`
+
+	LocationCacheType types.CacheType `yaml:"locationCacheType,omitempty"`
 
 	Nominatim []Nominatim
 }
@@ -97,9 +105,12 @@ func Default() *Config {
 			Size: 12800,
 		},
 		Geo{
-			IPCache:   "/wttr.in/cache/ip2l",
-			IPCacheDB: "/wttr.in/cache/geoip.db",
-			CacheType: types.CacheTypeDB,
+			IPCache:           "/wttr.in/cache/ip2l",
+			IPCacheDB:         "/wttr.in/cache/geoip.db",
+			IPCacheType:       types.CacheTypeDB,
+			LocationCache:     "/wttr.in/cache/loc",
+			LocationCacheDB:   "/wttr.in/cache/geoloc.db",
+			LocationCacheType: types.CacheTypeFiles,
 			Nominatim: []Nominatim{
 				{
 					Name:  "locationiq",

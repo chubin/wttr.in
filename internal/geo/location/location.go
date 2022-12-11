@@ -1,12 +1,29 @@
 package location
 
-import "github.com/chubin/wttr.in/internal/config"
+import (
+	"encoding/json"
+	"log"
+
+	"github.com/chubin/wttr.in/internal/config"
+)
 
 type Location struct {
-	Name     string
-	Fullname string `json:"display_name"`
-	Lat      string
-	Lon      string
+	Name     string `db:"name,key"`
+	Fullname string `db:"displayName" json:"display_name"`
+	Lat      string `db:"lat"`
+	Lon      string `db:"lon"`
+	Timezone string `db:"timezone"`
+}
+
+// String returns string represenation of location
+func (l *Location) String() string {
+	bytes, err := json.Marshal(l)
+	if err != nil {
+		// should never happen
+		log.Fatalln(err)
+	}
+
+	return string(bytes)
 }
 
 type Provider interface {

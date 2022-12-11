@@ -4,6 +4,8 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
+
+	"github.com/chubin/wttr.in/internal/types"
 )
 
 func TestParseCacheEntry(t *testing.T) {
@@ -63,7 +65,7 @@ func TestParseCacheEntry(t *testing.T) {
 			"1.2.3.4",
 			"DE;Germany;Free and Hanseatic City of Hamburg;Hamburg;53.5736;XXX",
 			Location{},
-			ErrInvalidCacheEntry,
+			types.ErrInvalidCacheEntry,
 		},
 	}
 
