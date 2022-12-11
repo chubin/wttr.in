@@ -3,3 +3,6 @@ srv: srv.go internal/*/*.go internal/*/*/*.go
 
 go-test:
 	go test ./...
+
+lint:
+	golangci-lint run ./...
