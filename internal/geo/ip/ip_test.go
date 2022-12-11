@@ -1,14 +1,17 @@
-package ip
+package ip_test
 
 import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
 
+	. "github.com/chubin/wttr.in/internal/geo/ip"
 	"github.com/chubin/wttr.in/internal/types"
 )
 
+//nolint:funlen
 func TestParseCacheEntry(t *testing.T) {
+	t.Parallel()
 	tests := []struct {
 		addr     string
 		input    string

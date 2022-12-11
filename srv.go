@@ -18,15 +18,15 @@ import (
 	"github.com/chubin/wttr.in/internal/processor"
 )
 
+//nolint:gochecknoglobals
 var cli struct {
-	ConfigCheck bool   `name:"config-check" help:"Check configuration"`
-	ConfigDump  bool   `name:"config-dump" help:"Dump configuration"`
-	GeoResolve  string `name:"geo-resolve" help:"Resolve location"`
-
 	ConfigFile string `name:"config-file" arg:"" optional:"" help:"Name of configuration file"`
 
-	ConvertGeoIPCache       bool `name:"convert-geo-ip-cache" help:"Convert Geo IP data cache to SQlite"`
-	ConvertGeoLocationCache bool `name:"convert-geo-location-cache" help:"Convert Geo Location data cache to SQlite"`
+	ConfigCheck             bool   `name:"config-check" help:"Check configuration"`
+	ConfigDump              bool   `name:"config-dump" help:"Dump configuration"`
+	ConvertGeoIPCache       bool   `name:"convert-geo-ip-cache" help:"Convert Geo IP data cache to SQlite"`
+	ConvertGeoLocationCache bool   `name:"convert-geo-location-cache" help:"Convert Geo Location data cache to SQlite"`
+	GeoResolve              string `name:"geo-resolve" help:"Resolve location"`
 }
 
 const logLineStart = "LOG_LINE_START "
@@ -84,7 +84,7 @@ func serve(conf *config.Config) error {
 		rp *processor.RequestProcessor
 
 		// errs is the servers errors channel.
-		errs chan error = make(chan error, 1)
+		errs = make(chan error, 1)
 
 		// numberOfServers started. If 0, exit.
 		numberOfServers int
@@ -110,15 +110,18 @@ func serve(conf *config.Config) error {
 
 	rp, err = processor.NewRequestProcessor(conf)
 	if err != nil {
-		log.Fatalln("log processor initialization:", err)
+		return fmt.Errorf("log processor initialization: %w", err)
 	}
 
 	err = errorsLog.Open()
 	if err != nil {
-		log.Fatalln("errors log:", err)
+		return err
 	}
 
-	rp.Start()
+	err = rp.Start()
+	if err != nil {
+		return err
+	}
 
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if err := logger.Log(r); err != nil {
@@ -128,17 +131,22 @@ func serve(conf *config.Config) error {
 		response, err := rp.ProcessRequest(r)
 		if err != nil {
 			log.Println(err)
+
 			return
 		}
 		if response.StatusCode == 0 {
 			log.Println("status code 0", response)
+
 			return
 		}
 
 		copyHeader(w.Header(), response.Header)
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.WriteHeader(response.StatusCode)
-		w.Write(response.Body)
+		_, err = w.Write(response.Body)
+		if err != nil {
+			log.Println(err)
+		}
 	})
 
 	if conf.Server.PortHTTP != 0 {
@@ -152,6 +160,7 @@ func serve(conf *config.Config) error {
 	if numberOfServers == 0 {
 		return errors.New("no servers configured")
 	}
+
 	return <-errs // block until one of the servers writes an error
 }
 
@@ -185,7 +194,9 @@ func main() {
 		if err != nil {
 			ctx.FatalIfErrorf(err)
 		}
+
 		ctx.FatalIfErrorf(geoIPCache.ConvertCache())
+
 		return
 	}
 
@@ -194,7 +205,9 @@ func main() {
 		if err != nil {
 			ctx.FatalIfErrorf(err)
 		}
+
 		ctx.FatalIfErrorf(geoLocCache.ConvertCache())
+
 		return
 	}
 
@@ -204,7 +217,6 @@ func main() {
 		ctx.FatalIfErrorf(err)
 		if loc != nil {
 			fmt.Println(*loc)
-
 		}
 	}
 

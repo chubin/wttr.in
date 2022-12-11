@@ -56,6 +56,7 @@ func (r *Router) Route(req *http.Request) Handler {
 			return re.Handler
 		}
 	}
+
 	return nil
 }
 

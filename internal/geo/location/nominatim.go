@@ -7,6 +7,8 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+
+	"github.com/chubin/wttr.in/internal/types"
 )
 
 type Nominatim struct {
@@ -41,6 +43,7 @@ func (n *Nominatim) Query(location string) (*Location, error) {
 	if err != nil {
 		return nil, fmt.Errorf("%s: %w", n.name, err)
 	}
+	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
@@ -49,7 +52,7 @@ func (n *Nominatim) Query(location string) (*Location, error) {
 
 	err = json.Unmarshal(body, &errResponse)
 	if err == nil && errResponse.Error != "" {
-		return nil, fmt.Errorf("%s: %s", n.name, errResponse.Error)
+		return nil, fmt.Errorf("%w: %s: %s", types.ErrUpstream, n.name, errResponse.Error)
 	}
 
 	err = json.Unmarshal(body, &result)
@@ -58,9 +61,8 @@ func (n *Nominatim) Query(location string) (*Location, error) {
 	}
 
 	if len(result) != 1 {
-		return nil, fmt.Errorf("%s: invalid response", n.name)
+		return nil, fmt.Errorf("%w: %s: invalid response", types.ErrUpstream, n.name)
 	}
 
 	return &result[0], nil
-
 }

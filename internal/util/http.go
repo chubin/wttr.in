@@ -21,5 +21,6 @@ func ReadUserIP(r *http.Request) string {
 			log.Printf("ERROR: userip: %q is not IP:port\n", IPAddress)
 		}
 	}
+
 	return IPAddress
 }

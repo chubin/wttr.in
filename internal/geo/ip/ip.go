@@ -35,6 +35,7 @@ func (l *Location) String() string {
 			"%s;%s;%s;%s",
 			l.CountryCode, l.CountryCode, l.Region, l.City)
 	}
+
 	return fmt.Sprintf(
 		"%s;%s;%s;%s;%v;%v",
 		l.CountryCode, l.CountryCode, l.Region, l.City, l.Latitude, l.Longitude)
@@ -68,16 +69,18 @@ func NewCache(config *config.Config) (*Cache, error) {
 //
 // Format:
 //
-//     [CountryCode];Country;Region;City;[Latitude];[Longitude]
+//  [CountryCode];Country;Region;City;[Latitude];[Longitude]
 //
 // Example:
 //
-//     DE;Germany;Free and Hanseatic City of Hamburg;Hamburg;53.5736;9.9782
+//  DE;Germany;Free and Hanseatic City of Hamburg;Hamburg;53.5736;9.9782
 //
+
 func (c *Cache) Read(addr string) (*Location, error) {
 	if c.config.Geo.IPCacheType == types.CacheTypeDB {
 		return c.readFromCacheDB(addr)
 	}
+
 	return c.readFromCacheFile(addr)
 }
 
@@ -86,6 +89,7 @@ func (c *Cache) readFromCacheFile(addr string) (*Location, error) {
 	if err != nil {
 		return nil, types.ErrNotFound
 	}
+
 	return NewLocationFromString(addr, string(bytes))
 }
 
@@ -97,17 +101,19 @@ func (c *Cache) readFromCacheDB(addr string) (*Location, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	return &result, nil
 }
 
 func (c *Cache) Put(addr string, loc *Location) error {
 	if c.config.Geo.IPCacheType == types.CacheTypeDB {
-		return c.putToCacheDB(addr, loc)
+		return c.putToCacheDB(loc)
 	}
+
 	return c.putToCacheFile(addr, loc)
 }
 
-func (c *Cache) putToCacheDB(addr string, loc *Location) error {
+func (c *Cache) putToCacheDB(loc *Location) error {
 	err := c.db.Insert(loc).Do()
 	// it should work like this:
 	//
@@ -121,14 +127,15 @@ func (c *Cache) putToCacheDB(addr string, loc *Location) error {
 	if strings.Contains(fmt.Sprint(err), "UNIQUE constraint failed") {
 		return c.db.Update(loc).Do()
 	}
+
 	return err
 }
 
-func (c *Cache) putToCacheFile(addr string, loc *Location) error {
-	return os.WriteFile(c.cacheFile(addr), []byte(loc.String()), 0644)
+func (c *Cache) putToCacheFile(addr string, loc fmt.Stringer) error {
+	return os.WriteFile(c.cacheFile(addr), []byte(loc.String()), 0o600)
 }
 
-// cacheFile retuns path to the cache entry for addr.
+// cacheFile returns path to the cache entry for addr.
 func (c *Cache) cacheFile(addr string) string {
 	return path.Join(c.config.Geo.IPCache, addr)
 }
@@ -170,14 +177,15 @@ func NewLocationFromString(addr, s string) (*Location, error) {
 	}, nil
 }
 
-// Reponse provides routing interface to the geo cache.
+// Response provides routing interface to the geo cache.
 //
 // Temporary workaround to switch IP addresses handling to the Go server.
 // Handles two queries:
 //
-//		/:geo-ip-put?ip=IP&value=VALUE
-//      /:geo-ip-get?ip=IP
+// - /:geo-ip-put?ip=IP&value=VALUE
+// - /:geo-ip-get?ip=IP
 //
+//nolint:cyclop
 func (c *Cache) Response(r *http.Request) *routing.Cadre {
 	var (
 		respERR = &routing.Cadre{Body: []byte("ERR")}
@@ -186,6 +194,7 @@ func (c *Cache) Response(r *http.Request) *routing.Cadre {
 
 	if ip := util.ReadUserIP(r); ip != "127.0.0.1" {
 		log.Printf("geoIP access from %s rejected\n", ip)
+
 		return nil
 	}
 
@@ -194,6 +203,7 @@ func (c *Cache) Response(r *http.Request) *routing.Cadre {
 		value := r.URL.Query().Get("value")
 		if !validIP4(ip) || value == "" {
 			log.Printf("invalid geoIP put query: ip='%s' value='%s'\n", ip, value)
+
 			return respERR
 		}
 
@@ -206,6 +216,7 @@ func (c *Cache) Response(r *http.Request) *routing.Cadre {
 		if err != nil {
 			return respERR
 		}
+
 		return respOK
 	}
 	if r.URL.Path == "/:geo-ip-get" {
@@ -218,12 +229,16 @@ func (c *Cache) Response(r *http.Request) *routing.Cadre {
 		if result == nil || err != nil {
 			return respERR
 		}
+
 		return &routing.Cadre{Body: []byte(result.String())}
 	}
+
 	return nil
 }
 
 func validIP4(ipAddress string) bool {
-	re, _ := regexp.Compile(`^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$`)
+	re := regexp.MustCompile(
+		`^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$`)
+
 	return re.MatchString(strings.Trim(ipAddress, " "))
 }

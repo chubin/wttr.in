@@ -10,5 +10,6 @@ import (
 func YamlUnmarshalStrict(in []byte, out interface{}) error {
 	dec := yaml.NewDecoder(bytes.NewReader(in))
 	dec.KnownFields(true)
+
 	return dec.Decode(out)
 }

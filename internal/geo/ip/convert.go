@@ -11,6 +11,7 @@ import (
 	"github.com/chubin/wttr.in/internal/util"
 )
 
+//nolint:cyclop
 func (c *Cache) ConvertCache() error {
 	dbfile := c.config.Geo.IPCacheDB
 
@@ -43,10 +44,12 @@ func (c *Cache) ConvertCache() error {
 		loc, err := c.Read(ip)
 		if err != nil {
 			log.Println("invalid entry for", ip)
+
 			continue
 		}
 
 		block = append(block, *loc)
+
 		if i%1000 != 0 || i == 0 {
 			continue
 		}
@@ -80,5 +83,6 @@ func createTable(db *godb.DB, tableName string) error {
 	`, tableName)
 
 	_, err := db.CurrentDB().Exec(createTable)
+
 	return err
 }

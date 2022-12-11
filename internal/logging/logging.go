@@ -63,6 +63,7 @@ func (rl *RequestLogger) Log(r *http.Request) error {
 	if time.Since(rl.lastFlush) > rl.period {
 		return rl.flush()
 	}
+
 	return nil
 }
 
@@ -85,7 +86,8 @@ func (rl *RequestLogger) flush() error {
 		}
 
 		// Open log file.
-		f, err := os.OpenFile(rl.filename, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+		//nolint:nosnakecase
+		f, err := os.OpenFile(rl.filename, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0o600)
 		if err != nil {
 			return err
 		}

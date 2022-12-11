@@ -21,7 +21,6 @@ type Config struct {
 
 // Logging configuration.
 type Logging struct {
-
 	// AccessLog path.
 	AccessLog string `yaml:"accessLog,omitempty"`
 
@@ -34,14 +33,13 @@ type Logging struct {
 
 // Server configuration.
 type Server struct {
-
 	// PortHTTP is port where HTTP server must listen.
 	// If 0, HTTP is disabled.
-	PortHTTP int `yaml:"portHTTP,omitempty"`
+	PortHTTP int `yaml:"portHttp,omitempty"`
 
 	// PortHTTP is port where the HTTPS server must listen.
 	// If 0, HTTPS is disabled.
-	PortHTTPS int `yaml:"portHTTPS,omitempty"`
+	PortHTTPS int `yaml:"portHttps,omitempty"`
 
 	// TLSCertFile contains path to cert file for TLS Server.
 	TLSCertFile string `yaml:"tlsCertFile,omitempty"`
@@ -75,7 +73,7 @@ type Geo struct {
 	IPCache string `yaml:"ipCache,omitempty"`
 
 	// IPCacheDB contains the path to the SQLite DB with the IP Geodata cache.
-	IPCacheDB string `yaml:"ipCacheDB,omitempty"`
+	IPCacheDB string `yaml:"ipCacheDb,omitempty"`
 
 	IPCacheType types.CacheType `yaml:"cacheType,omitempty"`
 
@@ -83,7 +81,7 @@ type Geo struct {
 	LocationCache string `yaml:"locationCache,omitempty"`
 
 	// LocationCacheDB contains the path to the SQLite DB with the Location Geodata cache.
-	LocationCacheDB string `yaml:"locationCacheDB,omitempty"`
+	LocationCacheDB string `yaml:"locationCacheDb,omitempty"`
 
 	LocationCacheType types.CacheType `yaml:"locationCacheType,omitempty"`
 
@@ -165,5 +163,6 @@ func (c *Config) Dump() []byte {
 		// should never happen.
 		log.Fatalln("config.Dump():", err)
 	}
+
 	return data
 }

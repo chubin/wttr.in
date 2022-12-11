@@ -31,11 +31,15 @@ func NewLogSuppressor(filename string, suppress []string, linePrefix string) *Lo
 
 // Open opens log file.
 func (ls *LogSuppressor) Open() error {
+	var err error
+
 	if ls.filename == "" {
 		return nil
 	}
-	var err error
-	ls.logFile, err = os.OpenFile(ls.filename, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+
+	//nolint:nosnakecase
+	ls.logFile, err = os.OpenFile(ls.filename, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0o600)
+
 	return err
 }
 
@@ -44,15 +48,14 @@ func (ls *LogSuppressor) Close() error {
 	if ls.filename == "" {
 		return nil
 	}
+
 	return ls.logFile.Close()
 }
 
 // Write writes p to log, and returns number f bytes written.
 // Implements io.Writer interface.
-func (ls *LogSuppressor) Write(p []byte) (n int, err error) {
-	var (
-		output string
-	)
+func (ls *LogSuppressor) Write(p []byte) (int, error) {
+	var output string
 
 	if ls.filename == "" {
 		return os.Stdin.Write(p)
@@ -63,19 +66,19 @@ func (ls *LogSuppressor) Write(p []byte) (n int, err error) {
 
 	lines := strings.Split(string(p), ls.linePrefix)
 	for _, line := range lines {
-		if (func() bool {
+		if (func(line string) bool {
 			for _, suppress := range ls.suppress {
 				if strings.Contains(line, suppress) {
 					return true
 				}
 			}
+
 			return false
-		})() {
+		})(line) {
 			continue
 		}
 		output += line
 	}
 
-	n, err = ls.logFile.Write([]byte(output))
-	return n, err
+	return ls.logFile.Write([]byte(output))
 }

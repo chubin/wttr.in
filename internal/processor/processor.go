@@ -22,19 +22,21 @@ import (
 )
 
 // plainTextAgents contains signatures of the plain-text agents.
-var plainTextAgents = []string{
-	"curl",
-	"httpie",
-	"lwp-request",
-	"wget",
-	"python-httpx",
-	"python-requests",
-	"openbsd ftp",
-	"powershell",
-	"fetch",
-	"aiohttp",
-	"http_get",
-	"xh",
+func plainTextAgents() []string {
+	return []string{
+		"curl",
+		"httpie",
+		"lwp-request",
+		"wget",
+		"python-httpx",
+		"python-requests",
+		"openbsd ftp",
+		"powershell",
+		"fetch",
+		"aiohttp",
+		"http_get",
+		"xh",
+	}
 }
 
 type responseWithHeader struct {
@@ -99,8 +101,8 @@ func NewRequestProcessor(config *config.Config) (*RequestProcessor, error) {
 }
 
 // Start starts async request processor jobs, such as peak handling.
-func (rp *RequestProcessor) Start() {
-	rp.startPeakHandling()
+func (rp *RequestProcessor) Start() error {
+	return rp.startPeakHandling()
 }
 
 func (rp *RequestProcessor) ProcessRequest(r *http.Request) (*responseWithHeader, error) {
@@ -124,11 +126,13 @@ func (rp *RequestProcessor) ProcessRequest(r *http.Request) (*responseWithHeader
 
 	if resp, ok := redirectInsecure(r); ok {
 		rp.stats.Inc("redirects")
+
 		return resp, nil
 	}
 
 	if dontCache(r) {
 		rp.stats.Inc("uncached")
+
 		return get(r, rp.upstreamTransport)
 	}
 
@@ -193,11 +197,11 @@ func (rp *RequestProcessor) ProcessRequest(r *http.Request) (*responseWithHeader
 			rp.lruCache.Remove(cacheDigest)
 		}
 	}
+
 	return response, nil
 }
 
 func get(req *http.Request, transport *http.Transport) (*responseWithHeader, error) {
-
 	client := &http.Client{
 		Transport: transport,
 	}
@@ -226,6 +230,7 @@ func get(req *http.Request, transport *http.Transport) (*responseWithHeader, err
 	if err != nil {
 		return nil, err
 	}
+	defer res.Body.Close()
 
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
@@ -241,9 +246,8 @@ func get(req *http.Request, transport *http.Transport) (*responseWithHeader, err
 	}, nil
 }
 
-// implementation of the cache.get_signature of original wttr.in
+// getCacheDigest is an implementation of the cache.get_signature of original wttr.in.
 func getCacheDigest(req *http.Request) string {
-
 	userAgent := req.Header.Get("User-Agent")
 
 	queryHost := req.Host
@@ -256,11 +260,11 @@ func getCacheDigest(req *http.Request) string {
 	return fmt.Sprintf("%s:%s%s:%s:%s", userAgent, queryHost, queryString, clientIPAddress, lang)
 }
 
-// return true if request should not be cached
+// dontCache returns true if req should not be cached.
 func dontCache(req *http.Request) bool {
-
 	// dont cache cyclic requests
 	loc := strings.Split(req.RequestURI, "?")[0]
+
 	return strings.Contains(loc, ":")
 }
 
@@ -269,10 +273,7 @@ func dontCache(req *http.Request) bool {
 //
 // Insecure queries are marked by the frontend web server
 // with X-Forwarded-Proto header:
-//
-//    proxy_set_header   X-Forwarded-Proto $scheme;
-//
-//
+// `proxy_set_header   X-Forwarded-Proto $scheme;`.
 func redirectInsecure(req *http.Request) (*responseWithHeader, bool) {
 	if isPlainTextAgent(req.Header.Get("User-Agent")) {
 		return nil, false
@@ -304,14 +305,15 @@ The document has moved
 	}, true
 }
 
-// isPlainTextAgent returns true if userAgent is a plain-text agent
+// isPlainTextAgent returns true if userAgent is a plain-text agent.
 func isPlainTextAgent(userAgent string) bool {
 	userAgentLower := strings.ToLower(userAgent)
-	for _, signature := range plainTextAgents {
+	for _, signature := range plainTextAgents() {
 		if strings.Contains(userAgentLower, signature) {
 			return true
 		}
 	}
+
 	return false
 }
 
@@ -325,6 +327,7 @@ func ipFromAddr(s string) string {
 	if pos == -1 {
 		return s
 	}
+
 	return s[:pos]
 }
 
@@ -336,5 +339,4 @@ func fromCadre(cadre *routing.Cadre) *responseWithHeader {
 		StatusCode: 200,
 		InProgress: false,
 	}
-
 }

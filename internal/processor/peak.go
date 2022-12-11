@@ -9,38 +9,49 @@ import (
 	"github.com/robfig/cron"
 )
 
-func (rp *RequestProcessor) startPeakHandling() {
+func (rp *RequestProcessor) startPeakHandling() error {
+	var err error
+
 	c := cron.New()
 	// cronTime := fmt.Sprintf("%d,%d * * * *", 30-prefetchInterval/60, 60-prefetchInterval/60)
-	c.AddFunc(
+	err = c.AddFunc(
 		"24 * * * *",
 		func() { rp.prefetchPeakRequests(&rp.peakRequest30) },
 	)
-	c.AddFunc(
+	if err != nil {
+		return err
+	}
+
+	err = c.AddFunc(
 		"54 * * * *",
 		func() { rp.prefetchPeakRequests(&rp.peakRequest60) },
 	)
+	if err != nil {
+		return err
+	}
+
 	c.Start()
+
+	return nil
 }
 
 func (rp *RequestProcessor) savePeakRequest(cacheDigest string, r *http.Request) {
-	_, min, _ := time.Now().Clock()
-	if min == 30 {
+	if _, min, _ := time.Now().Clock(); min == 30 {
 		rp.peakRequest30.Store(cacheDigest, *r)
 	} else if min == 0 {
 		rp.peakRequest60.Store(cacheDigest, *r)
 	}
 }
 
-func (rp *RequestProcessor) prefetchRequest(r *http.Request) {
-	rp.ProcessRequest(r)
+func (rp *RequestProcessor) prefetchRequest(r *http.Request) error {
+	_, err := rp.ProcessRequest(r)
+
+	return err
 }
 
 func syncMapLen(sm *sync.Map) int {
 	count := 0
-
 	f := func(key, value interface{}) bool {
-
 		// Not really certain about this part, don't know for sure
 		// if this is a good check for an entry's existence
 		if key == "" {
@@ -65,10 +76,14 @@ func (rp *RequestProcessor) prefetchPeakRequests(peakRequestMap *sync.Map) {
 	sleepBetweenRequests := time.Duration(rp.config.Uplink.PrefetchInterval*1000/peakRequestLen) * time.Millisecond
 	peakRequestMap.Range(func(key interface{}, value interface{}) bool {
 		go func(r http.Request) {
-			rp.prefetchRequest(&r)
+			err := rp.prefetchRequest(&r)
+			if err != nil {
+				log.Println("prefetch request:", err)
+			}
 		}(value.(http.Request))
 		peakRequestMap.Delete(key)
 		time.Sleep(sleepBetweenRequests)
+
 		return true
 	})
 }
