@@ -75,12 +75,19 @@ func (rp *RequestProcessor) prefetchPeakRequests(peakRequestMap *sync.Map) {
 	log.Printf("PREFETCH: Prefetching %d requests\n", peakRequestLen)
 	sleepBetweenRequests := time.Duration(rp.config.Uplink.PrefetchInterval*1000/peakRequestLen) * time.Millisecond
 	peakRequestMap.Range(func(key interface{}, value interface{}) bool {
+		req, ok := value.(http.Request)
+		if !ok {
+			log.Println("missing value for:", key)
+
+			return true
+		}
+
 		go func(r http.Request) {
 			err := rp.prefetchRequest(&r)
 			if err != nil {
 				log.Println("prefetch request:", err)
 			}
-		}(value.(http.Request))
+		}(req)
 		peakRequestMap.Delete(key)
 		time.Sleep(sleepBetweenRequests)
 

@@ -107,8 +107,9 @@ func (rp *RequestProcessor) Start() error {
 
 func (rp *RequestProcessor) ProcessRequest(r *http.Request) (*responseWithHeader, error) {
 	var (
-		response *responseWithHeader
-		err      error
+		response   *responseWithHeader
+		cacheEntry responseWithHeader
+		err        error
 	)
 
 	ip := util.ReadUserIP(r)
@@ -144,8 +145,10 @@ func (rp *RequestProcessor) ProcessRequest(r *http.Request) (*responseWithHeader
 
 	cacheBody, ok := rp.lruCache.Get(cacheDigest)
 	if ok {
+		cacheEntry, ok = cacheBody.(responseWithHeader)
+	}
+	if ok {
 		rp.stats.Inc("cache1")
-		cacheEntry := cacheBody.(responseWithHeader)
 
 		// if after all attempts we still have no answer,
 		// we try to make the query on our own
@@ -156,7 +159,9 @@ func (rp *RequestProcessor) ProcessRequest(r *http.Request) (*responseWithHeader
 			time.Sleep(30 * time.Millisecond)
 			cacheBody, ok = rp.lruCache.Get(cacheDigest)
 			if ok && cacheBody != nil {
-				cacheEntry = cacheBody.(responseWithHeader)
+				if v, ok := cacheBody.(responseWithHeader); ok {
+					cacheEntry = v
+				}
 			}
 		}
 		if cacheEntry.InProgress {
@@ -168,34 +173,37 @@ func (rp *RequestProcessor) ProcessRequest(r *http.Request) (*responseWithHeader
 		}
 	}
 
-	if !foundInCache {
-		// Handling query.
-		format := r.URL.Query().Get("format")
-		if len(format) != 0 {
-			rp.stats.Inc("format")
-			if format == "j1" {
-				rp.stats.Inc("format=j1")
-			}
-		}
+	if foundInCache {
+		return response, nil
+	}
 
-		// How many IP addresses are known.
-		_, err = rp.geoIPCache.Read(ip)
-		if err == nil {
-			rp.stats.Inc("geoip")
+	// Response was not found in cache.
+	// Starting real handling.
+	format := r.URL.Query().Get("format")
+	if len(format) != 0 {
+		rp.stats.Inc("format")
+		if format == "j1" {
+			rp.stats.Inc("format=j1")
 		}
+	}
 
-		rp.lruCache.Add(cacheDigest, responseWithHeader{InProgress: true})
+	// How many IP addresses are known.
+	_, err = rp.geoIPCache.Read(ip)
+	if err == nil {
+		rp.stats.Inc("geoip")
+	}
 
-		response, err = get(r, rp.upstreamTransport)
-		if err != nil {
-			return nil, err
-		}
-		if response.StatusCode == 200 || response.StatusCode == 304 || response.StatusCode == 404 {
-			rp.lruCache.Add(cacheDigest, *response)
-		} else {
-			log.Printf("REMOVE: %d response for %s from cache\n", response.StatusCode, cacheDigest)
-			rp.lruCache.Remove(cacheDigest)
-		}
+	rp.lruCache.Add(cacheDigest, responseWithHeader{InProgress: true})
+
+	response, err = get(r, rp.upstreamTransport)
+	if err != nil {
+		return nil, err
+	}
+	if response.StatusCode == 200 || response.StatusCode == 304 || response.StatusCode == 404 {
+		rp.lruCache.Add(cacheDigest, *response)
+	} else {
+		log.Printf("REMOVE: %d response for %s from cache\n", response.StatusCode, cacheDigest)
+		rp.lruCache.Remove(cacheDigest)
 	}
 
 	return response, nil

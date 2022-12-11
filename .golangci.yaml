@@ -14,21 +14,16 @@ linters:
     - gofmt
 
     # to be fixed:
+    - ireturn
     - gosec
     - noctx
     - funlen
     - nestif
-    - forbidigo
-    - funlen
     - interfacer
     - revive
     - cyclop
     - goerr113
-    - forcetypeassert
     - gocognit
-    - golint
-    - stylecheck
-    - ireturn
 
     # deprecated:
     - scopelint
@@ -38,3 +33,4 @@ linters:
     - ifshort
     - nosnakecase
     - structcheck
+    - golint

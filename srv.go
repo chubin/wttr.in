@@ -76,7 +76,7 @@ func serveHTTPS(mux *http.ServeMux, port int, certFile, keyFile string, logFile 
 func serve(conf *config.Config) error {
 	var (
 		// mux is main HTTP/HTTP requests multiplexer.
-		mux *http.ServeMux = http.NewServeMux()
+		mux = http.NewServeMux()
 
 		// logger is optimized requests logger.
 		logger *logging.RequestLogger
@@ -182,10 +182,13 @@ func main() {
 	}
 
 	if cli.ConfigDump {
+		//nolint:forbidigo
 		fmt.Print(string(conf.Dump()))
+
+		return
 	}
 
-	if cli.ConfigCheck || cli.ConfigDump {
+	if cli.ConfigCheck {
 		return
 	}
 
@@ -216,6 +219,7 @@ func main() {
 		loc, err := sr.Search(cli.GeoResolve)
 		ctx.FatalIfErrorf(err)
 		if loc != nil {
+			//nolint:forbidigo
 			fmt.Println(*loc)
 		}
 	}
