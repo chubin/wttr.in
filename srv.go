@@ -2,7 +2,6 @@ package main
 
 import (
 	"crypto/tls"
-	"errors"
 	"fmt"
 	"io"
 	"log"
@@ -16,6 +15,7 @@ import (
 	geoloc "github.com/chubin/wttr.in/internal/geo/location"
 	"github.com/chubin/wttr.in/internal/logging"
 	"github.com/chubin/wttr.in/internal/processor"
+	"github.com/chubin/wttr.in/internal/types"
 )
 
 //nolint:gochecknoglobals
@@ -158,7 +158,7 @@ func serve(conf *config.Config) error {
 		numberOfServers++
 	}
 	if numberOfServers == 0 {
-		return errors.New("no servers configured")
+		return types.ErrNoServersConfigured
 	}
 
 	return <-errs // block until one of the servers writes an error

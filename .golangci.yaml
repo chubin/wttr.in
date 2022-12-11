@@ -19,11 +19,10 @@ linters:
     - noctx
     - funlen
     - nestif
+    - gocognit
     - interfacer
     - revive
     - cyclop
-    - goerr113
-    - gocognit
 
     # deprecated:
     - scopelint
