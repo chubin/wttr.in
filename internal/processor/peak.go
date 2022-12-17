@@ -35,6 +35,8 @@ func (rp *RequestProcessor) startPeakHandling() error {
 	return nil
 }
 
+// registerPeakRequest registers requests coming in the peak time.
+// Such requests can be prefetched afterwards just before the peak time comes.
 func (rp *RequestProcessor) savePeakRequest(cacheDigest string, r *http.Request) {
 	if _, min, _ := time.Now().Clock(); min == 30 {
 		rp.peakRequest30.Store(cacheDigest, *r)

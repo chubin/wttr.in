@@ -39,7 +39,7 @@ func plainTextAgents() []string {
 	}
 }
 
-type responseWithHeader struct {
+type ResponseWithHeader struct {
 	InProgress bool      // true if the request is being processed
 	Expires    time.Time // expiration time of the cache entry
 
@@ -105,14 +105,12 @@ func (rp *RequestProcessor) Start() error {
 	return rp.startPeakHandling()
 }
 
-func (rp *RequestProcessor) ProcessRequest(r *http.Request) (*responseWithHeader, error) {
+func (rp *RequestProcessor) ProcessRequest(r *http.Request) (*ResponseWithHeader, error) {
 	var (
-		response   *responseWithHeader
-		cacheEntry responseWithHeader
-		err        error
+		response *ResponseWithHeader
+		ip       = util.ReadUserIP(r)
 	)
 
-	ip := util.ReadUserIP(r)
 	if ip != "127.0.0.1" {
 		rp.stats.Inc("total")
 	}
@@ -137,45 +135,67 @@ func (rp *RequestProcessor) ProcessRequest(r *http.Request) (*responseWithHeader
 		return get(r, rp.upstreamTransport)
 	}
 
+	// processing cached request
 	cacheDigest := getCacheDigest(r)
-
-	foundInCache := false
 
 	rp.savePeakRequest(cacheDigest, r)
 
-	cacheBody, ok := rp.lruCache.Get(cacheDigest)
-	if ok {
-		cacheEntry, ok = cacheBody.(responseWithHeader)
-	}
-	if ok {
-		rp.stats.Inc("cache1")
-
-		// if after all attempts we still have no answer,
-		// we try to make the query on our own
-		for attempts := 0; attempts < 300; attempts++ {
-			if !ok || !cacheEntry.InProgress {
-				break
-			}
-			time.Sleep(30 * time.Millisecond)
-			cacheBody, ok = rp.lruCache.Get(cacheDigest)
-			if ok && cacheBody != nil {
-				if v, ok := cacheBody.(responseWithHeader); ok {
-					cacheEntry = v
-				}
-			}
-		}
-		if cacheEntry.InProgress {
-			log.Printf("TIMEOUT: %s\n", cacheDigest)
-		}
-		if ok && !cacheEntry.InProgress && cacheEntry.Expires.After(time.Now()) {
-			response = &cacheEntry
-			foundInCache = true
-		}
-	}
-
-	if foundInCache {
+	response = rp.processRequestFromCache(r)
+	if response != nil {
 		return response, nil
 	}
+
+	return rp.processUncachedRequest(r)
+}
+
+// processRequestFromCache processes requests using the cache.
+// If no entry in cache found, nil is returned.
+func (rp *RequestProcessor) processRequestFromCache(r *http.Request) *ResponseWithHeader {
+	var (
+		cacheEntry  ResponseWithHeader
+		cacheDigest = getCacheDigest(r)
+		ok          bool
+	)
+
+	cacheBody, _ := rp.lruCache.Get(cacheDigest)
+	cacheEntry, ok = cacheBody.(ResponseWithHeader)
+	if !ok {
+		return nil
+	}
+
+	// if after all attempts we still have no answer,
+	// we try to make the query on our own
+	for attempts := 0; attempts < 300; attempts++ {
+		if !ok || !cacheEntry.InProgress {
+			break
+		}
+		time.Sleep(30 * time.Millisecond)
+		cacheBody, _ = rp.lruCache.Get(cacheDigest)
+		v, ok := cacheBody.(ResponseWithHeader)
+		if ok {
+			cacheEntry = v
+		}
+	}
+	if cacheEntry.InProgress {
+		log.Printf("TIMEOUT: %s\n", cacheDigest)
+	}
+	if ok && !cacheEntry.InProgress && cacheEntry.Expires.After(time.Now()) {
+		rp.stats.Inc("cache1")
+
+		return &cacheEntry
+	}
+
+	return nil
+}
+
+// processUncachedRequest processes requests that were not found in the cache.
+func (rp *RequestProcessor) processUncachedRequest(r *http.Request) (*ResponseWithHeader, error) {
+	var (
+		cacheDigest = getCacheDigest(r)
+		ip          = util.ReadUserIP(r)
+		response    *ResponseWithHeader
+		err         error
+	)
 
 	// Response was not found in cache.
 	// Starting real handling.
@@ -187,13 +207,14 @@ func (rp *RequestProcessor) ProcessRequest(r *http.Request) (*responseWithHeader
 		}
 	}
 
-	// How many IP addresses are known.
+	// Count, how many IP addresses are known.
 	_, err = rp.geoIPCache.Read(ip)
 	if err == nil {
 		rp.stats.Inc("geoip")
 	}
 
-	rp.lruCache.Add(cacheDigest, responseWithHeader{InProgress: true})
+	// Indicate, that the request is being handled.
+	rp.lruCache.Add(cacheDigest, ResponseWithHeader{InProgress: true})
 
 	response, err = get(r, rp.upstreamTransport)
 	if err != nil {
@@ -209,7 +230,7 @@ func (rp *RequestProcessor) ProcessRequest(r *http.Request) (*responseWithHeader
 	return response, nil
 }
 
-func get(req *http.Request, transport *http.Transport) (*responseWithHeader, error) {
+func get(req *http.Request, transport *http.Transport) (*ResponseWithHeader, error) {
 	client := &http.Client{
 		Transport: transport,
 	}
@@ -245,7 +266,7 @@ func get(req *http.Request, transport *http.Transport) (*responseWithHeader, err
 		return nil, err
 	}
 
-	return &responseWithHeader{
+	return &ResponseWithHeader{
 		InProgress: false,
 		Expires:    time.Now().Add(time.Duration(randInt(1000, 1500)) * time.Second),
 		Body:       body,
@@ -282,7 +303,7 @@ func dontCache(req *http.Request) bool {
 // Insecure queries are marked by the frontend web server
 // with X-Forwarded-Proto header:
 // `proxy_set_header   X-Forwarded-Proto $scheme;`.
-func redirectInsecure(req *http.Request) (*responseWithHeader, bool) {
+func redirectInsecure(req *http.Request) (*ResponseWithHeader, bool) {
 	if isPlainTextAgent(req.Header.Get("User-Agent")) {
 		return nil, false
 	}
@@ -304,7 +325,7 @@ The document has moved
 </BODY></HTML>
 `, target))
 
-	return &responseWithHeader{
+	return &ResponseWithHeader{
 		InProgress: false,
 		Expires:    time.Now().Add(time.Duration(randInt(1000, 1500)) * time.Second),
 		Body:       body,
@@ -340,8 +361,8 @@ func ipFromAddr(s string) string {
 }
 
 // fromCadre converts Cadre into a responseWithHeader.
-func fromCadre(cadre *routing.Cadre) *responseWithHeader {
-	return &responseWithHeader{
+func fromCadre(cadre *routing.Cadre) *ResponseWithHeader {
+	return &ResponseWithHeader{
 		Body:       cadre.Body,
 		Expires:    cadre.Expires,
 		StatusCode: 200,

@@ -79,7 +79,9 @@ func serve(conf *config.Config) error {
 		mux = http.NewServeMux()
 
 		// logger is optimized requests logger.
-		logger *logging.RequestLogger
+		logger = logging.NewRequestLogger(
+			conf.Logging.AccessLog,
+			time.Duration(conf.Logging.Interval)*time.Second)
 
 		rp *processor.RequestProcessor
 
@@ -89,23 +91,16 @@ func serve(conf *config.Config) error {
 		// numberOfServers started. If 0, exit.
 		numberOfServers int
 
-		errorsLog *logging.LogSuppressor
+		errorsLog = logging.NewLogSuppressor(
+			conf.Logging.ErrorsLog,
+			[]string{
+				"error reading preface from client",
+				"TLS handshake error from",
+			},
+			logLineStart,
+		)
 
 		err error
-	)
-
-	// logger is optimized requests logger.
-	logger = logging.NewRequestLogger(
-		conf.Logging.AccessLog,
-		time.Duration(conf.Logging.Interval)*time.Second)
-
-	errorsLog = logging.NewLogSuppressor(
-		conf.Logging.ErrorsLog,
-		[]string{
-			"error reading preface from client",
-			"TLS handshake error from",
-		},
-		logLineStart,
 	)
 
 	rp, err = processor.NewRequestProcessor(conf)
@@ -123,11 +118,32 @@ func serve(conf *config.Config) error {
 		return err
 	}
 
-	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/", mainHandler(rp, logger))
+
+	if conf.Server.PortHTTP != 0 {
+		go serveHTTP(mux, conf.Server.PortHTTP, errorsLog, errs)
+		numberOfServers++
+	}
+	if conf.Server.PortHTTPS != 0 {
+		go serveHTTPS(mux, conf.Server.PortHTTPS, conf.Server.TLSCertFile, conf.Server.TLSKeyFile, errorsLog, errs)
+		numberOfServers++
+	}
+	if numberOfServers == 0 {
+		return types.ErrNoServersConfigured
+	}
+
+	return <-errs // block until one of the servers writes an error
+}
+
+func mainHandler(
+	rp *processor.RequestProcessor,
+	logger *logging.RequestLogger,
+) func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
 		if err := logger.Log(r); err != nil {
 			log.Println(err)
 		}
-		// printStat()
+
 		response, err := rp.ProcessRequest(r)
 		if err != nil {
 			log.Println(err)
@@ -147,21 +163,7 @@ func serve(conf *config.Config) error {
 		if err != nil {
 			log.Println(err)
 		}
-	})
-
-	if conf.Server.PortHTTP != 0 {
-		go serveHTTP(mux, conf.Server.PortHTTP, errorsLog, errs)
-		numberOfServers++
 	}
-	if conf.Server.PortHTTPS != 0 {
-		go serveHTTPS(mux, conf.Server.PortHTTPS, conf.Server.TLSCertFile, conf.Server.TLSKeyFile, errorsLog, errs)
-		numberOfServers++
-	}
-	if numberOfServers == 0 {
-		return types.ErrNoServersConfigured
-	}
-
-	return <-errs // block until one of the servers writes an error
 }
 
 func main() {
@@ -192,29 +194,12 @@ func main() {
 		return
 	}
 
-	if cli.ConvertGeoIPCache {
-		geoIPCache, err := geoip.NewCache(conf)
-		if err != nil {
-			ctx.FatalIfErrorf(err)
-		}
-
-		ctx.FatalIfErrorf(geoIPCache.ConvertCache())
-
-		return
-	}
-
-	if cli.ConvertGeoLocationCache {
-		geoLocCache, err := geoloc.NewCache(conf)
-		if err != nil {
-			ctx.FatalIfErrorf(err)
-		}
-
-		ctx.FatalIfErrorf(geoLocCache.ConvertCache())
-
-		return
-	}
-
-	if cli.GeoResolve != "" {
+	switch {
+	case cli.ConvertGeoIPCache:
+		ctx.FatalIfErrorf(convertGeoIPCache(conf))
+	case cli.ConvertGeoLocationCache:
+		ctx.FatalIfErrorf(convertGeoLocationCache(conf))
+	case cli.GeoResolve != "":
 		sr := geoloc.NewSearcher(conf)
 		loc, err := sr.Search(cli.GeoResolve)
 		ctx.FatalIfErrorf(err)
@@ -222,8 +207,26 @@ func main() {
 			//nolint:forbidigo
 			fmt.Println(*loc)
 		}
+	default:
+		err = serve(conf)
+		ctx.FatalIfErrorf(err)
+	}
+}
+
+func convertGeoIPCache(conf *config.Config) error {
+	geoIPCache, err := geoip.NewCache(conf)
+	if err != nil {
+		return err
 	}
 
-	err = serve(conf)
-	ctx.FatalIfErrorf(err)
+	return geoIPCache.ConvertCache()
+}
+
+func convertGeoLocationCache(conf *config.Config) error {
+	geoLocCache, err := geoloc.NewCache(conf)
+	if err != nil {
+		return err
+	}
+
+	return geoLocCache.ConvertCache()
 }

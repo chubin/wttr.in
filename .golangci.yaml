@@ -17,12 +17,7 @@ linters:
     - ireturn
     - gosec
     - noctx
-    - funlen
-    - nestif
-    - gocognit
     - interfacer
-    - revive
-    - cyclop
 
     # deprecated:
     - scopelint
