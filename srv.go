@@ -33,6 +33,15 @@ var cli struct {
 
 const logLineStart = "LOG_LINE_START "
 
+func suppressMessages() []string {
+	return []string{
+		"error reading preface from client",
+		"TLS handshake error from",
+		"URL query contains semicolon, which is no longer a supported separator",
+		"connection error: PROTOCOL_ERROR",
+	}
+}
+
 func copyHeader(dst, src http.Header) {
 	for k, vv := range src {
 		for _, v := range vv {
@@ -95,10 +104,7 @@ func serve(conf *config.Config) error {
 
 		errorsLog = logging.NewLogSuppressor(
 			conf.Logging.ErrorsLog,
-			[]string{
-				"error reading preface from client",
-				"TLS handshake error from",
-			},
+			suppressMessages(),
 			logLineStart,
 		)
 
