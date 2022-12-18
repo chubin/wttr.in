@@ -2,13 +2,16 @@ package location
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"os"
 	"path"
+	"strconv"
 	"strings"
 
 	"github.com/samonzeweb/godb"
 	"github.com/samonzeweb/godb/adapters/sqlite"
+	log "github.com/sirupsen/logrus"
 	"github.com/zsefvlol/timezonemapper"
 
 	"github.com/chubin/wttr.in/internal/config"
@@ -22,6 +25,7 @@ import (
 type Cache struct {
 	config        *config.Config
 	db            *godb.DB
+	searcher      *Searcher
 	indexField    string
 	filesCacheDir string
 }
@@ -34,10 +38,13 @@ func NewCache(config *config.Config) (*Cache, error) {
 	)
 
 	if config.Geo.LocationCacheType == types.CacheTypeDB {
-		db, err = godb.Open(sqlite.Adapter, config.Geo.IPCacheDB)
+		log.Debugln("using db for location cache")
+		db, err = godb.Open(sqlite.Adapter, config.Geo.LocationCacheDB)
 		if err != nil {
 			return nil, err
 		}
+
+		log.Debugln("db file:", config.Geo.LocationCacheDB)
 
 		// Needed for "upsert" implementation in Put()
 		db.UseErrorParser()
@@ -48,7 +55,37 @@ func NewCache(config *config.Config) (*Cache, error) {
 		db:            db,
 		indexField:    "name",
 		filesCacheDir: config.Geo.LocationCache,
+		searcher:      NewSearcher(config),
 	}, nil
+}
+
+// Resolve returns location information for specified location.
+// If the information is found in the cache, it is returned.
+// If it is not found, the external service is queried,
+// and the result is stored in the cache.
+func (c *Cache) Resolve(location string) (*Location, error) {
+	location = normalizeLocationName(location)
+
+	loc, err := c.Read(location)
+	if !errors.Is(err, types.ErrNotFound) {
+		return loc, err
+	}
+
+	log.Debugln("geo/location: not found in cache:", location)
+	loc, err = c.searcher.Search(location)
+	if err != nil {
+		return nil, err
+	}
+
+	loc.Name = location
+	loc.Timezone = latLngToTimezoneString(loc.Lat, loc.Lon)
+
+	err = c.Put(location, loc)
+	if err != nil {
+		return nil, err
+	}
+
+	return loc, nil
 }
 
 // Read returns location information from the cache, if found,
@@ -108,6 +145,11 @@ func (c *Cache) readFromCacheDB(addr string) (*Location, error) {
 	err := c.db.Select(&result).
 		Where(c.indexField+" = ?", addr).
 		Do()
+
+	if strings.Contains(fmt.Sprint(err), "no rows in result set") {
+		return nil, types.ErrNotFound
+	}
+
 	if err != nil {
 		return nil, err
 	}
@@ -116,6 +158,7 @@ func (c *Cache) readFromCacheDB(addr string) (*Location, error) {
 }
 
 func (c *Cache) Put(addr string, loc *Location) error {
+	log.Infoln("geo/location: storing in cache:", loc)
 	if c.config.Geo.IPCacheType == types.CacheTypeDB {
 		return c.putToCacheDB(loc)
 	}
@@ -139,4 +182,37 @@ func (c *Cache) putToCacheFile(addr string, loc fmt.Stringer) error {
 // cacheFile returns path to the cache entry for addr.
 func (c *Cache) cacheFile(item string) string {
 	return path.Join(c.filesCacheDir, item)
+}
+
+// normalizeLocationName converts name into the standard location form
+// with the following steps:
+// - remove excessive spaces,
+// - remove quotes,
+// - convert to lover case.
+func normalizeLocationName(name string) string {
+	name = strings.ReplaceAll(name, `"`, " ")
+	name = strings.ReplaceAll(name, `'`, " ")
+	name = strings.TrimSpace(name)
+	name = strings.Join(strings.Fields(name), " ")
+
+	return strings.ToLower(name)
+}
+
+// latLngToTimezoneString returns timezone for lat, lon,
+// or an empty string if they are invalid.
+func latLngToTimezoneString(lat, lon string) string {
+	latFloat, err := strconv.ParseFloat(lat, 64)
+	if err != nil {
+		log.Errorln("geoloc: latLngToTimezoneString:", err)
+
+		return ""
+	}
+	lonFloat, err := strconv.ParseFloat(lon, 64)
+	if err != nil {
+		log.Errorln("geoloc: latLngToTimezoneString:", err)
+
+		return ""
+	}
+
+	return timezonemapper.LatLngToTimezoneString(latFloat, lonFloat)
 }

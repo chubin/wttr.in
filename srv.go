@@ -4,11 +4,12 @@ import (
 	"crypto/tls"
 	"fmt"
 	"io"
-	"log"
+	stdlog "log"
 	"net/http"
 	"time"
 
 	"github.com/alecthomas/kong"
+	log "github.com/sirupsen/logrus"
 
 	"github.com/chubin/wttr.in/internal/config"
 	geoip "github.com/chubin/wttr.in/internal/geo/ip"
@@ -27,6 +28,7 @@ var cli struct {
 	ConvertGeoIPCache       bool   `name:"convert-geo-ip-cache" help:"Convert Geo IP data cache to SQlite"`
 	ConvertGeoLocationCache bool   `name:"convert-geo-location-cache" help:"Convert Geo Location data cache to SQlite"`
 	GeoResolve              string `name:"geo-resolve" help:"Resolve location"`
+	LogLevel                string `name:"log-level" short:"l" help:"Show log messages with level" default:"info"`
 }
 
 const logLineStart = "LOG_LINE_START "
@@ -42,7 +44,7 @@ func copyHeader(dst, src http.Header) {
 func serveHTTP(mux *http.ServeMux, port int, logFile io.Writer, errs chan<- error) {
 	srv := &http.Server{
 		Addr:         fmt.Sprintf(":%d", port),
-		ErrorLog:     log.New(logFile, logLineStart, log.LstdFlags),
+		ErrorLog:     stdlog.New(logFile, logLineStart, stdlog.LstdFlags),
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 10 * time.Second,
 		IdleTimeout:  1 * time.Second,
@@ -63,7 +65,7 @@ func serveHTTPS(mux *http.ServeMux, port int, certFile, keyFile string, logFile 
 	}
 	srv := &http.Server{
 		Addr:         fmt.Sprintf(":%d", port),
-		ErrorLog:     log.New(logFile, logLineStart, log.LstdFlags),
+		ErrorLog:     stdlog.New(logFile, logLineStart, stdlog.LstdFlags),
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 20 * time.Second,
 		IdleTimeout:  1 * time.Second,
@@ -173,6 +175,7 @@ func main() {
 	)
 
 	ctx := kong.Parse(&cli)
+	ctx.FatalIfErrorf(setLogLevel(cli.LogLevel))
 
 	if cli.ConfigFile != "" {
 		conf, err = config.Load(cli.ConfigFile)
@@ -229,4 +232,14 @@ func convertGeoLocationCache(conf *config.Config) error {
 	}
 
 	return geoLocCache.ConvertCache()
+}
+
+func setLogLevel(logLevel string) error {
+	parsedLevel, err := log.ParseLevel(logLevel)
+	if err != nil {
+		return err
+	}
+	log.SetLevel(parsedLevel)
+
+	return nil
 }

@@ -16,6 +16,7 @@ import (
 
 	"github.com/chubin/wttr.in/internal/config"
 	geoip "github.com/chubin/wttr.in/internal/geo/ip"
+	geoloc "github.com/chubin/wttr.in/internal/geo/location"
 	"github.com/chubin/wttr.in/internal/routing"
 	"github.com/chubin/wttr.in/internal/stats"
 	"github.com/chubin/wttr.in/internal/util"
@@ -58,6 +59,7 @@ type RequestProcessor struct {
 	upstreamTransport *http.Transport
 	config            *config.Config
 	geoIPCache        *geoip.Cache
+	geoLocation       *geoloc.Cache
 }
 
 // NewRequestProcessor returns new RequestProcessor.
@@ -84,18 +86,25 @@ func NewRequestProcessor(config *config.Config) (*RequestProcessor, error) {
 		return nil, err
 	}
 
+	geoLocation, err := geoloc.NewCache(config)
+	if err != nil {
+		return nil, err
+	}
+
 	rp := &RequestProcessor{
 		lruCache:          lruCache,
 		stats:             stats.New(),
 		upstreamTransport: transport,
 		config:            config,
 		geoIPCache:        geoCache,
+		geoLocation:       geoLocation,
 	}
 
 	// Initialize routes.
 	rp.router.AddPath("/:stats", rp.stats)
 	rp.router.AddPath("/:geo-ip-get", rp.geoIPCache)
 	rp.router.AddPath("/:geo-ip-put", rp.geoIPCache)
+	rp.router.AddPath("/:geo-location", rp.geoLocation)
 
 	return rp, nil
 }

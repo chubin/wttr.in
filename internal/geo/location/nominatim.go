@@ -4,11 +4,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"net/url"
 
 	"github.com/chubin/wttr.in/internal/types"
+	log "github.com/sirupsen/logrus"
 )
 
 type Nominatim struct {
@@ -38,7 +38,7 @@ func (n *Nominatim) Query(location string) (*Location, error) {
 		"%s?q=%s&format=json&accept-language=native&limit=1&key=%s",
 		n.url, url.QueryEscape(location), n.token)
 
-	log.Println(urlws)
+	log.Debugln("nominatim:", urlws)
 	resp, err := http.Get(urlws)
 	if err != nil {
 		return nil, fmt.Errorf("%s: %w", n.name, err)
@@ -55,6 +55,7 @@ func (n *Nominatim) Query(location string) (*Location, error) {
 		return nil, fmt.Errorf("%w: %s: %s", types.ErrUpstream, n.name, errResponse.Error)
 	}
 
+	log.Debugln("nominatim: response: ", string(body))
 	err = json.Unmarshal(body, &result)
 	if err != nil {
 		return nil, fmt.Errorf("%s: %w", n.name, err)
