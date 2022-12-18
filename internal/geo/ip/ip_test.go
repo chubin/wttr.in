@@ -15,13 +15,13 @@ func TestParseCacheEntry(t *testing.T) {
 	tests := []struct {
 		addr     string
 		input    string
-		expected Location
+		expected Address
 		err      error
 	}{
 		{
 			"1.2.3.4",
 			"DE;Germany;Free and Hanseatic City of Hamburg;Hamburg;53.5736;9.9782",
-			Location{
+			Address{
 				IP:          "1.2.3.4",
 				CountryCode: "DE",
 				Country:     "Germany",
@@ -36,7 +36,7 @@ func TestParseCacheEntry(t *testing.T) {
 		{
 			"1.2.3.4",
 			"ES;Spain;Madrid, Comunidad de;Madrid;40.4165;-3.70256;28223;Orange Espagne SA;orange.es",
-			Location{
+			Address{
 				IP:          "1.2.3.4",
 				CountryCode: "ES",
 				Country:     "Spain",
@@ -51,7 +51,7 @@ func TestParseCacheEntry(t *testing.T) {
 		{
 			"1.2.3.4",
 			"US;United States of America;California;Mountain View",
-			Location{
+			Address{
 				IP:          "1.2.3.4",
 				CountryCode: "US",
 				Country:     "United States of America",
@@ -67,13 +67,13 @@ func TestParseCacheEntry(t *testing.T) {
 		{
 			"1.2.3.4",
 			"DE;Germany;Free and Hanseatic City of Hamburg;Hamburg;53.5736;XXX",
-			Location{},
+			Address{},
 			types.ErrInvalidCacheEntry,
 		},
 	}
 
 	for _, tt := range tests {
-		result, err := NewLocationFromString(tt.addr, tt.input)
+		result, err := NewAddressFromString(tt.addr, tt.input)
 		if tt.err == nil {
 			require.NoError(t, err)
 			require.Equal(t, *result, tt.expected)

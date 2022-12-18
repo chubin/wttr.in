@@ -18,8 +18,8 @@ import (
 	"github.com/samonzeweb/godb/adapters/sqlite"
 )
 
-// Location information.
-type Location struct {
+// Address information.
+type Address struct {
 	IP          string  `db:"ip,key"`
 	CountryCode string  `db:"countryCode"`
 	Country     string  `db:"country"`
@@ -29,7 +29,7 @@ type Location struct {
 	Longitude   float64 `db:"longitude"`
 }
 
-func (l *Location) String() string {
+func (l *Address) String() string {
 	if l.Latitude == -1000 {
 		return fmt.Sprintf(
 			"%s;%s;%s;%s",
@@ -76,7 +76,7 @@ func NewCache(config *config.Config) (*Cache, error) {
 //  DE;Germany;Free and Hanseatic City of Hamburg;Hamburg;53.5736;9.9782
 //
 
-func (c *Cache) Read(addr string) (*Location, error) {
+func (c *Cache) Read(addr string) (*Address, error) {
 	if c.config.Geo.IPCacheType == types.CacheTypeDB {
 		return c.readFromCacheDB(addr)
 	}
@@ -84,17 +84,17 @@ func (c *Cache) Read(addr string) (*Location, error) {
 	return c.readFromCacheFile(addr)
 }
 
-func (c *Cache) readFromCacheFile(addr string) (*Location, error) {
+func (c *Cache) readFromCacheFile(addr string) (*Address, error) {
 	bytes, err := os.ReadFile(c.cacheFile(addr))
 	if err != nil {
 		return nil, types.ErrNotFound
 	}
 
-	return NewLocationFromString(addr, string(bytes))
+	return NewAddressFromString(addr, string(bytes))
 }
 
-func (c *Cache) readFromCacheDB(addr string) (*Location, error) {
-	result := Location{}
+func (c *Cache) readFromCacheDB(addr string) (*Address, error) {
+	result := Address{}
 	err := c.db.Select(&result).
 		Where("IP = ?", addr).
 		Do()
@@ -105,7 +105,7 @@ func (c *Cache) readFromCacheDB(addr string) (*Location, error) {
 	return &result, nil
 }
 
-func (c *Cache) Put(addr string, loc *Location) error {
+func (c *Cache) Put(addr string, loc *Address) error {
 	if c.config.Geo.IPCacheType == types.CacheTypeDB {
 		return c.putToCacheDB(loc)
 	}
@@ -113,7 +113,7 @@ func (c *Cache) Put(addr string, loc *Location) error {
 	return c.putToCacheFile(addr, loc)
 }
 
-func (c *Cache) putToCacheDB(loc *Location) error {
+func (c *Cache) putToCacheDB(loc *Address) error {
 	err := c.db.Insert(loc).Do()
 	// it should work like this:
 	//
@@ -140,9 +140,9 @@ func (c *Cache) cacheFile(addr string) string {
 	return path.Join(c.config.Geo.IPCache, addr)
 }
 
-// NewLocationFromString parses the location cache entry s,
+// NewAddressFromString parses the location cache entry s,
 // and return location, or error, if the cache entry is invalid.
-func NewLocationFromString(addr, s string) (*Location, error) {
+func NewAddressFromString(addr, s string) (*Address, error) {
 	var (
 		lat  float64 = -1000
 		long float64 = -1000
@@ -166,7 +166,7 @@ func NewLocationFromString(addr, s string) (*Location, error) {
 		}
 	}
 
-	return &Location{
+	return &Address{
 		IP:          addr,
 		CountryCode: parts[0],
 		Country:     parts[1],
@@ -207,7 +207,7 @@ func (c *Cache) Response(r *http.Request) *routing.Cadre {
 			return respERR
 		}
 
-		location, err := NewLocationFromString(ip, value)
+		location, err := NewAddressFromString(ip, value)
 		if err != nil {
 			return respERR
 		}

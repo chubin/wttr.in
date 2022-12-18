@@ -25,20 +25,20 @@ func (c *Cache) ConvertCache() error {
 		return err
 	}
 
-	err = createTable(db, "Location")
+	err = createTable(db, "Address")
 	if err != nil {
 		return err
 	}
 
 	log.Println("listing cache entries...")
-	files, err := filepath.Glob(filepath.Join(c.config.Geo.LocationCache, "*"))
+	files, err := filepath.Glob(filepath.Join(c.config.Geo.IPCache, "*"))
 	if err != nil {
 		return err
 	}
 
 	log.Printf("going to convert %d entries\n", len(files))
 
-	block := []Location{}
+	block := []Address{}
 	for i, file := range files {
 		ip := filepath.Base(file)
 		loc, err := c.Read(ip)
@@ -58,7 +58,7 @@ func (c *Cache) ConvertCache() error {
 		if err != nil {
 			return err
 		}
-		block = []Location{}
+		block = []Address{}
 		log.Println("converted", i+1, "entries")
 	}
 
