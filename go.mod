@@ -12,6 +12,7 @@ require (
 	github.com/mattn/go-sqlite3 v1.14.16 // indirect
 	github.com/robfig/cron v1.2.0
 	github.com/samonzeweb/godb v1.0.8 // indirect
+	github.com/sirupsen/logrus v1.9.0 // indirect
 	github.com/smartystreets/assertions v1.2.0 // indirect
 	github.com/smartystreets/goconvey v1.6.4 // indirect
 	github.com/stretchr/testify v1.8.1 // indirect
