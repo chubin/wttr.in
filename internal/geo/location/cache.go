@@ -151,7 +151,7 @@ func (c *Cache) readFromCacheDB(addr string) (*Location, error) {
 	}
 
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("readFromCacheDB: %w", err)
 	}
 
 	return &result, nil
