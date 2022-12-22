@@ -33,12 +33,12 @@ func (l *Address) String() string {
 	if l.Latitude == -1000 {
 		return fmt.Sprintf(
 			"%s;%s;%s;%s",
-			l.CountryCode, l.CountryCode, l.Region, l.City)
+			l.CountryCode, l.Country, l.Region, l.City)
 	}
 
 	return fmt.Sprintf(
 		"%s;%s;%s;%s;%v;%v",
-		l.CountryCode, l.CountryCode, l.Region, l.City, l.Latitude, l.Longitude)
+		l.CountryCode, l.Country, l.Region, l.City, l.Latitude, l.Longitude)
 }
 
 // Cache provides access to the IP Geodata cache.

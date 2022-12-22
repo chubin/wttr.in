@@ -17,6 +17,14 @@ type Nominatim struct {
 	token string
 }
 
+type NominatimLocation struct {
+	Name string `db:"name,key"`
+	Lat  string `db:"lat"`
+	Lon  string `db:"lon"`
+	//nolint:tagliatelle
+	Fullname string `db:"displayName" json:"display_name"`
+}
+
 func NewNominatim(name, url, token string) *Nominatim {
 	return &Nominatim{
 		name:  name,
@@ -27,7 +35,7 @@ func NewNominatim(name, url, token string) *Nominatim {
 
 func (n *Nominatim) Query(location string) (*Location, error) {
 	var (
-		result []Location
+		result []NominatimLocation
 
 		errResponse struct {
 			Error string
@@ -65,5 +73,11 @@ func (n *Nominatim) Query(location string) (*Location, error) {
 		return nil, fmt.Errorf("%w: %s: invalid response", types.ErrUpstream, n.name)
 	}
 
-	return &result[0], nil
+	nl := &result[0]
+
+	return &Location{
+		Lat:      nl.Lat,
+		Lon:      nl.Lon,
+		Fullname: nl.Fullname,
+	}, nil
 }

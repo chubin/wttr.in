@@ -6,12 +6,11 @@ import (
 )
 
 type Location struct {
-	Name     string `db:"name,key"`
-	Lat      string `db:"lat"`
-	Lon      string `db:"lon"`
-	Timezone string `db:"timezone"`
-	//nolint:tagliatelle
-	Fullname string `db:"displayName" json:"display_name"`
+	Name     string `db:"name,key" json:"name"`
+	Lat      string `db:"lat" json:"latitude"`
+	Lon      string `db:"lon" json:"longitude"`
+	Timezone string `db:"timezone" json:"timezone"`
+	Fullname string `db:"displayName" json:"address"`
 }
 
 // String returns string representation of location.
