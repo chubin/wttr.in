@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"net/url"
 
 	"github.com/chubin/wttr.in/internal/types"
 	log "github.com/sirupsen/logrus"
@@ -15,69 +14,64 @@ type Nominatim struct {
 	name  string
 	url   string
 	token string
+	typ   string
 }
 
-type NominatimLocation struct {
-	Name string `db:"name,key"`
-	Lat  string `db:"lat"`
-	Lon  string `db:"lon"`
-	//nolint:tagliatelle
-	Fullname string `db:"displayName" json:"display_name"`
+type locationQuerier interface {
+	Query(*Nominatim, string) (*Location, error)
 }
 
-func NewNominatim(name, url, token string) *Nominatim {
+func NewNominatim(name, typ, url, token string) *Nominatim {
 	return &Nominatim{
 		name:  name,
 		url:   url,
 		token: token,
+		typ:   typ,
 	}
 }
 
 func (n *Nominatim) Query(location string) (*Location, error) {
-	var (
-		result []NominatimLocation
+	var data locationQuerier
 
-		errResponse struct {
-			Error string
-		}
-	)
+	switch n.typ {
+	case "iq":
+		data = &locationIQ{}
+	case "opencage":
+		data = &locationOpenCage{}
+	default:
+		return nil, fmt.Errorf("%s: %w", n.name, types.ErrUnknownLocationService)
+	}
 
-	urlws := fmt.Sprintf(
-		"%s?q=%s&format=json&accept-language=native&limit=1&key=%s",
-		n.url, url.QueryEscape(location), n.token)
+	return data.Query(n, location)
+}
 
-	log.Debugln("nominatim:", urlws)
-	resp, err := http.Get(urlws)
+func makeQuery(url string, result interface{}) error {
+	var errResponse struct {
+		Error string
+	}
+
+	log.Debugln("nominatim:", url)
+	resp, err := http.Get(url)
 	if err != nil {
-		return nil, fmt.Errorf("%s: %w", n.name, err)
+		return err
 	}
 	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return nil, fmt.Errorf("%s: %w", n.name, err)
+		return err
 	}
 
 	err = json.Unmarshal(body, &errResponse)
 	if err == nil && errResponse.Error != "" {
-		return nil, fmt.Errorf("%w: %s: %s", types.ErrUpstream, n.name, errResponse.Error)
+		return fmt.Errorf("%w: %s", types.ErrUpstream, errResponse.Error)
 	}
 
 	log.Debugln("nominatim: response: ", string(body))
 	err = json.Unmarshal(body, &result)
 	if err != nil {
-		return nil, fmt.Errorf("%s: %w", n.name, err)
+		return err
 	}
 
-	if len(result) != 1 {
-		return nil, fmt.Errorf("%w: %s: invalid response", types.ErrUpstream, n.name)
-	}
-
-	nl := &result[0]
-
-	return &Location{
-		Lat:      nl.Lat,
-		Lon:      nl.Lon,
-		Fullname: nl.Fullname,
-	}, nil
+	return nil
 }

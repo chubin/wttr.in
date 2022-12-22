@@ -14,7 +14,7 @@ type Searcher struct {
 func NewSearcher(config *config.Config) *Searcher {
 	providers := []Provider{}
 	for _, p := range config.Geo.Nominatim {
-		providers = append(providers, NewNominatim(p.Name, p.URL, p.Token))
+		providers = append(providers, NewNominatim(p.Name, p.Type, p.URL, p.Token))
 	}
 
 	return &Searcher{

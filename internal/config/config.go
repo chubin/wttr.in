@@ -91,6 +91,10 @@ type Geo struct {
 type Nominatim struct {
 	Name string
 
+	// Type describes the type of the location service.
+	// Supported types: iq.
+	Type string
+
 	URL string
 
 	Token string
@@ -112,8 +116,15 @@ func Default() *Config {
 			Nominatim: []Nominatim{
 				{
 					Name:  "locationiq",
+					Type:  "iq",
 					URL:   "https://eu1.locationiq.com/v1/search",
 					Token: os.Getenv("NOMINATIM_LOCATIONIQ"),
+				},
+				{
+					Name:  "opencage",
+					Type:  "opencage",
+					URL:   "https://api.opencagedata.com/geocode/v1/json",
+					Token: os.Getenv("NOMINATIM_OPENCAGE"),
 				},
 			},
 		},

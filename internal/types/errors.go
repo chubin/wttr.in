@@ -9,4 +9,6 @@ var (
 
 	// ErrNoServersConfigured means that there are no servers to run.
 	ErrNoServersConfigured = errors.New("no servers configured")
+
+	ErrUnknownLocationService = errors.New("unknown location service")
 )
