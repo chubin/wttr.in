@@ -268,7 +268,6 @@ func formatRain(c cond) string {
 			rainUnit,
 			unitRain(config.Imperial, config.Lang),
 			c.ChanceOfRain), 15)
-
 	}
 
 	return pad(fmt.Sprintf("%.1f %s", rainUnit, unitRain(config.Imperial, config.Lang)), 15)
@@ -342,7 +341,6 @@ func formatCond(cur []string, c cond, current bool) (ret []string) {
 		ret = append(ret, fmt.Sprintf("%v %v %v", cur[0], desc, icon[0]), fmt.Sprintf("%v %v %v", cur[1], formatTemp(c), icon[1]), fmt.Sprintf("%v %v %v", cur[2], formatWind(c), icon[2]), fmt.Sprintf("%v %v %v", cur[3], formatVisibility(c), icon[3]), fmt.Sprintf("%v %v %v", cur[4], formatRain(c), icon[4]))
 	} else {
 		ret = append(ret, fmt.Sprintf("%v %v %v", cur[0], icon[0], desc), fmt.Sprintf("%v %v %v", cur[1], icon[1], formatTemp(c)), fmt.Sprintf("%v %v %v", cur[2], icon[2], formatWind(c)), fmt.Sprintf("%v %v %v", cur[3], icon[3], formatVisibility(c)), fmt.Sprintf("%v %v %v", cur[4], icon[4], formatRain(c)))
-
 	}
 
 	return
@@ -358,7 +356,6 @@ func justifyCenter(s string, width int) string {
 			s = " " + s
 			appendSide = 1
 		}
-
 	}
 
 	return s
@@ -368,7 +365,6 @@ func reverse(s string) string {
 	r := []rune(s)
 	for i, j := 0, len(r)-1; i < len(r)/2; i, j = i+1, j-1 {
 		r[i], r[j] = r[j], r[i]
-
 	}
 
 	return string(r)
@@ -393,7 +389,6 @@ func pad(s string, mustLen int) (ret string) {
 		} else {
 			ret = fmt.Sprintf("%s%s%s", toks[0], esc, pad(toks[1], mustLen-tokLen))
 		}
-
 	}
 
 	return

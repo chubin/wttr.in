@@ -49,10 +49,8 @@ func printDay(w weather) (ret []string) {
 	// dateFmt := "┤ " + d.Format("Mon 02. Jan") + " ├"
 
 	if val, ok := locale[config.Lang]; ok {
-
 		lctime.SetLocale(val)
 	} else {
-
 		lctime.SetLocale("en_US")
 	}
 	dateName := ""
@@ -89,7 +87,6 @@ func printDay(w weather) (ret []string) {
 		trans = t
 	}
 	if config.Narrow {
-
 		names := "│      " + justifyCenter(trans[1], 16) +
 			"└──────┬──────┘" + justifyCenter(trans[3], 16) + "      │"
 
@@ -103,7 +100,6 @@ func printDay(w weather) (ret []string) {
 
 		return append(ret,
 			"└──────────────────────────────┴──────────────────────────────┘")
-
 	}
 
 	names := ""
