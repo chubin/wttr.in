@@ -1,7 +1,7 @@
 // This code represents wttr.in view v1.
 // It is based on wego (github.com/schachmat/wego) from which it diverged back in 2016.
 
-package main
+package v1
 
 import (
 	_ "crypto/sha512"
