@@ -11,8 +11,11 @@ import (
 	"github.com/samonzeweb/godb/adapters/sqlite"
 )
 
-//nolint:funlen,cyclop
-func (c *Cache) ConvertCache() error {
+// ConvertCache converts files-based cache into the DB-based cache.
+// If reset is true, the DB cache is created from scratch.
+//
+//nolint:funlen,cyclop,gocognit
+func (c *Cache) ConvertCache(reset bool) error {
 	var (
 		dbfile     = c.config.Geo.LocationCacheDB
 		tableName  = "Location"
@@ -20,9 +23,11 @@ func (c *Cache) ConvertCache() error {
 		known      = map[string]bool{}
 	)
 
-	err := removeDBIfExists(dbfile)
-	if err != nil {
-		return err
+	if reset {
+		err := removeDBIfExists(dbfile)
+		if err != nil {
+			return err
+		}
 	}
 
 	db, err := godb.Open(sqlite.Adapter, dbfile)
@@ -30,9 +35,11 @@ func (c *Cache) ConvertCache() error {
 		return err
 	}
 
-	err = createTable(db, tableName)
-	if err != nil {
-		return err
+	if reset {
+		err = createTable(db, tableName)
+		if err != nil {
+			return err
+		}
 	}
 
 	log.Println("listing cache entries...")

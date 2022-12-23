@@ -237,7 +237,7 @@ func convertGeoLocationCache(conf *config.Config) error {
 		return err
 	}
 
-	return geoLocCache.ConvertCache()
+	return geoLocCache.ConvertCache(false)
 }
 
 func setLogLevel(logLevel string) error {
