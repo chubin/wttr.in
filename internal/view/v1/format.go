@@ -31,7 +31,7 @@ func formatTemp(c cond) string {
 	color := func(temp int, explicitPlus bool) string {
 		var col int
 		if !config.Inverse {
-			// Extemely cold temperature must be shown with violet
+			// Extremely cold temperature must be shown with violet
 			// because dark blue is too dark
 			col = 165
 			switch temp {
@@ -167,17 +167,6 @@ func formatTemp(c cond) string {
 				unitTemp[config.Imperial]),
 			15)
 	}
-	// if c.FeelsLikeC < t {
-	// 	if c.FeelsLikeC < 0 && t > 0 {
-	// 		explicitPlus = true
-	// 	}
-	// 	return pad(fmt.Sprintf("%s%s%s °%s", color(c.FeelsLikeC, false), hyphen, color(t, explicitPlus), unitTemp[config.Imperial]), 15)
-	// } else if c.FeelsLikeC > t {
-	// 	if t < 0 && c.FeelsLikeC > 0 {
-	// 		explicitPlus = true
-	// 	}
-	// 	return pad(fmt.Sprintf("%s%s%s °%s", color(t, false), hyphen, color(c.FeelsLikeC, explicitPlus), unitTemp[config.Imperial]), 15)
-	// }
 	return pad(fmt.Sprintf("%s °%s", color(c.FeelsLikeC, false), unitTemp[config.Imperial]), 15)
 }
 
@@ -241,7 +230,9 @@ func formatWind(c cond) string {
 	cWindGustKmph := color(c.WindGustKmph)
 	cWindspeedKmph := color(c.WindspeedKmph)
 	if windInRightUnits(c.WindGustKmph) > windInRightUnits(c.WindspeedKmph) {
-		return pad(fmt.Sprintf("%s %s%s%s %s", windDir[c.Winddir16Point], cWindspeedKmph, hyphen, cWindGustKmph, unitWindString), 15)
+		return pad(
+			fmt.Sprintf("%s %s%s%s %s", windDir[c.Winddir16Point], cWindspeedKmph, hyphen, cWindGustKmph, unitWindString),
+			15)
 	}
 
 	return pad(fmt.Sprintf("%s %s %s", windDir[c.Winddir16Point], cWindspeedKmph, unitWindString), 15)
@@ -258,7 +249,7 @@ func formatVisibility(c cond) string {
 func formatRain(c cond) string {
 	rainUnit := float32(c.PrecipMM)
 	if config.Imperial {
-		rainUnit = float32(c.PrecipMM) * 0.039
+		rainUnit = c.PrecipMM * 0.039
 	}
 	if c.ChanceOfRain != "" {
 		return pad(fmt.Sprintf(
@@ -336,9 +327,21 @@ func formatCond(cur []string, c cond, current bool) (ret []string) {
 		}
 	}
 	if config.RightToLeft {
-		ret = append(ret, fmt.Sprintf("%v %v %v", cur[0], desc, icon[0]), fmt.Sprintf("%v %v %v", cur[1], formatTemp(c), icon[1]), fmt.Sprintf("%v %v %v", cur[2], formatWind(c), icon[2]), fmt.Sprintf("%v %v %v", cur[3], formatVisibility(c), icon[3]), fmt.Sprintf("%v %v %v", cur[4], formatRain(c), icon[4]))
+		ret = append(
+			ret,
+			fmt.Sprintf("%v %v %v", cur[0], desc, icon[0]),
+			fmt.Sprintf("%v %v %v", cur[1], formatTemp(c), icon[1]),
+			fmt.Sprintf("%v %v %v", cur[2], formatWind(c), icon[2]),
+			fmt.Sprintf("%v %v %v", cur[3], formatVisibility(c), icon[3]),
+			fmt.Sprintf("%v %v %v", cur[4], formatRain(c), icon[4]))
 	} else {
-		ret = append(ret, fmt.Sprintf("%v %v %v", cur[0], icon[0], desc), fmt.Sprintf("%v %v %v", cur[1], icon[1], formatTemp(c)), fmt.Sprintf("%v %v %v", cur[2], icon[2], formatWind(c)), fmt.Sprintf("%v %v %v", cur[3], icon[3], formatVisibility(c)), fmt.Sprintf("%v %v %v", cur[4], icon[4], formatRain(c)))
+		ret = append(
+			ret,
+			fmt.Sprintf("%v %v %v", cur[0], icon[0], desc),
+			fmt.Sprintf("%v %v %v", cur[1], icon[1], formatTemp(c)),
+			fmt.Sprintf("%v %v %v", cur[2], icon[2], formatWind(c)),
+			fmt.Sprintf("%v %v %v", cur[3], icon[3], formatVisibility(c)),
+			fmt.Sprintf("%v %v %v", cur[4], icon[4], formatRain(c)))
 	}
 
 	return
