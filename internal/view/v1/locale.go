@@ -300,6 +300,7 @@ func unitWind(unit int, lang string) string {
 	if !ok {
 		translation = localizedWind["en"]
 	}
+
 	return translation[unit]
 }
 
@@ -308,6 +309,7 @@ func unitVis(unit bool, lang string) string {
 	if !ok {
 		translation = localizedVis["en"]
 	}
+
 	return translation[unit]
 }
 
@@ -316,5 +318,6 @@ func unitRain(unit bool, lang string) string {
 	if !ok {
 		translation = localizedRain["en"]
 	}
+
 	return translation[unit]
 }

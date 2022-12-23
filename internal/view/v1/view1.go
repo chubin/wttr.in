@@ -49,8 +49,10 @@ func printDay(w weather) (ret []string) {
 	// dateFmt := "┤ " + d.Format("Mon 02. Jan") + " ├"
 
 	if val, ok := locale[config.Lang]; ok {
+
 		lctime.SetLocale(val)
 	} else {
+
 		lctime.SetLocale("en_US")
 	}
 	dateName := ""

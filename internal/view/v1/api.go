@@ -99,7 +99,9 @@ func getDataFromAPI() (ret resp) {
 
 	if debug {
 		var out bytes.Buffer
+
 		json.Indent(&out, body, "", "  ")
+
 		out.WriteTo(os.Stderr)
 		fmt.Print("\n\n")
 	}
@@ -113,6 +115,7 @@ func getDataFromAPI() (ret resp) {
 			log.Println(err)
 		}
 	}
+
 	return
 }
 
@@ -172,5 +175,6 @@ func unmarshalLang(body []byte, r *resp) error {
 	if err := json.NewDecoder(&buf).Decode(r); err != nil {
 		return err
 	}
+
 	return nil
 }

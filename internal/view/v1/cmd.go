@@ -52,6 +52,7 @@ func configload() error {
 	if err == nil {
 		return json.Unmarshal(b, &config)
 	}
+
 	return err
 }
 
@@ -60,6 +61,7 @@ func configsave() error {
 	if err == nil {
 		return ioutil.WriteFile(configpath, j, 0o600)
 	}
+
 	return err
 }
 
