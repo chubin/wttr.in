@@ -10,6 +10,11 @@ import (
 var slotTimes = [slotcount]int{9 * 60, 12 * 60, 18 * 60, 22 * 60}
 
 func printDay(w weather) (ret []string) {
+	var (
+		dateName string
+		names    string
+	)
+
 	hourly := w.Hourly
 	ret = make([]string, 5)
 	for i := range ret {
@@ -53,7 +58,7 @@ func printDay(w weather) (ret []string) {
 	} else {
 		lctime.SetLocale("en_US")
 	}
-	dateName := ""
+
 	if config.RightToLeft {
 		dow := lctime.Strftime("%a", d)
 		day := lctime.Strftime("%d", d)
@@ -102,7 +107,6 @@ func printDay(w weather) (ret []string) {
 			"└──────────────────────────────┴──────────────────────────────┘")
 	}
 
-	names := ""
 	if config.RightToLeft {
 		names = "│" + justifyCenter(trans[3], 29) + "│      " + justifyCenter(trans[2], 16) +
 			"└──────┬──────┘" + justifyCenter(trans[1], 16) + "      │" + justifyCenter(trans[0], 29) + "│"

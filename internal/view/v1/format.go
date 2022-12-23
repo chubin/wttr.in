@@ -29,7 +29,7 @@ var windDir = map[string]string{
 
 func formatTemp(c cond) string {
 	color := func(temp int, explicitPlus bool) string {
-		col := 0
+		var col int
 		if !config.Inverse {
 			// Extemely cold temperature must be shown with violet
 			// because dark blue is too dark
@@ -233,12 +233,10 @@ func formatWind(c cond) string {
 		}
 	}
 
-
-	hyphen := " - "
 	// if (config.Lang == "sl") {
 	//     hyphen = "-"
 	// }
-	hyphen = "-"
+	hyphen := "-"
 
 	cWindGustKmph := color(c.WindGustKmph)
 	cWindspeedKmph := color(c.WindspeedKmph)
