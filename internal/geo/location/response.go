@@ -3,6 +3,7 @@ package location
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/chubin/wttr.in/internal/routing"
@@ -23,6 +24,8 @@ func (c *Cache) Response(r *http.Request) *routing.Cadre {
 
 	loc, err = c.Resolve(locationName)
 	if err != nil {
+		log.Println("geo/location error:", locationName)
+
 		return errorResponse(fmt.Sprint(err))
 	}
 
