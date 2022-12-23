@@ -274,7 +274,7 @@ func formatRain(c cond) string {
 func formatCond(cur []string, c cond, current bool) (ret []string) {
 	var icon []string
 	if i, ok := codes[c.WeatherCode]; !ok {
-		icon = iconUnknown
+		icon = getIcon("iconUnknown")
 	} else {
 		icon = i
 	}

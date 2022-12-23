@@ -14,6 +14,7 @@ import (
 	"strings"
 )
 
+//nolint:tagliatelle
 type cond struct {
 	ChanceOfRain   string  `json:"chanceofrain"`
 	FeelsLikeC     int     `json:",string"`
@@ -49,6 +50,7 @@ type loc struct {
 	Type  string `json:"type"`
 }
 
+//nolint:tagliatelle
 type resp struct {
 	Data struct {
 		Cur     []cond                 `json:"current_condition"`
