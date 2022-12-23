@@ -1,6 +1,8 @@
 package location
 
 import (
+	"database/sql"
+	"errors"
 	"fmt"
 	"log"
 	"os"
@@ -14,7 +16,7 @@ import (
 // ConvertCache converts files-based cache into the DB-based cache.
 // If reset is true, the DB cache is created from scratch.
 //
-//nolint:funlen,cyclop,gocognit
+//nolint:funlen,cyclop
 func (c *Cache) ConvertCache(reset bool) error {
 	var (
 		dbfile     = c.config.Geo.LocationCacheDB
@@ -60,12 +62,28 @@ func (c *Cache) ConvertCache(reset bool) error {
 			continue
 		}
 
+		// Skip too long location names.
+		if len(loc.Name) > 25 {
+			continue
+		}
+
 		// Skip duplicates.
 		if known[loc.Name] {
 			log.Println("skipping", loc.Name)
 
 			continue
 		}
+
+		singleLocation := Location{}
+		err = db.Select(&singleLocation).
+			Where("name = ?", loc.Name).
+			Do()
+		if !errors.Is(err, sql.ErrNoRows) {
+			log.Println("found in db:", loc.Name)
+
+			continue
+		}
+
 		known[loc.Name] = true
 
 		// Skip some invalid names.
