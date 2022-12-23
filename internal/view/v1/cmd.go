@@ -20,7 +20,7 @@ import (
 	"github.com/mattn/go-runewidth"
 )
 
-type configuration struct {
+type Configuration struct {
 	APIKey       string
 	City         string
 	Numdays      int
@@ -36,7 +36,7 @@ type configuration struct {
 
 var (
 	ansiEsc    *regexp.Regexp
-	config     configuration
+	config     Configuration
 	configpath string
 	debug      bool
 )
@@ -98,7 +98,7 @@ func init() {
 	ansiEsc = regexp.MustCompile("\033.*?m")
 }
 
-func main() {
+func Cmd() {
 	flag.Parse()
 
 	r := getDataFromAPI()
