@@ -1,7 +1,7 @@
 package v1
 
-var (
-	locale = map[string]string{
+func locale() map[string]string {
+	return map[string]string{
 		"af":     "af_ZA",
 		"am":     "am_ET",
 		"ar":     "ar_TN",
@@ -73,8 +73,10 @@ var (
 		"zh":     "zh_CN",
 		"zu":     "zu_ZA",
 	}
+}
 
-	localizedCaption = map[string]string{
+func localizedCaption() map[string]string {
+	return map[string]string{
 		"af":     "Weer verslag vir:",
 		"am":     "የአየር ሁኔታ ዘገባ ለ ፥",
 		"ar":     "تقرير حالة ألطقس",
@@ -147,9 +149,11 @@ var (
 		"zh-tw":  "天氣預報：",
 		"mg":     "Vinavina toetr'andro hoan'ny:",
 	}
+}
 
-	//nolint:misspell
-	daytimeTranslation = map[string][]string{
+//nolint:misspell
+func daytimeTranslation() map[string][]string {
+	return map[string][]string{
 		"af":     {"Oggend", "Middag", "Vroegaand", "Laatnag"},
 		"am":     {"ጠዋት", "ከሰዓት በኋላ", "ምሽት", "ሌሊት"},
 		"ar":     {"ﺎﻠﻠﻴﻟ", "ﺎﻠﻤﺳﺍﺀ", "ﺎﻠﻈﻫﺭ", "ﺎﻠﺼﺑﺎﺣ"},
@@ -223,13 +227,17 @@ var (
 		"zu":     {"Morning", "Noon", "Evening", "Night"},
 		"mg":     {"Maraina", "Tolakandro", "Ariva", "Alina"},
 	}
+}
 
-	unitTemp = map[bool]string{
+func unitTemp() map[bool]string {
+	return map[bool]string{
 		false: "C",
 		true:  "F",
 	}
+}
 
-	localizedRain = map[string]map[bool]string{
+func localizedRain() map[string]map[bool]string {
+	return map[string]map[bool]string{
 		"en": {
 			false: "mm",
 			true:  "in",
@@ -247,8 +255,10 @@ var (
 			true:  "in",
 		},
 	}
+}
 
-	localizedVis = map[string]map[bool]string{
+func localizedVis() map[string]map[bool]string {
+	return map[string]map[bool]string{
 		"en": {
 			false: "km",
 			true:  "mi",
@@ -266,8 +276,10 @@ var (
 			true:  "mi",
 		},
 	}
+}
 
-	localizedWind = map[string]map[int]string{
+func localizedWind() map[string]map[int]string {
+	return map[string]map[int]string{
 		"en": {
 			0: "km/h",
 			1: "mph",
@@ -294,30 +306,30 @@ var (
 			2: "м/c",
 		},
 	}
-)
+}
 
 func unitWind(unit int, lang string) string {
-	translation, ok := localizedWind[lang]
+	translation, ok := localizedWind()[lang]
 	if !ok {
-		translation = localizedWind["en"]
+		translation = localizedWind()["en"]
 	}
 
 	return translation[unit]
 }
 
 func unitVis(unit bool, lang string) string {
-	translation, ok := localizedVis[lang]
+	translation, ok := localizedVis()[lang]
 	if !ok {
-		translation = localizedVis["en"]
+		translation = localizedVis()["en"]
 	}
 
 	return translation[unit]
 }
 
 func unitRain(unit bool, lang string) string {
-	translation, ok := localizedRain[lang]
+	translation, ok := localizedRain()[lang]
 	if !ok {
-		translation = localizedRain["en"]
+		translation = localizedRain()["en"]
 	}
 
 	return translation[unit]

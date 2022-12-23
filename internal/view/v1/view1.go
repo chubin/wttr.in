@@ -7,9 +7,11 @@ import (
 	"github.com/klauspost/lctime"
 )
 
-var slotTimes = [slotcount]int{9 * 60, 12 * 60, 18 * 60, 22 * 60}
+func slotTimes() []int {
+	return []int{9 * 60, 12 * 60, 18 * 60, 22 * 60}
+}
 
-func printDay(w weather) []string {
+func (g *global) printDay(w weather) []string {
 	var (
 		ret      []string
 		dateName string
@@ -27,25 +29,25 @@ func printDay(w weather) []string {
 	for _, h := range hourly {
 		c := int(math.Mod(float64(h.Time), 100)) + 60*(h.Time/100)
 		for i, s := range slots {
-			if math.Abs(float64(c-slotTimes[i])) < math.Abs(float64(s.Time-slotTimes[i])) {
+			if math.Abs(float64(c-slotTimes()[i])) < math.Abs(float64(s.Time-slotTimes()[i])) {
 				h.Time = c
 				slots[i] = h
 			}
 		}
 	}
 
-	if config.RightToLeft {
+	if g.config.RightToLeft {
 		slots[0], slots[3] = slots[3], slots[0]
 		slots[1], slots[2] = slots[2], slots[1]
 	}
 
 	for i, s := range slots {
-		if config.Narrow {
+		if g.config.Narrow {
 			if i == 0 || i == 2 {
 				continue
 			}
 		}
-		ret = formatCond(ret, s, false)
+		ret = g.formatCond(ret, s, false)
 		for i := range ret {
 			ret[i] = ret[i] + "│"
 		}
@@ -54,23 +56,23 @@ func printDay(w weather) []string {
 	d, _ := time.Parse("2006-01-02", w.Date)
 	// dateFmt := "┤ " + d.Format("Mon 02. Jan") + " ├"
 
-	if val, ok := locale[config.Lang]; ok {
+	if val, ok := locale()[g.config.Lang]; ok {
 		lctime.SetLocale(val)
 	} else {
 		lctime.SetLocale("en_US")
 	}
 
-	if config.RightToLeft {
+	if g.config.RightToLeft {
 		dow := lctime.Strftime("%a", d)
 		day := lctime.Strftime("%d", d)
 		month := lctime.Strftime("%b", d)
 		dateName = reverse(month) + " " + day + " " + reverse(dow)
 	} else {
 		dateName = lctime.Strftime("%a %d %b", d)
-		if config.Lang == "ko" {
+		if g.config.Lang == "ko" {
 			dateName = lctime.Strftime("%b %d일 %a", d)
 		}
-		if config.Lang == "zh" || config.Lang == "zh-tw" || config.Lang == "zh-cn" {
+		if g.config.Lang == "zh" || g.config.Lang == "zh-tw" || g.config.Lang == "zh-cn" {
 			dateName = lctime.Strftime("%b%d日%A", d)
 		}
 	}
@@ -88,11 +90,11 @@ func printDay(w weather) []string {
 
 	dateFmt := "┤" + justifyCenter(dateName, 12) + "├"
 
-	trans := daytimeTranslation["en"]
-	if t, ok := daytimeTranslation[config.Lang]; ok {
+	trans := daytimeTranslation()["en"]
+	if t, ok := daytimeTranslation()[g.config.Lang]; ok {
 		trans = t
 	}
-	if config.Narrow {
+	if g.config.Narrow {
 		names := "│      " + justifyCenter(trans[1], 16) +
 			"└──────┬──────┘" + justifyCenter(trans[3], 16) + "      │"
 
@@ -108,7 +110,7 @@ func printDay(w weather) []string {
 			"└──────────────────────────────┴──────────────────────────────┘")
 	}
 
-	if config.RightToLeft {
+	if g.config.RightToLeft {
 		names = "│" + justifyCenter(trans[3], 29) + "│      " + justifyCenter(trans[2], 16) +
 			"└──────┬──────┘" + justifyCenter(trans[1], 16) + "      │" + justifyCenter(trans[0], 29) + "│"
 	} else {
