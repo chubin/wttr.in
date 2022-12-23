@@ -229,65 +229,65 @@ var (
 	}
 
 	localizedRain = map[string]map[bool]string{
-		"en": map[bool]string{
+		"en": {
 			false: "mm",
 			true:  "in",
 		},
-		"be": map[bool]string{
+		"be": {
 			false: "мм",
 			true:  "in",
 		},
-		"ru": map[bool]string{
+		"ru": {
 			false: "мм",
 			true:  "in",
 		},
-		"uk": map[bool]string{
+		"uk": {
 			false: "мм",
 			true:  "in",
 		},
 	}
 
 	localizedVis = map[string]map[bool]string{
-		"en": map[bool]string{
+		"en": {
 			false: "km",
 			true:  "mi",
 		},
-		"be": map[bool]string{
+		"be": {
 			false: "км",
 			true:  "mi",
 		},
-		"ru": map[bool]string{
+		"ru": {
 			false: "км",
 			true:  "mi",
 		},
-		"uk": map[bool]string{
+		"uk": {
 			false: "км",
 			true:  "mi",
 		},
 	}
 
 	localizedWind = map[string]map[int]string{
-		"en": map[int]string{
+		"en": {
 			0: "km/h",
 			1: "mph",
 			2: "m/s",
 		},
-		"be": map[int]string{
+		"be": {
 			0: "км/г",
 			1: "mph",
 			2: "м/c",
 		},
-		"ru": map[int]string{
+		"ru": {
 			0: "км/ч",
 			1: "mph",
 			2: "м/c",
 		},
-		"tr": map[int]string{
+		"tr": {
 			0: "km/sa",
 			1: "mph",
 			2: "m/s",
 		},
-		"uk": map[int]string{
+		"uk": {
 			0: "км/год",
 			1: "mph",
 			2: "м/c",

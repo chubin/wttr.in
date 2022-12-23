@@ -58,7 +58,7 @@ func configload() error {
 func configsave() error {
 	j, err := json.MarshalIndent(config, "", "\t")
 	if err == nil {
-		return ioutil.WriteFile(configpath, j, 0600)
+		return ioutil.WriteFile(configpath, j, 0o600)
 	}
 	return err
 }

@@ -8,30 +8,28 @@ import (
 	"github.com/mattn/go-runewidth"
 )
 
-var (
-	windDir = map[string]string{
-		"N":   "\033[1m↓\033[0m",
-		"NNE": "\033[1m↓\033[0m",
-		"NE":  "\033[1m↙\033[0m",
-		"ENE": "\033[1m↙\033[0m",
-		"E":   "\033[1m←\033[0m",
-		"ESE": "\033[1m←\033[0m",
-		"SE":  "\033[1m↖\033[0m",
-		"SSE": "\033[1m↖\033[0m",
-		"S":   "\033[1m↑\033[0m",
-		"SSW": "\033[1m↑\033[0m",
-		"SW":  "\033[1m↗\033[0m",
-		"WSW": "\033[1m↗\033[0m",
-		"W":   "\033[1m→\033[0m",
-		"WNW": "\033[1m→\033[0m",
-		"NW":  "\033[1m↘\033[0m",
-		"NNW": "\033[1m↘\033[0m",
-	}
-)
+var windDir = map[string]string{
+	"N":   "\033[1m↓\033[0m",
+	"NNE": "\033[1m↓\033[0m",
+	"NE":  "\033[1m↙\033[0m",
+	"ENE": "\033[1m↙\033[0m",
+	"E":   "\033[1m←\033[0m",
+	"ESE": "\033[1m←\033[0m",
+	"SE":  "\033[1m↖\033[0m",
+	"SSE": "\033[1m↖\033[0m",
+	"S":   "\033[1m↑\033[0m",
+	"SSW": "\033[1m↑\033[0m",
+	"SW":  "\033[1m↗\033[0m",
+	"WSW": "\033[1m↗\033[0m",
+	"W":   "\033[1m→\033[0m",
+	"WNW": "\033[1m→\033[0m",
+	"NW":  "\033[1m↘\033[0m",
+	"NNW": "\033[1m↘\033[0m",
+}
 
 func formatTemp(c cond) string {
 	color := func(temp int, explicitPlus bool) string {
-		var col = 0
+		col := 0
 		if !config.Inverse {
 			// Extemely cold temperature must be shown with violet
 			// because dark blue is too dark
@@ -193,7 +191,7 @@ func formatWind(c cond) string {
 		return spd
 	}
 	color := func(spd int) string {
-		var col = 46
+		col := 46
 		switch spd {
 		case 1, 2, 3:
 			col = 82
@@ -286,7 +284,7 @@ func formatCond(cur []string, c cond, current bool) (ret []string) {
 			icon[i] = strings.Replace(icon[i], "38;5;251", "38;5;238", -1)
 		}
 	}
-	//desc := fmt.Sprintf("%-15.15v", c.WeatherDesc[0].Value)
+	// desc := fmt.Sprintf("%-15.15v", c.WeatherDesc[0].Value)
 	desc := c.WeatherDesc[0].Value
 	if config.RightToLeft {
 		for runewidth.StringWidth(desc) < 15 {
@@ -325,7 +323,7 @@ func formatCond(cur []string, c cond, current bool) (ret []string) {
 		} else {
 			if lastRune, size := utf8.DecodeLastRuneInString(desc); lastRune != ' ' {
 				desc = desc[:len(desc)-size] + "…"
-				//for numberOfSpaces < runewidth.StringWidth(fmt.Sprintf("%c", lastRune)) - 1 {
+				// for numberOfSpaces < runewidth.StringWidth(fmt.Sprintf("%c", lastRune)) - 1 {
 				for runewidth.StringWidth(desc) < 15 {
 					desc = desc + " "
 				}

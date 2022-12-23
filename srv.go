@@ -17,7 +17,7 @@ import (
 	"github.com/chubin/wttr.in/internal/logging"
 	"github.com/chubin/wttr.in/internal/processor"
 	"github.com/chubin/wttr.in/internal/types"
-	"github.com/chubin/wttr.in/internal/view/v1"
+	v1 "github.com/chubin/wttr.in/internal/view/v1"
 )
 
 //nolint:gochecknoglobals
@@ -31,7 +31,7 @@ var cli struct {
 	GeoResolve              string `name:"geo-resolve" help:"Resolve location"`
 	LogLevel                string `name:"log-level" short:"l" help:"Show log messages with level" default:"info"`
 
-	V1 struct v1.Configuration
+	V1 v1.Configuration
 }
 
 const logLineStart = "LOG_LINE_START "
