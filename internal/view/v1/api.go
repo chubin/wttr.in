@@ -60,8 +60,11 @@ type resp struct {
 	} `json:"data"`
 }
 
-func getDataFromAPI() (ret resp) {
-	var params []string
+func getDataFromAPI() resp {
+	var (
+		ret    resp
+		params []string
+	)
 
 	if len(config.APIKey) == 0 {
 		log.Fatal("No API key specified. Setup instructions are in the README.")
@@ -118,7 +121,7 @@ func getDataFromAPI() (ret resp) {
 		}
 	}
 
-	return
+	return ret
 }
 
 func unmarshalLang(body []byte, r *resp) error {

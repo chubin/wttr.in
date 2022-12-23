@@ -148,6 +148,7 @@ var (
 		"mg":     "Vinavina toetr'andro hoan'ny:",
 	}
 
+	//nolint:misspell
 	daytimeTranslation = map[string][]string{
 		"af":     {"Oggend", "Middag", "Vroegaand", "Laatnag"},
 		"am":     {"ጠዋት", "ከሰዓት በኋላ", "ምሽት", "ሌሊት"},

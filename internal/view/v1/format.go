@@ -167,6 +167,7 @@ func formatTemp(c cond) string {
 				unitTemp[config.Imperial]),
 			15)
 	}
+
 	return pad(fmt.Sprintf("%s °%s", color(c.FeelsLikeC, false), unitTemp[config.Imperial]), 15)
 }
 
@@ -247,7 +248,7 @@ func formatVisibility(c cond) string {
 }
 
 func formatRain(c cond) string {
-	rainUnit := float32(c.PrecipMM)
+	rainUnit := c.PrecipMM
 	if config.Imperial {
 		rainUnit = c.PrecipMM * 0.039
 	}
@@ -262,8 +263,12 @@ func formatRain(c cond) string {
 	return pad(fmt.Sprintf("%.1f %s", rainUnit, unitRain(config.Imperial, config.Lang)), 15)
 }
 
-func formatCond(cur []string, c cond, current bool) (ret []string) {
-	var icon []string
+func formatCond(cur []string, c cond, current bool) []string {
+	var (
+		ret  []string
+		icon []string
+	)
+
 	if i, ok := codes[c.WeatherCode]; !ok {
 		icon = getIcon("iconUnknown")
 	} else {
@@ -344,7 +349,7 @@ func formatCond(cur []string, c cond, current bool) (ret []string) {
 			fmt.Sprintf("%v %v %v", cur[4], icon[4], formatRain(c)))
 	}
 
-	return
+	return ret
 }
 
 func justifyCenter(s string, width int) string {
@@ -371,7 +376,8 @@ func reverse(s string) string {
 	return string(r)
 }
 
-func pad(s string, mustLen int) (ret string) {
+func pad(s string, mustLen int) string {
+	var ret string
 	ret = s
 	realLen := utf8.RuneCountInString(ansiEsc.ReplaceAllLiteralString(s, ""))
 	delta := mustLen - realLen
@@ -392,5 +398,5 @@ func pad(s string, mustLen int) (ret string) {
 		}
 	}
 
-	return
+	return ret
 }

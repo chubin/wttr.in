@@ -9,8 +9,9 @@ import (
 
 var slotTimes = [slotcount]int{9 * 60, 12 * 60, 18 * 60, 22 * 60}
 
-func printDay(w weather) (ret []string) {
+func printDay(w weather) []string {
 	var (
+		ret      []string
 		dateName string
 		names    string
 	)
