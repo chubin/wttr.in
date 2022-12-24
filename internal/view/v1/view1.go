@@ -11,15 +11,15 @@ func slotTimes() []int {
 	return []int{9 * 60, 12 * 60, 18 * 60, 22 * 60}
 }
 
+//nolint:funlen,gocognit,cyclop
 func (g *global) printDay(w weather) ([]string, error) {
 	var (
-		ret      []string
+		ret      = []string{}
 		dateName string
 		names    string
 	)
 
 	hourly := w.Hourly
-	ret = make([]string, 5)
 	for i := range ret {
 		ret[i] = "│"
 	}
@@ -82,17 +82,6 @@ func (g *global) printDay(w weather) ([]string, error) {
 			dateName = lctime.Strftime("%b%d日%A", d)
 		}
 	}
-	// appendSide := 0
-	// // for utf8.RuneCountInString(dateName) <= dateWidth {
-	// for runewidth.StringWidth(dateName) <= dateWidth {
-	//     if appendSide == 1 {
-	//         dateName = dateName + " "
-	//         appendSide = 0
-	//     } else {
-	//         dateName = " " + dateName
-	//         appendSide = 1
-	//     }
-	// }
 
 	dateFmt := "┤" + justifyCenter(dateName, 12) + "├"
 

@@ -1,5 +1,6 @@
 package v1
 
+//nolint:funlen
 func getIcon(name string) []string {
 	icon := map[string][]string{
 		"iconUnknown": {

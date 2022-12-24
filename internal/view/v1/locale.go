@@ -1,5 +1,6 @@
 package v1
 
+//nolint:funlen
 func locale() map[string]string {
 	return map[string]string{
 		"af":     "af_ZA",
@@ -75,6 +76,7 @@ func locale() map[string]string {
 	}
 }
 
+//nolint:funlen
 func localizedCaption() map[string]string {
 	return map[string]string{
 		"af":     "Weer verslag vir:",
@@ -151,7 +153,7 @@ func localizedCaption() map[string]string {
 	}
 }
 
-//nolint:misspell
+//nolint:misspell,funlen
 func daytimeTranslation() map[string][]string {
 	return map[string][]string{
 		"af":     {"Oggend", "Middag", "Vroegaand", "Laatnag"},

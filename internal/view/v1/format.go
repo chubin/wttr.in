@@ -1,3 +1,4 @@
+//nolint:funlen,nestif,cyclop,gocognit,gocyclo
 package v1
 
 import (
@@ -32,6 +33,7 @@ func windDir() map[string]string {
 func (g *global) formatTemp(c cond) string {
 	color := func(temp int, explicitPlus bool) string {
 		var col int
+		//nolint:dupl
 		if !g.config.Inverse {
 			// Extremely cold temperature must be shown with violet
 			// because dark blue is too dark
@@ -174,46 +176,6 @@ func (g *global) formatTemp(c cond) string {
 }
 
 func (g *global) formatWind(c cond) string {
-	windInRightUnits := func(spd int) int {
-		if g.config.WindMS {
-			spd = (spd * 1000) / 3600
-		} else if g.config.Imperial {
-			spd = (spd * 1000) / 1609
-		}
-
-		return spd
-	}
-	color := func(spd int) string {
-		col := 46
-		switch spd {
-		case 1, 2, 3:
-			col = 82
-		case 4, 5, 6:
-			col = 118
-		case 7, 8, 9:
-			col = 154
-		case 10, 11, 12:
-			col = 190
-		case 13, 14, 15:
-			col = 226
-		case 16, 17, 18, 19:
-			col = 220
-		case 20, 21, 22, 23:
-			col = 214
-		case 24, 25, 26, 27:
-			col = 208
-		case 28, 29, 30, 31:
-			col = 202
-		default:
-			if spd > 0 {
-				col = 196
-			}
-		}
-		spd = windInRightUnits(spd)
-
-		return fmt.Sprintf("\033[38;5;%03dm%d\033[0m", col, spd)
-	}
-
 	unitWindString := unitWind(0, g.config.Lang)
 	if g.config.WindMS {
 		unitWindString = unitWind(2, g.config.Lang)
@@ -221,20 +183,58 @@ func (g *global) formatWind(c cond) string {
 		unitWindString = unitWind(1, g.config.Lang)
 	}
 
-	// if (config.Lang == "sl") {
-	//     hyphen = "-"
-	// }
 	hyphen := "-"
 
-	cWindGustKmph := color(c.WindGustKmph)
-	cWindspeedKmph := color(c.WindspeedKmph)
-	if windInRightUnits(c.WindGustKmph) > windInRightUnits(c.WindspeedKmph) {
+	cWindGustKmph := speedToColor(c.WindGustKmph, windInRightUnits(c.WindGustKmph, g.config.WindMS, g.config.Imperial))
+	cWindspeedKmph := speedToColor(c.WindspeedKmph, windInRightUnits(c.WindspeedKmph, g.config.WindMS, g.config.Imperial))
+	if windInRightUnits(c.WindGustKmph, g.config.WindMS, g.config.Imperial) >
+		windInRightUnits(c.WindspeedKmph, g.config.WindMS, g.config.Imperial) {
 		return g.pad(
 			fmt.Sprintf("%s %s%s%s %s", windDir()[c.Winddir16Point], cWindspeedKmph, hyphen, cWindGustKmph, unitWindString),
 			15)
 	}
 
 	return g.pad(fmt.Sprintf("%s %s %s", windDir()[c.Winddir16Point], cWindspeedKmph, unitWindString), 15)
+}
+
+func windInRightUnits(spd int, windMS, imperial bool) int {
+	if windMS {
+		spd = (spd * 1000) / 3600
+	} else if imperial {
+		spd = (spd * 1000) / 1609
+	}
+
+	return spd
+}
+
+func speedToColor(spd, spdConverted int) string {
+	col := 46
+	switch spd {
+	case 1, 2, 3:
+		col = 82
+	case 4, 5, 6:
+		col = 118
+	case 7, 8, 9:
+		col = 154
+	case 10, 11, 12:
+		col = 190
+	case 13, 14, 15:
+		col = 226
+	case 16, 17, 18, 19:
+		col = 220
+	case 20, 21, 22, 23:
+		col = 214
+	case 24, 25, 26, 27:
+		col = 208
+	case 28, 29, 30, 31:
+		col = 202
+	default:
+		if spd > 0 {
+			col = 196
+		}
+	}
+
+	return fmt.Sprintf("\033[38;5;%03dm%d\033[0m", col, spdConverted)
 }
 
 func (g *global) formatVisibility(c cond) string {

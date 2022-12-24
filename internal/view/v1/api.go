@@ -1,3 +1,4 @@
+//nolint:forbidigo,funlen,nestif,goerr113,gocognit,cyclop
 package v1
 
 import (

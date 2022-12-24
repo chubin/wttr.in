@@ -1,11 +1,12 @@
 // This code represents wttr.in view v1.
 // It is based on wego (github.com/schachmat/wego) from which it diverged back in 2016.
 
+//nolint:forbidigo,funlen,gocognit,cyclop
 package v1
 
 import (
-	_ "crypto/sha512"
 	"encoding/json"
+	"errors"
 	"flag"
 	"fmt"
 	"io/ioutil"
@@ -88,7 +89,8 @@ func (g *global) init() {
 	g.config.Imperial = false
 	g.config.Lang = "en"
 	err := g.configload()
-	if _, ok := err.(*os.PathError); ok {
+	var pathError *os.PathError
+	if errors.Is(err, pathError) {
 		log.Printf("No config file found. Creating %s ...", g.configpath)
 		if err2 := g.configsave(); err2 != nil {
 			log.Fatal(err2)
