@@ -66,7 +66,7 @@ func (g *global) getDataFromAPI() (*resp, error) {
 	)
 
 	if len(g.config.APIKey) == 0 {
-		return nil, fmt.Errorf("No API key specified. Setup instructions are in the README.")
+		return nil, fmt.Errorf("no API key specified. Setup instructions are in the README")
 	}
 	params = append(params, "key="+g.config.APIKey)
 
