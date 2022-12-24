@@ -11,7 +11,7 @@ func slotTimes() []int {
 	return []int{9 * 60, 12 * 60, 18 * 60, 22 * 60}
 }
 
-func (g *global) printDay(w weather) []string {
+func (g *global) printDay(w weather) ([]string, error) {
 	var (
 		ret      []string
 		dateName string
@@ -49,7 +49,7 @@ func (g *global) printDay(w weather) []string {
 		}
 		ret = g.formatCond(ret, s, false)
 		for i := range ret {
-			ret[i] = ret[i] + "│"
+			ret[i] += "│"
 		}
 	}
 
@@ -57,9 +57,15 @@ func (g *global) printDay(w weather) []string {
 	// dateFmt := "┤ " + d.Format("Mon 02. Jan") + " ├"
 
 	if val, ok := locale()[g.config.Lang]; ok {
-		lctime.SetLocale(val)
+		err := lctime.SetLocale(val)
+		if err != nil {
+			return nil, err
+		}
 	} else {
-		lctime.SetLocale("en_US")
+		err := lctime.SetLocale("en_US")
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	if g.config.RightToLeft {
@@ -107,7 +113,8 @@ func (g *global) printDay(w weather) []string {
 			ret...)
 
 		return append(ret,
-			"└──────────────────────────────┴──────────────────────────────┘")
+				"└──────────────────────────────┴──────────────────────────────┘"),
+			nil
 	}
 
 	if g.config.RightToLeft {
@@ -129,5 +136,6 @@ func (g *global) printDay(w weather) []string {
 
 	//nolint:lll
 	return append(ret,
-		"└──────────────────────────────┴──────────────────────────────┴──────────────────────────────┴──────────────────────────────┘")
+			"└──────────────────────────────┴──────────────────────────────┴──────────────────────────────┴──────────────────────────────┘"),
+		nil
 }

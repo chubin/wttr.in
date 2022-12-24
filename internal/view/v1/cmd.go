@@ -100,13 +100,16 @@ func (g *global) init() {
 	g.ansiEsc = regexp.MustCompile("\033.*?m")
 }
 
-func Cmd() {
+func Cmd() error {
 	g := global{}
 	g.init()
 
 	flag.Parse()
 
-	r := g.getDataFromAPI()
+	r, err := g.getDataFromAPI()
+	if err != nil {
+		return err
+	}
 
 	if r.Data.Req == nil || len(r.Data.Req) < 1 {
 		if r.Data.Err != nil && len(r.Data.Err) >= 1 {
@@ -148,14 +151,20 @@ func Cmd() {
 	}
 
 	if g.config.Numdays == 0 {
-		return
+		return nil
 	}
 	if r.Data.Weather == nil {
 		log.Fatal("No detailed weather forecast available.")
 	}
 	for _, d := range r.Data.Weather {
-		for _, val := range g.printDay(d) {
+		lines, err := g.printDay(d)
+		if err != nil {
+			return err
+		}
+		for _, val := range lines {
 			fmt.Fprintln(stdout, val)
 		}
 	}
+
+	return nil
 }

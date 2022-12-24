@@ -6,7 +6,6 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"net/url"
 	"os"
@@ -60,14 +59,14 @@ type resp struct {
 	} `json:"data"`
 }
 
-func (g *global) getDataFromAPI() resp {
+func (g *global) getDataFromAPI() (*resp, error) {
 	var (
 		ret    resp
 		params []string
 	)
 
 	if len(g.config.APIKey) == 0 {
-		log.Fatal("No API key specified. Setup instructions are in the README.")
+		return nil, fmt.Errorf("No API key specified. Setup instructions are in the README.")
 	}
 	params = append(params, "key="+g.config.APIKey)
 
@@ -94,34 +93,41 @@ func (g *global) getDataFromAPI() resp {
 
 	res, err := http.Get(wuri + strings.Join(params, "&"))
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 	defer res.Body.Close()
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
 	if g.debug {
 		var out bytes.Buffer
 
-		json.Indent(&out, body, "", "  ")
+		err := json.Indent(&out, body, "", "  ")
+		if err != nil {
+			return nil, err
+		}
 
-		out.WriteTo(os.Stderr)
+		_, err = out.WriteTo(os.Stderr)
+		if err != nil {
+			return nil, err
+		}
+
 		fmt.Print("\n\n")
 	}
 
 	if g.config.Lang == "" {
 		if err = json.Unmarshal(body, &ret); err != nil {
-			log.Println(err)
+			return nil, err
 		}
 	} else {
 		if err = g.unmarshalLang(body, &ret); err != nil {
-			log.Println(err)
+			return nil, err
 		}
 	}
 
-	return ret
+	return &ret, nil
 }
 
 func (g *global) unmarshalLang(body []byte, r *resp) error {

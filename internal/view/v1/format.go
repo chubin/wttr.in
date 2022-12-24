@@ -177,10 +177,8 @@ func (g *global) formatWind(c cond) string {
 	windInRightUnits := func(spd int) int {
 		if g.config.WindMS {
 			spd = (spd * 1000) / 3600
-		} else {
-			if g.config.Imperial {
-				spd = (spd * 1000) / 1609
-			}
+		} else if g.config.Imperial {
+			spd = (spd * 1000) / 1609
 		}
 
 		return spd
@@ -219,10 +217,8 @@ func (g *global) formatWind(c cond) string {
 	unitWindString := unitWind(0, g.config.Lang)
 	if g.config.WindMS {
 		unitWindString = unitWind(2, g.config.Lang)
-	} else {
-		if g.config.Imperial {
-			unitWindString = unitWind(1, g.config.Lang)
-		}
+	} else if g.config.Imperial {
+		unitWindString = unitWind(1, g.config.Lang)
 	}
 
 	// if (config.Lang == "sl") {
@@ -279,12 +275,12 @@ func (g *global) formatCond(cur []string, c cond, current bool) []string {
 	if g.config.Inverse {
 		// inverting colors
 		for i := range icon {
-			icon[i] = strings.Replace(icon[i], "38;5;226", "38;5;94", -1)
-			icon[i] = strings.Replace(icon[i], "38;5;250", "38;5;243", -1)
-			icon[i] = strings.Replace(icon[i], "38;5;21", "38;5;18", -1)
-			icon[i] = strings.Replace(icon[i], "38;5;255", "38;5;245", -1)
-			icon[i] = strings.Replace(icon[i], "38;5;111", "38;5;63", -1)
-			icon[i] = strings.Replace(icon[i], "38;5;251", "38;5;238", -1)
+			icon[i] = strings.ReplaceAll(icon[i], "38;5;226", "38;5;94")
+			icon[i] = strings.ReplaceAll(icon[i], "38;5;250", "38;5;243")
+			icon[i] = strings.ReplaceAll(icon[i], "38;5;21", "38;5;18")
+			icon[i] = strings.ReplaceAll(icon[i], "38;5;255", "38;5;245")
+			icon[i] = strings.ReplaceAll(icon[i], "38;5;111", "38;5;63")
+			icon[i] = strings.ReplaceAll(icon[i], "38;5;251", "38;5;238")
 		}
 	}
 	// desc := fmt.Sprintf("%-15.15v", c.WeatherDesc[0].Value)
@@ -328,7 +324,7 @@ func (g *global) formatCond(cur []string, c cond, current bool) []string {
 				desc = desc[:len(desc)-size] + "…"
 				// for numberOfSpaces < runewidth.StringWidth(fmt.Sprintf("%c", lastRune)) - 1 {
 				for runewidth.StringWidth(desc) < 15 {
-					desc = desc + " "
+					desc += " "
 				}
 			}
 		}
@@ -358,7 +354,7 @@ func justifyCenter(s string, width int) string {
 	appendSide := 0
 	for runewidth.StringWidth(s) <= width {
 		if appendSide == 1 {
-			s = s + " "
+			s += " "
 			appendSide = 0
 		} else {
 			s = " " + s
