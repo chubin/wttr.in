@@ -29,6 +29,7 @@ type configuration struct {
 	Inverse      bool
 	Lang         string
 	Narrow       bool
+	NarrowFull   bool
 	LocationName string
 	WindMS       bool
 	RightToLeft  bool
@@ -71,6 +72,7 @@ func init() {
 	flag.BoolVar(&config.Imperial, "imperial", false, "Use imperial units")
 	flag.BoolVar(&config.Inverse, "inverse", false, "Use inverted colors")
 	flag.BoolVar(&config.Narrow, "narrow", false, "Narrow output (two columns)")
+	flag.BoolVar(&config.NarrowFull, "narrow-full", false, "Narrow output w/ all dayparts (two columns, two rows)")
 	flag.StringVar(&config.LocationName, "location_name", "", "Location name (used in the caption)")
 	flag.BoolVar(&config.WindMS, "wind_in_ms", false, "Show wind speed in m/s")
 	flag.BoolVar(&config.RightToLeft, "right_to_left", false, "Right to left script")

@@ -81,6 +81,8 @@ def parse_query(args):
         result['force-ansi'] = True
     if 'n' in q:
         result['narrow'] = True
+    if 'N' in q:
+        result['narrow-full'] = True
     if 'm' in q:
         result['use_metric'] = True
     if 'M' in q:
