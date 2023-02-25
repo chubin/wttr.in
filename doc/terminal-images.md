@@ -59,11 +59,11 @@ uxterm -ti vt340
 To view images in kitty:
 
 ```
-curl -s v3.wttr.in/Tabasco.png | kitty icat --align=left
+curl -s v3.wttr.in/Tabasco.png | kitten icat --align=left
 ```
 
 or even without `curl` at  all, because `icat` knows how to handle URLs:
 
 ```
-kitty icat --align=left https://v3.wttr.in/Tabasco.png
+kitten icat --align=left https://v3.wttr.in/Tabasco.png
 ```
