@@ -252,7 +252,7 @@ ${texeci 1800 curl wttr.in/kyiv_0pq_lang=uk.png
 ${image $HOME/.config/conky/out.png -p 0,0}
 ```
 
-![wttr.in in weechat status bar](https://user-images.githubusercontent.com/3875145/172178453-9e9ed9e3-9815-426a-9a21-afdd6e279fc8.png)
+![wttr.in in conky](https://user-images.githubusercontent.com/3875145/172178453-9e9ed9e3-9815-426a-9a21-afdd6e279fc8.png)
 
 ### Emojis support
 
