@@ -227,17 +227,19 @@ set -g status-right "$WEATHER ..."
 ```
 ![wttr.in in tmux status bar](https://wttr.in/files/example-tmux-status-line.png)
 
-### Weechat
+### WeeChat
 
-To embed in to an IRC ([Weechat](https://github.com/weechat/weechat)) client's existing status bar:
+To embed in to an IRC ([WeeChat](https://github.com/weechat/weechat)) client's existing status bar:
 
 ```
-/alias add wttr /exec -pipe "/set plugins.var.python.text_item.wttr all" url:wttr.in/Montreal?format=%l:+%c+%f+%h+%p+%P+%m+%w+%S+%s
+/alias add wttr /exec -pipe "/mute /set plugins.var.wttr" url:wttr.in/Montreal?format=%l:+%c+%f+%h+%p+%P+%m+%w+%S+%s;/wait 3 /item refresh wttr
 /trigger add wttr timer 60000;0;0 "" "" "/wttr"
-/eval /set weechat.bar.status.items ${weechat.bar.status.items},wttr
+/item add wttr "" "${plugins.var.wttr}"
+/eval /set weechat.bar.status.items ${weechat.bar.status.items},spacer,wttr
 /eval /set weechat.startup.command_after_plugins ${weechat.startup.command_after_plugins};/wttr
+/wttr
 ```
-![wttr.in in weechat status bar](https://i.imgur.com/IyvbxjL.png)
+![wttr.in in WeeChat status bar](https://i.imgur.com/XkYiRU7.png)
 
 
 ### conky
