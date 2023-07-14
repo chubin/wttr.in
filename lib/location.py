@@ -40,6 +40,7 @@ import json
 import os
 import socket
 import sys
+import random
 
 import geoip2.database
 import pycountry
@@ -47,7 +48,6 @@ import requests
 
 from globals import GEOLITE, GEOLOCATOR_SERVICE, IP2LCACHE, IP2LOCATION_KEY, NOT_FOUND_LOCATION, \
                     ALIASES, BLACKLIST, IATA_CODES_FILE, IPLOCATION_ORDER, IPINFO_TOKEN
-
 
 GEOIP_READER = geoip2.database.Reader(GEOLITE)
 COUNTRY_MAP = {"Russian Federation": "Russia"}
@@ -99,7 +99,10 @@ def _geolocator(location):
     """
 
     try:
-        geo = requests.get('%s/%s' % (GEOLOCATOR_SERVICE, location)).text
+        if random.random() < 0:
+          geo = requests.get('%s/%s' % (GEOLOCATOR_SERVICE, location)).text
+        else:
+          geo = requests.get("http://127.0.0.1:8083/:geo-location?location=%s" % location).text
     except requests.exceptions.ConnectionError as exception:
         print("ERROR: %s" % exception)
         return None
@@ -109,6 +112,8 @@ def _geolocator(location):
 
     try:
         answer = json.loads(geo.encode('utf-8'))
+        if "error" in answer:
+            return None
         return answer
     except ValueError as exception:
         print("ERROR: %s" % exception)
@@ -129,6 +134,7 @@ def _ipcachewrite(ip_addr, location):
 
         The latitude and longitude are optional elements.
     """
+    return
     cachefile = os.path.join(IP2LCACHE, ip_addr)
     if not os.path.exists(IP2LCACHE):
         os.makedirs(IP2LCACHE)
@@ -144,19 +150,28 @@ def _ipcache(ip_addr):
         Returns a triple of (CITY, REGION, COUNTRY) or None
         TODO: When cache becomes more robust, transition to using latlong
     """
-    cachefile = os.path.join(IP2LCACHE, ip_addr)
 
-    if os.path.exists(cachefile):
-        try:
-            _, country, region, city, *_ = open(cachefile, 'r').read().split(';')
-            return city, region, country
-        except ValueError:
-            # cache entry is malformed: should be
-            # [ccode];country;region;city;[lat];[long];...
-            return None
-    else:
-        _debug_log("[_ipcache] %s not found" % ip_addr)
+    ## Use Geo IP service when available
+    r = requests.get("http://127.0.0.1:8083/:geo-ip-get?ip=%s" % ip_addr)
+    if r.status_code == 200 and ";" in r.text:
+        _, country, region, city, *_ = r.text.split(';')
+        return city, region, country
+
     return None
+
+    # cachefile = os.path.join(IP2LCACHE, ip_addr)
+    #
+    # if os.path.exists(cachefile):
+    #     try:
+    #         _, country, region, city, *_ = open(cachefile, 'r').read().split(';')
+    #         return city, region, country
+    #     except ValueError:
+    #         # cache entry is malformed: should be
+    #         # [ccode];country;region;city;[lat];[long];...
+    #         return None
+    # else:
+    #     _debug_log("[_ipcache] %s not found" % ip_addr)
+    # return None
 
 
 def _ip2location(ip_addr):
@@ -340,7 +355,7 @@ def _get_hemisphere(location):
     geolocation = _geolocator(location_string)
     if geolocation is None:
         return True
-    return geolocation["latitude"] > 0
+    return float(geolocation["latitude"]) > 0
 
 
 def _fully_qualified_location(location, region, country):
@@ -477,7 +492,13 @@ def _main_():
                 print(city)
                 shutil.move(filename, os.path.join("/wttr.in/cache/ip2l-broken-format", ip_address))
 
+def _trace_ip():
+
+    print(_geoip("108.5.186.108"))
+    print(_get_location("108.5.186.108"))
+    print(location_processing("", "108.5.186.108"))
 
 if __name__ == "__main__":
-    _main_()
+    _trace_ip()
+    #_main_()
     #print(_geoip("173.216.90.56"))

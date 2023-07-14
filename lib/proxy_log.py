@@ -14,10 +14,12 @@ class Logger:
     For specific loggers, _shorten_query() should be rewritten.
     """
 
-    def __init__(self, filename):
+    def __init__(self, filename_access, filename_errors):
 
-        self._filename = filename
-        self._file = open(filename, "a", encoding="utf-8")
+        self._filename_access = filename_access
+        self._filename_errors = filename_errors
+        self._log_access = open(filename_access, "a", encoding="utf-8")
+        self._log_errors = open(filename_errors, "a", encoding="utf-8")
 
     def _shorten_query(self, query):
         return query
@@ -31,10 +33,11 @@ class Logger:
         query = self._shorten_query(query)
         if error != "":
             message += " ERR " + query + " " + error
+            self._log_errors.write(message+"\n")
         else:
-            message =  " OK  " + query
+            message +=  " OK  " + query
+            self._log_access.write(message+"\n")
 
-        self._file.write(message+"\n")
 
 class LoggerWWO(Logger):
     """

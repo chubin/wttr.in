@@ -573,13 +573,16 @@ def textual_information(data_parsed, geo_data, config, html_output=False):
         city_only = True
         suffix = ", Крым"
 
+    latitude = float(geo_data["latitude"])
+    longitude = float(geo_data["longitude"])
+
     if config["full_address"]:
         output.append('Location: %s%s [%5.4f,%5.4f]' \
                 % (
                     _shorten_full_location(config["full_address"], city_only=city_only),
                     suffix,
-                    geo_data["latitude"],
-                    geo_data["longitude"],
+                    latitude,
+                    longitude,
                 ))
 
     output = [
@@ -593,7 +596,7 @@ def textual_information(data_parsed, geo_data, config, html_output=False):
 # }}}
 # get_geodata {{{
 def get_geodata(location):
-    text = requests.get("http://localhost:8004/%s" % location).text
+    text = requests.get("http://127.0.0.1:8083/:geo-location?location=%s" % location).text
     return json.loads(text)
 # }}}
 

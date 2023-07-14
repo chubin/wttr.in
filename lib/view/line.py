@@ -238,7 +238,8 @@ def render_moonday(_, query):
 # this is just a temporary solution
 
 def get_geodata(location):
-    text = requests.get("http://localhost:8004/%s" % location).text
+    # text = requests.get("http://localhost:8004/%s" % location).text
+    text = requests.get("http://127.0.0.1:8083/:geo-location?location=%s" % location).text
     return json.loads(text)
 
 
