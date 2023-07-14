@@ -7,7 +7,7 @@ representation methods like terminal-oriented ANSI-sequences for console HTTP cl
 
 Originally started as a small project, a wrapper for [wego](https://github.com/schachmat/wego),
 intended to demonstrate the power of the console-oriented services,
-*wttr.in* became a popular weather reporting service, handling tens millions of queries daily.
+*wttr.in* became a popular weather reporting service, handling tens of millions of queries daily.
 
 You can see it running here: [wttr.in](https://wttr.in).
 
