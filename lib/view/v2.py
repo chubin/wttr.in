@@ -38,7 +38,7 @@ from astral import moon, sun
 from scipy.interpolate import interp1d
 from babel.dates import format_datetime
 
-from globals import WWO_KEY, remove_ansi
+from globals import WWO_KEY, TRANSLATION_TABLE, remove_ansi
 import constants
 import translations
 import parse_query
@@ -638,6 +638,8 @@ def main(query, parsed_query, data):
             output += textual_information(data_parsed, geo_data, parsed_query)
         if parsed_query.get('no-terminal', False):
             output = remove_ansi(output)
+        if parsed_query.get('dumb', False):
+            output = output.translate(TRANSLATION_TABLE)
     return output
 
 if __name__ == '__main__':
