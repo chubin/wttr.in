@@ -622,7 +622,7 @@ def main(query, parsed_query, data):
 <link rel="stylesheet" type="text/css" href="/files/style.css" />
 </head>
 <body>
-  <img src="/{filename}" width="592" height="532"/>
+  <img src="https://v2.wttr.in/{filename}" width="592" height="532"/>
 <pre>
 {textual_information}
 </pre>
