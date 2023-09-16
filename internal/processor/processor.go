@@ -37,6 +37,7 @@ func plainTextAgents() []string {
 		"aiohttp",
 		"http_get",
 		"xh",
+		"nushell",
 	}
 }
 
