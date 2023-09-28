@@ -161,7 +161,7 @@ var (
 		"ca":     {"Matí", "Dia", "Tarda", "Nit"},
 		"cy":     {"Bore", "Dydd", "Hwyr", "Nos"},
 		"da":     {"Morgen", "Middag", "Aften", "Nat"},
-		"de":     {"Früh", "Mittag", "Abend", "Nacht"},
+		"de":     {"Morgen", "Mittag", "Abend", "Nacht"},
 		"el":     {"Πρωί", "Μεσημέρι", "Απόγευμα", "Βράδυ"},
 		"en":     {"Morning", "Noon", "Evening", "Night"},
 		"eo":     {"Mateno", "Tago", "Vespero", "Nokto"},
