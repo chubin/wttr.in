@@ -10,7 +10,7 @@ astral
 timezonefinder==2.1.2
 pytz
 pyte
-python-dateutil
+python-dateutil>=2.5.0,<=2.6.1
 diagram
 pyjq
 scipy
