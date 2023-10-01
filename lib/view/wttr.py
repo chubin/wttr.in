@@ -84,6 +84,9 @@ def _wego_wrapper(location, parsed_query):
     if parsed_query.get('narrow'):
         cmd += ['-narrow']
 
+    if parsed_query.get('narrow-full'):
+        cmd += ['-narrow-full']
+
     if lang and lang in SUPPORTED_LANGS:
         cmd += ['-lang=%s'%lang]
 

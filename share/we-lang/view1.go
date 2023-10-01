@@ -88,7 +88,23 @@ func printDay(w weather) (ret []string) {
 	if t, ok := daytimeTranslation[config.Lang]; ok {
 		trans = t
 	}
-	if config.Narrow {
+	if config.NarrowFull {
+		names_1 := "│      " + justifyCenter(trans[0], 16) +
+			"└──────┬──────┘" + justifyCenter(trans[1], 16) + "      │"
+		names_2 := "│      " + justifyCenter(trans[2], 16) +
+			"└──────┬──────┘" + justifyCenter(trans[3], 16) + "      │"
+
+		ret = append([]string{
+			"                        ┌─────────────┐                        ",
+			"┌───────────────────────" + dateFmt + "───────────────────────┐",
+			names_1,
+			names_2,
+			"├──────────────────────────────┼──────────────────────────────┤"},
+			ret...)
+
+		return append(ret,
+			"└──────────────────────────────┴──────────────────────────────┘")
+	} else if config.Narrow {
 
 		names := "│      " + justifyCenter(trans[1], 16) +
 			"└──────┬──────┘" + justifyCenter(trans[3], 16) + "      │"
