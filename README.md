@@ -17,7 +17,7 @@ You can see it running here: [wttr.in](https://wttr.in).
 
 You can access the service from a shell or from a Web browser like this:
 
-    $ curl wttr.in
+    curl wttr.in
     Weather for City: Paris, France
 
          \   /     Clear
@@ -43,24 +43,24 @@ Invoke-RestMethod https://wttr.in
 Want to get the weather information for a specific location? You can add the desired location to the URL in your
 request like this:
 
-    $ curl wttr.in/London
-    $ curl wttr.in/Moscow
-    $ curl wttr.in/Salt+Lake+City
+    curl wttr.in/London
+    curl wttr.in/Moscow
+    curl wttr.in/Salt+Lake+City
 
 If you omit the location name, you will get the report for your current location based on your IP address.
 
 Use 3-letter airport codes in order to get the weather information at a certain airport:
 
-    $ curl wttr.in/muc      # Weather for IATA: muc, Munich International Airport, Germany
-    $ curl wttr.in/ham      # Weather for IATA: ham, Hamburg Airport, Germany
+    curl wttr.in/muc      # Weather for IATA: muc, Munich International Airport, Germany
+    curl wttr.in/ham      # Weather for IATA: ham, Hamburg Airport, Germany
 
 Let's say you'd like to get the weather for a geographical location other than a town or city - maybe an attraction
 in a city, a mountain name, or some special location. Add the character `~` before the name to look up that special
 location name before the weather is then retrieved:
 
-	$ curl wttr.in/~Vostok+Station
-	$ curl wttr.in/~Eiffel+Tower
-	$ curl wttr.in/~Kilimanjaro
+	curl wttr.in/~Vostok+Station
+	curl wttr.in/~Eiffel+Tower
+	curl wttr.in/~Kilimanjaro
 
 For these examples, you'll see a line below the weather forecast output that shows the geolocation
 results of looking up the location:
@@ -71,12 +71,12 @@ results of looking up the location:
 
 You can also use IP-addresses (direct) or domain names (prefixed with `@`) to specify a location:
 
-    $ curl wttr.in/@github.com
-    $ curl wttr.in/@msu.ru
+    curl wttr.in/@github.com
+    curl wttr.in/@msu.ru
 
 To get detailed information online, you can access the [/:help](https://wttr.in/:help) page:
 
-    $ curl wttr.in/:help
+    curl wttr.in/:help
 
 
 ### Weather Units
@@ -84,14 +84,14 @@ To get detailed information online, you can access the [/:help](https://wttr.in/
 By default the USCS units are used for the queries from the USA and the metric system for the rest of the world.
 You can override this behavior by adding `?u`, `?m` or `?M`   to a URL like this:
 
-    $ curl wttr.in/Amsterdam?u  # USCS (used by default in US)
-    $ curl wttr.in/Amsterdam?m  # metric (SI) (used by default everywhere except US)
-    $ curl wttr.in/Amsterdam?M  # metric (SI), but show wind speed in m/s
+    curl wttr.in/Amsterdam?u  # USCS (used by default in US)
+    curl wttr.in/Amsterdam?m  # metric (SI) (used by default everywhere except US)
+    curl wttr.in/Amsterdam?M  # metric (SI), but show wind speed in m/s
 
 If you have several options to pass, write them without delimiters in between for the one-letter options,
 and use `&` as a delimiter for the long options with values:
 
-    $ curl 'wttr.in/Amsterdam?m2&lang=nl'
+    curl 'wttr.in/Amsterdam?m2&lang=nl'
 
 It would be a rough equivalent of `-m2 --lang nl` for the GNU CLI syntax.
 
@@ -110,16 +110,16 @@ The ANSI and HTML formats are selected based on the User-Agent string.
 
 To force plain text, which disables colors:
 
-    $ curl wttr.in/?T
+    curl wttr.in/?T
 
 The PNG format can be forced by adding `.png` to the end of the query:
 
-    $ wget wttr.in/Paris.png
+    wget wttr.in/Paris.png
 
 You can use all of the options with the PNG-format like in an URL, but you have
 to separate them with `_` instead of `?` and `&`:
 
-    $ wget wttr.in/Paris_0tqp_lang=fr.png
+    wget wttr.in/Paris_0tqp_lang=fr.png
 
 Useful options for the PNG format:
 
@@ -128,7 +128,7 @@ Useful options for the PNG format:
 
 Transparency is a useful feature when weather PNGs are used to add weather data to pictures:
 
-    $ convert source.jpg <( curl wttr.in/Oymyakon_tqp0.png ) -geometry +50+50 -composite target.jpg
+    convert source.jpg <( curl wttr.in/Oymyakon_tqp0.png ) -geometry +50+50 -composite target.jpg
 
 In this example:
 
@@ -151,7 +151,7 @@ in status bar of different programs, such as *tmux*, *weechat*, etc.
 For one-line output format, specify additional URL parameter `format`:
 
 ```
-$ curl wttr.in/Nuremberg?format=3
+curl wttr.in/Nuremberg?format=3
 Nuremberg: 🌦 +11⁰C
 ```
 
@@ -160,13 +160,13 @@ Available preconfigured formats: 1, 2, 3, 4 and the custom format using the perc
 You can specify multiple locations separated with `:` (for repeating queries):
 
 ```
-$ curl wttr.in/Nuremberg:Hamburg:Berlin?format=3
+curl wttr.in/Nuremberg:Hamburg:Berlin?format=3
 Nuremberg: 🌦 +11⁰C
 ```
 Or to process all this queries at once:
 
 ```
-$ curl -s 'wttr.in/{Nuremberg,Hamburg,Berlin}?format=3'
+curl -s 'wttr.in/{Nuremberg,Hamburg,Berlin}?format=3'
 Nuremberg: 🌦 +11⁰C
 Hamburg: 🌦 +8⁰C
 Berlin: 🌦 +8⁰C
@@ -203,9 +203,9 @@ To specify your own custom output format, use the special `%`-notation:
 So, these two calls are the same:
 
 ```
-    $ curl wttr.in/London?format=3
+    curl wttr.in/London?format=3
     London: ⛅️ +7⁰C
-    $ curl wttr.in/London?format="%l:+%c+%t\n"
+    curl wttr.in/London?format="%l:+%c+%t\n"
     London: ⛅️ +7⁰C
 ```
 
@@ -245,9 +245,9 @@ To embed in to an IRC ([Weechat](https://github.com/weechat/weechat)) client's e
 Conky usage example:
 
 ```
-${texeci 1800 curl wttr.in/kyiv_0pq_lang=uk.png 
+{texeci 1800 curl wttr.in/kyiv_0pq_lang=uk.png 
   | convert - -transparent black $HOME/.config/conky/out.png}
-${image $HOME/.config/conky/out.png -p 0,0}
+{image $HOME/.config/conky/out.png -p 0,0}
 ```
 
 ![wttr.in in weechat status bar](https://user-images.githubusercontent.com/3875145/172178453-9e9ed9e3-9815-426a-9a21-afdd6e279fc8.png)
@@ -265,7 +265,7 @@ both of them support all necessary emoji glyphs.
 Font configuration:
 
 ```xml
-$ cat ~/.config/fontconfig/fonts.conf
+cat ~/.config/fontconfig/fonts.conf
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
 <fontconfig>
@@ -308,19 +308,19 @@ a lot of additional weather and astronomical information is available:
 * Precise geographical coordinates for the selected location.
 
 ```
-  $ curl v2.wttr.in/München
+  curl v2.wttr.in/München
 ```
 
 or
 
 ```
-  $ curl wttr.in/München?format=v2
+  curl wttr.in/München?format=v2
 ```
 
 or, if you prefer Nerd Fonts instead of Emoji, `v2d` (day) or `v2n` (night):
 
 ```
-  $ curl v2d.wttr.in/München
+  curl v2d.wttr.in/München
 ```
 
 
@@ -353,7 +353,7 @@ In the experimental map view, that is available under the view code `v3`,
 weather information about a geographical region is available:
 
 ```
-    $ curl v3.wttr.in/Bayern.sxl
+    curl v3.wttr.in/Bayern.sxl
 ```
 
 ![v3.wttr.in/Bayern](https://v3.wttr.in/Bayern.png)
@@ -399,7 +399,7 @@ The JSON format is a feature providing access to *wttr.in* data through an easy-
 
 To fetch information in JSON format, use the following syntax:
 
-    $ curl wttr.in/Detroit?format=j1
+    curl wttr.in/Detroit?format=j1
 
 This will fetch information on the Detroit region in JSON format. The j1 format code is used to allow for the use of other layouts for the JSON output.
 
@@ -447,7 +447,7 @@ The [Prometheus](https://github.com/prometheus/prometheus) Metrics format is a f
 
 To fetch information in Prometheus format, use the following syntax:
 
-    $ curl wttr.in/Detroit?format=p1
+    curl wttr.in/Detroit?format=p1
 
 This will fetch information on the Detroit region in Prometheus Metrics format. The `p1` format code is used to allow for the use of other layouts for the Prometheus Metrics output.
 
@@ -478,17 +478,17 @@ The result will look something like the following:
 wttr.in can also be used to check the phase of the Moon. This example shows how to see the current Moon phase
 in the full-output mode:
 
-    $ curl wttr.in/Moon
+    curl wttr.in/Moon
 
 Get the moon phase for a particular date by adding `@YYYY-MM-DD`:
 
-    $ curl wttr.in/Moon@2016-12-25
+    curl wttr.in/Moon@2016-12-25
 
 The moon phase information uses [pyphoon](https://github.com/chubin/pyphoon) as its backend.
 
 To get the moon phase information in the online mode, use `%m`:
 
-    $ curl wttr.in/London?format=%m
+    curl wttr.in/London?format=%m
     🌖
 
 Keep in mind that the Unicode representation of moon phases suffers 2 caveats:
@@ -515,7 +515,7 @@ wttr.in supports multilingual locations names that can be specified in any langu
 The query string should be specified in Unicode (hex-encoded or not). Spaces in the query string
 must be replaced with `+`:
 
-    $ curl wttr.in/станция+Восток
+    curl wttr.in/станция+Восток
     Weather report: станция Восток
 
                    Overcast
@@ -535,11 +535,11 @@ The language can be set explicitly when using console clients by using command-l
 
 The preferred language can be forced using the `lang` option:
 
-    $ curl wttr.in/Berlin?lang=de
+    curl wttr.in/Berlin?lang=de
 
 The third option is to choose the language using the DNS name used in the query:
 
-    $ curl de.wttr.in/Berlin
+    curl de.wttr.in/Berlin
 
 wttr.in is currently translated into 54 languages, and the number of supported languages is constantly growing.
 
@@ -582,8 +582,8 @@ wttr.in has the following external dependencies:
 
 After you install [golang](https://golang.org/doc/install), install `wego`:
 
-    $ go get -u github.com/schachmat/wego
-    $ go install github.com/schachmat/wego
+    go get -u github.com/schachmat/wego
+    go install github.com/schachmat/wego
 
 ### Install Python dependencies
 
@@ -605,13 +605,13 @@ You can install most of them using `pip`.
 
 Some python package use LLVM, so install it first:
 
-    $ apt-get install llvm-7 llvm-7-dev
+    apt-get install llvm-7 llvm-7-dev
 
 If `virtualenv` is used:
 
-    $ virtualenv -p python3 ve
-    $ ve/bin/pip3 install -r requirements.txt
-    $ ve/bin/python3 bin/srv.py
+    virtualenv -p python3 ve
+    ve/bin/pip3 install -r requirements.txt
+    ve/bin/python3 bin/srv.py
 
 Also, you need to install the geoip2 database.
 You can use a free database GeoLite2 that can be downloaded from (http://dev.maxmind.com/geoip/geoip2/geolite2/).
@@ -622,7 +622,7 @@ If you want to use the IP2location service for IP-addresses that are not covered
 you have to obtain a API key of that service, and after that save into the `~/.ip2location.key` file:
 
 ```
-$ echo 'YOUR_IP2LOCATION_KEY' > ~/.ip2location.key
+echo 'YOUR_IP2LOCATION_KEY' > ~/.ip2location.key
 ```
 
 If you don't have this file, the service will be silently skipped (it is not a big problem,
@@ -653,7 +653,7 @@ WWO key file: `~/.wwo.key`
 Also, you have to specify the key in the `wego` configuration:
 
 ```json
-$ cat ~/.wegorc
+cat ~/.wegorc
 {
 	"APIKey": "00XXXXXXXXXXXXXXXXXXXXXXXXXXX",
 	"City": "London",
