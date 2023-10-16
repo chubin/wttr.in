@@ -8,6 +8,7 @@ require (
 	github.com/go-sql-driver/mysql v1.5.0 // indirect
 	github.com/gopherjs/gopherjs v0.0.0-20200217142428-fce0ec30dd00 // indirect
 	github.com/hashicorp/golang-lru v0.6.0
+	github.com/itchyny/gojq v0.12.11 // indirect
 	github.com/klauspost/lctime v0.1.0 // indirect
 	github.com/lib/pq v1.8.0 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect

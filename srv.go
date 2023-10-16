@@ -6,6 +6,7 @@ import (
 	"io"
 	stdlog "log"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/alecthomas/kong"
@@ -17,7 +18,7 @@ import (
 	"github.com/chubin/wttr.in/internal/logging"
 	"github.com/chubin/wttr.in/internal/processor"
 	"github.com/chubin/wttr.in/internal/types"
-	v1 "github.com/chubin/wttr.in/internal/view/v1"
+	// v1 "github.com/chubin/wttr.in/internal/view/v1"
 )
 
 //nolint:gochecknoglobals
@@ -31,7 +32,7 @@ var cli struct {
 	GeoResolve              string `name:"geo-resolve" help:"Resolve location"`
 	LogLevel                string `name:"log-level" short:"l" help:"Show log messages with level" default:"info"`
 
-	V1 v1.Configuration
+	// V1 v1.Configuration
 }
 
 const logLineStart = "LOG_LINE_START "
@@ -155,6 +156,12 @@ func mainHandler(
 			log.Println(err)
 		}
 
+		if checkURLForPNG(r) {
+			w.Write([]byte("PNG support temporary disabled"))
+
+			return
+		}
+
 		response, err := rp.ProcessRequest(r)
 		if err != nil {
 			log.Println(err)
@@ -251,4 +258,9 @@ func setLogLevel(logLevel string) error {
 	log.SetLevel(parsedLevel)
 
 	return nil
+}
+
+func checkURLForPNG(r *http.Request) bool {
+	url := r.URL.String()
+	return strings.Contains(url, ".png")
 }
