@@ -29,7 +29,7 @@ You can access the service from a shell or from a Web browser like this:
 
 Here is an actual weather report for your location (it's live!):
 
-![Weather Report](https://wttr.in/San-Francisco.png?)
+![Weather Report](San_Francisco.png)
 
 (It's not your actual location - GitHub's CDN hides your real IP address with its own IP address,
 but it's still a live weather report in your language.)
