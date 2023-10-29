@@ -90,6 +90,7 @@ PLAIN_TEXT_AGENTS = [
     "aiohttp",
     "http_get",
     "xh",
+    "nushell",
 ]
 
 PLAIN_TEXT_PAGES = [':help', ':bash.function', ':translation', ':iterm2']
