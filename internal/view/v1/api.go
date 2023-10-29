@@ -1,4 +1,5 @@
-package main
+//nolint:forbidigo,funlen,nestif,goerr113,gocognit,cyclop
+package v1
 
 import (
 	"bytes"
@@ -6,7 +7,6 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"net/url"
 	"os"
@@ -14,6 +14,7 @@ import (
 	"strings"
 )
 
+//nolint:tagliatelle
 type cond struct {
 	ChanceOfRain   string  `json:"chanceofrain"`
 	FeelsLikeC     int     `json:",string"`
@@ -49,6 +50,7 @@ type loc struct {
 	Type  string `json:"type"`
 }
 
+//nolint:tagliatelle
 type resp struct {
 	Data struct {
 		Cur     []cond                 `json:"current_condition"`
@@ -58,65 +60,78 @@ type resp struct {
 	} `json:"data"`
 }
 
-func getDataFromAPI() (ret resp) {
-	var params []string
+func (g *global) getDataFromAPI() (*resp, error) {
+	var (
+		ret    resp
+		params []string
+	)
 
-	if len(config.APIKey) == 0 {
-		log.Fatal("No API key specified. Setup instructions are in the README.")
+	if len(g.config.APIKey) == 0 {
+		return nil, fmt.Errorf("no API key specified. Setup instructions are in the README")
 	}
-	params = append(params, "key="+config.APIKey)
+	params = append(params, "key="+g.config.APIKey)
 
 	// non-flag shortcut arguments will overwrite possible flag arguments
 	for _, arg := range flag.Args() {
 		if v, err := strconv.Atoi(arg); err == nil && len(arg) == 1 {
-			config.Numdays = v
+			g.config.Numdays = v
 		} else {
-			config.City = arg
+			g.config.City = arg
 		}
 	}
 
-	if len(config.City) > 0 {
-		params = append(params, "q="+url.QueryEscape(config.City))
+	if len(g.config.City) > 0 {
+		params = append(params, "q="+url.QueryEscape(g.config.City))
 	}
-	params = append(params, "format=json", "num_of_days="+strconv.Itoa(config.Numdays), "tp=3")
-	if config.Lang != "" {
-		params = append(params, "lang="+config.Lang)
+	params = append(params, "format=json", "num_of_days="+strconv.Itoa(g.config.Numdays), "tp=3")
+	if g.config.Lang != "" {
+		params = append(params, "lang="+g.config.Lang)
 	}
 
-	if debug {
+	if g.debug {
 		fmt.Fprintln(os.Stderr, params)
 	}
 
 	res, err := http.Get(wuri + strings.Join(params, "&"))
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 	defer res.Body.Close()
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
-	if debug {
+	if g.debug {
 		var out bytes.Buffer
-		json.Indent(&out, body, "", "  ")
-		out.WriteTo(os.Stderr)
+
+		err := json.Indent(&out, body, "", "  ")
+		if err != nil {
+			return nil, err
+		}
+
+		_, err = out.WriteTo(os.Stderr)
+		if err != nil {
+			return nil, err
+		}
+
 		fmt.Print("\n\n")
 	}
 
-	if config.Lang == "" {
+	if g.config.Lang == "" {
 		if err = json.Unmarshal(body, &ret); err != nil {
-			log.Println(err)
+			return nil, err
 		}
 	} else {
-		if err = unmarshalLang(body, &ret); err != nil {
-			log.Println(err)
+		if err = g.unmarshalLang(body, &ret); err != nil {
+			return nil, err
 		}
 	}
-	return
+
+	return &ret, nil
 }
 
-func unmarshalLang(body []byte, r *resp) error {
+func (g *global) unmarshalLang(body []byte, r *resp) error {
 	var rv map[string]interface{}
 	if err := json.Unmarshal(body, &rv); err != nil {
 		return err
@@ -128,7 +143,7 @@ func unmarshalLang(body []byte, r *resp) error {
 				if !ok {
 					continue
 				}
-				langs, ok := cc["lang_"+config.Lang].([]interface{})
+				langs, ok := cc["lang_"+g.config.Lang].([]interface{})
 				if !ok || len(langs) == 0 {
 					continue
 				}
@@ -151,7 +166,7 @@ func unmarshalLang(body []byte, r *resp) error {
 						if !ok {
 							continue
 						}
-						langs, ok := h["lang_"+config.Lang].([]interface{})
+						langs, ok := h["lang_"+g.config.Lang].([]interface{})
 						if !ok || len(langs) == 0 {
 							continue
 						}
@@ -172,5 +187,6 @@ func unmarshalLang(body []byte, r *resp) error {
 	if err := json.NewDecoder(&buf).Decode(r); err != nil {
 		return err
 	}
+
 	return nil
 }
