@@ -21,10 +21,10 @@ You can access the service from a shell or from a Web browser like this:
     Weather for City: Paris, France
 
          \   /     Clear
-          .-.      10 – 11 °C  
-       ― (   ) ―   ↑ 11 km/h  
-          `-’      10 km  
-         /   \     0.0 mm  
+          .-.      10 – 11 °C
+       ― (   ) ―   ↑ 11 km/h
+          `-’      10 km
+         /   \     0.0 mm
 
 
 Here is an actual weather report for your location (it's live!):
@@ -227,17 +227,19 @@ set -g status-right "$WEATHER ..."
 ```
 ![wttr.in in tmux status bar](https://wttr.in/files/example-tmux-status-line.png)
 
-### Weechat
+### WeeChat
 
-To embed in to an IRC ([Weechat](https://github.com/weechat/weechat)) client's existing status bar:
+To embed in to an IRC ([WeeChat](https://github.com/weechat/weechat)) client's existing status bar:
 
 ```
-/alias add wttr /exec -pipe "/set plugins.var.python.text_item.wttr all" url:wttr.in/Montreal?format=%l:+%c+%f+%h+%p+%P+%m+%w+%S+%s
+/alias add wttr /exec -pipe "/mute /set plugins.var.wttr" url:wttr.in/Montreal?format=%l:+%c+%f+%h+%p+%P+%m+%w+%S+%s;/wait 3 /item refresh wttr
 /trigger add wttr timer 60000;0;0 "" "" "/wttr"
-/eval /set weechat.bar.status.items ${weechat.bar.status.items},wttr
+/item add wttr "" "${plugins.var.wttr}"
+/eval /set weechat.bar.status.items ${weechat.bar.status.items},spacer,wttr
 /eval /set weechat.startup.command_after_plugins ${weechat.startup.command_after_plugins};/wttr
+/wttr
 ```
-![wttr.in in weechat status bar](https://i.imgur.com/IyvbxjL.png)
+![wttr.in in WeeChat status bar](https://i.imgur.com/XkYiRU7.png)
 
 
 ### conky
@@ -245,12 +247,12 @@ To embed in to an IRC ([Weechat](https://github.com/weechat/weechat)) client's e
 Conky usage example:
 
 ```
-${texeci 1800 curl wttr.in/kyiv_0pq_lang=uk.png 
+${texeci 1800 curl wttr.in/kyiv_0pq_lang=uk.png
   | convert - -transparent black $HOME/.config/conky/out.png}
 ${image $HOME/.config/conky/out.png -p 0,0}
 ```
 
-![wttr.in in weechat status bar](https://user-images.githubusercontent.com/3875145/172178453-9e9ed9e3-9815-426a-9a21-afdd6e279fc8.png)
+![wttr.in in conky](https://user-images.githubusercontent.com/3875145/172178453-9e9ed9e3-9815-426a-9a21-afdd6e279fc8.png)
 
 ### Emojis support
 
@@ -443,7 +445,7 @@ Most of these values are self-explanatory, aside from `weatherCode`. The `weathe
 
 ### Prometheus Metrics Output
 
-The [Prometheus](https://github.com/prometheus/prometheus) Metrics format is a feature providing access to *wttr.in* data through an easy-to-parse format for monitoring systems, without requiring the user to create a complex script to reinterpret wttr.in's graphical output. 
+The [Prometheus](https://github.com/prometheus/prometheus) Metrics format is a feature providing access to *wttr.in* data through an easy-to-parse format for monitoring systems, without requiring the user to create a complex script to reinterpret wttr.in's graphical output.
 
 To fetch information in Prometheus format, use the following syntax:
 
