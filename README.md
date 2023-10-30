@@ -27,12 +27,9 @@ You can access the service from a shell or from a Web browser like this:
          /   \     0.0 mm
 
 
-Here is an actual weather report for your location (it's live!):
+Here is an example weather report:
 
 ![Weather Report](San_Francisco.png)
-
-(It's not your actual location - GitHub's CDN hides your real IP address with its own IP address,
-but it's still a live weather report in your language.)
 
 Or in PowerShell:
 
