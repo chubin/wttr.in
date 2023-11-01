@@ -580,9 +580,9 @@ wttr.in has the following external dependencies:
 * [wego](https://github.com/schachmat/wego), weather client for terminal
 
 After you install [golang](https://golang.org/doc/install), install `wego`:
-
-    $ go get -u github.com/schachmat/wego
-    $ go install github.com/schachmat/wego
+```bash
+go install github.com/schachmat/wego@latest
+```
 
 ### Install Python dependencies
 
@@ -604,13 +604,15 @@ You can install most of them using `pip`.
 
 Some python package use LLVM, so install it first:
 
-    $ apt-get install llvm-7 llvm-7-dev
-
+```bash
+apt-get install llvm-7 llvm-7-dev
+```
 If `virtualenv` is used:
-
-    $ virtualenv -p python3 ve
-    $ ve/bin/pip3 install -r requirements.txt
-    $ ve/bin/python3 bin/srv.py
+```bash
+virtualenv -p python3 ve
+ve/bin/pip3 install -r requirements.txt
+ve/bin/python3 bin/srv.py
+```
 
 Also, you need to install the geoip2 database.
 You can use a free database GeoLite2 that can be downloaded from (http://dev.maxmind.com/geoip/geoip2/geolite2/).
