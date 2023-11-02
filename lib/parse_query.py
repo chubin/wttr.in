@@ -79,6 +79,8 @@ def parse_query(args):
         return result
     if 'A' in q:
         result['force-ansi'] = True
+    if 'd' in q:
+        result['dumb'] = True
     if 'n' in q:
         result['narrow'] = True
     if 'm' in q:
