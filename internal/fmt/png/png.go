@@ -6,8 +6,8 @@ import (
 	"os"
 	"strings"
 
+	"github.com/chubin/vt10x"
 	"github.com/fogleman/gg"
-	"github.com/hinshun/vt10x"
 )
 
 func StringSliceToRuneSlice(s string) [][]rune {
