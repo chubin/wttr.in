@@ -900,7 +900,7 @@ CAPTION = {
     "es": u"Pronóstico del tiempo en:",
     "et": u"Ilmaprognoos:",
     "eu": u"Eguraldiaren iragarpena:",
-    "fa": u"گزارش آب و هئا برای شما:",
+    "fa": u"گزارش آب و هوا برای شما:",
     "fi": u"Säätiedotus:",
     "fr": u"Prévisions météo pour:",
     "fy": u"Waarberjocht foar:",
