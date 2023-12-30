@@ -1,0 +1,34 @@
+version: 2
+updates:
+  # Enable updates for Python dependencies
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    # Specify labels for pull requests
+    labels:
+      - "dependencies"
+      - "python"
+  # Enable updates for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    # Specify labels for pull requests
+    labels:
+      - "dependencies"
+      - "github-actions"
+  - package-ecosystem: "gomod"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependencies"
+      - "go"
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependencies"
+      - "docker"
