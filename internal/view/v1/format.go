@@ -1,4 +1,5 @@
-package main
+//nolint:funlen,nestif,cyclop,gocognit,gocyclo
+package v1
 
 import (
 	"fmt"
@@ -8,8 +9,8 @@ import (
 	"github.com/mattn/go-runewidth"
 )
 
-var (
-	windDir = map[string]string{
+func windDir() map[string]string {
+	return map[string]string{
 		"N":   "\033[1m↓\033[0m",
 		"NNE": "\033[1m↓\033[0m",
 		"NE":  "\033[1m↙\033[0m",
@@ -27,13 +28,14 @@ var (
 		"NW":  "\033[1m↘\033[0m",
 		"NNW": "\033[1m↘\033[0m",
 	}
-)
+}
 
-func formatTemp(c cond) string {
+func (g *global) formatTemp(c cond) string {
 	color := func(temp int, explicitPlus bool) string {
-		var col = 0
-		if !config.Inverse {
-			// Extemely cold temperature must be shown with violet
+		var col int
+		//nolint:dupl
+		if !g.config.Inverse {
+			// Extremely cold temperature must be shown with violet
 			// because dark blue is too dark
 			col = 165
 			switch temp {
@@ -127,12 +129,13 @@ func formatTemp(c cond) string {
 				}
 			}
 		}
-		if config.Imperial {
+		if g.config.Imperial {
 			temp = (temp*18 + 320) / 10
 		}
 		if explicitPlus {
 			return fmt.Sprintf("\033[38;5;%03dm+%d\033[0m", col, temp)
 		}
+
 		return fmt.Sprintf("\033[38;5;%03dm%d\033[0m", col, temp)
 	}
 	t := c.TempC
@@ -160,135 +163,129 @@ func formatTemp(c cond) string {
 		if explicitPlus1 {
 			explicitPlus2 = false
 		}
-		return pad(
+
+		return g.pad(
 			fmt.Sprintf("%s(%s) °%s",
 				color(t, explicitPlus1),
 				color(c.FeelsLikeC, explicitPlus2),
-				unitTemp[config.Imperial]),
+				unitTemp()[g.config.Imperial]),
 			15)
 	}
-	// if c.FeelsLikeC < t {
-	// 	if c.FeelsLikeC < 0 && t > 0 {
-	// 		explicitPlus = true
-	// 	}
-	// 	return pad(fmt.Sprintf("%s%s%s °%s", color(c.FeelsLikeC, false), hyphen, color(t, explicitPlus), unitTemp[config.Imperial]), 15)
-	// } else if c.FeelsLikeC > t {
-	// 	if t < 0 && c.FeelsLikeC > 0 {
-	// 		explicitPlus = true
-	// 	}
-	// 	return pad(fmt.Sprintf("%s%s%s °%s", color(t, false), hyphen, color(c.FeelsLikeC, explicitPlus), unitTemp[config.Imperial]), 15)
-	// }
-	return pad(fmt.Sprintf("%s °%s", color(c.FeelsLikeC, false), unitTemp[config.Imperial]), 15)
+
+	return g.pad(fmt.Sprintf("%s °%s", color(c.FeelsLikeC, false), unitTemp()[g.config.Imperial]), 15)
 }
 
-func formatWind(c cond) string {
-	windInRightUnits := func(spd int) int {
-		if config.WindMS {
-			spd = (spd * 1000) / 3600
-		} else {
-			if config.Imperial {
-				spd = (spd * 1000) / 1609
-			}
-		}
-		return spd
-	}
-	color := func(spd int) string {
-		var col = 46
-		switch spd {
-		case 1, 2, 3:
-			col = 82
-		case 4, 5, 6:
-			col = 118
-		case 7, 8, 9:
-			col = 154
-		case 10, 11, 12:
-			col = 190
-		case 13, 14, 15:
-			col = 226
-		case 16, 17, 18, 19:
-			col = 220
-		case 20, 21, 22, 23:
-			col = 214
-		case 24, 25, 26, 27:
-			col = 208
-		case 28, 29, 30, 31:
-			col = 202
-		default:
-			if spd > 0 {
-				col = 196
-			}
-		}
-		spd = windInRightUnits(spd)
-
-		return fmt.Sprintf("\033[38;5;%03dm%d\033[0m", col, spd)
+func (g *global) formatWind(c cond) string {
+	unitWindString := unitWind(0, g.config.Lang)
+	if g.config.WindMS {
+		unitWindString = unitWind(2, g.config.Lang)
+	} else if g.config.Imperial {
+		unitWindString = unitWind(1, g.config.Lang)
 	}
 
-	unitWindString := unitWind(0, config.Lang)
-	if config.WindMS {
-		unitWindString = unitWind(2, config.Lang)
-	} else {
-		if config.Imperial {
-			unitWindString = unitWind(1, config.Lang)
-		}
+	hyphen := "-"
+
+	cWindGustKmph := speedToColor(c.WindGustKmph, windInRightUnits(c.WindGustKmph, g.config.WindMS, g.config.Imperial))
+	cWindspeedKmph := speedToColor(c.WindspeedKmph, windInRightUnits(c.WindspeedKmph, g.config.WindMS, g.config.Imperial))
+	if windInRightUnits(c.WindGustKmph, g.config.WindMS, g.config.Imperial) >
+		windInRightUnits(c.WindspeedKmph, g.config.WindMS, g.config.Imperial) {
+		return g.pad(
+			fmt.Sprintf("%s %s%s%s %s", windDir()[c.Winddir16Point], cWindspeedKmph, hyphen, cWindGustKmph, unitWindString),
+			15)
 	}
 
-	hyphen := " - "
-	// if (config.Lang == "sl") {
-	//     hyphen = "-"
-	// }
-	hyphen = "-"
-
-	cWindGustKmph := color(c.WindGustKmph)
-	cWindspeedKmph := color(c.WindspeedKmph)
-	if windInRightUnits(c.WindGustKmph) > windInRightUnits(c.WindspeedKmph) {
-		return pad(fmt.Sprintf("%s %s%s%s %s", windDir[c.Winddir16Point], cWindspeedKmph, hyphen, cWindGustKmph, unitWindString), 15)
-	}
-	return pad(fmt.Sprintf("%s %s %s", windDir[c.Winddir16Point], cWindspeedKmph, unitWindString), 15)
+	return g.pad(fmt.Sprintf("%s %s %s", windDir()[c.Winddir16Point], cWindspeedKmph, unitWindString), 15)
 }
 
-func formatVisibility(c cond) string {
-	if config.Imperial {
+func windInRightUnits(spd int, windMS, imperial bool) int {
+	if windMS {
+		spd = (spd * 1000) / 3600
+	} else if imperial {
+		spd = (spd * 1000) / 1609
+	}
+
+	return spd
+}
+
+func speedToColor(spd, spdConverted int) string {
+	col := 46
+	switch spd {
+	case 1, 2, 3:
+		col = 82
+	case 4, 5, 6:
+		col = 118
+	case 7, 8, 9:
+		col = 154
+	case 10, 11, 12:
+		col = 190
+	case 13, 14, 15:
+		col = 226
+	case 16, 17, 18, 19:
+		col = 220
+	case 20, 21, 22, 23:
+		col = 214
+	case 24, 25, 26, 27:
+		col = 208
+	case 28, 29, 30, 31:
+		col = 202
+	default:
+		if spd > 0 {
+			col = 196
+		}
+	}
+
+	return fmt.Sprintf("\033[38;5;%03dm%d\033[0m", col, spdConverted)
+}
+
+func (g *global) formatVisibility(c cond) string {
+	if g.config.Imperial {
 		c.VisibleDistKM = (c.VisibleDistKM * 621) / 1000
 	}
-	return pad(fmt.Sprintf("%d %s", c.VisibleDistKM, unitVis(config.Imperial, config.Lang)), 15)
+
+	return g.pad(fmt.Sprintf("%d %s", c.VisibleDistKM, unitVis(g.config.Imperial, g.config.Lang)), 15)
 }
 
-func formatRain(c cond) string {
-	rainUnit := float32(c.PrecipMM)
-	if config.Imperial {
-		rainUnit = float32(c.PrecipMM) * 0.039
+func (g *global) formatRain(c cond) string {
+	rainUnit := c.PrecipMM
+	if g.config.Imperial {
+		rainUnit = c.PrecipMM * 0.039
 	}
 	if c.ChanceOfRain != "" {
-		return pad(fmt.Sprintf(
+		return g.pad(fmt.Sprintf(
 			"%.1f %s | %s%%",
 			rainUnit,
-			unitRain(config.Imperial, config.Lang),
+			unitRain(g.config.Imperial, g.config.Lang),
 			c.ChanceOfRain), 15)
 	}
-	return pad(fmt.Sprintf("%.1f %s", rainUnit, unitRain(config.Imperial, config.Lang)), 15)
+
+	return g.pad(fmt.Sprintf("%.1f %s", rainUnit, unitRain(g.config.Imperial, g.config.Lang)), 15)
 }
 
-func formatCond(cur []string, c cond, current bool) (ret []string) {
-	var icon []string
-	if i, ok := codes[c.WeatherCode]; !ok {
-		icon = iconUnknown
+func (g *global) formatCond(cur []string, c cond, current bool) []string {
+	var (
+		ret  []string
+		icon []string
+	)
+
+	if i, ok := codes()[c.WeatherCode]; !ok {
+		icon = getIcon("iconUnknown")
 	} else {
 		icon = i
 	}
-	if config.Inverse {
+	if g.config.Inverse {
 		// inverting colors
 		for i := range icon {
-			icon[i] = strings.Replace(icon[i], "38;5;226", "38;5;94", -1)
-			icon[i] = strings.Replace(icon[i], "38;5;250", "38;5;243", -1)
-			icon[i] = strings.Replace(icon[i], "38;5;21", "38;5;18", -1)
-			icon[i] = strings.Replace(icon[i], "38;5;255", "38;5;245", -1)
-			icon[i] = strings.Replace(icon[i], "38;5;111", "38;5;63", -1)
-			icon[i] = strings.Replace(icon[i], "38;5;251", "38;5;238", -1)
+			icon[i] = strings.ReplaceAll(icon[i], "38;5;226", "38;5;94")
+			icon[i] = strings.ReplaceAll(icon[i], "38;5;250", "38;5;243")
+			icon[i] = strings.ReplaceAll(icon[i], "38;5;21", "38;5;18")
+			icon[i] = strings.ReplaceAll(icon[i], "38;5;255", "38;5;245")
+			icon[i] = strings.ReplaceAll(icon[i], "38;5;111", "38;5;63")
+			icon[i] = strings.ReplaceAll(icon[i], "38;5;251", "38;5;238")
 		}
 	}
-	//desc := fmt.Sprintf("%-15.15v", c.WeatherDesc[0].Value)
+	// desc := fmt.Sprintf("%-15.15v", c.WeatherDesc[0].Value)
 	desc := c.WeatherDesc[0].Value
-	if config.RightToLeft {
+	if g.config.RightToLeft {
 		for runewidth.StringWidth(desc) < 15 {
 			desc = " " + desc
 		}
@@ -306,7 +303,7 @@ func formatCond(cur []string, c cond, current bool) (ret []string) {
 		}
 	}
 	if current {
-		if config.RightToLeft {
+		if g.config.RightToLeft {
 			desc = c.WeatherDesc[0].Value
 			if runewidth.StringWidth(desc) < 15 {
 				desc = strings.Repeat(" ", 15-runewidth.StringWidth(desc)) + desc
@@ -315,7 +312,7 @@ func formatCond(cur []string, c cond, current bool) (ret []string) {
 			desc = c.WeatherDesc[0].Value
 		}
 	} else {
-		if config.RightToLeft {
+		if g.config.RightToLeft {
 			if frstRune, size := utf8.DecodeRuneInString(desc); frstRune != ' ' {
 				desc = "…" + desc[size:]
 				for runewidth.StringWidth(desc) < 15 {
@@ -325,32 +322,46 @@ func formatCond(cur []string, c cond, current bool) (ret []string) {
 		} else {
 			if lastRune, size := utf8.DecodeLastRuneInString(desc); lastRune != ' ' {
 				desc = desc[:len(desc)-size] + "…"
-				//for numberOfSpaces < runewidth.StringWidth(fmt.Sprintf("%c", lastRune)) - 1 {
+				// for numberOfSpaces < runewidth.StringWidth(fmt.Sprintf("%c", lastRune)) - 1 {
 				for runewidth.StringWidth(desc) < 15 {
-					desc = desc + " "
+					desc += " "
 				}
 			}
 		}
 	}
-	if config.RightToLeft {
-		ret = append(ret, fmt.Sprintf("%v %v %v", cur[0], desc, icon[0]), fmt.Sprintf("%v %v %v", cur[1], formatTemp(c), icon[1]), fmt.Sprintf("%v %v %v", cur[2], formatWind(c), icon[2]), fmt.Sprintf("%v %v %v", cur[3], formatVisibility(c), icon[3]), fmt.Sprintf("%v %v %v", cur[4], formatRain(c), icon[4]))
+	if g.config.RightToLeft {
+		ret = append(
+			ret,
+			fmt.Sprintf("%v %v %v", cur[0], desc, icon[0]),
+			fmt.Sprintf("%v %v %v", cur[1], g.formatTemp(c), icon[1]),
+			fmt.Sprintf("%v %v %v", cur[2], g.formatWind(c), icon[2]),
+			fmt.Sprintf("%v %v %v", cur[3], g.formatVisibility(c), icon[3]),
+			fmt.Sprintf("%v %v %v", cur[4], g.formatRain(c), icon[4]))
 	} else {
-		ret = append(ret, fmt.Sprintf("%v %v %v", cur[0], icon[0], desc), fmt.Sprintf("%v %v %v", cur[1], icon[1], formatTemp(c)), fmt.Sprintf("%v %v %v", cur[2], icon[2], formatWind(c)), fmt.Sprintf("%v %v %v", cur[3], icon[3], formatVisibility(c)), fmt.Sprintf("%v %v %v", cur[4], icon[4], formatRain(c)))
+		ret = append(
+			ret,
+			fmt.Sprintf("%v %v %v", cur[0], icon[0], desc),
+			fmt.Sprintf("%v %v %v", cur[1], icon[1], g.formatTemp(c)),
+			fmt.Sprintf("%v %v %v", cur[2], icon[2], g.formatWind(c)),
+			fmt.Sprintf("%v %v %v", cur[3], icon[3], g.formatVisibility(c)),
+			fmt.Sprintf("%v %v %v", cur[4], icon[4], g.formatRain(c)))
 	}
-	return
+
+	return ret
 }
 
 func justifyCenter(s string, width int) string {
 	appendSide := 0
 	for runewidth.StringWidth(s) <= width {
 		if appendSide == 1 {
-			s = s + " "
+			s += " "
 			appendSide = 0
 		} else {
 			s = " " + s
 			appendSide = 1
 		}
 	}
+
 	return s
 }
 
@@ -359,28 +370,31 @@ func reverse(s string) string {
 	for i, j := 0, len(r)-1; i < len(r)/2; i, j = i+1, j-1 {
 		r[i], r[j] = r[j], r[i]
 	}
+
 	return string(r)
 }
 
-func pad(s string, mustLen int) (ret string) {
+func (g *global) pad(s string, mustLen int) string {
+	var ret string
 	ret = s
-	realLen := utf8.RuneCountInString(ansiEsc.ReplaceAllLiteralString(s, ""))
+	realLen := utf8.RuneCountInString(g.ansiEsc.ReplaceAllLiteralString(s, ""))
 	delta := mustLen - realLen
 	if delta > 0 {
-		if config.RightToLeft {
+		if g.config.RightToLeft {
 			ret = strings.Repeat(" ", delta) + ret + "\033[0m"
 		} else {
 			ret += "\033[0m" + strings.Repeat(" ", delta)
 		}
 	} else if delta < 0 {
-		toks := ansiEsc.Split(s, 2)
+		toks := g.ansiEsc.Split(s, 2)
 		tokLen := utf8.RuneCountInString(toks[0])
-		esc := ansiEsc.FindString(s)
+		esc := g.ansiEsc.FindString(s)
 		if tokLen > mustLen {
 			ret = fmt.Sprintf("%.*s\033[0m", mustLen, toks[0])
 		} else {
-			ret = fmt.Sprintf("%s%s%s", toks[0], esc, pad(toks[1], mustLen-tokLen))
+			ret = fmt.Sprintf("%s%s%s", toks[0], esc, g.pad(toks[1], mustLen-tokLen))
 		}
 	}
-	return
+
+	return ret
 }

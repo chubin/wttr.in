@@ -1,0 +1,30 @@
+run:
+  skip-dirs:
+    - pkg/curlator
+linters:
+  enable-all: true
+  disable:
+    - wsl
+    - wrapcheck
+    - varnamelen
+    - gci
+    - exhaustivestruct
+    - exhaustruct
+    - gomnd
+    - gofmt
+
+    # to be fixed:
+    - ireturn
+    - gosec
+    - noctx
+    - interfacer
+
+    # deprecated:
+    - scopelint
+    - deadcode
+    - varcheck
+    - maligned
+    - ifshort
+    - nosnakecase
+    - structcheck
+    - golint

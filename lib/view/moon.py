@@ -44,6 +44,9 @@ def get_moon(parsed_query):
     if parsed_query.get('no-terminal', False):
         stdout = globals.remove_ansi(stdout)
 
+    if parsed_query.get('dumb', False):
+        stdout = stdout.translate(globals.TRANSLATION_TABLE)
+
     if html:
         p = Popen(
             ["bash", globals.ANSI2HTML, "--palette=solarized", "--bg=dark"],

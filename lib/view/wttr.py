@@ -13,8 +13,8 @@ from gevent.subprocess import Popen, PIPE
 
 sys.path.insert(0, "..")
 from translations import get_message, SUPPORTED_LANGS
-from globals import WEGO, NOT_FOUND_LOCATION, DEFAULT_LOCATION, ANSI2HTML, \
-                    error, remove_ansi
+from globals import WEGO, TRANSLATION_TABLE, NOT_FOUND_LOCATION, \
+                    DEFAULT_LOCATION, ANSI2HTML, error, remove_ansi
 
 
 def get_wetter(parsed_query):
@@ -125,6 +125,9 @@ def _wego_postprocessing(location, parsed_query, stdout):
 
     if parsed_query.get('no-city', False):
         stdout = "\n".join(stdout.splitlines()[2:]) + "\n"
+
+    if parsed_query.get('dumb', False):
+        stdout = stdout.translate(TRANSLATION_TABLE)
 
     if full_address \
         and parsed_query.get('format', 'txt') != 'png' \

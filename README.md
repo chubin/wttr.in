@@ -11,7 +11,7 @@ intended to demonstrate the power of the console-oriented services,
 
 You can see it running here: [wttr.in](https://wttr.in).
 
-[Documentation](https://wttr.in/:help) | [Usage](https://github.com/chubin/wttr.in#usage) | [One-line output](https://github.com/chubin/wttr.in#one-line-output) | [Data-rich output format](https://github.com/chubin/wttr.in#data-rich-output-format-v2) | [Map view](https://github.com/chubin/wttr.in#map-view-v3) | [Output formats](https://github.com/chubin/wttr.in#different-output-formats) | [Moon phases](https://github.com/chubin/wttr.in#moon-phases) | [Internationalization](https://github.com/chubin/wttr.in#internationalization-and-localization) | [Windows issues](https://github.com/chubin/wttr.in#windows-users) | [Installation](https://github.com/chubin/wttr.in#installation)
+[Documentation](https://wttr.in/:help) | [Usage](https://github.com/chubin/wttr.in#usage) | [One-line output](https://github.com/chubin/wttr.in#one-line-output) | [Data-rich output format](https://github.com/chubin/wttr.in#data-rich-output-format-v2) | [Map view](https://github.com/chubin/wttr.in#map-view-v3) | [Output formats](https://github.com/chubin/wttr.in#different-output-formats) | [Moon phases](https://github.com/chubin/wttr.in#moon-phases) | [Internationalization](https://github.com/chubin/wttr.in#internationalization-and-localization) | [Installation](https://github.com/chubin/wttr.in#installation)
 
 ## Usage
 
@@ -21,18 +21,15 @@ You can access the service from a shell or from a Web browser like this:
     Weather for City: Paris, France
 
          \   /     Clear
-          .-.      10 – 11 °C  
-       ― (   ) ―   ↑ 11 km/h  
-          `-’      10 km  
-         /   \     0.0 mm  
+          .-.      10 – 11 °C
+       ― (   ) ―   ↑ 11 km/h
+          `-’      10 km
+         /   \     0.0 mm
 
 
-Here is an actual weather report for your location (it's live!):
+Here is an example weather report:
 
-![Weather Report](https://wttr.in/San-Francisco.png?)
-
-(It's not your actual location - GitHub's CDN hides your real IP address with its own IP address,
-but it's still a live weather report in your language.)
+![Weather Report](San_Francisco.png)
 
 Or in PowerShell:
 
@@ -78,7 +75,6 @@ To get detailed information online, you can access the [/:help](https://wttr.in/
 
     $ curl wttr.in/:help
 
-
 ### Weather Units
 
 By default the USCS units are used for the queries from the USA and the metric system for the rest of the world.
@@ -111,6 +107,10 @@ The ANSI and HTML formats are selected based on the User-Agent string.
 To force plain text, which disables colors:
 
     $ curl wttr.in/?T
+
+To restrict output to glyphs available in standard console fonts (e.g. Consolas and Lucida Console):
+
+    $ curl wttr.in/?d
 
 The PNG format can be forced by adding `.png` to the end of the query:
 
@@ -227,17 +227,19 @@ set -g status-right "$WEATHER ..."
 ```
 ![wttr.in in tmux status bar](https://wttr.in/files/example-tmux-status-line.png)
 
-### Weechat
+### WeeChat
 
-To embed in to an IRC ([Weechat](https://github.com/weechat/weechat)) client's existing status bar:
+To embed in to an IRC ([WeeChat](https://github.com/weechat/weechat)) client's existing status bar:
 
 ```
-/alias add wttr /exec -pipe "/set plugins.var.python.text_item.wttr all" url:wttr.in/Montreal?format=%l:+%c+%f+%h+%p+%P+%m+%w+%S+%s
+/alias add wttr /exec -pipe "/mute /set plugins.var.wttr" url:wttr.in/Montreal?format=%l:+%c+%f+%h+%p+%P+%m+%w+%S+%s;/wait 3 /item refresh wttr
 /trigger add wttr timer 60000;0;0 "" "" "/wttr"
-/eval /set weechat.bar.status.items ${weechat.bar.status.items},wttr
+/item add wttr "" "${plugins.var.wttr}"
+/eval /set weechat.bar.status.items ${weechat.bar.status.items},spacer,wttr
 /eval /set weechat.startup.command_after_plugins ${weechat.startup.command_after_plugins};/wttr
+/wttr
 ```
-![wttr.in in weechat status bar](https://i.imgur.com/IyvbxjL.png)
+![wttr.in in WeeChat status bar](https://i.imgur.com/XkYiRU7.png)
 
 
 ### conky
@@ -245,12 +247,12 @@ To embed in to an IRC ([Weechat](https://github.com/weechat/weechat)) client's e
 Conky usage example:
 
 ```
-${texeci 1800 curl wttr.in/kyiv_0pq_lang=uk.png 
+${texeci 1800 curl wttr.in/kyiv_0pq_lang=uk.png
   | convert - -transparent black $HOME/.config/conky/out.png}
 ${image $HOME/.config/conky/out.png -p 0,0}
 ```
 
-![wttr.in in weechat status bar](https://user-images.githubusercontent.com/3875145/172178453-9e9ed9e3-9815-426a-9a21-afdd6e279fc8.png)
+![wttr.in in conky](https://user-images.githubusercontent.com/3875145/172178453-9e9ed9e3-9815-426a-9a21-afdd6e279fc8.png)
 
 ### Emojis support
 
@@ -443,7 +445,7 @@ Most of these values are self-explanatory, aside from `weatherCode`. The `weathe
 
 ### Prometheus Metrics Output
 
-The [Prometheus](https://github.com/prometheus/prometheus) Metrics format is a feature providing access to *wttr.in* data through an easy-to-parse format for monitoring systems, without requiring the user to create a complex script to reinterpret wttr.in's graphical output. 
+The [Prometheus](https://github.com/prometheus/prometheus) Metrics format is a feature providing access to *wttr.in* data through an easy-to-parse format for monitoring systems, without requiring the user to create a complex script to reinterpret wttr.in's graphical output.
 
 To fetch information in Prometheus format, use the following syntax:
 
@@ -549,19 +551,6 @@ in your language.
 
 ![Queries to wttr.in in various languages](https://pbs.twimg.com/media/C7hShiDXQAES6z1.jpg)
 
-## Windows Users
-
-There are currently two Windows related issues that prevent the examples found on this page from working exactly as expected out of the box. Until Microsoft fixes the issues, there are a few workarounds. To circumvent both issues you may use a shell such as `bash` on the [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install-win10) or read on for alternative solutions.
-
-### Garbage characters in the output
-There is a limitation of the current Win32 version of `curl`. Until the [Win32 curl issue](https://github.com/chubin/wttr.in/issues/18#issuecomment-474145551) is resolved and rolled out in a future Windows release, it is recommended that you use Powershell’s `Invoke-Web-Request` command instead:
-- `(Invoke-WebRequest https://wttr.in).Content`
-
-### Missing or double wide diagonal wind direction characters
-The second issue is regarding the width of the diagonal arrow glyphs that some Windows Terminal Applications such as the default `conhost.exe` use. At the time of writing this, `ConEmu.exe`, `ConEmu64.exe` and Terminal Applications built on top of ConEmu such as Cmder (`cmder.exe`) use these double-wide glyphs by default. The result is the same with all of these programs, either a missing character for certain wind directions or a broken table in the output or both. Some third-party Terminal Applications have addressed the wind direction glyph issue but that fix depends on the font and the Terminal Application you are using.
-One way to display the diagonal wind direction glyphs in your Terminal Application is to use [Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal-preview/9n0dx20hk701?activetab=pivot:overviewtab) which is currently available in the [Microsoft Store](https://www.microsoft.com/en-us/p/windows-terminal-preview/9n0dx20hk701?activetab=pivot:overviewtab). Windows Terminal is currently a preview release and will be rolled out as the default Terminal Application in an upcoming release. If your output is still skewed after using Windows Terminal then try maximizing the terminal window.
-Another way you can display the diagonal wind direction is to swap out the problematic characters with forward and backward slashes as shown [here](https://github.com/chubin/wttr.in/issues/18#issuecomment-405640892).
-
 ## Installation
 
 To install the application:
@@ -581,9 +570,9 @@ wttr.in has the following external dependencies:
 * [wego](https://github.com/schachmat/wego), weather client for terminal
 
 After you install [golang](https://golang.org/doc/install), install `wego`:
-
-    $ go get -u github.com/schachmat/wego
-    $ go install github.com/schachmat/wego
+```bash
+go install github.com/schachmat/wego@latest
+```
 
 ### Install Python dependencies
 
@@ -605,13 +594,15 @@ You can install most of them using `pip`.
 
 Some python package use LLVM, so install it first:
 
-    $ apt-get install llvm-7 llvm-7-dev
-
+```bash
+apt-get install llvm-7 llvm-7-dev
+```
 If `virtualenv` is used:
-
-    $ virtualenv -p python3 ve
-    $ ve/bin/pip3 install -r requirements.txt
-    $ ve/bin/python3 bin/srv.py
+```bash
+virtualenv -p python3 ve
+ve/bin/pip3 install -r requirements.txt
+ve/bin/python3 bin/srv.py
+```
 
 Also, you need to install the geoip2 database.
 You can use a free database GeoLite2 that can be downloaded from (http://dev.maxmind.com/geoip/geoip2/geolite2/).

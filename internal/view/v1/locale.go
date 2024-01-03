@@ -1,7 +1,8 @@
-package main
+package v1
 
-var (
-	locale = map[string]string{
+//nolint:funlen
+func locale() map[string]string {
+	return map[string]string{
 		"af":     "af_ZA",
 		"am":     "am_ET",
 		"ar":     "ar_TN",
@@ -73,8 +74,11 @@ var (
 		"zh":     "zh_CN",
 		"zu":     "zu_ZA",
 	}
+}
 
-	localizedCaption = map[string]string{
+//nolint:funlen
+func localizedCaption() map[string]string {
+	return map[string]string{
 		"af":     "Weer verslag vir:",
 		"am":     "የአየር ሁኔታ ዘገባ ለ ፥",
 		"ar":     "تقرير حالة ألطقس",
@@ -147,8 +151,11 @@ var (
 		"zh-tw":  "天氣預報：",
 		"mg":     "Vinavina toetr'andro hoan'ny:",
 	}
+}
 
-	daytimeTranslation = map[string][]string{
+//nolint:misspell,funlen
+func daytimeTranslation() map[string][]string {
+	return map[string][]string{
 		"af":     {"Oggend", "Middag", "Vroegaand", "Laatnag"},
 		"am":     {"ጠዋት", "ከሰዓት በኋላ", "ምሽት", "ሌሊት"},
 		"ar":     {"ﺎﻠﻠﻴﻟ", "ﺎﻠﻤﺳﺍﺀ", "ﺎﻠﻈﻫﺭ", "ﺎﻠﺼﺑﺎﺣ"},
@@ -161,7 +168,7 @@ var (
 		"ca":     {"Matí", "Dia", "Tarda", "Nit"},
 		"cy":     {"Bore", "Dydd", "Hwyr", "Nos"},
 		"da":     {"Morgen", "Middag", "Aften", "Nat"},
-		"de":     {"Früh", "Mittag", "Abend", "Nacht"},
+		"de":     {"Morgen", "Mittag", "Abend", "Nacht"},
 		"el":     {"Πρωί", "Μεσημέρι", "Απόγευμα", "Βράδυ"},
 		"en":     {"Morning", "Noon", "Evening", "Night"},
 		"eo":     {"Mateno", "Tago", "Vespero", "Nokto"},
@@ -222,99 +229,110 @@ var (
 		"zu":     {"Morning", "Noon", "Evening", "Night"},
 		"mg":     {"Maraina", "Tolakandro", "Ariva", "Alina"},
 	}
+}
 
-	unitTemp = map[bool]string{
+func unitTemp() map[bool]string {
+	return map[bool]string{
 		false: "C",
 		true:  "F",
 	}
+}
 
-	localizedRain = map[string]map[bool]string{
-		"en": map[bool]string{
+func localizedRain() map[string]map[bool]string {
+	return map[string]map[bool]string{
+		"en": {
 			false: "mm",
 			true:  "in",
 		},
-		"be": map[bool]string{
+		"be": {
 			false: "мм",
 			true:  "in",
 		},
-		"ru": map[bool]string{
+		"ru": {
 			false: "мм",
 			true:  "in",
 		},
-		"uk": map[bool]string{
+		"uk": {
 			false: "мм",
 			true:  "in",
 		},
 	}
+}
 
-	localizedVis = map[string]map[bool]string{
-		"en": map[bool]string{
+func localizedVis() map[string]map[bool]string {
+	return map[string]map[bool]string{
+		"en": {
 			false: "km",
 			true:  "mi",
 		},
-		"be": map[bool]string{
+		"be": {
 			false: "км",
 			true:  "mi",
 		},
-		"ru": map[bool]string{
+		"ru": {
 			false: "км",
 			true:  "mi",
 		},
-		"uk": map[bool]string{
+		"uk": {
 			false: "км",
 			true:  "mi",
 		},
 	}
+}
 
-	localizedWind = map[string]map[int]string{
-		"en": map[int]string{
+func localizedWind() map[string]map[int]string {
+	return map[string]map[int]string{
+		"en": {
 			0: "km/h",
 			1: "mph",
 			2: "m/s",
 		},
-		"be": map[int]string{
+		"be": {
 			0: "км/г",
 			1: "mph",
 			2: "м/c",
 		},
-		"ru": map[int]string{
+		"ru": {
 			0: "км/ч",
 			1: "mph",
 			2: "м/c",
 		},
-		"tr": map[int]string{
+		"tr": {
 			0: "km/sa",
 			1: "mph",
 			2: "m/s",
 		},
-		"uk": map[int]string{
+		"uk": {
 			0: "км/год",
 			1: "mph",
 			2: "м/c",
 		},
 	}
-)
+}
 
 func unitWind(unit int, lang string) string {
-	translation, ok := localizedWind[lang]
+	translation, ok := localizedWind()[lang]
 	if !ok {
-		translation = localizedWind["en"]
+		translation = localizedWind()["en"]
 	}
+
 	return translation[unit]
 }
 
 func unitVis(unit bool, lang string) string {
-	translation, ok := localizedVis[lang]
+	translation, ok := localizedVis()[lang]
 	if !ok {
-		translation = localizedVis["en"]
+		translation = localizedVis()["en"]
 	}
+
 	return translation[unit]
 }
 
 func unitRain(unit bool, lang string) string {
-	translation, ok := localizedRain[lang]
+	translation, ok := localizedRain()[lang]
 	if !ok {
-		translation = localizedRain["en"]
+		translation = localizedRain()["en"]
 	}
+
 	return translation[unit]
 }

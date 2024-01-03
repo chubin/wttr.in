@@ -90,9 +90,18 @@ PLAIN_TEXT_AGENTS = [
     "aiohttp",
     "http_get",
     "xh",
+    "nushell",
 ]
 
 PLAIN_TEXT_PAGES = [':help', ':bash.function', ':translation', ':iterm2']
+
+TRANSLATION_TABLE = str.maketrans({
+    '\u2196': '\u256E',  # '↖' -> '╮'
+    '\u2197': '\u256D',  # '↗' -> '╭'
+    '\u2198': '\u2570',  # '↘' -> '╰'
+    '\u2199': '\u256F',  # '↙' -> '╯'
+    '\u26A1': '\u250C\u2518'
+})
 
 _IPLOCATION_ORDER = os.environ.get(
     "WTTR_IPLOCATION_ORDER",

@@ -30,7 +30,7 @@ DESCRIPTION = {
         "Temperature in Fahrenheit",
         "temperature_fahrenheit"),
     "uvIndex": (
-        "Ultaviolet Radiation Index",
+        "Ultraviolet Radiation Index",
         "uv_index"),
     "visibility": (
         "Visible Distance in Kilometres",
@@ -91,15 +91,15 @@ DESCRIPTION = {
 
     # astronomy fields with time
     "moonrise": (
-        "Minutes since start of the day untill the moon appears above the horizon",
+        "Minutes since start of the day until the moon appears above the horizon",
         "astronomy_moonrise_min"),
     "moonset": (
-        "Minutes since start of the day untill the moon disappears below the horizon",
+        "Minutes since start of the day until the moon disappears below the horizon",
         "astronomy_moonset_min"),
     "sunrise": (
-        "Minutes since start of the day untill the sun appears above the horizon",
+        "Minutes since start of the day until the sun appears above the horizon",
         "astronomy_sunrise_min"),
     "sunset": (
-        "Minutes since start of the day untill the moon disappears below the horizon",
+        "Minutes since start of the day until the moon disappears below the horizon",
         "astronomy_sunset_min"),
     }

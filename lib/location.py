@@ -406,12 +406,17 @@ def location_processing(location, ip_addr):
 
     if location and location.lstrip('~ ').startswith('@'):
         try:
-            location, region, country = _get_location(
-                socket.gethostbyname(
-                    location.lstrip('~ ')[1:]))
-            location = '~' + location
-            location = _fully_qualified_location(location, region, country)
-            hide_full_address = not force_show_full_address
+            if (location.lstrip('~ ')[1:] == ""):
+                location, region, country = NOT_FOUND_LOCATION, None, None
+
+            else:
+                location, region, country = _get_location(
+                    socket.gethostbyname(
+                        location.lstrip('~ ')[1:]))
+                location = '~' + location
+                location = _fully_qualified_location(location, region, country)
+                hide_full_address = not force_show_full_address
+
         except:
             location, region, country = NOT_FOUND_LOCATION, None, None
 
