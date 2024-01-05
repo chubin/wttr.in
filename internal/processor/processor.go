@@ -201,7 +201,13 @@ func (rp *RequestProcessor) processRequestFromCache(r *http.Request) *ResponseWi
 		}
 	}
 	if cacheEntry.InProgress {
-		log.Printf("TIMEOUT: %s\n", cacheDigest)
+		// log.Printf("TIMEOUT: %s\n", cacheDigest)
+		return &ResponseWithHeader{
+			InProgress: false,
+			Expires:    time.Now().Add(time.Duration(randInt(1000, 1500)) * time.Second),
+			Body:       []byte("This query is already being processed"),
+			StatusCode: 200,
+		}
 	}
 	if ok && !cacheEntry.InProgress && cacheEntry.Expires.After(time.Now()) {
 		rp.stats.Inc("cache1")
@@ -220,6 +226,9 @@ func (rp *RequestProcessor) processUncachedRequest(r *http.Request) (*ResponseWi
 		response    *ResponseWithHeader
 		err         error
 	)
+
+	// Indicate, that the request is being handled.
+	rp.lruCache.Add(cacheDigest, ResponseWithHeader{InProgress: true})
 
 	// Response was not found in cache.
 	// Starting real handling.
