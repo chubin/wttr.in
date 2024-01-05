@@ -56,6 +56,11 @@ func (rl *RequestLogger) Log(r *http.Request) error {
 		le.Proto = "https"
 	}
 
+	// Do not log 127.0.0.1 connections
+	if le.IP == "127.0.0.1" {
+		return nil
+	}
+
 	rl.m.Lock()
 	rl.buf[le]++
 	rl.m.Unlock()
