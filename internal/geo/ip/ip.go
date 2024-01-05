@@ -10,12 +10,13 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/samonzeweb/godb"
+	"github.com/samonzeweb/godb/adapters/sqlite"
+
 	"github.com/chubin/wttr.in/internal/config"
 	"github.com/chubin/wttr.in/internal/routing"
 	"github.com/chubin/wttr.in/internal/types"
 	"github.com/chubin/wttr.in/internal/util"
-	"github.com/samonzeweb/godb"
-	"github.com/samonzeweb/godb/adapters/sqlite"
 )
 
 // Address information.
