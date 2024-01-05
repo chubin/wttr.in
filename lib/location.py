@@ -476,7 +476,6 @@ def location_processing(location, ip_addr):
     return location, \
             override_location_name, \
             full_address, \
-            country, \
             query_source_location, \
             hemisphere
 
