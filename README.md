@@ -1,6 +1,8 @@
 
 *wttr.in — the right way to ~check~ `curl` the weather!*
 
+[![Python CI](https://github.com/chubin/wttr.in/actions/workflows/python-ci.yml/badge.svg)](https://github.com/chubin/wttr.in/actions/workflows/python-ci.yml)
+
 wttr.in is a console-oriented weather forecast service that supports various information
 representation methods like terminal-oriented ANSI-sequences for console HTTP clients
 (curl, httpie, or wget), HTML for web browsers, or PNG for graphical viewers.
