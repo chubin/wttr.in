@@ -50,8 +50,17 @@ type Server struct {
 
 // Uplink configuration.
 type Uplink struct {
-	// Address contains address of the uplink server in form IP:PORT.
-	Address string `yaml:"address,omitempty"`
+	// Address1 contains address of the uplink server in form IP:PORT
+	// for format=j1 queries.
+	Address1 string `yaml:"address1,omitempty"`
+
+	// Address2 contains address of the uplink server in form IP:PORT
+	// for format=* queries.
+	Address2 string `yaml:"address2,omitempty"`
+
+	// Address3 contains address of the uplink server in form IP:PORT
+	// for all other queries.
+	Address3 string `yaml:"address3,omitempty"`
 
 	// Timeout for upstream queries.
 	Timeout int `yaml:"timeout,omitempty"`
@@ -85,7 +94,7 @@ type Geo struct {
 
 	LocationCacheType types.CacheType `yaml:"locationCacheType,omitempty"`
 
-	Nominatim []Nominatim
+	Nominatim []Nominatim `yaml:"nominatim"`
 }
 
 type Nominatim struct {
@@ -140,7 +149,9 @@ func Default() *Config {
 			TLSKeyFile:  "/wttr.in/etc/privkey.pem",
 		},
 		Uplink{
-			Address:          "127.0.0.1:9002",
+			Address1:         "127.0.0.1:9002",
+			Address2:         "127.0.0.1:9002",
+			Address3:         "127.0.0.1:9002",
 			Timeout:          30,
 			PrefetchInterval: 300,
 		},
