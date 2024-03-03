@@ -25,7 +25,7 @@ V2_TRANSLATION = {
     "es": ("El tiempo en:",                 "Clima", "Zona horaria", "Ahora", "Alborada", "Amanecer", "Cenit", "Atardecer", "Anochecer"),
     "et": ("Ilmaprognoos:",                 "Ilm", "Ajatsoon", "Hetkel", "Koit", "Päikesetõus", "Seniit", "Päikeseloojang", "Eha"),
     "eu": ("Eguraldia:",                    "Ordu-eremua", "Orain", "Egunsentia", "Eguzkia", "Zenit", "Ilunabarra", "Ilunabarra"),
-    "fa": ("اوه و بآ تیعضو شرازگ",          "", "", "", "", "", "", "", ""),
+    "fa": ("گزارش وضعیت آب و هوا",          "", "", "", "", "", "", "", ""),
     "fi": ("Säätiedotus:",                  "", "", "", "", "", "", "", ""),
     "fr": ("Prévisions météo pour :",       "Météo", "Fuseau Horaire", "Heure", "Aube", "Lever du Soleil", "Zénith", "Coucher du Soleil", "Crépuscule"),
     "fy": ("Waarberjocht foar:",            "", "", "", "", "", "", "", ""),
