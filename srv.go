@@ -262,5 +262,5 @@ func setLogLevel(logLevel string) error {
 
 func checkURLForPNG(r *http.Request) bool {
 	url := r.URL.String()
-	return strings.Contains(url, ".png")
+	return strings.Contains(url, ".png") && !strings.Contains(url, "/files/")
 }
