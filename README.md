@@ -326,7 +326,7 @@ or, if you prefer Nerd Fonts instead of Emoji, `v2d` (day) or `v2n` (night):
 ```
 
 
-![data-reach output format](https://wttr.in/files/example-wttr-v2.png)
+![data-rich output format](https://wttr.in/files/example-wttr-v2.png)
 
 (The mode is experimental, and it has several limitations currently:
 
