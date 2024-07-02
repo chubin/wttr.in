@@ -254,6 +254,13 @@ ${image $HOME/.config/conky/out.png -p 0,0}
 
 ![wttr.in in conky](https://user-images.githubusercontent.com/3875145/172178453-9e9ed9e3-9815-426a-9a21-afdd6e279fc8.png)
 
+
+### IRC
+
+IRC integration example:
+
+* https://github.com/OpenSourceTreasure/Mirc-ASCII-weather-translate-pixel-editor
+
 ### Emojis support
 
 To see emojis in terminal, you need:
