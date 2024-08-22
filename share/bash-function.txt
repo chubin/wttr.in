@@ -20,12 +20,12 @@ fi
 
 wttr() {
   local location="${1// /+}"
-  command shift
-  local args=""
+  test "$#" -gt 0 && shift
+  local args=()
   for p in $WTTR_PARAMS "$@"; do
-    args+=" --data-urlencode $p "
+    args+=("--data-urlencode" "$p")
   done
-  curl -fGsS -H "Accept-Language: ${LANG%_*}" $args --compressed "wttr.in/${location}"
+  curl -fGsS -H "Accept-Language: ${LANG%_*}" "${args[@]}" --compressed "wttr.in/${location}"
 }
 
 wttr "$@"
