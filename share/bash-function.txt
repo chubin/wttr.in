@@ -20,7 +20,7 @@ fi
 
 wttr() {
   local location="${1// /+}"
-  shift
+  test "$#" -gt 0 && shift
   local args=""
   for p in $WTTR_PARAMS "$@"; do
     args+=" --data-urlencode $p "
