@@ -5,7 +5,7 @@ In the experimental map view, that is available under the view code `v3`,
 weather information about a geographical region is available:
 
 ```
-    $ curl v3.wttr.in/Bayern.sxl
+curl v3.wttr.in/Bayern.sxl
 ```
 
 ![v3.wttr.in/Bayern](https://v3.wttr.in/Bayern.png)
