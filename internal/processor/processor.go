@@ -37,6 +37,7 @@ func plainTextAgents() []string {
 		"http_get",
 		"xh",
 		"nushell",
+		"zig",
 	}
 }
 
