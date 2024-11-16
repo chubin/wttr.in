@@ -304,6 +304,21 @@ $ cat ~/.config/fontconfig/fonts.conf
 In some cases, `tmux` and the terminal understanding of some emoji characters may differ, which may
 cause strange effects similar to that described in #579.
 
+### Squeak
+
+To embed into the world main docking bar:
+
+```smalltalk
+wttr := (UpdatingStringMorph on: [(WebClient httpGet: 'https://wttr.in/?format=%20%20%l:%20%C+%t') content] selector: #value)
+	stepTime: 60000;
+	useStringFormat;
+	yourself.
+dockingBar := World mainDockingBars first.
+dockingBar addMorph: wttr after: (dockingBar findA: ClockMorph).
+```
+
+![wttr.in integration in the Squeak world main docking bar](https://github.com/user-attachments/assets/4c2762b0-77ae-41a8-98db-3eb310d073bd)
+
 ## Data-rich output format (v2)
 
 In the experimental data-rich output format, that is available under the view code `v2`,
