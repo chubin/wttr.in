@@ -457,319 +457,319 @@ iray amin'ireo toerana mangatsiaka indrindra tsisy mponina eto an-tany.
 Sorry, we are running out of queries to the weather service at the moment.
 Here is the weather report for the default city (just to show you what it looks like).
 We will get new queries as soon as possible.
-You can follow https://twitter.com/igor_chubin for the updates.
+You can follow https://x.com/igor_chubin for the updates.
 ======================================================================================
 """,
         'af': u"""
 Verskoning, ons oorskry tans die vermoë om navrae aan die weerdiens te rig.
 Hier is die weerberig van 'n voorbeeld ligging (bloot om aan u te wys hoe dit lyk).
 Ons sal weereens nuwe navrae kan hanteer so gou as moontlik.
-U kan vir https://twitter.com/igor_chubin volg vir opdaterings.
+U kan vir https://x.com/igor_chubin volg vir opdaterings.
 ======================================================================================
 """,
         'am': u"""
 ይቅርታ ፤ ለጊዜው መጠይቆችን ማስተናገድ አልቻልንም፡፡
 የነባሪ ከተማው የአየር ሁኔታ ሪፖርት ይኸውልዎ (ምን እንደሚመስል ለማሳየት)።
 አዳዲስ መጠይቆችን በተቻለ ፍጥነት ለማስተናገድ እንሞክራለን።
-ለበለጠ መረጃ እባክዎ https://twitter.com/igor_chubin ን ይከተሉ።
+ለበለጠ መረጃ እባክዎ https://x.com/igor_chubin ን ይከተሉ።
 ======================================================================================
 """,
         'ar': u"""
 عذرًا ، استعلامات خدمة الطقس نفذت في الوقت الحالي.
 هذا هو تقرير الطقس للمدينة الافتراضية (فقط لتظهر لك كيف تبدو).
 سوف نتلقى استعلامات جديدة في أقرب وقت ممكن.
-يمكنك متابعة https://twitter.com/igor_chubin لآخر المستجدات.
+يمكنك متابعة https://x.com/igor_chubin لآخر المستجدات.
 ======================================================================================
 """,
         'be': u"""
 Прабачце, мы выйшлі за ліміты колькасці запытаў да службы надвор'я ў дадзены момант.
 Вось прагноз надвор'я для горада па змаўчанні (толькі, каб паказаць вам, як гэта выглядае).
 Мы вернемся як мага хутчэй.
-Вы можаце сачыць на https://twitter.com/igor_chubin за абнаўленнямі.
+Вы можаце сачыць на https://x.com/igor_chubin за абнаўленнямі.
 ======================================================================================
 """,
         'bg': u"""
 Съжаляваме, количеството заявки към услугата за предсказване на време е почти изчерпано.
 Ето доклад за града по подразбиране (просто да видите как изглежда).
 Ще осогурим допълнителни заявки максимално бързо.
-Може да последвате https://twitter.com/igor_chubin за обновления.
+Може да последвате https://x.com/igor_chubin за обновления.
 """,
         'bn': u"""
 দুঃখিত, এই মুহুর্তে আবহাওয়া পরিসেবাতে  আমাদের কুইরী শেষ হয়ে আসছে। 
 এখানে ডিফল্ট শহরের আবহাওয়ার প্রতিবেদন রয়েছে (এটি দেখতে কেমন তা আপনাকে দেখানোর জন্য)। 
 আমরা খুব দ্রুত নতুন কুইরী পাওয়ার ব্যবস্থা করছি। 
-আপডেটের জন্য আপনি https://twitter.com/igor_chubin অনুসরণ করতে পারেন। 
+আপডেটের জন্য আপনি https://x.com/igor_chubin অনুসরণ করতে পারেন। 
 """,
         'bs': u"""
 Žao mi je, mi ponestaje upita i vremenska prognoza u ovom trenutku.
 Ovdje je izvještaj o vremenu za default grada (samo da vam pokažem kako to izgleda).
 Mi ćemo dobiti nove upite u najkraćem mogućem roku.
-Možete pratiti https://twitter.com/igor_chubin za ažuriranja.
+Možete pratiti https://x.com/igor_chubin za ažuriranja.
 ======================================================================================
 """,
         'ca': u"""
 Disculpa'ns, ens hem quedat momentàniament sense consultes al servei meteorològic.
 Aquí t'oferim l'informe del temps a la ciutat per defecte (només per mostrar quin aspecte té).
 Obtindrem noves consultes tan aviat com ens sigui possible.
-Pots seguir https://twitter.com/igor_chubin per noves actualitzacions.
+Pots seguir https://x.com/igor_chubin per noves actualitzacions.
 ======================================================================================
 """,
         'de': u"""
 Entschuldigung, wir können momentan den Wetterdienst nicht erreichen.
 Dafür zeigen wir Ihnen das Wetter an einem Beispielort, damit Sie sehen, wie die Seite das Wetter anzeigt.
 Wir werden versuchen das Problem so schnell wie möglich zu beheben.
-Folgen Sie https://twitter.com/igor_chubin für Updates.
+Folgen Sie https://x.com/igor_chubin für Updates.
 ======================================================================================
 """,
         'cy': u"""
 Rydym yn brin o ymholiadau i'r gwasanaeth tywydd ar hyn o bryd.
 Felly dyma'r adroddiad tywydd ar gyfer y ddinas ragosod (er mwyn arddangos sut mae'n edrych).
 Byddwn gyda ymholiadau newydd yn fuan.
-Gellir dilyn https://twitter.com/igor_chubin i gael newyddion pellach.
+Gellir dilyn https://x.com/igor_chubin i gael newyddion pellach.
 ======================================================================================
 """,
         'es': u"""
 Lo siento, hemos alcanzado el límite de peticiones al servicio de previsión del tiempo en este momento.
 A continuación, la previsión del tiempo para una ciudad estándar (solo para que puedas ver el formato del reporte).
 Muy pronto volveremos a tener acceso a las peticiones.
-Puedes seguir https://twitter.com/igor_chubin para estar al tanto de la situación.
+Puedes seguir https://x.com/igor_chubin para estar al tanto de la situación.
 ======================================================================================
 """,
         'fa': u"""
 متأسفانه در حال حاضر ظرفیت ما برای درخواست به سرویس هواشناسی به اتمام رسیده.
 اینجا می تونید گزارش هواشناسی برای شهر پیش فرض رو ببینید (فقط برای اینه که بهتون نشون بدیم چه شکلی هست)
 ما تلاش میکنیم در اسرع وقت ظرفیت جدید به دست بیاریم.
-برای دنبال کردن اخبار جدید میتونید https://twitter.com/igor_chubin رو فالو کنید.
+برای دنبال کردن اخبار جدید میتونید https://x.com/igor_chubin رو فالو کنید.
 ======================================================================================
 """,
         'fr': u"""
 Désolé, nous avons épuisé les requêtes vers le service météo.
 Voici un bulletin météo de l'emplacement par défaut (pour vous donner un aperçu).
 Nous serons très bientôt en mesure de faire de nouvelles requêtes.
-Vous pouvez suivre https://twitter.com/igor_chubin pour rester informé.
+Vous pouvez suivre https://x.com/igor_chubin pour rester informé.
 ======================================================================================
 """,
         'ga': u"""
 Tá brón orainn, níl mórán iarratas le fail chuig seirbhís na haimsire faoi láthair.
 Seo duit réamhaisnéis na haimsire don chathair réamhshocraithe (chun é a thaispeaint duit).
 Gheobhaimid iarratais nua chomh luath agus is feidir.
-Lean orainn ar https://twitter.com/igor_chubin don eolas is déanaí.
+Lean orainn ar https://x.com/igor_chubin don eolas is déanaí.
 ======================================================================================
 """,
         'gl': u"""
 Desculpa, estamos a chegar ao límite de peticións ao servizo meteorolóxico neste momento.
 Aquí está a previsión do tempo para a cidade por defecto (tan só para amosarche un exemplo).
 Imos obter máis peticións tan pronto como poidamos.
-Podes seguir https://twitter.com/igor_chubin para estares actualizada.
+Podes seguir https://x.com/igor_chubin para estares actualizada.
 ======================================================================================
 """,
         'hi': u"""
 क्षमा करें, इस समय हम मौसम सेवा से संपर्क नहीं कर पा रहे है।
 यहा पूर्व निर्धारित शहर के लिए मौसम की जानकारी (आपको यह दिखाने के लिए कि यह कैसा दिखता है)।
 हम जल्द से जल्द मौसम सेवा से संपर्क करने नई कोशिश करेंगे।
-आप अपडेट के लिए https://twitter.com/igor_chubin का अनुसरण कर सकते हैं।
+आप अपडेट के लिए https://x.com/igor_chubin का अनुसरण कर सकते हैं।
 ======================================================================================
 """,
         'hu': u"""
 Sajnáljuk, kifogytunk az időjárási szolgáltatásra fordított erőforrásokból.
 Itt van az alapértelmezett város időjárási jelentése (hogy lásd, hogyan néz ki).
 A lehető leghamarabb új erőforrásokat fogunk kapni.
-A frissítésekért tekintsd meg a https://twitter.com/igor_chubin oldalt.
+A frissítésekért tekintsd meg a https://x.com/igor_chubin oldalt.
 ======================================================================================
 """,
         'hy': u"""
 Կներեք, այս պահին մենք գերազանցել ենք եղանակային տեսության կայանին հարցումների քանակը.
 Կարող եք տեսնել տիպային եղանակը զեկուցում հիմնական քաղաքի համար (Ուղղակի որպես նմուշ):
 Մենք մշտապես աշխատում ենք հարցումների քանակը բարելավելու ուղղությամբ:
-Կարող եք հետևել մեզ https://twitter.com/igor_chubin թարմացումների համար.
+Կարող եք հետևել մեզ https://x.com/igor_chubin թարմացումների համար.
 ======================================================================================
 """,
         'ia': u"""
 Pardono, nos ha exhaurite inquisitione del servicio tempore alora.
 Ecce es le reporto tempore por qualque citate (demonstrar le reporte).
 Nos recipera inquisitione nove tosto.
-Tu pote abonar a https://twitter.com/igor_chubin por nove information.
+Tu pote abonar a https://x.com/igor_chubin por nove information.
 ======================================================================================
 """,
         'id': u"""
 Maaf, kami kehabian permintaan ke layanan cuaca saat ini.
 Ini adalah laporan cuaca dari kota standar (hanya untuk menunjukkan kepada anda bagaimana tampilannya).
 Kami akan mencoba permintaan baru lagi sesegera mungkin.
-Anda dapat mengikuti https://twitter.com/igor_chubin untuk informasi terbaru.
+Anda dapat mengikuti https://x.com/igor_chubin untuk informasi terbaru.
 ======================================================================================
 """,
         'it': u"""
 Scusate, attualmente stiamo esaurendo le risorse a disposizione del servizio meteo.
 Qui trovate il bollettino del tempo per la città di default (solo per mostrarvi come si presenta).
 Potremo elaborare nuove richieste appena possibile.
-Potete seguire https://twitter.com/igor_chubin per gli aggiornamenti.
+Potete seguire https://x.com/igor_chubin per gli aggiornamenti.
 ======================================================================================
 """,
         'ko': u"""
 죄송합니다. 현재 날씨 정보를 가져오는 쿼리 요청이 한도에 도달했습니다.
 대신 기본으로 설정된 도시에 대한 일기 예보를 보여드리겠습니다. (이는 단지 어떻게 보이는지 알려주기 위함입니다).
 쿼리 요청이 가능한 한 빨리 이루어질 수 있도록 하겠습니다.
-업데이트 소식을 원하신다면 https://twitter.com/igor_chubin 을 팔로우 해주세요.
+업데이트 소식을 원하신다면 https://x.com/igor_chubin 을 팔로우 해주세요.
 ======================================================================================
 """,
         'lt': u"""
 Atsiprašome, šiuo metu pasiekėme orų prognozės paslaugos užklausų ribą.
 Štai orų prognozė numatomam miestui (tam, kad parodytume, kaip ji atrodo).
 Naujas užklausas priimsime, kai tik galėsime.
-Atnaujinimus galite sekti https://twitter.com/igor_chubin
+Atnaujinimus galite sekti https://x.com/igor_chubin
 ======================================================================================
 """,
         'lv': u"""
 Atvainojiet, uz doto brīdi mēs esam mazliet noslogoti.
 Šeit ir laika ziņas noklusējuma pilsētai (lai parādītu jums, kā izskatās izveidotais ziņojums).
 Mēs atsāksim darbu cik ātri vien varēsim.
-Jūs varat sekot https://twitter.com/igor_chubin lai redzētu visus jaunumus.
+Jūs varat sekot https://x.com/igor_chubin lai redzētu visus jaunumus.
 ======================================================================================
 """,
         'mk': u"""
 Извинете, ни снемуваат барања за до сервисот кој ни нуди временска прогноза во моментот.
 Еве една временска прогноза за град (за да видите како изгледа).
 Ќе добиеме нови барања најбрзо што можеме.
-Следете го https://twitter.com/igor_chubin за известувања
+Следете го https://x.com/igor_chubin за известувања
 ======================================================================================
 """,
         'mr': u"""
 क्षमस्व, याक्षणी आम्ही हवामान सेवेशी संपर्क करू शकत नाही.
 हा एका पूर्वनिर्धारित शहराचा हवामान अहवाल आहे (केवळ तो कसा दिसतो हे दाखवण्याकरिता).
 आम्ही लवकरात लवकर सेवा पुनः चालू करण्याचा प्रयत्न करू.
-अद्यावत माहितीसाठी तुम्ही https://twitter.com/igor_chubin चे अनुसरण करू शकता.
+अद्यावत माहितीसाठी तुम्ही https://x.com/igor_chubin चे अनुसरण करू शकता.
 ======================================================================================
 """,
         'nb': u"""
 Beklager, vi kan ikke nå værtjenesten for øyeblikket.
 Her er værmeldingen for standardbyen så du får se hvordan tjenesten ser ut.
 Vi vil forsøke å fikse problemet så snart som mulig.
-Du kan følge https://twitter.com/igor_chubin for oppdateringer.
+Du kan følge https://x.com/igor_chubin for oppdateringer.
 ======================================================================================
 """,
         'zh': u"""
 抱歉，当前天气服务不可用。
 以下显示默认城市（只对您可见）。
 我们将会尽快获取新数据。
-您可以通过 https://twitter.com/igor_chubin 获取最新动态。
+您可以通过 https://x.com/igor_chubin 获取最新动态。
 ======================================================================================
 """,
         'nl': u"""
 Excuse, wij kunnen u op dit moment dit weerbericht niet laten zien.
 Hier is het weerbericht voor de standaard stad(zodat u weet hoe het er uitziet)
 Wij lossen dit probleem zo snel mogelijk op.
-voor updates kunt u ons op https://twitter.com/igor_chubin volgen.
+voor updates kunt u ons op https://x.com/igor_chubin volgen.
 ======================================================================================
 """,
         'oc': u"""
 O planhèm, avèm pas mai de requèstas cap al servici metèo.
 Vaquí las prevision metèo de l'emplaçament per defaut (per vos donar un apercebut).
 Poirem lèu ne far de novèlas.
-Podètz seguir https://twitter.com/igor_chubin per demorar informat.
+Podètz seguir https://x.com/igor_chubin per demorar informat.
 ======================================================================================
 """,
         'fy': u"""
 Excuses, wy kinne op dit moment 't waarberjocht net sjin litte.
 Hjir is 't waarberjocht foar de standaard stêd.
 Wy losse dit probleem sa gau mooglik op.
-Foar updates kinne jo ús op https://twitter.com/igor_chubin folgje.
+Foar updates kinne jo ús op https://x.com/igor_chubin folgje.
 ======================================================================================
 """,
         'pl': u"""
 Bardzo nam przykro, ale chwilowo wykorzystaliśmy limit zapytań do serwisu pogodowego.
 To, co widzisz jest przykładowym raportem pogodowym dla domyślnego miasta.
 Postaramy się przywrócić funkcjonalność tak szybko, jak to tylko możliwe.
-Możesz śledzić https://twitter.com/igor_chubin na Twitterze, aby być na bieżąco.
+Możesz śledzić https://x.com/igor_chubin na Twitterze, aby być na bieżąco.
 ======================================================================================
 """,
         'pt': u"""
 Desculpe-nos, estamos atingindo o limite de consultas ao serviço de previsão do tempo neste momento.
 Veja a seguir a previsão do tempo para uma cidade padrão (apenas para você ver que aspecto o relatório tem).
 Em breve voltaremos a ter acesso às consultas.
-Você pode seguir https://twitter.com/igor_chubin para acompanhar a situação.
+Você pode seguir https://x.com/igor_chubin para acompanhar a situação.
 ======================================================================================
 """,
         'pt-br': u"""
 Desculpe-nos, atingimos o limite de consultas ao serviço de previsão do tempo neste momento.
 Veja a seguir a previsão do tempo para uma cidade padrão (apenas para você ver que aspecto o relatório tem).
 Em breve voltaremos a ter acesso às consultas.
-Você pode seguir https://twitter.com/igor_chubin para acompanhar a situação.
+Você pode seguir https://x.com/igor_chubin para acompanhar a situação.
 ======================================================================================
 """,
         'ro': u"""
 Ne pare rău, momentan am epuizat cererile alocate de către serviciul de prognoză meteo.
 Vă arătăm prognoza meteo pentru localitatea implicită (ca exemplu, să vedeți cum arată).
 Vom obține alocarea de cereri noi cât de curând posibil.
-Puteți urmări https://twitter.com/igor_chubin pentru actualizări.
+Puteți urmări https://x.com/igor_chubin pentru actualizări.
 ======================================================================================
 """,
         'te': u"""
 క్షమించండి, ప్రస్తుతానికి మేము వాతావరణ సేవకు ప్రశ్నలను గడుపుతున్నాం.
 ఇక్కడ డిఫాల్ట్ నగరం కోసం వాతావరణ నివేదిక (కేవలం మీకు చూపించడానికి, ఇది ఎలా కనిపిస్తుంది).
 సాధ్యమైనంత త్వరలో కొత్త ప్రశ్నలను పొందుతారు.
-నవీకరణల కోసం https://twitter.com/igor_chubin ను మీరు అనుసరించవచ్చు.
+నవీకరణల కోసం https://x.com/igor_chubin ను మీరు అనుసరించవచ్చు.
 ======================================================================================
 """,
         'tr': u"""
 Üzgünüz, an itibariyle hava durumu servisine yapabileceğimiz sorgu limitine ulaştık.
 Varsayılan şehir için hava durumu bilgisini görüyorsunuz (neye benzediğini gösterebilmek için).
 Mümkün olan en kısa sürede servise yeniden sorgu yapmaya başlayacağız.
-Gelişmeler için https://twitter.com/igor_chubin adresini takip edebilirsiniz.
+Gelişmeler için https://x.com/igor_chubin adresini takip edebilirsiniz.
 ======================================================================================
 """,
         'th': u"""
 ขออภัย การเรียกค้นหาระบบสภาพอากาศของเราหมดชั่วคราว
 เราจึงแสดงข้อมูลของเมืองตัวอย่าง (เพื่อที่จะแสดงให้คุณเห็นว่าหน้าตาเป็นยังไง)
 เราจะเรียกค้นหาใหม่โดยเร็วที่สุด
-คุณสามารถติดตามการอัพเดทได้ที่ https://twitter.com/igor_chubin
+คุณสามารถติดตามการอัพเดทได้ที่ https://x.com/igor_chubin
 ======================================================================================
 """,
         'da': u"""
 Beklager, men vi er ved at løbe tør for forespørgsler til vejr-servicen lige nu.
 Her er vejr rapporten for standard byen (bare så du ved hvordan det kan se ud).
 Vi får nye forespørsler hurtigst muligt.
-Du kan følge https://twitter.com/igor_chubin for at få opdateringer.
+Du kan følge https://x.com/igor_chubin for at få opdateringer.
 ======================================================================================
 """,
         'et': u"""
 Vabandage, kuid hetkel on päringud ilmateenusele piiratud.
 Selle asemel kuvame hetkel näidislinna ilmaprognoosi (näitamaks, kuidas see välja näeb).
 Üritame probleemi lahendada niipea kui võimalik.
-Jälgige https://twitter.com/igor_chubin värskenduste jaoks.
+Jälgige https://x.com/igor_chubin värskenduste jaoks.
 ======================================================================================
 """,
         'uk': u"""
 Вибачте, ми перевищили максимальну кількість запитів до сервісу погоди.
 Ось прогноз погоди у нашому місті (просто показати Вам як це виглядає).
 Ми відновимо роботу як тільки зможемо.
-Ви можете підписатися на https://twitter.com/igor_chubin для отримання новин.
+Ви можете підписатися на https://x.com/igor_chubin для отримання новин.
 ======================================================================================
 """,
         'vi': u"""
 Xin lỗi, hiện tại chúng tôi đã hết lượt yêu cầu thông tin thời tiết.
 Đây là dự báo thời tiết cho thành phố mặc định (chỉ để cho bạn thấy nó trông như thế nào).
 Chung tôi sẽ có thêm lượt truy vấn sớm nhất có thể
-Bạn có thể theo dõi https://twitter.com/igor_chubin để cập nhật thông tin mới nhất.
+Bạn có thể theo dõi https://x.com/igor_chubin để cập nhật thông tin mới nhất.
 ======================================================================================
 """,
         'zh-tw': u"""
 抱歉，目前天氣服務的查詢請求太多了。
 這裡是預設城市的天氣報告（只是為您展示它的外觀）。
 我們將盡快取得新的資料。
-您可以追蹤 https://twitter.com/igor_chubin 以取得更新。
+您可以追蹤 https://x.com/igor_chubin 以取得更新。
 ======================================================================================
 """,
         'mg': u"""
 Miala tsiny fa misedra olana ny sampan-draharaha momba ny toetrandro amin'izao fotoana izao.
 Ity ny tatitra momba ny toetr'andro ho an'ny tanàna mahazatra (mba hampisehoana anao ny endriny).
 Haivaly aminao haingana ny fangatahanao.
-Azonao atao ny manaraka ny pejy https://twitter.com/igor_chubin.
+Azonao atao ny manaraka ny pejy https://x.com/igor_chubin.
 """,
         'ta': u"""
 மன்னிக்கவும், தற்போது வானிலை சேவைக்கான வினவல்கள் எங்களிடம் இல்லை.
 இயல்புநிலை நகரத்திற்கான வானிலை அறிக்கை இதோ (அது எப்படி இருக்கும் என்பதை உங்களுக்குக் காண்பிப்பதற்காக).
 கூடிய விரைவில் புதிய வினவல்களைப் பெறுவோம்.
-புதுப்பிப்புகளுக்கு நீங்கள் https://twitter.com/igor_chubin ஐப் பின்தொடரலாம்.
+புதுப்பிப்புகளுக்கு நீங்கள் https://x.com/igor_chubin ஐப் பின்தொடரலாம்.
 """,
     },
 
@@ -843,7 +843,7 @@ Azonao atao ny manaraka ny pejy https://twitter.com/igor_chubin.
         'cy': u'Dilyner \033[46m\033[30m@igor_Chubin\033[0m am diweddariadau wttr.in',
         'fa': u'برای دنبال کردن خبرهای wttr.in شناسه \033[46m\033[30m@igor_chubin\033[0m رو فالو کنید.',
         'fr': u'Suivez \033[46m\033[30m@igor_Chubin\033[0m pour rester informé sur wttr.in',
-        'de': u'Folgen Sie \033[46m\033[30mhttps://twitter.com/igor_chubin\033[0m für wttr.in Updates',
+        'de': u'Folgen Sie \033[46m\033[30mhttps://x.com/igor_chubin\033[0m für wttr.in Updates',
         'ga': u'Lean \033[46m\033[30m@igor_chubin\033[0m don wttr.in eolas is deanaí',
         'gl': u'Segue a \033[46m\033[30m@igor_chubin\033[0m para actualizacións sobre wttr.in',
         'hi': u'अपडेट के लिए फॉलो करें \033[46m\033[30m@igor_chubin\033[0m',
