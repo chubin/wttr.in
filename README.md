@@ -156,6 +156,10 @@ Nuremberg: 🌦 +11⁰C
 ```
 
 Available preconfigured formats: 1, 2, 3, 4 and the custom format using the percent notation (see below).
+* 1: Current weather at location: `🌦 +11⁰C`
+* 2: Current weather at location with more details: `🌦   🌡️+11°C 🌬️↓4km/h`
+* 3: Name of location and current weather at location: `Nuremberg: 🌦 +11⁰C`
+* 4: Name of location and current weather at location with more details: `Nuremberg: 🌦   🌡️+11°C 🌬️↓4km/h`
 
 You can specify multiple locations separated with `:` (for repeating queries):
 
