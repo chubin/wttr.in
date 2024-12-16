@@ -25,7 +25,7 @@ from astral.sun import sun
 
 import pytz
 
-from constants import WWO_CODE, WEATHER_SYMBOL, WIND_DIRECTION, WEATHER_SYMBOL_WIDTH_VTE, WEATHER_SYMBOL_PLAIN
+from constants import WWO_CODE, WEATHER_SYMBOL, WEATHER_SYMBOL_WI_NIGHT, WEATHER_SYMBOL_WI_DAY, WIND_DIRECTION, WIND_DIRECTION_WI, WEATHER_SYMBOL_WIDTH_VTE, WEATHER_SYMBOL_PLAIN
 from weather_data import get_weather_data
 from . import v2
 from . import v3
@@ -36,6 +36,7 @@ PRECONFIGURED_FORMAT = {
     '2':    r'%c 🌡️%t 🌬️%w\n',
     '3':    r'%l: %c %t\n',
     '4':    r'%l: %c 🌡️%t 🌬️%w\n',
+    '69':   r'nice',
 }
 
 MOON_PHASES = (
@@ -81,8 +82,21 @@ def render_condition(data, query):
     """Emoji encoded weather condition (c)
     """
 
-    weather_condition = WEATHER_SYMBOL[WWO_CODE[data['weatherCode']]]
-    spaces = " "*(WEATHER_SYMBOL_WIDTH_VTE.get(weather_condition) - 1)
+    if query.get("view") == "v2n":
+        weather_condition = WEATHER_SYMBOL_WI_NIGHT.get(
+                WWO_CODE.get(
+                    data['weatherCode'], "Unknown"))
+        spaces = "  "
+    elif query.get("view") == "v2d":
+        weather_condition = WEATHER_SYMBOL_WI_DAY.get(
+                WWO_CODE.get(
+                    data['weatherCode'], "Unknown"))
+        spaces = "  "
+    else:
+        weather_condition = WEATHER_SYMBOL.get(
+                WWO_CODE.get(
+                    data['weatherCode'], "Unknown"))
+        spaces = " "*(3 - WEATHER_SYMBOL_WIDTH_VTE.get(weather_condition, 1))
 
     return weather_condition + spaces
 
@@ -154,6 +168,14 @@ def render_pressure(data, query):
         answer += 'hPa'
     return answer
 
+def render_uv_index(data, query):
+    """
+    UV Index (u)
+    """
+
+    answer = data.get('uvIndex', '')
+    return answer
+
 def render_wind(data, query):
     """
     wind (w)
@@ -170,7 +192,10 @@ def render_wind(data, query):
         degree = ""
 
     if degree:
-        wind_direction = WIND_DIRECTION[int(((degree+22.5)%360)/45.0)]
+        if query.get("view") in ["v2n", "v2d"]:
+            wind_direction = WIND_DIRECTION_WI[int(((degree+22.5)%360)/45.0)]
+        else:
+            wind_direction = WIND_DIRECTION[int(((degree+22.5)%360)/45.0)]
     else:
         wind_direction = ""
 
@@ -213,7 +238,8 @@ def render_moonday(_, query):
 # this is just a temporary solution
 
 def get_geodata(location):
-    text = requests.get("http://localhost:8004/%s" % location).text
+    # text = requests.get("http://localhost:8004/%s" % location).text
+    text = requests.get("http://127.0.0.1:8083/:geo-location?location=%s" % location).text
     return json.loads(text)
 
 
@@ -268,6 +294,7 @@ FORMAT_SYMBOL = {
     'p':    render_precipitation,
     'o':    render_precipitation_chance,
     'P':    render_pressure,
+    "u":    render_uv_index,
     }
 
 FORMAT_SYMBOL_ASTRO = {
@@ -359,7 +386,11 @@ def format_weather_data(query, parsed_query, data):
     if format_line in PRECONFIGURED_FORMAT:
         format_line = PRECONFIGURED_FORMAT[format_line]
 
-    if format_line == "j1":
+    if format_line in ["j1", "j2"]:
+        # j2 is a lightweight j1, without 'hourly' in 'weather' (weather forecast)
+        if "weather" in data["data"] and format_line == "j2":
+            for i in range(len(data["data"]["weather"])):
+                del data["data"]["weather"][i]["hourly"]
         return render_json(data['data'])
     if format_line == "p1":
         return prometheus.render_prometheus(data['data'])

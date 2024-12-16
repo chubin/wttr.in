@@ -1,48 +1,79 @@
-113: Helder                         : Clear                             
-113: Zonnig                         : Sunny
-116: Deels bewolkt                  : Partly cloudy
-119: Bewolkt                        : Cloudy
-122: Bewolkt                        : Overcast
-143: Mist                           : Mist
-176: Mogelijk plaatselijk regen     : Patchy rain possible
-179: Mogelijk plaatselijk sneeuw    : Patchy snow possible
-182: Mogelijk plaatselijk hagel     : Patchy sleet possible
-185: Mogelijk plaatselijk ijzel     : Patchy freezing drizzle possible
-200: Mogelijk een onweersbui        : Thundery outbreaks possible
-227: Sneeuw winden                  : Blowing snow
-230: Sneeuwstorm                    : Blizzard
-248: Mist                           : Fog
-260: Rijp                           : Freezing fog
-263: Plaatselijk motregen           : Patchy light drizzle
-266: Motregen                       : Light drizzle
-281: Ijzel                          : Freezing drizzle
-284: Zware ijzel                    : Heavy freezing drizzle
-293: Plaatselijk lichte regen       : Patchy light rain
-296: Lichte regen                   : Light rain
-299: Af en toe regen                : Moderate rain at times
-302: Regen                          : Moderate rain
-305: Af en toe zware regen          : Heavy rain at times
-308: Zware regen                    : Heavy rain
-311: Lichte ijzel                   : Light freezing rain
-314: Zware ijzel                    : Moderate or heavy freezing rain
-317: Lichte hagel                   : Light sleet
-320: Zware hagel                    : Moderate or heavy sleet
-323: Plaatselijk lichte sneeuw      : Patchy light snow
-326: Lichte sneeuw                  : Light snow
-329: Plaatselijke sneeuw            : Patchy moderate snow
-332: Sneeuw                         : Moderate snow
-335: Plaatselijk zware sneeuw       : Patchy heavy snow
-338: Zware sneeuw                   : Heavy snow
-350: Hagel                          : Ice pellets
-353: Lichte regenbuien              : Light rain shower
-356: Regenbuien                     : Moderate or heavy rain shower
-359: Extreem zware regenbuien       : Torrential rain shower
-362: Lichte hagelbuien              : Light sleet showers
-365: Hagelbuien                     : Moderate or heavy sleet showers
-368: Lichte sneeuwbuien             : Light snow showers
-371: Sneeuwbuien                    : Moderate or heavy snow showers
-386: Plaatselijk lichte regen met on: Patchy light rain with thunder      weer
-389: Regen met onweer               : Moderate or heavy rain with thunder
-392: Plaatselijk lichte sneeuw met o: Patchy light snow with thunder      nweer
-395: Sneeuw met onweer              : Moderate or heavy snow with thunder
+: Zware regen en hagel met onweer                      : Heavy rain and hail with thunderstorm
+: Zware regen met onweer                               : Heavy rain with thunderstorm
+: Lichte regen en hagel met onweer                     : Light rain and hail with thunderstorm
+: Lichte regen en sneeuwbui                            : Light rain and snow shower
+: Lichte regen met onweer                              : Light rain with thunderstorm
+: Lichte sneeuwbui                                     : Light snow shower
+: Plaatselijke mist                                    : Partial fog
+: Regen en hagel met onweer                            : Rain and hail with thunderstorm
+: Regen met onweer                                     : Rain with thunderstorm
+: Lichte mist                                          : Shallow fog
+: Nevel                                                : Smoke
+: Windstoten                                           : Squalls
+: Onweer in de buurt                                   : Thunderstorm in vicinity
+: Sneeuw                                               : Snow
+: Regen                                                : Rain
+: Lichte regen, regenbuien                             : Light Rain, Rain Shower
+: Regenbuien                                           : Rain Shower
+: Plaatselijke mist                                    : Patches of fog
+: Motregen                                             : Drizzle
+: Lichte motregen                                      : Light drizzle
+: Laag stuifsneeuw                                     : Low drifting snow
+: Lichte regen en sneeuw                               : Light rain and snow
+: Buien in de buurt                                    : Shower in vicinity
+: Regen met onweer                                     : Rain with thunderstorm
+: Regen en sneeuwbuien                                 : Rain and snow shower
+: Onweer                                               : Thunderstorm
+: Motregen en regen                                    : Drizzle and rain
+: Hagel met onweer                                     : Hail with thunderstorm
+: Nevel                                                : Haze
+: Lichte motregen en regen                             : Light drizzle and rain
+: Lichte regen en korrelhagel/sneeuwpallets met onweer : Light rain and small hail/snow pallets with thunderstorm
+113: Helder                               : Clear
+113: Zonnig                               : Sunny
+116: Deels bewolkt                        : Partly cloudy
+119: Bewolkt                              : Cloudy
+122: Geheel bewolkt                       : Overcast
+143: Mist                                 : Mist
+176: Mogelijk plaatselijk regen           : Patchy rain possible
+179: Mogelijk plaatselijk sneeuw          : Patchy snow possible
+182: Mogelijk plaatselijk hagel           : Patchy sleet possible
+185: Mogelijk plaatselijk ijzel           : Patchy freezing drizzle possible
+200: Mogelijk een onweersbui              : Thundery outbreaks possible
+227: Sneeuwwinden                         : Blowing snow
+230: Sneeuwstorm                          : Blizzard
+248: Mist                                 : Fog
+260: Rijp                                 : Freezing fog
+263: Plaatselijk motregen                 : Patchy light drizzle
+266: Motregen                             : Light drizzle
+281: Ijzel                                : Freezing drizzle
+284: Zware ijzel                          : Heavy freezing drizzle
+293: Plaatselijk lichte regen             : Patchy light rain
+296: Lichte regen                         : Light rain
+299: Af en toe regen                      : Moderate rain at times
+302: Regen                                : Moderate rain
+305: Af en toe zware regen                : Heavy rain at times
+308: Zware regen                          : Heavy rain
+311: Lichte ijzel                         : Light freezing rain
+314: Zware ijzel                          : Moderate or heavy freezing rain
+317: Lichte hagel                         : Light sleet
+320: Zware hagel                          : Moderate or heavy sleet
+323: Plaatselijk lichte sneeuw            : Patchy light snow
+326: Lichte sneeuw                        : Light snow
+329: Plaatselijke sneeuw                  : Patchy moderate snow
+332: Sneeuw                               : Moderate snow
+335: Plaatselijk zware sneeuw             : Patchy heavy snow
+338: Zware sneeuw                         : Heavy snow
+350: Hagel                                : Ice pellets
+353: Lichte regenbuien                    : Light rain shower
+356: Regenbuien                           : Moderate or heavy rain shower
+359: Extreem zware regenbuien             : Torrential rain shower
+362: Lichte hagelbuien                    : Light sleet showers
+365: Hagelbuien                           : Moderate or heavy sleet showers
+368: Lichte sneeuwbuien                   : Light snow showers
+371: Sneeuwbuien                          : Moderate or heavy snow showers
+386: Plaatselijk lichte regen met onweeer : Patchy light rain with thunder
+389: Regen met onweer                     : Moderate or heavy rain with thunder
+392: Plaatselijk lichte sneeuw met onweer : Patchy light snow with thunder
+395: Sneeuw met onweer                    : Moderate or heavy snow with thunder
 

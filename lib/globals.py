@@ -35,6 +35,10 @@ PNG_CACHE = os.path.join(_DATADIR, "cache/png")
 LRU_CACHE = os.path.join(_DATADIR, "cache/lru")
 
 LOG_FILE = os.path.join(_LOGDIR, 'main.log')
+
+PROXY_LOG_ACCESS = os.path.join(_LOGDIR, 'proxy-access.log')
+PROXY_LOG_ERRORS = os.path.join(_LOGDIR, 'proxy-errors.log')
+
 MISSING_TRANSLATION_LOG = os.path.join(_LOGDIR, 'missing-translation/%s.log')
 
 ALIASES = os.path.join(MYDIR, "share/aliases")
@@ -79,13 +83,25 @@ PLAIN_TEXT_AGENTS = [
     "lwp-request",
     "wget",
     "python-requests",
+    "python-httpx",
     "openbsd ftp",
     "powershell",
     "fetch",
     "aiohttp",
+    "http_get",
+    "xh",
+    "nushell",
 ]
 
 PLAIN_TEXT_PAGES = [':help', ':bash.function', ':translation', ':iterm2']
+
+TRANSLATION_TABLE = str.maketrans({
+    '\u2196': '\u256E',  # '↖' -> '╮'
+    '\u2197': '\u256D',  # '↗' -> '╭'
+    '\u2198': '\u2570',  # '↘' -> '╰'
+    '\u2199': '\u256F',  # '↙' -> '╯'
+    '\u26A1': '\u250C\u2518'
+})
 
 _IPLOCATION_ORDER = os.environ.get(
     "WTTR_IPLOCATION_ORDER",

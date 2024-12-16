@@ -38,7 +38,7 @@ from astral import moon, sun
 from scipy.interpolate import interp1d
 from babel.dates import format_datetime
 
-from globals import WWO_KEY, remove_ansi
+from globals import WWO_KEY, TRANSLATION_TABLE, remove_ansi
 import constants
 import translations
 import parse_query
@@ -321,7 +321,7 @@ def draw_emoji(data, config):
         weather_symbol = constants.WEATHER_SYMBOL_WI_NIGHT
         weather_symbol_width_vte = constants.WEATHER_SYMBOL_WIDTH_VTE_WI
     elif config.get("view") == "v2d":
-        weather_symbol = constants.WEATHER_SYMBOL_WI_NIGHT
+        weather_symbol = constants.WEATHER_SYMBOL_WI_DAY
         weather_symbol_width_vte = constants.WEATHER_SYMBOL_WIDTH_VTE_WI
     else:
         weather_symbol = constants.WEATHER_SYMBOL
@@ -419,13 +419,19 @@ def generate_panel(data_parsed, geo_data, config):
 
     max_width = 72
 
+    if config.get("use_imperial"):
+        feels_like_query = "[.data.weather[] | .hourly[]] | .[].FeelsLikeF"
+        temp_query = "[.data.weather[] | .hourly[]] | .[].tempF"
+        wind_speed_query = "[.data.weather[] | .hourly[]] | .[].windspeedMiles"
+    else:
+        feels_like_query = "[.data.weather[] | .hourly[]] | .[].FeelsLikeC"
+        temp_query = "[.data.weather[] | .hourly[]] | .[].tempC"
+        wind_speed_query = "[.data.weather[] | .hourly[]] | .[].windspeedKmph"
+
     precip_mm_query = "[.data.weather[] | .hourly[]] | .[].precipMM"
     precip_chance_query = "[.data.weather[] | .hourly[]] | .[].chanceofrain"
-    feels_like_query = "[.data.weather[] | .hourly[]] | .[].FeelsLikeC"
-    temp_query = "[.data.weather[] | .hourly[]] | .[].tempC"
     weather_code_query = "[.data.weather[] | .hourly[]] | .[].weatherCode"
     wind_direction_query = "[.data.weather[] | .hourly[]] | .[].winddirDegree"
-    wind_speed_query = "[.data.weather[] | .hourly[]] | .[].windspeedKmph"
 
     output = ""
 
@@ -509,7 +515,7 @@ def textual_information(data_parsed, geo_data, config, html_output=False):
 
     format_line = "%c %C, %t, %h, %w, %P"
     current_condition = data_parsed['data']['current_condition'][0]
-    query = {}
+    query = config
     weather_line = wttr_line.render_line(format_line, current_condition, query)
     output.append('Weather: %s' % weather_line)
 
@@ -567,13 +573,16 @@ def textual_information(data_parsed, geo_data, config, html_output=False):
         city_only = True
         suffix = ", Крым"
 
+    latitude = float(geo_data["latitude"])
+    longitude = float(geo_data["longitude"])
+
     if config["full_address"]:
         output.append('Location: %s%s [%5.4f,%5.4f]' \
                 % (
                     _shorten_full_location(config["full_address"], city_only=city_only),
                     suffix,
-                    geo_data["latitude"],
-                    geo_data["longitude"],
+                    latitude,
+                    longitude,
                 ))
 
     output = [
@@ -587,7 +596,7 @@ def textual_information(data_parsed, geo_data, config, html_output=False):
 # }}}
 # get_geodata {{{
 def get_geodata(location):
-    text = requests.get("http://localhost:8004/%s" % location).text
+    text = requests.get("http://127.0.0.1:8083/:geo-location?location=%s" % location).text
     return json.loads(text)
 # }}}
 
@@ -629,6 +638,8 @@ def main(query, parsed_query, data):
             output += textual_information(data_parsed, geo_data, parsed_query)
         if parsed_query.get('no-terminal', False):
             output = remove_ansi(output)
+        if parsed_query.get('dumb', False):
+            output = output.translate(TRANSLATION_TABLE)
     return output
 
 if __name__ == '__main__':

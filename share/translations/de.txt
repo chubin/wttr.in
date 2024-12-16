@@ -7,6 +7,7 @@
 : Regen                                             : Rain
 : Leichter Regen                                    : Light Rain
 : Regenschauer                                      : Rain Shower
+: Regen in der näheren Umgebung                     : Shower in vicinity
 113: Wolkenlos                                      : Clear
 113: Sonnig                                         : Sunny
 116: Leicht Bewölkt                                 : Partly cloudy

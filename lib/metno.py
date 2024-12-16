@@ -177,6 +177,8 @@ def hpa_to_mb(hpa):
 def hpa_to_in(hpa):
     return round(hpa * 0.02953, 2)
 
+def hpa_to_mmHg(hpa):
+    return round(hpa * 0.75006157584566 , 3)
 
 def group_hours_to_days(lat, lng, hourlies, days_to_return):
     tf = timezonefinder.TimezoneFinder()
@@ -345,6 +347,7 @@ def _convert_hour(hour):
         "visibility": 'not yet implemented',  # str(details['vis_km']),
         "visibilityMiles": 'not yet implemented',  # str(details['vis_miles']),
         "pressure": str(hpa_to_mb(details['air_pressure_at_sea_level'])),
+        "pressure_mmHg": str(hpa_to_mmHg(details['air_pressure_at_sea_level'])),
         "pressureInches": str(hpa_to_in(details['air_pressure_at_sea_level'])),
         "cloudcover": 'not yet implemented',  # Convert from cloud_area_fraction?? str(details['cloud']),
         # metno doesn't have FeelsLikeC, but we-lang.go is using it in calcs,

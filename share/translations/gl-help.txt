@@ -1,0 +1,67 @@
+Instrucións:
+
+    $ curl wttr.in          # o tempo na sua localización actual
+    $ curl wttr.in/muc      # o tempo no aeroporto de Múnic
+
+Tipos de localización soportados:
+
+    /paris                  # o nome dunha cidade
+    /~Eiffel+tower          # o nome de calquera lugar famoso
+    /Москва                 # nome Unicode de calquera lugar en calquera idioma
+    /muc                    # o código dun aeroporto (3 letras)
+    /@stackoverflow.com     # o nome dun dominio web
+    /94107                  # um código de área
+    /-78.46,106.79          # coordenadas do GPS
+
+Lugares especiais:
+
+    /moon                   # A fase da lúa (crecente ,+US ou ,+France para estas cidades)
+    /moon@2016-10-25        # A fase da lúa nunha determinada data (@2016-10-25)
+
+Unidades:
+
+    ?m                      # Métricas (SI) (por defecto en todos os lugares agás en EEUU)
+    ?u                      # Sistema Unificado de Clasificación de Solo ou USCS (por defecto en EEUU)
+    ?M                      # Amosar a velocidade do vento en m/s
+
+Opcións de visualización:
+
+    ?0                      # Soamente o clima actual
+    ?1                      # O clima actual + a previsión de 1 dia
+    ?2                      # O clima actual + a previsión de 2 dias
+    ?n                      # Versión curta (só o dia e a noite)
+    ?q                      # Versión breve (sen o texto de "Previsión do Tempo")
+    ?Q                      # Versión superbreve (sen "Previsión do Tempo" e o nome da cidade)
+    ?T                      # Desactiva as secuencias de escape no terminal (sen cores)
+
+Opións de PNG:
+
+    /paris.png              # Xera unha imaxe PNG
+    ?p                      # Amece un borde ao redor da imaxe
+    ?t                      # Transparencia 150
+    transparency=...        # Transparencia de 0 a 255 (255 = sen transparencia)
+
+As opcións poden ser usadas en conxunto:
+
+    /Paris?0pq
+    /Paris?0pq&lang=fr
+    /Paris_0pq.png          # Em PNG as opcións especificanse depois do caracter _
+    /Rome_0pq_lang=it.png   # Nunha secuencia longa de opcións, poden ser separadas polo caracter _
+
+Localizaión:
+
+    $ curl fr.wttr.in/Paris
+    $ curl wttr.in/paris?lang=fr
+    $ curl -H "Accept-Language: fr" wttr.in/paris
+
+Linguas soportadas:
+
+    FULL_TRANSLATION (soportadas)
+    PARTIAL_TRANSLATION (en proceso)
+
+URLs especiais:
+
+    /:help                  # Amosa esta páxina
+    /:bash.function         # Suxire unha función wttr() en bash
+    /:translation           # Amosa información respecto dos tradutores
+

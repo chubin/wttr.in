@@ -17,7 +17,7 @@ import fmt.png
 import parse_query
 from translations import get_message, FULL_TRANSLATION, PARTIAL_TRANSLATION, SUPPORTED_LANGS
 from buttons import add_buttons
-from globals import get_help_file, remove_ansi, \
+from globals import get_help_file, remove_ansi, TRANSLATION_TABLE, \
                     BASH_FUNCTION_FILE, TRANSLATION_FILE, LOG_FILE, \
                     NOT_FOUND_LOCATION, \
                     MALFORMED_RESPONSE_HTML_PAGE, \
@@ -210,6 +210,9 @@ def _response(parsed_query, query, fast_mode=False):
     # so we handle it with all available logic
     loc = (parsed_query['orig_location'] or "").lower()
     if parsed_query.get("view"):
+        if not parsed_query.get("location"):
+            parsed_query["location"] = loc
+
         output = wttr_line(query, parsed_query)
     elif loc == 'moon' or loc.startswith('moon@'):
         output = get_moon(parsed_query)
@@ -236,6 +239,8 @@ def _response(parsed_query, query, fast_mode=False):
                 message = get_message('FOLLOW_ME', parsed_query['lang'])
                 if parsed_query.get('no-terminal', False):
                     message = remove_ansi(message)
+                if parsed_query.get('dumb', False):
+                    message = message.translate(TRANSLATION_TABLE)
                 output += '\n' + message + '\n'
 
     return cache.store(cache_signature, output)

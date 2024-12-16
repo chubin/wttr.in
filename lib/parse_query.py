@@ -79,11 +79,14 @@ def parse_query(args):
         return result
     if 'A' in q:
         result['force-ansi'] = True
+    if 'd' in q:
+        result['dumb'] = True
     if 'n' in q:
         result['narrow'] = True
     if 'm' in q:
         result['use_metric'] = True
     if 'M' in q:
+        result['use_metric'] = True
         result['use_ms_for_wind'] = True
     if 'u' in q:
         result['use_imperial'] = True

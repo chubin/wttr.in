@@ -36,10 +36,14 @@ MYDIR = os.path.abspath(
     os.path.dirname(os.path.dirname('__file__')))
 sys.path.append("%s/lib/" % MYDIR)
 
+import proxy_log
+import globals
 from globals import PROXY_CACHEDIR, PROXY_HOST, PROXY_PORT, USE_METNO, USER_AGENT, MISSING_TRANSLATION_LOG
 from metno import create_standard_json_from_metno, metno_request
 from translations import PROXY_LANGS
 # pylint: enable=wrong-import-position
+
+proxy_logger = proxy_log.LoggerWWO(globals.PROXY_LOG_ACCESS, globals.PROXY_LOG_ERRORS)
 
 def is_testmode():
     """Server is running in the wttr.in test mode"""
@@ -90,7 +94,7 @@ def _cache_file(path, query):
 
     digest = hashlib.sha1(("%s %s" % (path, query)).encode("utf-8")).hexdigest()
     digest_number = ord(digest[0].upper())
-    expiry_interval = 60*(digest_number+90)
+    expiry_interval = 60*(digest_number+180)
 
     timestamp = "%010d" % (int(time.time())//expiry_interval*expiry_interval)
     filename = os.path.join(PROXY_CACHEDIR, timestamp, path, query)
@@ -133,7 +137,7 @@ def translate(text, lang):
 
     def _log_unknown_translation(lang, text):
         with open(MISSING_TRANSLATION_LOG % lang, "a") as f_missing_translation:
-            f_missing_translation.write(text)
+            f_missing_translation.write(text+"\n")
 
     if "," in text:
         terms = text.split(",")
@@ -233,10 +237,11 @@ def _fetch_content_and_headers(path, query_string, **kwargs):
 
     if content is None:
         srv = _find_srv_for_query(path, query_string)
-        url = '%s/%s?%s' % (srv, path, query_string)
+        url = "%s/%s?%s" % (srv, path, query_string)
 
         attempts = 10
         response = None
+        error = ""
         while attempts:
             try:
                 response = requests.get(url, timeout=2, **kwargs)
@@ -244,11 +249,19 @@ def _fetch_content_and_headers(path, query_string, **kwargs):
                 attempts -= 1
                 continue
             try:
-                json.loads(response.content)
+                data = json.loads(response.content)
+                error = data.get("data", {}).get("error", "")
+                if error:
+                    try:
+                        error = error[0]["msg"]
+                    except (ValueError, IndexError):
+                        error = "invalid error format: %s" % error
                 break
             except ValueError:
                 attempts -= 1
+                error = "invalid response"
 
+        proxy_logger.log(query_string, error)
         _touch_empty_file(path, query_string)
         if response:
             headers = {}
@@ -262,18 +275,8 @@ def _fetch_content_and_headers(path, query_string, **kwargs):
     return content, headers
 
 
-@APP.route("/<path:path>")
-def proxy(path):
-    """
-    Main proxy function. Handles incoming HTTP queries.
-    """
+def _make_query(path, query_string):
 
-    lang = request.args.get('lang', 'en')
-    query_string = request.query_string.decode("utf-8")
-    query_string = query_string.replace('sr-lat', 'sr')
-    query_string = query_string.replace('lang=None', 'lang=en')
-    content = ""
-    headers = ""
     if _is_metno():
         path, query, days = metno_request(path, query_string)
         if USER_AGENT == '':
@@ -288,6 +291,25 @@ def proxy(path):
         query_string += "&includelocation=yes"
         content, headers = _fetch_content_and_headers(path, query_string)
 
+    return content, headers
+
+@APP.route("/<path:path>")
+def proxy(path):
+    """
+    Main proxy function. Handles incoming HTTP queries.
+    """
+
+    lang = request.args.get('lang', 'en')
+    query_string = request.query_string.decode("utf-8")
+    query_string = query_string.replace('sr-lat', 'sr')
+    query_string = query_string.replace('lang=None', 'lang=en')
+    content = ""
+    headers = ""
+
+    content, headers = _make_query(path, query_string)
+
+    # _log_query(path, query_string, error)
+
     content = add_translations(content, lang)
 
     return content, 200, headers
@@ -295,6 +317,7 @@ def proxy(path):
 if __name__ == "__main__":
     #app.run(host='0.0.0.0', port=5001, debug=False)
     #app.debug = True
+
     if len(sys.argv) == 1:
         bind_addr = "0.0.0.0"
         SERVER = WSGIServer((bind_addr, PROXY_PORT), APP)
