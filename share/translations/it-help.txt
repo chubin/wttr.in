@@ -1,0 +1,68 @@
+Istruzioni:
+
+	$ curl wttr.in				# Il tempo nella tua posizione attuale
+	$ curl wttr.in/muc			# Meteo all'aeroporto di Monaco
+
+Tipi di località supportate:
+
+	/paris						# Il nome di una città
+	/~Torre+Eiffel				# Il nome di qualsiasi sito famoso
+	/Москва					# Il nome Unicode di qualsiasi sito in qualsiasi lingua
+	/muc						# Il codice di un aeroporto (3 lettere)
+	/@stackoverflow.com			# Il nome di un dominio web
+	/94107						# Un prefisso
+	/-78.46.106.79				# Coordinate GPS
+
+Siti speciali:
+
+	/moon						# La fase lunare (aggiungere ,+US o ,+France per questi paesi)
+	/moon@2016-10-25			# La fase lunare in una data specifica (@2016-10-25)
+
+Unità:
+
+	?m							# Metrico (SI) (lo standard ovunque tranne che negli Stati Uniti)
+	?u							# Sistema unificato di classificazione del suolo o USCS (lo standard negli Stati Uniti)
+	?M							# Mostra la velocità del vento in m/s
+
+Opzioni di visualizzazione:
+
+	?0							# Solo meteo attuale
+	?1							# Meteo attuale + previsioni per il giorno successivo
+	?2							# Il tempo attuale + le previsioni per i prossimi due giorni
+	?A							# ignora l'agente utente e forza il formato di output ANSI (terminale)
+	?F							# Non mostra la riga "Segui".
+	?n							# Versione breve (solo giorno e notte)
+	?q							# Versione silenziosa (senza il testo "Previsioni meteo:")
+	?Q							# Versione super silenziosa (né "Previsioni meteo:" né nome della città)
+	?T							# Modalità testuale (nessun colore)
+
+Opzioni utili per il formato PNG:
+
+	/paris.png					# Genera un'immagine PNG
+	?p							# Aggiunge un bordo attorno all'immagine
+	?t							# Trasparenza = 150
+	transparency=150			# Trasparenza da 0 a 255 (255 = nessuna trasparenza)
+
+Le opzioni possono essere utilizzate insieme:
+
+	/Paris?0pq
+	/Paris?0pq&lang=fr
+	/Paris_0pq.png				# In modalità PNG le opzioni sono specificate dopo il carattere _ (trattino basso) anziché ?
+	/Rome_0pq_lang=it.png		# In modalità PNG usare opzioni brevi e lunghe, ma separate con  _ (underscore) anziché ? e &
+
+Posizione:
+
+	$ curl fr.wttr.in/Paris
+	$ curl wttr.in/paris?lang=fr
+	$ curl -H "Accetta lingua: fr" wttr.in/paris
+
+Lingue supportate:
+
+	FULL_TRANSLATION (supportato)
+	PARTIAL_TRANSLATION (in corso)
+
+URL speciali:
+
+	/:aiuto						# Mostra questa pagina
+	/:bash.function				# Visualizza una funzione wttr() suggerita in bash
+	/:translation				# Visualizza le informazioni sui traduttori
