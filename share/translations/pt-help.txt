@@ -16,37 +16,40 @@ Tipos de localização suportados:
 Lugares especiais:
 
     /moon                   # A fase da lua (acrescente ,+US ou ,+France para estas cidades)
-    /moon@2016-10-25        # A fase da lua em uma data determinada  (@2016-10-25)
+    /moon@2016-10-25        # A fase da lua numa determinada data (@2016-10-25)
 
 Unidades:
 
-    ?m                      # métricas (SI) (o padrão em todos os lugares exceto nos EUA)
-    ?u                      # Sistema Unificado de Clasificaçāo de Solo ou USCS (o padrão nos EUA)
-    ?M                      # mostrar a velocidade do vento em m/s
+    m                       # Sistema métrico (SI) (usado por omissão em todos os lugares exceto nos EUA)
+    u                       # Sistema Unificado de Clasificaçāo de Solo ou USCS (usado por omissão nos EUA)
+    M                       # mostrar a velocidade do vento em m/s
 
 Opçōes de visualização:
 
-    ?0                      # somente o clima atual
-    ?1                      # o clima atual + a previsão de 1 dia
-    ?2                      # o clima atual + a previsão de 2 dias
-    ?n                      # versão curta (só o dia e a noite)
-    ?q                      # versão quieta (sem o texto de "Previsão do Tempo")
-    ?Q                      # versão superquieta (sem "Previsão do Tempo" e o nome da cidade)
-    ?T                      # desliga as sequências de terminal (sem cores)
+    0                       # apenas o clima atual
+    1                       # o clima atual + a previsão de hoje
+    2                       # o clima atual + as previsões de hoje + amanhã
+    A                       # ignora User-Agent e força output ANSI (terminal)
+    d                       # restringe o output a glifos da fonte padrão da consola
+    F                       # não mostra a linha "Segue"
+    n                       # versão curta (só o dia e a noite)
+    q                       # versão silenciosa (sem o texto de "Previsão do Tempo")
+    Q                       # versão super-silenciosa (sem "Previsão do Tempo" e o nome da cidade)
+    T                       # desliga as sequências de terminal (sem cores)
 
 Opçōes de PNG:
 
     /paris.png              # gera uma imagem PNG
-    ?p                      # acrescenta uma borda ao redor da imagem
-    ?t                      # transparência 150
+    p                       # acrescenta uma borda ao redor da imagem
+    t                       # transparência 150
     transparency=...        # transparência de 0 a 255 (255 = sem transparência)
 
 As opções podem ser usadas em conjunto:
 
     /Paris?0pq
     /Paris?0pq&lang=fr
-    /Paris_0pq.png          # em PNG as opções se especificam depois do caracter _
-    /Rome_0pq_lang=it.png   # uma longa sequência de opções podem ser separadas pelo caracter _
+    /Paris_0pq.png          # em PNG as opções especificam-se depois do caracter _
+    /Rome_0pq_lang=it.png   # opções longas podem ser separadas com um caracter _
 
 Localizaçāo:
 
@@ -62,6 +65,6 @@ Línguas suportadas:
 URLs especiais:
 
     /:help                  # mostra esta página
-    /:bash.function         # sugere uma função wttr() em bash
+    /:bash.function         # mostra uma função bash wttr() recomendada
     /:translation           # mostra informação a respeito dos tradutores
 
