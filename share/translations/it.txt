@@ -1,47 +1,79 @@
-113: Sereno                                         :  Clear
-113: Soleggiato                                     :  Sunny
-116: Parzialmente nuvoloso                          :  Partly cloudy
-119: Nuvoloso                                       :  Cloudy
-122: Coperto                                        :  Overcast
-143: Nebbia                                         :  Mist
-176: Possibile pioggia a zone                       :  Patchy rain possible
-179: Possibili nevicate a zone                      :  Patchy snow possible
-182: Possibile nevischio a zone                     :  Patchy sleet possible
-185: Possibile pioviggine ghiacciata                :  Patchy freezing drizzle possible
-200: Possibili violenti temporali improvvisi        :  Thundery outbreaks possible
-227: Neve a raffiche                                :  Blowing snow
-230: Bufera di neve                                 :  Blizzard
-248: Nebbia                                         :  Fog
-260: Nebbia gelata                                  :  Freezing fog
-263: Pioggerellina leggera a zone                   :  Patchy light drizzle
-266: Pioggerellina leggera                          :  Light drizzle
-281: Pioggia gelata                                 :  Freezing drizzle
-284: Pioviggine ghiacciata                          :  Heavy freezing drizzle
-293: Pioggia leggera a zone                         :  Patchy light rain
-296: Pioggia leggera                                :  Light rain
-299: Pioggia moderata irregolare                    :  Moderate rain at times
-302: Pioggia moderata                               :  Moderate rain
-305: Pioggia forte irregolare                       :  Heavy rain at times
-308: Pioggia forte                                  :  Heavy rain
-311: Pioggia leggera ghiacciata                     :  Light freezing rain
-314: Pioggia gelata moderata o pesante              :  Moderate or heavy freezing rain
-317: Nevischio leggero                              :  Light sleet
-320: Nevischio moderato o pesante                   :  Moderate or heavy sleet
-323: Neve leggera a zone chiare                     :  Patchy light snow
-326: Neve leggera                                   :  Light snow
-329: Neve moderata a zone                           :  Patchy moderate snow
-332: Neve moderata                                  :  Moderate snow
-335: Abbondante nevicata a zone                     :  Patchy heavy snow
-338: Abbondante nevicata                            :  Heavy snow
-350: Grandine                                       :  Ice pellets
-353: Pioggia leggera a scrosci                      :  Light rain shower
-356: Pioggia moderata o intensa a scrosci           :  Moderate or heavy rain shower
-359: Piogge torrenziali a scrosci                   :  Torrential rain shower
-362: Nevischio leggero a colpi                      :  Light sleet showers
-365: Rovesci di pioggia moderati o pesanti          :  Moderate or heavy sleet showers
-368: Deboli rovesci di neve                         :  Light snow showers
-371: Rovesci di neve moderati o abbondanti          :  Moderate or heavy snow showers
-386: Pioggia leggera con tuoni e fulmini            :  Patchy light rain with thunder
-389: Pioggia moderata o intensa con tuoni e fulmini :  Moderate or heavy rain with thunder
-392: Neve leggera a zone con tuoni                  :  Patchy light snow with thunder
-395: Neve moderata o pesante con tuoni              :  Moderate or heavy snow with thunder
+: Pioggia intensa e grandine con temporali                             : Heavy rain and hail with thunderstorm
+: Pioggia intensa con temporale                                        : Heavy rain with thunderstorm
+: Pioggia leggera e grandine con temporali                             : Light rain and hail with thunderstorm
+: Pioggia leggera e nevicata                                           : Light rain and snow shower
+: Pioggia leggera con temporale                                        : Light rain with thunderstorm
+: Leggera nevicata                                                     : Light snow shower
+: Nebbia parziale                                                      : Partial fog
+: Pioggia e grandine con temporali                                     : Rain and hail with thunderstorm
+: Pioggia con temporale                                                : Rain with thunderstorm
+: Nebbia leggera                                                       : Shallow fog
+: Foschia                                                              : Smoke
+: Burrasche                                                            : Squalls
+: Temporali nelle vicinanze                                            : Thunderstorm in vicinity
+: Neve                                                                 : Snow
+: Pioggia                                                              : Rain
+: Pioggia leggera, Rovesci di pioggia                                  : Light Rain, Rain Shower
+: Rovesci di pioggia                                                   : Rain Shower
+: Banchi di nebbia                                                     : Patches of fog
+: Pioggerellina                                                        : Drizzle
+: Pioggerellina leggera                                                : Light drizzle
+: Bassi cumuli di neve                                                 : Low drifting snow
+: Pioggia leggera e neve                                               : Light rain and snow
+: Rovesci nelle vicinanze                                              : Shower in vicinity
+: Pioggia con temporale                                                : Rain with thunderstorm
+: Rovesci di pioggia e neve                                            : Rain and snow shower
+: Temporale                                                            : Thunderstorm
+: Pioggerellina e pioggia                                              : Drizzle and rain
+: Grandine con temporale                                               : Hail with thunderstorm
+: Foschia                                                              : Haze
+: Pioggerellina leggera e pioggia                                      : Light drizzle and rain
+: Pioggia leggera e piccoli cumuli di grandine/neve con temporale      : Light rain and small hail/snow pallets with thunderstorm
+: Pioggia a tratti nelle vicinanze                                     : Patchy rain nearby
+113: Sereno                                                            :  Clear
+113: Soleggiato                                                        :  Sunny
+116: Parzialmente nuvoloso                                             :  Partly cloudy
+119: Nuvoloso                                                          :  Cloudy
+122: Coperto                                                           :  Overcast
+143: Nebbia                                                            :  Mist
+176: Possibile pioggia a zone                                          :  Patchy rain possible
+179: Possibili nevicate a zone                                         :  Patchy snow possible
+182: Possibile nevischio a zone                                        :  Patchy sleet possible
+185: Possibile pioviggine ghiacciata                                   :  Patchy freezing drizzle possible
+200: Possibili violenti temporali improvvisi                           :  Thundery outbreaks possible
+227: Neve a raffiche                                                   :  Blowing snow
+230: Bufera di neve                                                    :  Blizzard
+248: Nebbia                                                            :  Fog
+260: Nebbia gelata                                                     :  Freezing fog
+263: Pioggerellina leggera a zone                                      :  Patchy light drizzle
+266: Pioggerellina leggera                                             :  Light drizzle
+281: Pioggia gelata                                                    :  Freezing drizzle
+284: Pioviggine ghiacciata                                             :  Heavy freezing drizzle
+293: Pioggia leggera a zone                                            :  Patchy light rain
+296: Pioggia leggera                                                   :  Light rain
+299: Pioggia moderata irregolare                                       :  Moderate rain at times
+302: Pioggia moderata                                                  :  Moderate rain
+305: Pioggia forte irregolare                                          :  Heavy rain at times
+308: Pioggia forte                                                     :  Heavy rain
+311: Pioggia leggera ghiacciata                                        :  Light freezing rain
+314: Pioggia gelata moderata o pesante                                 :  Moderate or heavy freezing rain
+317: Nevischio leggero                                                 :  Light sleet
+320: Nevischio moderato o pesante                                      :  Moderate or heavy sleet
+323: Neve leggera a zone chiare                                        :  Patchy light snow
+326: Neve leggera                                                      :  Light snow
+329: Neve moderata a zone                                              :  Patchy moderate snow
+332: Neve moderata                                                     :  Moderate snow
+335: Abbondante nevicata a zone                                        :  Patchy heavy snow
+338: Abbondante nevicata                                               :  Heavy snow
+350: Grandine                                                          :  Ice pellets
+353: Pioggia leggera a scrosci                                         :  Light rain shower
+356: Pioggia moderata o intensa a scrosci                              :  Moderate or heavy rain shower
+359: Piogge torrenziali a scrosci                                      :  Torrential rain shower
+362: Nevischio leggero a colpi                                         :  Light sleet showers
+365: Rovesci di pioggia moderati o pesanti                             :  Moderate or heavy sleet showers
+368: Deboli rovesci di neve                                            :  Light snow showers
+371: Rovesci di neve moderati o abbondanti                             :  Moderate or heavy snow showers
+386: Pioggia leggera con tuoni e fulmini                               :  Patchy light rain with thunder
+389: Pioggia moderata o intensa con tuoni e fulmini                    :  Moderate or heavy rain with thunder
+392: Neve leggera a zone con tuoni                                     :  Patchy light snow with thunder
+395: Neve moderata o pesante con tuoni                                 :  Moderate or heavy snow with thunder

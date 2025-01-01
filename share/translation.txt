@@ -41,7 +41,7 @@ Translated/improved/corrected by:
     * Indonesian:           Andria Arisal @andria009
     * Interlingua:          Dustin Redmond @dustinkredmond (on github)
     * Irish:                Robert Devereux @RobertDev (gh), Conor O'Callaghan @ivernus (gh)
-    * Italian:              Diego Maniacco
+    * Italian:              Diego Maniacco, Riccardo Volpe aka YITA @yitaverse (gh)
     * Japanese:             @ryunix
     * Kazakh:               Akku Tutkusheva, Oleg Tropinin
     * Korean:               Jeremy Bae @opt9, Jung Winter @res_tin
