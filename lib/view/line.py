@@ -128,6 +128,12 @@ def render_condition_plain(data, query):
 
     return weather_condition
 
+def render_condition_int(data, query):
+    """Weather condition code as integer (i)
+    """
+    return data['weatherCode']
+
+
 def render_humidity(data, query):
     """
     humidity (h)
@@ -284,6 +290,7 @@ FORMAT_SYMBOL = {
     'c':    render_condition,
     'C':    render_condition_fullname,
     'x':    render_condition_plain,
+    'i':    render_condition_int,
     'h':    render_humidity,
     't':    render_temperature,
     'f':    render_feel_like_temperature,
