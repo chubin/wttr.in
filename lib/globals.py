@@ -91,6 +91,7 @@ PLAIN_TEXT_AGENTS = [
     "http_get",
     "xh",
     "nushell",
+    "zig",
 ]
 
 PLAIN_TEXT_PAGES = [':help', ':bash.function', ':translation', ':iterm2']
