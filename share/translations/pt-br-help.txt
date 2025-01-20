@@ -20,22 +20,22 @@ Lugares especiais:
 
 Unidades:
 
-    m                      # Sistema Internacional de Unidades (SI) (o padrão em todos os lugares exceto nos EUA)
-    u                      # Sistema Unificado de Clasificaçāo de Solo ou USCS (o padrão nos EUA)
-    M                      # mostra a velocidade do vento em m/s
+    m                       # Sistema Internacional de Unidades (SI) (o padrão em todos os lugares exceto nos EUA)
+    u                       # Sistema Unificado de Clasificaçāo de Solo ou USCS (o padrão nos EUA)
+    M                       # mostra a velocidade do vento em m/s
 
 Opçōes de visualização:
 
-    0                      # somente o clima atual
-    1                      # o clima atual + a previsão de 1 dia
-    2                      # o clima atual + a previsão de 2 dias
-    A			   # ignora o User-Agent e força o formato de saída ANSI (terminal)
-    d			   # restringe a saída aos caracteres da fonte padrão do console
-    F			   # não imprime a linha "Seguir"
-    n                      # versão curta (só o dia e a noite)
-    q                      # versão simples (sem o texto de "Previsão do Tempo")
-    Q                      # versão super simples (sem "Previsão do Tempo" e sem o nome da cidade)
-    T                      # imprime uma versão sem cores
+    0                       # somente o clima atual
+    1                       # o clima atual + a previsão de 1 dia
+    2                       # o clima atual + a previsão de 2 dias
+    A			    # ignora o User-Agent e força o formato de saída ANSI (terminal)
+    d			    # restringe a saída aos caracteres da fonte padrão do console
+    F			    # não imprime a linha "Seguir"
+    n                       # versão curta (só o dia e a noite)
+    q                       # versão simples (sem o texto de "Previsão do Tempo")
+    Q                       # versão super simples (sem "Previsão do Tempo" e sem o nome da cidade)
+    T                       # imprime uma versão sem cores
 
 Opçōes de PNG:
 
