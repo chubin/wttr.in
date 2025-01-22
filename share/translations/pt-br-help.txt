@@ -1,12 +1,12 @@
-Instruções:
+Uso:
 
-    $ curl wttr.in          # o tempo na sua localização atual
-    $ curl wttr.in/muc      # o tempo no aeroporto de Munique
+    $ curl wttr.in          # apresenta o clima na sua localização atual
+    $ curl wttr.in/muc      # apresenta o clima no aeroporto de Munique
 
 Tipos de locais suportados:
 
     /paris                  # o nome de uma cidade
-    /~Eiffel+tower          # o nome de um lugar famoso
+    /~Eiffel+tower          # o nome de um lugar famoso ("+" para espaços)
     /Москва                 # o nome Unicode de qualquer lugar em qualquer idioma
     /muc                    # o código de um aeroporto (3 letras)
     /@stackoverflow.com     # o nome de um domínio web
@@ -15,33 +15,36 @@ Tipos de locais suportados:
 
 Lugares especiais:
 
-    /moon                   # a fase da ua (crescente ,+US ou ,+France para estas cidades)
-    /moon@2016-10-25        # a fase da Lua em uma determinada data (@2016-10-25)
+    /moon                   # as fases da Lua (adicione "+US" ou "+France" para ver as fases da lua nesse lugares)
+    /moon@2016-10-25        # as fases da Lua em uma determinada data (25/10/2016)
 
 Unidades:
 
-    ?m                      # Sistema Internacional de Unidades (SI) (o padrão em todos os lugares exceto nos EUA)
-    ?u                      # Sistema Unificado de Clasificaçāo de Solo ou USCS (o padrão nos EUA)
-    ?M                      # mostrar a velocidade do vento em m/s
+    m                       # Sistema Internacional de Unidades (SI) (o padrão em todos os lugares exceto nos EUA)
+    u                       # Sistema Unificado de Clasificaçāo de Solo ou USCS (o padrão nos EUA)
+    M                       # mostra a velocidade do vento em m/s
 
 Opçōes de visualização:
 
-    ?0                      # somente o clima atual
-    ?1                      # o clima atual + a previsão de 1 dia
-    ?2                      # o clima atual + a previsão de 2 dias
-    ?n                      # versão curta (só o dia e a noite)
-    ?q                      # versão quieta (sem o texto de "Previsão do Tempo")
-    ?Q                      # versão superquieta (sem "Previsão do Tempo" e o nome da cidade)
-    ?T                      # desliga as sequências de terminal (sem cores)
+    0                       # somente o clima atual
+    1                       # o clima atual + a previsão de 1 dia
+    2                       # o clima atual + a previsão de 2 dias
+    A			    # ignora o User-Agent e força o formato de saída ANSI (terminal)
+    d			    # restringe a saída aos caracteres da fonte padrão do console
+    F			    # não imprime a linha "Seguir"
+    n                       # versão curta (só o dia e a noite)
+    q                       # versão simples (sem o texto de "Previsão do Tempo")
+    Q                       # versão super simples (sem "Previsão do Tempo" e sem o nome da cidade)
+    T                       # imprime uma versão sem cores
 
 Opçōes de PNG:
 
     /paris.png              # gera uma imagem PNG
-    ?p                      # acrescenta uma borda ao redor da imagem
-    ?t                      # transparência 150
+    p                       # acrescenta uma borda ao redor da imagem
+    t                       # define a transparência em 150
     transparency=...        # transparência de 0 a 255 (255 = sem transparência)
 
-As opções podem ser usadas em conjunto:
+As opções podem ser usadas em conjunto: (observe que para as opções de PNG, o nome do local deve anteceder um "_" e para as demais opções "?")
 
     /Paris?0pq
     /Paris?0pq&lang=fr
