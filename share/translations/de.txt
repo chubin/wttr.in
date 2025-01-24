@@ -1,57 +1,206 @@
-: Schneeverwehung                                   : Low drifting snow
-: Nebelfelder                                       : Patches of fog
-: Nieselregen                                       : Drizzle
-: Leichter Nieselregen                              : Light drizzle
-: Leichter Nieselregen und Regen                    : Light drizzle and rain
-: Schnee                                            : Snow
-: Regen                                             : Rain
-: Leichter Regen                                    : Light Rain
-: Regenschauer                                      : Rain Shower
-: Regen in der näheren Umgebung                     : Shower in vicinity
-113: Wolkenlos                                      : Clear
-113: Sonnig                                         : Sunny
-116: Leicht Bewölkt                                 : Partly cloudy
-119: Wolkig                                         : Cloudy
-122: Bedeckt                                        : Overcast
-143: Nebel                                          : Mist
-176: Stellenweise Regen möglich                     : Patchy rain possible
-179: Stellenweise Schnee möglich                    : Patchy snow possible
-182: Stellenweise Schneeregen möglich               : Patchy sleet possible
-185: Stellenweise gefrierende Nässe möglich         : Patchy freezing drizzle possible
-200: Gewitter möglich                               : Thundery outbreaks possible
-227: Schneesturm                                    : Blowing snow
-230: Blizzard                                       : Blizzard
-248: Nebel                                          : Fog
-260: Gefrierender Nebel                             : Freezing fog
-263: Stellenweise Nieselregen                       : Patchy light drizzle
-266: Leichter Nieselregen                           : Light drizzle
-281: Gefrierender Nieselregen                       : Freezing drizzle
-284: Starker gefrierender Nieselregen               : Heavy freezing drizzle
-293: Stellenweise leichter Regen                    : Patchy light rain
-296: Leichter Regen                                 : Light rain
-299: Stellenweise gemäßigter Regen                  : Moderate rain at times
-302: Gemäßigter Regen                               : Moderate rain
-305: Stellenweise starker Regen                     : Heavy rain at times
-308: Starker Regen                                  : Heavy rain
-311: Leichter gefrierender Regen                    : Light freezing rain
-314: Gemäßigter oder starker gefrierender Regen     : Moderate or heavy freezing rain
-317: Leichter Schneeregen                           : Light sleet
-320: Gemäßigter oder starker Schneeregen            : Moderate or heavy sleet
-323: Stellenweise leichter Schneefall               : Patchy light snow
-326: Leichter Schneefall                            : Light snow
-329: Stellenweise gemäßigter Schneefall             : Patchy moderate snow
-332: Gemäßigter Schneefall                          : Moderate snow
-335: Stellenweise starker Schneefall                : Patchy heavy snow
-338: Starker Schneefall                             : Heavy snow
-350: Eiskörner                                      : Ice pellets
-353: Leichter Regen                                 : Light rain shower
-356: Gemäßigter oder starker Regen                  : Moderate or heavy rain shower
-359: Wolkenbruch                                    : Torrential rain shower
-362: Leichter Schneeregen                           : Light sleet showers
-365: Gemäßigter oder starker Schneeregen            : Moderate or heavy sleet showers
-368: Leichter Schneefall                            : Light snow showers
-371: Gemäßigter oder starker Schneefall             : Moderate or heavy snow showers
-386: Stellenweise leichter Regen mit Gewitter       : Patchy light rain with thunder
-389: Gemäßigter oder starker Regen mit Gewitter     : Moderate or heavy rain with thunder
-392: Stellenweise leichter Schneefall mit Gewitter   : Patchy light snow with thunder
-395: Gemäßigter oder starker Schneefall mit Gewitter : Moderate or heavy snow with thunder
+: Schneeverwehung                                           : Low drifting snow
+: Nebelfelder                                               : Patches of fog
+: Nieselregen                                               : Drizzle
+: Leichter Nieselregen                                      : Light drizzle
+: Leichter Nieselregen und Regen                            : Light drizzle and rain
+: Schnee                                                    : Snow
+: Regen                                                     : Rain
+: Leichter Regen                                            : Light Rain
+: Regenschauer                                              : Rain Shower
+: Regen in der näheren Umgebung                             : Shower in vicinity
+: Sandverwehungen                                           : Blowing sand
+: Sandverwehungen durchweg                                  : Blowing widespread dust
+: Sandverwehungen in der Nähe                               : Blowing widespread dust in vicinity
+: Klar                                                      : Clear
+: Wolkig                                                    : Cloudy
+: Nieselregen und Nebel                                     : Drizzle and fog
+: Nieselregen und Regen                                     : Drizzle and rain
+: Nieselregen und Regenschauer                              : Drizzle and rain shower
+: Nieselregen mit Gewitter                                  : Drizzle with thunderstorm
+: Sandsturm                                                 : Dust storm
+: Nebel in der Nähe                                         : Fog in vicinity
+: Gefrierender Nieselregen und Regen                        : Freezing drizzle and rain
+: Gefrierender Nebel                                        : Freezing mist
+: Gefrierender Regen                                        : Freezing rain
+: Gefrierender Regen und Schnee                             : Freezing rain and snow
+: Gefrierender unbekannter Niederschlag                     : Freezing unknown precipitation
+: Trichterwolke in der Nähe                                 : Funnel cloud in vicinity
+: Hagelschauer                                              : Hail shower
+: Hagel mit Gewitter                                        : Hail with thunderstorm
+: Dunst                                                     : Haze
+: Starker Schneeverwehungen                                 : Heavy blowing snow
+: Starker Nieselregen                                       : Heavy drizzle
+: Starker Nieselregen und Regen                             : Heavy drizzle and rain
+: Starker gefrierender unbekannter Niederschlag             : Heavy freezing unknown precipitation
+: Starker Hagel mit Gewitter                                : Heavy hail with thunderstorm
+: Starke Eiskörner                                          : Heavy ice pallets
+: Starker Regen und Hagelschauer                            : Heavy rain and hail shower
+: Starker Regen und Hagelschauer mit Gewitter               : Heavy rain and hail with thunderstorm
+: Starker Regen und kleiner Hagelschauer                    : Heavy rain and small hail/snow pallets shower
+: Starker Regen und kleiner Hagel mit Gewitter              : Heavy rain and small hail/snow pallets with thunderstorm
+: Starker Regen und Schnee                                  : Heavy rain and snow
+: Starker Regen und Schnee sowie kleiner Hagel mit Gewitter : Heavy rain and snow and small hail/snow pallets with thunderstorm
+: Starker Schneeschauer                                     : Heavy snow shower
+: Starker Regen                                             : Heavy rain
+: Starker Regen mit Gewitter                                : Heavy rain with thunderstorm
+: Starker kleiner Hagelschauer                              : Heavy small hail/snow pallets shower
+: Starker kleiner Hagel mit Gewitter                        : Heavy small hail/snow pallets with thunderstorm
+: Starker Schnee und kleiner Hagelschauer                   : Heavy snow and small hail/snow pallets shower
+: Starker Schnee und kleiner Hagel mit Gewitter             : Heavy snow and small hail/snow pallets with thunderstorm
+: Starker Schneeschauer                                     : Heavy snow shower
+: Starker Schnee mit Gewitter                               : Heavy snow with thunderstorm
+: Eiskristalle                                              : Ice crystals
+: Eiskörner                                                 : Ice pallets
+: Leichter Schneeverwehungen                                : Light blowing snow
+: Leichter Nieselregen und Nebel                            : Light drizzle and fog
+: Leichter Nieselregen und Eiskörner                        : Light drizzle and ice pallets
+: Leichter Nieselregen und Regen und Schnee                 : Light drizzle and rain and snow
+: Leichter Nieselregen und Regenschauer                     : Light drizzle and rain shower
+: Leichter Nieselregen und Regen mit Gewitter               : Light drizzle and rain with thunderstorm
+: Leichter Nieselregen und Schnee                           : Light drizzle and snow
+: Leichter Nieselregen mit Gewitter                         : Light drizzle with thunderstorm
+: Leichter gefrierender Nieselregen                         : Light freezing drizzle
+: Leichter gefrierender Nieselregen und Regen               : Light freezing drizzle and rain
+: Leichter gefrierender Nieselregen und Schnee              : Light freezing drizzle and snow
+: Leichter gefrierender Nebel                               : Light freezing fog
+: Leichter gefrierender Regen und Schnee                    : Light freezing rain and snow
+: Leichter gefrierender Schneegraupel und Nebel             : Light freezing snow grains and fog
+: Leichter gefrierender unbekannter Niederschlag            : Light freezing unknown precipitation
+: Leichter Hagelschauer                                     : Light hail shower
+: Leichte Eiskristalle                                      : Light ice crystals
+: Leichte Eiskörner                                         : Light ice pallets
+: Leicht niedrige Verwehungen                               : Light low drifting
+: Leicht niedrige Schneeverwehungen                         : Light low drifting snow
+: Leichter Regen und Hagelschauer                           : Light rain and hail shower
+: Leichter Regen und Hagel mit Gewitter                     : Light rain and hail with thunderstorm
+: Leichter Regen und Eiskörner                              : Light rain and ice pallets
+: Leichter Regen und Nebel                                  : Light rain and mist
+: Leichter Regen und kleiner Hagelschauer                   : Light rain and small hail/snow pallets shower
+: Leichter Regen und kleiner Hagel mit Gewitter             : Light rain and small hail/snow pallets with thunderstorm
+: Leichter Regen und Schnee                                 : Light rain and snow
+: Leichter Regen und Schnee sowie kleiner Hagelschauer      : Light rain and snow and small hail/snow pallets shower
+: Leichter Regen und Schneegraupel                          : Light rain and snow grains
+: Leichter Regen und Schneeschauer                          : Light rain and snow shower
+: Leichter Regen und Schnee mit Gewitter                    : Light rain and snow with thunderstorm
+: Leichter Regen mit Gewitter                               : Light rain with thunderstorm
+: Leichter Schauer                                          : Light shower
+: Leichter Hagelschauer                                     : Light showers of ice pellets
+: Leichter kleiner Hagel                                    : Light small hail/snow pallets
+: Leichter kleiner Hagelschauer                             : Light small hail/snow pallets shower
+: Leichter kleiner Hagel mit Gewitter                       : Light small hail/snow pallets with thunderstorm
+: Leichter Schnee und Eiskörner                             : Light snow and ice pallets
+: Leichter Schnee und kleiner Hagel                         : Light snow and small hail/snow pallets
+: Leichter Schneeschauer mit kleinem Hagel                  : Light snow and small hail/snow pallets shower
+: Leichter Schnee mit kleinem Hagel und Gewitter            : Light snow and small hail/snow pallets with thunderstorm
+: Leichter Schnee und Schneegraupel                         : Light snow and snow grains
+: Leichtes Schneegraupel                                    : Light snow grains
+: Leichter Schneeschauer                                    : Light snow shower
+: Leichter Schnee mit Gewitter                              : Light snow with thunderstorm
+: Leichtes Gewitter                                         : Light thunderstorm
+: Leichter unbekannter Niederschlag                         : Light unknown precipitation
+: Leicht entwickelte Sandwirbel                             : Light well-developed dust/sand whirls
+: Verwehender Sand                                          : Low drifting sand
+: Verwehender Staub                                         : Low drifting widespread dust
+: Nebel mit Gewitter                                        : Mist with thunderstorm
+: Mäßiger oder starker Regen mit Gewitter                   : Moderate or heavy rain in area with thunder
+: Mäßiger oder starker Schnee mit Gewitter                  : Moderate or heavy snow in area with thunder
+: Bedeckt                                                   : Overcast
+: Teilweise Nebel                                           : Partial fog
+: Teilweise bewölkt                                         : Partly cloudy
+: Nebelfelder in der Nähe                                   : Patches of fog in vicinity
+: Ortsweise gefrierender Nieselregen                        : Patchy freezing drizzle nearby
+: Gebietsweise leichter Regen mit Gewitter                  : Patchy light rain in area with thunder
+: Gebietsweise leichter Schnee mit Gewitter                 : Patchy light snow in area with thunder
+: Örtlich Regen                                             : Patchy rain nearby
+: Örtlich Schneeregen                                       : Patchy sleet nearby
+: Örtlicher Schnee                                          : Patchy snow nearby
+: Regen und Hagelschauer                                    : Rain and hail shower
+: Regen und Hagel mit Gewitter                              : Rain and hail with thunderstorm
+: Regen und Nebel                                           : Rain and mist
+: Regen und Nebel mit Gewitter                              : Rain and mist with thunderstorm
+: Regen und kleiner Hagelschauer                            : Rain and small hail/snow pallets shower
+: Regen und kleiner Hagel mit Gewitter                      : Rain and small hail/snow pallets with thunderstorm
+: Regen und Schnee                                          : Rain and snow
+: Regen und Schnee sowie kleiner Hagelschauer               : Rain and snow and small hail/snow pallets shower
+: Regen und Schneegraupel                                   : Rain and snow grains
+: Regen und Schneeschauer                                   : Rain and snow shower
+: Regen und Schnee mit Gewitter                             : Rain and snow with thunderstorm
+: Regen in der Nähe                                         : Rain in vicinity
+: Regenschauer in der Nähe                                  : Rain shower in vicinity
+: Regen mit Gewitter                                        : Rain with thunderstorm
+: Sand                                                      : Sand
+: Sandsturm                                                 : Sandstorm
+: Flacher Nebel                                             : Shallow fog
+: Flacher Dunst                                             : Shallow mist
+: Schauer                                                   : Shower
+: Schauer in der Nähe                                       : Shower in vicinity
+: Kleiner Hagel                                             : Small hail/snow pallets
+: Kleiner Hagelschauer                                      : Small hail/snow pallets shower
+: Kleiner Hagel mit Gewitter                                : Small hail/snow pallets with thunderstorm
+: Rauch                                                     : Smoke
+: Schnee und Eiskörner                                      : Snow and ice pallets
+: Schnee und Nebel                                          : Snow and mist
+: Schnee und kleiner Hagelschauer                           : Snow and small hail/snow pellets shower
+: Schnee und kleiner Hagel mit Gewitter                     : Snow and small hail/snow pallets with thunderstorm
+: Schnee und Schneegraupel                                  : Snow and snow grains
+: Schneegraupel                                             : Snow grains
+: Schneeschauer                                             : Snow shower
+: Schnee mit Gewitter                                       : Snow with thunderstorm
+: Gewitterböen                                              : Squalls
+: Gewitter                                                  : Thunderstorm
+: Gewitter in der Nähe                                      : Thunderstorm in vicinity
+: Gewitter in der Nähe                                      : Thundery outbreaks in nearby
+: Unbekannter Niederschlag                                  : Unknown precipitation
+: Schauer mit unbekanntem Niederschlag                      : Unknown precipitation shower
+: Unbekannter Niederschlag mit Gewitter                     : Unknown precipitation with thunderstorm
+: Vulkanasche                                               : Volcanic ash
+: Vulkanasche in der Nähe                                   : Volcanic ash in vicinity
+: Stark entwickelte Sandwirbel in der Nähe                  : Well-developed dust/sand whirls in vicinity
+: Weit verbreiteter Staub                                   : Widespread dust
+113: Wolkenlos                                              : Clear
+113: Sonnig                                                 : Sunny
+116: Leicht Bewölkt                                         : Partly cloudy
+119: Wolkig                                                 : Cloudy
+122: Bedeckt                                                : Overcast
+143: Nebel                                                  : Mist
+176: Stellenweise Regen möglich                             : Patchy rain possible
+179: Stellenweise Schnee möglich                            : Patchy snow possible
+182: Stellenweise Schneeregen möglich                       : Patchy sleet possible
+185: Stellenweise gefrierende Nässe möglich                 : Patchy freezing drizzle possible
+200: Gewitter möglich                                       : Thundery outbreaks possible
+227: Schneesturm                                            : Blowing snow
+230: Blizzard                                               : Blizzard
+248: Nebel                                                  : Fog
+260: Gefrierender Nebel                                     : Freezing fog
+263: Stellenweise Nieselregen                               : Patchy light drizzle
+266: Leichter Nieselregen                                   : Light drizzle
+281: Gefrierender Nieselregen                               : Freezing drizzle
+284: Starker gefrierender Nieselregen                       : Heavy freezing drizzle
+293: Stellenweise leichter Regen                            : Patchy light rain
+296: Leichter Regen                                         : Light rain
+299: Stellenweise gemäßigter Regen                          : Moderate rain at times
+302: Gemäßigter Regen                                       : Moderate rain
+305: Stellenweise starker Regen                             : Heavy rain at times
+308: Starker Regen                                          : Heavy rain
+311: Leichter gefrierender Regen                            : Light freezing rain
+314: Gemäßigter oder starker gefrierender Regen             : Moderate or heavy freezing rain
+317: Leichter Schneeregen                                   : Light sleet
+320: Gemäßigter oder starker Schneeregen                    : Moderate or heavy sleet
+323: Stellenweise leichter Schneefall                       : Patchy light snow
+326: Leichter Schneefall                                    : Light snow
+329: Stellenweise gemäßigter Schneefall                     : Patchy moderate snow
+332: Gemäßigter Schneefall                                  : Moderate snow
+335: Stellenweise starker Schneefall                        : Patchy heavy snow
+338: Starker Schneefall                                     : Heavy snow
+350: Eiskörner                                              : Ice pellets
+353: Leichter Regen                                         : Light rain shower
+356: Gemäßigter oder starker Regen                          : Moderate or heavy rain shower
+359: Wolkenbruch                                            : Torrential rain shower
+362: Leichter Schneeregen                                   : Light sleet showers
+365: Gemäßigter oder starker Schneeregen                    : Moderate or heavy sleet showers
+368: Leichter Schneefall                                    : Light snow showers
+371: Gemäßigter oder starker Schneefall                     : Moderate or heavy snow showers
+386: Stellenweise leichter Regen mit Gewitter               : Patchy light rain with thunder
+389: Gemäßigter oder starker Regen mit Gewitter             : Moderate or heavy rain with thunder
+392: Stellenweise leichter Schneefall mit Gewitter          : Patchy light snow with thunder
+395: Gemäßigter oder starker Schneefall mit Gewitter        : Moderate or heavy snow with thunder
