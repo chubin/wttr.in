@@ -1,4 +1,4 @@
-: Schneeverwehung                                           : Low drifting snow
+: Bodennahe Schneeverwehung                                 : Low drifting snow
 : Nebelfelder                                               : Patches of fog
 : Nieselregen                                               : Drizzle
 : Leichter Nieselregen                                      : Light drizzle
@@ -9,8 +9,8 @@
 : Regenschauer                                              : Rain Shower
 : Regen in der näheren Umgebung                             : Shower in vicinity
 : Sandverwehungen                                           : Blowing sand
-: Sandverwehungen durchweg                                  : Blowing widespread dust
-: Sandverwehungen in der Nähe                               : Blowing widespread dust in vicinity
+: Weitläufige Sandverwehungen                               : Blowing widespread dust
+: Weitläufige Sandverwehungen in der Nähe                   : Blowing widespread dust in vicinity
 : Klar                                                      : Clear
 : Wolkig                                                    : Cloudy
 : Nieselregen und Nebel                                     : Drizzle and fog
@@ -28,7 +28,7 @@
 : Hagelschauer                                              : Hail shower
 : Hagel mit Gewitter                                        : Hail with thunderstorm
 : Dunst                                                     : Haze
-: Starker Schneeverwehungen                                 : Heavy blowing snow
+: Starke Schneeverwehungen                                  : Heavy blowing snow
 : Starker Nieselregen                                       : Heavy drizzle
 : Starker Nieselregen und Regen                             : Heavy drizzle and rain
 : Starker gefrierender unbekannter Niederschlag             : Heavy freezing unknown precipitation
@@ -51,7 +51,7 @@
 : Starker Schnee mit Gewitter                               : Heavy snow with thunderstorm
 : Eiskristalle                                              : Ice crystals
 : Eiskörner                                                 : Ice pallets
-: Leichter Schneeverwehungen                                : Light blowing snow
+: Leichte Schneeverwehungen                                 : Light blowing snow
 : Leichter Nieselregen und Nebel                            : Light drizzle and fog
 : Leichter Nieselregen und Eiskörner                        : Light drizzle and ice pallets
 : Leichter Nieselregen und Regen und Schnee                 : Light drizzle and rain and snow
@@ -69,8 +69,8 @@
 : Leichter Hagelschauer                                     : Light hail shower
 : Leichte Eiskristalle                                      : Light ice crystals
 : Leichte Eiskörner                                         : Light ice pallets
-: Leicht niedrige Verwehungen                               : Light low drifting
-: Leicht niedrige Schneeverwehungen                         : Light low drifting snow
+: Leichte bodennahe Verwehungen                             : Light low drifting
+: Leichte bodennahe Schneeverwehungen                       : Light low drifting snow
 : Leichter Regen und Hagelschauer                           : Light rain and hail shower
 : Leichter Regen und Hagel mit Gewitter                     : Light rain and hail with thunderstorm
 : Leichter Regen und Eiskörner                              : Light rain and ice pallets
@@ -98,12 +98,12 @@
 : Leichter Schnee mit Gewitter                              : Light snow with thunderstorm
 : Leichtes Gewitter                                         : Light thunderstorm
 : Leichter unbekannter Niederschlag                         : Light unknown precipitation
-: Leicht entwickelte Sandwirbel                             : Light well-developed dust/sand whirls
-: Verwehender Sand                                          : Low drifting sand
-: Verwehender Staub                                         : Low drifting widespread dust
+: Leicht ausgeprägte Staub- oder Sandwirbel                 : Light well-developed dust/sand whirls
+: Bodennaher verwehender Sand                               : Low drifting sand
+: Bodennaher verwehender Staub                              : Low drifting widespread dust
 : Nebel mit Gewitter                                        : Mist with thunderstorm
-: Mäßiger oder starker Regen mit Gewitter                   : Moderate or heavy rain in area with thunder
-: Mäßiger oder starker Schnee mit Gewitter                  : Moderate or heavy snow in area with thunder
+: Mäßig bis starker Regen mit Gewitter                      : Moderate or heavy rain in area with thunder
+: Mäßig bis starker Schnee mit Gewitter                     : Moderate or heavy snow in area with thunder
 : Bedeckt                                                   : Overcast
 : Teilweise Nebel                                           : Partial fog
 : Teilweise bewölkt                                         : Partly cloudy
@@ -113,7 +113,7 @@
 : Gebietsweise leichter Schnee mit Gewitter                 : Patchy light snow in area with thunder
 : Örtlich Regen                                             : Patchy rain nearby
 : Örtlich Schneeregen                                       : Patchy sleet nearby
-: Örtlicher Schnee                                          : Patchy snow nearby
+: Örtlich Schnee                                            : Patchy snow nearby
 : Regen und Hagelschauer                                    : Rain and hail shower
 : Regen und Hagel mit Gewitter                              : Rain and hail with thunderstorm
 : Regen und Nebel                                           : Rain and mist
@@ -130,18 +130,18 @@
 : Regen mit Gewitter                                        : Rain with thunderstorm
 : Sand                                                      : Sand
 : Sandsturm                                                 : Sandstorm
-: Flacher Nebel                                             : Shallow fog
-: Flacher Dunst                                             : Shallow mist
+: Seichter Nebel                                            : Shallow fog
+: Seichter Dunst                                            : Shallow mist
 : Schauer                                                   : Shower
 : Schauer in der Nähe                                       : Shower in vicinity
-: Kleiner Hagel                                             : Small hail/snow pallets
-: Kleiner Hagelschauer                                      : Small hail/snow pallets shower
-: Kleiner Hagel mit Gewitter                                : Small hail/snow pallets with thunderstorm
+: Leichter Hagel                                             : Small hail/snow pallets
+: Leichter Hagelschauer                                      : Small hail/snow pallets shower
+: Leichter Hagel mit Gewitter                                : Small hail/snow pallets with thunderstorm
 : Rauch                                                     : Smoke
 : Schnee und Eiskörner                                      : Snow and ice pallets
 : Schnee und Nebel                                          : Snow and mist
-: Schnee und kleiner Hagelschauer                           : Snow and small hail/snow pellets shower
-: Schnee und kleiner Hagel mit Gewitter                     : Snow and small hail/snow pallets with thunderstorm
+: Schnee- und leichte Hagelschauer                           : Snow and small hail/snow pellets shower
+: Schnee- und leichte Hagelschauer mit Gewitter              : Snow and small hail/snow pallets with thunderstorm
 : Schnee und Schneegraupel                                  : Snow and snow grains
 : Schneegraupel                                             : Snow grains
 : Schneeschauer                                             : Snow shower
@@ -155,8 +155,8 @@
 : Unbekannter Niederschlag mit Gewitter                     : Unknown precipitation with thunderstorm
 : Vulkanasche                                               : Volcanic ash
 : Vulkanasche in der Nähe                                   : Volcanic ash in vicinity
-: Stark entwickelte Sandwirbel in der Nähe                  : Well-developed dust/sand whirls in vicinity
-: Weit verbreiteter Staub                                   : Widespread dust
+: Stark ausgeprägte Staub-/Sandwirbel in der Nähe           : Well-developed dust/sand whirls in vicinity
+: flächendeckender Staub                                    : Widespread dust
 113: Wolkenlos                                              : Clear
 113: Sonnig                                                 : Sunny
 116: Leicht Bewölkt                                         : Partly cloudy
