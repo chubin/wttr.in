@@ -1,3 +1,16 @@
+body {
+    background: black;
+    color: #bbbbbb;
+}
+
+/* Switch to light mode if the user prefers it */
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: #ffffff; /* Light background */
+    color: #000000; /* Dark text */
+  }
+}
+
 pre {
 /*    font-family: source_code_proregular; */
 
