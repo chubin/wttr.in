@@ -17,7 +17,7 @@ Translated/improved/corrected by:
     * Bosnian:              Ismar Kunc @ismarkunc
     * Bengali:              Nazia Tasnim (@appledora on github)
     * Bulgarian:            Vladimir Vitkov @zeridon (on github)
-    * Brazilian-PT:         Tupã Negreiros @TupaNegreiros (on github)
+    * Brazilian-PT:         Tupã Negreiros @TupaNegreiros (on github), Gabriel Monteiro @krosct (on github)
     * Catalan:              Angel Jarabo @legna29A
     * Chinese(Traditional): Jeff Huang
     * Chinese(Simplified):  YouthLin Chen(@YouthLin on github), Junhan (@junhan-z on github),
@@ -32,7 +32,7 @@ Translated/improved/corrected by:
     * French:               Igor Chubin, @daftaupe, @iago-lito
     * Frisian:              Anne Douwe Bouma @anned20 (on github)
     * Galician              Diego Blanco @diego-treitos (on github)
-    * German:               Igor Chubin, @MAGICC (https://kthx.at)
+    * German:               Igor Chubin, @MAGICC (https://kthx.at), Simon Neutert @simonneutert (on github)
     * Greek:                Panayotis Vryonis and @Petewg (on github)
     * Hebrew:               E.R.
     * Hindi:                Aakash Gajjar @skyme5 (gh)

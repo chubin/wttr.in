@@ -1,78 +1,47 @@
-: Fortes pluies et orages de grêle                 : Heavy rain and hail with thunderstorm
-: Fortes pluies orageuses                          : Heavy rain with thunderstorm
-: Orages de pluie et grêle légères                 : Light rain and hail with thunderstorm
-: Pluie légère et averses                          : Light rain and snow shower
-: Pluies légères orageuses                         : Light rain with thunderstorm
-: Chutes de neige légères                          : Light snow shower
-: Nappes de brouillard                             : Partial fog
-: Orage de pluie et de grêle                       : Rain and hail with thunderstorm
-: Pluies orageuses                                 : Rain with thunderstorm
-: Brouillard léger                                 : Shallow fog
-: Brume                                            : Smoke
-: Grains                                           : Squalls
-: Orages proches                                   : Thunderstorm in vicinity
-: Neige                                            : Snow
-: Pluie                                            : Rain
-: Pluie légère, Averses                            : Light Rain, Rain Shower
-: Averses                                          : Rain Shower
-: Nappes de brouillard                             : Patches of fog
-: Bruine                                           : Drizzle
-: Bruine légère                                    : Light drizzle
-: Chasse-neige basse                               : Low drifting snow
-: Pluie et neige légères                           : Light rain and snow
-: Averses proches                                  : Shower in vicinity
-: Pluie et orages                                  : Rain with thunderstorm
-: Averse de pluie et neige mêlées                  : Rain and snow shower
-: Orage                                            : Thunderstorm
-: Bruine et pluie                                  : Drizzle and rain
-: Orage de grêle                                   : Hail with thunderstorm
-: Brume                                            : Haze
-: Bruine legère et pluie                           : Light drizzle and rain
-: Orage, pluie légère et grèle / neige roulée      : Light rain and small hail/snow pallets with thunderstorm
-113 : Temps clair                                  : Clear
-113 : Ensoleillé                                   : Sunny
-116 : Partiellement couvert                        : Partly cloudy
-119 : Nuageux                                      : Cloudy
-122 : Couvert                                      : Overcast
-143 : Brumeux                                      : Mist
-176 : Pluies éparses possibles                     : Patchy rain possible
-179 : Chutes de neige éparses possibles            : Patchy snow possible
-182 : Chutes éparses de neige fondue possibles     : Patchy sleet possible
-185 : Bruines givrantes éparses possibles          : Patchy freezing drizzle possible
-200 : Orages possibles                             : Thundery outbreaks possible
-227 : Poudrerie                                    : Blowing snow
-230 : Blizzard                                     : Blizzard
-248 : Brouillard                                   : Fog
-260 : Brouillard givrant                           : Freezing fog
-263 : Bruines éparses et légères                   : Patchy light drizzle
-266 : Bruine légère                                : Light drizzle
-281 : Bruine givrante                              : Freezing drizzle
-284 : Forte bruine givrante                        : Heavy freezing drizzle
-293 : Pluies éparses et légères                    : Patchy light rain
-296 : Pluie légère                                 : Light rain
-299 : Pluie modérée intermittente                  : Moderate rain at times
-302 : Pluie modérée                                : Moderate rain
-305 : Forte pluie intermittente                    : Heavy rain at times
-308 : Forte pluie                                  : Heavy rain
-311 : Pluie verglaçante légère                     : Light freezing rain
-314 : Pluie verglaçante modérée à forte            : Moderate or heavy freezing rain
-317 : Chutes légères de neige fondue               : Light sleet
-320 : Chutes de neige fondue modérées à fortes     : Moderate or heavy sleet
-323 : Chutes de neige éparses et légères           : Patchy light snow
-326 : Chutes de neige légères                      : Light snow
-329 : Chutes de neige éparses et modérées          : Patchy moderate snow
-332 : Chutes de neige modérées                     : Moderate snow
-335 : Fortes chutes de neige éparses               : Patchy heavy snow
-338 : Fortes chutes de neige                       : Heavy snow
-350 : Grésil                                       : Ice pellets
-353 : Averses légères                              : Light rain shower
-356 : Averses modérées à fortes                    : Moderate or heavy rain shower
-359 : Averses torrentielles                        : Torrential rain shower
-362 : Averses légères de neige fondue              : Light sleet showers
-365 : Averses de neige fondue modérées à fortes    : Moderate or heavy sleet showers
-368 : Averses de neige légères                     : Light snow showers
-371 : Averses de neige modérées à fortes           : Moderate or heavy snow showers
-386 : Pluies orageuses légères et éparses          : Patchy light rain with thunder
-389 : Pluies orageuses modérées à fortes           : Moderate or heavy rain with thunder
-392 : Chutes de neige orageuses légères et éparses : Patchy light snow with thunder
-395 : Chutes de neige orageuses modérées à fortes  : Moderate or heavy snow with thunder
+114: Temps clair: Clear
+113: Ensoleillé: Sunny
+116: Partiellement couvert  : Partly cloudy
+119: Nuageux: Cloudy
+122: Couvert: Overcast
+143: Brumeux: Mist
+176: Pluies éparses possibles: Patchy rain possible
+179: Chutes de neige éparses possibles: Patchy snow possible
+182: Chutes éparses de neige fondue possibles: Patchy sleet possible
+185: Bruines givrantes éparses possibles: Patchy freezing drizzle possible
+200: Orages possibles: Thundery outbreaks possible
+227: Poudrerie: Blowing snow
+230: Blizzard : Blizzard
+248: Brouillard: Fog
+260: Brouillard givrant: Freezing fog
+263: Bruines éparses et légères: Patchy light drizzle
+266: Bruine légère: Light drizzle
+281: Bruine givrante: Freezing drizzle
+284: Forte bruine givrante: Heavy freezing drizzle
+293: Pluies éparses et légères: Patchy light rain
+296: Pluie légère: Light rain
+299: Pluie modérée intermittente: Moderate rain at times
+302: Pluie modérée: Moderate rain
+305: Forte pluie intermittente: Heavy rain at times
+308: Forte pluie: Heavy rain
+311: Pluie verglaçante légère: Light freezing rain
+314: Pluie verglaçante modérée à forte: Moderate or heavy freezing rain
+317: Chutes légères de neige fondue: Light sleet
+320: Chutes de neige fondue modérées à fortes: Moderate or heavy sleet
+323: Chutes de neige éparses et légères: Patchy light snow
+326: Chutes de neige légères: Light snow
+329: Chutes de neige éparses et modérées: Patchy moderate snow
+332: Chutes de neige modérées: Moderate snow
+335: Fortes chutes de neige éparses: Patchy heavy snow
+338: Fortes chutes de neige: Heavy snow
+350: Grésil: Ice pellets
+353: Averses légères: Light rain shower
+356: Averses modérées à fortes: Moderate or heavy rain shower
+359: Averses torrentielles: Torrential rain shower
+362: Averses légères de neige fondue: Light sleet showers
+365: Averses de neige fondue modérées à fortes: Moderate or heavy sleet showers
+368: Averses de neige légères: Light snow showers
+371: Averses de neige modérées à fortes: Moderate or heavy snow showers
+386: Pluies orageuses légères et éparses: Patchy light rain with thunder
+389: Pluies orageuses modérées à fortes: Moderate or heavy rain with thunder
+392: Chutes de neige orageuses légères et éparses: Patchy light snow with thunder
+395: Chutes de neige orageuses modérées à fortes: Moderate or heavy snow with thunder
