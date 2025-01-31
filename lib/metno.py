@@ -127,40 +127,37 @@ def to_description(symbol_code):
 
 
 def to_16_point(degrees):
-    # 360 degrees / 16 = 22.5 degrees of arc or 11.25 degrees around the point
-    if degrees > (360 - 11.25) or degrees <= 11.25:
-        return 'N'
-    if degrees > 11.25 and degrees <= (11.25 + 22.5):
-        return 'NNE'
-    if degrees > (11.25 + (22.5 * 1)) and degrees <= (11.25 + (22.5 * 2)):
-        return 'NE'
-    if degrees > (11.25 + (22.5 * 2)) and degrees <= (11.25 + (22.5 * 3)):
-        return 'ENE'
-    if degrees > (11.25 + (22.5 * 3)) and degrees <= (11.25 + (22.5 * 4)):
-        return 'E'
-    if degrees > (11.25 + (22.5 * 4)) and degrees <= (11.25 + (22.5 * 5)):
-        return 'ESE'
-    if degrees > (11.25 + (22.5 * 5)) and degrees <= (11.25 + (22.5 * 6)):
-        return 'SE'
-    if degrees > (11.25 + (22.5 * 6)) and degrees <= (11.25 + (22.5 * 7)):
-        return 'SSE'
-    if degrees > (11.25 + (22.5 * 7)) and degrees <= (11.25 + (22.5 * 8)):
-        return 'S'
-    if degrees > (11.25 + (22.5 * 8)) and degrees <= (11.25 + (22.5 * 9)):
-        return 'SSW'
-    if degrees > (11.25 + (22.5 * 9)) and degrees <= (11.25 + (22.5 * 10)):
-        return 'SW'
-    if degrees > (11.25 + (22.5 * 10)) and degrees <= (11.25 + (22.5 * 11)):
-        return 'WSW'
-    if degrees > (11.25 + (22.5 * 11)) and degrees <= (11.25 + (22.5 * 12)):
-        return 'W'
-    if degrees > (11.25 + (22.5 * 12)) and degrees <= (11.25 + (22.5 * 13)):
-        return 'WNW'
-    if degrees > (11.25 + (22.5 * 13)) and degrees <= (11.25 + (22.5 * 14)):
-        return 'NW'
-    if degrees > (11.25 + (22.5 * 14)) and degrees <= (11.25 + (22.5 * 15)):
-        return 'NNW'
-
+    """
+    Convert degrees to a 16-point compass direction.
+    
+    Parameters:
+        degrees (float): The degrees to be converted.
+        
+    Returns:
+        str: The corresponding compass direction.
+    """
+    directions = [
+        (11.25, 'N'),
+        (33.75, 'NNE'),
+        (56.25, 'NE'),
+        (78.75, 'ENE'),
+        (101.25, 'E'),
+        (123.75, 'ESE'),
+        (146.25, 'SE'),
+        (168.75, 'SSE'),
+        (191.25, 'S'),
+        (213.75, 'SSW'),
+        (236.25, 'SW'),
+        (258.75, 'WSW'),
+        (281.25, 'W'),
+        (303.75, 'WNW'),
+        (326.25, 'NW'),
+        (348.75, 'NNW'),
+        (360, 'N')
+    ]
+    for max_degree, direction in directions:
+        if degrees <= max_degree:
+            return direction
 
 def meters_to_miles(meters):
     return round(meters * 0.00062137, 2)
