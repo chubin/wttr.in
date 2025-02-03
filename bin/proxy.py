@@ -42,10 +42,6 @@ import proxy_log
 import globals
 from globals import (
     PROXY_CACHEDIR,
-<<<<<<< HEAD
-    PROXY_HOST,
-=======
->>>>>>> afda32035714acad4aa555373fdd381a20a322dc
     PROXY_PORT,
     USE_METNO,
     USER_AGENT,
@@ -189,7 +185,7 @@ def cyr(to_translate):
 
 
 def _patch_greek(original):
-    return original.replace("ÎÎ»Î¹ÏÎ»Î¿ÏÏÏÎ·/Î¿", "ÎÎ»Î¹ÏÎ»Î¿ÏÏÏÎ·")
+    return original.replace("Ηλιόλουστη/ο", "Ηλιόλουστη")
 
 
 def add_translations(content, lang):
