@@ -639,7 +639,7 @@ def textual_information(data_parsed, geo_data, config, html_output=False):
 # get_geodata {{{
 def get_geodata(location):
     text = requests.get(
-        "http://127.0.0.1:8083/:geo-location?location=%s" % location
+        "http://127.0.0.1:8085/:geo-location?location=%s" % location
     ).text
     return json.loads(text)
 
