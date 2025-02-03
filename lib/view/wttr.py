@@ -136,8 +136,12 @@ def _wego_postprocessing(location, parsed_query, stdout):
         if parsed_query["days"] == "2":
             stdout = "\n".join(stdout.splitlines()[:27]) + "\n"
 
-    first = stdout.splitlines()[0]
-    rest = stdout.splitlines()[1:]
+    lines = stdout.splitlines()
+    if not lines:
+        lines = [""]
+
+    first = lines[0]
+    rest = lines[1:]
     if parsed_query.get("no-caption", False):
         if ":" in first:
             first = first.split(":", 1)[1]
