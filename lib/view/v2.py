@@ -45,10 +45,11 @@ import parse_query
 from . import line as wttr_line
 
 if not sys.version_info >= (3, 0):
-    reload(sys) # noqa: F821
+    reload(sys)  # noqa: F821
     sys.setdefaultencoding("utf-8")
 
 # data processing {{{
+
 
 def get_data(config):
     """
@@ -56,14 +57,15 @@ def get_data(config):
     """
 
     url = (
-        'http://'
-        'localhost:5001/premium/v1/weather.ashx'
-        '?key=%s'
-        '&q=%s&format=json&num_of_days=3&tp=3&lang=None'
+        "http://"
+        "localhost:5001/premium/v1/weather.ashx"
+        "?key=%s"
+        "&q=%s&format=json&num_of_days=3&tp=3&lang=None"
     ) % (WWO_KEY, config["location"])
     text = requests.get(url).text
     parsed_data = json.loads(text)
     return parsed_data
+
 
 def interpolate_data(input_data, max_width):
     """
@@ -74,9 +76,10 @@ def interpolate_data(input_data, max_width):
     input_data_len = len(input_data)
     x = list(range(input_data_len))
     y = input_data
-    xvals = np.linspace(0, input_data_len-1, max_width)
-    yinterp = interp1d(x, y, kind='cubic')
+    xvals = np.linspace(0, input_data_len - 1, max_width)
+    yinterp = interp1d(x, y, kind="cubic")
     return yinterp(xvals)
+
 
 def jq_query(query, data_parsed):
     """
@@ -87,6 +90,7 @@ def jq_query(query, data_parsed):
     data = list(map(float, pyjq_data))
     return data
 
+
 # }}}
 # utils {{{
 def colorize(string, color_code, html_output=False):
@@ -94,6 +98,8 @@ def colorize(string, color_code, html_output=False):
         return "<font color='#777777'>%s</font>" % (string)
     else:
         return "\033[%sm%s\033[0m" % (color_code, string)
+
+
 # }}}
 # draw_spark {{{
 
@@ -103,16 +109,18 @@ def draw_spark(data, height, width, color_data):
     Spark-style visualize `data` in a region `height` x `width`
     """
 
-    _BARS = u' _▁▂▃▄▅▇█'
+    _BARS = " _▁▂▃▄▅▇█"
 
     def _box(height, row, value, max_value):
         row_height = 1.0 * max_value / height
         if row_height * row >= value:
             return _BARS[0]
-        if row_height * (row+1) <= value:
+        if row_height * (row + 1) <= value:
             return _BARS[-1]
 
-        return _BARS[int(1.0*(value - row_height*row)/(row_height*1.0)*len(_BARS))]
+        return _BARS[
+            int(1.0 * (value - row_height * row) / (row_height * 1.0) * len(_BARS))
+        ]
 
     max_value = max(data)
 
@@ -120,19 +128,21 @@ def draw_spark(data, height, width, color_data):
     color_code = 20
     for i in range(height):
         for j in range(width):
-            character = _box(height, height-i-1, data[j], max_value)
+            character = _box(height, height - i - 1, data[j], max_value)
             if data[j] != 0:
-                chance_of_rain = color_data[j]/100.0 * 2
+                chance_of_rain = color_data[j] / 100.0 * 2
                 if chance_of_rain > 1:
                     chance_of_rain = 1
-                color_index = int(5*chance_of_rain)
-                color_code = 16 + color_index # int(math.floor((20-16) * 1.0 * (height-1-i)/height*(max_value/data[j])))
+                color_index = int(5 * chance_of_rain)
+                color_code = (
+                    16 + color_index
+                )  # int(math.floor((20-16) * 1.0 * (height-1-i)/height*(max_value/data[j])))
             output += "\033[38;5;%sm%s\033[0m" % (color_code, character)
         output += "\n"
 
     # labeling max value
     if max_value == 0:
-        max_line = " "*width
+        max_line = " " * width
     else:
         max_line = ""
         for j in range(width):
@@ -141,14 +151,16 @@ def draw_spark(data, height, width, color_data):
                 orig_max_line = max_line
 
                 # aligning it
-                if len(max_line)//2 < j and len(max_line)//2 + j < width:
-                    spaces = " "*(j - len(max_line)//2)
-                    max_line = spaces + max_line # + spaces
-                    max_line = max_line + " "*(width - len(max_line))
-                elif len(max_line)//2 + j >= width:
-                    max_line = " "*(width - len(max_line)) + max_line
+                if len(max_line) // 2 < j and len(max_line) // 2 + j < width:
+                    spaces = " " * (j - len(max_line) // 2)
+                    max_line = spaces + max_line  # + spaces
+                    max_line = max_line + " " * (width - len(max_line))
+                elif len(max_line) // 2 + j >= width:
+                    max_line = " " * (width - len(max_line)) + max_line
 
-                max_line = max_line.replace(orig_max_line, colorize(orig_max_line, "38;5;33"))
+                max_line = max_line.replace(
+                    orig_max_line, colorize(orig_max_line, "38;5;33")
+                )
 
                 break
 
@@ -157,28 +169,29 @@ def draw_spark(data, height, width, color_data):
 
     return output
 
+
 # }}}
 # draw_diagram {{{
 def draw_diagram(data, height, width):
 
     option = diagram.DOption()
     option.size = diagram.Point([width, height])
-    option.mode = 'g'
+    option.mode = "g"
 
     stream = io.BytesIO()
     gram = diagram.DGWrapper(
-        data=[list(data), range(len(data))],
-        dg_option=option,
-        ostream=stream)
+        data=[list(data), range(len(data))], dg_option=option, ostream=stream
+    )
     gram.show()
     return stream.getvalue().decode("utf-8")
+
+
 # }}}
 # draw_date {{{
 
 
 def draw_date(config, geo_data):
-    """
-    """
+    """ """
 
     tzinfo = pytz.timezone(geo_data["timezone"])
 
@@ -187,17 +200,17 @@ def draw_date(config, geo_data):
 
     answer = ""
     for day in range(3):
-        datetime_ = datetime_day_start + datetime.timedelta(hours=24*day)
+        datetime_ = datetime_day_start + datetime.timedelta(hours=24 * day)
         date = format_datetime(datetime_, "EEE dd MMM", locale=locale, tzinfo=tzinfo)
 
-        spaces = ((24-len(date))//2)*" "
+        spaces = ((24 - len(date)) // 2) * " "
         date = spaces + date + spaces
-        date = " "*(24-len(date)) + date
+        date = " " * (24 - len(date)) + date
         answer += date
     answer += "\n"
 
     for _ in range(3):
-        answer += " "*23 + u"╷"
+        answer += " " * 23 + "╷"
     return answer[:-1] + " "
 
 
@@ -206,16 +219,15 @@ def draw_date(config, geo_data):
 
 
 def draw_time(geo_data):
-    """
-    """
+    """ """
 
     tzinfo = pytz.timezone(geo_data["timezone"])
 
     line = ["", ""]
 
     for _ in range(3):
-        part = u"─"*5 + u"┴" + u"─"*5
-        line[0] += part + u"┼" + part + u"╂"
+        part = "─" * 5 + "┴" + "─" * 5
+        line[0] += part + "┼" + part + "╂"
     line[0] += "\n"
 
     for _ in range(3):
@@ -223,16 +235,19 @@ def draw_time(geo_data):
     line[1] += "\n"
 
     # highlight current time
-    hour_number = \
-        (datetime.datetime.now(tzinfo)
-         - datetime.datetime.now(tzinfo).replace(hour=0, minute=0, second=0, microsecond=0)
-        ).seconds//3600
+    hour_number = (
+        datetime.datetime.now(tzinfo)
+        - datetime.datetime.now(tzinfo).replace(
+            hour=0, minute=0, second=0, microsecond=0
+        )
+    ).seconds // 3600
 
     for line_number, _ in enumerate(line):
-        line[line_number] = \
-                line[line_number][:hour_number] \
-                + colorize(line[line_number][hour_number], "46") \
-                + line[line_number][hour_number+1:]
+        line[line_number] = (
+            line[line_number][:hour_number]
+            + colorize(line[line_number][hour_number], "46")
+            + line[line_number][hour_number + 1 :]
+        )
 
     return "".join(line)
 
@@ -240,7 +255,9 @@ def draw_time(geo_data):
 # }}}
 # draw_astronomical {{{
 def draw_astronomical(city_name, geo_data, config):
-    datetime_day_start = datetime.datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+    datetime_day_start = datetime.datetime.now().replace(
+        hour=0, minute=0, second=0, microsecond=0
+    )
 
     city = LocationInfo()
     city.latitude = geo_data["latitude"]
@@ -252,8 +269,8 @@ def draw_astronomical(city_name, geo_data, config):
     for time_interval in range(72):
 
         current_date = (
-            datetime_day_start
-            + datetime.timedelta(hours=1*time_interval)).replace(tzinfo=pytz.timezone(geo_data["timezone"]))
+            datetime_day_start + datetime.timedelta(hours=1 * time_interval)
+        ).replace(tzinfo=pytz.timezone(geo_data["timezone"]))
 
         try:
             dawn = sun.dawn(city.observer, date=current_date)
@@ -281,11 +298,11 @@ def draw_astronomical(city_name, geo_data, config):
         elif current_date > dusk:
             char = " "
         elif dawn <= current_date and current_date <= sunrise:
-            char = u"─"
+            char = "─"
         elif sunset <= current_date and current_date <= dusk:
-            char = u"─"
+            char = "─"
         elif sunrise <= current_date and current_date <= sunset:
-            char = u"━"
+            char = "━"
 
         answer += char
 
@@ -296,23 +313,26 @@ def draw_astronomical(city_name, geo_data, config):
             moon_phases = constants.MOON_PHASES
 
         # moon
-        if time_interval in [0,23,47,69]: # time_interval % 3 == 0:
+        if time_interval in [0, 23, 47, 69]:  # time_interval % 3 == 0:
             moon_phase = moon.phase(
-                date=datetime_day_start + datetime.timedelta(hours=time_interval))
+                date=datetime_day_start + datetime.timedelta(hours=time_interval)
+            )
             moon_phase_emoji = moon_phases[
-                int(math.floor(moon_phase*1.0/28.0*8+0.5)) % len(moon_phases)]
-        #    if time_interval in [0, 24, 48, 69]:
-            moon_line += moon_phase_emoji # + " "
+                int(math.floor(moon_phase * 1.0 / 28.0 * 8 + 0.5)) % len(moon_phases)
+            ]
+            #    if time_interval in [0, 24, 48, 69]:
+            moon_line += moon_phase_emoji  # + " "
         elif time_interval % 3 == 0:
-            if time_interval not in [24,28]: #se:
+            if time_interval not in [24, 28]:  # se:
                 moon_line += "   "
             else:
                 moon_line += " "
 
-
     answer = moon_line + "\n" + answer + "\n"
     answer += "\n"
     return answer
+
+
 # }}}
 # draw_emoji {{{
 def draw_emoji(data, config):
@@ -328,30 +348,29 @@ def draw_emoji(data, config):
         weather_symbol_width_vte = constants.WEATHER_SYMBOL_WIDTH_VTE
 
     for i in data:
-        emoji = weather_symbol.get(
-            constants.WWO_CODE.get(
-                str(int(i)), "Unknown"))
-        space = " "*(3-weather_symbol_width_vte.get(emoji, 1))
+        emoji = weather_symbol.get(constants.WWO_CODE.get(str(int(i)), "Unknown"))
+        space = " " * (3 - weather_symbol_width_vte.get(emoji, 1))
         answer += space[:1] + emoji + space[1:]
     answer += "\n"
     return answer
+
+
 # }}}
 # draw_wind {{{
 def draw_wind(data, color_data, config):
-
     def _color_code_for_wind_speed(wind_speed):
 
         color_codes = [
-            (3,  241),  # 82
-            (6,  242),  # 118
-            (9,  243),  # 154
+            (3, 241),  # 82
+            (6, 242),  # 118
+            (9, 243),  # 154
             (12, 246),  # 190
             (15, 250),  # 226
             (19, 253),  # 220
             (23, 214),
             (27, 208),
             (31, 202),
-            (-1, 196)
+            (-1, 196),
         ]
 
         for this_wind_speed, this_color_code in color_codes:
@@ -371,7 +390,7 @@ def draw_wind(data, color_data, config):
 
         degree = int(degree)
         if degree:
-            wind_direction = wind_direction_list[int(((degree+22.5)%360)/45.0)]
+            wind_direction = wind_direction_list[int(((degree + 22.5) % 360) / 45.0)]
         else:
             wind_direction = ""
 
@@ -390,32 +409,45 @@ def draw_wind(data, color_data, config):
     answer += "\n"
     answer += answer_line2 + "\n"
     return answer
+
+
 # }}}
 # panel implementation {{{
+
 
 def add_frame(output, width, config):
     """
     Add frame arond `output` that has width `width`
     """
 
-    empty_line = " "*width
-    output = "\n".join(u"│"+(x or empty_line)+u"│" for x in output.splitlines()) + "\n"
+    empty_line = " " * width
+    output = (
+        "\n".join("│" + (x or empty_line) + "│" for x in output.splitlines()) + "\n"
+    )
 
-    weather_report = \
-        translations.CAPTION[config.get("lang") or  "en"] \
-        + " " \
+    weather_report = (
+        translations.CAPTION[config.get("lang") or "en"]
+        + " "
         + (config["override_location_name"] or config["location"])
+    )
 
-    caption = u"┤ " + " " + weather_report + " " + u" ├"
-    output = u"┌" + caption + u"─"*(width-len(caption)) + u"┐\n" \
-                + output + \
-             u"└" + u"─"*width + u"┘\n"
+    caption = "┤ " + " " + weather_report + " " + " ├"
+    output = (
+        "┌"
+        + caption
+        + "─" * (width - len(caption))
+        + "┐\n"
+        + output
+        + "└"
+        + "─" * width
+        + "┘\n"
+    )
 
     return output
 
+
 def generate_panel(data_parsed, geo_data, config):
-    """
-    """
+    """ """
 
     max_width = 72
 
@@ -442,7 +474,7 @@ def generate_panel(data_parsed, geo_data, config):
     output += "\n"
     output += "\n"
 
-    #data = jq_query(feels_like_query, data_parsed)
+    # data = jq_query(feels_like_query, data_parsed)
     data = jq_query(temp_query, data_parsed)
     data_interpolated = interpolate_data(data, max_width)
     output += draw_diagram(data_interpolated, 10, max_width)
@@ -482,9 +514,8 @@ def textual_information(data_parsed, geo_data, config, html_output=False):
     """
 
     def _shorten_full_location(full_location, city_only=False):
-
         def _count_runes(string):
-            return len(string.encode('utf-16-le')) // 2
+            return len(string.encode("utf-16-le")) // 2
 
         words = full_location.split(",")
 
@@ -510,16 +541,17 @@ def textual_information(data_parsed, geo_data, config, html_output=False):
     output = []
     timezone = city.timezone
 
-    datetime_day_start = datetime.datetime.now()\
-            .replace(hour=0, minute=0, second=0, microsecond=0)
+    datetime_day_start = datetime.datetime.now().replace(
+        hour=0, minute=0, second=0, microsecond=0
+    )
 
     format_line = "%c %C, %t, %h, %w, %P"
-    current_condition = data_parsed['data']['current_condition'][0]
+    current_condition = data_parsed["data"]["current_condition"][0]
     query = config
     weather_line = wttr_line.render_line(format_line, current_condition, query)
-    output.append('Weather: %s' % weather_line)
+    output.append("Weather: %s" % weather_line)
 
-    output.append('Timezone: %s' % timezone)
+    output.append("Timezone: %s" % timezone)
 
     local_tz = pytz.timezone(timezone)
 
@@ -530,42 +562,42 @@ def textual_information(data_parsed, geo_data, config, html_output=False):
             "noon": sun.noon,
             "sunset": sun.sunset,
             "dusk": sun.dusk,
-            }[what]
+        }[what]
 
         current_time_of_what = _sun(city.observer, date=datetime_day_start)
-        return current_time_of_what\
-                .replace(tzinfo=pytz.utc)\
-                .astimezone(local_tz)\
-                .strftime("%H:%M:%S")
+        return (
+            current_time_of_what.replace(tzinfo=pytz.utc)
+            .astimezone(local_tz)
+            .strftime("%H:%M:%S")
+        )
 
     local_time_of = {}
     for what in ["dawn", "sunrise", "noon", "sunset", "dusk"]:
         try:
             local_time_of[what] = _get_local_time_of(what)
         except ValueError:
-            local_time_of[what] = "-"*8
+            local_time_of[what] = "-" * 8
 
     tmp_output = []
 
-    tmp_output.append('  Now:    %%{{NOW(%s)}}' % timezone)
-    tmp_output.append('Dawn:    %s' % local_time_of["dawn"])
-    tmp_output.append('Sunrise: %s' % local_time_of["sunrise"])
-    tmp_output.append('  Zenith: %s     ' % local_time_of["noon"])
-    tmp_output.append('Sunset:  %s' % local_time_of["sunset"])
-    tmp_output.append('Dusk:    %s' % local_time_of["dusk"])
+    tmp_output.append("  Now:    %%{{NOW(%s)}}" % timezone)
+    tmp_output.append("Dawn:    %s" % local_time_of["dawn"])
+    tmp_output.append("Sunrise: %s" % local_time_of["sunrise"])
+    tmp_output.append("  Zenith: %s     " % local_time_of["noon"])
+    tmp_output.append("Sunset:  %s" % local_time_of["sunset"])
+    tmp_output.append("Dusk:    %s" % local_time_of["dusk"])
 
     tmp_output = [
         re.sub("^([A-Za-z]*:)", lambda m: _colorize(m.group(1), "2"), x)
-        for x in tmp_output]
+        for x in tmp_output
+    ]
 
     output.append(
-        "%20s" % tmp_output[0] \
-        + " | %20s " % tmp_output[1] \
-        + " | %20s" % tmp_output[2])
+        "%20s" % tmp_output[0] + " | %20s " % tmp_output[1] + " | %20s" % tmp_output[2]
+    )
     output.append(
-        "%20s" % tmp_output[3] \
-        + " | %20s " % tmp_output[4] \
-        + " | %20s" % tmp_output[5])
+        "%20s" % tmp_output[3] + " | %20s " % tmp_output[4] + " | %20s" % tmp_output[5]
+    )
 
     city_only = False
     suffix = ""
@@ -577,28 +609,43 @@ def textual_information(data_parsed, geo_data, config, html_output=False):
     longitude = float(geo_data["longitude"])
 
     if config["full_address"]:
-        output.append('Location: %s%s [%5.4f,%5.4f]' \
-                % (
-                    _shorten_full_location(config["full_address"], city_only=city_only),
-                    suffix,
-                    latitude,
-                    longitude,
-                ))
+        output.append(
+            "Location: %s%s [%5.4f,%5.4f]"
+            % (
+                _shorten_full_location(config["full_address"], city_only=city_only),
+                suffix,
+                latitude,
+                longitude,
+            )
+        )
 
     output = [
-        re.sub("^( *[A-Za-z]*:)", lambda m: _colorize(m.group(1), "2"),
-               re.sub("^( +[A-Za-z]*:)", lambda m: _colorize(m.group(1), "2"),
-                      re.sub(r"(\|)", lambda m: _colorize(m.group(1), "2"), x)))
-        for x in output]
+        re.sub(
+            "^( *[A-Za-z]*:)",
+            lambda m: _colorize(m.group(1), "2"),
+            re.sub(
+                "^( +[A-Za-z]*:)",
+                lambda m: _colorize(m.group(1), "2"),
+                re.sub(r"(\|)", lambda m: _colorize(m.group(1), "2"), x),
+            ),
+        )
+        for x in output
+    ]
 
     return "".join("%s\n" % x for x in output)
+
 
 # }}}
 # get_geodata {{{
 def get_geodata(location):
-    text = requests.get("http://127.0.0.1:8083/:geo-location?location=%s" % location).text
+    text = requests.get(
+        "http://127.0.0.1:8085/:geo-location?location=%s" % location
+    ).text
     return json.loads(text)
+
+
 # }}}
+
 
 def main(query, parsed_query, data):
     parsed_query["locale"] = "en_US"
@@ -629,18 +676,22 @@ def main(query, parsed_query, data):
 </body>
 </html>
 """.format(
-        filename=filename, orig_location=parsed_query["orig_location"],
-        textual_information=textual_information(
-            data_parsed, geo_data, parsed_query, html_output=True))
+            filename=filename,
+            orig_location=parsed_query["orig_location"],
+            textual_information=textual_information(
+                data_parsed, geo_data, parsed_query, html_output=True
+            ),
+        )
     else:
         output = generate_panel(data_parsed, geo_data, parsed_query)
         if query.get("text") != "no" and parsed_query.get("text") != "no":
             output += textual_information(data_parsed, geo_data, parsed_query)
-        if parsed_query.get('no-terminal', False):
+        if parsed_query.get("no-terminal", False):
             output = remove_ansi(output)
-        if parsed_query.get('dumb', False):
+        if parsed_query.get("dumb", False):
             output = output.translate(TRANSLATION_TABLE)
     return output
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     sys.stdout.write(main(sys.argv[1]))

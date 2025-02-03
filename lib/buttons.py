@@ -21,14 +21,20 @@ GITHUB_BUTTON_FOOTER = """
 <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
 """
 
+
 def add_buttons(output):
     """
     Add buttons to html output
     """
 
-    return output.replace('</body>',
-                          (TWITTER_BUTTON
-                           + GITHUB_BUTTON
-                           + GITHUB_BUTTON_3
-                           + GITHUB_BUTTON_2
-                           + GITHUB_BUTTON_FOOTER) + '</body>')
+    return output.replace(
+        "</body>",
+        (
+            TWITTER_BUTTON
+            + GITHUB_BUTTON
+            + GITHUB_BUTTON_3
+            + GITHUB_BUTTON_2
+            + GITHUB_BUTTON_FOOTER
+        )
+        + "</body>",
+    )

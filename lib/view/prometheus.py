@@ -7,6 +7,7 @@ from datetime import datetime
 
 from fields import DESCRIPTION
 
+
 def _render_current(data, for_day="current", already_seen=[]):
     "Converts data into prometheus style format"
 
@@ -38,21 +39,30 @@ def _render_current(data, for_day="current", already_seen=[]):
         try:
             float(value)
         except ValueError:
-            description = f", description=\"{value}\""
+            description = f', description="{value}"'
             value = "1"
 
         if name not in already_seen:
             output.append(f"# HELP {name} {help}")
             already_seen.append(name)
 
-        output.append(f"{name}{{forecast=\"{for_day}\"{description}}} {value}")
+        output.append(f'{name}{{forecast="{for_day}"{description}}} {value}')
 
-    return "\n".join(output)+"\n"
+    return "\n".join(output) + "\n"
+
 
 def _convert_time_to_minutes(time_str):
     "Convert time from midnight to minutes"
-    return int((datetime.strptime(time_str, "%I:%M %p")
-        - datetime.strptime("12:00 AM", "%I:%M %p")).total_seconds())//60
+    return (
+        int(
+            (
+                datetime.strptime(time_str, "%I:%M %p")
+                - datetime.strptime("12:00 AM", "%I:%M %p")
+            ).total_seconds()
+        )
+        // 60
+    )
+
 
 def render_prometheus(data):
     """
@@ -61,9 +71,9 @@ def render_prometheus(data):
     """
 
     already_seen = []
-    answer = _render_current(
-        data["current_condition"][0], already_seen=already_seen)
+    answer = _render_current(data["current_condition"][0], already_seen=already_seen)
     for i in range(3):
         answer += _render_current(
-            data["weather"][i], for_day="%sd" % i, already_seen=already_seen)
+            data["weather"][i], for_day="%sd" % i, already_seen=already_seen
+        )
     return answer
