@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#vim: fileencoding=utf-8
+# vim: fileencoding=utf-8
 
 """
 
@@ -37,8 +37,16 @@ EMOJIS = [
     "⛈",
     "⛈",
     "☁️",
-    "🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘"
+    "🌑",
+    "🌒",
+    "🌓",
+    "🌔",
+    "🌕",
+    "🌖",
+    "🌗",
+    "🌘",
 ]
+
 
 def extract_emojis_to_directory(dirname):
     """
@@ -51,12 +59,19 @@ def extract_emojis_to_directory(dirname):
     for emoji in EMOJIS:
         filename = "%s/%s.png" % (dirname, emoji)
         convert_string = [
-            "convert", "-background", "black", "-size", "%sx%s" % (emoji_size, emoji_size),
-            "-set", "colorspace", "sRGB",
-            "pango:<span font=\"%s\" size=\"20000\">%s</span>" % (emoji_font, emoji),
-            filename
+            "convert",
+            "-background",
+            "black",
+            "-size",
+            "%sx%s" % (emoji_size, emoji_size),
+            "-set",
+            "colorspace",
+            "sRGB",
+            'pango:<span font="%s" size="20000">%s</span>' % (emoji_font, emoji),
+            filename,
         ]
         subprocess.Popen(convert_string)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     extract_emojis_to_directory("share/emoji")

@@ -25,6 +25,7 @@ import os
 import time
 import json
 import hashlib
+import re
 
 import requests
 import cyrtranslit
@@ -41,7 +42,10 @@ import proxy_log
 import globals
 from globals import (
     PROXY_CACHEDIR,
+<<<<<<< HEAD
     PROXY_HOST,
+=======
+>>>>>>> afda32035714acad4aa555373fdd381a20a322dc
     PROXY_PORT,
     USE_METNO,
     USER_AGENT,
@@ -110,7 +114,7 @@ def _cache_file(path, query):
 
     digest = hashlib.sha1(("%s %s" % (path, query)).encode("utf-8")).hexdigest()
     digest_number = ord(digest[0].upper())
-    expiry_interval = 60 * (digest_number + 240)
+    expiry_interval = 60 * (digest_number + 180)
 
     timestamp = "%010d" % (int(time.time()) // expiry_interval * expiry_interval)
     filename = os.path.join(PROXY_CACHEDIR, timestamp, path, query)
@@ -185,7 +189,7 @@ def cyr(to_translate):
 
 
 def _patch_greek(original):
-    return original.replace("Ηλιόλουστη/ο", "Ηλιόλουστη")
+    return original.replace("ÎÎ»Î¹ÏÎ»Î¿ÏÏÏÎ·/Î¿", "ÎÎ»Î¹ÏÎ»Î¿ÏÏÏÎ·")
 
 
 def add_translations(content, lang):
@@ -331,6 +335,29 @@ def _make_query(path, query_string):
     return content, headers
 
 
+def _normalize_query_string(query_string):
+    # Normalized query string has the following fixes:
+    # 1. Uses , for the coordinates separation
+    # 2. Limits number of digits after .
+
+    coord_match = re.search(r"q=[^&]*", query_string)
+    coords_str = coord_match.group(0)
+    coords = re.findall(r"[-0-9.]+", coords_str)
+    if len(coords) != 2:
+        return query_string
+
+    lat = str(round(float(coords[0]), 2))
+    lng = str(round(float(coords[1]), 2))
+    query_string = re.sub(r"q=[^&]*", "q=" + lat + "," + lng, query_string)
+    print(query_string)
+
+    # nqs = query_string.replace("%2C", ",")
+    # lat, lng = nqs.split(",", 1)
+    # nqs = f"{lat:.2f},{lng:.2f}"
+
+    return query_string
+
+
 @APP.route("/<path:path>")
 def proxy(path):
     """
@@ -339,6 +366,7 @@ def proxy(path):
 
     lang = request.args.get("lang", "en")
     query_string = request.query_string.decode("utf-8")
+    query_string = _normalize_query_string(query_string)
     query_string = query_string.replace("sr-lat", "sr")
     query_string = query_string.replace("lang=None", "lang=en")
     content = ""
