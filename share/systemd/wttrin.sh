@@ -44,8 +44,6 @@ main() {
 
   cd "$SRC_DIR" || exit 1
 
-  set -x
-
   while read -r line; do
     name=$(jq -r .name <<< "$line")
     workdir=$(jq -r .workdir <<< "$line")
