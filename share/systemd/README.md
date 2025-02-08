@@ -12,7 +12,7 @@ mkdir -p ~/.config/systemd/user/
 Then, create the service file called `myscript.service`:
 
 ```bash
-cp share/systemd/wttrin.service ~/.config/systemd/user/myscript.service
+cp share/systemd/wttrin.service ~/.config/systemd/user/wttrin.service
 ```
 
 2. **Reload the systemd daemon**: This will ensure systemd recognizes the new service.
