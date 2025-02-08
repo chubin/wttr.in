@@ -1,11 +1,11 @@
 services:
   - name: "main server"
-    command: "while true; do /wttr.in/bin/srv big-cache.yaml ; sleep 5; done"
+    command: "while true; do sudo /wttr.in/bin/srv big-cache.yaml ; sleep 5; done"
     workdir: "$HOME"
     port: ...
 
   - name: "geo server"
-    command: "while true; do /wttr.in/bin/wttr.in/srv geo.yaml; sleep 5; done"
+    command: "while true; do /wttr.in/bin/srv geo.yaml; sleep 5; done"
     workdir: "$HOME"
     env:
       - NOMINATIM_OPENCAGE
