@@ -29,14 +29,22 @@ To start the service immediately, run:
 systemctl --user start wttrin.service
 ```
 
+5. **Check the status**: To verify that your service is running correctly, you can check its status:
+
+```bash
+systemctl --user status wttrin.service
+```
+
+6. **Start service automatically**: This will ensure the service is running after reboot.
+
 To enable it to start automatically at boot, run:
 
 ```bash
 systemctl --user enable wttrin.service
 ```
 
-5. **Check the status**: To verify that your service is running correctly, you can check its status:
+Enable user services even if the user is not logged in (specify the user name instead of `USER`):
 
 ```bash
-systemctl --user status wttrin.service
+sudo loginctl enable-linger USER
 ```
