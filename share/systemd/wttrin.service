@@ -1,0 +1,11 @@
+[Unit]
+Description=wttr.in services
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/home/igor/src/wttr.in/share/systemd/wttrin.sh session1
+ExecStop=/usr/bin/tmux kill-session -t session1
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,32 @@
+services:
+  - name: "main server"
+    command: "while true; do sudo /wttr.in/bin/srv big-cache.yaml ; sleep 5; done"
+    workdir: "$HOME"
+    port: ...
+
+  - name: "geo server"
+    command: "while true; do /wttr.in/bin/srv geo.yaml; sleep 5; done"
+    workdir: "$HOME"
+    env:
+      - NOMINATIM_OPENCAGE
+    port: 8085
+
+  - name: "proxy"
+    command: ve/bin/python3 bin/proxy.py
+    workdir: "/wttr.in/wttr.in-v2-v2"
+    port: 5001
+
+  - name: "format=j1"
+    command: "WTTRIN_SRV_PORT=9003 ve/bin/python3 bin/srv.py"
+    workdir: "/wttr.in/wttr.in-v2-v2"
+    port: 9003
+
+  - name: "format=line"
+    command: "WTTRIN_SRV_PORT=9004 ve/bin/python3 bin/srv.py"
+    workdir: "/wttr.in/wttr.in-v2-v2"
+    port: 9004
+
+  - name: "format=v1"
+    command: "WTTRIN_SRV_PORT=9005 ve/bin/python3 bin/srv.py"
+    workdir: "/wttr.in/wttr.in-v2-v2"
+    port: 9005

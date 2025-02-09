@@ -29,7 +29,7 @@ You can access the service from a shell or from a Web browser like this:
 
 Here is an example weather report:
 
-![Weather Report](San_Francisco.png)
+![Weather Report](share/pics/San_Francisco.png)
 
 Or in PowerShell:
 
