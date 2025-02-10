@@ -30,3 +30,8 @@ services:
     command: "WTTRIN_SRV_PORT=9005 ve/bin/python3 bin/srv.py"
     workdir: "/wttr.in/wttr.in-v2-v2"
     port: 9005
+
+  - name: "filetype=png"
+    command: "WTTRIN_SRV_PORT=9006 ve/bin/python3 bin/srv.py"
+    workdir: "/wttr.in/wttr.in-v2-v2"
+    port: 9006
