@@ -60,6 +60,7 @@ type RequestProcessor struct {
 	upstreamTransport1 *http.Transport
 	upstreamTransport2 *http.Transport
 	upstreamTransport3 *http.Transport
+	upstreamTransport4 *http.Transport
 	config             *config.Config
 	geoIPCache         *geoip.Cache
 	geoLocation        *geoloc.Cache
@@ -93,6 +94,11 @@ func NewRequestProcessor(config *config.Config) (*RequestProcessor, error) {
 			return dialer.DialContext(ctx, network, config.Uplink.Address3)
 		},
 	}
+	transport4 := &http.Transport{
+		DialContext: func(ctx context.Context, network, _ string) (net.Conn, error) {
+			return dialer.DialContext(ctx, network, config.Uplink.Address4)
+		},
+	}
 
 	geoCache, err := geoip.NewCache(config)
 	if err != nil {
@@ -110,6 +116,7 @@ func NewRequestProcessor(config *config.Config) (*RequestProcessor, error) {
 		upstreamTransport1: transport1,
 		upstreamTransport2: transport2,
 		upstreamTransport3: transport3,
+		upstreamTransport4: transport4,
 		config:             config,
 		geoIPCache:         geoCache,
 		geoLocation:        geoLocation,
@@ -156,7 +163,7 @@ func (rp *RequestProcessor) ProcessRequest(r *http.Request) (*ResponseWithHeader
 	if dontCache(r) {
 		rp.stats.Inc("uncached")
 
-		return getAny(r, rp.upstreamTransport1, rp.upstreamTransport2, rp.upstreamTransport3)
+		return getAny(r, rp.upstreamTransport1, rp.upstreamTransport2, rp.upstreamTransport3, rp.upstreamTransport4)
 	}
 
 	// processing cached request
@@ -247,7 +254,7 @@ func (rp *RequestProcessor) processUncachedRequest(r *http.Request) (*ResponseWi
 		rp.stats.Inc("geoip")
 	}
 
-	response, err = getAny(r, rp.upstreamTransport1, rp.upstreamTransport2, rp.upstreamTransport3)
+	response, err = getAny(r, rp.upstreamTransport1, rp.upstreamTransport2, rp.upstreamTransport3, rp.upstreamTransport4)
 	if err != nil {
 		return nil, err
 	}
