@@ -1,18 +1,23 @@
+: Dunst in der Nähe                                         : Haze in vicinity
+: Starker Regen- und Schneeschauer                          : Heavy rain and snow shower
+: Starker Regenschauer                                      : Heavy rain shower
+: Leichter Nieselregen und Schneegriesel                    : Light drizzle and snow grains
+: Leichter Regen- und Nebelschauer                          : Light rain and mist shower
+: Leichter Hagel-/Schneegraupelschauer                      : Light small hail/snow pellets shower
+: Leichter Schauer unbekannter Niederschlag                 : Light unknown precipitation shower
+: Regen und kleiner Hagel/Schneegraupel mit Gewitter        : Rain and small hail/snow pellets with thunderstorm
+: Schneeschauer in der Nähe                                 : Snow shower in vicinity
+: Gewitterausbrüche in der Nähe                             : Thundery outbreaks nearby
 : Bodennahe Schneeverwehung                                 : Low drifting snow
 : Nebelfelder                                               : Patches of fog
 : Nieselregen                                               : Drizzle
-: Leichter Nieselregen                                      : Light drizzle
 : Leichter Nieselregen und Regen                            : Light drizzle and rain
 : Schnee                                                    : Snow
 : Regen                                                     : Rain
-: Leichter Regen                                            : Light Rain
 : Regenschauer                                              : Rain Shower
-: Regen in der näheren Umgebung                             : Shower in vicinity
 : Sandverwehungen                                           : Blowing sand
 : Weitläufige Sandverwehungen                               : Blowing widespread dust
 : Weitläufige Sandverwehungen in der Nähe                   : Blowing widespread dust in vicinity
-: Klar                                                      : Clear
-: Wolkig                                                    : Cloudy
 : Nieselregen und Nebel                                     : Drizzle and fog
 : Nieselregen und Regen                                     : Drizzle and rain
 : Nieselregen und Regenschauer                              : Drizzle and rain shower
@@ -40,8 +45,6 @@
 : Starker Regen und kleiner Hagel mit Gewitter              : Heavy rain and small hail/snow pallets with thunderstorm
 : Starker Regen und Schnee                                  : Heavy rain and snow
 : Starker Regen und Schnee sowie kleiner Hagel mit Gewitter : Heavy rain and snow and small hail/snow pallets with thunderstorm
-: Starker Schneeschauer                                     : Heavy snow shower
-: Starker Regen                                             : Heavy rain
 : Starker Regen mit Gewitter                                : Heavy rain with thunderstorm
 : Starker kleiner Hagelschauer                              : Heavy small hail/snow pallets shower
 : Starker kleiner Hagel mit Gewitter                        : Heavy small hail/snow pallets with thunderstorm
@@ -104,9 +107,7 @@
 : Nebel mit Gewitter                                        : Mist with thunderstorm
 : Mäßig bis starker Regen mit Gewitter                      : Moderate or heavy rain in area with thunder
 : Mäßig bis starker Schnee mit Gewitter                     : Moderate or heavy snow in area with thunder
-: Bedeckt                                                   : Overcast
 : Teilweise Nebel                                           : Partial fog
-: Teilweise bewölkt                                         : Partly cloudy
 : Nebelfelder in der Nähe                                   : Patches of fog in vicinity
 : Ortsweise gefrierender Nieselregen                        : Patchy freezing drizzle nearby
 : Gebietsweise leichter Regen mit Gewitter                  : Patchy light rain in area with thunder
