@@ -5,7 +5,7 @@
 : Leichter Regen- und Nebelschauer                          : Light rain and mist shower
 : Leichter Hagel-/Schneegraupelschauer                      : Light small hail/snow pellets shower
 : Leichter Schauer unbekannter Niederschlag                 : Light unknown precipitation shower
-: Regen und kleiner Hagel/Schneegraupel mit Gewitter        : Rain and small hail/snow pellets with thunderstorm
+: Regen und leichter Hagel/Schneegraupel mit Gewitter       : Rain and small hail/snow pellets with thunderstorm
 : Schneeschauer in der Nähe                                 : Snow shower in vicinity
 : Gewitterausbrüche in der Nähe                             : Thundery outbreaks nearby
 : Bodennahe Schneeverwehung                                 : Low drifting snow
