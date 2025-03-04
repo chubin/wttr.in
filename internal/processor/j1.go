@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-func getAny(req *http.Request, tr1, tr2, tr3 *http.Transport) (*ResponseWithHeader, error) {
+func getAny(req *http.Request, tr1, tr2, tr3, tr4 *http.Transport) (*ResponseWithHeader, error) {
 	uri := strings.ReplaceAll(req.URL.RequestURI(), "%", "%25")
 
 	u, err := url.Parse(uri)
@@ -27,6 +27,10 @@ func getAny(req *http.Request, tr1, tr2, tr3 *http.Transport) (*ResponseWithHead
 
 	// log.Println(req.URL.Query())
 	// log.Println()
+
+	if checkURLForPNG(req) {
+		return getDefault(req, tr4)
+	}
 
 	return getDefault(req, tr3)
 }
@@ -86,4 +90,9 @@ func getUpstream(req *http.Request, transport *http.Transport) (*ResponseWithHea
 		Header:     res.Header,
 		StatusCode: res.StatusCode,
 	}, nil
+}
+
+func checkURLForPNG(r *http.Request) bool {
+	url := r.URL.String()
+	return strings.Contains(url, ".png") && !strings.Contains(url, "/files/")
 }

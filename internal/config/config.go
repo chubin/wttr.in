@@ -62,6 +62,10 @@ type Uplink struct {
 	// for all other queries.
 	Address3 string `yaml:"address3,omitempty"`
 
+	// Address4 contains address of the uplink server in form IP:PORT
+	// for PNG queries.
+	Address4 string `yaml:"address4,omitempty"`
+
 	// Timeout for upstream queries.
 	Timeout int `yaml:"timeout,omitempty"`
 
@@ -152,6 +156,7 @@ func Default() *Config {
 			Address1:         "127.0.0.1:9002",
 			Address2:         "127.0.0.1:9002",
 			Address3:         "127.0.0.1:9002",
+			Address4:         "127.0.0.1:9002",
 			Timeout:          30,
 			PrefetchInterval: 300,
 		},

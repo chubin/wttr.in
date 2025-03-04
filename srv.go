@@ -6,7 +6,6 @@ import (
 	"io"
 	stdlog "log"
 	"net/http"
-	"strings"
 	"time"
 
 	"github.com/alecthomas/kong"
@@ -156,12 +155,6 @@ func mainHandler(
 			log.Println(err)
 		}
 
-		if checkURLForPNG(r) {
-			w.Write([]byte("PNG support temporary disabled"))
-
-			return
-		}
-
 		response, err := rp.ProcessRequest(r)
 		if err != nil {
 			log.Println(err)
@@ -258,9 +251,4 @@ func setLogLevel(logLevel string) error {
 	log.SetLevel(parsedLevel)
 
 	return nil
-}
-
-func checkURLForPNG(r *http.Request) bool {
-	url := r.URL.String()
-	return strings.Contains(url, ".png") && !strings.Contains(url, "/files/")
 }
