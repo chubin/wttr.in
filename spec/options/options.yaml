@@ -1,0 +1,271 @@
+query_options:
+  - name: current_only
+    short: "0"
+    description: "Show only current weather"
+    type: boolean
+    default: false
+    active: true
+  - name: current_plus_today
+    short: "1"
+    description: "Show current weather and today's forecast"
+    type: boolean
+    default: false
+    active: true
+  - name: current_plus_two_days
+    short: "2"
+    description: "Show current weather, today's, and tomorrow's forecast"
+    type: boolean
+    default: false
+    active: true
+  - name: ansi_output
+    short: A
+    description: "Force ANSI output format for terminals"
+    type: boolean
+    default: false
+    active: true
+  - name: standard_font
+    short: d
+    description: "Restrict output to standard console font glyphs"
+    type: boolean
+    default: false
+    active: true
+  - name: no_follow
+    short: F
+    description: "Do not show the 'Follow' line"
+    type: boolean
+    default: false
+    active: true
+  - name: metric
+    short: m
+    description: "Use metric (SI) units (default everywhere except US)"
+    type: boolean
+    values:
+      - true
+      - false
+    default: true
+    active: true
+    note: "Overridden by 'uscs' if specified; default is 'uscs' in US"
+  - name: uscs
+    short: u
+    description: "Use USCS units (default in the US)"
+    type: boolean
+    values:
+      - true
+      - false
+    default: false
+    active: true
+    note: "Default is 'uscs' in US, 'metric' elsewhere"
+  - name: wind_ms
+    short: M
+    description: "Show wind speed in meters per second"
+    type: boolean
+    default: false
+    active: true
+  - name: narrow
+    short: n
+    description: "Show only day and night forecast (narrow version)"
+    type: boolean
+    default: false
+    active: true
+  - name: frame
+    short: p
+    description: "Add a frame around the PNG output"
+    type: boolean
+    default: false
+    active: true
+    note: "Applicable only for PNG output"
+  - name: quiet
+    short: q
+    description: "Quiet version, no 'Weather report' text"
+    type: boolean
+    default: false
+    active: true
+  - name: superquiet
+    short: Q
+    description: "Superquiet version, no 'Weather report' text or city name"
+    type: boolean
+    default: false
+    active: true
+  - name: transparency
+    short: t
+    description: "Set transparency level for PNG output"
+    type: integer
+    range:
+      min: 0
+      max: 255
+    default: 150
+    active: true
+    note: "Applicable only for PNG output; 255 = not transparent"
+  - name: no_color
+    short: T
+    description: "Switch off terminal color sequences (no colors)"
+    type: boolean
+    default: false
+    active: true
+  - name: lang
+    description: "Specify output language"
+    type: string
+    values_map:
+      am: "Amharic"
+      ar: "Arabic"
+      af: "Afrikaans"
+      be: "Belarusian"
+      bn: "Bengali"
+      ca: "Catalan"
+      da: "Danish"
+      de: "German"
+      el: "Greek"
+      et: "Estonian"
+      fr: "French"
+      fa: "Persian"
+      gl: "Galician"
+      hi: "Hindi"
+      hu: "Hungarian"
+      ia: "Interlingua"
+      id: "Indonesian"
+      it: "Italian"
+      lt: "Lithuanian"
+      mg: "Malagasy"
+      nb: "Norwegian Bokmål"
+      nl: "Dutch"
+      oc: "Occitan"
+      pl: "Polish"
+      pt-br: "Portuguese (Brazil)"
+      ro: "Romanian"
+      ru: "Russian"
+      ta: "Tamil"
+      tr: "Turkish"
+      th: "Thai"
+      ua: "Ukrainian"
+      vi: "Vietnamese"
+      zh-cn: "Chinese (Simplified)"
+      zh-tw: "Chinese (Traditional)"
+      az: "Azerbaijani (partial support)"
+      ba: "Bashkir (partial support)"
+      bg: "Bulgarian (partial support)"
+      cy: "Welsh (partial support)"
+      bs: "Bosnian (partial support)"
+      by: "Belarusian (partial support)"
+      cz: "Czech (partial support)"
+      eo: "Esperanto (partial support)"
+      es: "Spanish (partial support)"
+      eu: "Basque (partial support)"
+      fi: "Finnish (partial support)"
+      ga: "Irish (partial support)"
+      hr: "Croatian (partial support)"
+      hy: "Armenian (partial support)"
+      is: "Icelandic (partial support)"
+      ja: "Japanese (partial support)"
+      jv: "Javanese (partial support)"
+      ka: "Georgian (partial support)"
+      kk: "Kazakh (partial support)"
+      ko: "Korean (partial support)"
+      ky: "Kyrgyz (partial support)"
+      lv: "Latvian (partial support)"
+      mk: "Macedonian (partial support)"
+      ml: "Malayalam (partial support)"
+      mr: "Marathi (partial support)"
+      fy: "Frisian (partial support)"
+      nn: "Norwegian Nynorsk (partial support)"
+      pt: "Portuguese (partial support)"
+      sk: "Slovak (partial support)"
+      sl: "Slovenian (partial support)"
+      sr: "Serbian (partial support)"
+      sr-lat: "Serbian (Latin) (partial support)"
+      sv: "Swedish (partial support)"
+      sw: "Swahili (partial support)"
+      te: "Telugu (partial support)"
+      ts: "Tsonga (partial support)"
+      zu: "Zulu (partial support)"
+      he: "Hebrew (partial support)"
+      zh: "Chinese (partial support)"
+    default: en
+    active: true
+    note: "Languages from 'az' to 'zh' have partial support; others have full support"
+  - name: background
+    description: "Set background color for PNG output in hex (RRGGBB format)"
+    type: string
+    default: null
+    validate:
+      - "length 6"
+      - "regexp [0-9a-fA-F]{6}"
+    active: true
+    note: "Applicable only for PNG output"
+  - name: format
+    description: "Specify output format for one-line weather info"
+    type: string
+    values_map:
+      "1": "Location and condition"
+      "2": "Location, condition, temperature"
+      "3": "Location: condition temperature"
+      "4": "Location: condition, temperature details, wind speed"
+      custom: "Percent notation (e.g., %l, %c, %t, %w, %m, etc.)"
+    values:
+      - "1"
+      - "2"
+      - "3"
+      - "4"
+      - "custom"
+    default: null
+    active: true
+    note: "Used for status bars in tools like tmux"
+  - name: date
+    description: "Specify forecast date offset (days in the future)"
+    type: integer
+    range:
+      min: 1
+      max: null
+    default: 0
+    active: false
+    note: "Proposed but not officially supported; limited evidence"
+format_specifiers:
+  - specifier: "%c"
+    description: "Weather condition"
+    active: true
+  - specifier: "%C"
+    description: "Weather condition text"
+    active: true
+  - specifier: "%h"
+    description: "Humidity"
+    active: true
+  - specifier: "%t"
+    description: "Temperature"
+    active: true
+  - specifier: "%w"
+    description: "Wind"
+    active: true
+  - specifier: "%l"
+    description: "Location"
+    active: true
+  - specifier: "%m"
+    description: "Moon phase"
+    active: true
+  - specifier: "%M"
+    description: "Moon day"
+    active: true
+  - specifier: "%p"
+    description: "Precipitation"
+    active: true
+  - specifier: "%D"
+    description: "Dawn"
+    active: true
+  - specifier: "%S"
+    description: "Sunrise"
+    active: true
+  - specifier: "%z"
+    description: "Zenith"
+    active: true
+  - specifier: "%s"
+    description: "Sunset"
+    active: true
+  - specifier: "%d"
+    description: "Dusk"
+    active: true
+  - specifier: "%H"
+    description: "High temperature for the day"
+    active: false
+    note: "Proposed in issue #585"
+  - specifier: "%L"
+    description: "Low temperature for the day"
+    active: false
+    note: "Proposed in issue #585"
