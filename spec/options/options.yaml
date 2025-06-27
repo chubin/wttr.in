@@ -100,16 +100,7 @@ query_options:
     type: boolean
     default: false
     active: true
-  - name: transparency
-    short: t
-    description: "Set transparency level for PNG output"
-    type: integer
-    range:
-      min: 0
-      max: 255
-    default: 150
-    active: true
-    note: "Applicable only for PNG output; 255 = not transparent"
+
   - name: period
     type: integer
     description: "Update interval for cyclic location selection"
@@ -250,6 +241,124 @@ query_options:
     default: 0
     active: false
     note: "Proposed but not officially supported; limited evidence"
+
+  - name: force-ansi
+    short: A
+    description: "Force ANSI output mode"
+    type: boolean
+    default: false
+    active: true
+    note: "Enables ANSI formatting regardless of terminal capabilities"
+
+  - name: dumb
+    short: d
+    description: "Use dumb terminal mode"
+    type: boolean
+    default: false
+    active: true
+    note: "Disables advanced terminal features"
+
+  - name: narrow
+    short: n
+    description: "Use narrow layout for output"
+    type: boolean
+    default: false
+    active: true
+    note: "Optimizes output for narrow displays"
+
+  - name: use_metric
+    short: m
+    description: "Use metric units for measurements"
+    type: boolean
+    default: false
+    active: true
+    note: "Sets units to metric system; 'M' also enables milliseconds for wind speed"
+
+  - name: use_ms_for_wind
+    short: M
+    description: "Use milliseconds for wind speed (requires metric units)"
+    type: boolean
+    default: false
+    active: true
+    note: "Only active when used with 'M' flag for metric units"
+
+  - name: use_imperial
+    short: u
+    description: "Use imperial units for measurements"
+    type: boolean
+    default: false
+    active: true
+    note: "Sets units to imperial system"
+
+  - name: inverted_colors
+    short: I
+    description: "Invert colors in output"
+    type: boolean
+    default: false
+    active: true
+    note: "Swaps foreground and background colors"
+
+  - name: transparency
+    short: t
+    description: "Set transparency level for PNG output"
+    type: integer
+    range:
+      min: 0
+      max: 255
+    default: 150
+    active: true
+    note: "Applicable only for PNG output; 255 = not transparent"
+
+  - name: no-terminal
+    short: T
+    description: "Disable terminal-specific formatting"
+    type: boolean
+    default: false
+    active: true
+    note: "Output is not tailored to terminal environment"
+
+  - name: padding
+    short: p
+    description: "Add padding to output"
+    type: boolean
+    default: false
+    active: true
+    note: "Adds extra spacing around output content"
+
+  - name: days
+    description: "Set the number of forecast days to display"
+    type: integer
+    range:
+      min: 0
+      max: 3
+    default: null
+    active: true
+    note: "Limits forecast output to the specified number of days"
+
+  - name: no-caption
+    short: q
+    description: "Disable captions in output"
+    type: boolean
+    default: false
+    active: true
+    note: "Removes descriptive text or labels from output"
+
+  - name: no-city
+    short: Q
+    description: "Hide city name in output"
+    type: boolean
+    default: false
+    active: true
+    note: "Omits location or city name from display"
+
+  - name: no-follow-line
+    short: F
+    description: "Disable follow line feature"
+    type: boolean
+    default: false
+    active: true
+    note: "Prevents automatic line following in output"
+
 format_specifiers:
   - specifier: "%c"
     description: "Weather condition"
