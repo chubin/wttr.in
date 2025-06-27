@@ -1,3 +1,11 @@
+invalid_options:
+  - name: info_hash
+    block: true
+  - name: peer_id
+    block: true
+  - name: port
+    block: true
+
 query_options:
   - name: current_only
     short: "0"
@@ -14,6 +22,12 @@ query_options:
   - name: current_plus_two_days
     short: "2"
     description: "Show current weather, today's, and tomorrow's forecast"
+    type: boolean
+    default: false
+    active: true
+  - name: current_plus_three_days
+    short: "3"
+    description: "Show current weather, forecast for today, tomorrow, and day after"
     type: boolean
     default: false
     active: true
@@ -96,6 +110,23 @@ query_options:
     default: 150
     active: true
     note: "Applicable only for PNG output; 255 = not transparent"
+  - name: period
+    type: integer
+    description: "Update interval for cyclic location selection"
+    default: null
+    active: true
+  - name: random
+    type: integer
+    description: "Random number, used to bypass the first caching layer (alias: dummy, nonce)"
+    active: true
+  - name: dummy
+    type: integer
+    description: "Random number, used to bypass the first caching layer (alias: random, nonce)"
+    active: true
+  - name: nonce
+    type: integer
+    description: "Random number, used to bypass the first caching layer (alias: dummy, random)"
+    active: true
   - name: no_color
     short: T
     description: "Switch off terminal color sequences (no colors)"
@@ -116,6 +147,7 @@ query_options:
       de: "German"
       el: "Greek"
       et: "Estonian"
+      en: "English"
       fr: "French"
       fa: "Persian"
       gl: "Galician"
@@ -194,18 +226,18 @@ query_options:
   - name: format
     description: "Specify output format for one-line weather info"
     type: string
-    values_map:
-      "1": "Location and condition"
-      "2": "Location, condition, temperature"
-      "3": "Location: condition temperature"
-      "4": "Location: condition, temperature details, wind speed"
-      custom: "Percent notation (e.g., %l, %c, %t, %w, %m, etc.)"
-    values:
-      - "1"
-      - "2"
-      - "3"
-      - "4"
-      - "custom"
+      # values_map:
+      #   "1": "Location and condition"
+      #   "2": "Location, condition, temperature"
+      #   "3": "Location: condition temperature"
+      #   "4": "Location: condition, temperature details, wind speed"
+      #   custom: "Percent notation (e.g., %l, %c, %t, %w, %m, etc.)"
+      # values:
+      #   - "1"
+      #   - "2"
+      #   - "3"
+      #   - "4"
+      #   - "custom"
     default: null
     active: true
     note: "Used for status bars in tools like tmux"
