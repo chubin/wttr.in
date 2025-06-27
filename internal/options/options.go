@@ -1,5 +1,12 @@
 package options
 
+import (
+	"fmt"
+	"io/ioutil"
+
+	"gopkg.in/yaml.v3"
+)
+
 // WttrInOptions represents the configuration for wttr.in query options and format specifiers.
 type WttrInOptions struct {
 	QueryOptions     []QueryOption     `yaml:"query_options"`
@@ -64,4 +71,21 @@ type FormatSpecifier struct {
 
 	// Note contains additional notes, if any (e.g., "Proposed in issue #585").
 	Note string `yaml:"note,omitempty"`
+}
+
+// NewFromFile reads a QueryOption from a YAML file and returns a pointer to it.
+func NewFromFile(filename string) (*WttrInOptions, error) {
+	// Read the YAML file
+	data, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read file: %w", err)
+	}
+
+	// Unmarshal the YAML content into a QueryOption struct
+	var option WttrInOptions
+	if err := yaml.Unmarshal(data, &option); err != nil {
+		return nil, fmt.Errorf("failed to unmarshal YAML: %w", err)
+	}
+
+	return &option, nil
 }

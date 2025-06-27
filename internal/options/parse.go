@@ -35,12 +35,16 @@ var (
 // ParseQueryString parses a wttr.in query string into a map of option names to values.
 // It validates option names, types, content, and values based on the provided WttrInOptions.
 // Returns the parsed map or an error if parsing or validation fails.
-func ParseQueryString(query string, config WttrInOptions) (map[string]string, error) {
+func ParseQueryString(query string, config *WttrInOptions) (map[string]string, error) {
 	// Initialize result map and lookup tables
 	result := make(map[string]string)
 	shortToName, nameToOption := buildOptionLookups(config.QueryOptions)
 
 	// Parse query string
+	query = strings.ReplaceAll(
+		strings.ReplaceAll(query, "%25", "%"),
+		"%", "%25")
+
 	parsed, err := url.ParseQuery(query)
 	if err != nil {
 		return nil, fmt.Errorf("%w: %v", ErrInvalidQueryString, err)

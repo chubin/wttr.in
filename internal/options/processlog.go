@@ -10,7 +10,7 @@ import (
 // ProcessLogFile reads a wttr.in log file, parses queries, and writes invalid entries to an error file.
 // Each log line is expected in the format: "timestamp request_id protocol ip query user_agent".
 // Invalid queries and their error messages are written to errorFilePath.
-func ProcessLogFile(logFilePath, errorFilePath string, config WttrInOptions) error {
+func ProcessLogFile(logFilePath, errorFilePath string, config *WttrInOptions) error {
 	logFile, err := openLogFile(logFilePath)
 	if err != nil {
 		return err
@@ -47,7 +47,7 @@ func openErrorFile(errorFilePath string) (*os.File, *bufio.Writer, error) {
 }
 
 // processLogLines reads and processes each line of the log file.
-func processLogLines(logFile *os.File, writer *bufio.Writer, config WttrInOptions) error {
+func processLogLines(logFile *os.File, writer *bufio.Writer, config *WttrInOptions) error {
 	scanner := bufio.NewScanner(logFile)
 	lineNumber := 0
 	for scanner.Scan() {
@@ -63,7 +63,7 @@ func processLogLines(logFile *os.File, writer *bufio.Writer, config WttrInOption
 }
 
 // processLogLine processes a single log line and writes errors to the error file.
-func processLogLine(line string, lineNumber int, writer *bufio.Writer, config WttrInOptions) error {
+func processLogLine(line string, lineNumber int, writer *bufio.Writer, config *WttrInOptions) error {
 	query, err := extractQueryFromLine(line, lineNumber, writer)
 	if err != nil {
 		return err
