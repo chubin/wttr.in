@@ -296,8 +296,8 @@ todėl mes nukreipėme jus į Omjakoną,
 vieną iš šalčiausių nuolatinių gyvenviečių planetoje.
 """,
         "lv": """
-Mēs nevarējām atrast jūsu atrašanās vietu tādēļ nogādājām jūs Oimjakonā,
-vienā no aukstākajām apdzīvotajām vietām uz planētas.
+Mēs nevarējām noteikt Tavu atrašanās vietu, tādēļ nogādājām Tevi Oimjakonā,
+vienā no planētas aukstākajām pastāvīgi apdzīvotajām vietām.
 """,
         "mk": """
 Неможевме да ја пронајдеме вашата локација,
@@ -720,10 +720,10 @@ Atnaujinimus galite sekti https://x.com/igor_chubin
 ======================================================================================
 """,
         "lv": """
-Atvainojiet, uz doto brīdi mēs esam mazliet noslogoti.
-Šeit ir laika ziņas noklusējuma pilsētai (lai parādītu jums, kā izskatās izveidotais ziņojums).
-Mēs atsāksim darbu cik ātri vien varēsim.
-Jūs varat sekot https://x.com/igor_chubin lai redzētu visus jaunumus.
+Atvainojamies, šobrīd laikapstākļu pakalpojums ir noslogots!
+Šeit ir laika ziņas noklusējuma pilsētai (lai parādītu, kā tās izskatās).
+Mēs atsāksim darbu, cik ātri vien varēsim.
+Var sekot https://x.com/igor_chubin, lai uzzinātu jaunumus.
 ======================================================================================
 """,
         "mk": """
@@ -904,7 +904,7 @@ Azonao atao ny manaraka ny pejy https://x.com/igor_chubin.
         "ko": "새로운 기능: 다국어로 대응된 위치 \033[92mwttr.in/서울\033[0m (UTF-8에서) 장소 검색 \033[92mwttr.in/~Kilimanjaro\033[0m (앞에 ~를 붙이세요)",
         "kk": "",
         "lt": "Naujiena: daugiakalbiai vietovių pavadinimai \033[92mwttr.in/станция+Восток\033[0m (UTF-8) ir vietovių paieška \033[92mwttr.in/~Kilimanjaro\033[0m (tiesiog priekyje pridėkite ~)",
-        "lv": "Jaunums: Daudzvalodu atrašanās vietu nosaukumi \033[92mwttr.in/станция+Восток\033[0m (in UTF-8) un dabas objektu meklēšana \033[92mwttr.in/~Kilimanjaro\033[0m (tikai priekšā pievieno ~)",
+        "lv": "Jauna iespēja: daudzvalodu atrašanās vietu nosaukumi \033[92mwttr.in/станция+Восток\033[0m (UTF-8) un atrašanās vietu meklēšana \033[92mwttr.in/~Kilimanjaro\033[0m (sākumā tikai jāpievieno ~)",
         "mk": "Нова функција: повеќе јазично локациски имиња \033[92mwttr.in/станция+Восток\033[0m (во UTF-8) и локациско пребарување \033[92mwttr.in/~Kilimanjaro\033[0m (just add ~ before)",
         "mr": "नवीन वैशिष्ट्य: स्थळांची बहुभाषिक नावे \033[92mwttr.in/станция+Восток\033[0m (UTF-8 मध्ये) आणि स्थळ शोध \033[92mwttr.in/~Kilimanjaro\033[0m (फक्त आधी ~ जोडा)",
         "oc": "Novèla foncionalitat : nom de lòc multilenga \033[92mwttr.in/станция+Восток\033[0m (en UTF-8) e recèrca de lòc \033[92mwttr.in/~Kilimanjaro\033[0m (solament ajustatz ~ abans)",
@@ -952,7 +952,7 @@ Azonao atao ny manaraka ny pejy https://x.com/igor_chubin.
         "ko": "wttr.in의 업데이트 소식을 원하신다면 \033[46m\033[30m@igor_chubin\033[0m 을 팔로우 해주세요",
         "kk": "",
         "lt": "wttr.in atnaujinimus sekite \033[46m\033[30m@igor_chubin\033[0m",
-        "lv": "Seko \033[46m\033[30m@igor_chubin\033[0m , lai uzzinātu wttr.in jaunumus",
+        "lv": "Seko \033[46m\033[30m@igor_chubin\033[0m, lai uzzinātu jaunumus par wttr.in",
         "mk": "Следете \033[46m\033[30m@igor_chubin\033[0m за wttr.in новости",
         "mr": "wttr.in च्या अद्यावत माहितीसाठी  \033[46m\033[30m@igor_chubin\033[0m चे अनुसरण करा",
         "nb": "Følg \033[46m\033[30m@igor_chubin\033[0m for wttr.in oppdateringer",

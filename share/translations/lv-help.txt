@@ -1,52 +1,56 @@
-Lietošana:
+Izmantošana:
 
     $ curl wttr.in          # pašreizējā atrašanās vieta
     $ curl wttr.in/rix      # laikapstākļi Rīgas lidostā
 
-Atbalstītie lokācijas tipi:
+Atbalstītie atrašanās vietu veidi:
 
     /paris                  # pilsētas nosaukums
-    /~Eiffel+tower          # jebkura dabas objekts
-    /Москва                 # Unicode nosaukums jebkurā valodā
-    /rix                    # lidostas kods (3 letters)
-    /@stackoverflow.com     # Domēna vārds
+    /~Eiffel+tower          # jebkura atrašanās vieta (+ atstarpju vietā)
+    /Москва                 # jebkuras atašanās vietas Unicode nosaukums jebkurā valodā
+    /rix                    # lidostas kods (3 burti)
+    /@stackoverflow.com     # domēna vārds
     /94107                  # pasta indekss (tikai ASV)
-    /-78.46,106.79          # GPS koordinātes
+    /-78.46,106.79          # GPS koordinātas
 
-Speciālās atrašanās vietas:
+Informācija par Mēness fāzēm:
 
-    /moon                   # Mēness fāze (pievieno ,+US vai ,+France specifiskai pilsētai)
+    /moon                   # Mēness fāze (jāpievieno ,+US vai ,+France noteiktai pilsētai)
     /moon@2016-10-25        # Mēness fāze datumā (@2016-10-25)
 
 Mērvienības:
 
-    ?m                      # Metriskā sistēma (SI) (izmantoto kā standartu visās vietās izņemot ASV)
-    ?u                      # USCS (ASV vietām izmanto kā standartu)
-    ?M                      # vēja ātrums m/s
+    m                       # Metriskā sistēma (SI) (pēc noklusējuma izmanto visur izņemot ASV)
+    u                       # USCS (pēc noklusējuma izmanto ASV)
+    M                       # rādīt vēja ātrumu ar m/s
 
 Skata iespējas:
 
-    ?0                      # tikai pašreizējos laikapstākļus
-    ?1                      # pašreizējos laikapstākļus + 1 dienu
-    ?2                      # pašreizējos laikapstākļus + 2 dienas
-    ?n                      # īsā versija (tkai diena un nakts)
-    ?q                      # apgrieztā versija (bez "Laika ziņas" teksta)
-    ?Q                      # ļoti apgrieztā versija (bez "Laika ziņas" teksta, pilsētas nosaukuma)
-    ?T                      # rādīt nekrāsainu
+    0                       # tikai pašreizējie laikapstākļi
+    1                       # pašreizējie laikapstākļi un šodienas prognoze
+    2                       # pašreizējie laikapstākļi un šodienas un rītdienas prognoze
+    A                       # neņemt vērā User-Agent un uzspiest ANSI izvades veidolu (terminālis)
+    d                       # ierobežot izvadi ar standarta konsoles fonta glifiem
+    F                       # nerādīt sekošanas rindu
+    n                       # šaurā versija (tikai diena un nakts)
+    q                       # saīsinātā versija (bez teksta "Laikapstākļi")
+    Q                       # īpaši saīsinātā versija (bez teksta "Laikapstākļi" un pilsētas nosaukuma)
+    T                       # izslēgt termināļa virknes (bez krāsām)
 
 PNG iespējas:
 
-    /paris.png              # izveidot PNG failu
-    ?p                      # pievienot rāmi ap izvades failu
-    ?t                      # caurspīdīgums 150
+    /paris.png              # izveidot PNG datni
+    p                       # izvadei pievienot rāmi
+    t                       # caurspīdīgums 150
     transparency=...        # caurspīdīgums no 0 - 255 (255 = necaurspīdīgs)
+    background=...          # fona krāsa veidolā RRGGBB, piem. 00aaaa
 
-Parametrus var apvienot:
+Iespējas var apvienot:
 
     /Paris?0pq
     /Paris?0pq&lang=fr
-    /Paris_0pq.png          # PNG failā iestatījumi tiek rakstīti aiz _
-    /Rome_0pq_lang=it.png   # gari parametri tiek apvienoti ar _
+    /Paris_0pq.png          # PNG datnes nosaukumā iespējas tiek rakstītas aiz _
+    /Rome_0pq_lang=it.png   # garās iespējas tiek atadlītas ar apakšsvītru
 
 Lokalizācija:
 
@@ -56,11 +60,11 @@ Lokalizācija:
 
 Atbalstītās valodas:
 
-    FULL_TRANSLATION (Atbalstīts)
-    PARTIAL_TRANSLATION (Tiek strādāts pie tā)
+    FULL_TRANSLATION (atbalstītas)
+    PARTIAL_TRANSLATION (pie tām tiek strādāts)
 
-Īpašie URLs:
+Īpaši URL:
 
-    /:help                  # parāda palīgā tekstu
-    /:bash.function         # parāda ieteicamo bash funkciju wttr()
-    /:translation           # parāda informāciju par tukojumiem
+    /:help                  # parāda šo lapu
+    /:bash.function         # parāda ieteikto bash funkciju wttr()
+    /:translation           # parāda informāciju par tulkotājiem
