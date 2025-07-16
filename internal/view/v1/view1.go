@@ -74,13 +74,17 @@ func (g *global) printDay(w weather) ([]string, error) {
 		month := lctime.Strftime("%b", d)
 		dateName = reverse(month) + " " + day + " " + reverse(dow)
 	} else {
-		dateName = lctime.Strftime("%a %d %b", d)
-		if g.config.Lang == "ko" {
-			dateName = lctime.Strftime("%b %d일 %a", d)
+		switch g.config.Lang {
+		case "ko":
+			date_format = "%b %d일 %a"
+		case "lv":
+			date_format = "%a., %d. %b."
+		case "zh", "zh-cn", "zh-tw":
+			date_format = "%b%d日%A"
+		default:
+			date_format = "%a %d %b"
 		}
-		if g.config.Lang == "zh" || g.config.Lang == "zh-tw" || g.config.Lang == "zh-cn" {
-			dateName = lctime.Strftime("%b%d日%A", d)
-		}
+		dateName = lctime.Strftime(date_format, d)
 	}
 
 	dateFmt := "┤" + justifyCenter(dateName, 12) + "├"
