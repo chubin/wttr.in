@@ -245,7 +245,17 @@ V2_TRANSLATION = {
         "Saulėlydis",
         "Sutemos",
     ),
-    "lv": ("Laika ziņas:", "", "", "", "", "", "", "", ""),
+    "lv": (
+        "Laika ziņas par:",
+        "laikapstākļiem",
+        "laika joslu",
+        "tagad",
+        "rītausmu",
+        "saullēktu",
+        "zenītu",
+        "saulrietu",
+        "vakara krēslu",
+    ),
     "mk": ("Прогноза за времето во:", "", "", "", "", "", "", "", ""),
     "ml": (
         "കാലാവസ്ഥ റിപ്പോർട്ട്:",
