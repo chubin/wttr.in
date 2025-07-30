@@ -33,11 +33,11 @@
 119: Облачно                                     : Cloudy                                             :
 122: Пасмурно                                    : Overcast                                           :
 143: Слабый туман                                : Mist                                               :
-176: Местами дождь поблизости                    : Patchy rain nearby                                 :
+176: Местами дождь                               : Patchy rain nearby                                 :
 176: Местами дождь                               : Patchy rain possible                               :
-179: Местами снег поблизости                     : Patchy snow nearby                                 :
+179: Местами снег                                : Patchy snow nearby                                 :
 179: Местами снег                                : Patchy snow possible                               :
-182: Местами мокрый снег поблизости              : Patchy sleet nearby                                :
+182: Местами мокрый снег                         : Patchy sleet nearby                                :
 182: Местами мокрый снег                         : Patchy sleet possible                              :
 185: Местами морось, гололедица                  : Patchy freezing drizzle possible                   :
 200: Местами грозы                               : Thundery outbreaks possible                        :
