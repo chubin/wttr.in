@@ -38,6 +38,7 @@ func plainTextAgents() []string {
 		"xh",
 		"nushell",
 		"zig",
+		"node",
 	}
 }
 
