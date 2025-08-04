@@ -1,11 +1,3 @@
-invalid_options:
-  - name: info_hash
-    block: true
-  - name: peer_id
-    block: true
-  - name: port
-    block: true
-
 query_options:
   - name: current_only
     short: "0"
@@ -358,6 +350,13 @@ query_options:
     default: false
     active: true
     note: "Prevents automatic line following in output"
+
+  - name: question_mark
+    short: "?"
+    description: "Workaround for multiple usage of the question mark in the query"
+    type: boolean
+    default: false
+    active: true
 
 format_specifiers:
   - specifier: "%c"
