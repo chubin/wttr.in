@@ -15,6 +15,7 @@ import (
 	geoip "github.com/chubin/wttr.in/internal/geo/ip"
 	geoloc "github.com/chubin/wttr.in/internal/geo/location"
 	"github.com/chubin/wttr.in/internal/logging"
+	"github.com/chubin/wttr.in/internal/options"
 	"github.com/chubin/wttr.in/internal/processor"
 	"github.com/chubin/wttr.in/internal/types"
 	// v1 "github.com/chubin/wttr.in/internal/view/v1"
@@ -30,6 +31,8 @@ var cli struct {
 	ConvertGeoLocationCache bool   `name:"convert-geo-location-cache" help:"Convert Geo Location data cache to SQlite"`
 	GeoResolve              string `name:"geo-resolve" help:"Resolve location"`
 	LogLevel                string `name:"log-level" short:"l" help:"Show log messages with level" default:"info"`
+	CheckQueriesInLog       string `name:"check-queries-in-log" help:"Check queries in the log file"`
+	OutputLog               string `name:"output-log" help:"Output log"`
 
 	// V1 v1.Configuration
 }
@@ -211,6 +214,16 @@ func main() {
 		ctx.FatalIfErrorf(convertGeoIPCache(conf))
 	case cli.ConvertGeoLocationCache:
 		ctx.FatalIfErrorf(convertGeoLocationCache(conf))
+	case cli.CheckQueriesInLog != "":
+		if cli.OutputLog == "" {
+			ctx.Fatalf("missing output log (--output-log)")
+		}
+		wttrinOptions, err := options.NewFromFile("spec/options/options.yaml")
+		ctx.FatalIfErrorf(err)
+
+		err = options.ProcessLogFile(cli.CheckQueriesInLog, cli.OutputLog, wttrinOptions)
+		ctx.FatalIfErrorf(err)
+
 	case cli.GeoResolve != "":
 		sr := geoloc.NewSearcher(conf)
 		loc, err := sr.Search(cli.GeoResolve)
