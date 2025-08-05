@@ -7,7 +7,7 @@ dnspython
 pylint
 cyrtranslit
 astral>=2.0,<=2.2
-timezonefinder==2.1.2
+timezonefinder
 pytz
 pyte
 python-dateutil>=2.5.0,<=2.8.1
