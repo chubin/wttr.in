@@ -18,7 +18,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'  # Specify the Python version you need
+          python-version: '3.12'  # Specify the Python version you need
 
       - name: Create and activate virtual environment
         run: |
@@ -29,8 +29,6 @@ jobs:
       - name: Install Python dependencies
         run: |
           source venv/bin/activate
-          # Required by pyjq
-          pip install lib2to3
           pip install -r requirements.txt
 
       - name: Add Python virtual environment to PATH
