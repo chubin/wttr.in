@@ -12,10 +12,55 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Install dependencies
-      run: make
+        # Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'  # Specify the Python version you need
 
-    - name: Run check
-      run: make check
+      - name: Create and activate virtual environment
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          echo "Virtual environment created and activated."
+
+      - name: Install Python dependencies
+        run: |
+          source venv/bin/activate
+          pip install -r requirements.txt
+
+      - name: Add Python virtual environment to PATH
+        run: |
+          echo "${{ github.workspace }}/venv/bin" >> $GITHUB_PATH
+
+      # Set up Go environment
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.24'  # Replace with the needed Go version
+
+      - name: Install gofumpt
+        run: |
+          go install mvdan.cc/gofumpt@latest
+
+      - name: Install goimports
+        run: |
+          go install golang.org/x/tools/cmd/goimports@latest
+
+      - name: Install swagger
+        run: |
+          cd /tmp \
+          && go install github.com/go-swagger/go-swagger/cmd/swagger@latest
+
+      - name: Add Go bin to PATH
+        run: |
+          echo "${{ runner.temp }}/go/bin" >> $GITHUB_PATH
+
+
+      - name: Install dependencies
+        run: make
+
+      - name: Run check
+        run: make check
