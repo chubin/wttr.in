@@ -7,7 +7,7 @@ dnspython
 pylint
 cyrtranslit
 astral>=2.0,<=2.2
-timezonefinder==2.1.2
+timezonefinder
 pytz
 pyte
 python-dateutil>=2.5.0,<=2.8.1
@@ -25,3 +25,4 @@ emoji>=1.6.0,<=1.7.0
 grapheme
 pycountry
 aiohttp>=3.10.11 # not directly required, pinned by Snyk to avoid a vulnerability
+yq
