@@ -29,6 +29,8 @@ jobs:
       - name: Install Python dependencies
         run: |
           source venv/bin/activate
+          # Required by pyjq
+          pip install lib2to3
           pip install -r requirements.txt
 
       - name: Add Python virtual environment to PATH
