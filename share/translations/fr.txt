@@ -1,6 +1,166 @@
+: Brume à proximité: Haze in vicinity
+: Averse de pluie et de neige forte: Heavy rain and snow shower
+: Averse de pluie forte: Heavy rain shower
+: Bruine légère et grains de neige: Light drizzle and snow grains
+: Averse légère de pluie et de brume: Light rain and mist shower
+: Averse légère de petites grêlons/pellets de neige: Light small hail/snow pellets shower
+: Averse légère de précipitations inconnues: Light unknown precipitation shower
+: Pluie et petites grêles/pellets de neige avec orage: Rain and small hail/snow pellets with thunderstorm
+: Averse de neige à proximité: Snow shower in vicinity
+: Éclats orageux à proximité: Thundery outbreaks nearby
+: Neige soufflée près du sol: Low drifting snow
+: Plaques de brume: Patches of fog
+: Bruine: Drizzle
+: Bruine légère et pluie: Light drizzle and rain
+: Neige: Snow
+: Pluie: Rain
+: Averse de pluie: Rain Shower
+: Sable soufflé: Blowing sand
+: Souffle de sable étendu: Blowing widespread dust
+: Souffle de sable étendu à proximité: Blowing widespread dust in vicinity
+: Bruine et brume: Drizzle and fog
+: Bruine et pluie: Drizzle and rain
+: Bruine et averse de pluie: Drizzle and rain shower
+: Bruine avec orage: Drizzle with thunderstorm
+: Tempête de sable: Dust storm
+: Brume à proximité: Fog in vicinity
+: Bruine et pluie verglaçantes: Freezing drizzle and rain
+: Brume verglaçante: Freezing mist
+: Pluie verglaçante: Freezing rain
+: Pluie verglaçante et neige: Freezing rain and snow
+: Précipitations inconnues verglaçantes: Freezing unknown precipitation
+: Nuage en entonnoir à proximité: Funnel cloud in vicinity
+: Averse de grêle: Hail shower
+: Grêle avec orage: Hail with thunderstorm
+: Brume: Haze
+: Neige soufflée forte: Heavy blowing snow
+: Bruine forte: Heavy drizzle
+: Bruine forte et pluie: Heavy drizzle and rain
+: Précipitations inconnues verglaçantes fortes: Heavy freezing unknown precipitation
+: Grêle forte avec orage: Heavy hail with thunderstorm
+: Grains de glace forts: Heavy ice pallets
+: Averse de pluie et grêle forte: Heavy rain and hail shower
+: Pluie et grêle forte avec orage: Heavy rain and hail with thunderstorm
+: Averse de pluie et petites grêles/pellets de neige forte: Heavy rain and small hail/snow pallets shower
+: Fortes pluies et petites grêles/pellets de neige avec orage: Heavy rain and small hail/snow pallets with thunderstorm
+: Pluie et neige forte: Heavy rain and snow
+: Pluie et neige forte et petites grêles/pellets de neige avec orage: Heavy rain and snow and small hail/snow pallets with thunderstorm
+: Pluie forte avec orage: Heavy rain with thunderstorm
+: Averse de petites grêles/pellets de neige forte: Heavy small hail/snow pallets shower
+: Petites grêles/pellets de neige avec orage: Heavy small hail/snow pallets with thunderstorm
+: Averse de neige forte et petites grêles/pellets de neige: Heavy snow and small hail/snow pallets shower
+: Neige forte et petites grêles/pellets de neige avec orage: Heavy snow and small hail/snow pallets with thunderstorm
+: Averse de neige forte: Heavy snow shower
+: Neige forte avec orage: Heavy snow with thunderstorm
+: Crystals de glace: Ice crystals
+: Grains de glace: Ice pallets
+: Neige soufflée légère: Light blowing snow
+: Bruine légère et brume: Light drizzle and fog
+: Bruine légère et grains de glace: Light drizzle and ice pallets
+: Bruine légère,  pluie et neige: Light drizzle and rain and snow
+: Bruine légère et averse de pluie: Light drizzle and rain shower
+: Bruine légère et pluie avec orage: Light drizzle and rain with thunderstorm
+: Bruine légère et neige: Light drizzle and snow
+: Bruine légère avec orage: Light drizzle with thunderstorm
+: Bruine verglaçante légère: Light freezing drizzle
+: Bruine verglaçante et pluie légère: Light freezing drizzle and rain
+: Bruine verglaçante et neige légère: Light freezing drizzle and snow
+: Brume verglaçante légère: Light freezing fog
+: Pluie verglaçante et neige légère: Light freezing rain and snow
+: Grains de neige verglaçants et brume: Light freezing snow grains and fog
+: Précipitations inconnues verglaçantes légères: Light freezing unknown precipitation
+: Averse de petites grêles légère: Light hail shower
+: Petits cristaux de glace: Light ice crystals
+: Petits grains de glace: Light ice pallets
+: Souffle léger près du sol: Light low drifting
+: Neige soufflée près du sol légère: Light low drifting snow
+: Averse de pluie et grêle légère: Light rain and hail shower
+: Pluie et grêle légère avec orage: Light rain and hail with thunderstorm
+: Pluie et grains de glace légère: Light rain and ice pallets
+: Pluie et brume légère: Light rain and mist
+: Averse de pluie et petites grêles/pellets de neige légère: Light rain and small hail/snow pallets shower
+: Pluie et petites grêles/pellets de neige avec orage: Light rain and small hail/snow pallets with thunderstorm
+: Pluie et neige légère: Light rain and snow
+: Pluie et neige légère avec petites grêles/pellets de neige: Light rain and snow and small hail/snow pallets shower
+: Pluie et grains de neige légère: Light rain and snow grains
+: Averse de pluie et neige légère: Light rain and snow shower
+: Pluie et neige avec orage: Light rain and snow with thunderstorm
+: Pluie légère avec orage: Light rain with thunderstorm
+: Averse légère: Light shower
+: Averse légère de grains de glace: Light showers of ice pellets
+: Averse légère de petites grêles/pellets de neige: Light small hail/snow pallets
+: Averse légère de petites grêles/pellets de neige: Light small hail/snow pallets shower
+: Petites grêles/pellets de neige avec orage: Light small hail/snow pallets with thunderstorm
+: Neige légère et grains de glace: Light snow and ice pallets
+: Neige légère et petites grêles/pellets de neige: Light snow and small hail/snow pallets
+: Neige légère et petites grêles/pellets de neige: Light snow and small hail/snow pallets shower
+: Neige légère et petites grêles/pellets de neige avec orage: Light snow and small hail/snow pallets with thunderstorm
+: Neige légère et grains de neige: Light snow and snow grains
+: Grains de neige légers: Light snow grains
+: Averse de neige légère: Light snow shower
+: Neige légère avec orage: Light snow with thunderstorm
+: Orage léger: Light thunderstorm
+: Précipitations inconnues légères: Light unknown precipitation
+: Petits tourbillons de sable/dust léger: Light well-developed dust/sand whirls
+: Sable soufflé léger: Low drifting sand
+: Souffle léger de poussière: Low drifting widespread dust
+: Brume avec orage: Mist with thunderstorm
+: Pluie modérée ou forte avec orage: Moderate or heavy rain in area with thunder
+: Neige modérée ou forte avec orage: Moderate or heavy snow in area with thunder
+: Brume partielle: Partial fog
+: Plages de brume à proximité: Patches of fog in vicinity
+: Bruine verglaçante locale à proximité: Patchy freezing drizzle nearby
+: Pluie légère locale avec orage: Patchy light rain in area with thunder
+: Neige légère locale avec orage: Patchy light snow in area with thunder
+: Pluie locale à proximité: Patchy rain nearby
+: Pluie verglaçante locale à proximité: Patchy sleet nearby
+: Neige locale à proximité: Patchy snow nearby
+: Averse de pluie et grêle: Rain and hail shower
+: Pluie et grêle avec orage: Rain and hail with thunderstorm
+: Pluie et brume: Rain and mist
+: Pluie et brume avec orage: Rain and mist with thunderstorm
+: Pluie et petites grêles/pellets de neige: Rain and small hail/snow pallets shower
+: Pluie et petites grêles/pellets de neige avec orage: Rain and small hail/snow pallets with thunderstorm
+: Pluie et neige: Rain and snow
+: Pluie et neige avec petites grêles/pellets de neige: Rain and snow and small hail/snow pallets shower
+: Pluie et grains de neige: Rain and snow grains
+: Averse de pluie et neige: Rain and snow shower
+: Pluie et neige avec orage: Rain and snow with thunderstorm
+: Pluie à proximité: Rain in vicinity
+: Averse de pluie à proximité: Rain shower in vicinity
+: Pluie avec orage: Rain with thunderstorm
+: Sable: Sand
+: Tempête de sable: Sandstorm
+: Brume légère: Shallow fog
+: Brume légère: Shallow mist
+: Averse: Shower
+: Averse à proximité: Shower in vicinity
+: Petites grêles/pellets de neige: Small hail/snow pallets
+: Averse de petites grêles/pellets de neige: Small hail/snow pallets shower
+: Petites grêles/pellets de neige avec orage: Small hail/snow pallets with thunderstorm
+: Fumée: Smoke
+: Neige et pellets de glace: Snow and ice pallets
+: Neige et brume: Snow and mist
+: Neige et petites grêles/pellets de neige: Snow and small hail/snow pellets shower
+: Neige et petites grêles/pellets de neige avec orage: Snow and small hail/snow pallets with thunderstorm
+: Neige et grains de neige: Snow and snow grains
+: Grains de neige: Snow grains
+: Averse de neige: Snow shower
+: Neige avec orage: Snow with thunderstorm
+: Squalls: Squalls
+: Orage: Thunderstorm
+: Orage à proximité: Thunderstorm in vicinity
+: Éclats orageux à proximité: Thundery outbreaks in nearby
+: Précipitations inconnues: Unknown precipitation
+: Averse de précipitations inconnues: Unknown precipitation shower
+: Précipitations inconnues avec orage: Unknown precipitation with thunderstorm
+: Cendres volcaniques: Volcanic ash
+: Cendres volcaniques à proximité: Volcanic ash in vicinity
+: Tourbillons de sable/poussière bien développés à proximité: Well-developed dust/sand whirls in vicinity
+: Poussière étendue: Widespread dust
 114: Temps clair: Clear
 113: Ensoleillé: Sunny
-116: Partiellement couvert  : Partly cloudy
+116: Partiellement couvert: Partly cloudy
 119: Nuageux: Cloudy
 122: Couvert: Overcast
 143: Brumeux: Mist
@@ -10,7 +170,7 @@
 185: Bruines givrantes éparses possibles: Patchy freezing drizzle possible
 200: Orages possibles: Thundery outbreaks possible
 227: Poudrerie: Blowing snow
-230: Blizzard : Blizzard
+230: Blizzard: Blizzard
 248: Brouillard: Fog
 260: Brouillard givrant: Freezing fog
 263: Bruines éparses et légères: Patchy light drizzle

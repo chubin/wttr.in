@@ -45,7 +45,8 @@ Translated/improved/corrected by:
     * Japanese:             @ryunix
     * Kazakh:               Akku Tutkusheva, Oleg Tropinin
     * Korean:               Jeremy Bae @opt9, Jung Winter @res_tin
-    * Latvian:              Gunārs Danovskis
+    * Latvian:              Gunārs Danovskis,
+                            Edgars Andersons (GitHub: @eandersons)
     * Lithuanian            Juras Rutavičius
     * Macedonian:           Matej Plavevski @MatejMecka
     * Marathi:              Sanket Pandit Garade (@sanketgarade on github)
@@ -82,4 +83,3 @@ Please start with one of the following steps:
     * Open a GitHub issue: github.com/chubin/wttr.in
     * Write an email to igor@chub.in
     * Write PM or tweet to igor_chubin
-
