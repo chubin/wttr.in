@@ -18,7 +18,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12'  # Specify the Python version you need
+          python-version: '3.11'  # Specify the Python version you need (3.11 required for pyjq)
 
       - name: Create and activate virtual environment
         run: |
