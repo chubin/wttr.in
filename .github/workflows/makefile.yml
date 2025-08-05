@@ -28,7 +28,7 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          apt-get install libjq-dev
+          sudo apt-get install libjq-dev
           source venv/bin/activate
           pip install -r requirements.txt
 
