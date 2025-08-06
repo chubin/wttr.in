@@ -1,0 +1,11 @@
+- param: WTTRIN_SRV_LISTEN_HOST
+  description: Host to bind the wttr.in server to
+  default: ""
+
+- param: WTTRIN_SRV_LISTEN_PORT
+  description: Port to bind the wttr.in server to
+  default: 8002
+
+- param: WTTRIN_SRV_MY_EXTERNAL_IP
+  description: External IP address
+  default: "5.9.243.187"

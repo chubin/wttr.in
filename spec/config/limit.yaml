@@ -1,0 +1,11 @@
+- param: WTTRIN_LIMIT_QUERY_MINUTE
+  description: Limit on number of queries per minute
+  default: 300
+
+- param: WTTRIN_LIMIT_QUERY_HOUR
+  description: Limit on number of queries per hour
+  default: 3600
+
+- param: WTTRIN_LIMIT_QUERY_DAY
+  description: Limit on number of queries per day
+  default: 86400

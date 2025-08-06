@@ -1,0 +1,8 @@
+- param: WTTRIN_BIN_WEGO
+  description: WEGO binary location
+  default: "/home/igor/go/bin/we-lang"
+
+- param: WTTRIN_BIN_ANSI2HTML
+  description: File location for ANSI to HTML script
+  default: "/<MYDIR>/share/ansi2html.sh"
+

@@ -1,0 +1,8 @@
+- param: WTTRIN_GEO_GEOLITE
+  description: GeoLite2 database file location
+  default: "<MYDIR>/data/GeoLite2-City.mmdb"
+
+
+- param: WTTRIN_SRV_GEOLOCATOR_SERVICE
+  description: URL for geolocator service
+  default: "http://localhost:8004"

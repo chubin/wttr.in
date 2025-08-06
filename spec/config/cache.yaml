@@ -1,0 +1,11 @@
+- param: WTTRIN_CACHE_IP2LCACHE
+  description: IP to location cache directory
+  default: "/wttr.in/cache/ip2l/"
+
+- param: WTTRIN_CACHE_PNG_CACHE
+  description: PNG cache directory
+  default: "/wttr.in/cache/png"
+
+- param: WTTRIN_CACHE_LRU_CACHE
+  description: LRU cache directory
+  default: "/wttr.in/cache/lru"

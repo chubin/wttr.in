@@ -1,0 +1,8 @@
+- param: WTTRIN_LOG_MAIN_FILE
+  description: Main log file location
+  default: "/wttr.in/log/main.log"
+
+
+- param: WTTRIN_LOG_MISSING_TRANSLATION
+  description: Log for missing translations
+  default: "/wttr.in/log/missing-translation/%s.log"

@@ -1,0 +1,35 @@
+- param: WTTRIN_PATH_ALIASES
+  description: File location for aliases data
+  default: "/<MYDIR>/share/aliases"
+
+- param: WTTRIN_PATH_BLACKLIST
+  description: File location for the blacklist
+  default: "/<MYDIR>/share/blacklist"
+
+- param: WTTRIN_PATH_HELP_FILE
+  description: Help file location
+  default: "/<MYDIR>/share/help.txt"
+
+- param: WTTRIN_PATH_BASH_FUNCTION_FILE
+  description: Bash function file location
+  default: "/<MYDIR>/share/bash-function.txt"
+
+- param: WTTRIN_PATH_TRANSLATION_FILE
+  description: Translation file location
+  default: "/<MYDIR>/share/translation.txt"
+
+- param: WTTRIN_PATH_IATA_CODES_FILE
+  description: List of IATA codes file location
+  default: "/<MYDIR>/share/list-of-iata-codes.txt"
+
+- param: WTTRIN_PATH_TEMPLATES
+  description: Templates directory location
+  default: "/<MYDIR>/share/templates"
+
+- param: WTTRIN_PATH_STATIC
+  description: Static files directory location
+  default: "/<MYDIR>/share/static"
+
+- param: WTTRIN_PATH_MALFORMED_RESPONSE_HTML_PAGE
+  description: Malformed response HTML page content
+  default: "<STATIC>/malformed-response.html"

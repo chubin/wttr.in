@@ -1,0 +1,19 @@
+- param: WTTRIN_PROXY_HOST
+  description: Host for the proxy server
+  default: "127.0.0.1"
+
+- param: WTTRIN_PROXY_PORT
+  description: Port for the proxy server
+  default: 5001
+
+- param: WTTRIN_PROXY_CACHEDIR
+  description: Directory to store proxy cache
+  default: "/wttr.in/cache/proxy-wwo/"
+
+- param: WTTRIN_PROXY_ACCESS_LOG
+  description: Proxy access log file location
+  default: "/wttr.in/log/proxy-access.log"
+
+- param: WTTRIN_PROXY_ERRORS_LOG
+  description: Proxy errors log file location
+  default: "/wttr.in/log/proxy-errors.log"
