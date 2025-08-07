@@ -84,6 +84,8 @@ Compile using cargo build --release or download pre-built binaries. Requires a f
 
 Features: Supports custom styling based on weather conditions (e.g., sunny), handles wttr.in errors gracefully, and allows wind direction display with Unicode arrows.
 
+<img src="https://user-images.githubusercontent.com/55081/232401699-b8345fe0-ffce-4353-b51b-615389153448.png" alt="wttrbar" width="300px">
+
 ### Xmobar
 
 [weather-xmobar-wttr.in](https://github.com/alexeygumirov/weather-xmobar-wttr.in) by *alexeygumirov*
