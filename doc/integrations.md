@@ -11,6 +11,24 @@ Compatible with:
 
 and more, these integrations enhance workflow efficiency by embedding weather information directly into user interfaces.
 
+| Integration For                | Repository                                                                                         | Short Description                                                                                                |
+|--------------------------------|----------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| **Terminal Managers**          |                                                                                                    |                                                                                                                  |
+| tmux                           | -                                                                                                  | Allows embedding weather data in the tmux status bar with customizable update intervals.                         |
+| **Window Managers Statusbars** |                                                                                                    |                                                                                                                  |
+| Waybar                         | [wttrbar](https://github.com/bjesus/wttrbar)                                                       | A custom module in Rust for displaying weather in Waybar, with support for custom indicators and error handling. |
+| Xmobar                         | [weather-xmobar-wttr.in](https://github.com/alexeygumirov/weather-xmobar-wttr.in)                  | A Python script for integrating weather data into Xmobar.                                                        |
+| AwesomeWM                      | [wttr-widget](https://github.com/pivaldi/wttr-widget)                                              | Displays weather in AwesomeWM with a focus on clean UI and tooltips.                                             |
+| **Editors**                    |                                                                                                    |                                                                                                                  |
+| Emacs                          | [emacs-wttrin](https://github.com/bcbcarl/emacs-wttrin)                                            | An Emacs frontend for showing weather forecasts directly within Emacs.                                           |
+| Emacs                          | [display-wttr](https://git.sr.ht/~josegpt/display-wttr)                                            | Displays weather in the Emacs mode line with emoji support, configurable for updates.                            |
+| **Chats**                      |                                                                                                    |                                                                                                                  |
+| Conky                          | -                                                                                                  | Example script for displaying weather in Conky using transparent images.                                         |
+| WeeChat                        | -                                                                                                  | Script for embedding weather in the WeeChat IRC client's status bar.                                             |
+| IRC                            | [IRC integration](https://github.com/OpenSourceTreasure/Mirc-ASCII-weather-translate-pixel-editor) | Uses Qt-based mirc bot to show weather updates.                                                                  |
+| **Other**                      |                                                                                                    |                                                                                                                  |
+| Squeak                         | -                                                                                                  | Script for embedding weather in Squeak's world main docking bar.                                                 |
+
 ## Terminal Managers
 
 ### tmux
