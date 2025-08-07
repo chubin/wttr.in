@@ -1,11 +1,53 @@
 ## Integrations
 
+wttr.in offers seamless integrations across a variety of platforms, enabling users to readily access real-time weather updates within their preferred applications.
+
+Compatible with:
+
+* terminal managers,
+* window managers,
+* editors,
+* chat clients,
+
+and more, these integrations enhance workflow efficiency by embedding weather information directly into user interfaces.
+
+## Terminal Managers
+
+### tmux
+
+When using in `tmux.conf`, you have to escape `%` with `%`, i.e. write there `%%` instead of `%`.
+
+The output does not contain new line by default, when the %-notation is used, but it does contain it when preconfigured format (`1`,`2`,`3` etc.)
+are used. To have the new line in the output when the %-notation is used, use '\n' and single quotes when doing a query from the shell.
+
+In programs, that are querying the service automatically (such as tmux), it is better to use some reasonable update interval. In tmux, you can configure it with `status-interval`.
+
+If several, `:` separated locations, are specified in the query, specify update period
+as an additional query parameter `period=`:
+
+```
+set -g status-interval 60
+WEATHER='#(curl -s wttr.in/London:Stockholm:Moscow\?format\="%%l:+%%c%%20%%t%%60%%w&period=60")'
+set -g status-right "$WEATHER ..."
+```
+
+![wttr.in in tmux status bar](https://wttr.in/files/example-tmux-status-line.png)
+
+
+## Window Managers Statusbars
+
 ### Waybar
 
-wttrbar by bjesus: A custom module for displaying weather in Waybar using wttr.in. It’s written in Rust for reliability and supports features like custom indicators (e.g., temperature in Celsius or Fahrenheit), location specification, and date formatting. Example configuration:
+[wttrbar](https://github.com/bjesus/wttrbar) by bjesus
+
+A custom module for displaying weather in Waybar using wttr.in. It’s written in
+Rust for reliability and supports features like custom indicators (e.g.,
+temperature in Celsius or Fahrenheit), location specification, and date
+formatting.
+
+Example configuration:
 
 ```json
-
     "custom/weather": {
       "format": "{}°",
       "tooltip": true,
@@ -15,27 +57,37 @@ wttrbar by bjesus: A custom module for displaying weather in Waybar using wttr.i
     }
 ```
 
-Installation: Compile using cargo build --release or download pre-built binaries. Requires a font supporting emojis (e.g., Noto Emoji) for weather icons.
+Installation:
+
+Compile using cargo build --release or download pre-built binaries. Requires a font supporting emojis (e.g., Noto Emoji) for weather icons.
+
 Features: Supports custom styling based on weather conditions (e.g., sunny), handles wttr.in errors gracefully, and allows wind direction display with Unicode arrows.
-Contact: The email hi@yoavmoshe.com is associated with Yoav Moshe, likely linked to the project’s maintainer (
-@bjesus
-). No direct response to this email is needed unless you’re seeking specific support.
-GitHub: https://github.com/bjesus/wttrbar
 
 ### Xmobar
 
-[weather-xmobar-wttr.in](https://github.com/alexeygumirov/weather-xmobar-wttr.in) by alexeygumirov: A Python-based script for displaying weather status in Xmobar, leveraging wttr.in. It provides a lightweight solution for integrating weather data into the Xmobar status bar.
+[weather-xmobar-wttr.in](https://github.com/alexeygumirov/weather-xmobar-wttr.in) by *alexeygumirov*
+
+A Python-based script for displaying weather status in Xmobar, leveraging
+wttr.in. It provides a lightweight solution for integrating weather data into
+the Xmobar status bar.
 
 ![wttr-in-Xmodbar](https://raw.githubusercontent.com/alexeygumirov/weather-xmobar-wttr.in/refs/heads/main/screenshot/screenshot_day.png)
+
 (displays weather conditions in a compact format suitable for Xmobar).
 
 ### AwesomeWM
 
-    wttr-widget by pivaldi: A weather widget for AwesomeWM that uses wttr.in to display weather information. It’s designed to integrate seamlessly with the Awesome window manager, providing a tooltip with detailed weather data.
-        Features: Displays weather conditions with a focus on a clean, customizable UI. The screenshot shows a tooltip with weather details like temperature and conditions.
-        GitHub: https://github.com/pivaldi/wttr-widget
+[wttr-widget](https://github.com/pivaldi/wttr-widget) by *pivaldi*
 
-![wttr-in-awesome](https://raw.githubusercontent.com/pivaldi/wttr-widget/refs/heads/master/screenshots/tooltip1.png (shows a tooltip with weather data integrated into AwesomeWM).
+A weather widget for AwesomeWM that uses wttr.in to display weather information. It’s designed to integrate seamlessly with the Awesome window manager, providing a tooltip with detailed weather data.
+
+Displays weather conditions with a focus on a clean, customizable UI. The screenshot shows a tooltip with weather details like temperature and conditions.
+
+![wttr-in-awesome](https://raw.githubusercontent.com/pivaldi/wttr-widget/refs/heads/master/screenshots/tooltip1.png)
+
+(shows a tooltip with weather data integrated into AwesomeWM)
+
+## Editors
 
 ### Emacs
 
@@ -67,39 +119,7 @@ Screenshot:
 
 (shows weather with emojis in the Emacs mode line).
 
-
-### tmux
-
-When using in `tmux.conf`, you have to escape `%` with `%`, i.e. write there `%%` instead of `%`.
-
-The output does not contain new line by default, when the %-notation is used, but it does contain it when preconfigured format (`1`,`2`,`3` etc.)
-are used. To have the new line in the output when the %-notation is used, use '\n' and single quotes when doing a query from the shell.
-
-In programs, that are querying the service automatically (such as tmux), it is better to use some reasonable update interval. In tmux, you can configure it with `status-interval`.
-
-If several, `:` separated locations, are specified in the query, specify update period
-as an additional query parameter `period=`:
-```
-set -g status-interval 60
-WEATHER='#(curl -s wttr.in/London:Stockholm:Moscow\?format\="%%l:+%%c%%20%%t%%60%%w&period=60")'
-set -g status-right "$WEATHER ..."
-```
-![wttr.in in tmux status bar](https://wttr.in/files/example-tmux-status-line.png)
-
-### WeeChat
-
-To embed in to an IRC ([WeeChat](https://github.com/weechat/weechat)) client's existing status bar:
-
-```
-/alias add wttr /exec -pipe "/mute /set plugins.var.wttr" url:wttr.in/Montreal?format=%l:+%c+%f+%h+%p+%P+%m+%w+%S+%s;/wait 3 /item refresh wttr
-/trigger add wttr timer 60000;0;0 "" "" "/wttr"
-/item add wttr "" "${plugins.var.wttr}"
-/eval /set weechat.bar.status.items ${weechat.bar.status.items},spacer,wttr
-/eval /set weechat.startup.command_after_plugins ${weechat.startup.command_after_plugins};/wttr
-/wttr
-```
-![wttr.in in WeeChat status bar](https://i.imgur.com/XkYiRU7.png)
-
+## Chats
 
 ### conky
 
@@ -113,55 +133,30 @@ ${image $HOME/.config/conky/out.png -p 0,0}
 
 ![wttr.in in conky](https://user-images.githubusercontent.com/3875145/172178453-9e9ed9e3-9815-426a-9a21-afdd6e279fc8.png)
 
+### WeeChat
+
+To embed in to an IRC ([WeeChat](https://github.com/weechat/weechat)) client's existing status bar:
+
+```
+/alias add wttr /exec -pipe "/mute /set plugins.var.wttr" url:wttr.in/Montreal?format=%l:+%c+%f+%h+%p+%P+%m+%w+%S+%s;/wait 3 /item refresh wttr
+/trigger add wttr timer 60000;0;0 "" "" "/wttr"
+/item add wttr "" "${plugins.var.wttr}"
+/eval /set weechat.bar.status.items ${weechat.bar.status.items},spacer,wttr
+/eval /set weechat.startup.command_after_plugins ${weechat.startup.command_after_plugins};/wttr
+/wttr
+```
+
+![wttr.in in WeeChat status bar](https://i.imgur.com/XkYiRU7.png)
+
+
 
 ### IRC
 
-IRC integration example:
+[IRC integration](https://github.com/OpenSourceTreasure/Mirc-ASCII-weather-translate-pixel-editor)
 
-* https://github.com/OpenSourceTreasure/Mirc-ASCII-weather-translate-pixel-editor
+![wttr-in-irc](https://raw.githubusercontent.com/OpenSourceTreasure/Mirc-ASCII-weather-translate-pixel-editor/main/mirc-bot.png)
 
-### Emojis support
-
-To see emojis in terminal, you need:
-
-1. Terminal support for emojis (was added to Cairo 1.15.8);
-2. Font with emojis support.
-
-For the emoji font, we recommend *Noto Color Emoji*, and a good alternative option would be the *Emoji One* font;
-both of them support all necessary emoji glyphs.
-
-Font configuration:
-
-```xml
-$ cat ~/.config/fontconfig/fonts.conf
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-<fontconfig>
-  <alias>
-    <family>serif</family>
-    <prefer>
-      <family>Noto Color Emoji</family>
-    </prefer>
-  </alias>
-  <alias>
-    <family>sans-serif</family>
-    <prefer>
-      <family>Noto Color Emoji</family>
-    </prefer>
-  </alias>
-  <alias>
-    <family>monospace</family>
-    <prefer>
-      <family>Noto Color Emoji</family>
-    </prefer>
-  </alias>
-</fontconfig>
-```
-
-(to apply the configuration, run `fc-cache -f -v`).
-
-In some cases, `tmux` and the terminal understanding of some emoji characters may differ, which may
-cause strange effects similar to that described in #579.
+## Other
 
 ### Squeak
 
