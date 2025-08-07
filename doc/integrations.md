@@ -27,7 +27,10 @@ and more, these integrations enhance workflow efficiency by embedding weather in
 | WeeChat                        | -                                                                                                  | Script for embedding weather in the WeeChat IRC client's status bar.                                             |
 | IRC                            | [IRC integration](https://github.com/OpenSourceTreasure/Mirc-ASCII-weather-translate-pixel-editor) | Uses Qt-based mirc bot to show weather updates.                                                                  |
 | **Other**                      |                                                                                                    |                                                                                                                  |
-| Squeak                         | -                                                                                                  | Script for embedding weather in Squeak's world main docking bar.                                                 |
+| ObsidianMD                     | -                                                                                                  | Script for embedding weather in Squeak's world main docking bar.                                                 |
+| Rainmeter                      | -                                                                                                  |                                                                                                                  |
+| Squeak                         | -                                                                                                  |                                                                                                                  |
+| Twitch                         | -                                                                                                  |                                                                                                                  |
 
 ## Terminal Managers
 
@@ -176,6 +179,41 @@ To embed in to an IRC ([WeeChat](https://github.com/weechat/weechat)) client's e
 
 ## Other
 
+### ObsidianMD Integration
+
+A script for ObsidianMD (a note-taking app) integrates wttr.in to embed weather data in daily notes using the Templater plugin. It fetches and displays weather details for a specified location only for the current day’s note.
+
+*Usage:* Add a script to the Templater plugin to check if the note’s date matches today and fetch weather data. Example script:
+
+```javascript
+<%* if (tp.file.title === tp.date.now()) { %>
+  <%* const weather = await requestUrl('https://wttr.in/Berlin?format=%l:+%c+%C+%t+feels+like+%f\nTime:+++++%T\nSunrise:++%S\nSunset:+++%s\nMoon:+++++%m\nWind:+++++%w\nRainfall:+%p\nHumidity:+%h') %>
+  <%* tR += weather.text %>
+<%* } else { %>
+  Update the weather report!
+<%* } %>
+```
+
+This displays weather details like temperature, sunrise/sunset, moon phase, wind, rainfall, and humidity in the note body.
+
+*Features:* Updates only for the current day’s note, supports custom formats, and can be triggered manually via a hotkey.
+
+
+### Rainmeter
+
+Rainmeter, a desktop customization tool for Windows, can use wttr.in to display
+weather data by parsing its JSON output. This is particularly useful for
+creating custom desktop widgets.
+
+Use a URL like `https://wttr.in/Alexandria,Virginia?format=j1` to fetch
+JSON data, which includes detailed weather metrics (e.g., temperature,
+humidity, wind speed, weather code). A Lua script can map weather codes to
+local icons for visualization.
+
+Parses JSON for detailed weather data, supports integration with
+custom icons (referencing WorldWeatherOnline’s weather codes), and allows for
+flexible widget design.
+
 ### Squeak
 
 To embed into the world main docking bar:
@@ -191,3 +229,20 @@ dockingBar addMorph: wttr after: (dockingBar findA: ClockMorph).
 
 ![wttr.in integration in the Squeak world main docking bar](https://github.com/user-attachments/assets/4c2762b0-77ae-41a8-98db-3eb310d073bd)
 
+### Twitch
+
+wttr.in is used to create a custom `!weather` command for Twitch streams, allowing viewers to query weather for a specific location (e.g., `!weather Toronto`).
+The command formats wttr.in output for display in chat.
+
+```bash
+curl "https://wttr.in/Toronto?format=:+%c+%l+is+currently+%C+with+a+temperature+of+%t+(+%f).+The+wind+is+blowing+from+%w.+The+Humidity+is+currently+%h&u"
+```
+
+This outputs, e.g., : ⛅️ Toronto is currently Partly Cloudy with a temperature
+of +7°C (+45°F). The wind is blowing from NE. The humidity is currently 65%. To
+display Fahrenheit in parentheses, add `?u` to the URL for USCS units.
+
+Features: Customizable output for Twitch chat, supports both Celsius and
+Fahrenheit, and handles location-based queries dynamically.
+
+Details: [wttr.in-on-twitch](https://www.reddit.com/r/commandline/comments/1eqoa0w/creating_a_weather_command_using_wttrin_service/)
