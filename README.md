@@ -213,6 +213,24 @@ So, these two calls are the same:
     London: ⛅️ +7⁰C
 ```
 
+## Integrations
+
+Thanks to the ease of integrating *wttr.in* into any program, there are a
+plethora of popular integrations across various libraries, programming
+languages, and systems.
+
+*wttr.in* is compatible with:
+
+* terminal managers,
+* window managers,
+* editors,
+* chat clients,
+
+and more, these integrations enhance workflow efficiency by embedding weather information directly into user interfaces.
+
+See the full list of integrations here: [wttr.in integrations](doc/integrations.md)
+and some of them below.
+
 ### tmux
 
 When using in `tmux.conf`, you have to escape `%` with `%`, i.e. write there `%%` instead of `%`.
