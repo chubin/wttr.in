@@ -1,47 +1,207 @@
-114: Despejado: Clear
-113: Soleado: Sunny
-116: Parcialmente nublado: Partly cloudy
-119: Nublado: Cloudy
-122: Cubierto de nubes: Overcast
-143: Niebla: Mist
-176: Posible lluvia irregular: Patchy rain possible
-179: Posible aguanieve irregular: Patchy snow possible
-182: Posible aguanieve irregular: Patchy sleet possible
-185: Posible llovizna helada irregular: Patchy freezing drizzle possible
-200: Posibles brotes de tormentas: Thundery outbreaks possible
-227: Nieve tormentosa: Blowing snow
-230: Ventisca: Blizzard
-248: Niebla: Fog
-260: Niebla helada: Freezing fog
-263: Llovizna ligera irregular: Patchy light drizzle
-266: Llovizna ligera: Light drizzle
-281: Llovizna helada: Freezing drizzle
-284: Llovizna muy helada: Heavy freezing drizzle
-293: Lluvia ligera irregular: Patchy light rain
-296: Lluvia ligera: Light rain
-299: Lluvia moderada ocasional: Moderate rain at times
-302: Lluvia moderada: Moderate rain
-305: Lluvia fuerte ocasional: Heavy rain at times
-308: Lluvia fuerte: Heavy rain
-311: Lluvia ligera helada: Light freezing rain
-314: Lluvia helada moderada o fuerte: Moderate or heavy freezing rain
-317: Aguanieve ligero: Light sleet
-320: Aguanieve moderado o fuerte: Moderate or heavy sleet
-323: Nieve ligera irregular: Patchy light snow
-326: Nieve ligera: Light snow
-329: Nieve moderada irregular: Patchy moderate snow
-332: Nieve moderada: Moderate snow
-335: Nieve pesada irregular: Patchy heavy snow
-338: Nieve pesada: Heavy snow
-350: Perdigones de hielo: Ice pellets
-353: Aguacero ligero: Light rain shower
-356: Aguacero moderado o fuerte: Moderate or heavy rain shower
-359: Aguacero torrencial: Torrential rain shower
-362: Aguacero ligero con aguanieve: Light sleet showers
-365: Aguacero con aguanieve moderado o fuerte: Moderate or heavy sleet showers
-368: Aguacero con nieve ligera: Light snow showers
-371: Aguacero con nieve moderada o fuerte: Moderate or heavy snow showers
-386: Lluvia ligera irregular con truenos: Patchy light rain with thunder
-389: Lluvia moderada o fuerte con truenos: Moderate or heavy rain with thunder
-392: Nevada ligera irregular con truenos: Patchy light snow with thunder
-395: Nevada moderada o fuerte con truenos: Moderate or heavy snow with thunder
+114: Despejado                                   : Clear                                              :
+113: Soleado                                     : Sunny                                              :
+116: Parcialmente nublado                        : Partly cloudy                                      :
+119: Nublado                                     : Cloudy                                             :
+122: Cubierto de nubes                           : Overcast                                           :
+143: Niebla                                      : Mist                                               :
+176: Posible lluvia irregular                    : Patchy rain possible                               :
+179: Posible aguanieve irregular                 : Patchy snow possible                               :
+182: Posible aguanieve irregular                 : Patchy sleet possible                              :
+185: Posible llovizna helada irregular           : Patchy freezing drizzle possible                   :
+200: Posibles brotes de tormentas                : Thundery outbreaks possible                        :
+227: Nieve tormentosa                            : Blowing snow                                       :
+230: Ventisca                                    : Blizzard                                           :
+248: Niebla                                      : Fog                                                :
+260: Niebla helada                               : Freezing fog                                       :
+263: Llovizna ligera irregular                   : Patchy light drizzle                               :
+266: Llovizna ligera                             : Light drizzle                                      :
+281: Llovizna helada                             : Freezing drizzle                                   :
+284: Llovizna muy helada                         : Heavy freezing drizzle                             :
+293: Lluvia ligera irregular                     : Patchy light rain                                  :
+296: Lluvia ligera                               : Light rain                                         :
+299: Lluvia moderada ocasional                   : Moderate rain at times                             :
+302: Lluvia moderada                             : Moderate rain                                      :
+305: Lluvia fuerte ocasional                     : Heavy rain at times                                :
+308: Lluvia fuerte                               : Heavy rain                                         :
+311: Lluvia ligera helada                        : Light freezing rain                                :
+314: Lluvia helada moderada o fuerte             : Moderate or heavy freezing rain                    :
+317: Aguanieve ligero                            : Light sleet                                        :
+320: Aguanieve moderado o fuerte                 : Moderate or heavy sleet                            :
+323: Nieve ligera irregular                      : Patchy light snow                                  :
+326: Nieve ligera                                : Light snow                                         :
+329: Nieve moderada irregular                    : Patchy moderate snow                               :
+332: Nieve moderada                              : Moderate snow                                      :
+335: Nieve pesada irregular                      : Patchy heavy snow                                  :
+338: Nieve pesada                                : Heavy snow                                         :
+350: Perdigones de hielo                         : Ice pellets                                        :
+353: Aguacero ligero                             : Light rain shower                                  :
+356: Aguacero moderado o fuerte                  : Moderate or heavy rain shower                      :
+359: Aguacero torrencial                         : Torrential rain shower                             :
+362: Aguacero ligero con aguanieve               : Light sleet showers                                :
+365: Aguacero con aguanieve moderado o fuerte    : Moderate or heavy sleet showers                    :
+368: Aguacero con nieve ligera                   : Light snow showers                                 :
+371: Aguacero con nieve moderada o fuerte        : Moderate or heavy snow showers                     :
+386: Lluvia ligera irregular con truenos         : Patchy light rain with thunder                     :
+389: Lluvia moderada o fuerte con truenos        : Moderate or heavy rain with thunder                :
+392: Nevada ligera irregular con truenos         : Patchy light snow with thunder                     :
+395: Nevada moderada o fuerte con truenos        : Moderate or heavy snow with thunder                :
+   : Bruma en las cercanías                      : Haze in vicinity                                   :
+   : Fuerte lluvia y nevada                      : Heavy rain and snow shower                         :
+   : Fuerte aguacero                             : Heavy rain shower                                  :
+   : Llovizna ligera y granos de nieve           : Light drizzle and snow grains                      :
+   : Lluvia ligera y bruma                       : Light rain and mist shower                         :
+   : Granizo ligero o chubasco de nieve granulada  : Light small hail/snow pellets shower               :
+   : Chubasco ligero de precipitación desconocida  : Light unknown precipitation shower                 :
+   : Lluvia y granizo ligero o nieve granulada con tormenta  : Rain and small hail/snow pellets with thunderstorm :
+   : Chubasco de nieve en las cercanías          : Snow shower in vicinity                            :
+   : Brotes de tormenta en las cercanías         : Thundery outbreaks nearby                          :
+   : Nieve arrastrada a nivel del suelo          : Low drifting snow                                  :
+   : Bancos de niebla                            : Patches of fog                                     :
+   : Llovizna                                    : Drizzle                                            :
+   : Llovizna ligera y lluvia                    : Light drizzle and rain                             :
+   : Nieve                                       : Snow                                               :
+   : Lluvia                                      : Rain                                               :
+   : Aguacero                                    : Rain Shower                                        :
+   : Arena arrastrada por el viento              : Blowing sand                                       :
+   : Polvo generalizado arrastrado por el viento  : Blowing widespread dust                            :
+   : Polvo generalizado arrastrado por el viento en las cercanías  : Blowing widespread dust in vicinity                :
+   : Llovizna y niebla                           : Drizzle and fog                                    :
+   : Llovizna y lluvia                           : Drizzle and rain                                   :
+   : Llovizna y aguacero                         : Drizzle and rain shower                            :
+   : Llovizna con tormenta                       : Drizzle with thunderstorm                          :
+   : Tormenta de polvo                           : Dust storm                                         :
+   : Niebla en las cercanías                     : Fog in vicinity                                    :
+   : Llovizna helada y lluvia                    : Freezing drizzle and rain                          :
+   : Niebla helada                               : Freezing mist                                      :
+   : Lluvia helada                               : Freezing rain                                      :
+   : Lluvia helada y nieve                       : Freezing rain and snow                             :
+   : Precipitación desconocida helada            : Freezing unknown precipitation                     :
+   : Nube embudo en las cercanías                : Funnel cloud in vicinity                           :
+   : Chubasco de granizo                         : Hail shower                                        :
+   : Granizo con tormenta                        : Hail with thunderstorm                             :
+   : Bruma                                       : Haze                                               :
+   : Fuertes ventiscas de nieve                  : Heavy blowing snow                                 :
+   : Fuerte llovizna                             : Heavy drizzle                                      :
+   : Fuerte llovizna y lluvia                    : Heavy drizzle and rain                             :
+   : Fuerte precipitación desconocida helada     : Heavy freezing unknown precipitation               :
+   : Fuerte granizo con tormenta                 : Heavy hail with thunderstorm                       :
+   : Fuertes gránulos de hielo                   : Heavy ice pallets                                  :
+   : Fuerte lluvia y chubasco de granizo         : Heavy rain and hail shower                         :
+   : Fuerte lluvia y granizo con tormenta        : Heavy rain and hail with thunderstorm              :
+   : Fuerte lluvia y granizo pequeño o chubasco de nieve granulada  : Heavy rain and small hail/snow pallets shower      :
+   : Fuerte lluvia y granizo pequeño o nieve granulada con tormenta  : Heavy rain and small hail/snow pallets with thunderstorm :
+   : Fuerte lluvia y nieve                       : Heavy rain and snow                                :
+   : Fuerte lluvia y nieve junto con granizo pequeño o nieve granulada con tormenta  : Heavy rain and snow and small hail/snow pallets with thunderstorm :
+   : Fuerte lluvia con tormenta                  : Heavy rain with thunderstorm                       :
+   : Fuerte chubasco de granizo pequeño o nieve granulada  : Heavy small hail/snow pallets shower               :
+   : Fuerte granizo pequeño o nieve granulada con tormenta  : Heavy small hail/snow pallets with thunderstorm    :
+   : Fuerte nieve y chubasco de granizo pequeño o nieve granulada  : Heavy snow and small hail/snow pallets shower      :
+   : Fuerte nieve y granizo pequeño o nieve granulada con tormenta  : Heavy snow and small hail/snow pallets with thunderstorm :
+   : Fuerte chubasco de nieve                    : Heavy snow shower                                  :
+   : Fuerte nieve con tormenta                   : Heavy snow with thunderstorm                       :
+   : Cristales de hielo                          : Ice crystals                                       :
+   : Gránulos de hielo                           : Ice pallets                                        :
+   : Ventiscas de nieve ligeras                  : Light blowing snow                                 :
+   : Llovizna ligera y niebla                    : Light drizzle and fog                              :
+   : Llovizna ligera y gránulos de hielo         : Light drizzle and ice pallets                      :
+   : Llovizna ligera, lluvia y nieve             : Light drizzle and rain and snow                    :
+   : Llovizna ligera y aguacero                  : Light drizzle and rain shower                      :
+   : Llovizna ligera y lluvia con tormenta       : Light drizzle and rain with thunderstorm           :
+   : Llovizna ligera y nieve                     : Light drizzle and snow                             :
+   : Llovizna ligera con tormenta                : Light drizzle with thunderstorm                    :
+   : Llovizna helada ligera                      : Light freezing drizzle                             :
+   : Llovizna helada ligera y lluvia             : Light freezing drizzle and rain                    :
+   : Llovizna helada ligera y nieve              : Light freezing drizzle and snow                    :
+   : Niebla helada ligera                        : Light freezing fog                                 :
+   : Lluvia helada ligera y nieve                : Light freezing rain and snow                       :
+   : Granos de nieve helados ligeros y niebla    : Light freezing snow grains and fog                 :
+   : Precipitación desconocida helada ligera     : Light freezing unknown precipitation               :
+   : Chubasco de granizo ligero                  : Light hail shower                                  :
+   : Cristales de hielo ligeros                  : Light ice crystals                                 :
+   : Gránulos de hielo ligeros                   : Light ice pallets                                  :
+   : Arrastrados ligeros a nivel del suelo       : Light low drifting                                 :
+   : Nieve arrastrada ligera a nivel del suelo   : Light low drifting snow                            :
+   : Lluvia ligera y chubasco de granizo         : Light rain and hail shower                         :
+   : Lluvia ligera y granizo con tormenta        : Light rain and hail with thunderstorm              :
+   : Lluvia ligera y gránulos de hielo           : Light rain and ice pallets                         :
+   : Lluvia ligera y bruma                       : Light rain and mist                                :
+   : Lluvia ligera y chubasco de granizo pequeño o nieve granulada  : Light rain and small hail/snow pallets shower      :
+   : Lluvia ligera y granizo pequeño o nieve granulada con tormenta  : Light rain and small hail/snow pallets with thunderstorm :
+   : Lluvia ligera y nieve                       : Light rain and snow                                :
+   : Lluvia ligera, nieve y chubasco de granizo pequeño o nieve granulada  : Light rain and snow and small hail/snow pallets shower :
+   : Lluvia ligera y granos de nieve             : Light rain and snow grains                         :
+   : Lluvia ligera y chubasco de nieve           : Light rain and snow shower                         :
+   : Lluvia ligera y nieve con tormenta          : Light rain and snow with thunderstorm              :
+   : Lluvia ligera con tormenta                  : Light rain with thunderstorm                       :
+   : Chubasco ligero                             : Light shower                                       :
+   : Chubascos ligeros de gránulos de hielo      : Light showers of ice pellets                       :
+   : Granizo pequeño o nieve granulada ligera    : Light small hail/snow pallets                      :
+   : Chubasco ligero de granizo pequeño o nieve granulada  : Light small hail/snow pallets shower               :
+   : Granizo pequeño o nieve granulada ligera con tormenta  : Light small hail/snow pallets with thunderstorm    :
+   : Nieve ligera y gránulos de hielo            : Light snow and ice pallets                         :
+   : Nieve ligera y granizo pequeño o nieve granulada  : Light snow and small hail/snow pallets             :
+   : Chubasco de nieve ligera con granizo pequeño o nieve granulada  : Light snow and small hail/snow pallets shower      :
+   : Nieve ligera con granizo pequeño o nieve granulada y tormenta  : Light snow and small hail/snow pallets with thunderstorm :
+   : Nieve ligera y granos de nieve              : Light snow and snow grains                         :
+   : Granos de nieve ligeros                     : Light snow grains                                  :
+   : Chubasco de nieve ligero                    : Light snow shower                                  :
+   : Nieve ligera con tormenta                   : Light snow with thunderstorm                       :
+   : Tormenta ligera                             : Light thunderstorm                                 :
+   : Precipitación desconocida ligera            : Light unknown precipitation                        :
+   : Remolinos de polvo o arena ligeros bien desarrollados  : Light well-developed dust/sand whirls              :
+   : Arena arrastrada a nivel del suelo          : Low drifting sand                                  :
+   : Polvo generalizado arrastrado a nivel del suelo  : Low drifting widespread dust                       :
+   : Bruma con tormenta                          : Mist with thunderstorm                             :
+   : Lluvia moderada a fuerte con truenos en la zona  : Moderate or heavy rain in area with thunder        :
+   : Nieve moderada a fuerte con truenos en la zona  : Moderate or heavy snow in area with thunder        :
+   : Niebla parcial                              : Partial fog                                        :
+   : Bancos de niebla en las cercanías           : Patches of fog in vicinity                         :
+   : Llovizna helada localizada en las cercanías  : Patchy freezing drizzle nearby                     :
+   : Lluvia ligera localizada con truenos en la zona  : Patchy light rain in area with thunder             :
+   : Nieve ligera localizada con truenos en la zona  : Patchy light snow in area with thunder             :
+   : Lluvia localizada en las cercanías          : Patchy rain nearby                                 :
+   : Aguanieve localizada en las cercanías       : Patchy sleet nearby                                :
+   : Nieve localizada en las cercanías           : Patchy snow nearby                                 :
+   : Lluvia y chubasco de granizo                : Rain and hail shower                               :
+   : Lluvia y granizo con tormenta               : Rain and hail with thunderstorm                    :
+   : Lluvia y bruma                              : Rain and mist                                      :
+   : Lluvia y bruma con tormenta                 : Rain and mist with thunderstorm                    :
+   : Lluvia y chubasco de granizo pequeño o nieve granulada  : Rain and small hail/snow pallets shower            :
+   : Lluvia y granizo pequeño o nieve granulada con tormenta  : Rain and small hail/snow pallets with thunderstorm :
+   : Lluvia y nieve                              : Rain and snow                                      :
+   : Lluvia, nieve y chubasco de granizo pequeño o nieve granulada  : Rain and snow and small hail/snow pallets shower   :
+   : Lluvia y granos de nieve                    : Rain and snow grains                               :
+   : Lluvia y chubasco de nieve                  : Rain and snow shower                               :
+   : Lluvia y nieve con tormenta                 : Rain and snow with thunderstorm                    :
+   : Lluvia en las cercanías                     : Rain in vicinity                                   :
+   : Aguacero en las cercanías                   : Rain shower in vicinity                            :
+   : Lluvia con tormenta                         : Rain with thunderstorm                             :
+   : Arena                                       : Sand                                               :
+   : Tormenta de arena                           : Sandstorm                                          :
+   : Niebla poco profunda                        : Shallow fog                                        :
+   : Bruma poco profunda                         : Shallow mist                                       :
+   : Chubasco                                    : Shower                                             :
+   : Chubasco en las cercanías                   : Shower in vicinity                                 :
+   : Granizo pequeño o nieve granulada ligera    : Small hail/snow pallets                            :
+   : Chubasco de granizo pequeño o nieve granulada  : Small hail/snow pallets shower                     :
+   : Granizo pequeño o nieve granulada con tormenta  : Small hail/snow pallets with thunderstorm          :
+   : Humo                                        : Smoke                                              :
+   : Nieve y gránulos de hielo                   : Snow and ice pallets                               :
+   : Nieve y bruma                               : Snow and mist                                      :
+   : Nieve y chubascos ligeros de granizo o nieve granulada  : Snow and small hail/snow pellets shower            :
+   : Nieve y chubascos ligeros de granizo o nieve granulada con tormenta  : Snow and small hail/snow pallets with thunderstorm :
+   : Nieve y granos de nieve                     : Snow and snow grains                               :
+   : Granos de nieve                             : Snow grains                                        :
+   : Chubasco de nieve                           : Snow shower                                        :
+   : Nieve con tormenta                          : Snow with thunderstorm                             :
+   : Rachas de tormenta                          : Squalls                                            :
+   : Tormenta                                    : Thunderstorm                                       :
+   : Tormenta en las cercanías                   : Thunderstorm in vicinity                           :
+   : Brotes de tormenta en las cercanías         : Thundery outbreaks in nearby                       :
+   : Precipitación desconocida                   : Unknown precipitation                              :
+   : Chubasco con precipitación desconocida      : Unknown precipitation shower                       :
+   : Precipitación desconocida con tormenta      : Unknown precipitation with thunderstorm            :
+   : Ceniza volcánica                            : Volcanic ash                                       :
+   : Ceniza volcánica en las cercanías           : Volcanic ash in vicinity                           :
+   : Remolinos de polvo o arena bien desarrollados en las cercanías  : Well-developed dust/sand whirls in vicinity        :
+   : Polvo generalizado                          : Widespread dust                                    :
