@@ -1,48 +1,207 @@
-:     Kiša                                : Rain
-113 : Vedro                               : Clear
-113 : Sunčano                             : Sunny
-116 : Djelomično oblačno                  : Partly cloudy
-119 : Oblačno                             : Cloudy
-122 : Tmurno                              : Overcast
-143 : Magla                               : Mist
-176 : Moguća povremena kiša               : Patchy rain possible
-179 : Moguć povremeni snijeg              : Patchy snow possible
-182 : Moguća povremena susnježica         : Patchy sleet possible
-185 : Moguća ledena rosulja               : Patchy freezing drizzle possible
-200 : Moguć prolom oblaka                 : Thundery outbreaks possible
-227 : Nanosi snijega                      : Blowing snow
-230 : Mećava                              : Blizzard
-248 : Magla                               : Fog
-260 : Ledena magla                        : Freezing fog
-263 : Povremena rosulja                   : Patchy light drizzle
-266 : Lagana rosulja                      : Light drizzle
-281 : Ledena rosulja                      : Freezing drizzle
-284 : Jaka ledena rosulja                 : Heavy freezing drizzle
-293 : Povremena lagana kiša               : Patchy light rain
-296 : Lagana kiša                         : Light rain
-299 : Umjerena povremena kiša             : Moderate rain at times
-302 : Umjerena kiša                       : Moderate rain
-305 : Povremeni pljuskovi                 : Heavy rain at times
-308 : Jaka kiša                           : Heavy rain
-311 : Lagana ledena kiša                  : Light freezing rain
-314 : Umjerena ili jaka ledena kiša       : Moderate or heavy freezing rain
-317 : Lagana susnježica                   : Light sleet
-320 : Umjerena ili jaka susnježica        : Moderate or heavy sleet
-323 : Povremen lagan snijeg               : Patchy light snow
-326 : Lagan snijeg                        : Light snow
-329 : Povremen umjeren snijeg             : Patchy moderate snow
-332 : Umjeren snijeg                      : Moderate snow
-335 : Povremen jak snijeg                 : Patchy heavy snow
-338 : Jak snijeg                          : Heavy snow
-350 : Ledena tuča                         : Ice pellets
-353 : Lagani pljusak                      : Light rain shower
-356 : Umjeren ili jak pljusak             : Moderate or heavy rain shower
-359 : Obilan pljusak                      : Torrential rain shower
-362 : Lagana susnježica                   : Light sleet showers
-365 : Umjerena ili jaka susnježica        : Moderate or heavy sleet showers
-368 : Lagani snježni pljuskovi            : Light snow showers
-371 : Umjereni ili jaki snježni pljuskovi : Moderate or heavy snow showers
-386 : Povremena lagana kiša s grmljavinom : Patchy light rain with thunder
-389 : Umjerena ili jaka kiša s grmljavinom: Moderate or heavy rain with thunder
-392 : Povremen lagan snijeg s grmljavinom : Patchy light snow with thunder
-395 : Umjeren ili jak snijeg s grmljavinom: Moderate or heavy snow with thunder
+   :     Kiša                                    : Rain                                               :
+113 : Vedro                                       : Clear                                              :
+113 : Sunčano                                     : Sunny                                              :
+116 : Djelomično oblačno                          : Partly cloudy                                      :
+119 : Oblačno                                     : Cloudy                                             :
+122 : Tmurno                                      : Overcast                                           :
+143 : Magla                                       : Mist                                               :
+176 : Moguća povremena kiša                       : Patchy rain possible                               :
+179 : Moguć povremeni snijeg                      : Patchy snow possible                               :
+182 : Moguća povremena susnježica                 : Patchy sleet possible                              :
+185 : Moguća ledena rosulja                       : Patchy freezing drizzle possible                   :
+200 : Moguć prolom oblaka                         : Thundery outbreaks possible                        :
+227 : Nanosi snijega                              : Blowing snow                                       :
+230 : Mećava                                      : Blizzard                                           :
+248 : Magla                                       : Fog                                                :
+260 : Ledena magla                                : Freezing fog                                       :
+263 : Povremena rosulja                           : Patchy light drizzle                               :
+266 : Lagana rosulja                              : Light drizzle                                      :
+281 : Ledena rosulja                              : Freezing drizzle                                   :
+284 : Jaka ledena rosulja                         : Heavy freezing drizzle                             :
+293 : Povremena lagana kiša                       : Patchy light rain                                  :
+296 : Lagana kiša                                 : Light rain                                         :
+299 : Umjerena povremena kiša                     : Moderate rain at times                             :
+302 : Umjerena kiša                               : Moderate rain                                      :
+305 : Povremeni pljuskovi                         : Heavy rain at times                                :
+308 : Jaka kiša                                   : Heavy rain                                         :
+311 : Lagana ledena kiša                          : Light freezing rain                                :
+314 : Umjerena ili jaka ledena kiša               : Moderate or heavy freezing rain                    :
+317 : Lagana susnježica                           : Light sleet                                        :
+320 : Umjerena ili jaka susnježica                : Moderate or heavy sleet                            :
+323 : Povremen lagan snijeg                       : Patchy light snow                                  :
+326 : Lagan snijeg                                : Light snow                                         :
+329 : Povremen umjeren snijeg                     : Patchy moderate snow                               :
+332 : Umjeren snijeg                              : Moderate snow                                      :
+335 : Povremen jak snijeg                         : Patchy heavy snow                                  :
+338 : Jak snijeg                                  : Heavy snow                                         :
+350 : Ledena tuča                                 : Ice pellets                                        :
+353 : Lagani pljusak                              : Light rain shower                                  :
+356 : Umjeren ili jak pljusak                     : Moderate or heavy rain shower                      :
+359 : Obilan pljusak                              : Torrential rain shower                             :
+362 : Lagana susnježica                           : Light sleet showers                                :
+365 : Umjerena ili jaka susnježica                : Moderate or heavy sleet showers                    :
+368 : Lagani snježni pljuskovi                    : Light snow showers                                 :
+371 : Umjereni ili jaki snježni pljuskovi         : Moderate or heavy snow showers                     :
+386 : Povremena lagana kiša s grmljavinom         : Patchy light rain with thunder                     :
+389 : Umjerena ili jaka kiša s grmljavinom        : Moderate or heavy rain with thunder                :
+392 : Povremen lagan snijeg s grmljavinom         : Patchy light snow with thunder                     :
+395 : Umjeren ili jak snijeg s grmljavinom        : Moderate or heavy snow with thunder                :
+   : Maglica u blizini                           : Haze in vicinity                                   :
+   : Jak kišni i snježni pljusak                 : Heavy rain and snow shower                         :
+   : Jak kišni pljusak                           : Heavy rain shower                                  :
+   : Lagana kišica i snježni kristali            : Light drizzle and snow grains                      :
+   : Lagana kiša i pljusak magle                 : Light rain and mist shower                         :
+   : Lagan pljusak sitne tuče/snježnih kuglica   : Light small hail/snow pellets shower               :
+   : Lagan pljusak nepoznatih oborina            : Light unknown precipitation shower                 :
+   : Kiša i sitna tuča/snježne kuglice s grmljavinom  : Rain and small hail/snow pellets with thunderstorm :
+   : Snježni pljusak u blizini                   : Snow shower in vicinity                            :
+   : Grmljavinske oluje u blizini                : Thundery outbreaks nearby                          :
+   : Nisko vijanje snijega                       : Low drifting snow                                  :
+   : Polja magle                                 : Patches of fog                                     :
+   : Kišica                                      : Drizzle                                            :
+   : Lagana kišica i kiša                        : Light drizzle and rain                             :
+   : Snijeg                                      : Snow                                               :
+   : Kišni pljusak                               : Rain Shower                                        :
+   : Vijanje pijeska                             : Blowing sand                                       :
+   : Široko rasprostranjeno vijanje prašine      : Blowing widespread dust                            :
+   : Široko rasprostranjeno vijanje prašine u blizini  : Blowing widespread dust in vicinity                :
+   : Kišica i magla                              : Drizzle and fog                                    :
+   : Kišica i kiša                               : Drizzle and rain                                   :
+   : Kišica i kišni pljusak                      : Drizzle and rain shower                            :
+   : Kišica s grmljavinom                        : Drizzle with thunderstorm                          :
+   : Pješčana oluja                              : Dust storm                                         :
+   : Magla u blizini                             : Fog in vicinity                                    :
+   : Smrzavajuća kišica i kiša                   : Freezing drizzle and rain                          :
+   : Smrzavajuća magla                           : Freezing mist                                      :
+   : Smrzavajuća kiša                            : Freezing rain                                      :
+   : Smrzavajuća kiša i snijeg                   : Freezing rain and snow                             :
+   : Smrzavajuće nepoznate oborine               : Freezing unknown precipitation                     :
+   : Lijevasta oblak u blizini                   : Funnel cloud in vicinity                           :
+   : Pljusak tuče                                : Hail shower                                        :
+   : Tuča s grmljavinom                          : Hail with thunderstorm                             :
+   : Maglica                                     : Haze                                               :
+   : Jako vijanje snijega                        : Heavy blowing snow                                 :
+   : Jaka kišica                                 : Heavy drizzle                                      :
+   : Jaka kišica i kiša                          : Heavy drizzle and rain                             :
+   : Jake smrzavajuće nepoznate oborine          : Heavy freezing unknown precipitation               :
+   : Jaka tuča s grmljavinom                     : Heavy hail with thunderstorm                       :
+   : Jaki ledeni kristali                        : Heavy ice pallets                                  :
+   : Jaka kiša i pljusak tuče                    : Heavy rain and hail shower                         :
+   : Jaka kiša i tuča s grmljavinom              : Heavy rain and hail with thunderstorm              :
+   : Jaka kiša i sitna tuča/snježne kuglice pljusak  : Heavy rain and small hail/snow pallets shower      :
+   : Jaka kiša i sitna tuča/snježne kuglice s grmljavinom  : Heavy rain and small hail/snow pallets with thunderstorm :
+   : Jaka kiša i snijeg                          : Heavy rain and snow                                :
+   : Jaka kiša i snijeg te sitna tuča/snježne kuglice s grmljavinom  : Heavy rain and snow and small hail/snow pallets with thunderstorm :
+   : Jaka kiša s grmljavinom                     : Heavy rain with thunderstorm                       :
+   : Jak pljusak sitne tuče/snježnih kuglica     : Heavy small hail/snow pallets shower               :
+   : Jaka sitna tuča/snježne kuglice s grmljavinom  : Heavy small hail/snow pallets with thunderstorm    :
+   : Jak snijeg i pljusak sitne tuče/snježnih kuglica  : Heavy snow and small hail/snow pallets shower      :
+   : Jak snijeg i sitna tuča/snježne kuglice s grmljavinom  : Heavy snow and small hail/snow pallets with thunderstorm :
+   : Jak snježni pljusak                         : Heavy snow shower                                  :
+   : Jak snijeg s grmljavinom                    : Heavy snow with thunderstorm                       :
+   : Ledeni kristali                             : Ice crystals                                       :
+   : Ledeni kristali                             : Ice pallets                                        :
+   : Lagan vijanje snijega                       : Light blowing snow                                 :
+   : Lagana kišica i magla                       : Light drizzle and fog                              :
+   : Lagana kišica i ledeni kristali             : Light drizzle and ice pallets                      :
+   : Lagana kišica i kiša i snijeg               : Light drizzle and rain and snow                    :
+   : Lagana kišica i kišni pljusak               : Light drizzle and rain shower                      :
+   : Lagana kišica i kiša s grmljavinom          : Light drizzle and rain with thunderstorm           :
+   : Lagana kišica i snijeg                      : Light drizzle and snow                             :
+   : Lagana kišica s grmljavinom                 : Light drizzle with thunderstorm                    :
+   : Lagan smrzavajući kišica                    : Light freezing drizzle                             :
+   : Lagan smrzavajući kišica i kiša             : Light freezing drizzle and rain                    :
+   : Lagan smrzavajući kišica i snijeg           : Light freezing drizzle and snow                    :
+   : Lagan smrzavajući magla                     : Light freezing fog                                 :
+   : Lagan smrzavajući kiša i snijeg             : Light freezing rain and snow                       :
+   : Lagan smrzavajući snježni kristali i magla  : Light freezing snow grains and fog                 :
+   : Lagan smrzavajući nepoznate oborine         : Light freezing unknown precipitation               :
+   : Lagan pljusak tuče                          : Light hail shower                                  :
+   : Lagani ledeni kristali                      : Light ice crystals                                 :
+   : Lagani ledeni kristali                      : Light ice pallets                                  :
+   : Lagan nisko vijanje                         : Light low drifting                                 :
+   : Lagan nisko vijanje snijega                 : Light low drifting snow                            :
+   : Lagana kiša i pljusak tuče                  : Light rain and hail shower                         :
+   : Lagana kiša i tuča s grmljavinom            : Light rain and hail with thunderstorm              :
+   : Lagana kiša i ledeni kristali               : Light rain and ice pallets                         :
+   : Lagana kiša i magla                         : Light rain and mist                                :
+   : Lagana kiša i pljusak sitne tuče/snježnih kuglica  : Light rain and small hail/snow pallets shower      :
+   : Lagana kiša i sitna tuča/snježne kuglice s grmljavinom  : Light rain and small hail/snow pallets with thunderstorm :
+   : Lagana kiša i snijeg                        : Light rain and snow                                :
+   : Lagana kiša i snijeg te pljusak sitne tuče/snježnih kuglica  : Light rain and snow and small hail/snow pallets shower :
+   : Lagana kiša i snježni kristali              : Light rain and snow grains                         :
+   : Lagana kiša i snježni pljusak               : Light rain and snow shower                         :
+   : Lagana kiša i snijeg s grmljavinom          : Light rain and snow with thunderstorm              :
+   : Lagana kiša s grmljavinom                   : Light rain with thunderstorm                       :
+   : Lagan pljusak                               : Light shower                                       :
+   : Lagan pljusak ledenih kuglica               : Light showers of ice pellets                       :
+   : Lagan sitna tuča/snježne kuglice            : Light small hail/snow pallets                      :
+   : Lagan pljusak sitne tuče/snježnih kuglica   : Light small hail/snow pallets shower               :
+   : Lagan sitna tuča/snježne kuglice s grmljavinom  : Light small hail/snow pallets with thunderstorm    :
+   : Lagan snijeg i ledeni kristali              : Light snow and ice pallets                         :
+   : Lagan snijeg i sitna tuča/snježne kuglice   : Light snow and small hail/snow pallets             :
+   : Lagan snježni pljusak sa sitnom tučom/snježnim kuglicama  : Light snow and small hail/snow pallets shower      :
+   : Lagan snijeg sa sitnom tučom/snježnim kuglicama i grmljavinom  : Light snow and small hail/snow pallets with thunderstorm :
+   : Lagan snijeg i snježni kristali             : Light snow and snow grains                         :
+   : Lagan snježni kristali                      : Light snow grains                                  :
+   : Lagan snježni pljusak                       : Light snow shower                                  :
+   : Lagan snijeg s grmljavinom                  : Light snow with thunderstorm                       :
+   : Lagan grmljavina                            : Light thunderstorm                                 :
+   : Lagan nepoznate oborine                     : Light unknown precipitation                        :
+   : Lagano razvijeni vrtlozi prašine ili pijeska  : Light well-developed dust/sand whirls              :
+   : Nisko vijanje pijeska                       : Low drifting sand                                  :
+   : Nisko vijanje široko rasprostranjene prašine  : Low drifting widespread dust                       :
+   : Magla s grmljavinom                         : Mist with thunderstorm                             :
+   : Umjerena do jaka kiša s grmljavinom         : Moderate or heavy rain in area with thunder        :
+   : Umjeren do jak snijeg s grmljavinom         : Moderate or heavy snow in area with thunder        :
+   : Djelomična magla                            : Partial fog                                        :
+   : Polja magle u blizini                       : Patches of fog in vicinity                         :
+   : Povremeno smrzavajuća kišica u blizini      : Patchy freezing drizzle nearby                     :
+   : Povremeno lagana kiša s grmljavinom u području  : Patchy light rain in area with thunder             :
+   : Povremeno lagan snijeg s grmljavinom u području  : Patchy light snow in area with thunder             :
+   : Povremeno kiša u blizini                    : Patchy rain nearby                                 :
+   : Povremeno susnježica u blizini              : Patchy sleet nearby                                :
+   : Povremeno snijeg u blizini                  : Patchy snow nearby                                 :
+   : Kiša i pljusak tuče                         : Rain and hail shower                               :
+   : Kiša i tuča s grmljavinom                   : Rain and hail with thunderstorm                    :
+   : Kiša i magla                                : Rain and mist                                      :
+   : Kiša i magla s grmljavinom                  : Rain and mist with thunderstorm                    :
+   : Kiša i pljusak sitne tuče/snježnih kuglica  : Rain and small hail/snow pallets shower            :
+   : Kiša i sitna tuča/snježne kuglice s grmljavinom  : Rain and small hail/snow pallets with thunderstorm :
+   : Kiša i snijeg                               : Rain and snow                                      :
+   : Kiša i snijeg te pljusak sitne tuče/snježnih kuglica  : Rain and snow and small hail/snow pallets shower   :
+   : Kiša i snježni kristali                     : Rain and snow grains                               :
+   : Kiša i snježni pljusak                      : Rain and snow shower                               :
+   : Kiša i snijeg s grmljavinom                 : Rain and snow with thunderstorm                    :
+   : Kiša u blizini                              : Rain in vicinity                                   :
+   : Kišni pljusak u blizini                     : Rain shower in vicinity                            :
+   : Kiša s grmljavinom                          : Rain with thunderstorm                             :
+   : Pijesak                                     : Sand                                               :
+   : Pješčana oluja                              : Sandstorm                                          :
+   : Plitka magla                                : Shallow fog                                        :
+   : Plitka maglica                              : Shallow mist                                       :
+   : Pljusak                                     : Shower                                             :
+   : Pljusak u blizini                           : Shower in vicinity                                 :
+   : Sitna tuča/snježne kuglice                  : Small hail/snow pallets                            :
+   : Pljusak sitne tuče/snježnih kuglica         : Small hail/snow pallets shower                     :
+   : Sitna tuča/snježne kuglice s grmljavinom    : Small hail/snow pallets with thunderstorm          :
+   : Dim                                         : Smoke                                              :
+   : Snijeg i ledeni kristali                    : Snow and ice pallets                               :
+   : Snijeg i magla                              : Snow and mist                                      :
+   : Snijeg i lagan pljusak sitne tuče/snježnih kuglica  : Snow and small hail/snow pellets shower            :
+   : Snijeg i lagan pljusak sitne tuče/snježnih kuglica s grmljavinom  : Snow and small hail/snow pallets with thunderstorm :
+   : Snijeg i snježni kristali                   : Snow and snow grains                               :
+   : Snježni kristali                            : Snow grains                                        :
+   : Snježni pljusak                             : Snow shower                                        :
+   : Snijeg s grmljavinom                        : Snow with thunderstorm                             :
+   : Grmljavinske oluje                          : Squalls                                            :
+   : Grmljavina                                  : Thunderstorm                                       :
+   : Grmljavina u blizini                        : Thunderstorm in vicinity                           :
+   : Grmljavinske oluje u blizini                : Thundery outbreaks in nearby                       :
+   : Nepoznate oborine                           : Unknown precipitation                              :
+   : Pljusak s nepoznatim oborinama              : Unknown precipitation shower                       :
+   : Nepoznate oborine s grmljavinom             : Unknown precipitation with thunderstorm            :
+   : Vulkanski pepeo                             : Volcanic ash                                       :
+   : Vulkanski pepeo u blizini                   : Volcanic ash in vicinity                           :
+   : Dobro razvijeni vrtlozi prašine/pijeska u blizini  : Well-developed dust/sand whirls in vicinity        :
+   : Široko rasprostranjena prašina              : Widespread dust                                    :
