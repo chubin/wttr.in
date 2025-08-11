@@ -255,3 +255,42 @@ Features: Customizable output for Twitch chat, supports both Celsius and
 Fahrenheit, and handles location-based queries dynamically.
 
 Details: [wttr.in-on-twitch](https://www.reddit.com/r/commandline/comments/1eqoa0w/creating_a_weather_command_using_wttrin_service/)
+
+
+### Google Sheets / Excel 365
+
+It is possible to show the live weather in Google Sheets.
+
+Assume you want the weather image for a specific location, and the location is either hardcoded or stored in a cell.
+Example 1: Hardcoded Location (London):
+In a cell (e.g., A1), enter:
+excel
+
+```
+=IMAGE("https://wttr.in/London_0pq.png", 1)
+```
+
+This inserts a weather image for London, resized to fit the cell while maintaining the aspect ratio.
+Example 2: Dynamic Location (from a cell):
+If cell B1 contains the location (e.g., London), use:
+
+```excel
+    =IMAGE("https://wttr.in/"&B1&"_0pq.png", 4, 100, 200)
+```
+
+This inserts the image with a custom size (100px height, 200px width). Adjust height and width as needed.
+
+Customize the wttr.in URL (Optional):
+
+* `_0pq`: Simple weather image (current conditions, no background).
+* `_m`: Metric units (e.g., Celsius).
+* `_u`: USCS units (e.g., Fahrenheit).
+* `_t`: Transparent background.
+
+Example with metric units and transparency:
+
+```
+=IMAGE("https://wttr.in/"&B1&"_0pqt_m.png", 1)
+```
+
+![Google Sheets Example](google-sheets.png)
