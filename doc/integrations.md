@@ -18,26 +18,29 @@ exhaustive, it serves as a guide to help you use *wttr.in* within your favorite
 application or add integration to a new one.
 
 
-| Integration For                | Short Description                                                                                                | Repository                                                                                         |
-|--------------------------------|------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
-| **Terminal Managers**          |                                                                                                                  |                                                                                                    |
-| [tmux](#tmux)                  | Allows embedding weather data in the tmux status bar with customizable update intervals.                         | -                                                                                                  |
-| **Window Managers Statusbars** |                                                                                                                  |                                                                                                    |
-| [Waybar](#Waybar)              | A custom module in Rust for displaying weather in Waybar, with support for custom indicators and error handling. | [wttrbar](https://github.com/bjesus/wttrbar)                                                       |
-| [Xmobar](#Xmobar)              | A Python script for integrating weather data into Xmobar.                                                        | [weather-xmobar-wttr.in](https://github.com/alexeygumirov/weather-xmobar-wttr.in)                  |
-| [AwesomeWM](#AwesomeWM)        | Displays weather in AwesomeWM with a focus on clean UI and tooltips.                                             | [wttr-widget](https://github.com/pivaldi/wttr-widget)                                              |
-| **Editors**                    |                                                                                                                  |                                                                                                    |
-| [Emacs](#Emacs)                | An Emacs frontend for showing weather forecasts directly within Emacs.                                           | [emacs-wttrin](https://github.com/bcbcarl/emacs-wttrin)                                            |
-| [Emacs](#Emacs)                | Displays weather in the Emacs mode line with emoji support, configurable for updates.                            | [display-wttr](https://git.sr.ht/~josegpt/display-wttr)                                            |
-| **Chats**                      |                                                                                                                  |                                                                                                    |
-| [Conky](#Conky)                | Example script for displaying weather in Conky using transparent images.                                         | -                                                                                                  |
-| [WeeChat](#WeeChat)            | Script for embedding weather in the WeeChat IRC client's status bar.                                             | -                                                                                                  |
-| [IRC](#IRC)                    | Uses Qt-based mirc bot to show weather updates.                                                                  | [IRC integration](https://github.com/OpenSourceTreasure/Mirc-ASCII-weather-translate-pixel-editor) |
-| **Other**                      |                                                                                                                  |                                                                                                    |
-| [ObsidianMD](#ObsidianMD)      | Script for embedding weather in Squeak's world main docking bar.                                                 | -                                                                                                  |
-| [RainMeter](#Rainmeter)        |                                                                                                                  | -                                                                                                  |
-| [Squeak](#Squeak)              |                                                                                                                  | -                                                                                                  |
-| [Twitch](#Twitch)              |                                                                                                                  | -                                                                                                  |
+| Integration For                                    | Short Description                                                                                                | Repository                                                                                         |
+|----------------------------------------------------|------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| **Terminal Managers**                              |                                                                                                                  |                                                                                                    |
+| [tmux](#tmux)                                      | Allows embedding weather data in the tmux status bar with customizable update intervals.                         | -                                                                                                  |
+| **Window Managers Statusbars**                     |                                                                                                                  |                                                                                                    |
+| [Waybar](#Waybar)                                  | A custom module in Rust for displaying weather in Waybar, with support for custom indicators and error handling. | [wttrbar](https://github.com/bjesus/wttrbar)                                                       |
+| [Xmobar](#Xmobar)                                  | A Python script for integrating weather data into Xmobar.                                                        | [weather-xmobar-wttr.in](https://github.com/alexeygumirov/weather-xmobar-wttr.in)                  |
+| [AwesomeWM](#AwesomeWM)                            | Displays weather in AwesomeWM with a focus on clean UI and tooltips.                                             | [wttr-widget](https://github.com/pivaldi/wttr-widget)                                              |
+| **Editors**                                        |                                                                                                                  |                                                                                                    |
+| [Emacs](#Emacs)                                    | An Emacs frontend for showing weather forecasts directly within Emacs.                                           | [emacs-wttrin](https://github.com/bcbcarl/emacs-wttrin)                                            |
+| [Emacs](#Emacs)                                    | Displays weather in the Emacs mode line with emoji support, configurable for updates.                            | [display-wttr](https://git.sr.ht/~josegpt/display-wttr)                                            |
+| **Chats**                                          |                                                                                                                  |                                                                                                    |
+| [Conky](#Conky)                                    | Example script for displaying weather in Conky using transparent images.                                         | -                                                                                                  |
+| [WeeChat](#WeeChat)                                | Script for embedding weather in the WeeChat IRC client's status bar.                                             | -                                                                                                  |
+| [IRC](#IRC)                                        | Uses Qt-based mirc bot to show weather updates.                                                                  | [IRC integration](https://github.com/OpenSourceTreasure/Mirc-ASCII-weather-translate-pixel-editor) |
+| **Other**                                          |                                                                                                                  |                                                                                                    |
+| [ObsidianMD](#ObsidianMD)                          | Script for embedding weather in Squeak's world main docking bar.                                                 | -                                                                                                  |
+| [RainMeter](#Rainmeter)                            |                                                                                                                  | -                                                                                                  |
+| [Squeak](#Squeak)                                  |                                                                                                                  | -                                                                                                  |
+| [Twitch](#Twitch)                                  |                                                                                                                  | -                                                                                                  |
+| [GoogleSheets/Excel365](#google-sheets--excel-365) | Direct wttr.in access from Google Sheets / Excel 365                                                             | -                                                                                                  |
+| [Raycast](#Raycast)                                | Weather extension for Raycast                                                                                    | -                                                                                                  |
+
 
 ## Terminal Managers
 
@@ -255,3 +258,59 @@ Features: Customizable output for Twitch chat, supports both Celsius and
 Fahrenheit, and handles location-based queries dynamically.
 
 Details: [wttr.in-on-twitch](https://www.reddit.com/r/commandline/comments/1eqoa0w/creating_a_weather_command_using_wttrin_service/)
+
+
+### Google Sheets / Excel 365
+
+It is possible to show the live weather in Google Sheets.
+
+Assume you want the weather image for a specific location, and the location is either hardcoded or stored in a cell.
+Example 1: Hardcoded Location (London):
+In a cell (e.g., A1), enter:
+excel
+
+```
+=IMAGE("https://wttr.in/London_0pq.png", 1)
+```
+
+This inserts a weather image for London, resized to fit the cell while maintaining the aspect ratio.
+Example 2: Dynamic Location (from a cell):
+If cell B1 contains the location (e.g., London), use:
+
+```excel
+=IMAGE("https://wttr.in/"&B1&"_0pq.png", 4, 100, 200)
+```
+
+This inserts the image with a custom size (100px height, 200px width). Adjust height and width as needed.
+
+Customize the wttr.in URL (Optional):
+
+* `_0pq`: Simple weather image (current conditions, no background).
+* `_m`: Metric units (e.g., Celsius).
+* `_u`: USCS units (e.g., Fahrenheit).
+* `_t`: Transparent background.
+
+Example with metric units and transparency:
+
+```
+=IMAGE("https://wttr.in/"&B1&"_0pqt_m.png", 1)
+```
+
+![Google Sheets Example](google-sheets.png)
+
+### Raycast
+
+* Raycast Store: https://www.raycast.com/tonka3000/weather
+* Source code: [Github](https://github.com/raycast/extensions/tree/542ed079c2eb5a95df0835d83ab1f1c2b1970e44/extensions/weather/)
+* Author: [tonka3000](https://github.com/tonka3000)
+
+Raycast is a handy tool for Mac users that helps them work faster and more
+efficiently.  It's popular among developers, designers, and tech enthusiasts who
+want to streamline their workflows.
+With Raycast, you can quickly launch apps,
+search for files, and perform everyday tasks all from one central place,
+boosting productivity and saving time.
+
+With the "Weather" extension, you can quickly check information about the current weather.
+
+![wttr.in in raycast](raycast.png)
