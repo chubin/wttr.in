@@ -275,7 +275,7 @@ Example 2: Dynamic Location (from a cell):
 If cell B1 contains the location (e.g., London), use:
 
 ```excel
-    =IMAGE("https://wttr.in/"&B1&"_0pq.png", 4, 100, 200)
+=IMAGE("https://wttr.in/"&B1&"_0pq.png", 4, 100, 200)
 ```
 
 This inserts the image with a custom size (100px height, 200px width). Adjust height and width as needed.
@@ -294,3 +294,20 @@ Example with metric units and transparency:
 ```
 
 ![Google Sheets Example](google-sheets.png)
+
+### Raycast
+
+* Raycast Store: https://www.raycast.com/tonka3000/weather
+* Source code: [https://github.com/raycast/extensions/tree/542ed079c2eb5a95df0835d83ab1f1c2b1970e44/extensions/weather/] (Github)
+* Author: [tonka3000](https://github.com/tonka3000)
+
+Raycast is a handy tool for Mac users that helps them work faster and more
+efficiently.  It's popular among developers, designers, and tech enthusiasts who
+want to streamline their workflows.
+With Raycast, you can quickly launch apps,
+search for files, and perform everyday tasks all from one central place,
+boosting productivity and saving time.
+
+With the "Weather" extension, you can quickly check information about the current weather.
+
+![wttr.in in raycast](raycast.png)
