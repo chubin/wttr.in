@@ -751,6 +751,6 @@ server {
 
 ## wttr.in usage stats
 
-As of the end of June 2025, *wttr.in* handles 20-25 million queries per day from 150,000 to 175,000 users, according to the access logs.
+As of the end of August 2025, *wttr.in* handles 22-27 million queries per day from 170,000 to 190,000 users, according to the access logs.
 
 ![wttr.in usage stats](share/stats/stats.png)
