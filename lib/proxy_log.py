@@ -35,9 +35,11 @@ class Logger:
         if error != "":
             message += " ERR " + query + " " + error
             self._log_errors.write(message + "\n")
+            self._log_errors.flush()
         else:
             message += " OK  " + query
             self._log_access.write(message + "\n")
+            self._log_access.flush()
 
 
 class LoggerWWO(Logger):
