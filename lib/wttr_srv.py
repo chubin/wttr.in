@@ -380,7 +380,7 @@ def wttr(location, request):
             response = make_response(
                 send_file(
                     io.BytesIO(response_text),
-                    attachment_filename=png_filename,
+                    download_name=png_filename,
                     mimetype="image/png",
                 )
             )
