@@ -26,6 +26,8 @@ import time
 import json
 import hashlib
 import re
+import logging
+
 
 import requests
 import cyrtranslit
@@ -206,6 +208,9 @@ def add_translations(content, lang):
         print("---")
         return {}
 
+    if "current_condition" not in d["data"]:
+        return content
+
     try:
         weather_condition = (
             d["data"]["current_condition"][0]["weatherDesc"][0]["value"]
@@ -306,8 +311,6 @@ def _fetch_content_and_headers(path, query_string, **kwargs):
             content = response.content
         else:
             content = "{}"
-    else:
-        print("cache found")
     return content, headers
 
 
@@ -345,7 +348,7 @@ def _normalize_query_string(query_string):
     lat = str(round(float(coords[0]), 2))
     lng = str(round(float(coords[1]), 2))
     query_string = re.sub(r"q=[^&]*", "q=" + lat + "," + lng, query_string)
-    print(query_string)
+    # print(query_string)
 
     # nqs = query_string.replace("%2C", ",")
     # lat, lng = nqs.split(",", 1)
@@ -373,6 +376,8 @@ def proxy(path):
     # _log_query(path, query_string, error)
 
     content = add_translations(content, lang)
+    if "Unable to find any" in content:
+        print(query_string)
 
     return content, 200, headers
 
@@ -380,10 +385,10 @@ def proxy(path):
 if __name__ == "__main__":
     # app.run(host='0.0.0.0', port=5001, debug=False)
     # app.debug = True
-
     if len(sys.argv) == 1:
         bind_addr = "0.0.0.0"
-        SERVER = WSGIServer((bind_addr, PROXY_PORT), APP)
+        logging.getLogger('werkzeug').setLevel(logging.ERROR)  # Suppress Werkzeug logs
+        SERVER = WSGIServer((bind_addr, PROXY_PORT), APP, log=None)
         SERVER.serve_forever()
     else:
         print("running single request from command line arg")
