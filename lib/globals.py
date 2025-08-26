@@ -25,7 +25,7 @@ else:
     GEOLITE = os.path.join(MYDIR, "data", "GeoLite2-City.mmdb")
 
 WEGO = os.environ.get("WTTR_WEGO", "/home/igor/go/bin/we-lang")
-PYPHOON = "pyphoon-lolcat"
+PYPHOON = "/home/igor/src/pyphoon/ve/bin/pyphoon-lolcat" # "pyphoon-lolcat"
 
 _DATADIR = "/wttr.in"
 _LOGDIR = "/wttr.in/log"
