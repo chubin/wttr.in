@@ -1,0 +1,7 @@
+{
+  "name": "visualcrossing",
+  "fullname": "Visual Crossing Timeline Weather API",
+  "description": "Provides historical, current, and forecast data globally through a single RESTful API call in JSON or CSV formats. Supports location queries with customizable outputs.",
+  "relevance": "Single-endpoint approach and JSON output make it suitable for wttr.in\u2019s streamlined data retrieval. Free tier with 1,000 records/day.",
+  "website": "https://www.visualcrossing.com/weather-api"
+}

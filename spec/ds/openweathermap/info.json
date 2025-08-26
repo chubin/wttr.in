@@ -1,0 +1,7 @@
+{
+  "name": "openweathermap",
+  "fullname": "OpenWeatherMap API",
+  "description": "Provides current, forecast, and historical weather data for global locations in JSON, XML, and HTML formats. Includes features like One Call API 3.0 for consolidated data retrieval, geocoding, and weather maps.",
+  "relevance": "JSON-based output and global coverage align well with wttr.in\u2019s need for console-friendly data parsing. Offers a free tier with 1,000 calls/day.",
+  "website": "https://openweathermap.org/api"
+}

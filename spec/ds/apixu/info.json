@@ -1,0 +1,7 @@
+{
+  "name": "apixu",
+  "fullname": "Apixu (now WeatherAPI.com)",
+  "description": "Provides various weather data in JSON and XML, with astronomy and time zone features.",
+  "relevance": "JSON output and breadth of data meet wttr.in\u2019s requirements.",
+  "website": "https://www.weatherapi.com"
+}

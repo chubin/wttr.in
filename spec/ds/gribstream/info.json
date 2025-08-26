@@ -1,0 +1,6 @@
+{
+  "name": "gribstream",
+  "fullname": "GribStream API",
+  "description": "Provides high-speed access to historical and real-time data from NBM and GFS models in JSON.",
+  "relevance": "High-resolution data could boost wttr.in\u2019s forecast accuracy, especially for researchers."
+}

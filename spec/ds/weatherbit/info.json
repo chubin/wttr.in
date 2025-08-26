@@ -1,0 +1,7 @@
+{
+  "name": "weatherbit",
+  "fullname": "Weatherbit API",
+  "description": "Offers current, forecast, and historical data in JSON format with global coverage and free tier options.",
+  "relevance": "JSON output makes it a good fit for wttr.in, though some report accuracy issues.",
+  "website": "https://www.weatherbit.io"
+}

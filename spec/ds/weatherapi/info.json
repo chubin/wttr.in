@@ -1,0 +1,7 @@
+{
+  "name": "weatherapi",
+  "fullname": "WeatherAPI.com",
+  "description": "Offers comprehensive weather, geolocation, astronomy, and time zone data in JSON and XML formats. Supports queries by city, coordinates, or ZIP code.",
+  "relevance": "Simple JSON output and multilingual support align with wttr.in\u2019s console-oriented, multilingual design. Free tier available.",
+  "website": "https://www.weatherapi.com"
+}

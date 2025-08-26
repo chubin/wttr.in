@@ -1,0 +1,7 @@
+{
+  "name": "stormglass",
+  "fullname": "Stormglass API",
+  "description": "Provides marine and terrestrial data, including wave height and tide info, in JSON format.",
+  "relevance": "Marine data and JSON output expand wttr.in\u2019s scope for coastal reports.",
+  "website": "https://stormglass.io"
+}

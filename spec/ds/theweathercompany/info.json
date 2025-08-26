@@ -1,0 +1,7 @@
+{
+  "name": "theweathercompany",
+  "fullname": "The Weather Company API",
+  "description": "Delivers real-time, historical, and forecast data with hyper-local insights in JSON format. Includes lifestyle indices and high-resolution radar imagery.",
+  "relevance": "Scalable JSON output and diverse data could enhance wttr.in\u2019s detailed reports; advanced features may require premium tiers.",
+  "website": "https://www.weathercompany.com/data-solutions/weather-data-api"
+}

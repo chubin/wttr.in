@@ -1,0 +1,7 @@
+{
+  "name": "yr",
+  "fullname": "YR.no API",
+  "description": "Provides free data and forecasts globally, primarily in XML, funded by the Norwegian government.",
+  "relevance": "Reliable data for Europe; XML output can be adapted for wttr.in.",
+  "website": "https://developer.yr.no"
+}
