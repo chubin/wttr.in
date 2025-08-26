@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/chubin/wttr.in/internal/routing"
 )
@@ -22,9 +23,13 @@ func (c *Cache) Response(r *http.Request) *routing.Cadre {
 		return errorResponse("location is not specified")
 	}
 
+	if strings.Contains(locationName, ".html") || strings.Contains(locationName, ".txt") {
+		return errorResponse("invalid location")
+	}
+
 	loc, err = c.Resolve(locationName)
 	if err != nil {
-		log.Println("geo/location error:", locationName)
+		log.Println("geo/location error:", locationName, r.RemoteAddr)
 
 		return errorResponse(fmt.Sprint(err))
 	}
