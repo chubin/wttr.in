@@ -86,7 +86,17 @@ V2_TRANSLATION = {
         "Posta",
         "Crepuscle",
     ),
-    "cs": ("Předpověď počasí pro:", "", "", "", "", "", "", "", ""),
+    "cs": (
+        "Předpověď počasí pro:", 
+        "Počasí", 
+        "Časové pásmo", 
+        "Nyní", 
+        "Svítání", 
+        "Východ slunce", 
+        "Vrchol", 
+        "Západ slunce", 
+        "Soumrak"
+    ),
     "cy": ("Adroddiad tywydd ar gyfer:", "", "", "", "", "", "", "", ""),
     "da": (
         "Vejret i:",

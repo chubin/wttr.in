@@ -187,7 +187,7 @@ un dels llocs més freds i permanentment deshabitats del planeta.
 """,
         "cs": """
 Nepodařilo se nám najít vaši polohu,
-takže jsme vás přivedl do Ojmjakonu.
+takže jsme vás přivedli do Ojmjakonu.
 Je to jedno z nejchladnějších trvale obydlených míst na planetě.
 Doufáme, že budete mít lepší počasí!
 """,
@@ -614,6 +614,13 @@ Obtindrem noves consultes tan aviat com ens sigui possible.
 Pots seguir https://x.com/igor_chubin per noves actualitzacions.
 ======================================================================================
 """,
+        "cs": """
+Omlouváme se, ale aktuálně nám dochází počet dotazů na službu počasí.
+Zde je předpověď počasí pro výchozí město (abyste viděli, jak to vypadá).
+Problém bude vyřešen co nejdříve.
+Aktualizace můžete následovat na https://x.com/igor_chubin.
+======================================================================================
+""",
         "de": """
 Entschuldigung, wir können momentan den Wetterdienst nicht erreichen.
 Dafür zeigen wir Ihnen das Wetter an einem Beispielort, damit Sie sehen, wie die Seite das Wetter anzeigt.
@@ -885,6 +892,7 @@ Azonao atao ny manaraka ny pejy https://x.com/igor_chubin.
         "bn": "নতুন ফিচার : বহুভাষিক অবস্থানের নাম \ 033 [92mwttr.in/станция+Восток\033 [0m (UTF-8)] এবং অবস্থান অনুসন্ধান \ 033 [92mwttr.in/~Kilimanjaro\033 [0m (শুধু আগে ~ যোগ করুন)",
         "bs": "XXXXXXXXXXXXXXXXXXXX: XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\033[92mwttr.in/станция+Восток\033[0m (XX UTF-8) XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
         "ca": "Noves funcionalitats: noms d'ubicació multilingües \033[92mwttr.in/станция+Восток\033[0m (en UTF-8) i la ubicació de recerca \033[92mwttr.in/~Kilimanjaro\033[0m (només cal afegir ~ abans)",
+        "cs": "Nová funkce: vícejazyčná jména poloh  \033[92mwttr.in/станция+Восток\033[0m (v UTF-8) a vyhledávání polohy \033[92mwttr.in/~Kilimanjaro\033[0m (pouze přidejte ~ před pozici)",
         "es": "Nuevas funcionalidades: los nombres de las ubicaciones en varios idiomas \033[92mwttr.in/станция+Восток\033[0m (em UTF-8) y la búsqueda por ubicaciones \033[92mwttr.in/~Kilimanjaro\033[0m (tan solo inserte ~ al principio)",
         "fa": "قابلیت جدید: پشتیبانی از نام چند زبانه مکانها \033[92mwttr.in/станция+Восток\033[0m (در فرمت UTF-8) و جسجتوی مکان ها \033[92mwttr.in/~Kilimanjaro\033[0m (فقط قبل از اون ~ اضافه کنید)",
         "fr": "Nouvelles fonctionnalités: noms d'emplacements multilingues \033[92mwttr.in/станция+Восток\033[0m (en UTF-8) et recherche d'emplacement \033[92mwttr.in/~Kilimanjaro\033[0m (ajouter ~ devant)",
@@ -935,6 +943,7 @@ Azonao atao ny manaraka ny pejy https://x.com/igor_chubin.
         "bn": "wttr.in আপডেটের জন্য \033[46m\033[30m@igor_chubin\033[0m কে অনুসরণ করুন",
         "bs": "XXXXXX \033[46m\033[30m@igor_chubin\033[0m XXXXXXXXXXXXXXXXXXX",
         "ca": "Segueix \033[46m\033[30m@igor_chubin\033[0m per actualitzacions de wttr.in",
+        "cs": "Sledujte \033[46m\033[30m@igor_chubin\033[0m pro aktualizace pro wttr.in",
         "es": "Sigue a \033[46m\033[30m@igor_chubin\033[0m para enterarte de las novedades de wttr.in",
         "eu": "\033[46m\033[30m@igor_chubin\033[0m jarraitu wttr.in berriak jasotzeko",
         "cy": "Dilyner \033[46m\033[30m@igor_Chubin\033[0m am diweddariadau wttr.in",
