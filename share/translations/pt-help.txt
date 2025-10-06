@@ -1,4 +1,4 @@
-Instruções:
+Utilização:
 
     $ curl wttr.in          # o clima na sua localização atual
     $ curl wttr.in/muc      # o clima no aeroporto de Munique
@@ -6,22 +6,22 @@ Instruções:
 Tipos de localização suportados:
 
     /paris                  # o nome de uma cidade
-    /~Eiffel+tower          # o nome de qualquer lugar famoso
-    /Москва                 # nome Unicode de qualquer lugar em qualquer idioma
+    /~Eiffel+tower          # o nome de um lugar famoso (+ para espaços)
+    /Москва                 # o nome Unicode de qualquer lugar em qualquer idioma
     /muc                    # o código de um aeroporto (3 letras)
     /@stackoverflow.com     # o nome de um domínio web
     /94107                  # um código de área
     /-78.46,106.79          # coordenadas do GPS
 
-Lugares especiais:
+Informações sobre as fases da lua:
 
     /moon                   # A fase da lua (acrescente ,+US ou ,+France para estas cidades)
     /moon@2016-10-25        # A fase da lua numa determinada data (@2016-10-25)
 
 Unidades:
 
-    m                       # Sistema métrico (SI) (usado por omissão em todos os lugares exceto nos EUA)
-    u                       # Sistema Unificado de Clasificaçāo de Solo ou USCS (usado por omissão nos EUA)
+    m                       # sistema métrico (SI) (usado por omissão em todos os lugares exceto nos EUA)
+    u                       # sistema Unificado de Clasificaçāo de Solo ou USCS (usado por omissão nos EUA)
     M                       # mostrar a velocidade do vento em m/s
 
 Opçōes de visualização:
@@ -43,6 +43,7 @@ Opçōes de PNG:
     p                       # acrescenta uma borda ao redor da imagem
     t                       # transparência 150
     transparency=...        # transparência de 0 a 255 (255 = sem transparência)
+    background=...          # cor de fundo na forma RRGGBB, por exemplo, 00aaaa
 
 As opções podem ser usadas em conjunto:
 
@@ -57,10 +58,10 @@ Localizaçāo:
     $ curl wttr.in/paris?lang=fr
     $ curl -H "Accept-Language: fr" wttr.in/paris
 
-Línguas suportadas:
+Idiomas suportados:
 
     FULL_TRANSLATION (suportadas)
-    PARTIAL_TRANSLATION (em andamento)
+    PARTIAL_TRANSLATION (em curso)
 
 URLs especiais:
 
