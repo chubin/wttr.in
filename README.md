@@ -487,6 +487,8 @@ The result will look something like the following:
 
 Most of these values are self-explanatory, aside from `weatherCode`. The `weatherCode` is an enumeration which you can find at either [the WorldWeatherOnline website](https://www.worldweatheronline.com/developer/api/docs/weather-icons.aspx) or [in the wttr.in source code](https://github.com/chubin/wttr.in/blob/master/lib/constants.py).
 
+A smaller version `format=j2` without hourly data is also availble. Can work well for microcontrollers with limited memory.
+
 ### Prometheus Metrics Output
 
 The [Prometheus](https://github.com/prometheus/prometheus) Metrics format is a feature providing access to *wttr.in* data through an easy-to-parse format for monitoring systems, without requiring the user to create a complex script to reinterpret wttr.in's graphical output.
