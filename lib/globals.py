@@ -80,6 +80,7 @@ PROXY_CACHEDIR = os.path.join(_DATADIR, "cache/proxy-wwo/")
 MY_EXTERNAL_IP = "5.9.243.187"
 
 PLAIN_TEXT_AGENTS = [
+    "",
     "curl",
     "httpie",
     "lwp-request",
