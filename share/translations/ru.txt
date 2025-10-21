@@ -1,3 +1,4 @@
+   : Сильный дождь со снегом                     : Heavy rain and snow shower                         :
    : Сильный ливень                              : Heavy rain shower                                  :
    : Снежная позёмка                             : Low drifting snow                                  :
    : Местами туман                               : Patches of fog                                     :
@@ -109,4 +110,3 @@
 389: Умеренный до сильного дождь, гроза          : Moderate or heavy rain with thunder                :
 392: Местами небольшой снег, гроза               : Patchy light snow with thunder                     :
 395: Умеренный до сильного снег, гроза           : Moderate or heavy snow with thunder                :
-до сильного снег с грозой         : Moderate or heavy snow with thunder                :
