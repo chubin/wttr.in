@@ -54,7 +54,7 @@
    : Дождь с градом, гроза                       : Rain and hail with thunderstorm                    :
    : Дождь, слабый туман                         : Rain and mist                                      :
    : Дождь со снегом                             : Rain and snow                                      :
-   : Дождь снежная крупа                         : Rain and snow grains                               :
+   : Дождь, снежная крупа                        : Rain and snow grains                               :
    : Дождь со снегом, гроза                      : Rain and snow with thunderstorm                    :
    : Дождь, гроза                                : Rain with thunderstorm                             :
    : Песчаная буря                               : Sandstorm                                          :
