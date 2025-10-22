@@ -52,9 +52,9 @@
    : Местами слабый снег, гроза                  : Patchy light snow in area with thunder             :
    : Дождь с сильным градом                      : Rain and hail shower                               :
    : Дождь с градом, гроза                       : Rain and hail with thunderstorm                    :
-   : Дождь, небольшой туман                      : Rain and mist                                      :
+   : Дождь, слабый туман                         : Rain and mist                                      :
    : Дождь со снегом                             : Rain and snow                                      :
-   : Дождь со снежной крупой                     : Rain and snow grains                               :
+   : Дождь снежная крупа                         : Rain and snow grains                               :
    : Дождь со снегом, гроза                      : Rain and snow with thunderstorm                    :
    : Дождь, гроза                                : Rain with thunderstorm                             :
    : Песчаная буря                               : Sandstorm                                          :
@@ -71,7 +71,7 @@
    : Вулканический пепел                         : Volcanic ash                                       :
 113: Ясно                                        : Clear                                              :
 113: Солнечно                                    : Sunny                                              :
-116: Малооблачно                                 : Partly cloudy                                      :
+116: Переменная облачность                       : Partly cloudy                                      :
 119: Облачно                                     : Cloudy                                             :
 122: Пасмурно                                    : Overcast                                           :
 143: Слабый туман                                : Mist                                               :
@@ -104,9 +104,9 @@
 359: Проливной дождь                             : Torrential rain shower                             :
 362: Слабый мокрый снег                          : Light sleet showers                                :
 365: Умеренный до сильного мокрый снег           : Moderate or heavy sleet showers                    :
-368: Небольшой снегопад                          : Light snow showers                                 :
+368: Кратковременный снегопад                    : Light snow showers                                 :
 371: Умеренный до сильного снегопад              : Moderate or heavy snow showers                     :
 386: Местами слабый дождь, гроза                 : Patchy light rain with thunder                     :
 389: Умеренный до сильного дождь, гроза          : Moderate or heavy rain with thunder                :
-392: Местами небольшой снег, гроза               : Patchy light snow with thunder                     :
+392: Местами слабый снег, гроза                  : Patchy light snow with thunder                     :
 395: Умеренный до сильного снег, гроза           : Moderate or heavy snow with thunder                :
