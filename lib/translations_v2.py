@@ -290,7 +290,17 @@ V2_TRANSLATION = {
         "सूर्यास्त",
         "संध्याकाळ",
     ),
-    "nb": ("Værmelding for:", "", "", "", "", "", "", "", ""),
+    "nb": (
+        "Værmelding for:",
+        "Vær",
+        "Tidssone",
+        "Nå",
+        "Morgengry",
+        "Soloppgang",
+        "Solhøyde",
+        "Solnedgang",
+        "Skumring",
+    ),
     "nl": (
         "Weerbericht voor:",
         "Weer",

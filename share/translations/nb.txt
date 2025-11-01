@@ -1,5 +1,5 @@
-113: Klart                                  : Clear
 113: Sol                                    : Sunny
+114: Klart                                  : Clear
 116: Delvis skyet                           : Partly cloudy
 119: Skyet                                  : Cloudy
 122: Overskyet                              : Overcast
@@ -42,6 +42,121 @@
 368: Lette snøbyger                         : Light snow showers
 371: Moderate eller kraftige snøbyger       : Moderate or heavy snow showers
 386: Skiftende, lett regn med torden        : Patchy light rain with thunder
-389: Moderat eller krafit regn med torden   : Moderate or heavy rain with thunder
+389: Moderat eller kraftig regn med torden  : Moderate or heavy rain with thunder
 392: Skiftende, lett snø med torden         : Patchy light snow with thunder
-395: Moderat eller krafitg snø med torden   : Moderate or heavy snow with thunder
+395: Moderat eller kraftig snø med torden   : Moderate or heavy snow with thunder
+
+: Dis i nærheten                            : Haze in vicinity
+: Kraftig regn- og snøbyge                  : Heavy rain and snow shower
+: Kraftig regnbyge                          : Heavy rain shower
+: Lett duskregn og snøkorn                  : Light drizzle and snow grains
+: Lett regn- og tåkebyge                    : Light rain and mist shower
+: Lett byge med små hagl                    : Light small hail shower
+: Lett byge med ukjent nedbør               : Light unknown precipitation shower
+: Regn og små hagl med tordenvær            : Rain and small hail with thunderstorm
+: Snøbyge i nærheten                        : Snow shower in vicinity
+: Tordenvær i nærheten                      : Thundery outbreaks nearby
+: Snøfokk nær bakken                        : Low drifting snow
+: Tåkebanker                                : Patches of fog
+: Duskregn                                  : Drizzle
+: Lett duskregn og regn                     : Light drizzle and rain
+: Snø                                       : Snow
+: Regn                                      : Rain
+: Regnbyge                                  : Rain shower
+: Sandfokk                                  : Blowing sand
+: Utbredt støvfokk                          : Blowing widespread dust
+: Utbredt støvfokk i nærheten               : Blowing widespread dust in vicinity
+: Duskregn og tåke                          : Drizzle and fog
+: Duskregn og regn                          : Drizzle and rain
+: Duskregn og regnbyge                      : Drizzle and rain shower
+: Duskregn med tordenvær                    : Drizzle with thunderstorm
+: Støvstorm                                 : Dust storm
+: Tåke i nærheten                           : Fog in vicinity
+: Underkjølt duskregn og regn               : Freezing drizzle and rain
+: Underkjølt tåke                           : Freezing mist
+: Underkjølt regn                           : Freezing rain
+: Underkjølt regn og snø                    : Freezing rain and snow
+: Underkjølt ukjent nedbør                  : Freezing unknown precipitation
+: Skydrage i nærheten                       : Funnel cloud in vicinity
+: Haglbyge                                  : Hail shower
+: Hagl med tordenvær                        : Hail with thunderstorm
+: Dis                                       : Haze
+: Kraftig snøfokk                           : Heavy blowing snow
+: Kraftig duskregn                          : Heavy drizzle
+: Kraftig duskregn og regn                  : Heavy drizzle and rain
+: Kraftig underkjølt ukjent nedbør          : Heavy freezing unknown precipitation
+: Kraftig hagl med tordenvær                : Heavy hail with thunderstorm
+: Kraftige ispellets                        : Heavy ice pellets
+: Kraftig regn- og haglbyge                 : Heavy rain and hail shower
+: Kraftig regn og hagl med tordenvær        : Heavy rain and hail with thunderstorm
+: Kraftig byge med regn og små hagl         : Heavy rain and small hail shower
+: Kraftig regn og små hagl med tordenvær    : Heavy rain and small hail with thunderstorm
+: Kraftig regn og snø                       : Heavy rain and snow
+: Kraftig regn og snø med tordenvær         : Heavy rain and snow with thunderstorm
+: Kraftig regn med tordenvær                : Heavy rain with thunderstorm
+: Kraftig byge med små hagl                 : Heavy small hail shower
+: Kraftig snøbyge                           : Heavy snow shower
+: Kraftig snø med tordenvær                 : Heavy snow with thunderstorm
+: Iskrystaller                              : Ice crystals
+: Lett snøfokk                              : Light blowing snow
+: Lett duskregn og tåke                     : Light drizzle and fog
+: Lett duskregn og ispellets                : Light drizzle and ice pellets
+: Lett duskregn, regn og snø                : Light drizzle and rain and snow
+: Lett duskregn og regnbyge                 : Light drizzle and rain shower
+: Lett duskregn og regn med tordenvær       : Light drizzle and rain with thunderstorm
+: Lett duskregn og snø                      : Light drizzle and snow
+: Lett duskregn med tordenvær               : Light drizzle with thunderstorm
+: Lett underkjølt duskregn                  : Light freezing drizzle
+: Lett underkjølt duskregn og regn          : Light freezing drizzle and rain
+: Lett underkjølt duskregn og snø           : Light freezing drizzle and snow
+: Lett underkjølt tåke                      : Light freezing fog
+: Lett underkjølt regn og snø               : Light freezing rain and snow
+: Lett underkjølt ukjent nedbør             : Light freezing unknown precipitation
+: Lett haglbyge                             : Light hail shower
+: Lett iskrystaller                         : Light ice crystals
+: Lett ispellets                            : Light ice pellets
+: Lett regn og dis                          : Light rain and mist
+: Lett byge med små hagl                    : Light rain and small hail shower
+: Lett regn og små hagl med tordenvær       : Light rain and small hail with thunderstorm
+: Lett regn og snø                          : Light rain and snow
+: Lett regn- og snøbyge                     : Light rain and snow shower
+: Lett regn med tordenvær                   : Light rain with thunderstorm
+: Lett snø og ispellets                     : Light snow and ice pellets
+: Lett snø og små hagl                      : Light snow and small hail
+: Lett snøbyge                              : Light snow shower
+: Lett snø med tordenvær                    : Light snow with thunderstorm
+: Lett tordenvær                            : Light thunderstorm
+: Delvis tåke                               : Partial fog
+: Tåkebanker i nærheten                     : Patches of fog in vicinity
+: Lokalt lett regn med tordenvær            : Patchy light rain in area with thunder
+: Lokalt lett snø med tordenvær             : Patchy light snow in area with thunder
+: Regn og haglbyge                          : Rain and hail shower
+: Regn og hagl med tordenvær                : Rain and hail with thunderstorm
+: Regn og dis                               : Rain and mist
+: Regn og dis med tordenvær                 : Rain and mist with thunderstorm
+: Regn og snø                               : Rain and snow
+: Regn- og snøbyge                          : Rain and snow shower
+: Regn og snø med tordenvær                 : Rain and snow with thunderstorm
+: Regn i nærheten                           : Rain in vicinity
+: Regnbyge i nærheten                       : Rain shower in vicinity
+: Regn med tordenvær                        : Rain with thunderstorm
+: Sandstorm                                 : Sandstorm
+: Lav tåke                                  : Shallow fog
+: Lav dis                                   : Shallow mist
+: Byge                                      : Shower
+: Byge i nærheten                           : Shower in vicinity
+: Små hagl                                  : Small hail
+: Byge med små hagl                         : Small hail shower
+: Små hagl med tordenvær                    : Small hail with thunderstorm
+: Snø og ispellets                          : Snow and ice pellets
+: Snø og tåke                               : Snow and mist
+: Snøbyge                                   : Snow shower
+: Snø med tordenvær                         : Snow with thunderstorm
+: Vindkast                                  : Squalls
+: Tordenvær                                 : Thunderstorm
+: Ukjent nedbør                             : Unknown precipitation
+: Byge med ukjent nedbør                    : Unknown precipitation shower
+: Ukjent nedbør med tordenvær               : Unknown precipitation with thunderstorm
+: Vulkansk aske                             : Volcanic ash
+: Vulkansk aske i nærheten                  : Volcanic ash in vicinity
+: Utbredt støv                              : Widespread dust
