@@ -15,6 +15,17 @@ You can see it running here: [wttr.in](https://wttr.in).
 
 ## Usage
 
+### 👶 Beginner Quick Start (Easy CURL examples)
+
+To quickly test wttr.in without any setup, run these commands in your terminal:
+
+```bash
+curl wttr.in
+curl wttr.in/Bangalore
+curl wttr.in/Mumbai
+```
+
+
 You can access the service from a shell or from a Web browser like this:
 
     $ curl wttr.in
