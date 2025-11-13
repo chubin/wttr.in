@@ -89,6 +89,38 @@ def render_feel_like_temperature(data, query):
     return temperature
 
 
+def render_high_temperature(data, query):
+    """
+    high temperature (H)
+    """
+
+    if query.get("use_imperial", False):
+        temperature = "%s°F" % data["maxtempF"]
+    else:
+        temperature = "%s°C" % data["maxtempC"]
+
+    if temperature[0] != "-":
+        temperature = "+" + temperature
+
+    return temperature
+
+
+def render_low_temperature(data, query):
+    """
+    low temperature (L)
+    """
+
+    if query.get("use_imperial", False):
+        temperature = "%s°F" % data["mintempF"]
+    else:
+        temperature = "%s°C" % data["mintempC"]
+
+    if temperature[0] != "-":
+        temperature = "+" + temperature
+
+    return temperature
+
+
 def render_condition(data, query):
     """Emoji encoded weather condition (c)"""
 
@@ -328,6 +360,8 @@ FORMAT_SYMBOL = {
     "h": render_humidity,
     "t": render_temperature,
     "f": render_feel_like_temperature,
+    "H": render_high_temperature,
+    "L": render_low_temperature,
     "w": render_wind,
     "l": render_location,
     "m": render_moonphase,
@@ -453,6 +487,10 @@ def format_weather_data(query, parsed_query, data):
     #     return v3.main(query, parsed_query, data)
 
     current_condition = data["data"]["current_condition"][0]
+    current_condition["maxtempC"] = data["weather"][0]["maxtempC"]
+    current_condition["maxtempF"] = data["weather"][0]["maxtempF"]
+    current_condition["mintempC"] = data["weather"][0]["mintempC"]
+    current_condition["mintempF"] = data["weather"][0]["mintempF"]
     current_condition["location"] = parsed_query["location"]
     current_condition["override_location"] = parsed_query["override_location_name"]
     output = render_line(format_line, current_condition, query)

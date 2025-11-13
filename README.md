@@ -185,6 +185,8 @@ To specify your own custom output format, use the special `%`-notation:
     h    Humidity,
     t    Temperature (Actual),
     f    Temperature (Feels Like),
+    H    Temperature (High),
+    L    Temperature (Low),
     w    Wind,
     l    Location,
     m    Moon phase 🌑🌒🌓🌔🌕🌖🌗🌘,
