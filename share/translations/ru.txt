@@ -3,12 +3,14 @@
    : Снежная позёмка                             : Low drifting snow                                  :
    : Местами туман                               : Patches of fog                                     :
    : Морось                                      : Drizzle                                            :
+   : Слабая морось, дождь                        : Light drizzle and rain                             :
    : Снег                                        : Snow                                               :
    : Дождь                                       : Rain                                               :
    : Ливень                                      : Rain Shower                                        :
    : Песчаный позёмок                            : Blowing sand                                       :
    : Пыльный позёмок                             : Blowing widespread dust                            :
    : Морось, туман                               : Drizzle and fog                                    :
+   : Морось, дождь                               : Drizzle and rain                                   :
    : Морось, гроза                               : Drizzle with thunderstorm                          :
    : Пыльная буря                                : Dust storm                                         :
    : Слабый туман c изморозью                    : Freezing mist                                      :
