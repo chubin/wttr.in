@@ -38,7 +38,7 @@
    : Слабый дождь со снегом                      : Light rain and snow                                :
    : Слабый дождь, снежная крупа                 : Light rain and snow grains                         :
    : Снегопад с дождём                           : Light rain and snow shower                         :
-   : Снегопад с дождём, гроза                  : Light rain and snow with thunderstorm              :
+   : Снегопад с дождём, гроза                    : Light rain and snow with thunderstorm              :
    : Слабый дождь, гроза                         : Light rain with thunderstorm                       :
    : Кратковременный ливень                      : Light shower                                       :
    : Небольшие осадки града/снежной крупы        : Light small hail/snow pallets                      :
