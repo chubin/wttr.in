@@ -12,7 +12,7 @@ pytz
 pyte
 python-dateutil>=2.5.0,<=2.8.1
 diagram
-pyjq
+jq
 scipy
 numpy
 pillow
