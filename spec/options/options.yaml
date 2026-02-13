@@ -1,4 +1,24 @@
 query_options:
+  - name: format
+    description: "Specify view name"
+    type: string
+    values:
+      - v1
+      - v2
+      - v3
+      - oneline
+      - j1
+      - j2
+
+  - name: output
+    description: "Specify output format"
+    type: string
+    values:
+      - txt
+      - html
+      - json
+      - png
+
   - name: current_only
     short: "0"
     description: "Show only current weather"
@@ -67,12 +87,15 @@ query_options:
     type: boolean
     default: false
     active: true
+
   - name: narrow
     short: n
     description: "Show only day and night forecast (narrow version)"
     type: boolean
     default: false
     active: true
+    note: "Optimizes output for narrow displays"
+
   - name: frame
     short: p
     description: "Add a frame around the PNG output"
@@ -207,7 +230,7 @@ query_options:
     active: true
     note: "Applicable only for PNG output"
   - name: format
-    description: "Specify output format for one-line weather info"
+    description: "Specify output format"
     type: string
       # values_map:
       #   "1": "Location and condition"
@@ -249,14 +272,6 @@ query_options:
     default: false
     active: true
     note: "Disables advanced terminal features"
-
-  - name: narrow
-    short: n
-    description: "Use narrow layout for output"
-    type: boolean
-    default: false
-    active: true
-    note: "Optimizes output for narrow displays"
 
   - name: use_metric
     short: m
