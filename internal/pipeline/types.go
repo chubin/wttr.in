@@ -11,8 +11,8 @@ type Weatherer interface {
 	GetWeather(lat, lon float64, lang string) ([]byte, error)
 }
 
-// IPDataer interface to fetch IP-related data.
-type IPDataer interface {
+// IPLocator interface to fetch IP-related data.
+type IPLocator interface {
 	GetIPData(ip string) (IPData, error)
 }
 
@@ -39,8 +39,13 @@ type ClientData struct {
 
 // IPData holds information about the client's IP address and location.
 type IPData struct {
-	IP           string
-	LocationAddr string
+	IP          string
+	CountryCode string
+	Country     string
+	Region      string
+	City        string
+	Latitude    string
+	Longitude   string
 }
 
 // Location holds detailed information about a specific location.
@@ -79,18 +84,20 @@ type FormatOutput struct {
 // Pipeline struct holds the components necessary for processing a query.
 type Pipeline struct {
 	Weatherer Weatherer
-	IPDataer  IPDataer
+	Locator   Locator
+	IPLocator IPLocator
 	Renderer  Renderer
 	Formatter Formatter
 }
 
 // NewPipeline initializes a new pipeline based on the provided options.
-func NewPipeline(opts *query.Options, weatherer Weatherer, ipDataer IPDataer) *Pipeline {
+func NewPipeline(opts *query.Options, weatherer Weatherer, locator Locator, ipLocator IPLocator) *Pipeline {
 	renderer := selectRenderer(opts.Format)
 	formatter := selectFormatter(opts.Format)
 	return &Pipeline{
 		Weatherer: weatherer,
-		IPDataer:  ipDataer,
+		Locator:   locator,
+		IPLocator: ipLocator,
 		Renderer:  renderer,
 		Formatter: formatter,
 	}
@@ -123,7 +130,9 @@ func WeatherHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Initialize pipeline with the parsed options
-	pipeline := NewPipeline(opts, nil, nil) // Weatherer and IPDataer to be injected or initialized
+	locator := NewCacheLocator(nil)
+	ipLocator := NewIPCacheLocator(nil)
+	pipeline := NewPipeline(opts, nil, locator, ipLocator)
 
 	// Build the query struct with client data and options
 	query := Query{
@@ -244,5 +253,5 @@ func parseQueryOptions(r *http.Request) (*query.Options, error) {
 	return nil, nil
 }
 
-// Weatherer and IPDataer implementations are also stubs to be provided externally.
+// Weatherer and IPLocator implementations are also stubs to be provided externally.
 // They should be injected into NewPipeline during initialization.
