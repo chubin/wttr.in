@@ -16,6 +16,11 @@ type IPDataer interface {
 	GetIPData(ip string) (IPData, error)
 }
 
+// Locator interface to fetch location-related data.
+type Locator interface {
+	GetLocation(location string) (Location, error)
+}
+
 // Renderer interface for rendering weather data into a visual representation.
 type Renderer interface {
 	Render(query Query) (RenderOutput, error)
