@@ -47,7 +47,7 @@ def load_cache(location_string):
         cachefile = os.path.join(CACHEDIR, location_string)
 
         return json.loads(open(cachefile, "r").read())
-    except:
+    except Exception:
         return None
 
 
