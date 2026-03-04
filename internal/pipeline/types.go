@@ -1,6 +1,7 @@
 package pipeline
 
 import (
+	"context"
 	"net/http"
 
 	"github.com/chubin/wttr.go/internal/query"
@@ -29,6 +30,29 @@ type Renderer interface {
 // Formatter interface for converting rendered output into the final format.
 type Formatter interface {
 	Format(output RenderOutput) (FormatOutput, error)
+}
+
+// QueryParser parses wttr.in / curl wttr.in style HTTP query strings
+// and returns the result as a strongly-typed *query.Options struct.
+type QueryParser interface {
+	// Parse parses the raw query string (the part after the ? character)
+	// and returns a populated *query.Options struct with all valid, active options set.
+	//
+	//   - Boolean flags without values are set to true (e.g. ?T -> Options.T = true)
+	//   - Short flags can be bundled (e.g. ?0pq -> CurrentOnly=true, p=true, q=true)
+	//   - Unknown, inactive, or invalid parameters cause an error
+	//   - Validation rules from the YAML spec (ranges, regexps, allowed values, ...) are enforced
+	//
+	// If the query is empty (no ? or ? alone), a zero-valued *query.Options is typically returned
+	// (all fields false/0/"").
+	//
+	// ctx can be used for cancellation, request-scoped logging, metrics collection, etc.
+	// Most implementations will ignore it in the first version.
+	Parse(ctx context.Context, query string) (*query.Options, error)
+
+	// MustParse is a convenience variant that panics on error.
+	// Mainly useful in tests, initialization code, or when invalid input is a programmer error.
+	MustParse(ctx context.Context, query string) *query.Options
 }
 
 // ClientData holds information about the client making the request.

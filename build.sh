@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 build() {
-  go build -o main main.go
+  CGO_CFLAGS="-Wno-return-local-addr" go build -o main main.go
 }
 
 case "$1" in
