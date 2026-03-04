@@ -94,6 +94,21 @@ type Query struct {
 	Weather    *WeatherData
 }
 
+type QueryProcessor struct {
+	Renderer  Renderer
+	Formatter Formatter
+}
+
+func NewQueryProcessor(opts query.Options) *QueryProcessor {
+	renderer := selectRenderer(opts.Format)
+	formatter := selectFormatter(opts.Format)
+
+	return &QueryProcessor{
+		Renderer:  renderer,
+		Formatter: formatter,
+	}
+}
+
 // RenderOutput represents the intermediate output from a renderer (ANSI format).
 type RenderOutput struct {
 	Content []byte
@@ -107,28 +122,24 @@ type FormatOutput struct {
 
 // Pipeline struct holds the components necessary for processing a query.
 type Pipeline struct {
-	Weatherer Weatherer
-	Locator   Locator
-	IPLocator IPLocator
-	Renderer  Renderer
-	Formatter Formatter
+	Weatherer   Weatherer
+	Locator     Locator
+	IPLocator   IPLocator
+	QueryParser QueryParser
 }
 
 // NewPipeline initializes a new pipeline based on the provided options.
-func NewPipeline(opts *query.Options, weatherer Weatherer, locator Locator, ipLocator IPLocator) *Pipeline {
-	renderer := selectRenderer(opts.Format)
-	formatter := selectFormatter(opts.Format)
+func NewPipeline(weatherer Weatherer, locator Locator, ipLocator IPLocator, queryParser QueryParser) *Pipeline {
 	return &Pipeline{
-		Weatherer: weatherer,
-		Locator:   locator,
-		IPLocator: ipLocator,
-		Renderer:  renderer,
-		Formatter: formatter,
+		Weatherer:   weatherer,
+		Locator:     locator,
+		IPLocator:   ipLocator,
+		QueryParser: queryParser,
 	}
 }
 
 // Process runs the pipeline to process the query and produce the final output.
-func (p *Pipeline) Process(query Query) (FormatOutput, error) {
+func (p *QueryProcessor) Process(query Query) (FormatOutput, error) {
 	// Step 1: Render the query data into an intermediate format (ANSI)
 	renderOutput, err := p.Renderer.Render(query)
 	if err != nil {
@@ -153,10 +164,10 @@ func WeatherHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Initialize pipeline with the parsed options
-	locator := NewCacheLocator(nil)
-	ipLocator := NewIPCacheLocator(nil)
-	pipeline := NewPipeline(opts, nil, locator, ipLocator)
+	// // Initialize pipeline with the parsed options
+	// locator := NewCacheLocator(nil)
+	// ipLocator := NewIPCacheLocator(nil)
+	// pipeline := NewPipeline(nil, locator, ipLocator, nil)
 
 	// Build the query struct with client data and options
 	query := Query{
@@ -168,7 +179,8 @@ func WeatherHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Process the query through the pipeline
-	output, err := pipeline.Process(query)
+	qp := NewQueryProcessor(*opts)
+	output, err := qp.Process(query)
 	if err != nil {
 		http.Error(w, "Failed to process query", http.StatusInternalServerError)
 		return
