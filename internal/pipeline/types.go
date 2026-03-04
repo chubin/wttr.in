@@ -120,17 +120,17 @@ type FormatOutput struct {
 	ContentType string
 }
 
-// Pipeline struct holds the components necessary for processing a query.
-type Pipeline struct {
+// WeatherService struct holds the components necessary for processing a query.
+type WeatherService struct {
 	Weatherer   Weatherer
 	Locator     Locator
 	IPLocator   IPLocator
 	QueryParser QueryParser
 }
 
-// NewPipeline initializes a new pipeline based on the provided options.
-func NewPipeline(weatherer Weatherer, locator Locator, ipLocator IPLocator, queryParser QueryParser) *Pipeline {
-	return &Pipeline{
+// NewWeatherService initializes a new pipeline based on the provided options.
+func NewWeatherService(weatherer Weatherer, locator Locator, ipLocator IPLocator, queryParser QueryParser) *WeatherService {
+	return &WeatherService{
 		Weatherer:   weatherer,
 		Locator:     locator,
 		IPLocator:   ipLocator,
@@ -156,18 +156,13 @@ func (p *QueryProcessor) Process(query Query) (FormatOutput, error) {
 }
 
 // HTTP Handler for processing incoming weather queries.
-func WeatherHandler(w http.ResponseWriter, r *http.Request) {
+func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) {
 	// Parse incoming HTTP query into Options
 	opts, err := parseQueryOptions(r)
 	if err != nil {
 		http.Error(w, "Failed to parse query options", http.StatusBadRequest)
 		return
 	}
-
-	// // Initialize pipeline with the parsed options
-	// locator := NewCacheLocator(nil)
-	// ipLocator := NewIPCacheLocator(nil)
-	// pipeline := NewPipeline(nil, locator, ipLocator, nil)
 
 	// Build the query struct with client data and options
 	query := Query{
@@ -290,4 +285,4 @@ func parseQueryOptions(r *http.Request) (*query.Options, error) {
 }
 
 // Weatherer and IPLocator implementations are also stubs to be provided externally.
-// They should be injected into NewPipeline during initialization.
+// They should be injected into NewWeatherService during initialization.

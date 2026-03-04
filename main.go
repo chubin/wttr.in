@@ -11,8 +11,15 @@ import (
 )
 
 func srv() {
+	ws := pipeline.NewWeatherService(
+		nil,
+		pipeline.NewCacheLocator(nil),
+		pipeline.NewIPCacheLocator(nil),
+		nil,
+	)
+
 	// Define routes
-	http.HandleFunc("/", pipeline.WeatherHandler)
+	http.HandleFunc("/", ws.WeatherHandler)
 
 	// Start the server
 	port := ":8080"
