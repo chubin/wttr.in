@@ -9,7 +9,7 @@ import (
 	"github.com/chubin/wttr.go/internal/generate"
 	"github.com/chubin/wttr.go/internal/location"
 	"github.com/chubin/wttr.go/internal/options"
-	"github.com/chubin/wttr.go/internal/pipeline"
+	"github.com/chubin/wttr.go/internal/weather"
 )
 
 func srv() {
@@ -43,14 +43,14 @@ func srv() {
 		log.Fatalln("error loading wttr.in options description: ", err)
 	}
 
-	ws := pipeline.NewWeatherService(
-		pipeline.NewWeatherClient(fmt.Sprintf(
+	ws := weather.NewWeatherService(
+		weather.NewWeatherClient(fmt.Sprintf(
 			"http://127.0.0.1:5001/premium/v1/weather.ashx?key=%s&q={lat},{long}&format=json&num_of_days=3&includelocation=yes",
 			os.Getenv("PROXY_KEY"),
 		)),
-		pipeline.NewCacheLocator(locationCache),
-		pipeline.NewIPCacheLocator(nil),
-		pipeline.NewQueryParser(wttrInOptions),
+		weather.NewCacheLocator(locationCache),
+		weather.NewIPCacheLocator(nil),
+		weather.NewQueryParser(wttrInOptions),
 	)
 
 	// Define routes
