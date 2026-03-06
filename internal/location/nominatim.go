@@ -31,6 +31,10 @@ func NewNominatim(name, typ, url, token string) *Nominatim {
 	}
 }
 
+func (n *Nominatim) Name() string {
+	return fmt.Sprintf("%s (%s)", n.name, n.typ)
+}
+
 func (n *Nominatim) Query(location string) (*Location, error) {
 	var data locationQuerier
 

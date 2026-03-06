@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/chubin/wttr.go/internal/location"
+	"github.com/sirupsen/logrus"
 )
 
 // cacheLocator implements Locator using wttr.in's Cache + Resolve logic
@@ -21,23 +22,24 @@ func NewCacheLocator(cache *location.Cache) Locator {
 }
 
 // GetLocation implements Locator interface
-func (l *cacheLocator) GetLocation(locationName string) (Location, error) {
+func (l *cacheLocator) GetLocation(locationName string) (*Location, error) {
 	// Use the existing Resolve method — it does cache lookup + upstream query + timezone
 	// + caching of result
 	raw, err := l.cache.Resolve(locationName)
 	if err != nil {
-		return Location{}, err
+		logrus.Errorln(err)
+		return nil, err
 	}
 
 	// Convert between the two Location types
 	lat, err := strconv.ParseFloat(raw.Lat, 64)
 	if err != nil {
-		return Location{}, fmt.Errorf("invalid latitude in cached location: %w", err)
+		return nil, fmt.Errorf("invalid latitude in cached location: %w", err)
 	}
 
 	lon, err := strconv.ParseFloat(raw.Lon, 64)
 	if err != nil {
-		return Location{}, fmt.Errorf("invalid longitude in cached location: %w", err)
+		return nil, fmt.Errorf("invalid longitude in cached location: %w", err)
 	}
 
 	// Country / CountryCode are not present in the existing Location type.
@@ -49,7 +51,7 @@ func (l *cacheLocator) GetLocation(locationName string) (Location, error) {
 	//
 	// → for most use-cases option 1 is acceptable
 
-	return Location{
+	return &Location{
 		Name: raw.Name, // already normalized
 		// Country:      "",              // not available
 		// CountryCode:  "",              // not available

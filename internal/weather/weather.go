@@ -23,7 +23,7 @@ type IPLocator interface {
 
 // Locator interface to fetch location-related data.
 type Locator interface {
-	GetLocation(location string) (Location, error)
+	GetLocation(location string) (*Location, error)
 }
 
 // Renderer interface for rendering weather data into a visual representation.
@@ -206,13 +206,11 @@ func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) 
 	var location *Location
 	var errLoc error
 	if locStr != "" {
-		var loc Location
-		loc, errLoc = s.Locator.GetLocation(locStr)
+		location, errLoc = s.Locator.GetLocation(locStr)
 		// if errLoc != nil {
 		// 	http.Error(w, fmt.Sprintf("Location not found: %s", locStr), http.StatusNotFound)
 		// 	return
 		// }
-		location = &loc
 	} else {
 		// No location at all (very rare — IP failed and no path)
 		http.Error(w, "No location provided and IP detection failed", http.StatusBadRequest)
@@ -220,11 +218,15 @@ func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) 
 	}
 
 	// ── 5. Fetch weather data ────────────────────────────────────────────────
-	weatherBytes, errWeather := s.Weatherer.GetWeather(location.Latitude, location.Longitude, opts.Lang)
-	if errWeather != nil {
-		// // In production: consider fallback / cached / different provider
-		// http.Error(w, "Failed to retrieve weather data", http.StatusBadGateway)
-		// return
+	var weatherBytes []byte
+	var errWeather error
+	if location != nil {
+		weatherBytes, errWeather = s.Weatherer.GetWeather(location.Latitude, location.Longitude, opts.Lang)
+		if errWeather != nil {
+			// // In production: consider fallback / cached / different provider
+			// http.Error(w, "Failed to retrieve weather data", http.StatusBadGateway)
+			// return
+		}
 	}
 
 	// ── 6. Build complete Query ──────────────────────────────────────────────
@@ -240,8 +242,8 @@ func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) 
 	}
 
 	// ── Debug check – AFTER everything is resolved ───────────────────────────
-	// debugRequested := opts.Debug || // if Options has a Debug field
-	debugRequested := r.URL.Query().Get("debug") != "" ||
+	debugRequested := opts.Debug ||
+		r.URL.Query().Get("debug") != "" ||
 		r.Header.Get("X-Debug") == "1"
 
 	if debugRequested {
@@ -319,7 +321,9 @@ func (s *WeatherService) serveDebugInfo(
 	if q.Location != nil {
 		sb.WriteString("\n  Final resolved location:\n")
 		sb.WriteString(fmt.Sprintf("    Name:         %s\n", q.Location.Name))
-		sb.WriteString(fmt.Sprintf("    Country:      %s (%s)\n", q.Location.Country, q.Location.CountryCode))
+		if q.Location.Country != "" {
+			sb.WriteString(fmt.Sprintf("    Country:      %s (%s)\n", q.Location.Country, q.Location.CountryCode))
+		}
 		sb.WriteString(fmt.Sprintf("    Lat/Lon:      %.6f / %.6f\n", q.Location.Latitude, q.Location.Longitude))
 		sb.WriteString(fmt.Sprintf("    Full addr:    %s\n", q.Location.FullAddress))
 	} else if locErr != nil {

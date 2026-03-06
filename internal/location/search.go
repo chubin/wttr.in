@@ -1,6 +1,9 @@
 package location
 
+import "github.com/sirupsen/logrus"
+
 type Provider interface {
+	Name() string
 	Query(location string) (*Location, error)
 }
 
@@ -30,6 +33,7 @@ func (s *Searcher) Search(location string) (*Location, error) {
 	)
 
 	for _, p := range s.providers {
+		logrus.Debugln("querying ", p.Name())
 		result, err = p.Query(location)
 		if result != nil && err == nil {
 			return result, nil

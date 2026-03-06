@@ -66,13 +66,21 @@ func NewCache(config *Config) (*Cache, error) {
 		db.UseErrorParser()
 	}
 
-	return &Cache{
+	cache := &Cache{
 		config:        config,
 		db:            db,
 		indexField:    "name",
 		filesCacheDir: config.LocationCache,
 		searcher:      NewSearcher(config),
-	}, nil
+	}
+
+	// Initialize the cache.
+	err = cache.InitDB(false)
+	if err != nil {
+		return nil, err
+	}
+
+	return cache, nil
 }
 
 // Resolve returns location information for specified location.

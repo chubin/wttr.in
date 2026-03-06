@@ -6,6 +6,8 @@ import (
 	"net/http"
 	"strings"
 	"time"
+
+	"github.com/sirupsen/logrus"
 )
 
 // WeatherClient is a struct that implements the Weatherer interface to fetch weather data
@@ -34,6 +36,8 @@ func (wc *WeatherClient) GetWeather(lat, lon float64, lang string) ([]byte, erro
 	client := &http.Client{
 		Timeout: 10 * time.Second, // Set a timeout to avoid hanging indefinitely
 	}
+
+	logrus.Debugln("[WeatherClient] accessing ", url)
 
 	// Perform the GET request
 	resp, err := client.Get(url)

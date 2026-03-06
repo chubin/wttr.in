@@ -14,6 +14,7 @@ type locationOpenCage struct {
 			Lat float64 `db:"lat"`
 			Lng float64 `db:"lng"`
 		}
+		Country  string `json:"country"`
 		Fullname string `json:"formatted"`
 	} `json:"results"`
 }
