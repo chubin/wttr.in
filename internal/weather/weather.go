@@ -7,6 +7,7 @@ import (
 	"net"
 	"net/http"
 	"strings"
+	"time"
 
 	"github.com/chubin/wttr.go/internal/query"
 )
@@ -109,6 +110,14 @@ type FormatOutput struct {
 	ContentType string
 }
 
+// TimeTracker holds timing information for each step in the pipeline.
+type TimeTracker struct {
+	StepTimes []struct {
+		Step string
+		Time time.Duration
+	}
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////
 
 // WeatherService struct holds the components necessary for processing a query.
@@ -158,9 +167,17 @@ func getClientIP(r *http.Request) string {
 
 // WeatherHandler processes incoming weather queries.
 func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+	startTime := time.Now()
+	timetracker := TimeTracker{}
 
+	ctx := r.Context()
+	start := time.Now()
 	opts, err := s.QueryParser.Parse(ctx, r.URL.RawQuery)
+	timetracker.StepTimes = append(timetracker.StepTimes, struct {
+		Step string
+		Time time.Duration
+	}{"Parse query options", time.Since(start)})
+
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Failed to parse query options: %s", err), http.StatusBadRequest)
 		return
@@ -169,7 +186,7 @@ func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) 
 	clientIP := getClientIP(r)
 
 	// ── 1. Determine location string from path ───────────────────────────────
-	// Supports /Paris, /Paris?0T, /Moscow.png?format=j2, / for auto-detect
+	start = time.Now()
 	path := strings.Trim(r.URL.Path, "/")
 	if strings.HasSuffix(path, ".png") || strings.HasSuffix(path, ".jpg") {
 		path = strings.TrimSuffix(path, ".png")
@@ -179,8 +196,13 @@ func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) 
 
 	var locStr string
 	autoDetect := (path == "" || path == ":help" || path == "help") // add more special paths if needed
+	timetracker.StepTimes = append(timetracker.StepTimes, struct {
+		Step string
+		Time time.Duration
+	}{"Determine location string from path", time.Since(start)})
 
 	// ── 2. Get IP-based data (always — useful for fallback + logging) ────────
+	start = time.Now()
 	var ipData *IPData
 	var errIP error
 	if autoDetect || path == "" {
@@ -194,15 +216,25 @@ func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) 
 		}
 		// If IP lookup fails → locStr stays "", will error later
 	}
+	timetracker.StepTimes = append(timetracker.StepTimes, struct {
+		Step string
+		Time time.Duration
+	}{"Get IP-based data", time.Since(start)})
 
 	// ── 3. Override with explicit path location if provided ──────────────────
+	start = time.Now()
 	if !autoDetect && path != "" {
 		locStr = path
 		// Optional: reset ipData to nil or keep for logging
 		ipData = nil
 	}
+	timetracker.StepTimes = append(timetracker.StepTimes, struct {
+		Step string
+		Time time.Duration
+	}{"Override with explicit path location if provided", time.Since(start)})
 
 	// ── 4. Resolve final Location (geocode locStr) ───────────────────────────
+	start = time.Now()
 	var location *Location
 	var errLoc error
 	if locStr != "" {
@@ -216,8 +248,13 @@ func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) 
 		http.Error(w, "No location provided and IP detection failed", http.StatusBadRequest)
 		return
 	}
+	timetracker.StepTimes = append(timetracker.StepTimes, struct {
+		Step string
+		Time time.Duration
+	}{"Resolve final Location (geocode locStr)", time.Since(start)})
 
 	// ── 5. Fetch weather data ────────────────────────────────────────────────
+	start = time.Now()
 	var weatherBytes []byte
 	var errWeather error
 	if location != nil {
@@ -228,8 +265,13 @@ func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) 
 			// return
 		}
 	}
+	timetracker.StepTimes = append(timetracker.StepTimes, struct {
+		Step string
+		Time time.Duration
+	}{"Fetch weather data", time.Since(start)})
 
 	// ── 6. Build complete Query ──────────────────────────────────────────────
+	start = time.Now()
 	query := Query{
 		ClientData: &ClientData{
 			ClientIP:    clientIP,
@@ -240,6 +282,10 @@ func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) 
 		Location: location,
 		Weather:  (*WeatherData)(&weatherBytes),
 	}
+	timetracker.StepTimes = append(timetracker.StepTimes, struct {
+		Step string
+		Time time.Duration
+	}{"Build complete Query", time.Since(start)})
 
 	// ── Debug check – AFTER everything is resolved ───────────────────────────
 	debugRequested := opts.Debug ||
@@ -247,11 +293,12 @@ func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) 
 		r.Header.Get("X-Debug") == "1"
 
 	if debugRequested {
-		s.serveDebugInfo(w, r, &query, locStr, errIP, errLoc, errWeather)
+		s.serveDebugInfo(w, r, &query, locStr, errIP, errLoc, errWeather, &timetracker)
 		return
 	}
 
 	// ── Renderer + Formatter pipeline (unchanged from previous step) ─────────
+	start = time.Now()
 	renderer := selectRenderer(opts.Format)
 	formatter := selectFormatter(opts.Format)
 
@@ -266,6 +313,10 @@ func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) 
 		http.Error(w, fmt.Sprintf("Formatting failed: %v", err), http.StatusInternalServerError)
 		return
 	}
+	timetracker.StepTimes = append(timetracker.StepTimes, struct {
+		Step string
+		Time time.Duration
+	}{"Renderer and Formatter pipeline", time.Since(start)})
 
 	w.Header().Set("Content-Type", formatOutput.ContentType)
 	// Optional: short cache — weather usually stable for 5–15 min
@@ -276,6 +327,12 @@ func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) 
 		http.Error(w, "Failed to write response", http.StatusInternalServerError)
 		return
 	}
+
+	totalDuration := time.Since(startTime)
+	timetracker.StepTimes = append(timetracker.StepTimes, struct {
+		Step string
+		Time time.Duration
+	}{"Total", totalDuration})
 }
 
 func (s *WeatherService) serveDebugInfo(
@@ -284,6 +341,7 @@ func (s *WeatherService) serveDebugInfo(
 	q *Query,
 	requestedLocStr string,
 	ipErr, locErr, weatherErr error,
+	timetracker *TimeTracker,
 ) {
 	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 
@@ -340,6 +398,12 @@ func (s *WeatherService) serveDebugInfo(
 		sb.WriteString(fmt.Sprintf("  Fetch error: %v\n", weatherErr))
 	} else {
 		sb.WriteString("  Not fetched (no valid location)\n")
+	}
+	sb.WriteString("\n")
+
+	sb.WriteString("Time Tracking:\n")
+	for _, timeStep := range timetracker.StepTimes {
+		sb.WriteString(fmt.Sprintf("  %s: %v\n", timeStep.Step, timeStep.Time))
 	}
 
 	fmt.Fprint(w, sb.String())
