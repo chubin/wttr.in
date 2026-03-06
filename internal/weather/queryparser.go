@@ -1,9 +1,7 @@
 package weather
 
 import (
-	"bytes"
 	"context"
-	"encoding/json"
 	"fmt"
 
 	"github.com/chubin/wttr.go/internal/options"
@@ -31,20 +29,7 @@ func (p *strictQueryParser) Parse(ctx context.Context, queryString string) (*que
 		return nil, err
 	}
 
-	// Step 2: convert map → JSON → query.Options struct
-	jsonBytes, err := json.Marshal(rawMap)
-	if err != nil {
-		return nil, fmt.Errorf("failed to marshal parsed options to JSON: %w", err)
-	}
-
-	var opts query.Options
-	decoder := json.NewDecoder(bytes.NewReader(jsonBytes))
-	decoder.DisallowUnknownFields() // optional: fail if map has keys not in struct
-	if err := decoder.Decode(&opts); err != nil {
-		return nil, fmt.Errorf("failed to unmarshal into query.Options: %w", err)
-	}
-
-	return &opts, nil
+	return query.ApplyParsedMap(rawMap)
 }
 
 // MustParse implements QueryParser.MustParse
