@@ -35,16 +35,15 @@ type Cache struct {
 }
 
 type Config struct {
-	LocationCacheType string
-	LocationCacheDB   string
-	LocationCache     string
-	IPCacheType       string
+	LocationCacheType string `yaml:"locationCacheType"`
+	LocationCacheDB   string `yaml:"locationCacheDb"`
+	LocationCache     string `yaml:"locationCache"`
 	NominatimServers  []struct {
-		Name  string
-		Type  string
-		URL   string
-		Token string
-	}
+		Name  string `yaml:"name"`
+		Type  string `yaml:"type"`
+		URL   string `yaml:"url"`
+		Token string `yaml:"token"`
+	} `yaml:"nominatim"`
 }
 
 // NewCache returns new cache reader for the specified config.
@@ -176,7 +175,7 @@ func (c *Cache) readFromCacheDB(addr string) (*Location, error) {
 
 func (c *Cache) Put(addr string, loc *Location) error {
 	log.Infoln("geo/location: storing in cache:", loc)
-	if c.config.IPCacheType == CacheTypeDB {
+	if c.config.LocationCacheType == CacheTypeDB {
 		return c.putToCacheDB(loc)
 	}
 

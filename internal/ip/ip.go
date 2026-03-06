@@ -43,9 +43,9 @@ func (l *Address) String() string {
 }
 
 type Config struct {
-	IPCacheDB   string
-	IPCache     string
-	IPCacheType string
+	IPCacheDB   string `yaml:"ipCacheDb"`
+	IPCache     string `yaml:"ipCache"`
+	IPCacheType string `yaml:"ipCacheType"`
 }
 
 // Cache provides access to the IP Geodata cache.
