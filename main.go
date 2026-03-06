@@ -1,10 +1,13 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/sirupsen/logrus"
 
 	"github.com/chubin/wttr.go/internal/config"
 	"github.com/chubin/wttr.go/internal/generate"
@@ -67,18 +70,40 @@ func srv() {
 }
 
 func main() {
-	if len(os.Args) < 2 {
-		fmt.Println("Usage: CMD {gen|srv}")
-		os.Exit(0)
+	flagDebug := flag.Bool("debug", false, "Enable debug logging")
+	flag.Parse()
+	debug = *flagDebug
+
+	// Configure logrus
+	if debug {
+		logrus.SetLevel(logrus.DebugLevel)
+	} else {
+		logrus.SetLevel(logrus.InfoLevel)
+	}
+	// Optional: Set output format
+	logrus.SetFormatter(&logrus.TextFormatter{
+		FullTimestamp: true,
+	})
+
+	// Check the remaining arguments after flag parsing
+	if len(flag.Args()) < 1 {
+		logrus.Error("Usage: CMD {gen|srv}")
+		os.Exit(1)
 	}
 
-	if os.Args[1] == "srv" {
+	// Use flag.Args() instead of os.Args to access non-flag arguments
+	switch flag.Args()[0] {
+	case "srv":
+		logrus.Info("Starting server...")
 		srv()
-	}
-	if os.Args[1] == "gen" {
+	case "gen":
+		logrus.Info("Generating options and parser...")
 		err := generate.GenerateOptionsAndParser()
 		if err != nil {
-			fmt.Println(err)
+			logrus.Error(err)
 		}
+	default:
+		logrus.Error("Invalid command. Usage: CMD {gen|srv}")
+		os.Exit(1)
 	}
 }
