@@ -2,6 +2,7 @@ package pipeline
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/chubin/wttr.go/internal/query"
@@ -109,6 +110,23 @@ func NewQueryProcessor(opts query.Options) *QueryProcessor {
 	}
 }
 
+// Process runs the pipeline to process the query and produce the final output.
+func (p *QueryProcessor) Process(query Query) (FormatOutput, error) {
+	// Step 1: Render the query data into an intermediate format (ANSI)
+	renderOutput, err := p.Renderer.Render(query)
+	if err != nil {
+		return FormatOutput{}, err
+	}
+
+	// Step 2: Format the rendered output into the final format
+	formatOutput, err := p.Formatter.Format(renderOutput)
+	if err != nil {
+		return FormatOutput{}, err
+	}
+
+	return formatOutput, nil
+}
+
 // RenderOutput represents the intermediate output from a renderer (ANSI format).
 type RenderOutput struct {
 	Content []byte
@@ -119,6 +137,8 @@ type FormatOutput struct {
 	Content     []byte
 	ContentType string
 }
+
+////////////////////////////////////////////////////////////////////////////////////////
 
 // WeatherService struct holds the components necessary for processing a query.
 type WeatherService struct {
@@ -138,29 +158,12 @@ func NewWeatherService(weatherer Weatherer, locator Locator, ipLocator IPLocator
 	}
 }
 
-// Process runs the pipeline to process the query and produce the final output.
-func (p *QueryProcessor) Process(query Query) (FormatOutput, error) {
-	// Step 1: Render the query data into an intermediate format (ANSI)
-	renderOutput, err := p.Renderer.Render(query)
-	if err != nil {
-		return FormatOutput{}, err
-	}
-
-	// Step 2: Format the rendered output into the final format
-	formatOutput, err := p.Formatter.Format(renderOutput)
-	if err != nil {
-		return FormatOutput{}, err
-	}
-
-	return formatOutput, nil
-}
-
 // HTTP Handler for processing incoming weather queries.
 func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) {
 	// Parse incoming HTTP query into Options
-	opts, err := parseQueryOptions(r)
+	opts, err := s.QueryParser.Parse(context.Background(), r.URL.RawQuery)
 	if err != nil {
-		http.Error(w, "Failed to parse query options", http.StatusBadRequest)
+		http.Error(w, fmt.Sprintf("Failed to parse query options: %s", err), http.StatusBadRequest)
 		return
 	}
 
