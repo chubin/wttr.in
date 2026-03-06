@@ -98,38 +98,6 @@ type Query struct {
 	Weather    *WeatherData
 }
 
-type QueryProcessor struct {
-	Renderer  Renderer
-	Formatter Formatter
-}
-
-func NewQueryProcessor(opts query.Options) *QueryProcessor {
-	renderer := selectRenderer(opts.Format)
-	formatter := selectFormatter(opts.Format)
-
-	return &QueryProcessor{
-		Renderer:  renderer,
-		Formatter: formatter,
-	}
-}
-
-// Process runs the pipeline to process the query and produce the final output.
-func (p *QueryProcessor) Process(query Query) (FormatOutput, error) {
-	// Step 1: Render the query data into an intermediate format (ANSI)
-	renderOutput, err := p.Renderer.Render(query)
-	if err != nil {
-		return FormatOutput{}, err
-	}
-
-	// Step 2: Format the rendered output into the final format
-	formatOutput, err := p.Formatter.Format(renderOutput)
-	if err != nil {
-		return FormatOutput{}, err
-	}
-
-	return formatOutput, nil
-}
-
 // RenderOutput represents the intermediate output from a renderer (ANSI format).
 type RenderOutput struct {
 	Content []byte
