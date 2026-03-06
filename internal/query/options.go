@@ -10,115 +10,115 @@ import (
 type Options struct {
 
 	// Show only current weather
-	CurrentOnly bool `json:"current_only"`
+	CurrentOnly bool `json:"current_only,omitempty"`
 
 	// Show current weather and today's forecast
-	CurrentPlusToday bool `json:"current_plus_today"`
+	CurrentPlusToday bool `json:"current_plus_today,omitempty"`
 
 	// Show current weather, today's, and tomorrow's forecast
-	CurrentPlusTwoDays bool `json:"current_plus_two_days"`
+	CurrentPlusTwoDays bool `json:"current_plus_two_days,omitempty"`
 
 	// Show current weather, forecast for today, tomorrow, and day after
-	CurrentPlusThreeDays bool `json:"current_plus_three_days"`
+	CurrentPlusThreeDays bool `json:"current_plus_three_days,omitempty"`
 
 	// Force ANSI output format for terminals
-	AnsiOutput bool `json:"ansi_output"`
+	AnsiOutput bool `json:"ansi_output,omitempty"`
 
 	// Restrict output to standard console font glyphs
-	StandardFont bool `json:"standard_font"`
+	StandardFont bool `json:"standard_font,omitempty"`
 
 	// Do not show the 'Follow' line
-	NoFollow bool `json:"no_follow"`
+	NoFollow bool `json:"no_follow,omitempty"`
 
 	// Use metric (SI) units (default everywhere except US) (Overridden by 'uscs' if specified; default is 'uscs' in US)
-	Metric bool `json:"metric"`
+	Metric bool `json:"metric,omitempty"`
 
 	// Use USCS units (default in the US) (Default is 'uscs' in US, 'metric' elsewhere)
-	Uscs bool `json:"uscs"`
+	Uscs bool `json:"uscs,omitempty"`
 
 	// Show wind speed in meters per second
-	WindMs bool `json:"wind_ms"`
+	WindMs bool `json:"wind_ms,omitempty"`
 
 	// Show only day and night forecast (narrow version) (Optimizes output for narrow displays)
-	Narrow bool `json:"narrow"`
+	Narrow bool `json:"narrow,omitempty"`
 
 	// Add a frame around the PNG output (Applicable only for PNG output)
-	Frame bool `json:"frame"`
+	Frame bool `json:"frame,omitempty"`
 
 	// Quiet version, no 'Weather report' text
-	Quiet bool `json:"quiet"`
+	Quiet bool `json:"quiet,omitempty"`
 
 	// Superquiet version, no 'Weather report' text or city name
-	Superquiet bool `json:"superquiet"`
+	Superquiet bool `json:"superquiet,omitempty"`
 
 	// Update interval for cyclic location selection
-	Period int `json:"period"`
+	Period int `json:"period,omitempty"`
 
 	// Random number, used to bypass the first caching layer (alias: dummy, nonce)
-	Random int `json:"random"`
+	Random int `json:"random,omitempty"`
 
 	// Random number, used to bypass the first caching layer (alias: random, nonce)
-	Dummy int `json:"dummy"`
+	Dummy int `json:"dummy,omitempty"`
 
 	// Random number, used to bypass the first caching layer (alias: dummy, random)
-	Nonce int `json:"nonce"`
+	Nonce int `json:"nonce,omitempty"`
 
 	// Switch off terminal color sequences (no colors)
-	NoColor bool `json:"no_color"`
+	NoColor bool `json:"no_color,omitempty"`
 
 	// Specify output language (Languages from 'az' to 'zh' have partial support; others have full support)
-	Lang string `json:"lang"`
+	Lang string `json:"lang,omitempty"`
 
 	// Set background color for PNG output in hex (RRGGBB format) (Applicable only for PNG output)
-	Background string `json:"background"`
+	Background string `json:"background,omitempty"`
 
 	// Specify output format (Used for status bars in tools like tmux)
-	Format string `json:"format"`
+	Format string `json:"format,omitempty"`
 
 	// Force ANSI output mode (Enables ANSI formatting regardless of terminal capabilities)
-	ForceAnsi bool `json:"force-ansi"`
+	ForceAnsi bool `json:"force-ansi,omitempty"`
 
 	// Use dumb terminal mode (Disables advanced terminal features)
-	Dumb bool `json:"dumb"`
+	Dumb bool `json:"dumb,omitempty"`
 
 	// Use metric units for measurements (Sets units to metric system; 'M' also enables milliseconds for wind speed)
-	UseMetric bool `json:"use_metric"`
+	UseMetric bool `json:"use_metric,omitempty"`
 
 	// Use milliseconds for wind speed (requires metric units) (Only active when used with 'M' flag for metric units)
-	UseMsForWind bool `json:"use_ms_for_wind"`
+	UseMsForWind bool `json:"use_ms_for_wind,omitempty"`
 
 	// Use imperial units for measurements (Sets units to imperial system)
-	UseImperial bool `json:"use_imperial"`
+	UseImperial bool `json:"use_imperial,omitempty"`
 
 	// Invert colors in output (Swaps foreground and background colors)
-	InvertedColors bool `json:"inverted_colors"`
+	InvertedColors bool `json:"inverted_colors,omitempty"`
 
 	// Set transparency level for PNG output (Applicable only for PNG output; 255 = not transparent)
-	Transparency int `json:"transparency"`
+	Transparency int `json:"transparency,omitempty"`
 
 	// Disable terminal-specific formatting (Output is not tailored to terminal environment)
-	NoTerminal bool `json:"no-terminal"`
+	NoTerminal bool `json:"no-terminal,omitempty"`
 
 	// Add padding to output (Adds extra spacing around output content)
-	Padding bool `json:"padding"`
+	Padding bool `json:"padding,omitempty"`
 
 	// Set the number of forecast days to display (Limits forecast output to the specified number of days)
-	Days int `json:"days"`
+	Days int `json:"days,omitempty"`
 
 	// Disable captions in output (Removes descriptive text or labels from output)
-	NoCaption bool `json:"no-caption"`
+	NoCaption bool `json:"no-caption,omitempty"`
 
 	// Hide city name in output (Omits location or city name from display)
-	NoCity bool `json:"no-city"`
+	NoCity bool `json:"no-city,omitempty"`
 
 	// Disable follow line feature (Prevents automatic line following in output)
-	NoFollowLine bool `json:"no-follow-line"`
+	NoFollowLine bool `json:"no-follow-line,omitempty"`
 
 	// Workaround for multiple usage of the question mark in the query
-	QuestionMark bool `json:"question_mark"`
+	QuestionMark bool `json:"question_mark,omitempty"`
 
 	// Show debug output
-	Debug bool `json:"debug"`
+	Debug bool `json:"debug,omitempty"`
 }
 
 // ApplyParsedMap populates Options from a validated map[string]string.

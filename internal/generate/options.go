@@ -26,7 +26,7 @@ import (
 type Options struct {
 {{range .QueryOptions}}
 	// {{.Description}}{{if .Note}} ({{.Note}}){{end}}
-	{{.FieldName}} {{.FieldType}} ` + "`json:\"{{.Name}}\"`" + `
+	{{.FieldName}} {{.FieldType}} ` + "`json:\"{{.Name}},omitempty\"`" + `
 {{end}}
 }
 
