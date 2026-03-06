@@ -1,13 +1,8 @@
 package location
 
 import (
-	"database/sql"
-	"errors"
 	"fmt"
-	"log"
 	"os"
-	"path/filepath"
-	"strings"
 
 	"github.com/samonzeweb/godb"
 	"github.com/samonzeweb/godb/adapters/sqlite"
@@ -17,13 +12,15 @@ import (
 // If reset is true, the DB cache is created from scratch.
 //
 //nolint:funlen,cyclop
-func (c *Cache) ConvertCache(reset bool) error {
+func (c *Cache) InitDB(reset bool) error {
 	var (
-		dbfile     = c.config.LocationCacheDB
-		tableName  = "Location"
-		cacheFiles = c.filesCacheDir
-		known      = map[string]bool{}
+		dbfile    = c.config.LocationCacheDB
+		tableName = "Location"
 	)
+
+	if !reset && fileExists(dbfile) {
+		return nil
+	}
 
 	if reset {
 		err := removeDBIfExists(dbfile)
@@ -37,81 +34,10 @@ func (c *Cache) ConvertCache(reset bool) error {
 		return err
 	}
 
-	if reset {
-		err = createTable(db, tableName)
-		if err != nil {
-			return err
-		}
-	}
-
-	log.Println("listing cache entries...")
-	files, err := filepath.Glob(filepath.Join(cacheFiles, "*"))
+	err = createTable(db, tableName)
 	if err != nil {
 		return err
 	}
-
-	log.Printf("going to convert %d entries\n", len(files))
-
-	block := []Location{}
-	for i, file := range files {
-		ip := filepath.Base(file)
-		loc, err := c.Read(ip)
-		if err != nil {
-			log.Println("invalid entry for", ip)
-
-			continue
-		}
-
-		// Skip too long location names.
-		if len(loc.Name) > 25 {
-			continue
-		}
-
-		// Skip duplicates.
-		if known[loc.Name] {
-			log.Println("skipping", loc.Name)
-
-			continue
-		}
-
-		singleLocation := Location{}
-		err = db.Select(&singleLocation).
-			Where("name = ?", loc.Name).
-			Do()
-		if !errors.Is(err, sql.ErrNoRows) {
-			log.Println("found in db:", loc.Name)
-
-			continue
-		}
-
-		known[loc.Name] = true
-
-		// Skip some invalid names.
-		if strings.Contains(loc.Name, "\n") {
-			continue
-		}
-
-		block = append(block, *loc)
-		if i%1000 != 0 || i == 0 {
-			continue
-		}
-
-		log.Println("going to insert new entries")
-		err = db.BulkInsert(&block).Do()
-		if err != nil {
-			return err
-		}
-		block = []Location{}
-		log.Println("converted", i+1, "entries")
-	}
-
-	// inserting the rest.
-	err = db.BulkInsert(&block).Do()
-	if err != nil {
-		return err
-	}
-
-	log.Println("converted", len(files), "entries")
 
 	return nil
 }
@@ -142,4 +68,15 @@ func removeDBIfExists(filename string) error {
 	}
 
 	return os.Remove(filename)
+}
+
+func fileExists(filename string) bool {
+	_, err := os.Stat(filename)
+	if err != nil {
+		if os.IsNotExist(err) {
+			return false
+		}
+		return true
+	}
+	return true
 }
