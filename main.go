@@ -6,34 +6,36 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/chubin/wttr.go/internal/config"
 	"github.com/chubin/wttr.go/internal/generate"
+	"github.com/chubin/wttr.go/internal/ip"
 	"github.com/chubin/wttr.go/internal/location"
 	"github.com/chubin/wttr.go/internal/options"
 	"github.com/chubin/wttr.go/internal/weather"
 )
 
+var debug = true
+
 func srv() {
-	locationCache, err := location.NewCache(
-		&location.Config{
-			LocationCacheType: "",
-			LocationCacheDB:   "",
-			LocationCache:     "",
-			IPCacheType:       "",
-			NominatimServers: []struct {
-				Name  string
-				Type  string
-				URL   string
-				Token string
-			}{
-				{
-					"",
-					"",
-					"",
-					"",
-				},
-			},
-		},
-	)
+	cfg, err := config.LoadFromYAML("config.yaml")
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	if debug {
+		configYAML, err := cfg.MarshalYAML()
+		if err != nil {
+			log.Fatalln(err)
+		}
+		log.Println("loaded config:\n" + string(configYAML))
+	}
+
+	locationCache, err := location.NewCache(cfg.Geo)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	ipCache, err := ip.NewCache(cfg.IP)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -49,7 +51,7 @@ func srv() {
 			os.Getenv("PROXY_KEY"),
 		)),
 		weather.NewCacheLocator(locationCache),
-		weather.NewIPCacheLocator(nil),
+		weather.NewIPCacheLocator(ipCache),
 		weather.NewQueryParser(wttrInOptions),
 	)
 
