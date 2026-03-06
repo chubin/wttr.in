@@ -14,13 +14,13 @@ func NewIPCacheLocator(cache *ip.Cache) IPLocator {
 	return &ipCacheLocator{cache}
 }
 
-func (l *ipCacheLocator) GetIPData(ip string) (IPData, error) {
+func (l *ipCacheLocator) GetIPData(ip string) (*IPData, error) {
 	addr, err := l.cache.Read(ip)
 	if err != nil {
-		return IPData{}, err
+		return &IPData{}, err
 	}
 
-	return IPData{
+	return &IPData{
 		IP:          addr.IP,
 		CountryCode: addr.CountryCode,
 		Country:     addr.Country,
