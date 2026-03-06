@@ -76,7 +76,7 @@ func main() {
 		srv()
 	}
 	if os.Args[1] == "gen" {
-		err := generate.GenerateOptions()
+		err := generate.GenerateOptionsAndParser()
 		if err != nil {
 			fmt.Println(err)
 		}
