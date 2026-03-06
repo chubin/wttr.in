@@ -8,11 +8,15 @@ import (
 
 	"github.com/chubin/wttr.go/internal/ip"
 	"github.com/chubin/wttr.go/internal/location"
+	"github.com/chubin/wttr.go/internal/weather"
 )
 
 type Config struct {
-	Geo *location.Config
-	IP  *ip.Config
+	Geo     *location.Config
+	IP      *ip.Config
+	Weather struct {
+		WWO *weather.WWOConfig
+	}
 }
 
 // LoadFromYAML loads configuration from a YAML file and returns a pointer to Config

@@ -10,6 +10,11 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+type WWOConfig struct {
+	BaseURL string `yaml:"baseUrl"`
+	Key     string `yaml:"key"`
+}
+
 // WeatherClient is a struct that implements the Weatherer interface to fetch weather data
 // from a specified HTTP endpoint using latitude, longitude, and language parameters.
 type WeatherClient struct {
@@ -19,7 +24,18 @@ type WeatherClient struct {
 // NewWeatherClient creates a new instance of WeatherClient with the provided base URL.
 // The baseURL should contain placeholders for latitude, longitude, and language (e.g., "lat={lat}&lon={lon}&lang={lang}").
 // Parameters will be replaced during the request.
-func NewWeatherClient(baseURL string) *WeatherClient {
+func NewWeatherClient(cfg *WWOConfig) *WeatherClient {
+	if cfg.BaseURL == "" {
+		panic("empty baseURL")
+	}
+
+	if cfg.Key == "" {
+		panic("missing/empty key")
+	}
+
+	baseURL := cfg.BaseURL
+	baseURL = strings.Replace(baseURL, "{key}", cfg.Key, 1)
+
 	return &WeatherClient{baseURL: baseURL}
 }
 

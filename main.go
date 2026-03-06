@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -49,10 +48,7 @@ func srv() {
 	}
 
 	ws := weather.NewWeatherService(
-		weather.NewWeatherClient(fmt.Sprintf(
-			"http://127.0.0.1:5001/premium/v1/weather.ashx?key=%s&q={lat},{lon}&format=json&num_of_days=3&includelocation=yes&lang={lang}",
-			os.Getenv("PROXY_KEY"),
-		)),
+		weather.NewWeatherClient(cfg.Weather.WWO),
 		weather.NewCacheLocator(locationCache),
 		weather.NewIPCacheLocator(ipCache),
 		weather.NewQueryParser(wttrInOptions),
