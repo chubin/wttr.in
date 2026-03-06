@@ -373,6 +373,12 @@ query_options:
     default: false
     active: true
 
+  - name: debug
+    description: "Show debug output"
+    type: boolean
+    default: false
+    active: true
+
 format_specifiers:
   - specifier: "%c"
     description: "Weather condition"
