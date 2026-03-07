@@ -34,7 +34,7 @@ type Renderer interface {
 
 // Formatter interface for converting rendered output into the final format.
 type Formatter interface {
-	Format(output RenderOutput) (FormatOutput, error)
+	Format(output RenderOutput) (*FormatOutput, error)
 }
 
 // QueryParser parses wttr.in / curl wttr.in style HTTP query strings
@@ -276,7 +276,6 @@ func (s *WeatherService) serveFromCache(w http.ResponseWriter, e *CacheEntry) {
 // Does NOT write to ResponseWriter — that stays in handler.
 func (s *WeatherService) computeResponse(
 	ctx context.Context, r *http.Request,
-	opts *query.Options,
 	tracker *TimeTracker,
 ) (*FormatOutput, error) {
 	debugRequested := r.URL.Query().Get("debug") != ""
@@ -369,7 +368,7 @@ func (s *WeatherService) computeResponse(
 		return nil, fmt.Errorf("render failed: %w", err)
 	}
 
-	formatOut, err := formatter.Format(renderOut)
+	formatOut, err = formatter.Format(renderOut)
 	if err != nil {
 		return nil, fmt.Errorf("format failed: %w", err)
 	}
@@ -383,7 +382,7 @@ func (s *WeatherService) computeResponse(
 		}, nil
 	}
 
-	return &formatOut, nil
+	return formatOut, nil
 }
 
 func isAutoDetectPath(p string) bool {
@@ -470,23 +469,27 @@ func prettyPrintOptions(o *query.Options) string {
 // selectRenderer chooses the appropriate renderer based on the format option.
 func selectRenderer(format string) Renderer {
 	switch format {
+	case "":
+		return &V1Renderer{} // If no format specified, use v1 renderer
 	case "v1":
 		return &V1Renderer{}
 	case "v2":
 		return &V2Renderer{}
-	case "oneline":
-		return &OnelineRenderer{}
 	case "j1":
 		return &J1Renderer{}
 	case "j2":
 		return &J2Renderer{}
 	default:
-		return &V1Renderer{} // Default to v1 renderer
+		return &OnelineRenderer{} // Default to oneline renderer
 	}
 }
 
 // selectFormatter chooses the appropriate formatter based on the format option.
 func selectFormatter(format string) Formatter {
+	if format == "j1" || format == "j2" {
+		format = "json"
+	}
+
 	switch format {
 	case "terminal":
 		return &TerminalFormatter{}
@@ -526,30 +529,32 @@ func (r *OnelineRenderer) Render(query Query) (RenderOutput, error) {
 // Formatter Implementations (Stubs)
 type TerminalFormatter struct{}
 
-func (f *TerminalFormatter) Format(output RenderOutput) (FormatOutput, error) {
+func (f *TerminalFormatter) Format(output RenderOutput) (*FormatOutput, error) {
 	// Stub: To be implemented
-	return FormatOutput{}, nil
+	return &FormatOutput{}, nil
 }
 
 type BrowserFormatter struct{}
 
-func (f *BrowserFormatter) Format(output RenderOutput) (FormatOutput, error) {
+func (f *BrowserFormatter) Format(output RenderOutput) (*FormatOutput, error) {
 	// Stub: To be implemented
-	return FormatOutput{}, nil
+	return &FormatOutput{}, nil
 }
 
 type PNGFormatter struct{}
 
-func (f *PNGFormatter) Format(output RenderOutput) (FormatOutput, error) {
+func (f *PNGFormatter) Format(output RenderOutput) (*FormatOutput, error) {
 	// Stub: To be implemented
-	return FormatOutput{}, nil
+	return &FormatOutput{}, nil
 }
 
 type JSONFormatter struct{}
 
-func (f *JSONFormatter) Format(output RenderOutput) (FormatOutput, error) {
-	// Stub: To be implemented
-	return FormatOutput{}, nil
+func (f *JSONFormatter) Format(output RenderOutput) (*FormatOutput, error) {
+	return &FormatOutput{
+		Content:     output.Content,
+		ContentType: "application/json",
+	}, nil
 }
 
 // Stub Functions to be Implemented Separately
