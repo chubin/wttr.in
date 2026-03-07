@@ -232,23 +232,8 @@ func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) 
 		}()
 	}
 
-	// 1. Parse options (cheap, always first)
-	opts, err := s.QueryParser.Parse(ctx, r.URL.RawQuery)
-	if err != nil {
-		s.Cacher.Remove(cacheKey)
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	tracker.Add("Options parsing", time.Since(overallStart))
-
-	// Here are we are ready to get the information from the upstream,
-	// based on the information provided in the options.
-	// ...
-	// ...
-	// ...
-
 	// 7. The heavy part — now extracted
-	formatOut, err := s.computeResponse(ctx, r, opts, &tracker)
+	formatOut, err := s.computeResponse(ctx, r, &tracker)
 	if err != nil {
 		s.Cacher.Remove(cacheKey)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -303,6 +288,13 @@ func (s *WeatherService) computeResponse(
 	path := r.URL.Path // cleanPath(r.URL.Path) // helper: trim / and extensions
 	autoDetect := isAutoDetectPath(path)
 
+	// 1. Parse options (cheap, always first)
+	opts, err := s.QueryParser.Parse(ctx, r.URL.RawQuery)
+	if err != nil {
+		return nil, err
+	}
+	tracker.Add("Options parsing", time.Since(start))
+
 	var locStr string
 	var ipData *IPData
 	if autoDetect {
@@ -334,6 +326,16 @@ func (s *WeatherService) computeResponse(
 		return nil, fmt.Errorf("location not found: %w", err)
 	}
 	tracker.Add("Geocode location", time.Since(start))
+
+	// Here are we are ready to get the information from the upstream,
+	// based on the information provided in the options.
+	// We also have information about the IP and Geolocation,
+	// which can be added to the headers.
+	// ...
+	isUpstream, formatOut, err := s.upstreamRouting(opts, r, ipData, location)
+	if isUpstream {
+		return formatOut, err
+	}
 
 	// ── Fetch weather ─────────────────────────────────────────────────────
 	start = time.Now()
