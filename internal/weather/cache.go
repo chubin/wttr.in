@@ -60,3 +60,15 @@ type Cacher interface {
 	// Optional for in-memory implementations, required for networked caches.
 	Close() error
 }
+
+// buildCacheKey generates a cache signature very similar to original wttr.in logic
+func buildCacheKey(r *http.Request) string {
+	ua := r.Header.Get("User-Agent")
+	host := r.Host
+	uri := r.RequestURI
+	ip := getClientIP(r)
+	lang := r.Header.Get("Accept-Language")
+
+	// You can keep it exactly like original:
+	return ua + ":" + host + uri + ":" + ip + ":" + lang
+}

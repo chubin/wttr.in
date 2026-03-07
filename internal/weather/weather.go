@@ -118,6 +118,16 @@ type TimeTracker struct {
 	}
 }
 
+func (tt *TimeTracker) Add(step string, t time.Duration) {
+	tt.StepTimes = append(tt.StepTimes, struct {
+		Step string
+		Time time.Duration
+	}{
+		Step: step,
+		Time: t,
+	})
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////
 
 // WeatherService struct holds the components necessary for processing a query.
@@ -173,112 +183,167 @@ func getClientIP(r *http.Request) string {
 	return r.RemoteAddr // worst case
 }
 
-// WeatherHandler processes incoming weather queries.
+// WeatherHandler is now much shorter — mainly orchestration + caching
 func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) {
-	startTime := time.Now()
-	timetracker := TimeTracker{}
-
 	ctx := r.Context()
-	start := time.Now()
-	opts, err := s.QueryParser.Parse(ctx, r.URL.RawQuery)
-	timetracker.StepTimes = append(timetracker.StepTimes, struct {
-		Step string
-		Time time.Duration
-	}{"Parse query options", time.Since(start)})
+	var (
+		bypassCache bool
+		cacheKey    string
+		entry       *CacheEntry
+		err         error
+	)
 
+	overallStart := time.Now()
+	tracker := TimeTracker{}
+
+	if r.URL.Query().Get("debug") != "" {
+		bypassCache = true
+	}
+
+	if !bypassCache {
+		// 3. Build cache key (must include everything that affects output)
+		cacheKey = buildCacheKey(r)
+
+		// 4. Fast path: cache hit
+		if entry := s.Cacher.Get(cacheKey); entry != nil {
+			s.serveFromCache(w, entry)
+			return
+		}
+
+		// 5. Coalescing: if someone else is already computing → wait
+		if s.Cacher.IsInProgress(cacheKey) {
+			entry, err := s.Cacher.WaitForCompletion(cacheKey, 12*time.Second)
+			if err == nil && entry != nil {
+				s.serveFromCache(w, entry)
+				return
+			}
+			// timeout → we'll compute it ourselves
+		}
+
+		// 6. Become the leader: mark in-progress and compute
+		s.Cacher.SetInProgress(cacheKey)
+
+		// Important: recover from panic to clean up in-progress flag
+		defer func() {
+			if rec := recover(); rec != nil {
+				s.Cacher.Remove(cacheKey)
+				panic(rec)
+			}
+		}()
+	}
+
+	// 1. Parse options (cheap, always first)
+	opts, err := s.QueryParser.Parse(ctx, r.URL.RawQuery)
 	if err != nil {
-		http.Error(w, fmt.Sprintf("Failed to parse query options: %s", err), http.StatusBadRequest)
+		s.Cacher.Remove(cacheKey)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	tracker.Add("Options parsing", time.Since(overallStart))
+
+	// Here are we are ready to get the information from the upstream,
+	// based on the information provided in the options.
+	// ...
+	// ...
+	// ...
+
+	// 7. The heavy part — now extracted
+	formatOut, err := s.computeResponse(ctx, r, opts, &tracker)
+	if err != nil {
+		s.Cacher.Remove(cacheKey)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
+	// This information will not be visible,
+	// because the debug output is already in response.
+	tracker.Add("Total computation time", time.Since(overallStart))
+
+	entry = &CacheEntry{
+		Body:       formatOut.Content,
+		StatusCode: http.StatusOK,
+		Expires:    time.Now().Add(12 * time.Minute), // tune this TTL
+		Header: http.Header{
+			"Content-Type":  []string{formatOut.ContentType},
+			"Cache-Control": []string{"public, max-age=600"},
+		},
+	}
+
+	if !bypassCache {
+		// 8. Store successful result
+		s.Cacher.Set(cacheKey, *entry)
+	}
+
+	// 9. Send to client
+	s.serveFromCache(w, entry) // reuse same helper
+}
+
+func (s *WeatherService) serveFromCache(w http.ResponseWriter, e *CacheEntry) {
+	for k, vs := range e.Header {
+		w.Header()[k] = vs
+	}
+	w.WriteHeader(e.StatusCode)
+	w.Write(e.Body)
+}
+
+// computeResponse performs location resolution, weather fetch, rendering and formatting.
+// Returns ready-to-cache CacheEntry or error.
+// Does NOT write to ResponseWriter — that stays in handler.
+func (s *WeatherService) computeResponse(
+	ctx context.Context, r *http.Request,
+	opts *query.Options,
+	tracker *TimeTracker,
+) (*FormatOutput, error) {
+	debugRequested := r.URL.Query().Get("debug") != ""
+
 	clientIP := getClientIP(r)
 
-	// ── 1. Determine location string from path ───────────────────────────────
-	start = time.Now()
-	path := strings.Trim(r.URL.Path, "/")
-	if strings.HasSuffix(path, ".png") || strings.HasSuffix(path, ".jpg") {
-		path = strings.TrimSuffix(path, ".png")
-		path = strings.TrimSuffix(path, ".jpg")
-	}
-	// Special cases like /:help, moon, etc. can be added later
+	// ── Determine location string ────────────────────────────────────────
+	start := time.Now()
+	path := r.URL.Path // cleanPath(r.URL.Path) // helper: trim / and extensions
+	autoDetect := isAutoDetectPath(path)
 
 	var locStr string
-	autoDetect := (path == "" || path == ":help" || path == "help") // add more special paths if needed
-	timetracker.StepTimes = append(timetracker.StepTimes, struct {
-		Step string
-		Time time.Duration
-	}{"Determine location string from path", time.Since(start)})
-
-	// ── 2. Get IP-based data (always — useful for fallback + logging) ────────
-	start = time.Now()
 	var ipData *IPData
-	var errIP error
-	if autoDetect || path == "" {
+	if autoDetect {
+		var errIP error
 		ipData, errIP = s.IPLocator.GetIPData(clientIP)
 		if errIP == nil && ipData != nil {
 			locStr = ipData.City
 			if locStr == "" {
-				// fallback to coords if city missing
 				locStr = fmt.Sprintf("%s,%s", ipData.Latitude, ipData.Longitude)
 			}
 		}
-		// If IP lookup fails → locStr stays "", will error later
 	}
-	timetracker.StepTimes = append(timetracker.StepTimes, struct {
-		Step string
-		Time time.Duration
-	}{"Get IP-based data", time.Since(start)})
+	tracker.Add("Determine location string + IP lookup", time.Since(start))
 
-	// ── 3. Override with explicit path location if provided ──────────────────
-	start = time.Now()
+	// Explicit location overrides auto-detect
 	if !autoDetect && path != "" {
 		locStr = path
-		// Optional: reset ipData to nil or keep for logging
 		ipData = nil
 	}
-	timetracker.StepTimes = append(timetracker.StepTimes, struct {
-		Step string
-		Time time.Duration
-	}{"Override with explicit path location if provided", time.Since(start)})
 
-	// ── 4. Resolve final Location (geocode locStr) ───────────────────────────
-	start = time.Now()
-	var location *Location
-	var errLoc error
-	if locStr != "" {
-		location, errLoc = s.Locator.GetLocation(locStr)
-		// if errLoc != nil {
-		// 	http.Error(w, fmt.Sprintf("Location not found: %s", locStr), http.StatusNotFound)
-		// 	return
-		// }
-	} else {
-		// No location at all (very rare — IP failed and no path)
-		http.Error(w, "No location provided and IP detection failed", http.StatusBadRequest)
-		return
+	if locStr == "" {
+		return nil, fmt.Errorf("no location could be determined")
 	}
-	timetracker.StepTimes = append(timetracker.StepTimes, struct {
-		Step string
-		Time time.Duration
-	}{"Resolve final Location (geocode locStr)", time.Since(start)})
 
-	// ── 5. Fetch weather data ────────────────────────────────────────────────
+	// ── Geocode ───────────────────────────────────────────────────────────
 	start = time.Now()
-	var weatherBytes []byte
-	var errWeather error
-	if location != nil {
-		weatherBytes, errWeather = s.Weatherer.GetWeather(location.Latitude, location.Longitude, opts.Lang)
-		if errWeather != nil {
-			// // In production: consider fallback / cached / different provider
-			// http.Error(w, "Failed to retrieve weather data", http.StatusBadGateway)
-			// return
-		}
+	location, err := s.Locator.GetLocation(locStr)
+	if err != nil {
+		return nil, fmt.Errorf("location not found: %w", err)
 	}
-	timetracker.StepTimes = append(timetracker.StepTimes, struct {
-		Step string
-		Time time.Duration
-	}{"Fetch weather data", time.Since(start)})
+	tracker.Add("Geocode location", time.Since(start))
 
-	// ── 6. Build complete Query ──────────────────────────────────────────────
+	// ── Fetch weather ─────────────────────────────────────────────────────
+	start = time.Now()
+	weatherBytes, err := s.Weatherer.GetWeather(location.Latitude, location.Longitude, opts.Lang)
+	if err != nil {
+		return nil, fmt.Errorf("weather fetch failed: %w", err)
+	}
+	tracker.Add("Fetch weather data", time.Since(start))
+
+	// ── Build Query ───────────────────────────────────────────────────────
 	start = time.Now()
 	query := Query{
 		ClientData: &ClientData{
@@ -286,73 +351,49 @@ func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) 
 			ClientAgent: r.UserAgent(),
 		},
 		Options:  opts,
-		IPData:   ipData, // may be nil if explicit location was used
+		IPData:   ipData,
 		Location: location,
 		Weather:  (*WeatherData)(&weatherBytes),
 	}
-	timetracker.StepTimes = append(timetracker.StepTimes, struct {
-		Step string
-		Time time.Duration
-	}{"Build complete Query", time.Since(start)})
+	tracker.Add("Build Query object", time.Since(start))
 
-	// ── Debug check – AFTER everything is resolved ───────────────────────────
-	debugRequested := opts.Debug ||
-		r.URL.Query().Get("debug") != "" ||
-		r.Header.Get("X-Debug") == "1"
-
-	if debugRequested {
-		s.serveDebugInfo(w, r, &query, locStr, errIP, errLoc, errWeather, &timetracker)
-		return
-	}
-
-	// ── Renderer + Formatter pipeline (unchanged from previous step) ─────────
+	// ── Render + Format ───────────────────────────────────────────────────
 	start = time.Now()
 	renderer := selectRenderer(opts.Format)
 	formatter := selectFormatter(opts.Format)
 
-	renderOutput, err := renderer.Render(query)
+	renderOut, err := renderer.Render(query)
 	if err != nil {
-		http.Error(w, fmt.Sprintf("Rendering failed: %v", err), http.StatusInternalServerError)
-		return
+		return nil, fmt.Errorf("render failed: %w", err)
 	}
 
-	formatOutput, err := formatter.Format(renderOutput)
+	formatOut, err := formatter.Format(renderOut)
 	if err != nil {
-		http.Error(w, fmt.Sprintf("Formatting failed: %v", err), http.StatusInternalServerError)
-		return
+		return nil, fmt.Errorf("format failed: %w", err)
 	}
-	timetracker.StepTimes = append(timetracker.StepTimes, struct {
-		Step string
-		Time time.Duration
-	}{"Renderer and Formatter pipeline", time.Since(start)})
+	tracker.Add("Render + Format", time.Since(start))
 
-	w.Header().Set("Content-Type", formatOutput.ContentType)
-	// Optional: short cache — weather usually stable for 5–15 min
-	w.Header().Set("Cache-Control", "public, max-age=600")
-
-	_, err = w.Write(formatOutput.Content)
-	if err != nil {
-		http.Error(w, "Failed to write response", http.StatusInternalServerError)
-		return
+	if debugRequested {
+		debugInfo := getDebugInfo(r, &query, locStr, tracker)
+		return &FormatOutput{
+			Content:     []byte(debugInfo),
+			ContentType: "text/plain",
+		}, nil
 	}
 
-	totalDuration := time.Since(startTime)
-	timetracker.StepTimes = append(timetracker.StepTimes, struct {
-		Step string
-		Time time.Duration
-	}{"Total", totalDuration})
+	return &formatOut, nil
 }
 
-func (s *WeatherService) serveDebugInfo(
-	w http.ResponseWriter,
+func isAutoDetectPath(p string) bool {
+	return p == ""
+}
+
+func getDebugInfo(
 	r *http.Request,
 	q *Query,
 	requestedLocStr string,
-	ipErr, locErr, weatherErr error,
 	timetracker *TimeTracker,
-) {
-	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-
+) string {
 	var sb strings.Builder
 	sb.WriteString("=== Weather Query Debug ===\n\n")
 
@@ -378,8 +419,6 @@ func (s *WeatherService) serveDebugInfo(
 		sb.WriteString(fmt.Sprintf("    Region:     %s\n", q.IPData.Region))
 		sb.WriteString(fmt.Sprintf("    Country:    %s (%s)\n", q.IPData.Country, q.IPData.CountryCode))
 		sb.WriteString(fmt.Sprintf("    Lat/Lon:    %s / %s\n", q.IPData.Latitude, q.IPData.Longitude))
-	} else if ipErr != nil {
-		sb.WriteString(fmt.Sprintf("  IP lookup error: %v\n", ipErr))
 	} else {
 		sb.WriteString("  No IP lookup performed\n")
 	}
@@ -392,8 +431,6 @@ func (s *WeatherService) serveDebugInfo(
 		}
 		sb.WriteString(fmt.Sprintf("    Lat/Lon:      %.6f / %.6f\n", q.Location.Latitude, q.Location.Longitude))
 		sb.WriteString(fmt.Sprintf("    Full addr:    %s\n", q.Location.FullAddress))
-	} else if locErr != nil {
-		sb.WriteString(fmt.Sprintf("  Geocoding error: %v\n", locErr))
 	} else {
 		sb.WriteString("  No location resolved\n")
 	}
@@ -402,8 +439,6 @@ func (s *WeatherService) serveDebugInfo(
 	sb.WriteString("Weather Data:\n")
 	if len(*q.Weather) > 0 {
 		sb.WriteString(fmt.Sprintf("  Fetched successfully (%d bytes)\n", len(*q.Weather)))
-	} else if weatherErr != nil {
-		sb.WriteString(fmt.Sprintf("  Fetch error: %v\n", weatherErr))
 	} else {
 		sb.WriteString("  Not fetched (no valid location)\n")
 	}
@@ -414,7 +449,7 @@ func (s *WeatherService) serveDebugInfo(
 		sb.WriteString(fmt.Sprintf("  %s: %v\n", timeStep.Step, timeStep.Time))
 	}
 
-	fmt.Fprint(w, sb.String())
+	return sb.String()
 }
 
 func prettyPrintOptions(o *query.Options) string {
