@@ -189,6 +189,33 @@ def render_pressure(data, query):
     return answer
 
 
+def render_dewpoint(data, query):
+    """
+    dew point (e)
+    """
+
+    try:
+        temp_c = float(data["temp_C"])
+        humidity = float(data["humidity"])
+    except (KeyError, ValueError, TypeError):
+        return ""
+
+    if not humidity:
+        return ""
+
+    dew_point_c = temp_c - (100.0 - humidity) / 5.0
+
+    if query.get("use_imperial", False):
+        dew_point = "%s°F" % int(round(dew_point_c * 9.0 / 5 + 32))
+    else:
+        dew_point = "%s°C" % int(round(dew_point_c))
+
+    if dew_point[0] != "-":
+        dew_point = "+" + dew_point
+
+    return dew_point
+
+
 def render_uv_index(data, query):
     """
     UV Index (u)
@@ -335,6 +362,7 @@ FORMAT_SYMBOL = {
     "p": render_precipitation,
     "o": render_precipitation_chance,
     "P": render_pressure,
+    "e": render_dewpoint,
     "u": render_uv_index,
 }
 

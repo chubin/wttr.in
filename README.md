@@ -191,6 +191,7 @@ To specify your own custom output format, use the special `%`-notation:
     M    Moon day,
     p    Precipitation (mm/3 hours),
     P    Pressure (hPa),
+    e    Dew point,
     u    UV index (1-12),
 
     D    Dawn*,
