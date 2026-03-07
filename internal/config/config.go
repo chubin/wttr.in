@@ -6,8 +6,12 @@ import (
 
 	"gopkg.in/yaml.v2"
 
+	"github.com/chubin/wttr.go/internal/cache"
 	"github.com/chubin/wttr.go/internal/ip"
 	"github.com/chubin/wttr.go/internal/location"
+	"github.com/chubin/wttr.go/internal/logging"
+	"github.com/chubin/wttr.go/internal/server"
+	"github.com/chubin/wttr.go/internal/uplink"
 	"github.com/chubin/wttr.go/internal/weather"
 )
 
@@ -17,6 +21,10 @@ type Config struct {
 	Weather struct {
 		WWO *weather.WWOConfig
 	}
+	Cache   cache.Config
+	Logging logging.Config
+	Uplink  uplink.Config
+	Server  server.Config
 }
 
 // LoadFromYAML loads configuration from a YAML file and returns a pointer to Config
@@ -30,8 +38,8 @@ func LoadFromYAML(filePath string) (*Config, error) {
 	// Create a new Config instance
 	config := &Config{}
 
-	// Unmarshal YAML data into the Config struct
-	err = yaml.Unmarshal(data, config)
+	// Unmarshal YAML data into the Config struct with strict checking for unknown fields
+	err = yaml.UnmarshalStrict(data, config)
 	if err != nil {
 		return nil, fmt.Errorf("error unmarshaling YAML: %v", err)
 	}
