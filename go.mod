@@ -6,6 +6,7 @@ require gopkg.in/yaml.v2 v2.4.0
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/hashicorp/golang-lru/v2 v2.0.7 // indirect
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/samonzeweb/godb v1.0.15 // indirect

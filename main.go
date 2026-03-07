@@ -8,6 +8,7 @@ import (
 
 	"github.com/sirupsen/logrus"
 
+	"github.com/chubin/wttr.go/internal/cache"
 	"github.com/chubin/wttr.go/internal/config"
 	"github.com/chubin/wttr.go/internal/generate"
 	"github.com/chubin/wttr.go/internal/ip"
@@ -47,11 +48,17 @@ func srv() {
 		log.Fatalln("error loading wttr.in options description: ", err)
 	}
 
+	lruCache, err := cache.NewLRU(cfg.Cache)
+	if err != nil {
+		log.Fatalln("error creating lru cache: ", err)
+	}
+
 	ws := weather.NewWeatherService(
 		weather.NewWeatherClient(cfg.Weather.WWO),
 		weather.NewCacheLocator(locationCache),
 		weather.NewIPCacheLocator(ipCache),
 		weather.NewQueryParser(wttrInOptions),
+		lruCache,
 	)
 
 	// Define routes

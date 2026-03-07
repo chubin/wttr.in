@@ -126,15 +126,23 @@ type WeatherService struct {
 	Locator     Locator
 	IPLocator   IPLocator
 	QueryParser QueryParser
+	Cacher      Cacher
 }
 
 // NewWeatherService initializes a new pipeline based on the provided options.
-func NewWeatherService(weatherer Weatherer, locator Locator, ipLocator IPLocator, queryParser QueryParser) *WeatherService {
+func NewWeatherService(
+	weatherer Weatherer,
+	locator Locator,
+	ipLocator IPLocator,
+	queryParser QueryParser,
+	cacher Cacher,
+) *WeatherService {
 	return &WeatherService{
 		Weatherer:   weatherer,
 		Locator:     locator,
 		IPLocator:   ipLocator,
 		QueryParser: queryParser,
+		Cacher:      cacher,
 	}
 }
 
