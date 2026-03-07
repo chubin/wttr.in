@@ -1,5 +1,10 @@
 query_options:
   - name: format
+    description: "Output structure format for oneline view (which is always implied when format is used)."
+    type: string
+    active: true
+
+  - name: view
     description: "Specify view name"
     type: string
     values:
@@ -9,6 +14,7 @@ query_options:
       - oneline
       - j1
       - j2
+    active: true
 
   - name: output
     description: "Specify output format"
@@ -18,6 +24,12 @@ query_options:
       - html
       - json
       - png
+    active: true
+
+  - name: agent
+    description: "The name of the user-agent. When specified, overrides the user-agent from the header"
+    type: string
+    active: true
 
   - name: current_only
     short: "0"

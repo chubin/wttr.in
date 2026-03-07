@@ -9,6 +9,18 @@ import (
 // Options represents parsed and validated wttr.in query options.
 type Options struct {
 
+	// Output structure format for oneline view (which is always implied when format is used).
+	Format string `json:"format,omitempty"`
+
+	// Specify view name
+	View string `json:"view,omitempty"`
+
+	// Specify output format
+	Output string `json:"output,omitempty"`
+
+	// The name of the user-agent. When specified, overrides the user-agent from the header
+	Agent string `json:"agent,omitempty"`
+
 	// Show only current weather
 	CurrentOnly bool `json:"current_only,omitempty"`
 
@@ -125,6 +137,26 @@ type Options struct {
 // All values are already validated by options.ParseQueryString().
 func ApplyParsedMap(raw map[string]string) (*Options, error) {
 	opts := &Options{}
+
+	// string or fallback
+	if v, ok := raw["format"]; ok {
+		opts.Format = v
+	}
+
+	// string or fallback
+	if v, ok := raw["view"]; ok {
+		opts.View = v
+	}
+
+	// string or fallback
+	if v, ok := raw["output"]; ok {
+		opts.Output = v
+	}
+
+	// string or fallback
+	if v, ok := raw["agent"]; ok {
+		opts.Agent = v
+	}
 
 	if v, ok := raw["current_only"]; ok {
 		opts.CurrentOnly = (v == "true")
