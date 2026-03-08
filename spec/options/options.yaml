@@ -3,6 +3,18 @@ query_options:
     description: "Output structure format for oneline view (which is always implied when format is used)."
     type: string
     active: true
+      # values_map:
+      #   "1": "Location and condition"
+      #   "2": "Location, condition, temperature"
+      #   "3": "Location: condition temperature"
+      #   "4": "Location: condition, temperature details, wind speed"
+      #   custom: "Percent notation (e.g., %l, %c, %t, %w, %m, etc.)"
+      # values:
+      #   - "1"
+      #   - "2"
+      #   - "3"
+      #   - "4"
+      #   - "custom"
 
   - name: view
     description: "Specify view name"
@@ -28,6 +40,11 @@ query_options:
 
   - name: agent
     description: "The name of the user-agent. When specified, overrides the user-agent from the header"
+    type: string
+    active: true
+
+  - name: location
+    description: "Location name the weather is queried about"
     type: string
     active: true
 
@@ -241,24 +258,6 @@ query_options:
       - "regexp [0-9a-fA-F]{6}"
     active: true
     note: "Applicable only for PNG output"
-  - name: format
-    description: "Specify output format"
-    type: string
-      # values_map:
-      #   "1": "Location and condition"
-      #   "2": "Location, condition, temperature"
-      #   "3": "Location: condition temperature"
-      #   "4": "Location: condition, temperature details, wind speed"
-      #   custom: "Percent notation (e.g., %l, %c, %t, %w, %m, etc.)"
-      # values:
-      #   - "1"
-      #   - "2"
-      #   - "3"
-      #   - "4"
-      #   - "custom"
-    default: null
-    active: true
-    note: "Used for status bars in tools like tmux"
   - name: date
     description: "Specify forecast date offset (days in the future)"
     type: integer
