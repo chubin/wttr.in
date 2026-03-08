@@ -53,11 +53,11 @@ type QueryParser interface {
 	//
 	// ctx can be used for cancellation, request-scoped logging, metrics collection, etc.
 	// Most implementations will ignore it in the first version.
-	Parse(ctx context.Context, query string) (*query.Options, error)
+	Parse(ctx context.Context, r *http.Request) (*query.Options, error)
 
 	// MustParse is a convenience variant that panics on error.
 	// Mainly useful in tests, initialization code, or when invalid input is a programmer error.
-	MustParse(ctx context.Context, query string) *query.Options
+	MustParse(ctx context.Context, r *http.Request) *query.Options
 }
 
 // ClientData holds information about the client making the request.
@@ -288,7 +288,7 @@ func (s *WeatherService) computeResponse(
 	autoDetect := isAutoDetectPath(path)
 
 	// 1. Parse options (cheap, always first)
-	opts, err := s.QueryParser.Parse(ctx, r.URL.RawQuery)
+	opts, err := s.QueryParser.Parse(ctx, r)
 	if err != nil {
 		return nil, err
 	}

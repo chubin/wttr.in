@@ -3,6 +3,7 @@ package weather
 import (
 	"context"
 	"fmt"
+	"net/http"
 
 	"github.com/chubin/wttr.go/internal/options"
 	"github.com/chubin/wttr.go/internal/query"
@@ -22,21 +23,36 @@ func NewQueryParser(config *options.WttrInOptions) QueryParser {
 }
 
 // Parse implements QueryParser.Parse
-func (p *strictQueryParser) Parse(ctx context.Context, queryString string) (*query.Options, error) {
+func (p *strictQueryParser) Parse(ctx context.Context, r *http.Request) (*query.Options, error) {
+	queryString := r.URL.RawQuery
+
 	// Step 1: use the existing parser to get validated map[string]string
 	rawMap, err := options.ParseQueryString(queryString, p.config)
 	if err != nil {
 		return nil, err
 	}
 
-	return query.ApplyParsedMap(rawMap)
+	opts, err := query.FromRequest(r)
+	if err != nil {
+		return nil, err
+	}
+
+	opts, err = query.ApplyParsedMap(opts, rawMap)
+	if err != nil {
+		return nil, err
+	}
+
+	query.ApplyAutoFixes(opts)
+
+	return opts, nil
 }
 
 // MustParse implements QueryParser.MustParse
-func (p *strictQueryParser) MustParse(ctx context.Context, query string) *query.Options {
-	opts, err := p.Parse(ctx, query)
+func (p *strictQueryParser) MustParse(ctx context.Context, r *http.Request) *query.Options {
+	queryString := r.URL.RawQuery
+	opts, err := p.Parse(ctx, r)
 	if err != nil {
-		panic(fmt.Sprintf("MustParse failed: %v (query: %q)", err, query))
+		panic(fmt.Sprintf("MustParse failed: %v (query: %q)", err, queryString))
 	}
 	return opts
 }

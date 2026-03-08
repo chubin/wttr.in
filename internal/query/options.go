@@ -21,6 +21,9 @@ type Options struct {
 	// The name of the user-agent. When specified, overrides the user-agent from the header
 	Agent string `json:"agent,omitempty"`
 
+	// Location name the weather is queried about
+	Location string `json:"location,omitempty"`
+
 	// Show only current weather
 	CurrentOnly bool `json:"current_only,omitempty"`
 
@@ -84,9 +87,6 @@ type Options struct {
 	// Set background color for PNG output in hex (RRGGBB format) (Applicable only for PNG output)
 	Background string `json:"background,omitempty"`
 
-	// Specify output format (Used for status bars in tools like tmux)
-	Format string `json:"format,omitempty"`
-
 	// Force ANSI output mode (Enables ANSI formatting regardless of terminal capabilities)
 	ForceAnsi bool `json:"force-ansi,omitempty"`
 
@@ -135,8 +135,7 @@ type Options struct {
 
 // ApplyParsedMap populates Options from a validated map[string]string.
 // All values are already validated by options.ParseQueryString().
-func ApplyParsedMap(raw map[string]string) (*Options, error) {
-	opts := &Options{}
+func ApplyParsedMap(opts *Options, raw map[string]string) (*Options, error) {
 
 	// string or fallback
 	if v, ok := raw["format"]; ok {
@@ -156,6 +155,11 @@ func ApplyParsedMap(raw map[string]string) (*Options, error) {
 	// string or fallback
 	if v, ok := raw["agent"]; ok {
 		opts.Agent = v
+	}
+
+	// string or fallback
+	if v, ok := raw["location"]; ok {
+		opts.Location = v
 	}
 
 	if v, ok := raw["current_only"]; ok {
@@ -258,11 +262,6 @@ func ApplyParsedMap(raw map[string]string) (*Options, error) {
 	// string or fallback
 	if v, ok := raw["background"]; ok {
 		opts.Background = v
-	}
-
-	// string or fallback
-	if v, ok := raw["format"]; ok {
-		opts.Format = v
 	}
 
 	if v, ok := raw["force-ansi"]; ok {

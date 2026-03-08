@@ -32,9 +32,7 @@ type Options struct {
 
 // ApplyParsedMap populates Options from a validated map[string]string.
 // All values are already validated by options.ParseQueryString().
-func ApplyParsedMap(raw map[string]string) (*Options, error) {
-	opts := &Options{}
-
+func ApplyParsedMap(opts *Options, raw map[string]string) (*Options, error) {
 {{range .QueryOptions}}
 	{{if eq .FieldType "bool"}}
 	if v, ok := raw["{{.Name}}"]; ok {
