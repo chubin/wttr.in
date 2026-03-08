@@ -294,7 +294,7 @@ func (s *WeatherService) computeResponse(
 	}
 	tracker.Add("Options parsing", time.Since(start))
 
-	var locStr string
+	locStr := opts.Location
 	var ipData *IPData
 	if autoDetect {
 		var errIP error
@@ -305,13 +305,7 @@ func (s *WeatherService) computeResponse(
 				locStr = fmt.Sprintf("%s,%s", ipData.Latitude, ipData.Longitude)
 			}
 		}
-	}
-	tracker.Add("Determine location string + IP lookup", time.Since(start))
-
-	// Explicit location overrides auto-detect
-	if !autoDetect && path != "" {
-		locStr = path
-		ipData = nil
+		tracker.Add("Determine location string + IP lookup", time.Since(start))
 	}
 
 	if locStr == "" {
@@ -463,7 +457,7 @@ func prettyPrintOptions(o *query.Options) string {
 		return fmt.Sprintf("  Error: %v\n", err)
 	}
 
-	return string(data) + "\n"
+	return "  " + string(data) + "\n"
 }
 
 // selectRenderer chooses the appropriate renderer based on the format option.
