@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/sirupsen/logrus"
 
@@ -13,6 +14,7 @@ import (
 	"github.com/chubin/wttr.go/internal/generate"
 	"github.com/chubin/wttr.go/internal/ip"
 	"github.com/chubin/wttr.go/internal/location"
+	"github.com/chubin/wttr.go/internal/logging"
 	"github.com/chubin/wttr.go/internal/options"
 	"github.com/chubin/wttr.go/internal/weather"
 )
@@ -53,12 +55,18 @@ func srv() {
 		log.Fatalln("error creating lru cache: ", err)
 	}
 
+	requestLogger := logging.NewRequestLogger(
+		cfg.Logging.AccessLog,
+		time.Duration(cfg.Logging.Interval)*time.Second,
+	)
+
 	ws := weather.NewWeatherService(
 		weather.NewWeatherClient(cfg.Weather.WWO),
 		weather.NewCacheLocator(locationCache),
 		weather.NewIPCacheLocator(ipCache),
 		weather.NewQueryParser(wttrInOptions),
 		lruCache,
+		requestLogger,
 	)
 
 	// Define routes

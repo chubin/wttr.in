@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net"
 	"net/http"
 	"strings"
@@ -58,6 +59,10 @@ type QueryParser interface {
 	// MustParse is a convenience variant that panics on error.
 	// Mainly useful in tests, initialization code, or when invalid input is a programmer error.
 	MustParse(ctx context.Context, r *http.Request) *query.Options
+}
+
+type RequestLogger interface {
+	Log(r *http.Request) error
 }
 
 // ClientData holds information about the client making the request.
@@ -132,11 +137,12 @@ func (tt *TimeTracker) Add(step string, t time.Duration) {
 
 // WeatherService struct holds the components necessary for processing a query.
 type WeatherService struct {
-	Weatherer   Weatherer
-	Locator     Locator
-	IPLocator   IPLocator
-	QueryParser QueryParser
-	Cacher      Cacher
+	Weatherer     Weatherer
+	Locator       Locator
+	IPLocator     IPLocator
+	QueryParser   QueryParser
+	Cacher        Cacher
+	RequestLogger RequestLogger
 }
 
 // NewWeatherService initializes a new pipeline based on the provided options.
@@ -146,13 +152,15 @@ func NewWeatherService(
 	ipLocator IPLocator,
 	queryParser QueryParser,
 	cacher Cacher,
+	requestLogger RequestLogger,
 ) *WeatherService {
 	return &WeatherService{
-		Weatherer:   weatherer,
-		Locator:     locator,
-		IPLocator:   ipLocator,
-		QueryParser: queryParser,
-		Cacher:      cacher,
+		Weatherer:     weatherer,
+		Locator:       locator,
+		IPLocator:     ipLocator,
+		QueryParser:   queryParser,
+		Cacher:        cacher,
+		RequestLogger: requestLogger,
 	}
 }
 
@@ -195,6 +203,12 @@ func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) 
 
 	overallStart := time.Now()
 	tracker := TimeTracker{}
+
+	// Log incoming request.
+	// If the logging was not successful, write a warning and continue.
+	if err := s.RequestLogger.Log(r); err != nil {
+		log.Println(err)
+	}
 
 	if r.URL.Query().Get("debug") != "" {
 		bypassCache = true
