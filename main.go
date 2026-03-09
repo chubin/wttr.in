@@ -16,6 +16,7 @@ import (
 	"github.com/chubin/wttr.go/internal/location"
 	"github.com/chubin/wttr.go/internal/logging"
 	"github.com/chubin/wttr.go/internal/options"
+	"github.com/chubin/wttr.go/internal/uplink"
 	"github.com/chubin/wttr.go/internal/weather"
 )
 
@@ -67,6 +68,7 @@ func srv() {
 		weather.NewQueryParser(wttrInOptions),
 		lruCache,
 		requestLogger,
+		uplink.NewUplinkProcessor(cfg.Uplink),
 	)
 
 	// Define routes

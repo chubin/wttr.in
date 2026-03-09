@@ -65,6 +65,10 @@ type RequestLogger interface {
 	Log(r *http.Request) error
 }
 
+type UplinkProcessor interface {
+	Route(opts *query.Options, r *http.Request, ipData *IPData, location *Location) (bool, *CacheEntry, error)
+}
+
 // ClientData holds information about the client making the request.
 type ClientData struct {
 	ClientIP    string
@@ -137,12 +141,13 @@ func (tt *TimeTracker) Add(step string, t time.Duration) {
 
 // WeatherService struct holds the components necessary for processing a query.
 type WeatherService struct {
-	Weatherer     Weatherer
-	Locator       Locator
-	IPLocator     IPLocator
-	QueryParser   QueryParser
-	Cacher        Cacher
-	RequestLogger RequestLogger
+	Weatherer       Weatherer
+	Locator         Locator
+	IPLocator       IPLocator
+	QueryParser     QueryParser
+	Cacher          Cacher
+	RequestLogger   RequestLogger
+	UplinkProcessor UplinkProcessor
 }
 
 // NewWeatherService initializes a new pipeline based on the provided options.
@@ -153,14 +158,16 @@ func NewWeatherService(
 	queryParser QueryParser,
 	cacher Cacher,
 	requestLogger RequestLogger,
+	uplinkProcessor UplinkProcessor,
 ) *WeatherService {
 	return &WeatherService{
-		Weatherer:     weatherer,
-		Locator:       locator,
-		IPLocator:     ipLocator,
-		QueryParser:   queryParser,
-		Cacher:        cacher,
-		RequestLogger: requestLogger,
+		Weatherer:       weatherer,
+		Locator:         locator,
+		IPLocator:       ipLocator,
+		QueryParser:     queryParser,
+		Cacher:          cacher,
+		RequestLogger:   requestLogger,
+		UplinkProcessor: uplinkProcessor,
 	}
 }
 
@@ -247,7 +254,7 @@ func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) 
 	}
 
 	// 7. The heavy part — now extracted
-	formatOut, err := s.computeResponse(ctx, r, &tracker)
+	entry, err = s.computeResponse(ctx, r, &tracker)
 	if err != nil {
 		s.Cacher.Remove(cacheKey)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -257,16 +264,6 @@ func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) 
 	// This information will not be visible,
 	// because the debug output is already in response.
 	tracker.Add("Total computation time", time.Since(overallStart))
-
-	entry = &CacheEntry{
-		Body:       formatOut.Content,
-		StatusCode: http.StatusOK,
-		Expires:    time.Now().Add(12 * time.Minute), // tune this TTL
-		Header: http.Header{
-			"Content-Type":  []string{formatOut.ContentType},
-			"Cache-Control": []string{"public, max-age=600"},
-		},
-	}
 
 	if !bypassCache {
 		// 8. Store successful result
@@ -291,7 +288,7 @@ func (s *WeatherService) serveFromCache(w http.ResponseWriter, e *CacheEntry) {
 func (s *WeatherService) computeResponse(
 	ctx context.Context, r *http.Request,
 	tracker *TimeTracker,
-) (*FormatOutput, error) {
+) (*CacheEntry, error) {
 	debugRequested := r.URL.Query().Get("debug") != ""
 
 	clientIP := getClientIP(r)
@@ -339,9 +336,9 @@ func (s *WeatherService) computeResponse(
 	// We also have information about the IP and Geolocation,
 	// which can be added to the headers.
 	// ...
-	isUpstream, formatOut, err := s.upstreamRouting(opts, r, ipData, location)
+	isUpstream, uplinkResponse, err := s.UplinkProcessor.Route(opts, r, ipData, location)
 	if isUpstream {
-		return formatOut, err
+		return uplinkResponse, err
 	}
 
 	// ── Fetch weather ─────────────────────────────────────────────────────
@@ -376,7 +373,7 @@ func (s *WeatherService) computeResponse(
 		return nil, fmt.Errorf("render failed: %w", err)
 	}
 
-	formatOut, err = formatter.Format(renderOut)
+	formatOut, err := formatter.Format(renderOut)
 	if err != nil {
 		return nil, fmt.Errorf("format failed: %w", err)
 	}
@@ -384,13 +381,21 @@ func (s *WeatherService) computeResponse(
 
 	if debugRequested {
 		debugInfo := getDebugInfo(r, &query, locStr, tracker)
-		return &FormatOutput{
+		formatOut = &FormatOutput{
 			Content:     []byte(debugInfo),
 			ContentType: "text/plain",
-		}, nil
+		}
 	}
 
-	return formatOut, nil
+	return &CacheEntry{
+		Body:       formatOut.Content,
+		StatusCode: http.StatusOK,
+		Expires:    time.Now().Add(12 * time.Minute), // tune this TTL
+		Header: http.Header{
+			"Content-Type":  []string{formatOut.ContentType},
+			"Cache-Control": []string{"public, max-age=600"},
+		},
+	}, nil
 }
 
 func isAutoDetectPath(p string) bool {
