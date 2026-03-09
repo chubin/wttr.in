@@ -1,11 +1,12 @@
 package uplink
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"math/rand"
+	"net"
 	"net/http"
-	"net/url"
 	"strings"
 	"time"
 
@@ -24,55 +25,78 @@ type Config struct {
 
 // UplinkProcessor handles incoming requests.
 type UplinkProcessor struct {
-	uplinkTransport1 *http.Transport
-	uplinkTransport2 *http.Transport
-	uplinkTransport3 *http.Transport
-	uplinkTransport4 *http.Transport
+	transport1 *http.Transport
+	transport2 *http.Transport
+	transport3 *http.Transport
+	transport4 *http.Transport
 }
 
 func NewUplinkProcessor(cfg Config) *UplinkProcessor {
-	return &UplinkProcessor{}
+	dialer := &net.Dialer{
+		Timeout:   time.Duration(cfg.Timeout) * time.Second,
+		KeepAlive: time.Duration(cfg.Timeout) * time.Second,
+		DualStack: true,
+	}
+
+	transport1 := &http.Transport{
+		DialContext: func(ctx context.Context, network, _ string) (net.Conn, error) {
+			return dialer.DialContext(ctx, network, cfg.Address1)
+		},
+	}
+	transport2 := &http.Transport{
+		DialContext: func(ctx context.Context, network, _ string) (net.Conn, error) {
+			return dialer.DialContext(ctx, network, cfg.Address2)
+		},
+	}
+	transport3 := &http.Transport{
+		DialContext: func(ctx context.Context, network, _ string) (net.Conn, error) {
+			return dialer.DialContext(ctx, network, cfg.Address3)
+		},
+	}
+	transport4 := &http.Transport{
+		DialContext: func(ctx context.Context, network, _ string) (net.Conn, error) {
+			return dialer.DialContext(ctx, network, cfg.Address4)
+		},
+	}
+
+	return &UplinkProcessor{
+		transport1: transport1,
+		transport2: transport2,
+		transport3: transport3,
+		transport4: transport4,
+	}
 }
 
-func (s *UplinkProcessor) Route(
+func (p *UplinkProcessor) Route(
 	opts *query.Options, r *http.Request, ipData *weather.IPData, location *weather.Location,
 ) (bool, *weather.CacheEntry, error) {
-	return false, nil, nil
-}
+	var (
+		uplinkRoute    bool = true
+		uplinkResponse *weather.CacheEntry
+		err            error
+		transport      *http.Transport
+	)
 
-func getAny(req *http.Request, tr1, tr2, tr3, tr4 *http.Transport) (*weather.CacheEntry, error) {
-	uri := strings.ReplaceAll(req.URL.RequestURI(), "%", "%25")
+	//////////////////////////////////////////
 
-	u, err := url.Parse(uri)
-	if err != nil {
-		return nil, err
+	if opts.View == "j1" {
+		transport = p.transport1
+	} else if opts.View == "v1" {
+		transport = p.transport2
+	} else if checkURLForPNG(r) {
+		transport = p.transport4
+	} else if opts.View == "v1" {
+		transport = p.transport3
+	} else {
+		uplinkRoute = true
+	}
+	//////////////////////////////////////////
+
+	if uplinkRoute {
+		uplinkResponse, err = getUplink(r, transport)
 	}
 
-	format := u.Query().Get("format")
-
-	if format == "j1" {
-		return getJ1(req, tr1)
-	} else if format != "" {
-		return getFormat(req, tr2)
-	}
-
-	if checkURLForPNG(req) {
-		return getDefault(req, tr4)
-	}
-
-	return getDefault(req, tr3)
-}
-
-func getJ1(req *http.Request, transport *http.Transport) (*weather.CacheEntry, error) {
-	return getUplink(req, transport)
-}
-
-func getFormat(req *http.Request, transport *http.Transport) (*weather.CacheEntry, error) {
-	return getUplink(req, transport)
-}
-
-func getDefault(req *http.Request, transport *http.Transport) (*weather.CacheEntry, error) {
-	return getUplink(req, transport)
+	return uplinkRoute, uplinkResponse, err
 }
 
 func getUplink(req *http.Request, transport *http.Transport) (*weather.CacheEntry, error) {
