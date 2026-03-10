@@ -8,6 +8,7 @@ import (
 	"path"
 	"strconv"
 	"strings"
+	"sync"
 
 	"github.com/samonzeweb/godb"
 	"github.com/samonzeweb/godb/adapters/sqlite"
@@ -32,6 +33,8 @@ type Cache struct {
 	searcher      *Searcher
 	indexField    string
 	filesCacheDir string
+
+	m sync.Mutex
 }
 
 type Config struct {
@@ -88,6 +91,9 @@ func NewCache(config *Config) (*Cache, error) {
 // If it is not found, the external service is queried,
 // and the result is stored in the cache.
 func (c *Cache) Resolve(location string) (*Location, error) {
+	c.m.Lock()
+	defer c.m.Unlock()
+
 	location = normalizeLocationName(location)
 
 	loc, err := c.Read(location)
@@ -182,6 +188,9 @@ func (c *Cache) readFromCacheDB(addr string) (*Location, error) {
 }
 
 func (c *Cache) Put(addr string, loc *Location) error {
+	c.m.Lock()
+	defer c.m.Unlock()
+
 	log.Infoln("geo/location: storing in cache:", loc)
 	if c.config.LocationCacheType == CacheTypeDB {
 		return c.putToCacheDB(loc)

@@ -9,6 +9,7 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"sync"
 
 	"github.com/samonzeweb/godb"
 	"github.com/samonzeweb/godb/adapters/sqlite"
@@ -52,6 +53,7 @@ type Config struct {
 type Cache struct {
 	config *Config
 	db     *godb.DB
+	m      sync.Mutex
 }
 
 // NewCache returns new cache reader for the specified config.
@@ -84,6 +86,9 @@ func NewCache(config *Config) (*Cache, error) {
 //
 
 func (c *Cache) Read(addr string) (*Address, error) {
+	c.m.Lock()
+	defer c.m.Unlock()
+
 	if c.config.IPCacheType == CacheTypeDB {
 		return c.readFromCacheDB(addr)
 	}
@@ -113,6 +118,9 @@ func (c *Cache) readFromCacheDB(addr string) (*Address, error) {
 }
 
 func (c *Cache) Put(addr string, loc *Address) error {
+	c.m.Lock()
+	defer c.m.Unlock()
+
 	if c.config.IPCacheType == CacheTypeDB {
 		return c.putToCacheDB(loc)
 	}
