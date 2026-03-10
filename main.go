@@ -22,8 +22,8 @@ import (
 
 var debug = true
 
-func srv() error {
-	cfg, err := config.LoadFromYAML("config.yaml")
+func srv(configFile string) error {
+	cfg, err := config.LoadFromYAML(configFile)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -92,15 +92,22 @@ func main() {
 
 	// Check the remaining arguments after flag parsing
 	if len(flag.Args()) < 1 {
-		logrus.Error("Usage: CMD {gen|srv}")
+		logrus.Error("Usage: CMD {gen|srv CONFIG}")
 		os.Exit(1)
 	}
 
 	// Use flag.Args() instead of os.Args to access non-flag arguments
 	switch flag.Args()[0] {
 	case "srv":
+		var configFile string
+		if len(flag.Args()) > 1 {
+			configFile = flag.Args()[1]
+		} else {
+			log.Fatalln("usage: CMD srv CONFIG")
+		}
+
 		logrus.Info("Starting server...")
-		err := srv()
+		err := srv(configFile)
 		if err != nil {
 			log.Fatalln(err)
 		}
