@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"math/rand"
 	"net"
 	"net/http"
@@ -81,12 +80,12 @@ func (p *UplinkProcessor) Route(
 
 	//////////////////////////////////////////
 
-	if opts.View != "" && opts.View != "v1" && opts.View != "j1" && opts.View != "j2" {
+	if checkURLForPNG(r) {
+		transport = p.transport4
+	} else if opts.View != "" && opts.View != "v1" && opts.View != "j1" && opts.View != "j2" {
 		transport = p.transport1
 	} else if opts.View == "v1" {
 		transport = p.transport2
-	} else if checkURLForPNG(r) {
-		transport = p.transport4
 	} else if opts.View == "v1" {
 		transport = p.transport3
 	} else {
@@ -132,7 +131,6 @@ func getUplink(req *http.Request, transport *http.Transport, location *weather.L
 	}
 
 	proxyReq.Header.Set("X-Location", string(locationJson))
-	log.Println(string(locationJson))
 
 	res, err := client.Do(proxyReq)
 	if err != nil {
