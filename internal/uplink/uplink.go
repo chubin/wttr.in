@@ -26,10 +26,14 @@ type Config struct {
 
 // UplinkProcessor handles incoming requests.
 type UplinkProcessor struct {
-	transport1 *http.Transport
-	transport2 *http.Transport
-	transport3 *http.Transport
-	transport4 *http.Transport
+	client1 *http.Client
+	client2 *http.Client
+	client3 *http.Client
+	client4 *http.Client
+	// transport1 *http.Transport
+	// transport2 *http.Transport
+	// transport3 *http.Transport
+	// transport4 *http.Transport
 }
 
 func NewUplinkProcessor(cfg Config) *UplinkProcessor {
@@ -39,33 +43,53 @@ func NewUplinkProcessor(cfg Config) *UplinkProcessor {
 		DualStack: true,
 	}
 
-	transport1 := &http.Transport{
-		DialContext: func(ctx context.Context, network, _ string) (net.Conn, error) {
-			return dialer.DialContext(ctx, network, cfg.Address1)
-		},
-	}
-	transport2 := &http.Transport{
-		DialContext: func(ctx context.Context, network, _ string) (net.Conn, error) {
-			return dialer.DialContext(ctx, network, cfg.Address2)
-		},
-	}
-	transport3 := &http.Transport{
-		DialContext: func(ctx context.Context, network, _ string) (net.Conn, error) {
-			return dialer.DialContext(ctx, network, cfg.Address3)
-		},
-	}
-	transport4 := &http.Transport{
-		DialContext: func(ctx context.Context, network, _ string) (net.Conn, error) {
-			return dialer.DialContext(ctx, network, cfg.Address4)
-		},
+	mkClient := func(addr string) *http.Client {
+		return &http.Client{
+			Transport: &http.Transport{
+				DialContext: func(ctx context.Context, network, _ string) (net.Conn, error) {
+					return dialer.DialContext(ctx, network, addr)
+				},
+				MaxIdleConnsPerHost: 32, // tune this!
+				IdleConnTimeout:     90 * time.Second,
+			},
+			Timeout: 15 * time.Second, // safety net
+		}
 	}
 
 	return &UplinkProcessor{
-		transport1: transport1,
-		transport2: transport2,
-		transport3: transport3,
-		transport4: transport4,
+		client1: mkClient(cfg.Address1),
+		client2: mkClient(cfg.Address2),
+		client3: mkClient(cfg.Address3),
+		client4: mkClient(cfg.Address4),
 	}
+
+	// transport1 := &http.Transport{
+	// 	DialContext: func(ctx context.Context, network, _ string) (net.Conn, error) {
+	// 		return dialer.DialContext(ctx, network, cfg.Address1)
+	// 	},
+	// }
+	// transport2 := &http.Transport{
+	// 	DialContext: func(ctx context.Context, network, _ string) (net.Conn, error) {
+	// 		return dialer.DialContext(ctx, network, cfg.Address2)
+	// 	},
+	// }
+	// transport3 := &http.Transport{
+	// 	DialContext: func(ctx context.Context, network, _ string) (net.Conn, error) {
+	// 		return dialer.DialContext(ctx, network, cfg.Address3)
+	// 	},
+	// }
+	// transport4 := &http.Transport{
+	// 	DialContext: func(ctx context.Context, network, _ string) (net.Conn, error) {
+	// 		return dialer.DialContext(ctx, network, cfg.Address4)
+	// 	},
+	// }
+
+	// return &UplinkProcessor{
+	// 	transport1: transport1,
+	// 	transport2: transport2,
+	// 	transport3: transport3,
+	// 	transport4: transport4,
+	// }
 }
 
 func (p *UplinkProcessor) Route(
@@ -75,35 +99,35 @@ func (p *UplinkProcessor) Route(
 		uplinkRoute    bool = true
 		uplinkResponse *weather.CacheEntry
 		err            error
-		transport      *http.Transport
+		client         *http.Client
 	)
 
 	//////////////////////////////////////////
 
 	if checkURLForPNG(r) {
-		transport = p.transport4
+		client = p.client4
 	} else if opts.View != "" && opts.View != "v1" && opts.View != "j1" && opts.View != "j2" {
-		transport = p.transport1
+		client = p.client1
 	} else if opts.View == "v1" {
-		transport = p.transport2
+		client = p.client2
 	} else if opts.View == "v1" {
-		transport = p.transport3
+		client = p.client3
 	} else {
 		uplinkRoute = false
 	}
 	//////////////////////////////////////////
 
 	if uplinkRoute {
-		uplinkResponse, err = getUplink(r, transport, location)
+		uplinkResponse, err = getUplink(r, client, location)
 	}
 
 	return uplinkRoute, uplinkResponse, err
 }
 
-func getUplink(req *http.Request, transport *http.Transport, location *weather.Location) (*weather.CacheEntry, error) {
-	client := &http.Client{
-		Transport: transport,
-	}
+func getUplink(req *http.Request, client *http.Client, location *weather.Location) (*weather.CacheEntry, error) {
+	// client := &http.Client{
+	// 	Transport: transport,
+	// }
 
 	queryURL := fmt.Sprintf("http://%s%s", req.Host, req.RequestURI)
 

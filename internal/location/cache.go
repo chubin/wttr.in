@@ -91,8 +91,9 @@ func NewCache(config *Config) (*Cache, error) {
 // If it is not found, the external service is queried,
 // and the result is stored in the cache.
 func (c *Cache) Resolve(location string) (*Location, error) {
-	c.m.Lock()
-	defer c.m.Unlock()
+	defer func() {
+		log.Debugln("Resolve() finished")
+	}()
 
 	location = normalizeLocationName(location)
 
@@ -130,6 +131,13 @@ func (c *Cache) Read(addr string) (*Location, error) {
 }
 
 func (c *Cache) readFromCacheFile(name string) (*Location, error) {
+	log.Debugln("readFromCacheFile started")
+	c.m.Lock()
+	defer func() {
+		log.Debugln("readFromCacheFile finished")
+		c.m.Unlock()
+	}()
+
 	var (
 		fileLoc = struct {
 			Latitude  float64 `json:"latitude"`
@@ -171,6 +179,13 @@ func (c *Cache) readFromCacheFile(name string) (*Location, error) {
 }
 
 func (c *Cache) readFromCacheDB(addr string) (*Location, error) {
+	log.Debugln("readFromCacheDB started")
+	c.m.Lock()
+	defer func() {
+		log.Debugln("readFromCacheDB finished")
+		c.m.Unlock()
+	}()
+
 	result := Location{}
 	err := c.db.Select(&result).
 		Where(c.indexField+" = ?", addr).
@@ -188,9 +203,6 @@ func (c *Cache) readFromCacheDB(addr string) (*Location, error) {
 }
 
 func (c *Cache) Put(addr string, loc *Location) error {
-	c.m.Lock()
-	defer c.m.Unlock()
-
 	log.Infoln("geo/location: storing in cache:", loc)
 	if c.config.LocationCacheType == CacheTypeDB {
 		return c.putToCacheDB(loc)
@@ -200,6 +212,13 @@ func (c *Cache) Put(addr string, loc *Location) error {
 }
 
 func (c *Cache) putToCacheDB(loc *Location) error {
+	log.Debugln("putToCacheDB started")
+	c.m.Lock()
+	defer func() {
+		log.Debugln("putToCacheDB finished")
+		c.m.Unlock()
+	}()
+
 	err := c.db.Insert(loc).Do()
 	if strings.Contains(fmt.Sprint(err), "UNIQUE constraint failed") {
 		return c.db.Update(loc).Do()
@@ -209,6 +228,13 @@ func (c *Cache) putToCacheDB(loc *Location) error {
 }
 
 func (c *Cache) putToCacheFile(addr string, loc fmt.Stringer) error {
+	log.Debugln("putToCacheFile started")
+	c.m.Lock()
+	defer func() {
+		log.Debugln("putToCacheFile finished")
+		c.m.Unlock()
+	}()
+
 	return os.WriteFile(c.cacheFile(addr), []byte(loc.String()), 0o600)
 }
 
