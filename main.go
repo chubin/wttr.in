@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"log"
-	"net/http"
 	"os"
 	"time"
 
@@ -16,13 +15,14 @@ import (
 	"github.com/chubin/wttr.go/internal/location"
 	"github.com/chubin/wttr.go/internal/logging"
 	"github.com/chubin/wttr.go/internal/options"
+	"github.com/chubin/wttr.go/internal/server"
 	"github.com/chubin/wttr.go/internal/uplink"
 	"github.com/chubin/wttr.go/internal/weather"
 )
 
 var debug = true
 
-func srv() {
+func srv() error {
 	cfg, err := config.LoadFromYAML("config.yaml")
 	if err != nil {
 		log.Fatalln(err)
@@ -71,15 +71,7 @@ func srv() {
 		uplink.NewUplinkProcessor(cfg.Uplink),
 	)
 
-	// Define routes
-	http.HandleFunc("/", ws.WeatherHandler)
-
-	// Start the server
-	port := ":8080"
-	log.Printf("Server starting on port %s", port)
-	if err := http.ListenAndServe(port, nil); err != nil {
-		log.Fatal(err)
-	}
+	return server.Serve(&cfg.Server, &cfg.Logging, ws)
 }
 
 func main() {
@@ -108,7 +100,10 @@ func main() {
 	switch flag.Args()[0] {
 	case "srv":
 		logrus.Info("Starting server...")
-		srv()
+		err := srv()
+		if err != nil {
+			log.Fatalln(err)
+		}
 	case "gen":
 		logrus.Info("Generating options and parser...")
 		err := generate.GenerateOptionsAndParser()
