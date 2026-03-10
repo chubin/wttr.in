@@ -2,8 +2,10 @@ package uplink
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"math/rand"
 	"net"
 	"net/http"
@@ -79,7 +81,7 @@ func (p *UplinkProcessor) Route(
 
 	//////////////////////////////////////////
 
-	if opts.View == "j1" {
+	if opts.View != "" && opts.View != "v1" && opts.View != "j1" && opts.View != "j2" {
 		transport = p.transport1
 	} else if opts.View == "v1" {
 		transport = p.transport2
@@ -88,18 +90,18 @@ func (p *UplinkProcessor) Route(
 	} else if opts.View == "v1" {
 		transport = p.transport3
 	} else {
-		uplinkRoute = true
+		uplinkRoute = false
 	}
 	//////////////////////////////////////////
 
 	if uplinkRoute {
-		uplinkResponse, err = getUplink(r, transport)
+		uplinkResponse, err = getUplink(r, transport, location)
 	}
 
 	return uplinkRoute, uplinkResponse, err
 }
 
-func getUplink(req *http.Request, transport *http.Transport) (*weather.CacheEntry, error) {
+func getUplink(req *http.Request, transport *http.Transport, location *weather.Location) (*weather.CacheEntry, error) {
 	client := &http.Client{
 		Transport: transport,
 	}
@@ -123,6 +125,14 @@ func getUplink(req *http.Request, transport *http.Transport) (*weather.CacheEntr
 	if proxyReq.Header.Get("X-Forwarded-For") == "" {
 		proxyReq.Header.Set("X-Forwarded-For", ipFromAddr(req.RemoteAddr))
 	}
+
+	locationJson, err := json.Marshal(location)
+	if err != nil {
+		return nil, err
+	}
+
+	proxyReq.Header.Set("X-Location", string(locationJson))
+	log.Println(string(locationJson))
 
 	res, err := client.Do(proxyReq)
 	if err != nil {
