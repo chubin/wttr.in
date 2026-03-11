@@ -9,6 +9,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/samonzeweb/godb"
 	"github.com/samonzeweb/godb/adapters/sqlite"
@@ -132,10 +133,8 @@ func (c *Cache) Read(addr string) (*Location, error) {
 
 func (c *Cache) readFromCacheFile(name string) (*Location, error) {
 	log.Debugln("readFromCacheFile started")
-	c.m.Lock()
 	defer func() {
 		log.Debugln("readFromCacheFile finished")
-		c.m.Unlock()
 	}()
 
 	var (
@@ -179,11 +178,11 @@ func (c *Cache) readFromCacheFile(name string) (*Location, error) {
 }
 
 func (c *Cache) readFromCacheDB(addr string) (*Location, error) {
+	start := time.Now()
 	log.Debugln("readFromCacheDB started")
-	c.m.Lock()
 	defer func() {
-		log.Debugln("readFromCacheDB finished")
-		c.m.Unlock()
+		duration := time.Since(start)
+		log.Debugf("readFromCacheDB finished (time: %v)\n", duration)
 	}()
 
 	result := Location{}
