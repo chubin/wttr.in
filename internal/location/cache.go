@@ -231,7 +231,7 @@ func (c *Cache) readFromCacheDB(addr string) (*Location, error) {
 	var loc Location
 	err := c.sqlReadPool.QueryRow(
 		`SELECT name, lat, lon, timezone, fullname
-		 FROM locations
+		 FROM Location
 		 WHERE name = ? LIMIT 1`,
 		addr,
 	).Scan(
