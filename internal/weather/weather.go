@@ -336,9 +336,7 @@ func (s *WeatherService) computeResponse(
 	// We also have information about the IP and Geolocation,
 	// which can be added to the headers.
 	// ...
-	log.Println("accessing uplink")
 	isUpstream, uplinkResponse, err := s.UplinkProcessor.Route(opts, r, ipData, location)
-	log.Println("done")
 	if isUpstream {
 		return uplinkResponse, err
 	}
