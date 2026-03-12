@@ -316,6 +316,7 @@ func (s *WeatherService) computeResponse(
 				if locStr == "" {
 					locStr = fmt.Sprintf("%s,%s", ipData.Latitude, ipData.Longitude)
 				}
+				break
 			}
 		}
 		tracker.Add("Determine location string + IP lookup", time.Since(start))
