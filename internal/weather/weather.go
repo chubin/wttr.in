@@ -143,7 +143,7 @@ func (tt *TimeTracker) Add(step string, t time.Duration) {
 type WeatherService struct {
 	Weatherer       Weatherer
 	Locator         Locator
-	IPLocator       IPLocator
+	IPLocators      []IPLocator
 	QueryParser     QueryParser
 	Cacher          Cacher
 	RequestLogger   RequestLogger
@@ -154,7 +154,7 @@ type WeatherService struct {
 func NewWeatherService(
 	weatherer Weatherer,
 	locator Locator,
-	ipLocator IPLocator,
+	ipLocators []IPLocator,
 	queryParser QueryParser,
 	cacher Cacher,
 	requestLogger RequestLogger,
@@ -163,7 +163,7 @@ func NewWeatherService(
 	return &WeatherService{
 		Weatherer:       weatherer,
 		Locator:         locator,
-		IPLocator:       ipLocator,
+		IPLocators:      ipLocators,
 		QueryParser:     queryParser,
 		Cacher:          cacher,
 		RequestLogger:   requestLogger,
@@ -309,11 +309,13 @@ func (s *WeatherService) computeResponse(
 	var ipData *IPData
 	if autoDetect {
 		var errIP error
-		ipData, errIP = s.IPLocator.GetIPData(clientIP)
-		if errIP == nil && ipData != nil {
-			locStr = ipData.City
-			if locStr == "" {
-				locStr = fmt.Sprintf("%s,%s", ipData.Latitude, ipData.Longitude)
+		for _, ipLocator := range s.IPLocators {
+			ipData, errIP = ipLocator.GetIPData(clientIP)
+			if errIP == nil && ipData != nil {
+				locStr = ipData.City
+				if locStr == "" {
+					locStr = fmt.Sprintf("%s,%s", ipData.Latitude, ipData.Longitude)
+				}
 			}
 		}
 		tracker.Add("Determine location string + IP lookup", time.Since(start))

@@ -47,6 +47,7 @@ type Config struct {
 	IPCacheDB   string `yaml:"ipCacheDb"`
 	IPCache     string `yaml:"ipCache"`
 	IPCacheType string `yaml:"ipCacheType"`
+	GeoIP2      string `yaml:"geoip2"`
 }
 
 // Cache provides access to the IP Geodata cache.

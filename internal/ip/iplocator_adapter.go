@@ -1,26 +1,26 @@
-package weather
+package ip
 
 import (
 	"fmt"
 
-	"github.com/chubin/wttr.go/internal/ip"
+	"github.com/chubin/wttr.go/internal/weather"
 )
 
 type ipCacheLocator struct {
-	cache *ip.Cache
+	cache *Cache
 }
 
-func NewIPCacheLocator(cache *ip.Cache) IPLocator {
+func NewIPCacheLocator(cache *Cache) weather.IPLocator {
 	return &ipCacheLocator{cache}
 }
 
-func (l *ipCacheLocator) GetIPData(ip string) (*IPData, error) {
+func (l *ipCacheLocator) GetIPData(ip string) (*weather.IPData, error) {
 	addr, err := l.cache.Read(ip)
 	if err != nil {
-		return &IPData{}, err
+		return &weather.IPData{}, err
 	}
 
-	return &IPData{
+	return &weather.IPData{
 		IP:          addr.IP,
 		CountryCode: addr.CountryCode,
 		Country:     addr.Country,

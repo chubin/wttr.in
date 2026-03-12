@@ -41,10 +41,23 @@ func srv(configFile string) error {
 		log.Fatalln(err)
 	}
 
+	////////////////////////////
+	// Configuring IP Locators.
+	////////////////////////////
+	ipLocators := []weather.IPLocator{}
+	if cfg.IP.GeoIP2 != "" {
+		geoIP2, err := ip.NewIPLocatorGeoIP2(cfg.IP.GeoIP2)
+		if err != nil {
+			log.Fatalln("geoip2 initalization error:", err)
+		}
+		ipLocators = append(ipLocators, geoIP2)
+	}
+
 	ipCache, err := ip.NewCache(cfg.IP)
 	if err != nil {
 		log.Fatalln(err)
 	}
+	ipLocators = append(ipLocators, ip.NewIPCacheLocator(ipCache))
 
 	wttrInOptions, err := options.NewFromFile("spec/options/options.yaml")
 	if err != nil {
@@ -64,7 +77,7 @@ func srv(configFile string) error {
 	ws := weather.NewWeatherService(
 		weather.NewWeatherClient(cfg.Weather.WWO),
 		weather.NewCacheLocator(locationCache),
-		weather.NewIPCacheLocator(ipCache),
+		ipLocators,
 		weather.NewQueryParser(wttrInOptions),
 		lruCache,
 		requestLogger,
