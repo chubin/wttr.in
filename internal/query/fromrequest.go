@@ -73,6 +73,7 @@ func FromRequest(r *http.Request) (*Options, error) {
 
 		opts.Location = location
 	}
+	opts.Location = strings.ReplaceAll(opts.Location, "+", " ")
 
 	// Step 5: Set default language from header if not set by domain or URL
 	if opts.Lang == "" {
