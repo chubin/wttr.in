@@ -401,7 +401,7 @@ func (s *WeatherService) computeResponse(
 }
 
 func isAutoDetectPath(p string) bool {
-	return p == ""
+	return strings.Trim(p, "/") == ""
 }
 
 func getDebugInfo(
