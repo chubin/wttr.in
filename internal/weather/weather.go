@@ -323,7 +323,9 @@ func (s *WeatherService) computeResponse(
 	}
 
 	if locStr == "" {
-		return nil, fmt.Errorf("no location could be determined")
+		// Temporary use Berlin as the default location
+		locStr = "Berlin"
+		log.Println("no location could be determined")
 	}
 
 	// ── Geocode ───────────────────────────────────────────────────────────
