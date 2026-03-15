@@ -341,55 +341,70 @@ func (s *WeatherService) computeResponse(
 	// We also have information about the IP and Geolocation,
 	// which can be added to the headers.
 	// ...
-	isUpstream, uplinkResponse, err := s.UplinkProcessor.Route(opts, r, ipData, location)
-	if isUpstream {
-		return uplinkResponse, err
-	}
-
-	// ── Fetch weather ─────────────────────────────────────────────────────
-	start = time.Now()
-	weatherBytes, err := s.Weatherer.GetWeather(location.Latitude, location.Longitude, opts.Lang)
-	if err != nil {
-		return nil, fmt.Errorf("weather fetch failed: %w", err)
-	}
-	tracker.Add("Fetch weather data", time.Since(start))
+	var (
+		formatOut *FormatOutput
+		query     Query
+	)
 
 	// ── Build Query ───────────────────────────────────────────────────────
 	start = time.Now()
-	query := Query{
+	query = Query{
 		ClientData: &ClientData{
 			ClientIP:    clientIP,
 			ClientAgent: r.UserAgent(),
 		},
 		Options:  opts,
-		IPData:   ipData,
 		Location: location,
-		Weather:  (*WeatherData)(&weatherBytes),
 	}
 	tracker.Add("Build Query object", time.Since(start))
 
-	// ── Render + Format ───────────────────────────────────────────────────
 	start = time.Now()
-	renderer := selectRenderer(opts.Format)
-	formatter := selectFormatter(opts.Format)
+	isUpstream, uplinkResponse, err := s.UplinkProcessor.Route(opts, r, ipData, location)
+	if isUpstream {
+		if !debugRequested {
+			return uplinkResponse, err
+		}
+		tracker.Add("Upstream processing", time.Since(start))
+	} else {
+		// ── Fetch weather ─────────────────────────────────────────────────────
+		start = time.Now()
+		weatherBytes, err := s.Weatherer.GetWeather(location.Latitude, location.Longitude, opts.Lang)
+		if err != nil {
+			return nil, fmt.Errorf("weather fetch failed: %w", err)
+		}
+		tracker.Add("Fetch weather data", time.Since(start))
 
-	renderOut, err := renderer.Render(query)
-	if err != nil {
-		return nil, fmt.Errorf("render failed: %w", err)
-	}
+		// ── Filling up Query ───────────────────────────────────────────────────────
+		query.IPData = ipData
+		query.Weather = (*WeatherData)(&weatherBytes)
 
-	formatOut, err := formatter.Format(renderOut)
-	if err != nil {
-		return nil, fmt.Errorf("format failed: %w", err)
+		// ── Render + Format ───────────────────────────────────────────────────
+		start = time.Now()
+		renderer := selectRenderer(opts.Format)
+		formatter := selectFormatter(opts.Format)
+
+		renderOut, err := renderer.Render(query)
+		if err != nil {
+			return nil, fmt.Errorf("render failed: %w", err)
+		}
+
+		formatOut, err = formatter.Format(renderOut)
+		if err != nil {
+			return nil, fmt.Errorf("format failed: %w", err)
+		}
+		tracker.Add("Render + Format", time.Since(start))
 	}
-	tracker.Add("Render + Format", time.Since(start))
 
 	if debugRequested {
 		debugInfo := getDebugInfo(r, &query, locStr, tracker)
-		formatOut = &FormatOutput{
-			Content:     []byte(debugInfo),
-			ContentType: "text/plain",
-		}
+		return &CacheEntry{
+			Body:       []byte(debugInfo),
+			StatusCode: http.StatusOK,
+			Header: http.Header{
+				"Content-Type":  []string{"text/plain"},
+				"Cache-Control": []string{"public, max-age=0"},
+			},
+		}, nil
 	}
 
 	return &CacheEntry{
@@ -456,10 +471,10 @@ func getDebugInfo(
 	sb.WriteString("\n")
 
 	sb.WriteString("Weather Data:\n")
-	if len(*q.Weather) > 0 {
+	if q.Weather != nil && len(*q.Weather) > 0 {
 		sb.WriteString(fmt.Sprintf("  Fetched successfully (%d bytes)\n", len(*q.Weather)))
 	} else {
-		sb.WriteString("  Not fetched (no valid location)\n")
+		sb.WriteString("  Not fetched (no valid location/used uplink)\n")
 	}
 	sb.WriteString("\n")
 
