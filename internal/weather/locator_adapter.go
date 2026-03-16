@@ -123,12 +123,6 @@ func SplitCamelCase(s string) string {
 			result.WriteRune(' ')
 		}
 
-		// Add a space before a lowercase letter if the previous character is uppercase
-		// and it's not the start of a new word (to handle acronyms like "HTTPResponse")
-		if unicode.IsLower(current) && unicode.IsUpper(prev) {
-			result.WriteRune(' ')
-		}
-
 		result.WriteRune(current)
 	}
 
