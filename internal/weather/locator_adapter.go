@@ -32,7 +32,10 @@ func (l *cacheLocator) GetLocation(locationName string) (*Location, error) {
 	raw, err := l.cache.Resolve(locationName)
 	if err != nil {
 		camelCaseFixed := SplitCamelCase(locationName)
-		raw, err = l.cache.Resolve(camelCaseFixed)
+		if camelCaseFixed != locationName {
+			locationName = camelCaseFixed
+			raw, err = l.cache.Resolve(camelCaseFixed)
+		}
 
 		if err != nil {
 			err1 := AppendToFile("/tmp/unknown-locations.txt", fmt.Sprintf("%s", locationName))
