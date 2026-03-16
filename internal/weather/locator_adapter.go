@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"strings"
 	"time"
+	"unicode"
 
 	"github.com/chubin/wttr.go/internal/location"
 	"github.com/sirupsen/logrus"
@@ -29,13 +31,17 @@ func (l *cacheLocator) GetLocation(locationName string) (*Location, error) {
 	// + caching of result
 	raw, err := l.cache.Resolve(locationName)
 	if err != nil {
-		err1 := AppendToFile("/tmp/unknown-locations.txt", fmt.Sprintf("%s", locationName))
-		if err1 != nil {
-			logrus.Errorln(err1)
+		camelCaseFixed := SplitCamelCase(locationName)
+		raw, err = l.cache.Resolve(camelCaseFixed)
+
+		if err != nil {
+			err1 := AppendToFile("/tmp/unknown-locations.txt", fmt.Sprintf("%s", locationName))
+			if err1 != nil {
+				logrus.Errorln(err1)
+				return nil, err
+			}
 			return nil, err
 		}
-
-		return nil, err
 	}
 
 	// Convert between the two Location types
@@ -90,4 +96,38 @@ func AppendToFile(filename string, content string) error {
 	}
 
 	return nil
+}
+
+// SplitCamelCase splits a CamelCase string into words and joins them with spaces.
+func SplitCamelCase(s string) string {
+	if s == "" {
+		return ""
+	}
+
+	var result strings.Builder
+	runes := []rune(s)
+	length := len(runes)
+
+	// Add the first character as is (no space before it)
+	result.WriteRune(runes[0])
+
+	for i := 1; i < length; i++ {
+		current := runes[i]
+		prev := runes[i-1]
+
+		// Add a space before an uppercase letter if the previous character is lowercase
+		if unicode.IsUpper(current) && unicode.IsLower(prev) {
+			result.WriteRune(' ')
+		}
+
+		// Add a space before a lowercase letter if the previous character is uppercase
+		// and it's not the start of a new word (to handle acronyms like "HTTPResponse")
+		if unicode.IsLower(current) && unicode.IsUpper(prev) {
+			result.WriteRune(' ')
+		}
+
+		result.WriteRune(current)
+	}
+
+	return result.String()
 }
