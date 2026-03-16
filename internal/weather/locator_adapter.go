@@ -2,7 +2,9 @@ package weather
 
 import (
 	"fmt"
+	"os"
 	"strconv"
+	"time"
 
 	"github.com/chubin/wttr.go/internal/location"
 	"github.com/sirupsen/logrus"
@@ -27,7 +29,12 @@ func (l *cacheLocator) GetLocation(locationName string) (*Location, error) {
 	// + caching of result
 	raw, err := l.cache.Resolve(locationName)
 	if err != nil {
-		logrus.Errorln(err)
+		err1 := AppendToFile("/tmp/unknown-locations.txt", fmt.Sprintf("%s", locationName))
+		if err1 != nil {
+			logrus.Errorln(err1)
+			return nil, err
+		}
+
 		return nil, err
 	}
 
@@ -59,4 +66,28 @@ func (l *cacheLocator) GetLocation(locationName string) (*Location, error) {
 		Longitude:   lon,
 		FullAddress: raw.Fullname,
 	}, nil
+}
+
+// AppendToFile appends a string to the specified file with a timestamp
+func AppendToFile(filename string, content string) error {
+	// Open the file in append mode, create if it doesn't exist
+	file, err := os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		return fmt.Errorf("error opening file: %v", err)
+	}
+	defer file.Close()
+
+	// Get current timestamp
+	timestamp := time.Now().Format("2006-01-02 15:04:05")
+
+	// Format the content with timestamp
+	formattedContent := fmt.Sprintf("[%s] %s\n", timestamp, content)
+
+	// Write to file
+	_, err = file.WriteString(formattedContent)
+	if err != nil {
+		return fmt.Errorf("error writing to file: %v", err)
+	}
+
+	return nil
 }
