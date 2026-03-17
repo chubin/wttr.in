@@ -1,9 +1,13 @@
 package query
 
 import (
+	"fmt"
 	"net/http"
+	"net/url"
 	"path"
 	"strings"
+
+	"github.com/chubin/wttr.go/internal/options"
 )
 
 // FromRequest creates an Options struct based on the provided HTTP request.
@@ -134,6 +138,123 @@ func ApplyAutoFixes(opts *Options) {
 	if opts.View == "j1" || opts.View == "j2" {
 		opts.Output = "json"
 	}
+}
+
+// ParseOptionsInFilename converts a wttr.in-style PNG filename into *Options
+// using the same parsing/validation pipeline as normal ?query=string requests.
+//
+// Examples:
+//   "Paris.png"                  → location=Paris
+//   "Moscow_200x_m_q.png"        → location=Moscow, use_metric=true, no_caption=true, width=200
+//   "Rome_0pq_lang=it_T.png"     → days=0, padding=true, no-caption=true, lang=it, no-terminal=true
+//   "Berlin_u_300x150.png"       → use_imperial=true, width=300, height=150
+//
+// Returns location separately so caller can decide what to do with it.
+func ParseOptionsInFilename(filename string, cfg *options.WttrInOptions) (*Options, string, error) {
+	if cfg == nil {
+		return nil, "", fmt.Errorf("config required")
+	}
+
+	// 1. Normalize filename
+	name := strings.TrimSuffix(strings.ToLower(filename), ".png")
+	name = strings.TrimSuffix(name, ".PNG") // just in case
+
+	if name == "" {
+		return &Options{Output: "png"}, "", nil
+	}
+
+	// 2. Split into location + option parts
+	parts := strings.Split(name, "_")
+	if len(parts) == 0 {
+		return &Options{Output: "png"}, "", nil
+	}
+
+	location := parts[0]
+	location = strings.ReplaceAll(location, "+", " ") // standard wttr.in normalization
+
+	// 3. Build fake query string from the remaining parts
+	var qParams url.Values = make(url.Values)
+
+	for _, part := range parts[1:] {
+		part = strings.TrimSpace(part)
+		if part == "" {
+			continue
+		}
+
+		// Special case: dimension tokens (most common in PNG URLs)
+		if strings.Contains(part, "x") {
+			dims := strings.SplitN(part, "x", 2)
+			widthStr, heightStr := "", ""
+
+			if len(dims) == 2 {
+				widthStr = dims[0]
+				heightStr = dims[1]
+			} else if strings.HasPrefix(part, "x") {
+				heightStr = part[1:]
+			} else {
+				widthStr = part[:len(part)-1] // 300x → width=300
+			}
+
+			if widthStr != "" {
+				qParams.Add("width", widthStr) // assuming you support width=... (add to config if needed)
+			}
+			if heightStr != "" {
+				qParams.Add("height", heightStr)
+			}
+			continue
+		}
+
+		// key=value long option
+		if strings.Contains(part, "=") {
+			kv := strings.SplitN(part, "=", 2)
+			if len(kv) == 2 && kv[0] != "" {
+				key := strings.ToLower(kv[0])
+				val := kv[1]
+
+				// Some common aliases / normalizations
+				if key == "t" {
+					key = "transparency"
+				}
+				if key == "view" || key == "format" {
+					key = "view" // normalize
+				}
+
+				qParams.Add(key, val)
+			}
+			continue
+		}
+
+		// Otherwise: bundle of short flags (mMuIpq etc.)
+		for _, ch := range part {
+			if ch == 0 {
+				continue
+			}
+			qParams.Add(string(ch), "") // empty value = flag
+		}
+	}
+
+	// 4. Turn into query string and parse with the real parser
+	queryStr := qParams.Encode()
+
+	rawMap, err := options.ParseQueryString(queryStr, cfg)
+	if err != nil {
+		return nil, "", fmt.Errorf("failed to parse converted PNG query: %w (query was: %s)", err, queryStr)
+	}
+
+	// 5. Build Options the standard way
+	opts := &Options{
+		Output:       "png",
+		Location:     location,
+		Transparency: 150,  // PNG default
+		Metric:       true, // global default
+	}
+
+	opts, err = ApplyParsedMap(opts, rawMap)
+	if err != nil {
+		return nil, "", err
+	}
+
+	return opts, location, nil
 }
 
 // isValidLanguageCode checks if the provided code is a valid 2-letter language code.
