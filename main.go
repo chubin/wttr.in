@@ -59,7 +59,7 @@ func srv(configFile string) error {
 	}
 	ipLocators = append(ipLocators, ip.NewIPCacheLocator(ipCache))
 
-	wttrInOptions, err := options.NewFromFile("spec/options/options.yaml")
+	wttrInOptions, err := options.NewFromAssets("spec/options/options.yaml")
 	if err != nil {
 		log.Fatalln("error loading wttr.in options description: ", err)
 	}
