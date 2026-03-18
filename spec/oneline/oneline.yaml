@@ -112,3 +112,36 @@ format_specifiers:
     letter: "Z"
     description: "IANA timezone name of the location"
     example: "Europe/Berlin"
+
+
+
+preconfigured_formats:
+  - id: "1"
+    name: "Basic condition + temperature"
+    format: "%c %t"
+    description: "Simple emoji + temperature"
+    example_output: "⛅ +18°C"
+
+  - id: "2"
+    name: "With wind"
+    format: "%c 🌡️%t 🌬️%w"
+    description: "Condition + temperature + wind (emoji style)"
+    example_output: "🌤️ 🌡️+22°C 🌬️→14km/h"
+
+  - id: "3"
+    name: "With location"
+    format: "%l: %c %t"
+    description: "Location prefix + basic weather"
+    example_output: "Berlin: ☀️ +15°C"
+
+  - id: "4"
+    name: "Full compact line"
+    format: "%l: %c 🌡️%t 🌬️%w"
+    description: "Location + condition + temp + wind"
+    example_output: "Paris: 🌤️ 🌡️+19°C 🌬️↗11km/h"
+
+  - id: "69"
+    name: "Easter egg"
+    format: "nice"
+    description: "Hidden nice message"
+    example_output: "nice"

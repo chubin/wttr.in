@@ -13,8 +13,9 @@ import (
 
 // WttrInOptions represents the configuration for wttr.in query options and format specifiers.
 type WttrInOptions struct {
-	QueryOptions     []QueryOption     `yaml:"query_options"`
-	FormatSpecifiers []FormatSpecifier `yaml:"format_specifiers"`
+	QueryOptions         []QueryOption         `yaml:"query_options"`
+	FormatSpecifiers     []FormatSpecifier     `yaml:"format_specifiers"`
+	PreconfiguredFormats []PreconfiguredFormat `yaml:"preconfigured_formats"`
 }
 
 // QueryOption defines a single query option for wttr.in, such as `lang` or `format`.
@@ -78,6 +79,15 @@ type FormatSpecifier struct {
 
 	// Active indicates if the specifier is implemented (true) or proposed (false).
 	Active bool `yaml:"active"`
+}
+
+// PreconfiguredFormat represents one named preset for ?format=...
+type PreconfiguredFormat struct {
+	ID            string `yaml:"id"` // "1", "2", "69", etc.
+	Name          string `yaml:"name"`
+	Format        string `yaml:"format"` // the actual string like "%c %t"
+	Description   string `yaml:"description"`
+	ExampleOutput string `yaml:"example_output,omitempty"`
 }
 
 // NewFromAssets reads a QueryOption from an embeeded YAML file and returns a pointer to it.
