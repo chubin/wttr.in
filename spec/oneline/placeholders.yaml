@@ -1,0 +1,114 @@
+# wttr.in one-line format placeholders
+# Used in ?format=... parameter
+
+placeholders:
+
+  - name: condition_emoji
+    letter: "c"
+    description: "Weather condition as emoji (day/night variants when using ?view=v2d or v2n)"
+    example: "⛅  or  🌧️  or  ❄️"
+
+  - name: condition_full_name
+    letter: "C"
+    description: "Full textual description of current weather condition (prefers translated version if lang_xx available)"
+    example: "Partly cloudy"
+
+  - name: condition_plain
+    letter: "x"
+    description: "Plain English condition name (no emoji, no translation)"
+    example: "Partly Cloudy"
+
+  - name: condition_code
+    letter: "i"
+    description: "WorldWeatherOnline numeric weather code"
+    example: "116"
+
+  - name: temperature
+    letter: "t"
+    description: "Current temperature (with sign, °C by default, °F with ?F or imperial mode)"
+    example: "+7°C  or  -3°F"
+
+  - name: feels_like
+    letter: "f"
+    description: "Feels-like / apparent temperature"
+    example: "+4°C"
+
+  - name: wind
+    letter: "w"
+    description: "Wind direction symbol + speed (unit depends on mode: km/h, mph, m/s)"
+    example: "→12km/h  or  ↑8mph  or  NNW 18km/h"
+
+  - name: humidity
+    letter: "h"
+    description: "Relative humidity percentage"
+    example: "82%"
+
+  - name: precipitation_amount
+    letter: "p"
+    description: "Precipitation amount in current period (usually last hour or 3h)"
+    example: "1.2mm  or  0mm"
+
+  - name: precipitation_chance
+    letter: "o"
+    description: "Probability of precipitation (usually chance of rain)"
+    example: "60%"
+
+  - name: pressure
+    letter: "P"
+    description: "Atmospheric pressure"
+    example: "1018hPa"
+
+  - name: uv_index
+    letter: "u"
+    description: "Current UV index"
+    example: "5"
+
+  - name: location
+    letter: "l"
+    description: "Displayed name of the location"
+    example: "Berlin  or  Новосибирск  or  New York"
+
+  - name: moon_phase_emoji
+    letter: "m"
+    description: "Current moon phase emoji (calculated for today)"
+    example: "🌔"
+
+  - name: moon_day
+    letter: "M"
+    description: "Days since new moon (0–27/28)"
+    example: "11"
+
+  - name: sunrise
+    letter: "S"
+    description: "Local time of sunrise"
+    example: "05:22"
+
+  - name: sunset
+    letter: "s"
+    description: "Local time of sunset"
+    example: "20:41"
+
+  - name: dawn
+    letter: "D"
+    description: "Civil dawn time"
+    example: "04:48"
+
+  - name: dusk
+    letter: "d"
+    description: "Civil dusk time"
+    example: "21:15"
+
+  - name: solar_noon
+    letter: "z"
+    description: "Solar noon / zenith time"
+    example: "13:02"
+
+  - name: local_time
+    letter: "T"
+    description: "Current local time in HH:MM:SS format"
+    example: "14:37:22"
+
+  - name: timezone
+    letter: "Z"
+    description: "IANA timezone name of the location"
+    example: "Europe/Berlin"
