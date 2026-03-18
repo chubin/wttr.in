@@ -278,6 +278,7 @@ func (s *WeatherService) serveFromCache(w http.ResponseWriter, e *CacheEntry) {
 	for k, vs := range e.Header {
 		w.Header()[k] = vs
 	}
+	w.Header()["Access-Control-Allow-Origin"] = []string{"*"}
 	w.WriteHeader(e.StatusCode)
 	w.Write(e.Body)
 }
