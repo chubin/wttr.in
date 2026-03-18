@@ -108,6 +108,12 @@ type Options struct {
 	// Set transparency level for PNG output (Applicable only for PNG output; 255 = not transparent)
 	Transparency int `json:"transparency,omitempty"`
 
+	// Height of the generated PNG file (Applicable only for PNG output)
+	Height int `json:"height,omitempty"`
+
+	// Width of the generated PNG file (Applicable only for PNG output)
+	Width int `json:"width,omitempty"`
+
 	// Disable terminal-specific formatting (Output is not tailored to terminal environment)
 	NoTerminal bool `json:"no-terminal,omitempty"`
 
@@ -294,6 +300,22 @@ func ApplyParsedMap(opts *Options, raw map[string]string) (*Options, error) {
 			return nil, fmt.Errorf("invalid integer for transparency: %w", err)
 		}
 		opts.Transparency = n
+	}
+
+	if v, ok := raw["height"]; ok {
+		n, err := strconv.Atoi(v)
+		if err != nil {
+			return nil, fmt.Errorf("invalid integer for height: %w", err)
+		}
+		opts.Height = n
+	}
+
+	if v, ok := raw["width"]; ok {
+		n, err := strconv.Atoi(v)
+		if err != nil {
+			return nil, fmt.Errorf("invalid integer for width: %w", err)
+		}
+		opts.Width = n
 	}
 
 	if v, ok := raw["no-terminal"]; ok {

@@ -39,23 +39,23 @@ func (p *strictQueryParser) Parse(ctx context.Context, r *http.Request) (*query.
 		return nil, err
 	}
 
+	opts, err = query.ApplyParsedMap(opts, rawMap)
+	if err != nil {
+		return nil, err
+	}
+
 	if opts.Output == "png" {
 		filenameOpts, location, err := query.ParseOptionsInFilename(opts.Location, p.config)
 		if err != nil {
 			return nil, err
 		}
 
-		if err := mergo.Merge(&opts, filenameOpts); err != nil {
-			return nil, err
+		if err := mergo.Merge(opts, *filenameOpts); err != nil {
+			return nil, fmt.Errorf("filename options merge error: %w", err)
 		}
 
 		opts.Location = location
 
-	}
-
-	opts, err = query.ApplyParsedMap(opts, rawMap)
-	if err != nil {
-		return nil, err
 	}
 
 	query.ApplyAutoFixes(opts)

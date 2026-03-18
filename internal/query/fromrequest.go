@@ -78,6 +78,7 @@ func FromRequest(r *http.Request) (*Options, error) {
 		opts.Location = location
 	}
 	opts.Location = strings.ReplaceAll(opts.Location, "+", " ")
+	opts.Location = strings.TrimPrefix(opts.Location, "~")
 
 	// Step 5: Set default language from header if not set by domain or URL
 	if opts.Lang == "" {
@@ -107,10 +108,12 @@ func FromRequest(r *http.Request) (*Options, error) {
 	if userAgent != "" {
 		opts.Agent = userAgent
 		// Determine if it's a plain text client (e.g., curl, wget)
-		if isPlainTextClient(userAgent) {
-			opts.Output = "text"
-		} else if opts.Output == "" {
-			opts.Output = "html"
+		if opts.Output == "" {
+			if isPlainTextClient(userAgent) {
+				opts.Output = "text"
+			} else {
+				opts.Output = "html"
+			}
 		}
 	}
 
@@ -144,10 +147,11 @@ func ApplyAutoFixes(opts *Options) {
 // using the same parsing/validation pipeline as normal ?query=string requests.
 //
 // Examples:
-//   "Paris.png"                  → location=Paris
-//   "Moscow_200x_m_q.png"        → location=Moscow, use_metric=true, no_caption=true, width=200
-//   "Rome_0pq_lang=it_T.png"     → days=0, padding=true, no-caption=true, lang=it, no-terminal=true
-//   "Berlin_u_300x150.png"       → use_imperial=true, width=300, height=150
+//
+//	"Paris.png"                  → location=Paris
+//	"Moscow_200x_m_q.png"        → location=Moscow, use_metric=true, no_caption=true, width=200
+//	"Rome_0pq_lang=it_T.png"     → days=0, padding=true, no-caption=true, lang=it, no-terminal=true
+//	"Berlin_u_300x150.png"       → use_imperial=true, width=300, height=150
 //
 // Returns location separately so caller can decide what to do with it.
 func ParseOptionsInFilename(filename string, cfg *options.WttrInOptions) (*Options, string, error) {

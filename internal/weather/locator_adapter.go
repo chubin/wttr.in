@@ -1,10 +1,12 @@
 package weather
 
 import (
+	"errors"
 	"fmt"
 	"os"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 	"unicode"
 
@@ -15,6 +17,9 @@ import (
 // cacheLocator implements Locator using wttr.in's Cache + Resolve logic
 type cacheLocator struct {
 	cache *location.Cache
+
+	unknownLocation map[string]struct{}
+	m               sync.Mutex
 }
 
 // NewCacheLocator creates a Locator backed by wttr.in-style location cache
@@ -22,22 +27,48 @@ func NewCacheLocator(cache *location.Cache) Locator {
 	if cache == nil {
 		panic("cache must not be nil")
 	}
-	return &cacheLocator{cache: cache}
+	return &cacheLocator{
+		cache:           cache,
+		unknownLocation: map[string]struct{}{},
+	}
 }
 
 // GetLocation implements Locator interface
 func (l *cacheLocator) GetLocation(locationName string) (*Location, error) {
+	// unknownLocation is a temporary workaround to limit
+	// the stream of the incorrect locations resolutions attempts.
+	//
+	// Should be done on the proper basis:
+	//
+	// - persistent
+	// - in the proper place (in the lower levels)
+	// - with the possibility of the "reset"
+	// - with the possibility of "aliases" integration
+	//
+	l.m.Lock()
+	if _, found := l.unknownLocation[locationName]; found {
+		l.m.Unlock()
+		return nil, errors.New("location not found")
+	}
+	l.m.Unlock()
+
 	// Use the existing Resolve method — it does cache lookup + upstream query + timezone
 	// + caching of result
 	raw, err := l.cache.Resolve(locationName)
 	if err != nil {
 		camelCaseFixed := SplitCamelCase(locationName)
+		origLocationName := locationName
 		if camelCaseFixed != locationName {
 			locationName = camelCaseFixed
 			raw, err = l.cache.Resolve(camelCaseFixed)
 		}
 
 		if err != nil {
+			l.m.Lock()
+			l.unknownLocation[origLocationName] = struct{}{}
+			l.unknownLocation[locationName] = struct{}{}
+			l.m.Unlock()
+
 			err1 := AppendToFile("/tmp/unknown-locations.txt", fmt.Sprintf("%s", locationName))
 			if err1 != nil {
 				logrus.Errorln(err1)

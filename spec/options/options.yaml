@@ -327,6 +327,21 @@ query_options:
     active: true
     note: "Applicable only for PNG output; 255 = not transparent"
 
+  - name: height
+    description: "Height of the generated PNG file"
+    type: integer
+    default: 0
+    active: true
+    note: "Applicable only for PNG output"
+
+  - name: width
+    description: "Width of the generated PNG file"
+    type: integer
+    default: 0
+    active: true
+    note: "Applicable only for PNG output"
+
+
   - name: no-terminal
     short: T
     description: "Disable terminal-specific formatting"
