@@ -107,6 +107,12 @@ cmd_build() {
     fi
 }
 
+cmd_gen() {
+    info "Generating..."
+    ./"$BINARY_NAME" gen
+    info "Generating done"
+}
+
 cmd_clean() {
     info "Cleaning up..."
     rm -f "$BINARY_NAME"
@@ -149,6 +155,7 @@ main() {
     case "$cmd" in
         assets)     cmd_assets "$@" ;;
         build)      cmd_build "$@" ;;
+        gen)        cmd_gen "$@" ;;
         all)        cmd_all "$@" ;;
         clean)      cmd_clean "$@" ;;
         help|--help|-h)
