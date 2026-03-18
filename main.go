@@ -14,6 +14,7 @@ import (
 	"github.com/chubin/wttr.go/internal/ip"
 	"github.com/chubin/wttr.go/internal/location"
 	"github.com/chubin/wttr.go/internal/logging"
+	"github.com/chubin/wttr.go/internal/oneline"
 	"github.com/chubin/wttr.go/internal/server"
 	"github.com/chubin/wttr.go/internal/spec"
 	"github.com/chubin/wttr.go/internal/uplink"
@@ -40,6 +41,12 @@ func srv(configFile string) error {
 	if err != nil {
 		log.Fatalln(err)
 	}
+
+	////////////////////////////
+	// Configuring Renderers.
+	////////////////////////////
+
+	_ = oneline.NewOnelineRenderer()
 
 	////////////////////////////
 	// Configuring IP Locators.

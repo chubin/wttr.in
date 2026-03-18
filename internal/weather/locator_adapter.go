@@ -105,6 +105,7 @@ func (l *cacheLocator) GetLocation(locationName string) (*Location, error) {
 		Latitude:    lat,
 		Longitude:   lon,
 		FullAddress: raw.Fullname,
+		TimeZone:    raw.Timezone,
 	}, nil
 }
 

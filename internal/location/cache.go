@@ -164,6 +164,10 @@ func (c *Cache) Resolve(location string) (*Location, error) {
 	loc.Name = location
 	loc.Timezone = latLngToTimezoneString(loc.Lat, loc.Lon)
 
+	if err = enrichLocationWithTimezone(loc); err != nil {
+		log.Warnln("failed to find timezone for location:", err)
+	}
+
 	// 4. Store result
 	if err = c.Put(location, loc); err != nil {
 		log.Warnln("failed to persist location to cache:", err)

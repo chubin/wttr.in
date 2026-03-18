@@ -94,6 +94,7 @@ type Location struct {
 	Latitude    float64
 	Longitude   float64
 	FullAddress string
+	TimeZone    string
 }
 
 // WeatherData represents the internal weather data as raw bytes.
@@ -514,7 +515,7 @@ func selectRenderer(format string) Renderer {
 	case "j2":
 		return &J2Renderer{}
 	default:
-		return &OnelineRenderer{} // Default to oneline renderer
+		return &J1Renderer{}
 	}
 }
 
@@ -549,13 +550,6 @@ func (r *V1Renderer) Render(query Query) (RenderOutput, error) {
 type V2Renderer struct{}
 
 func (r *V2Renderer) Render(query Query) (RenderOutput, error) {
-	// Stub: To be implemented
-	return RenderOutput{}, nil
-}
-
-type OnelineRenderer struct{}
-
-func (r *OnelineRenderer) Render(query Query) (RenderOutput, error) {
 	// Stub: To be implemented
 	return RenderOutput{}, nil
 }
