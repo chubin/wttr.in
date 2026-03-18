@@ -5,7 +5,11 @@ package spec
 import (
 	_ "embed"
 	"fmt"
+	"path"
+	"path/filepath"
+	"strings"
 
+	"dario.cat/mergo"
 	"gopkg.in/yaml.v3"
 
 	"github.com/chubin/wttr.go/internal/assets"
@@ -90,36 +94,69 @@ type PreconfiguredFormat struct {
 	ExampleOutput string `yaml:"example_output,omitempty"`
 }
 
-// NewFromAssets reads a QueryOption from an embeeded YAML file and returns a pointer to it.
-func NewFromAssets() (*WttrInOptions, error) {
-	optionsSpecFile := "spec/options/options.yaml"
-	onelineSpecFile := "spec/oneline/oneline.yaml"
+// LoadSpecFromAssets loads and merges all .yaml / .yml files under spec/ in the embedded FS.
+// Slices are appended; other fields are overridden by later files.
+func LoadSpecFromAssets() (*WttrInOptions, error) {
+	const root = "spec"
 
-	// Read Options description
-	data, err := assets.GetFile(optionsSpecFile)
-	if err != nil {
-		return nil, fmt.Errorf("failed to read file: %w", err)
+	var final WttrInOptions
+
+	// Recursive walker using only fs.ReadDirFS + fs.ReadFileFS
+	var walk func(dir string) error
+	walk = func(dir string) error {
+		entries, err := assets.FS.ReadDir(dir)
+		if err != nil {
+			return fmt.Errorf("cannot read embedded directory %q: %w", dir, err)
+		}
+
+		for _, entry := range entries {
+			name := entry.Name()
+			fullPath := path.Join(dir, name)
+
+			if entry.IsDir() {
+				if err := walk(fullPath); err != nil {
+					return err
+				}
+				continue
+			}
+
+			// Only process YAML files
+			ext := strings.ToLower(filepath.Ext(name))
+			if ext != ".yaml" && ext != ".yml" {
+				continue
+			}
+
+			data, err := assets.FS.ReadFile(fullPath)
+			if err != nil {
+				return fmt.Errorf("cannot read embedded file %q: %w", fullPath, err)
+			}
+
+			var current WttrInOptions
+			if err := yaml.Unmarshal(data, &current); err != nil {
+				return fmt.Errorf("cannot parse YAML %q: %w", fullPath, err)
+			}
+
+			// Merge: append slices + override other fields
+			if err := mergo.Merge(&final, &current,
+				mergo.WithOverride,
+				mergo.WithAppendSlice,
+			); err != nil {
+				return fmt.Errorf("merge failed for %q: %w", fullPath, err)
+			}
+		}
+		return nil
 	}
 
-	// Unmarshal the YAML content into a QueryOption struct
-	var option WttrInOptions
-	if err := yaml.Unmarshal(data, &option); err != nil {
-		return nil, fmt.Errorf("failed to unmarshal YAML: %w", err)
+	if err := walk(root); err != nil {
+		return nil, err
 	}
 
-	// Read Format specifiers
-	data, err = assets.GetFile(onelineSpecFile)
-	if err != nil {
-		return nil, fmt.Errorf("failed to read file: %w", err)
+	// Optional: detect completely empty result
+	if len(final.QueryOptions) == 0 &&
+		len(final.FormatSpecifiers) == 0 &&
+		len(final.PreconfiguredFormats) == 0 {
+		return nil, fmt.Errorf("no valid spec data found under embed/%s (no items loaded)", root)
 	}
 
-	// Unmarshal the YAML content into a QueryOption struct
-	var oneline WttrInOptions
-	if err := yaml.Unmarshal(data, &option); err != nil {
-		return nil, fmt.Errorf("failed to unmarshal YAML: %w", err)
-	}
-
-	option.FormatSpecifiers = oneline.FormatSpecifiers
-
-	return &option, nil
+	return &final, nil
 }
