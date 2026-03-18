@@ -14,8 +14,8 @@ import (
 	"github.com/chubin/wttr.go/internal/ip"
 	"github.com/chubin/wttr.go/internal/location"
 	"github.com/chubin/wttr.go/internal/logging"
-	"github.com/chubin/wttr.go/internal/options"
 	"github.com/chubin/wttr.go/internal/server"
+	"github.com/chubin/wttr.go/internal/spec"
 	"github.com/chubin/wttr.go/internal/uplink"
 	"github.com/chubin/wttr.go/internal/weather"
 )
@@ -59,7 +59,7 @@ func srv(configFile string) error {
 	}
 	ipLocators = append(ipLocators, ip.NewIPCacheLocator(ipCache))
 
-	wttrInOptions, err := options.NewFromAssets("spec/options/options.yaml")
+	spec, err := spec.NewFromAssets()
 	if err != nil {
 		log.Fatalln("error loading wttr.in options description: ", err)
 	}
@@ -78,7 +78,7 @@ func srv(configFile string) error {
 		weather.NewWeatherClient(cfg.Weather.WWO),
 		weather.NewCacheLocator(locationCache),
 		ipLocators,
-		weather.NewQueryParser(wttrInOptions),
+		weather.NewQueryParser(spec),
 		lruCache,
 		requestLogger,
 		uplink.NewUplinkProcessor(cfg.Uplink),

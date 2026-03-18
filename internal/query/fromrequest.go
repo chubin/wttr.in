@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/chubin/wttr.go/internal/options"
+	"github.com/chubin/wttr.go/internal/spec"
 )
 
 // FromRequest creates an Options struct based on the provided HTTP request.
@@ -154,7 +155,7 @@ func ApplyAutoFixes(opts *Options) {
 //	"Berlin_u_300x150.png"       → use_imperial=true, width=300, height=150
 //
 // Returns location separately so caller can decide what to do with it.
-func ParseOptionsInFilename(filename string, cfg *options.WttrInOptions) (*Options, string, error) {
+func ParseOptionsInFilename(filename string, cfg *spec.WttrInOptions) (*Options, string, error) {
 	if cfg == nil {
 		return nil, "", fmt.Errorf("config required")
 	}

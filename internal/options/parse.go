@@ -7,6 +7,8 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+
+	"github.com/chubin/wttr.go/internal/spec"
 )
 
 // Errors for query parsing and validation
@@ -33,9 +35,9 @@ var (
 )
 
 // ParseQueryString parses a wttr.in query string into a map of option names to values.
-// It validates option names, types, content, and values based on the provided WttrInOptions.
+// It validates option names, types, content, and values based on the provided spec.WttrInOptions.
 // Returns the parsed map or an error if parsing or validation fails.
-func ParseQueryString(query string, config *WttrInOptions) (map[string]string, error) {
+func ParseQueryString(query string, config *spec.WttrInOptions) (map[string]string, error) {
 	// Initialize result map and lookup tables
 	result := make(map[string]string)
 	shortToName, nameToOption := buildOptionLookups(config.QueryOptions)
@@ -66,22 +68,13 @@ func ParseQueryString(query string, config *WttrInOptions) (map[string]string, e
 		}
 	}
 
-	// Validate format specifiers if format=custom
-	if formatValue, exists := result["format"]; exists && formatValue == "custom" {
-		for _, spec := range config.FormatSpecifiers {
-			if !spec.Active {
-				return nil, fmt.Errorf("%w: %s", ErrInactiveFormatSpecifier, spec.Specifier)
-			}
-		}
-	}
-
 	return result, nil
 }
 
 // buildOptionLookups creates lookup maps for short-to-long names and option details.
-func buildOptionLookups(options []QueryOption) (map[string]string, map[string]QueryOption) {
+func buildOptionLookups(options []spec.QueryOption) (map[string]string, map[string]spec.QueryOption) {
 	shortToName := make(map[string]string)
-	nameToOption := make(map[string]QueryOption)
+	nameToOption := make(map[string]spec.QueryOption)
 	for _, opt := range options {
 		nameToOption[opt.Name] = opt
 		if opt.Short != "" {
@@ -92,7 +85,7 @@ func buildOptionLookups(options []QueryOption) (map[string]string, map[string]Qu
 }
 
 // handleFlagOption processes flag options (e.g., "0pq" or "m") without values.
-func handleFlagOption(key string, shortToName map[string]string, nameToOption map[string]QueryOption, result map[string]string) error {
+func handleFlagOption(key string, shortToName map[string]string, nameToOption map[string]spec.QueryOption, result map[string]string) error {
 	// Handle bundled short options (e.g., "0pq")
 	if len(key) > 1 && !strings.Contains(key, "=") {
 		for _, short := range strings.Split(key, "") {
@@ -107,7 +100,7 @@ func handleFlagOption(key string, shortToName map[string]string, nameToOption ma
 }
 
 // validateAndSetFlag validates and sets a single flag option.
-func validateAndSetFlag(key string, shortToName map[string]string, nameToOption map[string]QueryOption, result map[string]string) error {
+func validateAndSetFlag(key string, shortToName map[string]string, nameToOption map[string]spec.QueryOption, result map[string]string) error {
 	name, exists := shortToName[key]
 	if !exists {
 		name = key // Try long name
@@ -127,7 +120,7 @@ func validateAndSetFlag(key string, shortToName map[string]string, nameToOption 
 }
 
 // handleValueOption processes options with values (e.g., "lang=fr").
-func handleValueOption(key, value string, shortToName map[string]string, nameToOption map[string]QueryOption, result map[string]string) error {
+func handleValueOption(key, value string, shortToName map[string]string, nameToOption map[string]spec.QueryOption, result map[string]string) error {
 	// Resolve option name
 	name, exists := shortToName[key]
 	if !exists {
@@ -155,7 +148,7 @@ func handleValueOption(key, value string, shortToName map[string]string, nameToO
 }
 
 // validateBooleanOption validates and sets boolean option values.
-func validateBooleanOption(name, value string, opt QueryOption, result map[string]string) error {
+func validateBooleanOption(name, value string, opt spec.QueryOption, result map[string]string) error {
 	if value != "true" && value != "false" {
 		return fmt.Errorf("%w: %s: %s", ErrBooleanValueRequired, name, value)
 	}
@@ -173,7 +166,7 @@ func validateBooleanOption(name, value string, opt QueryOption, result map[strin
 }
 
 // validateStringOption validates and sets string option values, including background-specific rules.
-func validateStringOption(name, value string, opt QueryOption, result map[string]string) error {
+func validateStringOption(name, value string, opt spec.QueryOption, result map[string]string) error {
 	if len(opt.ValuesMap) > 0 {
 		if _, valid := opt.ValuesMap[value]; !valid {
 			return fmt.Errorf("%w: %s: %s, expected one of %v", ErrInvalidStringValue, name, value, getMapKeys(opt.ValuesMap))
@@ -229,7 +222,7 @@ func applyValidationRule(name, value, rule string) error {
 }
 
 // validateIntegerOption validates and sets integer option values.
-func validateIntegerOption(name, value string, opt QueryOption, result map[string]string) error {
+func validateIntegerOption(name, value string, opt spec.QueryOption, result map[string]string) error {
 	num, err := strconv.Atoi(value)
 	if err != nil {
 		return fmt.Errorf("%w: %s: %s", ErrInvalidInteger, name, value)

@@ -9,15 +9,16 @@ import (
 
 	"github.com/chubin/wttr.go/internal/options"
 	"github.com/chubin/wttr.go/internal/query"
+	"github.com/chubin/wttr.go/internal/spec"
 )
 
 // strictQueryParser implements QueryParser using the existing options.ParseQueryString
 type strictQueryParser struct {
-	config *options.WttrInOptions
+	config *spec.WttrInOptions
 }
 
 // NewQueryParser returns a new QueryParser that uses the provided configuration
-func NewQueryParser(config *options.WttrInOptions) QueryParser {
+func NewQueryParser(config *spec.WttrInOptions) QueryParser {
 	if config == nil {
 		panic("config must not be nil")
 	}

@@ -1,7 +1,7 @@
 # wttr.in one-line format placeholders
 # Used in ?format=... parameter
 
-placeholders:
+format_specifiers:
 
   - name: condition_emoji
     letter: "c"
