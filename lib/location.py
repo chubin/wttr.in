@@ -318,7 +318,7 @@ def _get_location(ip_addr):
     #    try:
     #        location = geolocator.reverse(coord, language='en')
     #        city = location.raw.get('address', {}).get('city')
-    #    except:
+    #    except Exception:
     #        pass
 
     # No methods resulted in a location - return default
@@ -448,7 +448,7 @@ def location_processing(location, ip_addr):
                 location = _fully_qualified_location(location, region, country)
                 hide_full_address = not force_show_full_address
 
-        except:
+        except Exception:
             location, region, country = NOT_FOUND_LOCATION, None, None
 
     query_source_location = _get_location(ip_addr)
