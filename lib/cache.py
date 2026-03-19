@@ -53,7 +53,6 @@ def get_signature(user_agent, query_string, client_ip_address, lang):
         return None
 
     signature = "%s:%s:%s:%s" % (user_agent, query_string, client_ip_address, lang)
-    print(signature)
     return signature
 
 

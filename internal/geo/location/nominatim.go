@@ -5,10 +5,16 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"time"
 
 	"github.com/chubin/wttr.in/internal/types"
 	log "github.com/sirupsen/logrus"
 )
+
+// httpClient is a shared HTTP client with timeout for external API calls
+var httpClient = &http.Client{
+	Timeout: 5 * time.Second,
+}
 
 type Nominatim struct {
 	name  string
@@ -51,7 +57,7 @@ func makeQuery(url string, result interface{}) error {
 	}
 
 	log.Debugln("nominatim:", url)
-	resp, err := http.Get(url)
+	resp, err := httpClient.Get(url)
 	if err != nil {
 		return err
 	}

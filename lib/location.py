@@ -46,6 +46,10 @@ import geoip2.database
 import pycountry
 import requests
 
+# Create a session for connection pooling (reuses TCP connections)
+HTTP_SESSION = requests.Session()
+HTTP_TIMEOUT = 5  # seconds
+
 from globals import (
     GEOLITE,
     GEOLOCATOR_SERVICE,
@@ -110,12 +114,13 @@ def _geolocator(location):
 
     try:
         if random.random() < 0:
-            geo = requests.get("%s/%s" % (GEOLOCATOR_SERVICE, location)).text
+            geo = HTTP_SESSION.get("%s/%s" % (GEOLOCATOR_SERVICE, location), timeout=HTTP_TIMEOUT).text
         else:
-            geo = requests.get(
-                "http://127.0.0.1:8085/:geo-location?location=%s" % location
+            geo = HTTP_SESSION.get(
+                "http://127.0.0.1:8085/:geo-location?location=%s" % location,
+                timeout=HTTP_TIMEOUT
             ).text
-    except requests.exceptions.ConnectionError as exception:
+    except (requests.exceptions.ConnectionError, requests.exceptions.Timeout) as exception:
         print("ERROR: %s" % exception)
         return None
 
@@ -166,7 +171,10 @@ def _ipcache(ip_addr):
     """
 
     ## Use Geo IP service when available
-    r = requests.get("http://127.0.0.1:8085/:geo-ip-get?ip=%s" % ip_addr)
+    try:
+        r = HTTP_SESSION.get("http://127.0.0.1:8085/:geo-ip-get?ip=%s" % ip_addr, timeout=HTTP_TIMEOUT)
+    except (requests.exceptions.ConnectionError, requests.exceptions.Timeout):
+        return None
     if r.status_code == 200 and ";" in r.text:
         _, country, region, city, *_ = r.text.split(";")
         return city, region, country
@@ -203,9 +211,10 @@ def _ip2location(ip_addr):
         return None
     try:
         _debug_log("[_ip2location] %s search" % ip_addr)
-        r = requests.get(
+        r = HTTP_SESSION.get(
             "http://api.ip2location.com/?ip=%s&key=%s&package=WS3"  # WS5 provides latlong
-            % (ip_addr, IP2LOCATION_KEY)
+            % (ip_addr, IP2LOCATION_KEY),
+            timeout=HTTP_TIMEOUT
         )
         r.raise_for_status()
         location = r.text
@@ -216,7 +225,7 @@ def _ip2location(ip_addr):
             _debug_log("[_ip2location] %s found" % ip_addr)
             return [parts[3], parts[2], parts[1], parts[0]] + parts[4:]
         return None
-    except requests.exceptions.RequestException:
+    except (requests.exceptions.RequestException, requests.exceptions.Timeout):
         return None
 
 
@@ -224,7 +233,7 @@ def _ipinfo(ip_addr):
     if not IPINFO_TOKEN:
         return None
     try:
-        r = requests.get("https://ipinfo.io/%s/json?token=%s" % (ip_addr, IPINFO_TOKEN))
+        r = HTTP_SESSION.get("https://ipinfo.io/%s/json?token=%s" % (ip_addr, IPINFO_TOKEN), timeout=HTTP_TIMEOUT)
         r.raise_for_status()
         r_json = r.json()
         # can't do two unpackings on one line
