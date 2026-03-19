@@ -73,6 +73,27 @@ WEATHER_SYMBOL = {
     "VeryCloudy": "☁️",
 }
 
+WEATHER_SYMBOL_NERDFONTS = {
+    "Cloudy": "\U000f0590",             # nf-md-weather_cloudy
+    "VeryCloudy": "\U000f0590",             # nf-md-weather_cloudy
+    "Fog": "\U000f0591",                 # nf-md-weather_fog
+    "HeavyRain": "\U000f0596",           # nf-md-weather_pouring
+    "HeavyShowers": "\U000f0596",           # nf-md-weather_pouring
+    "HeavySnow": "\U000f0f36",           # nf-md-weather_snowy_heavy
+    "HeavySnowShowers": "\U000f067f",    # nf-md-weather_snowy_rainy
+    "LightRain": "\U000f0597",           # nf-md-weather_rainy
+    "LightShowers": "\U000f0597",           # nf-md-weather_rainy
+    "LightSleet": "\U000f067f",          # nf-md-weather_snowy_rainy ## Graupel?
+    "LightSleetShowers": "\U000f067f",          # nf-md-weather_snowy_rainy ## Graupel?
+    "LightSnow": "\U000f0598",           # nf-md-weather_snowy
+    "LightSnowShowers": "\U000f067f",          # nf-md-weather_snowy_rainy
+    "PartlyCloudy": "\U000f0595",        # nf-md-weather_partly_cloudy
+    "Sunny": "\U000f0599",               # nf-md-weather_sunny
+    "ThunderyHeavyRain": "\U000f067e",   # nf-md-weather_lightning_rainy
+    "ThunderyShowers": "\U000f067e",   # nf-md-weather_lightning_rainy
+}
+
+
 WEATHER_SYMBOL_WIDTH_VTE = {
     "✨": 2,
     "☁️": 1,
