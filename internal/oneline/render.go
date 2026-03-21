@@ -2,7 +2,6 @@ package oneline
 
 import (
 	"fmt"
-	"log"
 	"math"
 	"strconv"
 	"time"
@@ -21,8 +20,7 @@ func renderConditionFullName(ctx *renderContext) string {
 
 	val, err := GetStringValue(ctx.DataRaw, query)
 	if err != nil {
-		log.Println("renderConditionFullName: ", err)
-		return ctx.Data.WeatherDesc
+		return fmt.Sprintf("[ERR: renderConditionFullName: %s]", err) + ctx.Data.WeatherDesc
 	}
 
 	return val
