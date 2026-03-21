@@ -97,7 +97,7 @@ type PreconfiguredFormat struct {
 // LoadSpecFromAssets loads and merges all .yaml / .yml files under spec/ in the embedded FS.
 // Slices are appended; other fields are overridden by later files.
 func LoadSpecFromAssets() (*WttrInOptions, error) {
-	const root = "spec"
+	const root = "embed/spec"
 
 	var final WttrInOptions
 
@@ -111,6 +111,10 @@ func LoadSpecFromAssets() (*WttrInOptions, error) {
 
 		for _, entry := range entries {
 			name := entry.Name()
+			if name == "gen" {
+				continue
+			}
+
 			fullPath := path.Join(dir, name)
 
 			if entry.IsDir() {
