@@ -51,13 +51,13 @@ func (r *OnelineRenderer) determineFormat(opts *query.Options) string {
 	// Handle preconfigured format IDs from oneline.yaml
 	switch opts.Format {
 	case "1":
-		return "%c %t"
+		return "%c %t\n"
 	case "2":
-		return "%c 🌡️%t 🌬️%w"
+		return "%c 🌡️%t 🌬️%w\n"
 	case "3":
-		return "%l: %c %t"
+		return "%l: %c %t\n"
 	case "4":
-		return "%l: %c 🌡️%t 🌬️%w"
+		return "%l: %c 🌡️%t 🌬️%w\n"
 	case "69":
 		return "nice"
 	}
@@ -159,6 +159,9 @@ func (r *OnelineRenderer) Render(q weather.Query) (weather.RenderOutput, error) 
 	}
 
 	output := sb.String()
+
+	// Replace \n in the text with new lines
+	output = strings.ReplaceAll(output, `\n`, "\n")
 
 	return weather.RenderOutput{
 		Content: []byte(output),
