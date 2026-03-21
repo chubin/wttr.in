@@ -7,6 +7,7 @@ import (
 	"log"
 	"net"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 
@@ -368,14 +369,12 @@ func (s *WeatherService) computeResponse(
 		isUpstream     bool
 		uplinkResponse *CacheEntry
 	)
-	if opts.View != "line" {
-		isUpstream, uplinkResponse, err = s.UplinkProcessor.Route(opts, r, ipData, location)
-	}
-	if isUpstream {
+	isUpstream, uplinkResponse, err = s.UplinkProcessor.Route(opts, r, ipData, location)
+	if isUpstream && opts.View != "line" {
 		if !debugRequested {
 			return uplinkResponse, err
 		}
-		tracker.Add("Upstream processing", time.Since(start))
+		tracker.Add(fmt.Sprintf("Upstream processing (view=%s)", opts.View), time.Since(start))
 	} else {
 		// ── Fetch weather ─────────────────────────────────────────────────────
 		start = time.Now()
@@ -404,6 +403,13 @@ func (s *WeatherService) computeResponse(
 			return nil, fmt.Errorf("format failed: %w", err)
 		}
 		tracker.Add("Render + Format", time.Since(start))
+
+		if isUpstream && opts.View == "line" {
+			debugCompareOneLineRendering(opts.Format, string(uplinkResponse.Body), string(formatOut.Content))
+			if !debugRequested {
+				return uplinkResponse, err
+			}
+		}
 	}
 
 	if debugRequested {
@@ -604,3 +610,24 @@ func parseQueryOptions(r *http.Request) (*query.Options, error) {
 
 // Weatherer and IPLocator implementations are also stubs to be provided externally.
 // They should be injected into NewWeatherService during initialization.
+
+func debugCompareOneLineRendering(format string, uplinkResponse string, internalResponse string) {
+	if uplinkResponse != internalResponse {
+		// Prepare the log message using the provided format and responses
+		logMessage := fmt.Sprintf("---\nFORMAT:\n%s\n###########\nUPLINK:\n%s\nINTERNAL:\n%s\n^^^\n", format, uplinkResponse, internalResponse)
+
+		// Open the log file in append mode, create if it doesn't exist
+		file, err := os.OpenFile("/tmp/oneline-rendering-errors.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+		if err != nil {
+			// If there's an error opening the file, log it to stderr
+			fmt.Fprintf(os.Stderr, "Error opening log file: %v\n", err)
+			return
+		}
+		defer file.Close()
+
+		// Write the log message to the file
+		if _, err := file.WriteString(logMessage + "\n"); err != nil {
+			fmt.Fprintf(os.Stderr, "Error writing to log file: %v\n", err)
+		}
+	}
+}
