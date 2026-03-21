@@ -148,6 +148,13 @@ func (c *Cache) Resolve(location string) (*Location, error) {
 	// 2. Persistent cache
 	loc, err := c.Read(location)
 	if err == nil {
+		// It is possible that in the cache, the data does not contain a correct time zone.
+		if loc.Timezone == "" || loc.Timezone == "UTC" {
+			if err = enrichLocationWithTimezone(loc); err != nil {
+				log.Warnln("failed to find timezone for location:", err)
+			}
+		}
+
 		c.putToLRU(location, loc) // warm the LRU
 		return loc, nil
 	}
@@ -162,7 +169,6 @@ func (c *Cache) Resolve(location string) (*Location, error) {
 	}
 
 	loc.Name = location
-	loc.Timezone = latLngToTimezoneString(loc.Lat, loc.Lon)
 
 	if err = enrichLocationWithTimezone(loc); err != nil {
 		log.Warnln("failed to find timezone for location:", err)
@@ -356,20 +362,6 @@ func normalizeLocationName(name string) string {
 	name = strings.TrimSpace(name)
 	name = strings.Join(strings.Fields(name), " ")
 	return strings.ToLower(name)
-}
-
-func latLngToTimezoneString(lat, lon string) string {
-	latF, err := strconv.ParseFloat(lat, 64)
-	if err != nil {
-		log.Errorln("latLngToTimezoneString: invalid lat:", err)
-		return ""
-	}
-	lonF, err := strconv.ParseFloat(lon, 64)
-	if err != nil {
-		log.Errorln("latLngToTimezoneString: invalid lon:", err)
-		return ""
-	}
-	return timezonemapper.LatLngToTimezoneString(latF, lonF)
 }
 
 func mustParseFloat(s string) float64 {

@@ -28,7 +28,7 @@ func enrichLocationWithTimezone(loc *Location) error {
 		return fmt.Errorf("invalid longitude in cached location: %w", err)
 	}
 
-	tzName := finder.GetTimezoneName(lat, lon)
+	tzName := finder.GetTimezoneName(lon, lat)
 	if tzName == "" {
 		tzName = "UTC" // fallback
 	}

@@ -2,8 +2,10 @@ package oneline
 
 import (
 	"fmt"
+	"log"
 	"math"
 	"strconv"
+	"time"
 )
 
 // ──────────────────────────────────────────────────────────────────────────────
@@ -11,7 +13,19 @@ import (
 // ──────────────────────────────────────────────────────────────────────────────
 
 func renderConditionFullName(ctx *renderContext) string {
-	return ctx.Data.WeatherDesc // already prefers translated if available
+	if ctx.Options.Lang == "en" {
+		return ctx.Data.WeatherDesc
+	}
+
+	query := fmt.Sprintf(".data.current_condition[0].lang_%s[0].value", ctx.Options.Lang)
+
+	val, err := GetStringValue(ctx.DataRaw, query)
+	if err != nil {
+		log.Println("renderConditionFullName: ", err)
+		return ctx.Data.WeatherDesc
+	}
+
+	return val
 }
 
 func renderConditionCode(ctx *renderContext) string {
@@ -90,11 +104,11 @@ func renderUVIndex(ctx *renderContext) string {
 }
 
 func renderLocation(ctx *renderContext) string {
-	if ctx.Data.LocationName != "" {
-		return ctx.Data.LocationName
-	}
 	if ctx.Location != nil {
 		return ctx.Location.Name
+	}
+	if ctx.Data.LocationName != "" {
+		return ctx.Data.LocationName
 	}
 	return "?"
 }
@@ -121,7 +135,18 @@ func renderSolarNoon(ctx *renderContext) string {
 }
 
 func renderLocalTime(ctx *renderContext) string {
-	return ctx.Now.Format("15:04:05")
+	// Start with UTC as default
+	loc := time.UTC
+	if ctx.Location.TimeZone != "" {
+		tz, err := time.LoadLocation(ctx.Location.TimeZone)
+		if err == nil {
+			loc = tz
+		}
+	}
+
+	// Convert the time to the specified timezone
+	localTime := ctx.Now.In(loc)
+	return localTime.Format("15:04:05-0700")
 }
 
 func renderTimezone(ctx *renderContext) string {

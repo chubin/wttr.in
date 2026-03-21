@@ -2,6 +2,7 @@
 package oneline
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"strings"
@@ -71,6 +72,7 @@ var ErrNoWeatherData = errors.New("no weather data available in query")
 // renderContext holds everything a single placeholder might need
 type renderContext struct {
 	Data     *parsedCurrentCondition
+	DataRaw  interface{}
 	Options  *query.Options
 	Location *weather.Location
 	Now      time.Time
@@ -120,10 +122,18 @@ func (r *OnelineRenderer) Render(q weather.Query) (weather.RenderOutput, error) 
 		return weather.RenderOutput{}, err
 	}
 
+	var dataRaw interface{} // or map[string]interface{}
+
+	err = json.Unmarshal(*q.Weather, &dataRaw)
+	if err != nil {
+		return weather.RenderOutput{}, err
+	}
+
 	formatStr := r.determineFormat(q.Options)
 
 	ctx := &renderContext{
 		Data:     data,
+		DataRaw:  dataRaw,
 		Options:  q.Options,
 		Location: q.Location,
 		Now:      time.Now(), // or from observation time if you prefer
