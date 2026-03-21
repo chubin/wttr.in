@@ -69,11 +69,12 @@ func FromRequest(r *http.Request) (*Options, error) {
 			switch ext {
 			case "png", "jpg", "jpeg":
 				opts.Output = ext
+				location = strings.TrimSuffix(location, "."+ext)
 			case "json":
 				opts.Output = "json"
+				location = strings.TrimSuffix(location, "."+ext)
 			}
 			// Remove the extension from the location
-			location = strings.TrimSuffix(location, "."+ext)
 		}
 
 		opts.Location = location
