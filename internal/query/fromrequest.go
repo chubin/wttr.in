@@ -131,7 +131,7 @@ func FromRequest(r *http.Request) (*Options, error) {
 
 func ApplyAutoFixes(opts *Options) {
 	if opts.View == "" {
-		if opts.Format == "j1" || opts.Format == "j2" {
+		if opts.Format == "j1" || opts.Format == "j2" || opts.Format == "v2" || opts.Format == "p1" {
 			opts.View = opts.Format
 		} else if opts.Format != "" {
 			opts.View = "line"
@@ -283,6 +283,7 @@ func isValidView(view string) bool {
 	return view == "line" ||
 		view == "v1" ||
 		view == "v2" ||
+		view == "p1" ||
 		view == "j1" ||
 		view == "j2"
 }

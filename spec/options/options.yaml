@@ -23,9 +23,10 @@ query_options:
       - v1
       - v2
       - v3
-      - oneline
+      - line
       - j1
       - j2
+      - p1
     active: true
 
   - name: output
