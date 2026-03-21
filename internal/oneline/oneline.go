@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"net/url"
 	"strings"
 	"time"
 
@@ -130,6 +131,10 @@ func (r *OnelineRenderer) Render(q weather.Query) (weather.RenderOutput, error) 
 	}
 
 	formatStr := r.determineFormat(q.Options)
+	formatStr, err = url.QueryUnescape(formatStr)
+	if err != nil {
+		return weather.RenderOutput{}, fmt.Errorf("error decoding format string: %w", err)
+	}
 
 	ctx := &renderContext{
 		Data:     data,
