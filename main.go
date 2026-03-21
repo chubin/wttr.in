@@ -46,7 +46,13 @@ func srv(configFile string) error {
 	// Configuring Renderers.
 	////////////////////////////
 
-	_ = oneline.NewOnelineRenderer()
+	rendererMap := map[string]weather.Renderer{
+		"v1":   &weather.V1Renderer{},
+		"v2":   &weather.V2Renderer{},
+		"j1":   &weather.J1Renderer{},
+		"j2":   &weather.J2Renderer{},
+		"line": oneline.NewOnelineRenderer(),
+	}
 
 	////////////////////////////
 	// Configuring IP Locators.
@@ -89,6 +95,7 @@ func srv(configFile string) error {
 		lruCache,
 		requestLogger,
 		uplink.NewUplinkProcessor(cfg.Uplink),
+		rendererMap,
 	)
 
 	return server.Serve(&cfg.Server, &cfg.Logging, ws)
