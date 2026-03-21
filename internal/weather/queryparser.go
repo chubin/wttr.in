@@ -61,6 +61,11 @@ func (p *strictQueryParser) Parse(ctx context.Context, r *http.Request) (*query.
 
 	query.ApplyAutoFixes(opts)
 
+	err = query.Validate(opts)
+	if err != nil {
+		return nil, fmt.Errorf("invalid option: %w", err)
+	}
+
 	return opts, nil
 }
 

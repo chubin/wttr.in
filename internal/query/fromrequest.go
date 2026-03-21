@@ -262,6 +262,13 @@ func ParseOptionsInFilename(filename string, cfg *spec.WttrInOptions) (*Options,
 	return opts, location, nil
 }
 
+func Validate(opts *Options) error {
+	if !isValidView(opts.View) {
+		return fmt.Errorf("invalid view: %s", opts.View)
+	}
+	return nil
+}
+
 // isValidLanguageCode checks if the provided code is a valid 2-letter language code.
 // This is a simplified check; in a real application, you'd have a list of supported languages.
 func isValidLanguageCode(code string) bool {
@@ -273,7 +280,11 @@ func isValidLanguageCode(code string) bool {
 // This is a placeholder; in a real application, you'd have a list of supported views.
 func isValidView(view string) bool {
 	// Example: support "v2", "j1", "j2" as valid views
-	return view == "v2" || view == "j1" || view == "j2"
+	return view == "line" ||
+		view == "v1" ||
+		view == "v2" ||
+		view == "j1" ||
+		view == "j2"
 }
 
 // isPlainTextClient determines if the User-Agent indicates a plain text client like curl or wget.
