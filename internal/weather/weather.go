@@ -149,6 +149,7 @@ type WeatherService struct {
 	Cacher          Cacher
 	RequestLogger   RequestLogger
 	UplinkProcessor UplinkProcessor
+	RendererMap     map[string]Renderer
 }
 
 // NewWeatherService initializes a new pipeline based on the provided options.
@@ -160,6 +161,7 @@ func NewWeatherService(
 	cacher Cacher,
 	requestLogger RequestLogger,
 	uplinkProcessor UplinkProcessor,
+	rendererMap map[string]Renderer,
 ) *WeatherService {
 	return &WeatherService{
 		Weatherer:       weatherer,
@@ -169,6 +171,7 @@ func NewWeatherService(
 		Cacher:          cacher,
 		RequestLogger:   requestLogger,
 		UplinkProcessor: uplinkProcessor,
+		RendererMap:     rendererMap,
 	}
 }
 
@@ -361,7 +364,13 @@ func (s *WeatherService) computeResponse(
 	tracker.Add("Build Query object", time.Since(start))
 
 	start = time.Now()
-	isUpstream, uplinkResponse, err := s.UplinkProcessor.Route(opts, r, ipData, location)
+	var (
+		isUpstream     bool
+		uplinkResponse *CacheEntry
+	)
+	if opts.View != "line" {
+		isUpstream, uplinkResponse, err = s.UplinkProcessor.Route(opts, r, ipData, location)
+	}
 	if isUpstream {
 		if !debugRequested {
 			return uplinkResponse, err
@@ -382,8 +391,8 @@ func (s *WeatherService) computeResponse(
 
 		// ── Render + Format ───────────────────────────────────────────────────
 		start = time.Now()
-		renderer := selectRenderer(opts.Format)
-		formatter := selectFormatter(opts.Format)
+		renderer := s.selectRenderer(opts.View)
+		formatter := selectFormatter(opts.Output)
 
 		renderOut, err := renderer.Render(query)
 		if err != nil {
@@ -502,32 +511,24 @@ func prettyPrintOptions(o *query.Options) string {
 }
 
 // selectRenderer chooses the appropriate renderer based on the format option.
-func selectRenderer(format string) Renderer {
-	switch format {
-	case "":
+func (s *WeatherService) selectRenderer(view string) Renderer {
+	if renderer, found := s.RendererMap[view]; found {
+		return renderer
+	} else {
+		log.Println("Unknown renderer for view: ", view)
 		return &V1Renderer{} // If no format specified, use v1 renderer
-	case "v1":
-		return &V1Renderer{}
-	case "v2":
-		return &V2Renderer{}
-	case "j1":
-		return &J1Renderer{}
-	case "j2":
-		return &J2Renderer{}
-	default:
-		return &J1Renderer{}
 	}
 }
 
-// selectFormatter chooses the appropriate formatter based on the format option.
-func selectFormatter(format string) Formatter {
-	if format == "j1" || format == "j2" {
-		format = "json"
-	}
+// selectFormatter chooses the appropriate formatter based on the output format option.
+func selectFormatter(output string) Formatter {
+	// if format == "j1" || format == "j2" {
+	// 	format = "json"
+	// }
 
-	switch format {
-	case "terminal":
-		return &TerminalFormatter{}
+	switch output {
+	case "terminal", "text", "ansi":
+		return &TextFormatter{}
 	case "browser":
 		return &BrowserFormatter{}
 	case "png":
@@ -582,6 +583,15 @@ func (f *JSONFormatter) Format(output RenderOutput) (*FormatOutput, error) {
 	return &FormatOutput{
 		Content:     output.Content,
 		ContentType: "application/json",
+	}, nil
+}
+
+type TextFormatter struct{}
+
+func (f *TextFormatter) Format(output RenderOutput) (*FormatOutput, error) {
+	return &FormatOutput{
+		Content:     output.Content,
+		ContentType: "application/text",
 	}, nil
 }
 
