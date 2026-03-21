@@ -207,10 +207,12 @@ func renderWithPlaceholders(format string, ctx *renderContext) string {
 //   - A lone "%" at the end of the string remains "%".
 //
 // Args:
-//   s: The input string containing potential percent-encoded sequences.
+//
+//	s: The input string containing potential percent-encoded sequences.
 //
 // Returns:
-//   A new string with valid percent-encoded sequences replaced by their decoded byte values.
+//
+//	A new string with valid percent-encoded sequences replaced by their decoded byte values.
 func TolerantUnescape(s string) string {
 	var sb strings.Builder
 	i := 0

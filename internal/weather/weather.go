@@ -395,11 +395,13 @@ func (s *WeatherService) computeResponse(
 
 		renderOut, err := renderer.Render(query)
 		if err != nil {
+			log.Println(err)
 			return nil, fmt.Errorf("render failed: %w", err)
 		}
 
 		formatOut, err = formatter.Format(renderOut)
 		if err != nil {
+			log.Println(err)
 			return nil, fmt.Errorf("format failed: %w", err)
 		}
 		tracker.Add("Render + Format", time.Since(start))
@@ -565,8 +567,10 @@ func (r *V2Renderer) Render(query Query) (RenderOutput, error) {
 type TerminalFormatter struct{}
 
 func (f *TerminalFormatter) Format(output RenderOutput) (*FormatOutput, error) {
-	// Stub: To be implemented
-	return &FormatOutput{}, nil
+	return &FormatOutput{
+		Content:     output.Content,
+		ContentType: "application/text",
+	}, nil
 }
 
 type BrowserFormatter struct{}
