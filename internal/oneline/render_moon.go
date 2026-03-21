@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"math"
 	"time"
+
+	"github.com/kixorz/suncalc"
 )
 
 // moonAgeDays returns the approximate age of the moon in days
@@ -24,14 +26,15 @@ func moonAgeDays(t time.Time) float64 {
 	return age
 }
 
-// renderMoonPhaseEmoji returns a Unicode moon phase emoji for the given time
-// (8 main phases — matches most weather services and wttr.in style)
+// renderMoonPhaseEmoji returns a Unicode moon phase emoji
+// Matches common 8-phase style used in wttr.in and many terminal tools
 func renderMoonPhaseEmoji(ctx *renderContext) string {
-	age := moonAgeDays(ctx.Now)
+	illum := suncalc.GetMoonIllumination(ctx.Now)
 
-	// Map age (0–29.53) → 0–7 phase index
-	// We use simple linear mapping with slight bias toward better visual distinction
-	phase := int(math.Floor((age / 29.530588853 * 8) + 0.5))
+	// illum.Phase is 0.0 (new) → 1.0 (next new moon)
+	// Map to 8 phases (0=new, 1=wx crescent, ..., 4=full, ..., 7=wn crescent)
+	// +0.5 before floor gives nice rounding/centering
+	phaseIndex := int(math.Floor(illum.Phase*8+0.5)) % 8
 
 	phases := [8]string{
 		0: "🌑", // New Moon
@@ -44,14 +47,26 @@ func renderMoonPhaseEmoji(ctx *renderContext) string {
 		7: "🌘", // Waning Crescent
 	}
 
-	return phases[phase%8]
+	return phases[phaseIndex]
 }
 
-// renderMoonDay returns days since last new moon (0–29)
-// Rounded to nearest integer — common in weather displays
+// renderMoonDay returns approximate lunar day (days since last new moon, 0–29)
+// Rounded to nearest integer — suitable for weather/terminal display
 func renderMoonDay(ctx *renderContext) string {
-	age := moonAgeDays(ctx.Now)
-	day := int(math.Round(age))
-	// Sometimes people cap at 28, but 0–29 is more accurate for most purposes
+	illum := suncalc.GetMoonIllumination(ctx.Now)
+
+	// Approximate age from phase value:
+	// This is a common approximation; real age = synodic * phase, but phase is already normalized
+	ageDays := 29.530588853 * illum.Phase
+
+	// Round to nearest day (0–29 range)
+	day := int(math.Round(ageDays))
+	if day < 0 {
+		day = 0
+	}
+	if day > 29 {
+		day = 29
+	}
+
 	return fmt.Sprintf("%d", day)
 }

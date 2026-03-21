@@ -63,8 +63,15 @@ func renderFeelsLike(ctx *renderContext) string {
 }
 
 func renderWind(ctx *renderContext) string {
-	// dir := windDirSymbol(ctx.Data.WindDirDegree, ctx.Options.View)
-	dir := ""
+	var dir string
+
+	dirIndex := getWindDirectionIndex(ctx.Data.WindDirDegree)
+
+	if ctx.Options.View == "v2n" || ctx.Options.View == "v2d" {
+		dir = WindDirectionWi[dirIndex]
+	} else {
+		dir = WindDirection[dirIndex]
+	}
 
 	var speed float64
 	var unit string
@@ -92,6 +99,9 @@ func renderPrecipitation(ctx *renderContext) string {
 }
 
 func renderPrecipChance(ctx *renderContext) string {
+	if ctx.Data.ChanceOfRain == 0 {
+		return ""
+	}
 	return fmt.Sprintf("%d%%", ctx.Data.ChanceOfRain)
 }
 
@@ -176,4 +186,13 @@ func renderConditionPlain(ctx *renderContext) string {
 	}
 
 	return plainSymbol
+}
+
+func getWindDirectionIndex(degree int) int {
+	degreeFloat := float64(degree)
+	normalizedDegree := math.Mod(degreeFloat+22.5, 360.0)
+	if normalizedDegree < 0 {
+		normalizedDegree += 360.0
+	}
+	return int(normalizedDegree / 45.0)
 }
