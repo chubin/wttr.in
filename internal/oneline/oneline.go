@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"net/url"
+	"strconv"
 	"strings"
 	"time"
 
@@ -131,10 +131,7 @@ func (r *OnelineRenderer) Render(q weather.Query) (weather.RenderOutput, error) 
 	}
 
 	formatStr := r.determineFormat(q.Options)
-	formatStr, err = url.QueryUnescape(formatStr)
-	if err != nil {
-		return weather.RenderOutput{}, fmt.Errorf("error decoding format string: %w", err)
-	}
+	formatStr = TolerantUnescape(formatStr)
 
 	ctx := &renderContext{
 		Data:     data,
@@ -195,5 +192,41 @@ func renderWithPlaceholders(format string, ctx *renderContext) string {
 		sb.WriteByte(format[i])
 	}
 
+	return sb.String()
+}
+
+// TolerantUnescape decodes a string by replacing percent-encoded sequences (%XX)
+// with their corresponding byte values, where XX is a two-digit hexadecimal number.
+// If a percent-encoded sequence is invalid (e.g., not a valid hex number or incomplete),
+// the original sequence is preserved as-is in the output. This makes the function
+// "tolerant" to malformed input, unlike strict unescaping functions that might fail.
+//
+// For example:
+//   - "%20" becomes a space character (ASCII 32).
+//   - "%GG" remains "%GG" since "GG" is not a valid hex number.
+//   - A lone "%" at the end of the string remains "%".
+//
+// Args:
+//   s: The input string containing potential percent-encoded sequences.
+//
+// Returns:
+//   A new string with valid percent-encoded sequences replaced by their decoded byte values.
+func TolerantUnescape(s string) string {
+	var sb strings.Builder
+	i := 0
+	for i < len(s) {
+		if s[i] == '%' && i+2 < len(s) {
+			hex := s[i+1 : i+3]
+			if v, err := strconv.ParseUint(hex, 16, 8); err == nil {
+				sb.WriteByte(byte(v))
+				i += 3
+				continue
+			}
+			// invalid hex → keep literal %XX
+		}
+		// lone % or invalid → keep as is
+		sb.WriteByte(s[i])
+		i++
+	}
 	return sb.String()
 }
