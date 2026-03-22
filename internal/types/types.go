@@ -1,8 +1,14 @@
 package types
 
-type CacheType string
+import "errors"
 
-const (
-	CacheTypeDB    = "db"
-	CacheTypeFiles = "files"
+var (
+	ErrNotFound               = errors.New("not found")
+	ErrUnknownLocationService = errors.New("unknown location service")
+	ErrUpstream               = errors.New("upstream error")
+	ErrInvalidCacheEntry      = errors.New("invalid cache entry")
 )
+
+type Cadre struct {
+	Body []byte
+}

@@ -1,4 +1,54 @@
 query_options:
+  - name: format
+    description: "Output structure format for oneline view (which is always implied when format is used)."
+    type: string
+    active: true
+      # values_map:
+      #   "1": "Location and condition"
+      #   "2": "Location, condition, temperature"
+      #   "3": "Location: condition temperature"
+      #   "4": "Location: condition, temperature details, wind speed"
+      #   custom: "Percent notation (e.g., %l, %c, %t, %w, %m, etc.)"
+      # values:
+      #   - "1"
+      #   - "2"
+      #   - "3"
+      #   - "4"
+      #   - "custom"
+
+  - name: view
+    description: "Specify view name"
+    type: string
+    values:
+      - v1
+      - v2
+      - v3
+      - line
+      - j1
+      - j2
+      - p1
+    active: true
+
+  - name: output
+    description: "Specify output format"
+    type: string
+    values:
+      - txt
+      - html
+      - json
+      - png
+    active: true
+
+  - name: agent
+    description: "The name of the user-agent. When specified, overrides the user-agent from the header"
+    type: string
+    active: true
+
+  - name: location
+    description: "Location name the weather is queried about"
+    type: string
+    active: true
+
   - name: current_only
     short: "0"
     description: "Show only current weather"
@@ -67,12 +117,15 @@ query_options:
     type: boolean
     default: false
     active: true
+
   - name: narrow
     short: n
     description: "Show only day and night forecast (narrow version)"
     type: boolean
     default: false
     active: true
+    note: "Optimizes output for narrow displays"
+
   - name: frame
     short: p
     description: "Add a frame around the PNG output"
@@ -151,7 +204,7 @@ query_options:
       ta: "Tamil"
       tr: "Turkish"
       th: "Thai"
-      ua: "Ukrainian"
+      uk: "Ukrainian"
       vi: "Vietnamese"
       zh-cn: "Chinese (Simplified)"
       zh-tw: "Chinese (Traditional)"
@@ -206,24 +259,6 @@ query_options:
       - "regexp [0-9a-fA-F]{6}"
     active: true
     note: "Applicable only for PNG output"
-  - name: format
-    description: "Specify output format for one-line weather info"
-    type: string
-      # values_map:
-      #   "1": "Location and condition"
-      #   "2": "Location, condition, temperature"
-      #   "3": "Location: condition temperature"
-      #   "4": "Location: condition, temperature details, wind speed"
-      #   custom: "Percent notation (e.g., %l, %c, %t, %w, %m, etc.)"
-      # values:
-      #   - "1"
-      #   - "2"
-      #   - "3"
-      #   - "4"
-      #   - "custom"
-    default: null
-    active: true
-    note: "Used for status bars in tools like tmux"
   - name: date
     description: "Specify forecast date offset (days in the future)"
     type: integer
@@ -249,14 +284,6 @@ query_options:
     default: false
     active: true
     note: "Disables advanced terminal features"
-
-  - name: narrow
-    short: n
-    description: "Use narrow layout for output"
-    type: boolean
-    default: false
-    active: true
-    note: "Optimizes output for narrow displays"
 
   - name: use_metric
     short: m
@@ -300,6 +327,21 @@ query_options:
     default: 150
     active: true
     note: "Applicable only for PNG output; 255 = not transparent"
+
+  - name: height
+    description: "Height of the generated PNG file"
+    type: integer
+    default: 0
+    active: true
+    note: "Applicable only for PNG output"
+
+  - name: width
+    description: "Width of the generated PNG file"
+    type: integer
+    default: 0
+    active: true
+    note: "Applicable only for PNG output"
+
 
   - name: no-terminal
     short: T
@@ -354,6 +396,12 @@ query_options:
   - name: question_mark
     short: "?"
     description: "Workaround for multiple usage of the question mark in the query"
+    type: boolean
+    default: false
+    active: true
+
+  - name: debug
+    description: "Show debug output"
     type: boolean
     default: false
     active: true
