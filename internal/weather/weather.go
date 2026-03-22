@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/chubin/wttr.go/internal/query"
+	"github.com/chubin/wttr.in/internal/query"
 )
 
 // Weatherer interface to fetch weather data based on location and language.

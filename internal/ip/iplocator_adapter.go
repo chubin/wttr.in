@@ -3,7 +3,7 @@ package ip
 import (
 	"fmt"
 
-	"github.com/chubin/wttr.go/internal/weather"
+	"github.com/chubin/wttr.in/internal/weather"
 )
 
 type ipCacheLocator struct {

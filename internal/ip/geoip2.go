@@ -6,7 +6,7 @@ import (
 	"net/netip"
 	"strconv"
 
-	"github.com/chubin/wttr.go/internal/weather"
+	"github.com/chubin/wttr.in/internal/weather"
 	"github.com/oschwald/geoip2-golang/v2"
 )
 

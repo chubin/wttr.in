@@ -10,7 +10,7 @@ import (
 
 	lru "github.com/hashicorp/golang-lru/v2"
 
-	"github.com/chubin/wttr.go/internal/weather"
+	"github.com/chubin/wttr.in/internal/weather"
 )
 
 const (

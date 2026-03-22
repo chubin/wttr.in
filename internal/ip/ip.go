@@ -14,8 +14,8 @@ import (
 	"github.com/samonzeweb/godb"
 	"github.com/samonzeweb/godb/adapters/sqlite"
 
-	"github.com/chubin/wttr.go/internal/types"
-	"github.com/chubin/wttr.go/internal/util"
+	"github.com/chubin/wttr.in/internal/types"
+	"github.com/chubin/wttr.in/internal/util"
 )
 
 var CacheTypeDB = "db"

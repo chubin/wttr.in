@@ -7,8 +7,8 @@ import (
 	"path"
 	"strings"
 
-	"github.com/chubin/wttr.go/internal/options"
-	"github.com/chubin/wttr.go/internal/spec"
+	"github.com/chubin/wttr.in/internal/options"
+	"github.com/chubin/wttr.in/internal/spec"
 )
 
 // FromRequest creates an Options struct based on the provided HTTP request.

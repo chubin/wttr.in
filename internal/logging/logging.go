@@ -7,7 +7,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/chubin/wttr.go/internal/util"
+	"github.com/chubin/wttr.in/internal/util"
 )
 
 // Logging request.

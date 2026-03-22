@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/chubin/wttr.go/internal/types"
+	"github.com/chubin/wttr.in/internal/types"
 )
 
 // Response provides routing interface to the geo cache.

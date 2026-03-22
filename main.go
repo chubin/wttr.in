@@ -8,17 +8,17 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/chubin/wttr.go/internal/cache"
-	"github.com/chubin/wttr.go/internal/config"
-	"github.com/chubin/wttr.go/internal/generate"
-	"github.com/chubin/wttr.go/internal/ip"
-	"github.com/chubin/wttr.go/internal/location"
-	"github.com/chubin/wttr.go/internal/logging"
-	"github.com/chubin/wttr.go/internal/oneline"
-	"github.com/chubin/wttr.go/internal/server"
-	"github.com/chubin/wttr.go/internal/spec"
-	"github.com/chubin/wttr.go/internal/uplink"
-	"github.com/chubin/wttr.go/internal/weather"
+	"github.com/chubin/wttr.in/internal/cache"
+	"github.com/chubin/wttr.in/internal/config"
+	"github.com/chubin/wttr.in/internal/generate"
+	"github.com/chubin/wttr.in/internal/ip"
+	"github.com/chubin/wttr.in/internal/location"
+	"github.com/chubin/wttr.in/internal/logging"
+	"github.com/chubin/wttr.in/internal/oneline"
+	"github.com/chubin/wttr.in/internal/server"
+	"github.com/chubin/wttr.in/internal/spec"
+	"github.com/chubin/wttr.in/internal/uplink"
+	"github.com/chubin/wttr.in/internal/weather"
 )
 
 var debug = true

@@ -1,4 +1,4 @@
-module github.com/chubin/wttr.go
+module github.com/chubin/wttr.in
 
 go 1.25.0
 
