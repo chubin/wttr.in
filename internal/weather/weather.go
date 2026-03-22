@@ -337,7 +337,7 @@ func (s *WeatherService) computeResponse(
 	// ── Geocode ───────────────────────────────────────────────────────────
 	start = time.Now()
 	location, err := s.Locator.GetLocation(locStr)
-	if err != nil {
+	if err != nil && opts.View != "files" {
 		return nil, fmt.Errorf("location not found: %w", err)
 	}
 	tracker.Add("Geocode location", time.Since(start))
@@ -368,9 +368,14 @@ func (s *WeatherService) computeResponse(
 	var (
 		isUpstream     bool
 		uplinkResponse *CacheEntry
+
+		// compareWithUpstream is used when we the data
+		// must be delivered both by the uplink, and the core
+		// and then compared, e.g. for opts.View == 'line'.
+		compareWithUpstream bool = false
 	)
 	isUpstream, uplinkResponse, err = s.UplinkProcessor.Route(opts, r, ipData, location)
-	if isUpstream && opts.View != "line" {
+	if isUpstream && !(compareWithUpstream && opts.View == "line") {
 		if !debugRequested {
 			return uplinkResponse, err
 		}
@@ -406,7 +411,7 @@ func (s *WeatherService) computeResponse(
 		}
 		tracker.Add("Render + Format", time.Since(start))
 
-		if isUpstream && opts.View == "line" {
+		if isUpstream && (compareWithUpstream && opts.View == "line") {
 			debugCompareOneLineRendering(opts.Format, string(uplinkResponse.Body), string(formatOut.Content))
 			if !debugRequested {
 				return uplinkResponse, err

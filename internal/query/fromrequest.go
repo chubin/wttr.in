@@ -27,6 +27,10 @@ func FromRequest(r *http.Request) (*Options, error) {
 		components = []string{""}
 	}
 
+	if strings.HasPrefix(urlPath, "files/") {
+		opts.View = "files"
+	}
+
 	// Step 2: Process domain name for VIEW or LANG
 	host := r.Host
 	domainParts := strings.SplitN(host, ".", 2)
@@ -281,7 +285,8 @@ func isValidLanguageCode(code string) bool {
 // This is a placeholder; in a real application, you'd have a list of supported views.
 func isValidView(view string) bool {
 	// Example: support "v2", "j1", "j2" as valid views
-	return view == "line" ||
+	return view == "files" ||
+		view == "line" ||
 		view == "v1" ||
 		view == "v2" ||
 		view == "p1" ||

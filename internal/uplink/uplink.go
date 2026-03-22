@@ -104,16 +104,20 @@ func (p *UplinkProcessor) Route(
 
 	//////////////////////////////////////////
 
+	// Views that are not processed by the uplink.
+	if opts.View == "line" || opts.View == "j1" || opts.View == "j2" {
+		return false, nil, nil
+	}
+
 	if checkURLForPNG(r) {
 		client = p.client4
-	} else if opts.View != "" && opts.View != "v1" && opts.View != "j1" && opts.View != "j2" {
-		client = p.client1
-	} else if opts.View == "v1" {
-		client = p.client2
-	} else if opts.View == "v1" {
+	} else if opts.View == "v1" || opts.View == "files" {
 		client = p.client3
+	} else if opts.View == "v2" || opts.View == "p1" {
+		client = p.client2
 	} else {
-		uplinkRoute = false
+		// The rest goes to the client1 (should be empty).
+		client = p.client1
 	}
 	//////////////////////////////////////////
 
