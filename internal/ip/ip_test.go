@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	. "github.com/chubin/wttr.go/internal/ip"
-	"github.com/chubin/wttr.go/internal/types"
+	. "github.com/chubin/wttr.in/internal/ip"
+	"github.com/chubin/wttr.in/internal/types"
 )
 
 //nolint:funlen

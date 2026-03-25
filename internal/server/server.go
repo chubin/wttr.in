@@ -10,8 +10,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/chubin/wttr.go/internal/logging"
-	"github.com/chubin/wttr.go/internal/weather"
+	"github.com/chubin/wttr.in/internal/logging"
+	"github.com/chubin/wttr.in/internal/weather"
 )
 
 type Config struct {

@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/chubin/wttr.go/internal/spec"
+	"github.com/chubin/wttr.in/internal/spec"
 )
 
 // Errors for query parsing and validation

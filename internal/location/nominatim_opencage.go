@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/chubin/wttr.go/internal/types"
+	"github.com/chubin/wttr.in/internal/types"
 )
 
 type locationOpenCage struct {

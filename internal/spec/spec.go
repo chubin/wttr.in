@@ -12,7 +12,7 @@ import (
 	"dario.cat/mergo"
 	"gopkg.in/yaml.v3"
 
-	"github.com/chubin/wttr.go/internal/assets"
+	"github.com/chubin/wttr.in/internal/assets"
 )
 
 // WttrInOptions represents the configuration for wttr.in query options and format specifiers.

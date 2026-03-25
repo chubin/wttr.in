@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/chubin/wttr.go/internal/spec"
+	"github.com/chubin/wttr.in/internal/spec"
 )
 
 // ProcessLogFile reads a wttr.in log file, parses queries, and writes invalid entries to an error file.

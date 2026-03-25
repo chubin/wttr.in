@@ -10,7 +10,7 @@ import (
 	"time"
 	"unicode"
 
-	"github.com/chubin/wttr.go/internal/location"
+	"github.com/chubin/wttr.in/internal/location"
 	"github.com/sirupsen/logrus"
 )
 

@@ -7,9 +7,9 @@ import (
 
 	"dario.cat/mergo"
 
-	"github.com/chubin/wttr.go/internal/options"
-	"github.com/chubin/wttr.go/internal/query"
-	"github.com/chubin/wttr.go/internal/spec"
+	"github.com/chubin/wttr.in/internal/options"
+	"github.com/chubin/wttr.in/internal/query"
+	"github.com/chubin/wttr.in/internal/spec"
 )
 
 // strictQueryParser implements QueryParser using the existing options.ParseQueryString

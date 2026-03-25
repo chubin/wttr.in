@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/chubin/wttr.go/internal/query"
-	"github.com/chubin/wttr.go/internal/weather"
+	"github.com/chubin/wttr.in/internal/query"
+	"github.com/chubin/wttr.in/internal/weather"
 )
 
 // ──────────────────────────────────────────────────────────────────────────────

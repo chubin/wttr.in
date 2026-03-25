@@ -19,7 +19,7 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/zsefvlol/timezonemapper"
 
-	"github.com/chubin/wttr.go/internal/types"
+	"github.com/chubin/wttr.in/internal/types"
 )
 
 var (
