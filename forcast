@@ -1,0 +1,28 @@
+server {
+	listen [::]:80;
+	server_name  wttr.in *.wttr.in;
+	access_log  /var/log/nginx/wttr.in-access.log  main;
+	error_log  /var/log/nginx/wttr.in-error.log;
+
+	location / {
+	    proxy_pass         http://127.0.0.1:8002;
+
+	    proxy_set_header   Host             $host;
+	    proxy_set_header   X-Real-IP        $remote_addr;
+	    proxy_set_header   X-Forwarded-For  $remote_addr;
+
+	    client_max_body_size       10m;
+	    client_body_buffer_size    128k;
+
+	    proxy_connect_timeout      90;
+	    proxy_send_timeout         90;
+	    proxy_read_timeout         90;
+
+	    proxy_buffer_size          4k;
+	    proxy_buffers              4 32k;
+	    proxy_busy_buffers_size    64k;
+	    proxy_temp_file_write_size 64k;
+
+	    expires                    off;
+	}
+}
