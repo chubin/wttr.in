@@ -91,32 +91,6 @@ query_options:
     type: boolean
     default: false
     active: true
-  - name: metric
-    short: m
-    description: "Use metric (SI) units (default everywhere except US)"
-    type: boolean
-    values:
-      - true
-      - false
-    default: true
-    active: true
-    note: "Overridden by 'uscs' if specified; default is 'uscs' in US"
-  - name: uscs
-    short: u
-    description: "Use USCS units (default in the US)"
-    type: boolean
-    values:
-      - true
-      - false
-    default: false
-    active: true
-    note: "Default is 'uscs' in US, 'metric' elsewhere"
-  - name: wind_ms
-    short: M
-    description: "Show wind speed in meters per second"
-    type: boolean
-    default: false
-    active: true
 
   - name: narrow
     short: n
@@ -285,6 +259,8 @@ query_options:
     active: true
     note: "Disables advanced terminal features"
 
+####################################################
+
   - name: use_metric
     short: m
     description: "Use metric units for measurements"
@@ -302,12 +278,24 @@ query_options:
     note: "Only active when used with 'M' flag for metric units"
 
   - name: use_imperial
-    short: u
     description: "Use imperial units for measurements"
     type: boolean
     default: false
     active: true
     note: "Sets units to imperial system"
+
+  - name: use_uscs
+    short: u
+    description: "Use USCS units (default in the US)"
+    type: boolean
+    values:
+      - true
+      - false
+    default: false
+    active: true
+    note: "Default is 'uscs' in US, 'metric' elsewhere"
+
+####################################################
 
   - name: inverted_colors
     short: I
