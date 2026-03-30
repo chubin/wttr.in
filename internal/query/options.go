@@ -45,15 +45,6 @@ type Options struct {
 	// Do not show the 'Follow' line
 	NoFollow bool `json:"no_follow,omitempty"`
 
-	// Use metric (SI) units (default everywhere except US) (Overridden by 'uscs' if specified; default is 'uscs' in US)
-	Metric bool `json:"metric,omitempty"`
-
-	// Use USCS units (default in the US) (Default is 'uscs' in US, 'metric' elsewhere)
-	Uscs bool `json:"uscs,omitempty"`
-
-	// Show wind speed in meters per second
-	WindMs bool `json:"wind_ms,omitempty"`
-
 	// Show only day and night forecast (narrow version) (Optimizes output for narrow displays)
 	Narrow bool `json:"narrow,omitempty"`
 
@@ -101,6 +92,9 @@ type Options struct {
 
 	// Use imperial units for measurements (Sets units to imperial system)
 	UseImperial bool `json:"use_imperial,omitempty"`
+
+	// Use USCS units (default in the US) (Default is 'uscs' in US, 'metric' elsewhere)
+	UseUscs bool `json:"use_uscs,omitempty"`
 
 	// Invert colors in output (Swaps foreground and background colors)
 	InvertedColors bool `json:"inverted_colors,omitempty"`
@@ -196,18 +190,6 @@ func ApplyParsedMap(opts *Options, raw map[string]string) (*Options, error) {
 		opts.NoFollow = (v == "true")
 	}
 
-	if v, ok := raw["metric"]; ok {
-		opts.Metric = (v == "true")
-	}
-
-	if v, ok := raw["uscs"]; ok {
-		opts.Uscs = (v == "true")
-	}
-
-	if v, ok := raw["wind_ms"]; ok {
-		opts.WindMs = (v == "true")
-	}
-
 	if v, ok := raw["narrow"]; ok {
 		opts.Narrow = (v == "true")
 	}
@@ -290,6 +272,10 @@ func ApplyParsedMap(opts *Options, raw map[string]string) (*Options, error) {
 		opts.UseImperial = (v == "true")
 	}
 
+	if v, ok := raw["use_uscs"]; ok {
+		opts.UseUscs = (v == "true")
+	}
+
 	if v, ok := raw["inverted_colors"]; ok {
 		opts.InvertedColors = (v == "true")
 	}
@@ -355,11 +341,6 @@ func ApplyParsedMap(opts *Options, raw map[string]string) (*Options, error) {
 	}
 
 	// Optional: apply defaults for unset fields (if not zero-value)
-
-	// if default is true
-	if !opts.Metric {
-		opts.Metric = true
-	}
 
 	if opts.Lang == "" {
 		opts.Lang = "en"
