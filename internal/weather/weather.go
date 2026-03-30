@@ -3,6 +3,7 @@ package weather
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"log"
 	"net"
@@ -13,6 +14,8 @@ import (
 
 	"github.com/chubin/wttr.in/internal/query"
 )
+
+var ErrDataSource = errors.New("weather data source not available")
 
 // Weatherer interface to fetch weather data based on location and language.
 type Weatherer interface {
@@ -313,20 +316,29 @@ func (s *WeatherService) computeResponse(
 
 	locStr := opts.Location
 	var ipData *IPData
-	if autoDetect {
-		var errIP error
-		for _, ipLocator := range s.IPLocators {
-			ipData, errIP = ipLocator.GetIPData(clientIP)
-			if errIP == nil && ipData != nil {
+	var errIP error
+	for _, ipLocator := range s.IPLocators {
+		ipData, errIP = ipLocator.GetIPData(clientIP)
+		if errIP == nil && ipData != nil {
+			break
+		}
+	}
+
+	if ipData != nil {
+		if isClientInUSA(ipData) {
+			opts.Metric = false
+		}
+
+		if autoDetect {
+			if ipData.City == "" {
+				locStr = fmt.Sprintf("%s,%s", ipData.Latitude, ipData.Longitude)
+			} else {
 				locStr = ipData.City
-				if locStr == "" {
-					locStr = fmt.Sprintf("%s,%s", ipData.Latitude, ipData.Longitude)
-				}
-				break
+				// locStr = fmt.Sprintf("%s, %s, %s", ipData.City, ipData.Region, ipData.CountryCode)
 			}
 		}
-		tracker.Add("Determine location string + IP lookup", time.Since(start))
 	}
+	tracker.Add("Determine location string + IP lookup", time.Since(start))
 
 	if locStr == "" {
 		// Temporary use Berlin as the default location
@@ -385,7 +397,7 @@ func (s *WeatherService) computeResponse(
 		start = time.Now()
 		weatherBytes, err := s.Weatherer.GetWeather(location.Latitude, location.Longitude, opts.Lang)
 		if err != nil {
-			return nil, fmt.Errorf("weather fetch failed: %w", err)
+			return nil, ErrDataSource
 		}
 		tracker.Add("Fetch weather data", time.Since(start))
 
@@ -639,4 +651,8 @@ func debugCompareOneLineRendering(format string, uplinkResponse string, internal
 			fmt.Fprintf(os.Stderr, "Error writing to log file: %v\n", err)
 		}
 	}
+}
+
+func isClientInUSA(ipData *IPData) bool {
+	return ipData.CountryCode == "US"
 }
