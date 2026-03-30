@@ -124,7 +124,7 @@ func FromRequest(r *http.Request) (*Options, error) {
 	}
 
 	// Step 8: Set default metric units (overridden by explicit options if present)
-	opts.Metric = true
+	opts.UseMetric = true
 
 	// Step 9: Set default transparency for PNG output if applicable
 	if opts.Output == "png" && opts.Transparency == 0 {
@@ -256,7 +256,7 @@ func ParseOptionsInFilename(filename string, cfg *spec.WttrInOptions) (*Options,
 		Output:       "png",
 		Location:     location,
 		Transparency: 150,  // PNG default
-		Metric:       true, // global default
+		UseMetric:    true, // global default
 	}
 
 	opts, err = ApplyParsedMap(opts, rawMap)

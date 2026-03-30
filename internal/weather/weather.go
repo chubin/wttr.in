@@ -307,14 +307,7 @@ func (s *WeatherService) computeResponse(
 	path := r.URL.Path // cleanPath(r.URL.Path) // helper: trim / and extensions
 	autoDetect := isAutoDetectPath(path)
 
-	// 1. Parse options (cheap, always first)
-	opts, err := s.QueryParser.Parse(ctx, r)
-	if err != nil {
-		return nil, err
-	}
-	tracker.Add("Options parsing", time.Since(start))
-
-	locStr := opts.Location
+	// 0. Locate IP
 	var ipData *IPData
 	var errIP error
 	for _, ipLocator := range s.IPLocators {
@@ -323,10 +316,22 @@ func (s *WeatherService) computeResponse(
 			break
 		}
 	}
+	tracker.Add("IP locating", time.Since(start))
+
+	// 1. Parse options (cheap, always first)
+	start = time.Now()
+	opts, err := s.QueryParser.Parse(ctx, r)
+	if err != nil {
+		return nil, err
+	}
+	tracker.Add("Options parsing", time.Since(start))
+
+	locStr := opts.Location
 
 	if ipData != nil {
 		if isClientInUSA(ipData) {
-			opts.Metric = false
+			opts.UseMetric = false
+			opts.UseMetric = false
 		}
 
 		if autoDetect {
