@@ -1,4 +1,4 @@
-// Package options provides configuration-driven parsing and validation of
+// Package query provides configuration-driven parsing and validation of
 // wttr.in-style HTTP query strings.
 //
 // The package is built around a YAML specification file (typically
@@ -18,14 +18,11 @@
 //
 // Typical usage:
 //
-//	config, err := options.NewFromFile("spec/options/options.yaml")
-//	if err != nil { ... }
-//
-//	parsed, err := options.ParseQueryString("lang=fr&format=3&T&0pq", config)
+//	parsed, err := query.ParseQueryString("lang=fr&format=3&T&0pq", config)
 //	if err != nil { ... }  // err contains detailed reason
 //
 //	// or process access log to find bad queries:
-//	err = options.ProcessLogFile("access.log", "invalid.log", config)
+//	err = query.ProcessLogFile("access.log", "invalid.log", config)
 //
 // The package is primarily intended for:
 //   - wttr.in backend / proxy implementations
@@ -38,14 +35,5 @@
 // This implementation is stricter than the original wttr.in service in several
 // ways (case sensitivity, rejection of unknown parameters, no support for
 // comma-separated lang lists, strict format specifier check when format=custom,
-// etc.). It should not be used as a drop-in replacement for the public
-// wttr.in server without careful compatibility testing.
-//
-// For the canonical (and more permissive) list of supported parameters see:
-//
-//	https://wttr.in/:help
-//
-// or the original repository:
-//
-//	https://github.com/chubin/wttr.in
-package options
+// etc.).
+package query
