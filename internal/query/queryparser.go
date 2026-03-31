@@ -40,11 +40,7 @@ func (p *strictQueryParser) Parse(ctx context.Context, r *http.Request, ipOpts *
 		return nil, err
 	}
 
-	if err := mergo.Merge(ipOpts, *requestOpts); err != nil {
-		return nil, fmt.Errorf("request options merge error: %w", err)
-	}
-
-	opts, err := options.ApplyParsedMap(ipOpts, rawMap)
+	opts, err := options.ApplyParsedMap(requestOpts, rawMap)
 	if err != nil {
 		return nil, err
 	}
@@ -61,6 +57,13 @@ func (p *strictQueryParser) Parse(ctx context.Context, r *http.Request, ipOpts *
 
 		opts.Location = location
 
+	}
+
+	// If there is no strong preference for specific units,
+	// use IP-based defaults.
+	if !opts.UseMetric && !opts.UseImperial {
+		opts.UseMetric = ipOpts.UseMetric
+		opts.UseImperial = ipOpts.UseImperial
 	}
 
 	ApplyAutoFixes(opts)
