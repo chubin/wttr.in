@@ -11,63 +11,77 @@ import (
 )
 
 type WWOConfig struct {
-	BaseURL string `yaml:"baseUrl"`
-	Key     string `yaml:"key"`
+	BaseURL  string `yaml:"baseUrl"`
+	Key      string `yaml:"key"`
+	MaxConns int    `yaml:"maxConns,omitempty"`
 }
 
-// WeatherClient is a struct that implements the Weatherer interface to fetch weather data
-// from a specified HTTP endpoint using latitude, longitude, and language parameters.
+// WeatherClient fetches weather data with controlled concurrency
 type WeatherClient struct {
-	baseURL string
+	baseURL  string
+	sem      chan struct{} // semaphore to limit concurrent connections
+	maxConns int
 }
 
-// NewWeatherClient creates a new instance of WeatherClient with the provided base URL.
-// The baseURL should contain placeholders for latitude, longitude, and language (e.g., "lat={lat}&lon={lon}&lang={lang}").
-// Parameters will be replaced during the request.
+// NewWeatherClient creates a new WeatherClient with a maximum number of parallel connections
 func NewWeatherClient(cfg *WWOConfig) *WeatherClient {
 	if cfg.BaseURL == "" {
 		panic("empty baseURL")
 	}
-
 	if cfg.Key == "" {
 		panic("missing/empty key")
+	}
+
+	maxConns := cfg.MaxConns
+	if maxConns < 1 {
+		maxConns = 100 // reasonable default
 	}
 
 	baseURL := cfg.BaseURL
 	baseURL = strings.Replace(baseURL, "{key}", cfg.Key, 1)
 
-	return &WeatherClient{baseURL: baseURL}
+	return &WeatherClient{
+		baseURL:  baseURL,
+		sem:      make(chan struct{}, maxConns),
+		maxConns: maxConns,
+	}
 }
 
-// GetWeather fetches weather data from the specified URL by replacing the latitude, longitude,
-// and language placeholders in the baseURL. It performs an HTTP GET request and returns the response body
-// as a byte slice, or an error if the request fails.
+// GetWeather fetches weather data while respecting the maximum number of parallel connections.
+// Returns ErrNoFreeConnection if all slots are currently occupied.
 func (wc *WeatherClient) GetWeather(lat, lon float64, lang string) ([]byte, error) {
-	// Replace placeholders in the baseURL with actual values
+	// Try to acquire a connection slot (non-blocking)
+	select {
+	case wc.sem <- struct{}{}:
+		// Slot acquired successfully
+		defer func() { <-wc.sem }() // release slot when done
+	default:
+		// No free connection slot available
+		return nil, ErrNoFreeConnection
+	}
+
+	// Replace placeholders
 	url := strings.Replace(wc.baseURL, "{lat}", fmt.Sprintf("%f", lat), 1)
 	url = strings.Replace(url, "{lon}", fmt.Sprintf("%f", lon), 1)
 	url = strings.Replace(url, "{lang}", lang, 1)
 
-	// Create an HTTP client
-	client := &http.Client{
-		Timeout: 10 * time.Second, // Set a timeout to avoid hanging indefinitely
-	}
-
 	logrus.Debugln("[WeatherClient] accessing ", url)
 
-	// Perform the GET request
+	// Create HTTP client with timeout
+	client := &http.Client{
+		Timeout: 10 * time.Second,
+	}
+
 	resp, err := client.Get(url)
 	if err != nil {
 		return nil, fmt.Errorf("failed to make HTTP request: %v", err)
 	}
-	defer resp.Body.Close() // Correct way to close the response body
+	defer resp.Body.Close()
 
-	// Check if the response status code is OK
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected status code: %d", resp.StatusCode)
 	}
 
-	// Read the response body
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read response body: %v", err)
@@ -75,3 +89,6 @@ func (wc *WeatherClient) GetWeather(lat, lon float64, lang string) ([]byte, erro
 
 	return body, nil
 }
+
+// ErrNoFreeConnection is returned when the maximum number of parallel connections is reached
+var ErrNoFreeConnection = fmt.Errorf("heating up, try again later")
