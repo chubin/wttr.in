@@ -14,6 +14,7 @@ import (
 
 	"github.com/chubin/wttr.in/internal/domain"
 	"github.com/chubin/wttr.in/internal/query"
+	"github.com/chubin/wttr.in/internal/renderer"
 )
 
 var ErrDataSource = errors.New("weather data source not available")
@@ -492,11 +493,11 @@ func prettyPrintOptions(o *query.Options) string {
 
 // selectRenderer chooses the appropriate renderer based on the format option.
 func (s *WeatherService) selectRenderer(view string) Renderer {
-	if renderer, found := s.RendererMap[view]; found {
-		return renderer
+	if rndrer, found := s.RendererMap[view]; found {
+		return rndrer
 	} else {
 		log.Println("Unknown renderer for view: ", view)
-		return &V1Renderer{} // If no format specified, use v1 renderer
+		return &renderer.V1Renderer{} // If no format specified, use v1 renderer
 	}
 }
 
@@ -518,21 +519,6 @@ func selectFormatter(output string) Formatter {
 	default:
 		return &TerminalFormatter{} // Default to terminal formatter
 	}
-}
-
-// Renderer Implementations (Stubs)
-type V1Renderer struct{}
-
-func (r *V1Renderer) Render(query domain.Query) (domain.RenderOutput, error) {
-	// Stub: To be implemented
-	return domain.RenderOutput{}, nil
-}
-
-type V2Renderer struct{}
-
-func (r *V2Renderer) Render(query domain.Query) (domain.RenderOutput, error) {
-	// Stub: To be implemented
-	return domain.RenderOutput{}, nil
 }
 
 // Formatter Implementations (Stubs)

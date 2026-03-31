@@ -1,4 +1,4 @@
-package weather
+package renderer
 
 import (
 	"encoding/json"

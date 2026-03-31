@@ -1,6 +1,4 @@
-// Package pipeline provides components for processing weather data queries
-// and rendering them into various formats.
-package weather
+package renderer
 
 import (
 	"encoding/json"
