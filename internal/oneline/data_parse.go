@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"strconv"
 	"time"
+
+	"github.com/chubin/wttr.in/internal/domain"
 )
 
 // parsedCurrentCondition is a normalized, ready-to-use view of current weather
@@ -40,7 +42,7 @@ type parsedCurrentCondition struct {
 // from the raw JSON bytes returned by the upstream weather service.
 func parseCurrentCondition(raw []byte) (*parsedCurrentCondition, error) {
 	var fullWrapped struct {
-		Data WeatherData `json:"data"`
+		Data domain.Weather `json:"data"`
 	}
 	if err := json.Unmarshal(raw, &fullWrapped); err != nil {
 		return nil, fmt.Errorf("invalid weather JSON: %w", err)

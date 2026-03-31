@@ -358,7 +358,7 @@ func (s *WeatherService) computeResponse(
 
 		// ── Filling up Query ───────────────────────────────────────────────────────
 		query.IPData = ipData
-		query.Weather = (*domain.WeatherData)(&weatherBytes)
+		query.Weather = (*domain.WeatherRaw)(&weatherBytes)
 
 		// ── Render + Format ───────────────────────────────────────────────────
 		start = time.Now()
