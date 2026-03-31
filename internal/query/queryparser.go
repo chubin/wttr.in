@@ -26,7 +26,7 @@ func NewQueryParser(config *spec.WttrInOptions) weather.QueryParser {
 }
 
 // Parse implements QueryParser.Parse
-func (p *strictQueryParser) Parse(ctx context.Context, r *http.Request) (*options.Options, error) {
+func (p *strictQueryParser) Parse(ctx context.Context, r *http.Request, ipOpts *options.Options) (*options.Options, error) {
 	queryString := r.URL.RawQuery
 
 	// Step 1: use the existing parser to get validated map[string]string
@@ -35,12 +35,16 @@ func (p *strictQueryParser) Parse(ctx context.Context, r *http.Request) (*option
 		return nil, err
 	}
 
-	opts, err := FromRequest(r)
+	requestOpts, err := FromRequest(r)
 	if err != nil {
 		return nil, err
 	}
 
-	opts, err = options.ApplyParsedMap(opts, rawMap)
+	if err := mergo.Merge(ipOpts, *requestOpts); err != nil {
+		return nil, fmt.Errorf("request options merge error: %w", err)
+	}
+
+	opts, err := options.ApplyParsedMap(ipOpts, rawMap)
 	if err != nil {
 		return nil, err
 	}
@@ -70,9 +74,9 @@ func (p *strictQueryParser) Parse(ctx context.Context, r *http.Request) (*option
 }
 
 // MustParse implements QueryParser.MustParse
-func (p *strictQueryParser) MustParse(ctx context.Context, r *http.Request) *options.Options {
+func (p *strictQueryParser) MustParse(ctx context.Context, r *http.Request, ipOpts *options.Options) *options.Options {
 	queryString := r.URL.RawQuery
-	opts, err := p.Parse(ctx, r)
+	opts, err := p.Parse(ctx, r, ipOpts)
 	if err != nil {
 		panic(fmt.Sprintf("MustParse failed: %v (query: %q)", err, queryString))
 	}

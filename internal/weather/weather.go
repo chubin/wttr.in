@@ -61,11 +61,11 @@ type QueryParser interface {
 	//
 	// ctx can be used for cancellation, request-scoped logging, metrics collection, etc.
 	// Most implementations will ignore it in the first version.
-	Parse(ctx context.Context, r *http.Request) (*options.Options, error)
+	Parse(context.Context, *http.Request, *options.Options) (*options.Options, error)
 
 	// MustParse is a convenience variant that panics on error.
 	// Mainly useful in tests, initialization code, or when invalid input is a programmer error.
-	MustParse(ctx context.Context, r *http.Request) *options.Options
+	MustParse(context.Context, *http.Request, *options.Options) *options.Options
 }
 
 type RequestLogger interface {
@@ -270,9 +270,21 @@ func (s *WeatherService) computeResponse(
 	}
 	tracker.Add("IP locating", time.Since(start))
 
+	/////////////////////
+	// This part should be moved to queryparser.
+	ipOpts := options.Options{}
+	if isClientInUSA(ipData) {
+		ipOpts.UseMetric = false
+		ipOpts.UseImperial = true
+	} else {
+		ipOpts.UseMetric = true
+		ipOpts.UseImperial = false
+	}
+	///////////////////
+
 	// 1. Parse options (cheap, always first)
 	start = time.Now()
-	opts, err := s.QueryParser.Parse(ctx, r)
+	opts, err := s.QueryParser.Parse(ctx, r, &ipOpts)
 	if err != nil {
 		return nil, err
 	}
@@ -281,11 +293,6 @@ func (s *WeatherService) computeResponse(
 	locStr := opts.Location
 
 	if ipData != nil {
-		if isClientInUSA(ipData) {
-			opts.UseMetric = false
-			opts.UseMetric = false
-		}
-
 		if autoDetect {
 			if ipData.City == "" {
 				locStr = fmt.Sprintf("%s,%s", ipData.Latitude, ipData.Longitude)
