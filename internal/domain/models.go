@@ -12,14 +12,14 @@
 //
 // Following clean architecture principles, higher-level packages depend
 // on domain, but domain depends on nothing else (except for a few small
-// standard library types and the query.Options struct).
+// standard library types and the options.Options struct).
 package domain
 
 import (
 	"net/http"
 	"time"
 
-	"github.com/chubin/wttr.in/internal/query"
+	"github.com/chubin/wttr.in/internal/options"
 )
 
 // ClientData holds information about the client making the request.
@@ -102,7 +102,7 @@ type FormatOutput struct {
 // and the fetched weather data (once available).
 type Query struct {
 	ClientData *ClientData
-	Options    *query.Options
+	Options    *options.Options
 	IPData     *IPData
 	Location   *Location
 	Weather    *WeatherRaw

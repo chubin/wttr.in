@@ -7,13 +7,14 @@ import (
 	"path"
 	"strings"
 
+	"github.com/chubin/wttr.in/internal/options"
 	"github.com/chubin/wttr.in/internal/spec"
 )
 
-// FromRequest creates an Options struct based on the provided HTTP request.
+// FromRequest creates an options.Options struct based on the provided HTTP request.
 // It processes the URL path, domain name, and headers according to the specified rules.
-func FromRequest(r *http.Request) (*Options, error) {
-	opts := &Options{}
+func FromRequest(r *http.Request) (*options.Options, error) {
+	opts := &options.Options{}
 
 	// Step 1: Extract components from the URL path
 	urlPath := r.URL.Path
@@ -133,7 +134,7 @@ func FromRequest(r *http.Request) (*Options, error) {
 	return opts, nil
 }
 
-func ApplyAutoFixes(opts *Options) {
+func ApplyAutoFixes(opts *options.Options) {
 	if opts.View == "" {
 		if opts.Format == "j1" || opts.Format == "j2" || opts.Format == "v2" || opts.Format == "p1" {
 			opts.View = opts.Format
@@ -148,7 +149,7 @@ func ApplyAutoFixes(opts *Options) {
 	}
 }
 
-// ParseOptionsInFilename converts a wttr.in-style PNG filename into *Options
+// ParseOptionsInFilename converts a wttr.in-style PNG filename into *options.Options
 // using the same parsing/validation pipeline as normal ?query=string requests.
 //
 // Examples:
@@ -159,7 +160,7 @@ func ApplyAutoFixes(opts *Options) {
 //	"Berlin_u_300x150.png"       → use_imperial=true, width=300, height=150
 //
 // Returns location separately so caller can decide what to do with it.
-func ParseOptionsInFilename(filename string, cfg *spec.WttrInOptions) (*Options, string, error) {
+func ParseOptionsInFilename(filename string, cfg *spec.WttrInOptions) (*options.Options, string, error) {
 	if cfg == nil {
 		return nil, "", fmt.Errorf("config required")
 	}
@@ -169,13 +170,13 @@ func ParseOptionsInFilename(filename string, cfg *spec.WttrInOptions) (*Options,
 	name = strings.TrimSuffix(name, ".PNG") // just in case
 
 	if name == "" {
-		return &Options{Output: "png"}, "", nil
+		return &options.Options{Output: "png"}, "", nil
 	}
 
 	// 2. Split into location + option parts
 	parts := strings.Split(name, "_")
 	if len(parts) == 0 {
-		return &Options{Output: "png"}, "", nil
+		return &options.Options{Output: "png"}, "", nil
 	}
 
 	location := parts[0]
@@ -250,15 +251,15 @@ func ParseOptionsInFilename(filename string, cfg *spec.WttrInOptions) (*Options,
 		return nil, "", fmt.Errorf("failed to parse converted PNG query: %w (query was: %s)", err, queryStr)
 	}
 
-	// 5. Build Options the standard way
-	opts := &Options{
+	// 5. Build options.Options the standard way
+	opts := &options.Options{
 		Output:       "png",
 		Location:     location,
 		Transparency: 150,  // PNG default
 		UseMetric:    true, // global default
 	}
 
-	opts, err = ApplyParsedMap(opts, rawMap)
+	opts, err = options.ApplyParsedMap(opts, rawMap)
 	if err != nil {
 		return nil, "", err
 	}
@@ -266,7 +267,7 @@ func ParseOptionsInFilename(filename string, cfg *spec.WttrInOptions) (*Options,
 	return opts, location, nil
 }
 
-func Validate(opts *Options) error {
+func Validate(opts *options.Options) error {
 	if !isValidView(opts.View) {
 		return fmt.Errorf("invalid view: %s", opts.View)
 	}

@@ -14,7 +14,7 @@ import (
 
 	"github.com/chubin/wttr.in/internal/domain"
 	"github.com/chubin/wttr.in/internal/formatter"
-	"github.com/chubin/wttr.in/internal/query"
+	"github.com/chubin/wttr.in/internal/options"
 	"github.com/chubin/wttr.in/internal/renderer"
 )
 
@@ -46,26 +46,26 @@ type Formatter interface {
 }
 
 // QueryParser parses wttr.in / curl wttr.in style HTTP query strings
-// and returns the result as a strongly-typed *query.Options struct.
+// and returns the result as a strongly-typed *options.Options struct.
 type QueryParser interface {
 	// Parse parses the raw query string (the part after the ? character)
-	// and returns a populated *query.Options struct with all valid, active options set.
+	// and returns a populated *options.Options struct with all valid, active options set.
 	//
 	//   - Boolean flags without values are set to true (e.g. ?T -> Options.T = true)
 	//   - Short flags can be bundled (e.g. ?0pq -> CurrentOnly=true, p=true, q=true)
 	//   - Unknown, inactive, or invalid parameters cause an error
 	//   - Validation rules from the YAML spec (ranges, regexps, allowed values, ...) are enforced
 	//
-	// If the query is empty (no ? or ? alone), a zero-valued *query.Options is typically returned
+	// If the query is empty (no ? or ? alone), a zero-valued *options.Options is typically returned
 	// (all fields false/0/"").
 	//
 	// ctx can be used for cancellation, request-scoped logging, metrics collection, etc.
 	// Most implementations will ignore it in the first version.
-	Parse(ctx context.Context, r *http.Request) (*query.Options, error)
+	Parse(ctx context.Context, r *http.Request) (*options.Options, error)
 
 	// MustParse is a convenience variant that panics on error.
 	// Mainly useful in tests, initialization code, or when invalid input is a programmer error.
-	MustParse(ctx context.Context, r *http.Request) *query.Options
+	MustParse(ctx context.Context, r *http.Request) *options.Options
 }
 
 type RequestLogger interface {
@@ -73,7 +73,7 @@ type RequestLogger interface {
 }
 
 type UplinkProcessor interface {
-	Route(opts *query.Options, r *http.Request, ipData *domain.IPData, location *domain.Location) (bool, *domain.CacheEntry, error)
+	Route(opts *options.Options, r *http.Request, ipData *domain.IPData, location *domain.Location) (bool, *domain.CacheEntry, error)
 }
 
 // TimeTracker holds timing information for each step in the pipeline.
@@ -479,7 +479,7 @@ func getDebugInfo(
 	return sb.String()
 }
 
-func prettyPrintOptions(o *query.Options) string {
+func prettyPrintOptions(o *options.Options) string {
 	if o == nil {
 		return "  (nil)\n"
 	}

@@ -12,7 +12,7 @@ import (
 	"time"
 
 	"github.com/chubin/wttr.in/internal/domain"
-	"github.com/chubin/wttr.in/internal/query"
+	"github.com/chubin/wttr.in/internal/options"
 )
 
 type Config struct {
@@ -30,10 +30,6 @@ type UplinkProcessor struct {
 	client2 *http.Client
 	client3 *http.Client
 	client4 *http.Client
-	// transport1 *http.Transport
-	// transport2 *http.Transport
-	// transport3 *http.Transport
-	// transport4 *http.Transport
 }
 
 func NewUplinkProcessor(cfg Config) *UplinkProcessor {
@@ -62,38 +58,10 @@ func NewUplinkProcessor(cfg Config) *UplinkProcessor {
 		client3: mkClient(cfg.Address3),
 		client4: mkClient(cfg.Address4),
 	}
-
-	// transport1 := &http.Transport{
-	// 	DialContext: func(ctx context.Context, network, _ string) (net.Conn, error) {
-	// 		return dialer.DialContext(ctx, network, cfg.Address1)
-	// 	},
-	// }
-	// transport2 := &http.Transport{
-	// 	DialContext: func(ctx context.Context, network, _ string) (net.Conn, error) {
-	// 		return dialer.DialContext(ctx, network, cfg.Address2)
-	// 	},
-	// }
-	// transport3 := &http.Transport{
-	// 	DialContext: func(ctx context.Context, network, _ string) (net.Conn, error) {
-	// 		return dialer.DialContext(ctx, network, cfg.Address3)
-	// 	},
-	// }
-	// transport4 := &http.Transport{
-	// 	DialContext: func(ctx context.Context, network, _ string) (net.Conn, error) {
-	// 		return dialer.DialContext(ctx, network, cfg.Address4)
-	// 	},
-	// }
-
-	// return &UplinkProcessor{
-	// 	transport1: transport1,
-	// 	transport2: transport2,
-	// 	transport3: transport3,
-	// 	transport4: transport4,
-	// }
 }
 
 func (p *UplinkProcessor) Route(
-	opts *query.Options, r *http.Request, ipData *domain.IPData, location *domain.Location,
+	opts *options.Options, r *http.Request, ipData *domain.IPData, location *domain.Location,
 ) (bool, *domain.CacheEntry, error) {
 	var (
 		uplinkRoute    bool = true

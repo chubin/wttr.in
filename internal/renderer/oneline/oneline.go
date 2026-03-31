@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/chubin/wttr.in/internal/domain"
-	"github.com/chubin/wttr.in/internal/query"
+	"github.com/chubin/wttr.in/internal/options"
 )
 
 // ──────────────────────────────────────────────────────────────────────────────
@@ -44,7 +44,7 @@ func NewOnelineRenderer() *OnelineRenderer {
 // Helpers (usually kept private in the same file)
 // ──────────────────────────────────────────────────────────────────────────────
 
-func (r *OnelineRenderer) determineFormat(opts *query.Options) string {
+func (r *OnelineRenderer) determineFormat(opts *options.Options) string {
 	if opts == nil || opts.Format == "" {
 		return "%c %t" // sensible minimal default
 	}
@@ -74,7 +74,7 @@ var ErrNoWeatherData = errors.New("no weather data available in query")
 type renderContext struct {
 	Data     *parsedCurrentCondition
 	DataRaw  interface{}
-	Options  *query.Options
+	Options  *options.Options
 	Location *domain.Location
 	Now      time.Time
 }

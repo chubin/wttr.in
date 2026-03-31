@@ -14,6 +14,7 @@ import (
 	"github.com/chubin/wttr.in/internal/ip"
 	"github.com/chubin/wttr.in/internal/location"
 	"github.com/chubin/wttr.in/internal/logging"
+	"github.com/chubin/wttr.in/internal/query"
 	"github.com/chubin/wttr.in/internal/renderer"
 	"github.com/chubin/wttr.in/internal/renderer/oneline"
 	"github.com/chubin/wttr.in/internal/server"
@@ -92,7 +93,7 @@ func srv(configFile string) error {
 		weather.NewWeatherClient(cfg.Weather.WWO),
 		weather.NewCacheLocator(locationCache),
 		ipLocators,
-		weather.NewQueryParser(spec),
+		query.NewQueryParser(spec),
 		lruCache,
 		requestLogger,
 		uplink.NewUplinkProcessor(cfg.Uplink),
