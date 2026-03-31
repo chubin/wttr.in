@@ -3,6 +3,7 @@
 package weather
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 
@@ -47,6 +48,10 @@ type Cacher interface {
 	Close() error
 }
 
+// DefaultCacheInterval defines how often the cache key "rotates" (i.e. effective TTL).
+// All entries within the same interval share the same key.
+const DefaultCacheInterval = 1 * time.Hour
+
 // buildCacheKey generates a cache signature very similar to original wttr.in logic
 func buildCacheKey(r *http.Request) string {
 	ua := r.Header.Get("User-Agent")
@@ -55,6 +60,9 @@ func buildCacheKey(r *http.Request) string {
 	ip := getClientIP(r)
 	lang := r.Header.Get("Accept-Language")
 
-	// You can keep it exactly like original:
-	return ua + ":" + host + uri + ":" + ip + ":" + lang
+	// Bucket the current time by the interval
+	// Example: for 1 hour interval, all requests in the same hour get the same bucket
+	bucket := time.Now().Unix() / int64(DefaultCacheInterval.Seconds())
+
+	return fmt.Sprintf("%s:%s%s:%s:%s:%d", ua, host, uri, ip, lang, bucket)
 }
