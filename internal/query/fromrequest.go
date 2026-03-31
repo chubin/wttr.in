@@ -7,7 +7,6 @@ import (
 	"path"
 	"strings"
 
-	"github.com/chubin/wttr.in/internal/options"
 	"github.com/chubin/wttr.in/internal/spec"
 )
 
@@ -246,7 +245,7 @@ func ParseOptionsInFilename(filename string, cfg *spec.WttrInOptions) (*Options,
 	// 4. Turn into query string and parse with the real parser
 	queryStr := qParams.Encode()
 
-	rawMap, err := options.ParseQueryString(queryStr, cfg)
+	rawMap, err := ParseQueryString(queryStr, cfg)
 	if err != nil {
 		return nil, "", fmt.Errorf("failed to parse converted PNG query: %w (query was: %s)", err, queryStr)
 	}

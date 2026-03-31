@@ -7,7 +7,6 @@ import (
 
 	"dario.cat/mergo"
 
-	"github.com/chubin/wttr.in/internal/options"
 	"github.com/chubin/wttr.in/internal/query"
 	"github.com/chubin/wttr.in/internal/spec"
 )
@@ -30,7 +29,7 @@ func (p *strictQueryParser) Parse(ctx context.Context, r *http.Request) (*query.
 	queryString := r.URL.RawQuery
 
 	// Step 1: use the existing parser to get validated map[string]string
-	rawMap, err := options.ParseQueryString(queryString, p.config)
+	rawMap, err := query.ParseQueryString(queryString, p.config)
 	if err != nil {
 		return nil, err
 	}
