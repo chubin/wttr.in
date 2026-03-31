@@ -13,6 +13,7 @@ import (
 	"time"
 
 	"github.com/chubin/wttr.in/internal/domain"
+	"github.com/chubin/wttr.in/internal/formatter"
 	"github.com/chubin/wttr.in/internal/query"
 	"github.com/chubin/wttr.in/internal/renderer"
 )
@@ -364,7 +365,7 @@ func (s *WeatherService) computeResponse(
 		// ── Render + Format ───────────────────────────────────────────────────
 		start = time.Now()
 		renderer := s.selectRenderer(opts.View)
-		formatter := selectFormatter(opts.Output)
+		formatter := s.selectFormatter(opts.Output)
 
 		renderOut, err := renderer.Render(query)
 		if err != nil {
@@ -502,76 +503,24 @@ func (s *WeatherService) selectRenderer(view string) Renderer {
 }
 
 // selectFormatter chooses the appropriate formatter based on the output format option.
-func selectFormatter(output string) Formatter {
+func (s *WeatherService) selectFormatter(output string) Formatter {
 	// if format == "j1" || format == "j2" {
 	// 	format = "json"
 	// }
 
 	switch output {
 	case "terminal", "text", "ansi":
-		return &TextFormatter{}
+		return &formatter.TextFormatter{}
 	case "browser":
-		return &BrowserFormatter{}
+		return &formatter.BrowserFormatter{}
 	case "png":
-		return &PNGFormatter{}
+		return &formatter.PNGFormatter{}
 	case "json":
-		return &JSONFormatter{}
+		return &formatter.JSONFormatter{}
 	default:
-		return &TerminalFormatter{} // Default to terminal formatter
+		return &formatter.TerminalFormatter{} // Default to terminal formatter
 	}
 }
-
-// Formatter Implementations (Stubs)
-type TerminalFormatter struct{}
-
-func (f *TerminalFormatter) Format(output domain.RenderOutput) (*domain.FormatOutput, error) {
-	return &domain.FormatOutput{
-		Content:     output.Content,
-		ContentType: "application/text",
-	}, nil
-}
-
-type BrowserFormatter struct{}
-
-func (f *BrowserFormatter) Format(output domain.RenderOutput) (*domain.FormatOutput, error) {
-	// Stub: To be implemented
-	return &domain.FormatOutput{}, nil
-}
-
-type PNGFormatter struct{}
-
-func (f *PNGFormatter) Format(output domain.RenderOutput) (*domain.FormatOutput, error) {
-	// Stub: To be implemented
-	return &domain.FormatOutput{}, nil
-}
-
-type JSONFormatter struct{}
-
-func (f *JSONFormatter) Format(output domain.RenderOutput) (*domain.FormatOutput, error) {
-	return &domain.FormatOutput{
-		Content:     output.Content,
-		ContentType: "application/json",
-	}, nil
-}
-
-type TextFormatter struct{}
-
-func (f *TextFormatter) Format(output domain.RenderOutput) (*domain.FormatOutput, error) {
-	return &domain.FormatOutput{
-		Content:     output.Content,
-		ContentType: "application/text",
-	}, nil
-}
-
-// Stub Functions to be Implemented Separately
-// parseQueryOptions parses the incoming HTTP request into Options.
-func parseQueryOptions(r *http.Request) (*query.Options, error) {
-	// Stub: To be implemented
-	return nil, nil
-}
-
-// Weatherer and IPLocator implementations are also stubs to be provided externally.
-// They should be injected into NewWeatherService during initialization.
 
 func debugCompareOneLineRendering(format string, uplinkResponse string, internalResponse string) {
 	if uplinkResponse != internalResponse {
