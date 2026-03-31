@@ -61,9 +61,10 @@ func (p *strictQueryParser) Parse(ctx context.Context, r *http.Request, ipOpts *
 
 	// If there is no strong preference for specific units,
 	// use IP-based defaults.
-	if !opts.UseMetric && !opts.UseImperial {
+	if !opts.UseMetric && !opts.UseImperial && !opts.UseUscs {
 		opts.UseMetric = ipOpts.UseMetric
 		opts.UseImperial = ipOpts.UseImperial
+		opts.UseUscs = ipOpts.UseUscs
 	}
 
 	ApplyAutoFixes(opts)

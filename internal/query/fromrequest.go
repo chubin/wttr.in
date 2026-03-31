@@ -144,6 +144,12 @@ func ApplyAutoFixes(opts *options.Options) {
 	if opts.View == "j1" || opts.View == "j2" {
 		opts.Output = "json"
 	}
+
+	// USCS and Imperial are, strictly speaking, not the same,
+	// but in our context, there is no difference between them.
+	// If at least one of them is set, the other must be set as well.
+	opts.UseImperial = opts.UseImperial || opts.UseUscs
+	opts.UseUscs = opts.UseImperial
 }
 
 // ParseOptionsInFilename converts a wttr.in-style PNG filename into *options.Options
