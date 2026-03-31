@@ -11,8 +11,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/chubin/wttr.in/internal/domain"
 	"github.com/chubin/wttr.in/internal/query"
-	"github.com/chubin/wttr.in/internal/weather"
 )
 
 type Config struct {
@@ -93,11 +93,11 @@ func NewUplinkProcessor(cfg Config) *UplinkProcessor {
 }
 
 func (p *UplinkProcessor) Route(
-	opts *query.Options, r *http.Request, ipData *weather.IPData, location *weather.Location,
-) (bool, *weather.CacheEntry, error) {
+	opts *query.Options, r *http.Request, ipData *domain.IPData, location *domain.Location,
+) (bool, *domain.CacheEntry, error) {
 	var (
 		uplinkRoute    bool = true
-		uplinkResponse *weather.CacheEntry
+		uplinkResponse *domain.CacheEntry
 		err            error
 		client         *http.Client
 	)
@@ -128,7 +128,7 @@ func (p *UplinkProcessor) Route(
 	return uplinkRoute, uplinkResponse, err
 }
 
-func getUplink(req *http.Request, client *http.Client, location *weather.Location) (*weather.CacheEntry, error) {
+func getUplink(req *http.Request, client *http.Client, location *domain.Location) (*domain.CacheEntry, error) {
 	// client := &http.Client{
 	// 	Transport: transport,
 	// }
@@ -171,7 +171,7 @@ func getUplink(req *http.Request, client *http.Client, location *weather.Locatio
 		return nil, err
 	}
 
-	return &weather.CacheEntry{
+	return &domain.CacheEntry{
 		Expires:    time.Now().Add(time.Duration(randInt(1000, 1500)) * time.Second),
 		Body:       body,
 		Header:     res.Header,

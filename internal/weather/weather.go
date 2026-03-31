@@ -12,6 +12,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/chubin/wttr.in/internal/domain"
 	"github.com/chubin/wttr.in/internal/query"
 )
 
@@ -24,22 +25,22 @@ type Weatherer interface {
 
 // IPLocator interface to fetch IP-related data.
 type IPLocator interface {
-	GetIPData(ip string) (*IPData, error)
+	GetIPData(ip string) (*domain.IPData, error)
 }
 
 // Locator interface to fetch location-related data.
 type Locator interface {
-	GetLocation(location string) (*Location, error)
+	GetLocation(location string) (*domain.Location, error)
 }
 
 // Renderer interface for rendering weather data into a visual representation.
 type Renderer interface {
-	Render(query Query) (RenderOutput, error)
+	Render(query domain.Query) (domain.RenderOutput, error)
 }
 
 // Formatter interface for converting rendered output into the final format.
 type Formatter interface {
-	Format(output RenderOutput) (*FormatOutput, error)
+	Format(output domain.RenderOutput) (*domain.FormatOutput, error)
 }
 
 // QueryParser parses wttr.in / curl wttr.in style HTTP query strings
@@ -70,58 +71,7 @@ type RequestLogger interface {
 }
 
 type UplinkProcessor interface {
-	Route(opts *query.Options, r *http.Request, ipData *IPData, location *Location) (bool, *CacheEntry, error)
-}
-
-// ClientData holds information about the client making the request.
-type ClientData struct {
-	ClientIP    string
-	ClientAgent string
-}
-
-// IPData holds information about the client's IP address and location.
-type IPData struct {
-	IP          string
-	CountryCode string
-	Country     string
-	Region      string
-	City        string
-	Latitude    string
-	Longitude   string
-}
-
-// Location holds detailed information about a specific location.
-type Location struct {
-	Name        string
-	Country     string
-	CountryCode string
-	Latitude    float64
-	Longitude   float64
-	FullAddress string
-	TimeZone    string
-}
-
-// WeatherData represents the internal weather data as raw bytes.
-type WeatherData []byte
-
-// Query holds all data necessary for processing a weather query.
-type Query struct {
-	ClientData *ClientData
-	Options    *query.Options
-	IPData     *IPData
-	Location   *Location
-	Weather    *WeatherData
-}
-
-// RenderOutput represents the intermediate output from a renderer (ANSI format).
-type RenderOutput struct {
-	Content []byte
-}
-
-// FormatOutput represents the final formatted output to be sent to the client.
-type FormatOutput struct {
-	Content     []byte
-	ContentType string
+	Route(opts *query.Options, r *http.Request, ipData *domain.IPData, location *domain.Location) (bool, *domain.CacheEntry, error)
 }
 
 // TimeTracker holds timing information for each step in the pipeline.
@@ -212,7 +162,7 @@ func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) 
 	var (
 		bypassCache bool
 		cacheKey    string
-		entry       *CacheEntry
+		entry       *domain.CacheEntry
 		err         error
 	)
 
@@ -282,7 +232,7 @@ func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) 
 	s.serveFromCache(w, entry) // reuse same helper
 }
 
-func (s *WeatherService) serveFromCache(w http.ResponseWriter, e *CacheEntry) {
+func (s *WeatherService) serveFromCache(w http.ResponseWriter, e *domain.CacheEntry) {
 	for k, vs := range e.Header {
 		w.Header()[k] = vs
 	}
@@ -292,12 +242,12 @@ func (s *WeatherService) serveFromCache(w http.ResponseWriter, e *CacheEntry) {
 }
 
 // computeResponse performs location resolution, weather fetch, rendering and formatting.
-// Returns ready-to-cache CacheEntry or error.
+// Returns ready-to-cache domain.CacheEntry or error.
 // Does NOT write to ResponseWriter — that stays in handler.
 func (s *WeatherService) computeResponse(
 	ctx context.Context, r *http.Request,
 	tracker *TimeTracker,
-) (*CacheEntry, error) {
+) (*domain.CacheEntry, error) {
 	debugRequested := r.URL.Query().Get("debug") != ""
 
 	clientIP := getClientIP(r)
@@ -308,7 +258,7 @@ func (s *WeatherService) computeResponse(
 	autoDetect := isAutoDetectPath(path)
 
 	// 0. Locate IP
-	var ipData *IPData
+	var ipData *domain.IPData
 	var errIP error
 	for _, ipLocator := range s.IPLocators {
 		ipData, errIP = ipLocator.GetIPData(clientIP)
@@ -365,14 +315,14 @@ func (s *WeatherService) computeResponse(
 	// which can be added to the headers.
 	// ...
 	var (
-		formatOut *FormatOutput
-		query     Query
+		formatOut *domain.FormatOutput
+		query     domain.Query
 	)
 
 	// ── Build Query ───────────────────────────────────────────────────────
 	start = time.Now()
-	query = Query{
-		ClientData: &ClientData{
+	query = domain.Query{
+		ClientData: &domain.ClientData{
 			ClientIP:    clientIP,
 			ClientAgent: r.UserAgent(),
 		},
@@ -384,7 +334,7 @@ func (s *WeatherService) computeResponse(
 	start = time.Now()
 	var (
 		isUpstream     bool
-		uplinkResponse *CacheEntry
+		uplinkResponse *domain.CacheEntry
 
 		// compareWithUpstream is used when we the data
 		// must be delivered both by the uplink, and the core
@@ -408,7 +358,7 @@ func (s *WeatherService) computeResponse(
 
 		// ── Filling up Query ───────────────────────────────────────────────────────
 		query.IPData = ipData
-		query.Weather = (*WeatherData)(&weatherBytes)
+		query.Weather = (*domain.WeatherData)(&weatherBytes)
 
 		// ── Render + Format ───────────────────────────────────────────────────
 		start = time.Now()
@@ -438,7 +388,7 @@ func (s *WeatherService) computeResponse(
 
 	if debugRequested {
 		debugInfo := getDebugInfo(r, &query, locStr, tracker)
-		return &CacheEntry{
+		return &domain.CacheEntry{
 			Body:       []byte(debugInfo),
 			StatusCode: http.StatusOK,
 			Header: http.Header{
@@ -448,7 +398,7 @@ func (s *WeatherService) computeResponse(
 		}, nil
 	}
 
-	return &CacheEntry{
+	return &domain.CacheEntry{
 		Body:       formatOut.Content,
 		StatusCode: http.StatusOK,
 		Expires:    time.Now().Add(12 * time.Minute), // tune this TTL
@@ -465,7 +415,7 @@ func isAutoDetectPath(p string) bool {
 
 func getDebugInfo(
 	r *http.Request,
-	q *Query,
+	q *domain.Query,
 	requestedLocStr string,
 	timetracker *TimeTracker,
 ) string {
@@ -573,23 +523,23 @@ func selectFormatter(output string) Formatter {
 // Renderer Implementations (Stubs)
 type V1Renderer struct{}
 
-func (r *V1Renderer) Render(query Query) (RenderOutput, error) {
+func (r *V1Renderer) Render(query domain.Query) (domain.RenderOutput, error) {
 	// Stub: To be implemented
-	return RenderOutput{}, nil
+	return domain.RenderOutput{}, nil
 }
 
 type V2Renderer struct{}
 
-func (r *V2Renderer) Render(query Query) (RenderOutput, error) {
+func (r *V2Renderer) Render(query domain.Query) (domain.RenderOutput, error) {
 	// Stub: To be implemented
-	return RenderOutput{}, nil
+	return domain.RenderOutput{}, nil
 }
 
 // Formatter Implementations (Stubs)
 type TerminalFormatter struct{}
 
-func (f *TerminalFormatter) Format(output RenderOutput) (*FormatOutput, error) {
-	return &FormatOutput{
+func (f *TerminalFormatter) Format(output domain.RenderOutput) (*domain.FormatOutput, error) {
+	return &domain.FormatOutput{
 		Content:     output.Content,
 		ContentType: "application/text",
 	}, nil
@@ -597,22 +547,22 @@ func (f *TerminalFormatter) Format(output RenderOutput) (*FormatOutput, error) {
 
 type BrowserFormatter struct{}
 
-func (f *BrowserFormatter) Format(output RenderOutput) (*FormatOutput, error) {
+func (f *BrowserFormatter) Format(output domain.RenderOutput) (*domain.FormatOutput, error) {
 	// Stub: To be implemented
-	return &FormatOutput{}, nil
+	return &domain.FormatOutput{}, nil
 }
 
 type PNGFormatter struct{}
 
-func (f *PNGFormatter) Format(output RenderOutput) (*FormatOutput, error) {
+func (f *PNGFormatter) Format(output domain.RenderOutput) (*domain.FormatOutput, error) {
 	// Stub: To be implemented
-	return &FormatOutput{}, nil
+	return &domain.FormatOutput{}, nil
 }
 
 type JSONFormatter struct{}
 
-func (f *JSONFormatter) Format(output RenderOutput) (*FormatOutput, error) {
-	return &FormatOutput{
+func (f *JSONFormatter) Format(output domain.RenderOutput) (*domain.FormatOutput, error) {
+	return &domain.FormatOutput{
 		Content:     output.Content,
 		ContentType: "application/json",
 	}, nil
@@ -620,8 +570,8 @@ func (f *JSONFormatter) Format(output RenderOutput) (*FormatOutput, error) {
 
 type TextFormatter struct{}
 
-func (f *TextFormatter) Format(output RenderOutput) (*FormatOutput, error) {
-	return &FormatOutput{
+func (f *TextFormatter) Format(output domain.RenderOutput) (*domain.FormatOutput, error) {
+	return &domain.FormatOutput{
 		Content:     output.Content,
 		ContentType: "application/text",
 	}, nil
@@ -658,6 +608,6 @@ func debugCompareOneLineRendering(format string, uplinkResponse string, internal
 	}
 }
 
-func isClientInUSA(ipData *IPData) bool {
+func isClientInUSA(ipData *domain.IPData) bool {
 	return ipData.CountryCode == "US"
 }

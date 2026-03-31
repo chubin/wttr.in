@@ -10,6 +10,7 @@ import (
 
 	lru "github.com/hashicorp/golang-lru/v2"
 
+	"github.com/chubin/wttr.in/internal/domain"
 	"github.com/chubin/wttr.in/internal/weather"
 )
 
@@ -50,7 +51,7 @@ func NewLRU(cfg Config) (weather.Cacher, error) {
 }
 
 // Get returns a valid, non-expired cache entry or nil.
-func (c *LRUCacher) Get(key string) *weather.CacheEntry {
+func (c *LRUCacher) Get(key string) *domain.CacheEntry {
 	raw, ok := c.cache.Get(key)
 	if !ok {
 		return nil
@@ -61,7 +62,7 @@ func (c *LRUCacher) Get(key string) *weather.CacheEntry {
 		return nil
 	}
 
-	entry, ok := raw.(weather.CacheEntry)
+	entry, ok := raw.(domain.CacheEntry)
 	if !ok {
 		return nil
 	}
@@ -75,7 +76,7 @@ func (c *LRUCacher) Get(key string) *weather.CacheEntry {
 }
 
 // Set stores a completed cache entry and clears the in-progress state.
-func (c *LRUCacher) Set(key string, entry weather.CacheEntry) {
+func (c *LRUCacher) Set(key string, entry domain.CacheEntry) {
 	c.mu.Lock()
 	delete(c.inProgress, key)
 	c.mu.Unlock()
@@ -101,7 +102,7 @@ func (c *LRUCacher) IsInProgress(key string) bool {
 }
 
 // WaitForCompletion blocks until the in-progress flag is cleared or timeout occurs.
-func (c *LRUCacher) WaitForCompletion(key string, maxWait time.Duration) (*weather.CacheEntry, error) {
+func (c *LRUCacher) WaitForCompletion(key string, maxWait time.Duration) (*domain.CacheEntry, error) {
 	if maxWait <= 0 {
 		maxWait = c.maxWait
 	}

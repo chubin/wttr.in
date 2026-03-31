@@ -5,34 +5,20 @@ package weather
 import (
 	"net/http"
 	"time"
+
+	"github.com/chubin/wttr.in/internal/domain"
 )
-
-// CacheEntry represents a cached HTTP response.
-// It is immutable once stored in the cache.
-type CacheEntry struct {
-	// Body is the response body bytes
-	Body []byte
-
-	// Header contains the HTTP response headers to return to the client
-	Header http.Header
-
-	// StatusCode is the HTTP status code (200, 404, etc.)
-	StatusCode int
-
-	// Expires is the absolute time after which this entry should be considered stale
-	Expires time.Time
-}
 
 // Cacher defines the contract for all cache implementations used by the request processor.
 // Implementations may use LRU, Redis, in-memory maps, etc.
 type Cacher interface {
 	// Get returns a valid (non-expired) cache entry for the given key.
 	// Returns nil if the key does not exist or the entry has expired.
-	Get(key string) *CacheEntry
+	Get(key string) *domain.CacheEntry
 
 	// Set stores a completed response in the cache under the given key.
 	// This should clear any in-progress state for the same key.
-	Set(key string, entry CacheEntry)
+	Set(key string, entry domain.CacheEntry)
 
 	// SetInProgress marks that a request for this key is currently being processed.
 	// Used to prevent duplicate upstream requests (coalescing).
@@ -49,7 +35,7 @@ type Cacher interface {
 	//   - the completed entry if available
 	//   - nil, nil if the entry was removed (e.g. upstream error)
 	//   - nil, error on timeout
-	WaitForCompletion(key string, maxWait time.Duration) (*CacheEntry, error)
+	WaitForCompletion(key string, maxWait time.Duration) (*domain.CacheEntry, error)
 
 	// Remove deletes the entry (and any in-progress marker) for the given key.
 	// Typically called when the upstream response should not be cached
