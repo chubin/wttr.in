@@ -270,6 +270,12 @@ func (s *WeatherService) computeResponse(
 	}
 	tracker.Add("IP locating", time.Since(start))
 
+	// For testing purposes, it is possibe to simulate US-based clients
+	// by setting country code in the HTTP headers of the request.
+	if countryCode := r.Header.Get("X-Client-Country-Code"); countryCode != "" {
+		ipData.CountryCode = countryCode
+	}
+
 	/////////////////////
 	// This part should be moved to queryparser.
 	ipOpts := options.Options{}
