@@ -10,24 +10,25 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-// WWOConfig holds configuration for World Weather Online (or similar) API
+// WWOConfig holds configuration for the weather API (e.g. World Weather Online)
 type WWOConfig struct {
 	BaseURL  string `yaml:"baseUrl"`
 	Key      string `yaml:"key"`
 	MaxConns int    `yaml:"maxConns,omitempty"`
 }
 
-// WeatherClient fetches weather data with controlled concurrency using a semaphore.
+// WeatherClient fetches weather data with controlled concurrency and connection reuse.
 type WeatherClient struct {
-	baseURL  string
-	sem      chan struct{} // semaphore to limit concurrent connections
-	maxConns int
+	baseURL    string
+	sem        chan struct{} // semaphore to limit concurrent requests
+	maxConns   int
+	httpClient *http.Client  // reused HTTP client with connection pooling
 }
 
-// ErrNoFreeConnection is returned when all connection slots are occupied.
+// ErrNoFreeConnection is returned when the maximum number of parallel connections is reached.
 var ErrNoFreeConnection = fmt.Errorf("heating up, try again later")
 
-// NewWeatherClient creates a new WeatherClient.
+// NewWeatherClient creates a new WeatherClient with proper connection pooling.
 func NewWeatherClient(cfg *WWOConfig) *WeatherClient {
 	if cfg == nil {
 		panic("weather config is nil")
@@ -41,32 +42,45 @@ func NewWeatherClient(cfg *WWOConfig) *WeatherClient {
 
 	maxConns := cfg.MaxConns
 	if maxConns < 1 {
-		maxConns = 100 // sensible default
+		maxConns = 100 // reasonable default
 	}
 
-	// Replace {key} once at client creation
+	// Replace API key once during initialization
 	baseURL := strings.ReplaceAll(cfg.BaseURL, "{key}", cfg.Key)
 
+	// Configure HTTP transport for connection reuse and pooling
+	transport := &http.Transport{
+		MaxIdleConns:        100,               // total idle connections across all hosts
+		MaxIdleConnsPerHost: 30,                // idle connections to the weather API host
+		MaxConnsPerHost:     maxConns,          // maximum concurrent connections to the host
+		IdleConnTimeout:     90 * time.Second,  // how long to keep idle connections alive
+	}
+
 	return &WeatherClient{
-		baseURL:  baseURL,
-		sem:      make(chan struct{}, maxConns),
+		baseURL: baseURL,
+		sem:     make(chan struct{}, maxConns),
 		maxConns: maxConns,
+		httpClient: &http.Client{
+			Transport: transport,
+			Timeout:   10 * time.Second,
+		},
 	}
 }
 
-// GetWeather fetches weather data for given coordinates while respecting the concurrency limit.
-// Returns ErrNoFreeConnection immediately if no slot is available (non-blocking).
+// GetWeather fetches weather data while respecting the concurrency limit.
+// It reuses HTTP connections thanks to the shared http.Client.
 func (wc *WeatherClient) GetWeather(lat, lon float64, lang string) ([]byte, error) {
-	// Non-blocking acquire
+	// Non-blocking attempt to acquire a semaphore slot
 	select {
 	case wc.sem <- struct{}{}:
-		// Slot acquired - ensure we release it when done
+		// Slot acquired - release when function returns
 		defer func() { <-wc.sem }()
 	default:
+		// All slots are busy
 		return nil, ErrNoFreeConnection
 	}
 
-	// Build URL with placeholders
+	// Build the final URL
 	url := wc.buildURL(lat, lon, lang)
 
 	logrus.WithFields(logrus.Fields{
@@ -75,19 +89,15 @@ func (wc *WeatherClient) GetWeather(lat, lon float64, lang string) ([]byte, erro
 		"lang": lang,
 	}).Debug("Accessing weather API")
 
-	// HTTP client with timeout
-	client := &http.Client{
-		Timeout: 10 * time.Second,
-	}
-
-	resp, err := client.Get(url)
+	// Use the shared http.Client (this enables connection reuse)
+	resp, err := wc.httpClient.Get(url)
 	if err != nil {
 		return nil, fmt.Errorf("weather API request failed: %w", err)
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("weather API returned unexpected status: %d", resp.StatusCode)
+		return nil, fmt.Errorf("weather API returned unexpected status code: %d", resp.StatusCode)
 	}
 
 	body, err := io.ReadAll(resp.Body)
@@ -98,11 +108,19 @@ func (wc *WeatherClient) GetWeather(lat, lon float64, lang string) ([]byte, erro
 	return body, nil
 }
 
-// buildURL constructs the final URL by replacing placeholders.
-// This is extracted for better testability and clarity.
+// buildURL replaces placeholders in the base URL with actual values.
 func (wc *WeatherClient) buildURL(lat, lon float64, lang string) string {
 	url := strings.ReplaceAll(wc.baseURL, "{lat}", fmt.Sprintf("%.6f", lat))
 	url = strings.ReplaceAll(url, "{lon}", fmt.Sprintf("%.6f", lon))
 	url = strings.ReplaceAll(url, "{lang}", lang)
 	return url
+}
+
+// Close closes idle HTTP connections. Call this when shutting down the application.
+func (wc *WeatherClient) Close() {
+	if wc.httpClient != nil {
+		if transport, ok := wc.httpClient.Transport.(*http.Transport); ok {
+			transport.CloseIdleConnections()
+		}
+	}
 }
