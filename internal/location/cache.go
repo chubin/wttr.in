@@ -358,6 +358,7 @@ func normalizeLocationName(name string) string {
 	name = strings.ReplaceAll(name, `'`, " ")
 	name = strings.TrimSpace(name)
 	name = strings.Join(strings.Fields(name), " ")
+	// name = strings.ReplaceAll(name, `, `, ",")
 	return strings.ToLower(name)
 }
 
