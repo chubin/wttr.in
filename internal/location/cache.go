@@ -271,9 +271,6 @@ func (c *Cache) Put(addr string, loc *Location) error {
 }
 
 func (c *Cache) putToCacheDB(loc *Location) error {
-	c.writeMu.Lock()
-	defer c.writeMu.Unlock()
-
 	log.Debugln("putToCacheDB started")
 	defer log.Debugln("putToCacheDB finished")
 
