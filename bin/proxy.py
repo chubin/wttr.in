@@ -110,6 +110,8 @@ def _cache_file(path, query):
     is slightly varied basing on the path+query sha1 hash digest.
     """
 
+    # return "/wttr.in/wttr.in-v2-v2/just-some-data.json"
+
     digest = hashlib.sha1(("%s %s" % (path, query)).encode("utf-8")).hexdigest()
     digest_number = ord(digest[0].upper())
     penalty = 0
@@ -329,7 +331,8 @@ def _make_query(path, query_string):
     else:
         # WWO tweaks
         query_string += "&extra=localObsTime"
-        query_string += "&includelocation=yes"
+        if "includelocation" not in query_string:
+            query_string += "&includelocation=yes"
         content, headers = _fetch_content_and_headers(path, query_string)
 
     return content, headers
