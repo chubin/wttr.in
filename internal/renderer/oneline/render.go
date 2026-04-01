@@ -95,6 +95,9 @@ func renderHumidity(ctx *renderContext) string {
 }
 
 func renderPrecipitation(ctx *renderContext) string {
+	if ctx.Options.UseImperial || ctx.Options.UseUscs {
+		return fmt.Sprintf("%.1fin", ctx.Data.PrecipInches)
+	}
 	return fmt.Sprintf("%.1fmm", ctx.Data.PrecipMM)
 }
 

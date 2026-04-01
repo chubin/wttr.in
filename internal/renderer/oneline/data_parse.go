@@ -21,6 +21,7 @@ type parsedCurrentCondition struct {
 	FeelsLikeF     float64
 	Humidity       int     // 0–100
 	PrecipMM       float64 // mm in last period (usually 1h or 3h)
+	PrecipInches   float64 // mm in last period (usually 1h or 3h)
 	ChanceOfRain   int     // 0–100 %
 	PressureHpa    int
 	UVIndex        int
@@ -63,6 +64,7 @@ func parseCurrentCondition(raw []byte) (*parsedCurrentCondition, error) {
 
 	humidity, _ := strconv.Atoi(cc.Humidity)
 	precipMM, _ := strconv.ParseFloat(cc.PrecipMM, 64)
+	precipInches, _ := strconv.ParseFloat(cc.PrecipInches, 64)
 	pressure, _ := strconv.Atoi(cc.Pressure)
 	uv, _ := strconv.Atoi(cc.UVIndex)
 	windKmph, _ := strconv.ParseFloat(cc.WindspeedKmph, 64)
@@ -111,6 +113,7 @@ func parseCurrentCondition(raw []byte) (*parsedCurrentCondition, error) {
 		FeelsLikeF:       feelsF,
 		Humidity:         humidity,
 		PrecipMM:         precipMM,
+		PrecipInches:     precipInches,
 		ChanceOfRain:     0, // often comes from hourly → can be filled later if needed
 		PressureHpa:      pressure,
 		UVIndex:          uv,
