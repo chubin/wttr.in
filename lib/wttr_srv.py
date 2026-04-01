@@ -333,6 +333,16 @@ def parse_request(location, request, query, fast_mode=False):
     parsed_query["html_output"] = get_output_format(query, parsed_query)
     parsed_query["json_output"] = (parsed_query.get("view", "") or "").startswith("j")
 
+    # Extracting options passed by the core from the header
+
+    core_options_header_json_str = request.headers.get("X-Options", "")
+    core_options_header_json_str = core_options_header_json_str.encode(
+        "latin-1"
+    ).decode("utf-8")
+    if options_header_json_str:
+        core_options = json.loads(core_options_header_json_str)
+        parsed_query.updated(core_options)
+
     # Extracting location data from the header
 
     location_header_json_str = request.headers.get("X-Location", "")
@@ -387,6 +397,7 @@ def parse_request(location, request, query, fast_mode=False):
         )
 
     parsed_query.update(query)
+
     return parsed_query
 
 
