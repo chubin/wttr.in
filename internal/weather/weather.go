@@ -106,6 +106,8 @@ type WeatherService struct {
 	RequestLogger   RequestLogger
 	UplinkProcessor UplinkProcessor
 	RendererMap     map[string]Renderer
+
+	semNewAutoLoc chan struct{}
 }
 
 // NewWeatherService initializes a new pipeline based on the provided options.
@@ -119,6 +121,11 @@ func NewWeatherService(
 	uplinkProcessor UplinkProcessor,
 	rendererMap map[string]Renderer,
 ) *WeatherService {
+	// How many locations in the new format we can handle simultaneously.
+	// For the rest use the old format as a fall back.
+	// Semaphores are in semNewAutoLoc.
+	maxNewAutoLoc := 20
+
 	return &WeatherService{
 		Weatherer:       weatherer,
 		Locator:         locator,
@@ -128,6 +135,8 @@ func NewWeatherService(
 		RequestLogger:   requestLogger,
 		UplinkProcessor: uplinkProcessor,
 		RendererMap:     rendererMap,
+
+		semNewAutoLoc: make(chan struct{}, maxNewAutoLoc),
 	}
 }
 
@@ -303,8 +312,25 @@ func (s *WeatherService) computeResponse(
 			if ipData.City == "" {
 				locStr = fmt.Sprintf("%s,%s", ipData.Latitude, ipData.Longitude)
 			} else {
-				locStr = ipData.City
-				// locStr = fmt.Sprintf("%s, %s, %s", ipData.City, ipData.Region, ipData.CountryCode)
+				// Switching to the new format gradually.
+				// Handle only limited number of connections in the new format.
+				// For now, this applies only to US-based clients; others will follow.
+				if isClientInUSA(ipData) {
+					// Try to acquire a "new auto location format" slot (non-blocking)
+					select {
+					case s.semNewAutoLoc <- struct{}{}:
+						// Slot acquired successfully
+						// Using the new location format.
+						locStr = fmt.Sprintf("%s, %s, %s", ipData.City, ipData.Region, ipData.CountryCode)
+						defer func() { <-s.semNewAutoLoc }() // release slot when done
+					default:
+						// No free conneoction slot available
+						// Fallback to the original format.
+						locStr = ipData.City
+					}
+				} else {
+					locStr = ipData.City
+				}
 			}
 		}
 	}
