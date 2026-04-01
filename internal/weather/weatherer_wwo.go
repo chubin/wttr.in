@@ -10,35 +10,42 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+// WWOConfig holds configuration for World Weather Online (or similar) API
 type WWOConfig struct {
 	BaseURL  string `yaml:"baseUrl"`
 	Key      string `yaml:"key"`
 	MaxConns int    `yaml:"maxConns,omitempty"`
 }
 
-// WeatherClient fetches weather data with controlled concurrency
+// WeatherClient fetches weather data with controlled concurrency using a semaphore.
 type WeatherClient struct {
 	baseURL  string
 	sem      chan struct{} // semaphore to limit concurrent connections
 	maxConns int
 }
 
-// NewWeatherClient creates a new WeatherClient with a maximum number of parallel connections
+// ErrNoFreeConnection is returned when all connection slots are occupied.
+var ErrNoFreeConnection = fmt.Errorf("heating up, try again later")
+
+// NewWeatherClient creates a new WeatherClient.
 func NewWeatherClient(cfg *WWOConfig) *WeatherClient {
+	if cfg == nil {
+		panic("weather config is nil")
+	}
 	if cfg.BaseURL == "" {
-		panic("empty baseURL")
+		panic("empty baseURL in weather config")
 	}
 	if cfg.Key == "" {
-		panic("missing/empty key")
+		panic("missing/empty API key in weather config")
 	}
 
 	maxConns := cfg.MaxConns
 	if maxConns < 1 {
-		maxConns = 100 // reasonable default
+		maxConns = 100 // sensible default
 	}
 
-	baseURL := cfg.BaseURL
-	baseURL = strings.Replace(baseURL, "{key}", cfg.Key, 1)
+	// Replace {key} once at client creation
+	baseURL := strings.ReplaceAll(cfg.BaseURL, "{key}", cfg.Key)
 
 	return &WeatherClient{
 		baseURL:  baseURL,
@@ -47,48 +54,55 @@ func NewWeatherClient(cfg *WWOConfig) *WeatherClient {
 	}
 }
 
-// GetWeather fetches weather data while respecting the maximum number of parallel connections.
-// Returns ErrNoFreeConnection if all slots are currently occupied.
+// GetWeather fetches weather data for given coordinates while respecting the concurrency limit.
+// Returns ErrNoFreeConnection immediately if no slot is available (non-blocking).
 func (wc *WeatherClient) GetWeather(lat, lon float64, lang string) ([]byte, error) {
-	// Try to acquire a connection slot (non-blocking)
+	// Non-blocking acquire
 	select {
 	case wc.sem <- struct{}{}:
-		// Slot acquired successfully
-		defer func() { <-wc.sem }() // release slot when done
+		// Slot acquired - ensure we release it when done
+		defer func() { <-wc.sem }()
 	default:
-		// No free connection slot available
 		return nil, ErrNoFreeConnection
 	}
 
-	// Replace placeholders
-	url := strings.Replace(wc.baseURL, "{lat}", fmt.Sprintf("%f", lat), 1)
-	url = strings.Replace(url, "{lon}", fmt.Sprintf("%f", lon), 1)
-	url = strings.Replace(url, "{lang}", lang, 1)
+	// Build URL with placeholders
+	url := wc.buildURL(lat, lon, lang)
 
-	logrus.Debugln("[WeatherClient] accessing ", url)
+	logrus.WithFields(logrus.Fields{
+		"lat":  lat,
+		"lon":  lon,
+		"lang": lang,
+	}).Debug("Accessing weather API")
 
-	// Create HTTP client with timeout
+	// HTTP client with timeout
 	client := &http.Client{
 		Timeout: 10 * time.Second,
 	}
 
 	resp, err := client.Get(url)
 	if err != nil {
-		return nil, fmt.Errorf("failed to make HTTP request: %v", err)
+		return nil, fmt.Errorf("weather API request failed: %w", err)
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unexpected status code: %d", resp.StatusCode)
+		return nil, fmt.Errorf("weather API returned unexpected status: %d", resp.StatusCode)
 	}
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return nil, fmt.Errorf("failed to read response body: %v", err)
+		return nil, fmt.Errorf("failed to read weather response body: %w", err)
 	}
 
 	return body, nil
 }
 
-// ErrNoFreeConnection is returned when the maximum number of parallel connections is reached
-var ErrNoFreeConnection = fmt.Errorf("heating up, try again later")
+// buildURL constructs the final URL by replacing placeholders.
+// This is extracted for better testability and clarity.
+func (wc *WeatherClient) buildURL(lat, lon float64, lang string) string {
+	url := strings.ReplaceAll(wc.baseURL, "{lat}", fmt.Sprintf("%.6f", lat))
+	url = strings.ReplaceAll(url, "{lon}", fmt.Sprintf("%.6f", lon))
+	url = strings.ReplaceAll(url, "{lang}", lang)
+	return url
+}
