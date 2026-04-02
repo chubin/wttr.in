@@ -158,80 +158,77 @@ func getClientIP(r *http.Request) string {
 	return r.RemoteAddr // worst case
 }
 
-// WeatherHandler is now much shorter — mainly orchestration + caching
+// WeatherHandler handles weather requests with proper cache coalescing.
 func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-	var (
-		bypassCache bool
-		cacheKey    string
-		entry       *domain.CacheEntry
-		err         error
-	)
-
 	overallStart := time.Now()
-	tracker := TimeTracker{}
 
-	// Log incoming request.
-	// If the logging was not successful, write a warning and continue.
+	// Best-effort logging
 	if err := s.RequestLogger.Log(r); err != nil {
-		log.Println(err)
+		log.Println("RequestLogger error:", err)
 	}
 
-	if r.URL.Query().Get("debug") != "" {
-		bypassCache = true
+	bypassCache := r.URL.Query().Get("debug") != ""
+
+	if bypassCache {
+		s.serveFreshResponse(ctx, w, r)
+		return
 	}
 
-	if !bypassCache {
-		// 3. Build cache key (must include everything that affects output)
-		cacheKey = buildCacheKey(r)
+	cacheKey := buildCacheKey(r)
 
-		// 4. Fast path: cache hit
-		if entry := s.Cacher.Get(cacheKey); entry != nil {
+	// Fast path: cache hit
+	if entry := s.Cacher.Get(cacheKey); entry != nil {
+		s.serveFromCache(w, entry)
+		return
+	}
+
+	// Try to become the leader (atomic check + set)
+	if !s.Cacher.SetInProgressIfNotExists(cacheKey) {
+		// Someone else is already computing or we have a fresh entry now
+		if entry, err := s.Cacher.WaitForCompletion(cacheKey, 12*time.Second); err == nil && entry != nil {
 			s.serveFromCache(w, entry)
 			return
 		}
-
-		// 5. Coalescing: if someone else is already computing → wait
-		if s.Cacher.IsInProgress(cacheKey) {
-			entry, err := s.Cacher.WaitForCompletion(cacheKey, 12*time.Second)
-			if err == nil && entry != nil {
-				s.serveFromCache(w, entry)
-				return
-			}
-			// timeout → we'll compute it ourselves
-		}
-
-		// 6. Become the leader: mark in-progress and compute
-		s.Cacher.SetInProgress(cacheKey)
-
-		// Important: recover from panic to clean up in-progress flag
-		defer func() {
-			if rec := recover(); rec != nil {
-				s.Cacher.Remove(cacheKey)
-				panic(rec)
-			}
-		}()
+		// Timeout or failure → fall through and compute ourselves
 	}
 
-	// 7. The heavy part — now extracted
-	entry, err = s.computeResponse(ctx, r, &tracker)
+	// We are the leader → compute and store
+	s.computeAndStore(ctx, w, r, cacheKey, overallStart)
+}
+
+// Helper to keep the main handler clean
+func (s *WeatherService) serveFreshResponse(ctx context.Context, w http.ResponseWriter, r *http.Request) {
+	entry, err := s.computeResponse(ctx, r, &TimeTracker{})
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	s.serveFromCache(w, entry)
+}
+
+func (s *WeatherService) computeAndStore(ctx context.Context, w http.ResponseWriter, r *http.Request, cacheKey string, overallStart time.Time) {
+	tracker := &TimeTracker{}
+
+	defer func() {
+		if rec := recover(); rec != nil {
+			s.Cacher.Remove(cacheKey)
+			panic(rec)
+		}
+	}()
+
+	entry, err := s.computeResponse(ctx, r, tracker)
 	if err != nil {
 		s.Cacher.Remove(cacheKey)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	// This information will not be visible,
-	// because the debug output is already in response.
+	// Success: store in cache
+	s.Cacher.Set(cacheKey, *entry)
+
 	tracker.Add("Total computation time", time.Since(overallStart))
-
-	if !bypassCache {
-		// 8. Store successful result
-		s.Cacher.Set(cacheKey, *entry)
-	}
-
-	// 9. Send to client
-	s.serveFromCache(w, entry) // reuse same helper
+	s.serveFromCache(w, entry)
 }
 
 func (s *WeatherService) serveFromCache(w http.ResponseWriter, e *domain.CacheEntry) {

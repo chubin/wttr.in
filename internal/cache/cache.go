@@ -9,13 +9,12 @@ import (
 	"time"
 
 	lru "github.com/hashicorp/golang-lru/v2"
-
 	"github.com/chubin/wttr.in/internal/domain"
 	"github.com/chubin/wttr.in/internal/weather"
 )
 
 const (
-	inProgressMarker    = "__IN_PROGRESS__"
+	inProgressMarker = "__IN_PROGRESS__"
 	defaultPollInterval = 25 * time.Millisecond
 	defaultMaxWait      = 12 * time.Second
 )
@@ -77,6 +76,35 @@ func (c *LRUCacher) Get(key string) *domain.CacheEntry {
 	return &entry
 }
 
+// SetInProgressIfNotExists atomically checks whether the key already has a
+// valid (non-expired) cache entry or is currently being computed.
+//
+// If neither is true, it marks the key as in-progress and returns true
+// (caller should compute the value).
+// If a valid entry exists or another goroutine is already computing,
+// it returns false.
+func (c *LRUCacher) SetInProgressIfNotExists(key string) bool {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+
+	// Check cache under lock
+	if raw, ok := c.cache.Get(key); ok {
+		if entry, ok := raw.(domain.CacheEntry); ok {
+			if !time.Now().After(entry.Expires) {
+				return false // valid cached entry exists
+			}
+			// expired → will be overwritten
+		} else if marker, ok := raw.(string); ok && marker == inProgressMarker {
+			return false // already being computed by someone else
+		}
+	}
+
+	// No valid entry and not in progress → we become the leader
+	c.inProgress[key] = struct{}{}
+	c.cache.Add(key, inProgressMarker)
+	return true
+}
+
 // Set stores a completed cache entry and clears the in-progress state.
 func (c *LRUCacher) Set(key string, entry domain.CacheEntry) {
 	c.mu.Lock()
@@ -84,15 +112,6 @@ func (c *LRUCacher) Set(key string, entry domain.CacheEntry) {
 	c.mu.Unlock()
 
 	c.cache.Add(key, entry)
-}
-
-// SetInProgress marks a key as currently being processed to prevent duplicate work.
-func (c *LRUCacher) SetInProgress(key string) {
-	c.mu.Lock()
-	c.inProgress[key] = struct{}{}
-	c.mu.Unlock()
-
-	c.cache.Add(key, inProgressMarker)
 }
 
 // IsInProgress checks whether the key is currently being processed.
@@ -126,7 +145,7 @@ func (c *LRUCacher) WaitForCompletion(key string, maxWait time.Duration) (*domai
 		select {
 		case <-ticker.C:
 			// continue polling
-		case <-time.After(time.Until(deadline)): // safety for edge case
+		case <-time.After(time.Until(deadline)):
 			return nil, errors.New("timeout waiting for cache entry to complete")
 		}
 	}
@@ -139,7 +158,6 @@ func (c *LRUCacher) Remove(key string) {
 	c.mu.Lock()
 	delete(c.inProgress, key)
 	c.mu.Unlock()
-
 	c.cache.Remove(key)
 }
 
@@ -148,7 +166,5 @@ func (c *LRUCacher) Close() error {
 	c.mu.Lock()
 	c.inProgress = nil
 	c.mu.Unlock()
-
-	// Optional: c.cache.Purge()
 	return nil
 }

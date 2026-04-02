@@ -21,9 +21,9 @@ type Cacher interface {
 	// This should clear any in-progress state for the same key.
 	Set(key string, entry domain.CacheEntry)
 
-	// SetInProgress marks that a request for this key is currently being processed.
+	// SetInProgressIfNotExists marks that a request for this key is currently being processed.
 	// Used to prevent duplicate upstream requests (coalescing).
-	SetInProgress(key string)
+	SetInProgressIfNotExists(key string) bool
 
 	// IsInProgress returns true if the key is currently being processed by another goroutine.
 	IsInProgress(key string) bool
