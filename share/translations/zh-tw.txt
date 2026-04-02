@@ -18,7 +18,7 @@
 281: 凍毛毛雨                        : Freezing drizzle
 284: 重凍毛毛雨                      : Heavy freezing drizzle
 293: 局部小雨                        : Patchy light rain
-296: 小雨                            : Light 
+296: 小雨                            : Light rain
 299: 有時中雨                        : Moderate rain at times
 302: 中雨                            : Moderate rain
 305: 有時大雨                        : Heavy rain at times
