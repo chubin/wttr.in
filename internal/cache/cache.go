@@ -1,5 +1,5 @@
 // Package cache provides a concrete implementation of the weather.Cacher
-// interface using hashicorp/golang-lru as the underlying storage.
+// interface using hashicorp/golang-lru/v2 as the underlying storage.
 package cache
 
 import (
@@ -20,7 +20,8 @@ const (
 	defaultMaxWait      = 12 * time.Second
 )
 
-// LRUCacher is a Cacher implementation backed by an LRU cache.
+// LRUCacher is a Cacher implementation backed by an LRU cache with
+// support for in-progress markers to prevent thundering herd problems.
 type LRUCacher struct {
 	cache        *lru.Cache[string, any]
 	mu           sync.Mutex
@@ -29,10 +30,9 @@ type LRUCacher struct {
 	maxWait      time.Duration
 }
 
-// NewLRU creates and returns a new Cacher using LRU eviction policy.
+// NewLRU creates and returns a new LRU-based Cacher.
 func NewLRU(cfg Config) (weather.Cacher, error) {
 	size := cfg.Size
-
 	if size <= 0 {
 		size = 1024 // sensible default
 	}
@@ -50,7 +50,7 @@ func NewLRU(cfg Config) (weather.Cacher, error) {
 	}, nil
 }
 
-// Get returns a valid, non-expired cache entry or nil.
+// Get returns a valid, non-expired cache entry or nil if not found/expired.
 func (c *LRUCacher) Get(key string) *domain.CacheEntry {
 	raw, ok := c.cache.Get(key)
 	if !ok {
@@ -58,12 +58,14 @@ func (c *LRUCacher) Get(key string) *domain.CacheEntry {
 	}
 
 	// Check for in-progress marker
-	if marker, isString := raw.(string); isString && marker == inProgressMarker {
+	if marker, ok := raw.(string); ok && marker == inProgressMarker {
 		return nil
 	}
 
 	entry, ok := raw.(domain.CacheEntry)
 	if !ok {
+		// Invalid entry type → treat as miss
+		c.cache.Remove(key)
 		return nil
 	}
 
@@ -84,7 +86,7 @@ func (c *LRUCacher) Set(key string, entry domain.CacheEntry) {
 	c.cache.Add(key, entry)
 }
 
-// SetInProgress marks a key as currently being processed.
+// SetInProgress marks a key as currently being processed to prevent duplicate work.
 func (c *LRUCacher) SetInProgress(key string) {
 	c.mu.Lock()
 	c.inProgress[key] = struct{}{}
@@ -96,12 +98,13 @@ func (c *LRUCacher) SetInProgress(key string) {
 // IsInProgress checks whether the key is currently being processed.
 func (c *LRUCacher) IsInProgress(key string) bool {
 	c.mu.Lock()
+	defer c.mu.Unlock()
 	_, exists := c.inProgress[key]
-	c.mu.Unlock()
 	return exists
 }
 
 // WaitForCompletion blocks until the in-progress flag is cleared or timeout occurs.
+// Returns the entry if available, nil if missing or upstream failed, or error on timeout.
 func (c *LRUCacher) WaitForCompletion(key string, maxWait time.Duration) (*domain.CacheEntry, error) {
 	if maxWait <= 0 {
 		maxWait = c.maxWait
@@ -116,30 +119,36 @@ func (c *LRUCacher) WaitForCompletion(key string, maxWait time.Duration) (*domai
 			if entry := c.Get(key); entry != nil {
 				return entry, nil
 			}
-			// Entry was removed → upstream likely failed
+			// Entry was removed (likely upstream failure)
 			return nil, nil
 		}
 
-		<-ticker.C
+		select {
+		case <-ticker.C:
+			// continue polling
+		case <-time.After(time.Until(deadline)): // safety for edge case
+			return nil, errors.New("timeout waiting for cache entry to complete")
+		}
 	}
 
 	return nil, errors.New("timeout waiting for cache entry to complete")
 }
 
-// Remove deletes the entry for the given key (including in-progress marker).
+// Remove deletes the entry for the given key (including any in-progress marker).
 func (c *LRUCacher) Remove(key string) {
 	c.mu.Lock()
 	delete(c.inProgress, key)
 	c.mu.Unlock()
+
 	c.cache.Remove(key)
 }
 
-// Close performs any necessary cleanup (optional for LRU).
+// Close performs cleanup.
 func (c *LRUCacher) Close() error {
 	c.mu.Lock()
 	c.inProgress = nil
 	c.mu.Unlock()
-	// LRU doesn't require explicit close, but we could purge if desired
-	// c.cache.Purge()
+
+	// Optional: c.cache.Purge()
 	return nil
 }
