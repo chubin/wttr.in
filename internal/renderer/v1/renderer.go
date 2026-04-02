@@ -80,7 +80,7 @@ func (r *V1Renderer) Render(query domain.Query) (domain.RenderOutput, error) {
 
 	// Current condition
 	current := data.CurrentCondition[0]
-	condLines := r.formatCond(make([]string, 5), current, true, opts)
+	condLines := r.formatCond(make([]string, 5), convertCurrentConditionToCond(current), true, opts)
 
 	// Build output using strings.Builder directly
 	var sb strings.Builder
@@ -141,4 +141,6 @@ func determineNumDays(opts *options.Options) int {
 	return 3 // default
 }
 
-// sbWriter is no longer needed — we write directly to strings.Builder
+func convertCurrentConditionToCond(cc domain.CurrentCondition) cond {
+	return cond{}
+}
