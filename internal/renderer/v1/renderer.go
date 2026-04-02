@@ -19,7 +19,8 @@ import (
 
 // V1Renderer renders weather in the classic wttr.in v1 style.
 type V1Renderer struct {
-	ansiEsc *regexp.Regexp
+	ansiEsc     *regexp.Regexp
+	rightToLeft bool // computed once per render based on language
 }
 
 // NewV1Renderer creates a new v1 renderer.
@@ -62,7 +63,7 @@ func (r *V1Renderer) Render(query domain.Query) (domain.RenderOutput, error) {
 	}
 
 	// Right-to-left support for certain languages
-	rightToLeft := opts.Lang == "he" || opts.Lang == "ar" || opts.Lang == "fa"
+	r.rightToLeft = (opts.Lang == "he" || opts.Lang == "ar" || opts.Lang == "fa")
 
 	// Build caption
 	caption := "Weather report"
@@ -71,7 +72,7 @@ func (r *V1Renderer) Render(query domain.Query) (domain.RenderOutput, error) {
 	}
 
 	var header string
-	if rightToLeft {
+	if r.rightToLeft {
 		caption = locationName + " " + caption
 		space := strings.Repeat(" ", 125-runewidth.StringWidth(caption))
 		header = space + caption + "\n\n"
@@ -90,7 +91,7 @@ func (r *V1Renderer) Render(query domain.Query) (domain.RenderOutput, error) {
 	stdout := colorable.NewColorable(&sb) // simulate colored output into buffer
 
 	for _, line := range condLines {
-		if rightToLeft {
+		if r.rightToLeft {
 			fmt.Fprint(stdout, strings.Repeat(" ", 94))
 		} else {
 			fmt.Fprint(stdout, " ")
