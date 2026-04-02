@@ -33,7 +33,7 @@ var (
 
 	// Batch writer tuning
 	defaultBatchSize     = 200
-	defaultFlushInterval = 200 * time.Millisecond
+	defaultFlushInterval = 5000 * time.Millisecond
 )
 
 type Config struct {
@@ -193,7 +193,7 @@ func (c *Cache) flushBatch(batch []*Location) {
 
 	start := time.Now()
 	defer func() {
-		log.Debugf("flushed batch of %d locations in %v", len(batch), time.Since(start))
+		log.Infof("flushed batch of %d locations in %v", len(batch), time.Since(start))
 	}()
 
 	// Begin transaction (godb style)
