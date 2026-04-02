@@ -17,6 +17,7 @@ import (
 	"github.com/chubin/wttr.in/internal/query"
 	"github.com/chubin/wttr.in/internal/renderer"
 	"github.com/chubin/wttr.in/internal/renderer/oneline"
+	v1 "github.com/chubin/wttr.in/internal/renderer/v1"
 	"github.com/chubin/wttr.in/internal/server"
 	"github.com/chubin/wttr.in/internal/spec"
 	"github.com/chubin/wttr.in/internal/uplink"
@@ -49,7 +50,7 @@ func srv(configFile string) error {
 	////////////////////////////
 
 	rendererMap := map[string]weather.Renderer{
-		"v1":   &renderer.V1Renderer{},
+		"v1":   v1.NewV1Renderer(),
 		"v2":   &renderer.V2Renderer{},
 		"j1":   &renderer.J1Renderer{},
 		"j2":   &renderer.J2Renderer{},

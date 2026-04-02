@@ -4,6 +4,8 @@ import (
 	"math"
 	"time"
 
+	"github.com/chubin/wttr.in/internal/domain"
+	"github.com/chubin/wttr.in/internal/options"
 	"github.com/klauspost/lctime"
 )
 
@@ -12,7 +14,7 @@ func slotTimes() []int {
 }
 
 //nolint:funlen,gocognit,cyclop
-func (g *global) printDay(w weather) ([]string, error) {
+func (r *V1Renderer) printDay(w domain.WeatherDay, opts *options.Options) ([]string, error) {
 	var (
 		ret      = []string{}
 		dateName string
@@ -36,7 +38,7 @@ func (g *global) printDay(w weather) ([]string, error) {
 		}
 	}
 
-	if g.config.RightToLeft {
+	if r.rightToLeft {
 		slots[0], slots[3] = slots[3], slots[0]
 		slots[1], slots[2] = slots[2], slots[1]
 	}
