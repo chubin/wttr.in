@@ -303,14 +303,9 @@ func (s *WeatherService) computeResponse(
 			if ipData.City == "" {
 				locStr = fmt.Sprintf("%s,%s", ipData.Latitude, ipData.Longitude)
 			} else {
-				// Switching to the new format gradually.
-				// Handle only limited number of connections in the new format.
-				// For now, this applies only to US-, UK- and ES- based clients; others will follow.
-				if isClientInUSA(ipData) || ipData.CountryCode == "ES" || ipData.CountryCode == "GB" {
-					locStr = fmt.Sprintf("%s, %s, %s", ipData.City, ipData.Region, ipData.CountryCode)
-				} else {
-					locStr = ipData.City
-				}
+				locStr = fmt.Sprintf("%s, %s, %s", ipData.City, ipData.Region, ipData.CountryCode)
+				// 	log.Printf("Using old style location for: %s, %s, %s\n", ipData.City, ipData.Region, ipData.CountryCode)
+				// 	locStr = ipData.City
 			}
 		}
 	}
