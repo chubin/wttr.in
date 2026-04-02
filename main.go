@@ -50,7 +50,7 @@ func srv(configFile string) error {
 	////////////////////////////
 
 	rendererMap := map[string]weather.Renderer{
-		"v1":   v1.NewV1Renderer(),
+		"v1x":  v1.NewV1Renderer(),
 		"v2":   &renderer.V2Renderer{},
 		"j1":   &renderer.J1Renderer{},
 		"j2":   &renderer.J2Renderer{},
