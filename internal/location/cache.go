@@ -13,13 +13,12 @@ import (
 	"sync"
 	"time"
 
+	"github.com/chubin/wttr.in/internal/types"
 	lru "github.com/hashicorp/golang-lru/v2"
 	"github.com/samonzeweb/godb"
 	"github.com/samonzeweb/godb/adapters/sqlite"
 	log "github.com/sirupsen/logrus"
 	"github.com/zsefvlol/timezonemapper"
-
-	"github.com/chubin/wttr.in/internal/types"
 )
 
 var (
@@ -31,6 +30,10 @@ var (
 	defaultMaxOpenConns    = 16
 	defaultMaxIdleConns    = 4
 	defaultConnMaxIdleTime = 5 * time.Minute
+
+	// Batch writer tuning
+	defaultBatchSize     = 200
+	defaultFlushInterval = 200 * time.Millisecond
 )
 
 type Config struct {
@@ -61,26 +64,29 @@ func (l *Location) String() string {
 		// should never happen
 		log.Fatalln(err)
 	}
-
 	return string(bytes)
 }
 
 // Cache combines in-memory LRU, SQLite read pool, and write support.
 type Cache struct {
 	config *Config
-
 	// ── Persistent storage ───────────────────────────────
 	dbPath      string
-	godbWrite   *godb.DB // used for writes (Insert/Update)
+	godbWrite   *godb.DB // used for writes (schema + batch)
 	sqlReadPool *sql.DB  // read-only connection pool
 
 	// ── Fast in-memory cache ─────────────────────────────
 	lru   *lru.Cache[string, *Location]
 	lruMu sync.Mutex // only for lazy init
 
-	// ── Synchronization ──────────────────────────────────
-	writeMu sync.Mutex
+	// ── Batch writer ─────────────────────────────────────
+	writeQueue    chan *Location
+	batchSize     int
+	flushInterval time.Duration
+	done          chan struct{} // graceful shutdown
 
+	// ── Synchronization ──────────────────────────────────
+	writeMu       sync.Mutex
 	searcher      *Searcher
 	indexField    string
 	filesCacheDir string
@@ -93,6 +99,12 @@ func NewCache(config *Config) (*Cache, error) {
 		indexField:    "name",
 		filesCacheDir: config.LocationCache,
 		searcher:      NewSearcher(config),
+
+		// Batch writer settings
+		batchSize:     defaultBatchSize,
+		flushInterval: defaultFlushInterval,
+		done:          make(chan struct{}),
+		writeQueue:    make(chan *Location, 5000), // large buffer for bursts
 	}
 
 	if config.LocationCacheType == CacheTypeDB {
@@ -112,11 +124,9 @@ func NewCache(config *Config) (*Cache, error) {
 		if err != nil {
 			return nil, fmt.Errorf("cannot open sqlite read pool: %w", err)
 		}
-
 		sqlDB.SetMaxOpenConns(defaultMaxOpenConns)
 		sqlDB.SetMaxIdleConns(defaultMaxIdleConns)
 		sqlDB.SetConnMaxIdleTime(defaultConnMaxIdleTime)
-
 		c.sqlReadPool = sqlDB
 
 		log.Debugf("SQLite read pool initialized (maxOpen=%d, maxIdle=%d)",
@@ -126,18 +136,110 @@ func NewCache(config *Config) (*Cache, error) {
 	// LRU is initialized lazily on first use
 	c.lru = nil
 
-	// Ensure DB schema exists (if using DB mode)
+	// Ensure DB schema exists (uses your existing InitDB)
 	if err := c.InitDB(false); err != nil {
 		return nil, err
+	}
+
+	// Start batch writer only for DB mode
+	if config.LocationCacheType == CacheTypeDB {
+		go c.batchWriter()
+		log.Infof("SQLite batch writer started (batch=%d, interval=%v)", c.batchSize, c.flushInterval)
 	}
 
 	return c, nil
 }
 
+// ── Batch Writer ─────────────────────────────────────────────────────────────
+
+func (c *Cache) batchWriter() {
+	ticker := time.NewTicker(c.flushInterval)
+	defer ticker.Stop()
+
+	batch := make([]*Location, 0, c.batchSize)
+
+	for {
+		select {
+		case loc := <-c.writeQueue:
+			batch = append(batch, loc)
+			if len(batch) >= c.batchSize {
+				c.flushBatch(batch)
+				batch = batch[:0]
+			}
+
+		case <-ticker.C:
+			if len(batch) > 0 {
+				c.flushBatch(batch)
+				batch = batch[:0]
+			}
+
+		case <-c.done:
+			// Final flush on shutdown
+			if len(batch) > 0 {
+				c.flushBatch(batch)
+			}
+			return
+		}
+	}
+}
+
+func (c *Cache) flushBatch(batch []*Location) {
+	if len(batch) == 0 {
+		return
+	}
+
+	c.writeMu.Lock()
+	defer c.writeMu.Unlock()
+
+	start := time.Now()
+	defer func() {
+		log.Debugf("flushed batch of %d locations in %v", len(batch), time.Since(start))
+	}()
+
+	// Begin transaction (godb style)
+	if err := c.godbWrite.Begin(); err != nil {
+		log.Warnln("batch writer: failed to begin transaction:", err)
+		return
+	}
+
+	defer func() {
+		if r := recover(); r != nil {
+			c.godbWrite.Rollback()
+			panic(r)
+		}
+	}()
+
+	stmt, err := c.godbWrite.CurrentDB().Prepare(`
+		INSERT INTO Location (name, displayName, lat, lon, timezone)
+		VALUES (?, ?, ?, ?, ?)
+		ON CONFLICT(name) DO UPDATE SET
+			displayName = excluded.displayName,
+			lat         = excluded.lat,
+			lon         = excluded.lon,
+			timezone    = excluded.timezone
+	`)
+	if err != nil {
+		log.Warnln("batch writer: prepare failed:", err)
+		c.godbWrite.Rollback()
+		return
+	}
+	defer stmt.Close()
+
+	for _, loc := range batch {
+		if _, err = stmt.Exec(loc.Name, loc.Fullname, loc.Lat, loc.Lon, loc.Timezone); err != nil {
+			log.Warnf("batch writer: failed to write %s: %v", loc.Name, err)
+		}
+	}
+
+	if err := c.godbWrite.Commit(); err != nil {
+		log.Warnln("batch writer: commit failed:", err)
+		c.godbWrite.Rollback() // safety
+	}
+}
+
 // Resolve returns location data — first from cache (LRU → persistent), then from external search.
 func (c *Cache) Resolve(location string) (*Location, error) {
 	defer log.Debugln("Resolve() finished")
-
 	location = normalizeLocationName(location)
 
 	// 1. Fastest path: LRU
@@ -154,7 +256,6 @@ func (c *Cache) Resolve(location string) (*Location, error) {
 				log.Warnln("failed to find timezone for location:", err)
 			}
 		}
-
 		c.putToLRU(location, loc) // warm the LRU
 		return loc, nil
 	}
@@ -167,28 +268,24 @@ func (c *Cache) Resolve(location string) (*Location, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	loc.Name = location
-
 	if err = enrichLocationWithTimezone(loc); err != nil {
 		log.Warnln("failed to find timezone for location:", err)
 	}
 
-	// 4. Store result
+	// 4. Store result (now uses batch writer)
 	if err = c.Put(location, loc); err != nil {
-		log.Warnln("failed to persist location to cache:", err)
+		log.Warnln("failed to queue location to cache:", err)
 		// still return fresh data
 	}
 
 	c.putToLRU(location, loc)
-
 	return loc, nil
 }
 
 // Read fetches location from cache (LRU already checked in Resolve).
 func (c *Cache) Read(addr string) (*Location, error) {
 	addr = normalizeLocationName(addr)
-
 	if c.config.LocationCacheType == CacheTypeFiles {
 		return c.readFromCacheFile(addr)
 	}
@@ -213,7 +310,6 @@ func (c *Cache) readFromCacheFile(name string) (*Location, error) {
 		Timezone  string  `json:"timezone"`
 		Address   string  `json:"address"`
 	}
-
 	if err = json.Unmarshal(data, &fileLoc); err != nil {
 		return nil, fmt.Errorf("invalid cache file format: %w", err)
 	}
@@ -247,38 +343,34 @@ func (c *Cache) readFromCacheDB(addr string) (*Location, error) {
 	).Scan(
 		&loc.Name, &loc.Lat, &loc.Lon, &loc.Timezone, &loc.Fullname,
 	)
-
 	if err == sql.ErrNoRows {
 		return nil, types.ErrNotFound
 	}
 	if err != nil {
 		return nil, fmt.Errorf("sqlite read failed: %w", err)
 	}
-
 	return &loc, nil
 }
 
-// Put stores the location in the configured backend.
+// Put stores the location in the configured backend (now uses batching for DB)
 func (c *Cache) Put(addr string, loc *Location) error {
 	log.Infoln("geo/location: storing in cache:", loc)
 
 	addr = normalizeLocationName(addr)
+	loc.Name = addr
 
 	if c.config.LocationCacheType == CacheTypeDB {
-		return c.putToCacheDB(loc)
+		// Queue for batch writing (non-blocking with timeout)
+		select {
+		case c.writeQueue <- loc:
+			return nil
+		case <-time.After(100 * time.Millisecond):
+			log.Debugln("location cache write queue full, dropping write for:", addr)
+			return nil // safe to drop for a cache
+		}
 	}
+
 	return c.putToCacheFile(addr, loc)
-}
-
-func (c *Cache) putToCacheDB(loc *Location) error {
-	log.Debugln("putToCacheDB started")
-	defer log.Debugln("putToCacheDB finished")
-
-	err := c.godbWrite.Insert(loc).Do()
-	if err != nil && strings.Contains(strings.ToLower(err.Error()), "unique constraint") {
-		return c.godbWrite.Update(loc).Do()
-	}
-	return err
 }
 
 func (c *Cache) putToCacheFile(addr string, loc *Location) error {
@@ -296,29 +388,25 @@ func (c *Cache) putToCacheFile(addr string, loc *Location) error {
 		"address":   loc.Fullname,
 	}
 
-	bytes, err := json.MarshalIndent(data, "", "  ")
+	bytes, err := json.MarshalIndent(data, "", " ")
 	if err != nil {
 		return err
 	}
-
 	return os.WriteFile(c.cacheFile(addr), bytes, 0o600)
 }
 
 // ── LRU helpers ────────────────────────────────────────────────────────────────
-
 func (c *Cache) initLRUOnce() {
 	c.lruMu.Lock()
 	defer c.lruMu.Unlock()
 	if c.lru != nil {
 		return
 	}
-
 	l, err := lru.New[string, *Location](defaultLRUSize)
 	if err != nil {
 		log.Errorln("failed to initialize LRU cache:", err)
 		return
 	}
-
 	c.lru = l
 	log.Infof("LRU cache initialized (size = %d)", defaultLRUSize)
 }
@@ -348,7 +436,6 @@ func (c *Cache) putToLRU(key string, val *Location) {
 }
 
 // ── Utility functions ──────────────────────────────────────────────────────────
-
 func (c *Cache) cacheFile(item string) string {
 	return path.Join(c.filesCacheDir, item)
 }
@@ -358,7 +445,6 @@ func normalizeLocationName(name string) string {
 	name = strings.ReplaceAll(name, `'`, " ")
 	name = strings.TrimSpace(name)
 	name = strings.Join(strings.Fields(name), " ")
-	// name = strings.ReplaceAll(name, `, `, ",")
 	return strings.ToLower(name)
 }
 
@@ -373,6 +459,12 @@ func mustParseFloat(s string) float64 {
 // Close cleans up resources (call on shutdown).
 func (c *Cache) Close() error {
 	var errs []error
+
+	// Signal batch writer to stop and flush remaining items
+	if c.done != nil {
+		close(c.done)
+		time.Sleep(400 * time.Millisecond) // give time for final flush
+	}
 
 	if c.sqlReadPool != nil {
 		if err := c.sqlReadPool.Close(); err != nil {
