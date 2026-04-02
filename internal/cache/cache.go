@@ -33,7 +33,7 @@ type LRUCacher struct {
 func NewLRU(cfg Config) (weather.Cacher, error) {
 	size := cfg.Size
 	if size <= 0 {
-		size = 1024 // sensible default
+		size = 1024
 	}
 
 	lruCache, err := lru.New[string, any](size)
@@ -56,14 +56,12 @@ func (c *LRUCacher) Get(key string) *domain.CacheEntry {
 		return nil
 	}
 
-	// Check for in-progress marker
 	if marker, ok := raw.(string); ok && marker == inProgressMarker {
 		return nil
 	}
 
 	entry, ok := raw.(domain.CacheEntry)
 	if !ok {
-		// Invalid entry type → treat as miss
 		c.cache.Remove(key)
 		return nil
 	}
@@ -76,30 +74,32 @@ func (c *LRUCacher) Get(key string) *domain.CacheEntry {
 	return &entry
 }
 
-// SetInProgressIfNotExists atomically checks whether the key already has a
-// valid (non-expired) cache entry or is currently being computed.
+// SetInProgressIfNotExists tries to claim responsibility for computing the key.
 //
-// If neither is true, it marks the key as in-progress and returns true
-// (caller should compute the value).
-// If a valid entry exists or another goroutine is already computing,
-// it returns false.
+// It returns true if this goroutine should compute the value (we became the leader).
+// It returns false if:
+//   - a valid non-expired entry already exists, or
+//   - another goroutine is already computing it.
+//
+// This method minimizes the race window by performing the check and mark under lock.
 func (c *LRUCacher) SetInProgressIfNotExists(key string) bool {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
-	// Check cache under lock
+	// Re-check under lock (critical for correctness)
 	if raw, ok := c.cache.Get(key); ok {
-		if entry, ok := raw.(domain.CacheEntry); ok {
-			if !time.Now().After(entry.Expires) {
-				return false // valid cached entry exists
-			}
-			// expired → will be overwritten
-		} else if marker, ok := raw.(string); ok && marker == inProgressMarker {
-			return false // already being computed by someone else
+		// Valid completed entry?
+		if entry, ok := raw.(domain.CacheEntry); ok && !time.Now().After(entry.Expires) {
+			return false
+		}
+
+		// Already in progress?
+		if marker, ok := raw.(string); ok && marker == inProgressMarker {
+			return false
 		}
 	}
 
-	// No valid entry and not in progress → we become the leader
+	// No valid entry and not in progress → we take ownership
 	c.inProgress[key] = struct{}{}
 	c.cache.Add(key, inProgressMarker)
 	return true
@@ -123,7 +123,6 @@ func (c *LRUCacher) IsInProgress(key string) bool {
 }
 
 // WaitForCompletion blocks until the in-progress flag is cleared or timeout occurs.
-// Returns the entry if available, nil if missing or upstream failed, or error on timeout.
 func (c *LRUCacher) WaitForCompletion(key string, maxWait time.Duration) (*domain.CacheEntry, error) {
 	if maxWait <= 0 {
 		maxWait = c.maxWait
@@ -138,13 +137,11 @@ func (c *LRUCacher) WaitForCompletion(key string, maxWait time.Duration) (*domai
 			if entry := c.Get(key); entry != nil {
 				return entry, nil
 			}
-			// Entry was removed (likely upstream failure)
-			return nil, nil
+			return nil, nil // upstream likely failed
 		}
 
 		select {
 		case <-ticker.C:
-			// continue polling
 		case <-time.After(time.Until(deadline)):
 			return nil, errors.New("timeout waiting for cache entry to complete")
 		}
