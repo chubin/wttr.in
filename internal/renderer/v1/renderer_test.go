@@ -4,8 +4,10 @@ import (
 	"bytes"
 	"encoding/json"
 	"flag"
+	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 
 	"github.com/chubin/wttr.in/internal/domain"
@@ -22,13 +24,11 @@ type testCase struct {
 }
 
 func TestV1Renderer_Render(t *testing.T) {
-	// Load raw weather data (required by the renderer)
 	weatherRaw, err := loadWeatherRaw("testdata/weather.json")
 	if err != nil {
 		t.Fatalf("failed to load weather data: %v", err)
 	}
 
-	// Load test cases
 	cases, err := loadTestCases("testdata/testcases.json")
 	if err != nil {
 		t.Fatalf("failed to load test cases: %v", err)
@@ -38,17 +38,12 @@ func TestV1Renderer_Render(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.Name, func(t *testing.T) {
-			// Attach weather data to the query
 			tc.Query.Weather = weatherRaw
 
-			// Ensure Options is initialized (prevents nil pointer dereference)
 			if tc.Query.Options == nil {
-				tc.Query.Options = &options.Options{
-					Lang: "en", // default fallback
-				}
+				tc.Query.Options = &options.Options{Lang: "en"}
 			}
 
-			// Call renderer (only accepts domain.Query)
 			output, err := renderer.Render(tc.Query)
 			if err != nil {
 				t.Fatalf("Render failed: %v", err)
@@ -56,14 +51,12 @@ func TestV1Renderer_Render(t *testing.T) {
 
 			got := output.Content
 
-			// Load expected golden output
 			goldenPath := filepath.Join("testdata", tc.Golden+".txt")
-			want, err := os.ReadFile(goldenPath)
+			wantBytes, err := os.ReadFile(goldenPath)
 			if err != nil {
 				t.Fatalf("failed to read golden file %s: %v", goldenPath, err)
 			}
 
-			// Update golden files when running with -update flag
 			if *update {
 				if err := os.WriteFile(goldenPath, got, 0o644); err != nil {
 					t.Fatalf("failed to update golden file: %v", err)
@@ -72,18 +65,25 @@ func TestV1Renderer_Render(t *testing.T) {
 				return
 			}
 
-			// Compare actual vs expected
-			if !bytes.Equal(bytes.TrimSpace(got), bytes.TrimSpace(want)) {
-				t.Errorf("output mismatch for test case %q\n\n"+
-					"--- GOT ---\n%s\n\n"+
-					"--- WANT ---\n%s",
-					tc.Name, string(got), string(want))
+			want := bytes.TrimSpace(wantBytes)
+			gotTrim := bytes.TrimSpace(got)
 
-				// Save actual output for easy debugging
+			if !bytes.Equal(gotTrim, want) {
+				t.Errorf("output mismatch for test case %q", tc.Name)
+
+				// Show colored original output
+				t.Logf("\n--- GOT (colored) ---\n%s", string(got))
+				t.Logf("\n--- WANT (colored) ---\n%s", string(wantBytes))
+
+				// Show clean line-by-line diff (ANSI stripped)
+				diff := diffLines(string(gotTrim), string(want))
+				if diff != "" {
+					t.Logf("\n--- LINE-BY-LINE DIFF ---\n%s", diff)
+				}
+
+				// Save actual output for easy comparison
 				actualPath := goldenPath + ".actual"
-				if writeErr := os.WriteFile(actualPath, got, 0o644); writeErr != nil {
-					t.Logf("warning: could not write .actual file: %v", writeErr)
-				} else {
+				if err := os.WriteFile(actualPath, got, 0o644); err == nil {
 					t.Logf("actual output saved to: %s", actualPath)
 				}
 			}
@@ -91,28 +91,54 @@ func TestV1Renderer_Render(t *testing.T) {
 	}
 }
 
+// diffLines returns a human-readable diff of two multi-line strings
+func diffLines(got, want string) string {
+	g := strings.Split(got, "\n")
+	w := strings.Split(want, "\n")
+
+	var diff strings.Builder
+	maxLen := len(g)
+	if len(w) > maxLen {
+		maxLen = len(w)
+	}
+
+	for i := 0; i < maxLen; i++ {
+		var gLine, wLine string
+		if i < len(g) {
+			gLine = g[i]
+		}
+		if i < len(w) {
+			wLine = w[i]
+		}
+
+		if gLine != wLine {
+			diff.WriteString(fmt.Sprintf("Line %3d:\n", i+1))
+			diff.WriteString(fmt.Sprintf("  GOT : %s$\n", gLine))
+			diff.WriteString(fmt.Sprintf("  WANT: %s$\n", wLine))
+			diff.WriteString("  ---\n")
+		}
+	}
+	return diff.String()
+}
+
 // ===================================================================
 // Helpers
 // ===================================================================
 
-// loadWeatherRaw loads the weather JSON and converts it to *domain.WeatherRaw
 func loadWeatherRaw(path string) (*domain.WeatherRaw, error) {
 	b, err := os.ReadFile(path)
 	if err != nil {
 		return nil, err
 	}
-
 	wr := domain.WeatherRaw(b)
 	return &wr, nil
 }
 
-// loadTestCases loads the array of test cases from JSON
 func loadTestCases(path string) ([]testCase, error) {
 	b, err := os.ReadFile(path)
 	if err != nil {
 		return nil, err
 	}
-
 	var cases []testCase
 	if err := json.Unmarshal(b, &cases); err != nil {
 		return nil, err
