@@ -78,13 +78,13 @@ func (r *V1Renderer) Render(query domain.Query) (domain.RenderOutput, error) {
 		space := strings.Repeat(" ", 125-runewidth.StringWidth(caption))
 		header = space + caption + "\n\n"
 	} else {
-		header = fmt.Sprintf("%s %s\n\n", caption, locationName)
+		header = fmt.Sprintf("%s: %s\n\n", caption, locationName)
 	}
 
 	// Current condition
 	current := data.CurrentCondition[0]
 	cond := convertCurrentConditionToCond(current)
-	condLines := r.formatCond(cond, true, opts)
+	condLines := r.formatCond("", cond, true, opts)
 
 	// Build output using strings.Builder directly
 	var sb strings.Builder
@@ -119,6 +119,13 @@ func (r *V1Renderer) Render(query domain.Query) (domain.RenderOutput, error) {
 			}
 		}
 	}
+
+	// Location line:
+
+	sb.WriteString(fmt.Sprintf("Location: %s [%v,%v]\n", query.Location.FullAddress, query.Location.Latitude, query.Location.Longitude))
+
+	followICforUpdates := `Follow [46m[30m@igor_chubin[0m for wttr.in updates`
+	sb.WriteString("\n" + followICforUpdates)
 
 	return domain.RenderOutput{
 		Content: []byte(sb.String()),
