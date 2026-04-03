@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/klauspost/lctime"
-
 	"github.com/chubin/wttr.in/internal/options"
 )
 
@@ -30,14 +29,13 @@ func (r *V1Renderer) printDay(day weather, opts *options.Options) ([]string, err
 		slots[1], slots[2] = slots[2], slots[1]
 	}
 
-	// Format the four hourly blocks
-	var ret []string
-	for _, slot := range slots {
-		if opts.Narrow && (len(ret) == 1 || len(ret) == 3) { // skip some slots in narrow mode
-			continue
+	// Format all 4 blocks first (each block = 5 lines)
+	var blocks [4][]string
+	for i, slot := range slots {
+		if opts.Narrow && (i == 1 || i == 2) {
+			continue // skip middle slots in narrow mode
 		}
-		lines := r.formatCond(slot, false, opts)
-		ret = append(ret, lines...)
+		blocks[i] = r.formatCond("│", slot, false, opts)
 	}
 
 	// Build date header with localization
@@ -58,20 +56,24 @@ func (r *V1Renderer) printDay(day weather, opts *options.Options) ([]string, err
 		names := "│ " + justifyCenter(trans[1], 16) +
 			"└──────┬──────┘" + justifyCenter(trans[3], 16) + " │"
 
-		ret = append([]string{
-			" ┌─────────────┐ ",
-			"┌───────────────────────" + dateFmt + "───────────────────────┐",
-			names,
-			"├──────────────────────────────┼──────────────────────────────┤",
-		}, ret...)
+		var ret []string
+		ret = append(ret, " ┌─────────────┐ ")
+		ret = append(ret, "┌───────────────────────"+dateFmt+"───────────────────────┐")
+		ret = append(ret, names)
+		ret = append(ret, "├──────────────────────────────┼──────────────────────────────┤")
 
-		ret = append(ret,
-			"└──────────────────────────────┴──────────────────────────────┘",
-		)
+		// Merge lines from the two active blocks (Morning + Night)
+		for lineIdx := 0; lineIdx < 5; lineIdx++ {
+			left := blocks[0][lineIdx]
+			right := blocks[3][lineIdx]
+			ret = append(ret, left+right)
+		}
+
+		ret = append(ret, "└──────────────────────────────┴──────────────────────────────┘")
 		return ret, nil
 	}
 
-	// Normal (wide) mode layout
+	// Wide mode layout
 	var names string
 	if r.rightToLeft {
 		names = "│" + justifyCenter(trans[3], 29) + "│ " + justifyCenter(trans[2], 16) +
@@ -81,16 +83,19 @@ func (r *V1Renderer) printDay(day weather, opts *options.Options) ([]string, err
 			"└──────┬──────┘" + justifyCenter(trans[2], 16) + " │" + justifyCenter(trans[3], 29) + "│"
 	}
 
-	ret = append([]string{
-		" ┌─────────────┐ ",
-		"┌──────────────────────────────┬───────────────────────" + dateFmt + "───────────────────────┬──────────────────────────────┐",
-		names,
-		"├──────────────────────────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────┤",
-	}, ret...)
+	var ret []string
+	ret = append(ret, " ┌─────────────┐ ")
+	ret = append(ret, "┌──────────────────────────────┬───────────────────────"+dateFmt+"───────────────────────┬──────────────────────────────┐")
+	ret = append(ret, names)
+	ret = append(ret, "├──────────────────────────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────┤")
 
-	ret = append(ret,
-		"└──────────────────────────────┴──────────────────────────────┴──────────────────────────────┴──────────────────────────────┘",
-	)
+	// Merge 4 blocks horizontally, line by line
+	for lineIdx := 0; lineIdx < 5; lineIdx++ {
+		line := blocks[0][lineIdx] + blocks[1][lineIdx] + blocks[2][lineIdx] + blocks[3][lineIdx]
+		ret = append(ret, line)
+	}
+
+	ret = append(ret, "└──────────────────────────────┴──────────────────────────────┴──────────────────────────────┴──────────────────────────────┘")
 
 	return ret, nil
 }
@@ -101,7 +106,6 @@ func (r *V1Renderer) selectBestHourlySlots(hourly []cond) [4]cond {
 	targets := slotTimes()
 
 	for _, h := range hourly {
-		// Convert time string like "0", "300", "600", "1200" → minutes since midnight
 		minutes := parseTimeToMinutes(h.Time)
 
 		for i, target := range targets {
@@ -120,7 +124,6 @@ func (r *V1Renderer) formatDate(dateStr string, opts *options.Options) (string, 
 		return "", fmt.Errorf("invalid date %s: %w", dateStr, err)
 	}
 
-	// Set locale for lctime
 	localeStr := "en_US"
 	if val, ok := locale()[opts.Lang]; ok {
 		localeStr = val
@@ -147,10 +150,5 @@ func (r *V1Renderer) formatDate(dateStr string, opts *options.Options) (string, 
 		}
 		dateName = lctime.Strftime(dateFormat, d)
 	}
-
 	return dateName, nil
-}
-
-func getWeatherIcon(c string) string {
-	return ""
 }
