@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/klauspost/lctime"
+
 	"github.com/chubin/wttr.in/internal/options"
 )
 

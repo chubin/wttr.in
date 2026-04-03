@@ -32,7 +32,7 @@ func parseFloat32(s string) float32 {
 
 // parseTimeToMinutes converts "0", "300", "600", ..., "2100" into minutes since midnight
 func parseTimeToMinutes(timeInt int) int {
-	timeStr := fmt.Sprint(timeInt)
+	timeStr := fmt.Sprintf("%04d", timeInt)
 	var hour, minute int
 	fmt.Sscanf(timeStr, "%2d%2d", &hour, &minute)
 	return hour*60 + minute
