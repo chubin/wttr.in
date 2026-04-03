@@ -21,6 +21,7 @@ query_options:
     type: string
     values:
       - v1
+      - v1x
       - v2
       - v3
       - line

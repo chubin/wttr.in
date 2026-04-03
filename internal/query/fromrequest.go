@@ -290,6 +290,7 @@ func isValidView(view string) bool {
 	return view == "files" ||
 		view == "line" ||
 		view == "v1" ||
+		view == "v1x" ||
 		view == "v2" ||
 		view == "p1" ||
 		view == "j1" ||
