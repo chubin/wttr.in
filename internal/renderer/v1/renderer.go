@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"regexp"
+	"strconv"
 	"strings"
 
 	"github.com/mattn/go-runewidth"
@@ -82,7 +83,8 @@ func (r *V1Renderer) Render(query domain.Query) (domain.RenderOutput, error) {
 
 	// Current condition
 	current := data.CurrentCondition[0]
-	condLines := r.formatCond(convertCurrentConditionToCond(current), true, opts)
+	cond := convertCurrentConditionToCond(current)
+	condLines := r.formatCond(cond, true, opts)
 
 	// Build output using strings.Builder directly
 	var sb strings.Builder
@@ -143,6 +145,30 @@ func determineNumDays(opts *options.Options) int {
 	return 3 // default
 }
 
+// convertCurrentConditionToCond converts domain.CurrentCondition to v1.cond
 func convertCurrentConditionToCond(cc domain.CurrentCondition) cond {
-	return cond{}
+	c := cond{
+		FeelsLikeC:     parseInt(cc.FeelsLikeC),
+		TempC2:         parseInt(cc.TempC), // current uses temp_C
+		VisibleDistKM:  parseInt(cc.Visibility),
+		WeatherCode:    parseInt(cc.WeatherCode),
+		WindspeedKmph:  parseInt(cc.WindspeedKmph),
+		Winddir16Point: cc.Winddir16Point,
+	}
+
+	// Convert WeatherDesc
+	if len(cc.WeatherDesc) > 0 {
+		c.WeatherDesc = []struct{ Value string }{{Value: cc.WeatherDesc[0].Value}}
+	} else {
+		c.WeatherDesc = []struct{ Value string }{{Value: "Unknown"}}
+	}
+
+	// PrecipMM
+	if cc.PrecipMM != "" {
+		if f, err := strconv.ParseFloat(cc.PrecipMM, 32); err == nil {
+			c.PrecipMM = float32(f)
+		}
+	}
+
+	return c
 }

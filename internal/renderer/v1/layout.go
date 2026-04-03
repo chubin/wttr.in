@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/klauspost/lctime"
-	"github.com/mattn/go-runewidth"
 
 	"github.com/chubin/wttr.in/internal/options"
 )
@@ -114,19 +113,6 @@ func (r *V1Renderer) selectBestHourlySlots(hourly []cond) [4]cond {
 	return slots
 }
 
-// parseTimeToMinutes converts "0", "300", "600", ..., "2100" into minutes since midnight
-func parseTimeToMinutes(timeInt int) int {
-	timeStr := fmt.Sprint(timeInt)
-	var hour, minute int
-	fmt.Sscanf(timeStr, "%2d%2d", &hour, &minute)
-	return hour*60 + minute
-}
-
-// h2m returns minutes since midnight for a cond (used in comparison)
-func h2m(h cond) int {
-	return parseTimeToMinutes(h.Time)
-}
-
 // formatDate returns localized and optionally reversed date string for the header.
 func (r *V1Renderer) formatDate(dateStr string, opts *options.Options) (string, error) {
 	d, err := time.Parse("2006-01-02", dateStr)
@@ -163,30 +149,6 @@ func (r *V1Renderer) formatDate(dateStr string, opts *options.Options) (string, 
 	}
 
 	return dateName, nil
-}
-
-func justifyCenter(s string, width int) string {
-	appendSide := 0
-	for runewidth.StringWidth(s) <= width {
-		if appendSide == 1 {
-			s += " "
-			appendSide = 0
-		} else {
-			s = " " + s
-			appendSide = 1
-		}
-	}
-
-	return s
-}
-
-func reverse(s string) string {
-	r := []rune(s)
-	for i, j := 0, len(r)-1; i < len(r)/2; i, j = i+1, j-1 {
-		r[i], r[j] = r[j], r[i]
-	}
-
-	return string(r)
 }
 
 func getWeatherIcon(c string) string {

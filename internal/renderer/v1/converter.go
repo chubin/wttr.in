@@ -1,8 +1,6 @@
 package v1
 
 import (
-	"strconv"
-
 	"github.com/chubin/wttr.in/internal/domain"
 )
 
@@ -96,27 +94,4 @@ func convertValueItems(items []domain.ValueItem) []struct{ Value string } {
 		result[i].Value = item.Value
 	}
 	return result
-}
-
-// Safe parsing helpers
-func parseInt(s string) int {
-	if s == "" {
-		return 0
-	}
-	i, err := strconv.Atoi(s)
-	if err != nil {
-		return 0
-	}
-	return i
-}
-
-func parseFloat32(s string) float32 {
-	if s == "" {
-		return 0
-	}
-	f, err := strconv.ParseFloat(s, 32)
-	if err != nil {
-		return 0
-	}
-	return float32(f)
 }
