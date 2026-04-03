@@ -292,19 +292,21 @@ func (r *V1Renderer) formatRain(c cond, opts *options.Options) string {
 				c.ChanceOfRain),
 			15)
 	}
-
 	return r.pad(
 		fmt.Sprintf("%.1f %s", rain, unitRain(opts.UseImperial, opts.Lang)),
 		15)
 }
 
 // formatCond builds the 5-line current/forecast condition block.
-func (r *V1Renderer) formatCond(c cond, isCurrent bool, opts *options.Options) []string {
+// prefix is " " for current condition, "│" for forecast blocks inside the box.
+func (r *V1Renderer) formatCond(prefix string, c cond, isCurrent bool, opts *options.Options) []string {
 	if opts == nil {
 		opts = &options.Options{}
 	}
+	if prefix == "" {
+		prefix = " "
+	}
 
-	cur := make([]string, 5)
 	var ret []string
 
 	// Get icon
@@ -325,7 +327,11 @@ func (r *V1Renderer) formatCond(c cond, isCurrent bool, opts *options.Options) [
 		}
 	}
 
-	desc := c.WeatherDesc[0].Value
+	// Safe description handling
+	desc := "Unknown"
+	if len(c.WeatherDesc) > 0 {
+		desc = c.WeatherDesc[0].Value
+	}
 
 	// Pad/truncate description to 15 characters
 	if r.rightToLeft {
@@ -347,7 +353,6 @@ func (r *V1Renderer) formatCond(c cond, isCurrent bool, opts *options.Options) [
 	}
 
 	if isCurrent {
-		desc = c.WeatherDesc[0].Value
 		if r.rightToLeft && runewidth.StringWidth(desc) < 15 {
 			desc = strings.Repeat(" ", 15-runewidth.StringWidth(desc)) + desc
 		}
@@ -370,21 +375,22 @@ func (r *V1Renderer) formatCond(c cond, isCurrent bool, opts *options.Options) [
 		}
 	}
 
+	// Build the 5 lines using the prefix
 	if r.rightToLeft {
 		ret = append(ret,
-			fmt.Sprintf("%v %v %v", cur[0], desc, icon[0]),
-			fmt.Sprintf("%v %v %v", cur[1], r.formatTemp(c, opts), icon[1]),
-			fmt.Sprintf("%v %v %v", cur[2], r.formatWind(c, opts), icon[2]),
-			fmt.Sprintf("%v %v %v", cur[3], r.formatVisibility(c, opts), icon[3]),
-			fmt.Sprintf("%v %v %v", cur[4], r.formatRain(c, opts), icon[4]),
+			fmt.Sprintf("%s %s %s", prefix, desc, icon[0]),
+			fmt.Sprintf("%s %s %s", prefix, r.formatTemp(c, opts), icon[1]),
+			fmt.Sprintf("%s %s %s", prefix, r.formatWind(c, opts), icon[2]),
+			fmt.Sprintf("%s %s %s", prefix, r.formatVisibility(c, opts), icon[3]),
+			fmt.Sprintf("%s %s %s", prefix, r.formatRain(c, opts), icon[4]),
 		)
 	} else {
 		ret = append(ret,
-			fmt.Sprintf("%v %v %v", cur[0], icon[0], desc),
-			fmt.Sprintf("%v %v %v", cur[1], icon[1], r.formatTemp(c, opts)),
-			fmt.Sprintf("%v %v %v", cur[2], icon[2], r.formatWind(c, opts)),
-			fmt.Sprintf("%v %v %v", cur[3], icon[3], r.formatVisibility(c, opts)),
-			fmt.Sprintf("%v %v %v", cur[4], icon[4], r.formatRain(c, opts)),
+			fmt.Sprintf("%s %s %s", prefix, icon[0], desc),
+			fmt.Sprintf("%s %s %s", prefix, icon[1], r.formatTemp(c, opts)),
+			fmt.Sprintf("%s %s %s", prefix, icon[2], r.formatWind(c, opts)),
+			fmt.Sprintf("%s %s %s", prefix, icon[3], r.formatVisibility(c, opts)),
+			fmt.Sprintf("%s %s %s", prefix, icon[4], r.formatRain(c, opts)),
 		)
 	}
 

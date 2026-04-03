@@ -66,7 +66,7 @@ func (r *V1Renderer) printDay(day weather, opts *options.Options) ([]string, err
 		for lineIdx := 0; lineIdx < 5; lineIdx++ {
 			left := blocks[0][lineIdx]
 			right := blocks[3][lineIdx]
-			ret = append(ret, left+right)
+			ret = append(ret, left+right+"│")
 		}
 
 		ret = append(ret, "└──────────────────────────────┴──────────────────────────────┘")
@@ -76,22 +76,22 @@ func (r *V1Renderer) printDay(day weather, opts *options.Options) ([]string, err
 	// Wide mode layout
 	var names string
 	if r.rightToLeft {
-		names = "│" + justifyCenter(trans[3], 29) + "│ " + justifyCenter(trans[2], 16) +
-			"└──────┬──────┘" + justifyCenter(trans[1], 16) + " │" + justifyCenter(trans[0], 29) + "│"
+		names = "│" + justifyCenter(trans[3], 29) + "│ " + justifyCenter(trans[2], 21) +
+			"└──────┬──────┘" + justifyCenter(trans[1], 21) + " │" + justifyCenter(trans[0], 29) + "│"
 	} else {
-		names = "│" + justifyCenter(trans[0], 29) + "│ " + justifyCenter(trans[1], 16) +
-			"└──────┬──────┘" + justifyCenter(trans[2], 16) + " │" + justifyCenter(trans[3], 29) + "│"
+		names = "│" + justifyCenter(trans[0], 29) + "│ " + justifyCenter(trans[1], 21) +
+			"└──────┬──────┘" + justifyCenter(trans[2], 21) + " │" + justifyCenter(trans[3], 29) + "│"
 	}
 
 	var ret []string
-	ret = append(ret, " ┌─────────────┐ ")
+	ret = append(ret, "                                                       ┌─────────────┐ ")
 	ret = append(ret, "┌──────────────────────────────┬───────────────────────"+dateFmt+"───────────────────────┬──────────────────────────────┐")
 	ret = append(ret, names)
 	ret = append(ret, "├──────────────────────────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────┤")
 
 	// Merge 4 blocks horizontally, line by line
 	for lineIdx := 0; lineIdx < 5; lineIdx++ {
-		line := blocks[0][lineIdx] + blocks[1][lineIdx] + blocks[2][lineIdx] + blocks[3][lineIdx]
+		line := blocks[0][lineIdx] + blocks[1][lineIdx] + blocks[2][lineIdx] + blocks[3][lineIdx] + "│"
 		ret = append(ret, line)
 	}
 
