@@ -2,7 +2,16 @@
   {
     "name": "default_english_wide",
     "query": {
+      "Location": {
+        "Name": "Heideck",
+        "Country": "Deutschland",
+        "CountryCode": "DE",
+        "Latitude": 49.1336509,
+        "Longitude": 11.124544,
+        "FullAddress": "Heideck, Landkreis Roth, Bayern, 91180, Deutschland"
+      },
       "Options": {
+        "location": "heideck",
         "lang": "en",
         "narrow": false,
         "use_imperial": false,
