@@ -44,6 +44,8 @@ func (r *V1Renderer) Render(query domain.Query) (domain.RenderOutput, error) {
 		return domain.RenderOutput{}, errors.New("no current condition data available")
 	}
 
+	dataResp := ConvertWeather(data)
+
 	opts := query.Options
 	if opts == nil {
 		opts = &options.Options{}
@@ -80,7 +82,7 @@ func (r *V1Renderer) Render(query domain.Query) (domain.RenderOutput, error) {
 
 	// Current condition
 	current := data.CurrentCondition[0]
-	condLines := r.formatCond(make([]string, 5), convertCurrentConditionToCond(current), true, opts)
+	condLines := r.formatCond(convertCurrentConditionToCond(current), true, opts)
 
 	// Build output using strings.Builder directly
 	var sb strings.Builder
@@ -101,7 +103,7 @@ func (r *V1Renderer) Render(query domain.Query) (domain.RenderOutput, error) {
 	numDays := determineNumDays(opts)
 
 	if numDays > 0 && len(data.Weather) > 0 {
-		for i, day := range data.Weather {
+		for i, day := range dataResp.Data.Weather {
 			if i >= numDays {
 				break
 			}

@@ -299,11 +299,12 @@ func (r *V1Renderer) formatRain(c cond, opts *options.Options) string {
 }
 
 // formatCond builds the 5-line current/forecast condition block.
-func (r *V1Renderer) formatCond(cur []string, c cond, isCurrent bool, opts *options.Options) []string {
+func (r *V1Renderer) formatCond(c cond, isCurrent bool, opts *options.Options) []string {
 	if opts == nil {
 		opts = &options.Options{}
 	}
 
+	cur := make([]string, 5)
 	var ret []string
 
 	// Get icon
