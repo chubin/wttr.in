@@ -57,7 +57,7 @@ func (r *V1Renderer) printDay(day weather, opts *options.Options) ([]string, err
 			"└──────┬──────┘" + justifyCenter(trans[3], 16) + " │"
 
 		var ret []string
-		ret = append(ret, " ┌─────────────┐ ")
+		ret = append(ret, "                       ┌─────────────┐                     ")
 		ret = append(ret, "┌───────────────────────"+dateFmt+"───────────────────────┐")
 		ret = append(ret, names)
 		ret = append(ret, "├──────────────────────────────┼──────────────────────────────┤")
@@ -79,12 +79,12 @@ func (r *V1Renderer) printDay(day weather, opts *options.Options) ([]string, err
 		names = "│" + justifyCenter(trans[3], 29) + "│ " + justifyCenter(trans[2], 21) +
 			"└──────┬──────┘" + justifyCenter(trans[1], 21) + " │" + justifyCenter(trans[0], 29) + "│"
 	} else {
-		names = "│" + justifyCenter(trans[0], 29) + "│ " + justifyCenter(trans[1], 21) +
-			"└──────┬──────┘" + justifyCenter(trans[2], 21) + " │" + justifyCenter(trans[3], 29) + "│"
+		names = "│" + justifyCenter(trans[0], 29) + "│      " + justifyCenter(trans[1], 16) +
+			"└──────┬──────┘" + justifyCenter(trans[2], 16) + "      │" + justifyCenter(trans[3], 29) + "│"
 	}
 
 	var ret []string
-	ret = append(ret, "                                                       ┌─────────────┐ ")
+	ret = append(ret, "                                                       ┌─────────────┐                                                       ")
 	ret = append(ret, "┌──────────────────────────────┬───────────────────────"+dateFmt+"───────────────────────┬──────────────────────────────┐")
 	ret = append(ret, names)
 	ret = append(ret, "├──────────────────────────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────┤")

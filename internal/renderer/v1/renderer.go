@@ -95,7 +95,7 @@ func (r *V1Renderer) Render(query domain.Query) (domain.RenderOutput, error) {
 		if r.rightToLeft {
 			sb.WriteString(strings.Repeat(" ", 94))
 		} else {
-			sb.WriteString(" ")
+			sb.WriteString("")
 		}
 		sb.WriteString(line)
 		sb.WriteString("\n")

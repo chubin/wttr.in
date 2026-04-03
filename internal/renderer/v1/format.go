@@ -355,6 +355,8 @@ func (r *V1Renderer) formatCond(prefix string, c cond, isCurrent bool, opts *opt
 	if isCurrent {
 		if r.rightToLeft && runewidth.StringWidth(desc) < 15 {
 			desc = strings.Repeat(" ", 15-runewidth.StringWidth(desc)) + desc
+		} else {
+			desc = strings.TrimRight(desc, " ")
 		}
 	} else {
 		// Add ellipsis for forecast
