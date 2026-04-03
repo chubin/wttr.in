@@ -1,0 +1,16 @@
+[
+  {
+    "name": "default_english_wide",
+    "query": {
+      "Options": {
+        "lang": "en",
+        "narrow": false,
+        "use_imperial": false,
+        "inverted_colors": false,
+        "no_color": false,
+        "ansi_output": true
+      }
+    },
+    "golden": "default"
+  }
+]
