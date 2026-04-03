@@ -1,6 +1,7 @@
 package weather
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -22,7 +23,7 @@ type WeatherClient struct {
 	baseURL    string
 	sem        chan struct{} // semaphore to limit concurrent requests
 	maxConns   int
-	httpClient *http.Client  // reused HTTP client with connection pooling
+	httpClient *http.Client // reused HTTP client with connection pooling
 }
 
 // ErrNoFreeConnection is returned when the maximum number of parallel connections is reached.
@@ -50,15 +51,15 @@ func NewWeatherClient(cfg *WWOConfig) *WeatherClient {
 
 	// Configure HTTP transport for connection reuse and pooling
 	transport := &http.Transport{
-		MaxIdleConns:        100,               // total idle connections across all hosts
-		MaxIdleConnsPerHost: 30,                // idle connections to the weather API host
-		MaxConnsPerHost:     maxConns,          // maximum concurrent connections to the host
-		IdleConnTimeout:     90 * time.Second,  // how long to keep idle connections alive
+		MaxIdleConns:        100,              // total idle connections across all hosts
+		MaxIdleConnsPerHost: 30,               // idle connections to the weather API host
+		MaxConnsPerHost:     maxConns,         // maximum concurrent connections to the host
+		IdleConnTimeout:     90 * time.Second, // how long to keep idle connections alive
 	}
 
 	return &WeatherClient{
-		baseURL: baseURL,
-		sem:     make(chan struct{}, maxConns),
+		baseURL:  baseURL,
+		sem:      make(chan struct{}, maxConns),
 		maxConns: maxConns,
 		httpClient: &http.Client{
 			Transport: transport,
@@ -105,7 +106,24 @@ func (wc *WeatherClient) GetWeather(lat, lon float64, lang string) ([]byte, erro
 		return nil, fmt.Errorf("failed to read weather response body: %w", err)
 	}
 
-	return body, nil
+	////////////////
+	// Remove 'data' wrapper.
+	var data struct {
+		Data interface{} `json:"data"`
+	}
+
+	err = json.Unmarshal(body, &data)
+	if err != nil {
+		return nil, fmt.Errorf("invalid data format")
+	}
+
+	dataBytes, err := json.MarshalIndent(data.Data, "", "  ")
+	if err != nil {
+		return nil, fmt.Errorf("invalid data format")
+	}
+	//////////////////
+
+	return dataBytes, nil
 }
 
 // buildURL replaces placeholders in the base URL with actual values.
