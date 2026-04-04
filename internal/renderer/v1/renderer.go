@@ -73,12 +73,16 @@ func (r *V1Renderer) Render(query domain.Query) (domain.RenderOutput, error) {
 	}
 
 	var header string
-	if r.rightToLeft {
-		caption = locationName + " " + caption
-		space := strings.Repeat(" ", 125-runewidth.StringWidth(caption))
-		header = space + caption + "\n\n"
+	if opts.Quiet || opts.NoCaption {
+		header = locationName + "\n\n"
 	} else {
-		header = fmt.Sprintf("%s: %s\n\n", caption, locationName)
+		if r.rightToLeft {
+			caption = locationName + " " + caption
+			space := strings.Repeat(" ", 125-runewidth.StringWidth(caption))
+			header = space + caption + "\n\n"
+		} else {
+			header = fmt.Sprintf("%s: %s\n\n", caption, locationName)
+		}
 	}
 
 	// Current condition
@@ -88,7 +92,9 @@ func (r *V1Renderer) Render(query domain.Query) (domain.RenderOutput, error) {
 
 	// Build output using strings.Builder directly
 	var sb strings.Builder
-	sb.WriteString(header)
+	if !opts.Superquiet && !opts.NoCity {
+		sb.WriteString(header)
+	}
 
 	// Write current condition with proper indentation
 	for _, line := range condLines {
@@ -97,7 +103,7 @@ func (r *V1Renderer) Render(query domain.Query) (domain.RenderOutput, error) {
 		} else {
 			sb.WriteString("")
 		}
-		sb.WriteString(line)
+		sb.WriteString(strings.TrimRight(line, " "))
 		sb.WriteString("\n")
 	}
 
@@ -121,11 +127,15 @@ func (r *V1Renderer) Render(query domain.Query) (domain.RenderOutput, error) {
 	}
 
 	// Location line:
+	if !opts.CurrentOnly {
 
-	sb.WriteString(fmt.Sprintf("Location: %s [%v,%v]\n", query.Location.FullAddress, query.Location.Latitude, query.Location.Longitude))
+		if !opts.Quiet && !opts.Superquiet && !opts.NoCity {
+			sb.WriteString(fmt.Sprintf("Location: %s [%v,%v]\n", query.Location.FullAddress, query.Location.Latitude, query.Location.Longitude))
+		}
 
-	followICforUpdates := `Follow [46m[30m@igor_chubin[0m for wttr.in updates`
-	sb.WriteString("\n" + followICforUpdates)
+		followICforUpdates := `Follow [46m[30m@igor_chubin[0m for wttr.in updates`
+		sb.WriteString("\n" + followICforUpdates)
+	}
 
 	return domain.RenderOutput{
 		Content: []byte(sb.String()),

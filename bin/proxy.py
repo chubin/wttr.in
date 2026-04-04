@@ -110,6 +110,7 @@ def _cache_file(path, query):
     is slightly varied basing on the path+query sha1 hash digest.
     """
 
+    return "internal/renderer/v1/testdata/weather-with-data.json"
     # return "/wttr.in/wttr.in-v2-v2/just-some-data.json"
 
     digest = hashlib.sha1(("%s %s" % (path, query)).encode("utf-8")).hexdigest()

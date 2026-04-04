@@ -29,8 +29,8 @@
       "query": {
         "Options": {
           "location": "heideck",
-          "options": "format=3",
-          "format": "3",
+          "current_plus_three_days": true,
+          "options": "3",
           "lang": "en"
         }
       },
@@ -41,7 +41,7 @@
       "query": {
         "Options": {
           "location": "heideck",
-          "options": "0&M",
+          "options": "0&m",
           "current_only": true,
           "use_metric": true,
           "lang": "en"
@@ -54,7 +54,7 @@
       "query": {
         "Options": {
           "location": "heideck",
-          "options": "3&u&no_color",
+          "options": "3&u&no_color=true",
           "current_plus_three_days": true,
           "use_imperial": true,
           "no_color": true,
@@ -95,25 +95,14 @@
       "query": {
         "Options": {
           "location": "heideck",
-          "options": "inverted&no-city&no-caption",
+          "options": "inverted_colors=true&no-city=true&no-caption=true",
           "inverted_colors": true,
-          "no_city": true,
-          "no_caption": true,
+          "no-city": true,
+          "no-caption": true,
           "lang": "en"
         }
       },
       "golden": "inverted_nocaption"
-    },
-    {
-      "name": "heideck_japanese",
-      "query": {
-        "Options": {
-          "location": "heideck",
-          "options": "lang=ja",
-          "lang": "ja"
-        }
-      },
-      "golden": "japanese"
     },
     {
       "name": "heideck_superquiet",

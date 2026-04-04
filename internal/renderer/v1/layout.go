@@ -33,9 +33,9 @@ func (r *V1Renderer) printDay(day weather, opts *options.Options) ([]string, err
 	// Format all 4 blocks first (each block = 5 lines)
 	var blocks [4][]string
 	for i, slot := range slots {
-		if opts.Narrow && (i == 1 || i == 2) {
-			continue // skip middle slots in narrow mode
-		}
+		// if opts.Narrow && (i == 1 || i == 2) {
+		// 	continue // skip middle slots in narrow mode
+		// }
 		blocks[i] = r.formatCond("│", slot, false, opts)
 	}
 
@@ -54,18 +54,18 @@ func (r *V1Renderer) printDay(day weather, opts *options.Options) ([]string, err
 
 	// Narrow mode layout
 	if opts.Narrow {
-		names := "│ " + justifyCenter(trans[1], 16) +
-			"└──────┬──────┘" + justifyCenter(trans[3], 16) + " │"
+		names := "│      " + justifyCenter(trans[1], 16) +
+			"└──────┬──────┘" + justifyCenter(trans[3], 16) + "      │"
 
 		var ret []string
-		ret = append(ret, "                       ┌─────────────┐                     ")
+		ret = append(ret, "                        ┌─────────────┐")
 		ret = append(ret, "┌───────────────────────"+dateFmt+"───────────────────────┐")
 		ret = append(ret, names)
 		ret = append(ret, "├──────────────────────────────┼──────────────────────────────┤")
 
 		// Merge lines from the two active blocks (Morning + Night)
 		for lineIdx := 0; lineIdx < 5; lineIdx++ {
-			left := blocks[0][lineIdx]
+			left := blocks[1][lineIdx]
 			right := blocks[3][lineIdx]
 			ret = append(ret, left+right+"│")
 		}
@@ -85,7 +85,7 @@ func (r *V1Renderer) printDay(day weather, opts *options.Options) ([]string, err
 	}
 
 	var ret []string
-	ret = append(ret, "                                                       ┌─────────────┐                                                       ")
+	ret = append(ret, "                                                       ┌─────────────┐")
 	ret = append(ret, "┌──────────────────────────────┬───────────────────────"+dateFmt+"───────────────────────┬──────────────────────────────┐")
 	ret = append(ret, names)
 	ret = append(ret, "├──────────────────────────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────┤")
