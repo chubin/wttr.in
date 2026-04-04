@@ -23,23 +23,34 @@ type testCase struct {
 	Golden string       `json:"golden"`
 }
 
+// testData represents the new structure of testcases.json
+type testData struct {
+	Location  domain.Location `json:"location"`
+	TestCases []testCase      `json:"testcases"`
+}
+
 func TestV1Renderer_Render(t *testing.T) {
 	weatherRaw, err := loadWeatherRaw("testdata/weather.json")
 	if err != nil {
 		t.Fatalf("failed to load weather data: %v", err)
 	}
 
-	cases, err := loadTestCases("testdata/testcases.json")
+	td, err := loadTestData("testdata/testcases.json")
 	if err != nil {
-		t.Fatalf("failed to load test cases: %v", err)
+		t.Fatalf("failed to load test data: %v", err)
 	}
 
 	renderer := NewV1Renderer()
 
-	for _, tc := range cases {
+	for _, tc := range td.TestCases {
 		t.Run(tc.Name, func(t *testing.T) {
+			// Use the shared location for every test case
+			tc.Query.Location = &td.Location
+
+			// Attach weather data
 			tc.Query.Weather = weatherRaw
 
+			// Ensure Options is never nil and set default language
 			if tc.Query.Options == nil {
 				tc.Query.Options = &options.Options{Lang: "en"}
 			}
@@ -75,7 +86,7 @@ func TestV1Renderer_Render(t *testing.T) {
 				t.Logf("\n--- GOT (colored) ---\n%s", string(got))
 				t.Logf("\n--- WANT (colored) ---\n%s", string(wantBytes))
 
-				// Show clean line-by-line diff (ANSI stripped)
+				// Show clean line-by-line diff
 				diff := diffLines(string(gotTrim), string(want))
 				if diff != "" {
 					t.Logf("\n--- LINE-BY-LINE DIFF ---\n%s", diff)
@@ -95,13 +106,11 @@ func TestV1Renderer_Render(t *testing.T) {
 func diffLines(got, want string) string {
 	g := strings.Split(got, "\n")
 	w := strings.Split(want, "\n")
-
 	var diff strings.Builder
 	maxLen := len(g)
 	if len(w) > maxLen {
 		maxLen = len(w)
 	}
-
 	for i := 0; i < maxLen; i++ {
 		var gLine, wLine string
 		if i < len(g) {
@@ -110,12 +119,11 @@ func diffLines(got, want string) string {
 		if i < len(w) {
 			wLine = w[i]
 		}
-
 		if gLine != wLine {
 			diff.WriteString(fmt.Sprintf("Line %3d:\n", i+1))
-			diff.WriteString(fmt.Sprintf("  GOT : %s$\n", gLine))
-			diff.WriteString(fmt.Sprintf("  WANT: %s$\n", wLine))
-			diff.WriteString("  ---\n")
+			diff.WriteString(fmt.Sprintf(" GOT : %s$\n", gLine))
+			diff.WriteString(fmt.Sprintf(" WANT: %s$\n", wLine))
+			diff.WriteString(" ---\n")
 		}
 	}
 	return diff.String()
@@ -134,14 +142,17 @@ func loadWeatherRaw(path string) (*domain.WeatherRaw, error) {
 	return &wr, nil
 }
 
-func loadTestCases(path string) ([]testCase, error) {
+// loadTestData loads the new structured testcases.json
+func loadTestData(path string) (testData, error) {
 	b, err := os.ReadFile(path)
 	if err != nil {
-		return nil, err
+		return testData{}, err
 	}
-	var cases []testCase
-	if err := json.Unmarshal(b, &cases); err != nil {
-		return nil, err
+
+	var td testData
+	if err := json.Unmarshal(b, &td); err != nil {
+		return testData{}, err
 	}
-	return cases, nil
+
+	return td, nil
 }
