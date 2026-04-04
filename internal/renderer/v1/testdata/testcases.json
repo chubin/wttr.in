@@ -1,25 +1,131 @@
-[
-  {
-    "name": "default_english_wide",
-    "query": {
-      "Location": {
-        "Name": "Heideck",
-        "Country": "Deutschland",
-        "CountryCode": "DE",
-        "Latitude": 49.1336509,
-        "Longitude": 11.124544,
-        "FullAddress": "Heideck, Landkreis Roth, Bayern, 91180, Deutschland"
+{
+  "location": {
+    "Name": "Heideck",
+    "Country": "Deutschland",
+    "CountryCode": "DE",
+    "Latitude": 49.1336509,
+    "Longitude": 11.124544,
+    "FullAddress": "Heideck, Landkreis Roth, Bayern, 91180, Deutschland"
+  },
+  "testcases": [
+    {
+      "name": "default_english_wide",
+      "query": {
+        "Options": {
+          "location": "heideck",
+          "options": "",
+          "lang": "en",
+          "narrow": false,
+          "use_imperial": false,
+          "inverted_colors": false,
+          "no_color": false,
+          "ansi_output": true
+        }
       },
-      "Options": {
-        "location": "heideck",
-        "lang": "en",
-        "narrow": false,
-        "use_imperial": false,
-        "inverted_colors": false,
-        "no_color": false,
-        "ansi_output": true
-      }
+      "golden": "default"
     },
-    "golden": "default"
-  }
-]
+    {
+      "name": "heideck_format_3",
+      "query": {
+        "Options": {
+          "location": "heideck",
+          "options": "format=3",
+          "format": "3",
+          "lang": "en"
+        }
+      },
+      "golden": "format3"
+    },
+    {
+      "name": "heideck_current_only_metric",
+      "query": {
+        "Options": {
+          "location": "heideck",
+          "options": "0&M",
+          "current_only": true,
+          "use_metric": true,
+          "lang": "en"
+        }
+      },
+      "golden": "current_metric"
+    },
+    {
+      "name": "heideck_3days_imperial_nocolor",
+      "query": {
+        "Options": {
+          "location": "heideck",
+          "options": "3&u&no_color",
+          "current_plus_three_days": true,
+          "use_imperial": true,
+          "no_color": true,
+          "lang": "en"
+        }
+      },
+      "golden": "3days_imperial_nocolor"
+    },
+    {
+      "name": "heideck_narrow_quiet",
+      "query": {
+        "Options": {
+          "location": "heideck",
+          "options": "nq",
+          "narrow": true,
+          "quiet": true,
+          "lang": "en"
+        }
+      },
+      "golden": "narrow_quiet"
+    },
+    {
+      "name": "heideck_2days_force_ansi",
+      "query": {
+        "Options": {
+          "location": "heideck",
+          "options": "days=2&force-ansi=true",
+          "days": 2,
+          "force_ansi": true,
+          "ansi_output": true,
+          "lang": "en"
+        }
+      },
+      "golden": "2days_ansi"
+    },
+    {
+      "name": "heideck_inverted_no_city_no_caption",
+      "query": {
+        "Options": {
+          "location": "heideck",
+          "options": "inverted&no-city&no-caption",
+          "inverted_colors": true,
+          "no_city": true,
+          "no_caption": true,
+          "lang": "en"
+        }
+      },
+      "golden": "inverted_nocaption"
+    },
+    {
+      "name": "heideck_japanese",
+      "query": {
+        "Options": {
+          "location": "heideck",
+          "options": "lang=ja",
+          "lang": "ja"
+        }
+      },
+      "golden": "japanese"
+    },
+    {
+      "name": "heideck_superquiet",
+      "query": {
+        "Options": {
+          "location": "heideck",
+          "options": "Q",
+          "superquiet": true,
+          "lang": "en"
+        }
+      },
+      "golden": "superquiet"
+    }
+  ]
+}
