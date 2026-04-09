@@ -41,6 +41,36 @@ application or add integration to a new one.
 | [GoogleSheets/Excel365](#google-sheets--excel-365) | Direct wttr.in access from Google Sheets / Excel 365                                                             | -                                                                                                  |
 | [Raycast](#Raycast)                                | Weather extension for Raycast                                                                                    | -                                                                                                  |
 
+## AI Agent Frameworks and Bots
+
+A growing ecosystem of open-source AI agent frameworks and bots that integrate
+with **wttr.in** for seamless, API-key-free weather queries (typically via
+simple `curl` or `web_fetch` calls).
+
+These projects commonly use wttr.in as a
+lightweight weather skill or tool within their agent capabilities:
+
+* [openclaw](https://github.com/openclaw/openclaw)
+* [QuantClaw](https://github.com/QuantClaw/QuantClaw)
+* [picobot](https://github.com/louisho5/picobot)
+* [microclaw](https://github.com/microclaw/microclaw)
+* [nanobot](https://github.com/HKUDS/nanobot)
+* [openakita](https://github.com/openakita/openakita)
+* [devclaw](https://github.com/jholhewres/devclaw)
+* [openpaw](https://github.com/daxaur/openpaw)
+* [debot](https://github.com/BotMesh/debot)
+* [cortez](https://github.com/xichan96/cortex)
+* [rayclaw](https://github.com/rayclaw/rayclaw)
+* [acpclaw](https://github.com/zhu327/acpclaw)
+* [OxiBot](https://github.com/DioCrafts/OxiBot)
+* [LightAgent](https://github.com/wanxingai/LightAgent)
+* [openclawgotchi](https://github.com/turmyshevd/openclawgotchi)
+* [clawkido](https://github.com/shamspias/clawkido)
+* [pincer](https://github.com/pincerhq/pincer)
+* [cryptoclaw](https://github.com/TermiX-official/cryptoclaw)
+* [flowlyai](https://github.com/Nocetic/flowlyai)
+* [owliabot](https://github.com/owliabot/owliabot)
+* [Boucle](https://github.com/Bande-a-Bonnot/Boucle-framework)
 
 ## Terminal Managers
 
