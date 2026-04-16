@@ -113,6 +113,7 @@ cmd_build() {
 cmd_update_css() {
     curl -L -o share/static/terminal.css \
       https://raw.githubusercontent.com/buildkite/terminal-to-html/refs/heads/main/internal/assets/terminal.css
+    sed -i 's@^[.]term-container {@.term-container-disabled {@' share/static/terminal.css
 }
 
 cmd_gen() {
