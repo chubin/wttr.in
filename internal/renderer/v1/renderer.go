@@ -133,8 +133,10 @@ func (r *V1Renderer) Render(query domain.Query) (domain.RenderOutput, error) {
 			sb.WriteString(fmt.Sprintf("Location: %s [%v,%v]\n", query.Location.FullAddress, query.Location.Latitude, query.Location.Longitude))
 		}
 
-		followICforUpdates := `Follow [46m[30m@igor_chubin[0m for wttr.in updates`
-		sb.WriteString("\n" + followICforUpdates)
+		if opts.Output != "html" && !opts.NoFollowLine {
+			followICforUpdates := `Follow [46m[30m@igor_chubin[0m for wttr.in updates`
+			sb.WriteString("\n" + followICforUpdates + "\n")
+		}
 	}
 
 	return domain.RenderOutput{
