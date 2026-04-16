@@ -119,6 +119,7 @@ cmd_update_css() {
 cmd_gen() {
     info "Generating..."
     ./"$BINARY_NAME" gen
+    go fmt internal/options/options.go
     info "Generating done"
 }
 
