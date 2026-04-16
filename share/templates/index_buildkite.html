@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wttr.in — Weather Report</title>
+
+    <!-- Source Code Pro font – same as original wttr.in -->
+    <link rel="stylesheet" type="text/css" 
+          href="https://adobe-fonts.github.io/source-code-pro/source-code-pro.css">
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: #000000;
+            height: 100%;
+            overflow: auto;
+        }
+
+        .term-container {
+            background: #000000;
+            color: #bbbbbb;
+            font-family: "Source Code Pro", 
+                         "DejaVu Sans Mono", 
+                         Menlo, 
+                         "Lucida Sans Typewriter", 
+                         "Lucida Console", 
+                         monaco, 
+                         "Bitstream Vera Sans Mono", 
+                         monospace;
+            font-size: 15px;
+            line-height: 1.18 !important;     /* Best match to original wttr.in spacing */
+            letter-spacing: 0.015em;
+            padding: 16px 20px;
+            white-space: pre-wrap;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            margin: 0;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* Make bold text brighter (like original wttr.in) */
+        .term-fg1, .bold {
+            color: #eeeeee;
+            font-weight: normal;
+        }
+
+        /* Buildkite terminal-to-html color classes */
+        {{.CSS}}
+    </style>
+</head>
+<body>
+    <div class="term-container">
+        {{- .Body}}
+    </div>
+</body>
+</html>
