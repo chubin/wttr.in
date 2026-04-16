@@ -86,12 +86,6 @@ query_options:
     type: boolean
     default: false
     active: true
-  - name: no_follow
-    short: F
-    description: "Do not show the 'Follow' line"
-    type: boolean
-    default: false
-    active: true
 
   - name: narrow
     short: n

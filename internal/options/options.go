@@ -42,9 +42,6 @@ type Options struct {
 	// Restrict output to standard console font glyphs
 	StandardFont bool `json:"standard_font,omitempty"`
 
-	// Do not show the 'Follow' line
-	NoFollow bool `json:"no_follow,omitempty"`
-
 	// Show only day and night forecast (narrow version) (Optimizes output for narrow displays)
 	Narrow bool `json:"narrow,omitempty"`
 
@@ -184,10 +181,6 @@ func ApplyParsedMap(opts *Options, raw map[string]string) (*Options, error) {
 
 	if v, ok := raw["standard_font"]; ok {
 		opts.StandardFont = (v == "true")
-	}
-
-	if v, ok := raw["no_follow"]; ok {
-		opts.NoFollow = (v == "true")
 	}
 
 	if v, ok := raw["narrow"]; ok {
