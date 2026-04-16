@@ -42,7 +42,7 @@ func NewHTMLFormatter() (*HTMLFormatter, error) {
 	}, nil
 }
 
-func (f *HTMLFormatter) Format(output domain.RenderOutput) (*domain.FormatOutput, error) {
+func (f *HTMLFormatter) Format(query *domain.Query, output *domain.RenderOutput) (*domain.FormatOutput, error) {
 	if output.Content == nil || len(output.Content) == 0 {
 		return nil, fmt.Errorf("no render output to convert to HTML")
 	}
@@ -54,10 +54,12 @@ func (f *HTMLFormatter) Format(output domain.RenderOutput) (*domain.FormatOutput
 	data := struct {
 		Title string
 		CSS   template.CSS
+		Query *domain.Query
 		Body  template.HTML
 	}{
 		Title: "Weather Report",
 		CSS:   template.CSS(f.css),
+		Query: query,
 		Body:  template.HTML(htmlBody),
 	}
 

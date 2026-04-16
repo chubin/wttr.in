@@ -41,7 +41,7 @@ type Renderer interface {
 
 // Formatter interface for converting rendered output into the final format.
 type Formatter interface {
-	Format(output domain.RenderOutput) (*domain.FormatOutput, error)
+	Format(query *domain.Query, output *domain.RenderOutput) (*domain.FormatOutput, error)
 }
 
 // QueryParser parses wttr.in / curl wttr.in style HTTP query strings
@@ -386,7 +386,7 @@ func (s *WeatherService) computeResponse(
 			return nil, fmt.Errorf("render failed: %w", err)
 		}
 
-		formatOut, err = formatter.Format(renderOut)
+		formatOut, err = formatter.Format(&query, &renderOut)
 		if err != nil {
 			log.Println(err)
 			return nil, fmt.Errorf("format failed: %w", err)
