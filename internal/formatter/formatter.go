@@ -12,13 +12,6 @@ func (f *TerminalFormatter) Format(output domain.RenderOutput) (*domain.FormatOu
 	}, nil
 }
 
-type BrowserFormatter struct{}
-
-func (f *BrowserFormatter) Format(output domain.RenderOutput) (*domain.FormatOutput, error) {
-	// Stub: To be implemented
-	return &domain.FormatOutput{}, nil
-}
-
 type PNGFormatter struct{}
 
 func (f *PNGFormatter) Format(output domain.RenderOutput) (*domain.FormatOutput, error) {
