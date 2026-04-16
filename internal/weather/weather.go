@@ -13,7 +13,6 @@ import (
 	"time"
 
 	"github.com/chubin/wttr.in/internal/domain"
-	"github.com/chubin/wttr.in/internal/formatter"
 	"github.com/chubin/wttr.in/internal/options"
 	"github.com/chubin/wttr.in/internal/renderer"
 )
@@ -106,6 +105,7 @@ type WeatherService struct {
 	RequestLogger   RequestLogger
 	UplinkProcessor UplinkProcessor
 	RendererMap     map[string]Renderer
+	FormatterMap    map[string]Formatter
 }
 
 // NewWeatherService initializes a new pipeline based on the provided options.
@@ -118,6 +118,7 @@ func NewWeatherService(
 	requestLogger RequestLogger,
 	uplinkProcessor UplinkProcessor,
 	rendererMap map[string]Renderer,
+	formatterMap map[string]Formatter,
 ) *WeatherService {
 	return &WeatherService{
 		Weatherer:       weatherer,
@@ -128,6 +129,7 @@ func NewWeatherService(
 		RequestLogger:   requestLogger,
 		UplinkProcessor: uplinkProcessor,
 		RendererMap:     rendererMap,
+		FormatterMap:    formatterMap,
 	}
 }
 
@@ -515,21 +517,15 @@ func (s *WeatherService) selectRenderer(view string) Renderer {
 
 // selectFormatter chooses the appropriate formatter based on the output format option.
 func (s *WeatherService) selectFormatter(output string) Formatter {
-	// if format == "j1" || format == "j2" {
-	// 	format = "json"
-	// }
-
 	switch output {
 	case "terminal", "text", "ansi":
-		return &formatter.TextFormatter{}
-	case "browser":
-		return &formatter.BrowserFormatter{}
+		return s.FormatterMap["text"]
+	case "html":
+		return s.FormatterMap["html"]
 	case "png":
-		return &formatter.PNGFormatter{}
-	case "json":
-		return &formatter.JSONFormatter{}
+		return s.FormatterMap["png"]
 	default:
-		return &formatter.TerminalFormatter{} // Default to terminal formatter
+		return s.FormatterMap["text"]
 	}
 }
 

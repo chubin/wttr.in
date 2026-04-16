@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"os"
 	"time"
@@ -10,6 +11,7 @@ import (
 
 	"github.com/chubin/wttr.in/internal/cache"
 	"github.com/chubin/wttr.in/internal/config"
+	"github.com/chubin/wttr.in/internal/formatter"
 	"github.com/chubin/wttr.in/internal/generate"
 	"github.com/chubin/wttr.in/internal/ip"
 	"github.com/chubin/wttr.in/internal/location"
@@ -58,6 +60,20 @@ func srv(configFile string) error {
 	}
 
 	////////////////////////////
+	// Configuring Formatters.
+	////////////////////////////
+
+	htmlFormatter, err := formatter.NewHTMLFormatter()
+	if err != nil {
+		return fmt.Errorf("html formatter creation error: %w", err)
+	}
+
+	formatterMap := map[string]weather.Formatter{
+		"text": &formatter.TextFormatter{},
+		"html": htmlFormatter,
+	}
+
+	////////////////////////////
 	// Configuring IP Locators.
 	////////////////////////////
 	ipLocators := []weather.IPLocator{}
@@ -99,6 +115,7 @@ func srv(configFile string) error {
 		requestLogger,
 		uplink.NewUplinkProcessor(cfg.Uplink),
 		rendererMap,
+		formatterMap,
 	)
 
 	return server.Serve(&cfg.Server, &cfg.Logging, ws)
