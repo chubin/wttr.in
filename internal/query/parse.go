@@ -47,6 +47,8 @@ func ParseQueryString(query string, config *spec.WttrInOptions) (map[string]stri
 		strings.ReplaceAll(query, "%25", "%"),
 		"%", "%25")
 
+	query = strings.ReplaceAll(query, ";", "%3B")
+
 	parsed, err := url.ParseQuery(query)
 	if err != nil {
 		return nil, fmt.Errorf("%w: %v", ErrInvalidQueryString, err)
