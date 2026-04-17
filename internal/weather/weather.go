@@ -382,8 +382,9 @@ func (s *WeatherService) computeResponse(
 
 		renderOut, err := renderer.Render(query)
 		if err != nil {
+			err = fmt.Errorf("render failed: %w [%s][%v,%v][%d][view=%v]", err, opts.Location, location.Latitude, location.Longitude, len(weatherBytes), opts.View)
 			log.Println(err)
-			return nil, fmt.Errorf("render failed: %w", err)
+			return nil, err
 		}
 
 		formatOut, err = formatter.Format(&query, &renderOut)
