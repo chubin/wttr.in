@@ -152,6 +152,9 @@ func ApplyAutoFixes(opts *options.Options) {
 	if opts.View == "j1" || opts.View == "j2" {
 		opts.Output = "json"
 	}
+	if opts.View == "line" && opts.Output == "html" {
+		opts.Output = "text"
+	}
 
 	// USCS and Imperial are, strictly speaking, not the same,
 	// but in our context, there is no difference between them.
