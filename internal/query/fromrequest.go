@@ -109,19 +109,9 @@ func FromRequest(r *http.Request) (*options.Options, error) {
 		opts.Lang = "en"
 	}
 
-	// Step 6: Set User-Agent from header
-	userAgent := r.Header.Get("User-Agent")
-	if userAgent != "" {
-		opts.Agent = userAgent
-		// Determine if it's a plain text client (e.g., curl, wget)
-		if opts.Output == "" {
-			if isPlainTextClient(userAgent) {
-				opts.Output = "text"
-			} else {
-				opts.Output = "html"
-			}
-		}
-	}
+	// Step 6: Set User-Agent from header. Output defaulting based on the
+	// agent is deferred to ApplyAutoFixes, where the view is known.
+	opts.Agent = r.Header.Get("User-Agent")
 
 	// Step 8: Set default transparency for PNG output if applicable
 	if opts.Output == "png" && opts.Transparency == 0 {
@@ -154,6 +144,26 @@ func ApplyAutoFixes(opts *options.Options) {
 	}
 	if opts.View == "line" && opts.Output == "html" {
 		opts.Output = "text"
+	}
+
+	// Default output based on User-Agent. Compact/line views default to text
+	// for non-browsers (they are primarily consumed by scripts and terminals).
+	// The main views (v1, v2, etc.) only switch to text for known CLI clients,
+	// to preserve the rich HTML experience for anything that might be a browser.
+	if opts.Output == "" && opts.Agent != "" {
+		if opts.View == "line" {
+			if isBrowserClient(opts.Agent) {
+				opts.Output = "html"
+			} else {
+				opts.Output = "text"
+			}
+		} else {
+			if isPlainTextClient(opts.Agent) {
+				opts.Output = "text"
+			} else {
+				opts.Output = "html"
+			}
+		}
 	}
 
 	// USCS and Imperial are, strictly speaking, not the same,
@@ -309,9 +319,15 @@ func isValidView(view string) bool {
 		view == "j2"
 }
 
+// isBrowserClient determines if the User-Agent indicates a web browser.
+// All real browsers include "Mozilla/" in their User-Agent string for
+// historical Netscape-compatibility reasons.
+func isBrowserClient(userAgent string) bool {
+	return strings.Contains(strings.ToLower(userAgent), "mozilla/")
+}
+
 // isPlainTextClient determines if the User-Agent indicates a plain text client like curl or wget.
 func isPlainTextClient(userAgent string) bool {
-	// plainTextAgents contains signatures of the plain-text agents.
 	plainTextAgents := []string{
 		"curl",
 		"httpie",
