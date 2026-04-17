@@ -21,6 +21,7 @@ EMBED_TARGET_DIR="internal/assets/embed"
 ASSET_ROOTS=(
     "spec"
     "share/static"
+    "share/pages"
     "share/templates"
 )
 

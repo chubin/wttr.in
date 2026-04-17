@@ -132,6 +132,14 @@ func FromRequest(r *http.Request) (*options.Options, error) {
 }
 
 func ApplyAutoFixes(opts *options.Options) {
+	pages := []string{
+		":help",
+		":translation",
+		":bash.function",
+	}
+	if inSlice(opts.Location, pages) {
+		opts.View = "page"
+	}
 	if opts.View == "" {
 		if opts.Format == "j1" || opts.Format == "j2" || opts.Format == "v2" || opts.Format == "p1" {
 			opts.View = opts.Format
@@ -288,6 +296,7 @@ func isValidLanguageCode(code string) bool {
 func isValidView(view string) bool {
 	// Example: support "v2", "j1", "j2" as valid views
 	return view == "files" ||
+		view == "page" ||
 		view == "line" ||
 		view == "v1" ||
 		view == "v1x" ||
@@ -324,5 +333,14 @@ func isPlainTextClient(userAgent string) bool {
 		}
 	}
 
+	return false
+}
+
+func inSlice(what string, where []string) bool {
+	for _, item := range where {
+		if item == what {
+			return true
+		}
+	}
 	return false
 }

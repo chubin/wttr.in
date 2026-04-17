@@ -57,6 +57,7 @@ func srv(configFile string) error {
 		"j1":   &renderer.J1Renderer{},
 		"j2":   &renderer.J2Renderer{},
 		"line": oneline.NewOnelineRenderer(),
+		"page": renderer.NewPageRenderer(),
 	}
 
 	////////////////////////////

@@ -319,7 +319,7 @@ func (s *WeatherService) computeResponse(
 	// ── Geocode ───────────────────────────────────────────────────────────
 	start = time.Now()
 	location, err := s.Locator.GetLocation(locStr)
-	if err != nil && opts.View != "files" {
+	if err != nil && opts.View != "files" && opts.View != "page" {
 		return nil, fmt.Errorf("location not found: %w", err)
 	}
 	tracker.Add("Geocode location", time.Since(start))
@@ -425,7 +425,7 @@ func (s *WeatherService) computeResponse(
 }
 
 func isAutoDetectPath(p string) bool {
-	return strings.Trim(p, "/") == ""
+	return strings.Trim(p, "/") == "" || strings.HasPrefix(strings.Trim(p, "/"), ":")
 }
 
 func getDebugInfo(
