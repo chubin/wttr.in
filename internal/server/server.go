@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/chubin/wttr.in/internal/assets"
 	"github.com/chubin/wttr.in/internal/logging"
 	"github.com/chubin/wttr.in/internal/weather"
 )
@@ -40,6 +41,20 @@ func copyHeader(dst, src http.Header) {
 			dst.Add(k, v)
 		}
 	}
+}
+
+func faviconHandler(w http.ResponseWriter, r *http.Request) {
+	data, err := assets.GetFile("share/static/favicon.ico")
+	if err != nil {
+		// Fallback: return 404 if favicon is missing
+		http.NotFound(w, r)
+		return
+	}
+
+	w.Header().Set("Content-Type", "image/x-icon")
+	w.Header().Set("Cache-Control", "public, max-age=86400") // cache for 1 day
+	w.WriteHeader(http.StatusOK)
+	_, _ = w.Write(data)
 }
 
 func serveHTTP(mux *http.ServeMux, port int, logFile io.Writer, errs chan<- error) {
@@ -106,6 +121,7 @@ func Serve(conf *Config, logConf *logging.Config, ws *weather.WeatherService) er
 	}
 
 	mux.HandleFunc("/", mainHandler(ws, logger))
+	mux.HandleFunc("/favicon.ico", faviconHandler)
 
 	if conf.PortHTTP != 0 {
 		go serveHTTP(mux, conf.PortHTTP, errorsLog, errs)
@@ -131,25 +147,5 @@ func mainHandler(
 			log.Println(err)
 		}
 		ws.WeatherHandler(w, r)
-
-		// response, err := rp.ProcessRequest(r)
-		// if err != nil {
-		// 	log.Println(err)
-
-		// 	return
-		// }
-		// if response.StatusCode == 0 {
-		// 	log.Println("status code 0", response)
-
-		// 	return
-		// }
-
-		// copyHeader(w.Header(), response.Header)
-		// w.Header().Set("Access-Control-Allow-Origin", "*")
-		// w.WriteHeader(response.StatusCode)
-		// _, err = w.Write(response.Body)
-		// if err != nil {
-		// 	log.Println(err)
-		// }
 	}
 }
