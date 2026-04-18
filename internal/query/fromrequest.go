@@ -169,6 +169,10 @@ func ApplyAutoFixes(opts *options.Options) {
 		}
 	}
 
+	if !inSlice(opts.View, []string{"v1", "v2"}) {
+		opts.NoFollowLine = true
+	}
+
 	// USCS and Imperial are, strictly speaking, not the same,
 	// but in our context, there is no difference between them.
 	// If at least one of them is set, the other must be set as well.
