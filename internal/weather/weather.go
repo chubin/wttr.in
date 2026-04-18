@@ -319,8 +319,12 @@ func (s *WeatherService) computeResponse(
 	// ── Geocode ───────────────────────────────────────────────────────────
 	start = time.Now()
 	location, err := s.Locator.GetLocation(locStr)
-	if err != nil && opts.View != "files" && opts.View != "page" {
-		return nil, fmt.Errorf("location not found: %w", err)
+	if err != nil {
+		if opts.View == "files" || opts.View == "page" {
+			location = &domain.Location{}
+		} else {
+			return nil, fmt.Errorf("location not found: %w", err)
+		}
 	}
 	tracker.Add("Geocode location", time.Since(start))
 
