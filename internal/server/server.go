@@ -8,6 +8,7 @@ import (
 	"log"
 	stdlog "log"
 	"net/http"
+	"runtime/debug"
 	"time"
 
 	"github.com/chubin/wttr.in/internal/assets"
@@ -55,6 +56,41 @@ func faviconHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Cache-Control", "public, max-age=86400") // cache for 1 day
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write(data)
+}
+
+// panicRecovery is a middleware that recovers from panics in handlers
+func panicRecovery(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		defer func() {
+			if rec := recover(); rec != nil {
+				// Log the panic with full stack trace
+				stack := debug.Stack()
+				log.Printf("PANIC in handler %s %s: %v\n%s", r.Method, r.URL.Path, rec, stack)
+
+				// Optionally also write to stderr for visibility
+				fmt.Fprintf(log.Writer(), "PANIC recovered: %v\n%s\n", rec, stack)
+
+				// Return 500 to the client (but only if headers haven't been sent yet)
+				if !wroteHeader(w) {
+					http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+				}
+			}
+		}()
+
+		next(w, r)
+	}
+}
+
+// wroteHeader is a simple helper to avoid writing headers twice after panic
+func wroteHeader(w http.ResponseWriter) bool {
+	// This is a best-effort check. In real production code you might want a more robust solution.
+	type headerWriter interface {
+		WroteHeader() bool
+	}
+	if hw, ok := w.(headerWriter); ok {
+		return hw.WroteHeader()
+	}
+	return false
 }
 
 func serveHTTP(mux *http.ServeMux, port int, logFile io.Writer, errs chan<- error) {
@@ -120,8 +156,9 @@ func Serve(conf *Config, logConf *logging.Config, ws *weather.WeatherService) er
 		return err
 	}
 
-	mux.HandleFunc("/", mainHandler(ws, logger))
-	mux.HandleFunc("/favicon.ico", faviconHandler)
+	// Register handlers with panic recovery
+	mux.HandleFunc("/", panicRecovery(mainHandler(ws, logger)))
+	mux.HandleFunc("/favicon.ico", panicRecovery(faviconHandler))
 
 	if conf.PortHTTP != 0 {
 		go serveHTTP(mux, conf.PortHTTP, errorsLog, errs)
