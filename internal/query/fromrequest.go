@@ -146,6 +146,9 @@ func ApplyAutoFixes(opts *options.Options) {
 		opts.Output = "text"
 	}
 
+	// ATTENTION:
+	// This block is not active at the moment, because Output format is explicitly set above.
+	//
 	// Default output based on User-Agent. Compact/line views default to text
 	// for non-browsers (they are primarily consumed by scripts and terminals).
 	// The main views (v1, v2, etc.) only switch to text for known CLI clients,
