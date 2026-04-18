@@ -6,7 +6,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/mattn/go-runewidth"
+	"github.com/clipperhouse/displaywidth"
 
 	"github.com/chubin/wttr.in/internal/options"
 )
@@ -335,26 +335,26 @@ func (r *V1Renderer) formatCond(prefix string, c cond, isCurrent bool, opts *opt
 
 	// Pad/truncate description to 15 characters
 	if r.rightToLeft {
-		for runewidth.StringWidth(desc) < 15 {
+		for displaywidth.String(desc) < 15 {
 			desc = " " + desc
 		}
-		for runewidth.StringWidth(desc) > 15 {
+		for displaywidth.String(desc) > 15 {
 			_, size := utf8.DecodeLastRuneInString(desc)
 			desc = desc[:len(desc)-size]
 		}
 	} else {
-		for runewidth.StringWidth(desc) < 15 {
+		for displaywidth.String(desc) < 15 {
 			desc += " "
 		}
-		for runewidth.StringWidth(desc) > 15 {
+		for displaywidth.String(desc) > 15 {
 			_, size := utf8.DecodeLastRuneInString(desc)
 			desc = desc[:len(desc)-size]
 		}
 	}
 
 	if isCurrent {
-		if r.rightToLeft && runewidth.StringWidth(desc) < 15 {
-			desc = strings.Repeat(" ", 15-runewidth.StringWidth(desc)) + desc
+		if r.rightToLeft && displaywidth.String(desc) < 15 {
+			desc = strings.Repeat(" ", 15-displaywidth.String(desc)) + desc
 		} else {
 			desc = strings.TrimRight(desc, " ")
 		}
@@ -363,14 +363,14 @@ func (r *V1Renderer) formatCond(prefix string, c cond, isCurrent bool, opts *opt
 		if r.rightToLeft {
 			if first, size := utf8.DecodeRuneInString(desc); first != ' ' {
 				desc = "…" + desc[size:]
-				for runewidth.StringWidth(desc) < 15 {
+				for displaywidth.String(desc) < 15 {
 					desc = " " + desc
 				}
 			}
 		} else {
 			if last, size := utf8.DecodeLastRuneInString(desc); last != ' ' {
 				desc = desc[:len(desc)-size] + "…"
-				for runewidth.StringWidth(desc) < 15 {
+				for displaywidth.String(desc) < 15 {
 					desc += " "
 				}
 			}

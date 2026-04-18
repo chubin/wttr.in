@@ -10,10 +10,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/mattn/go-runewidth"
-
 	"github.com/chubin/wttr.in/internal/domain"
 	"github.com/chubin/wttr.in/internal/options"
+	"github.com/clipperhouse/displaywidth"
 )
 
 // V1Renderer renders weather in the classic wttr.in v1 style.
@@ -78,7 +77,7 @@ func (r *V1Renderer) Render(query domain.Query) (domain.RenderOutput, error) {
 	} else {
 		if r.rightToLeft {
 			caption = locationName + " " + caption
-			space := strings.Repeat(" ", 125-runewidth.StringWidth(caption))
+			space := strings.Repeat(" ", 125-displaywidth.String(caption))
 			header = space + caption + "\n\n"
 		} else {
 			header = fmt.Sprintf("%s: %s\n\n", caption, locationName)

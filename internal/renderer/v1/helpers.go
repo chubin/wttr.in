@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/mattn/go-runewidth"
+	"github.com/clipperhouse/displaywidth"
 )
 
 // Safe parsing helpers
@@ -45,7 +45,7 @@ func h2m(h cond) int {
 
 func justifyCenter(s string, width int) string {
 	appendSide := 0
-	for runewidth.StringWidth(s) <= width {
+	for displaywidth.String(s) <= width {
 		if appendSide == 1 {
 			s += " "
 			appendSide = 0
