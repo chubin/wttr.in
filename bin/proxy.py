@@ -110,12 +110,12 @@ def _cache_file(path, query):
     is slightly varied basing on the path+query sha1 hash digest.
     """
 
-    return "internal/renderer/v1/testdata/weather-with-data.json"
+    # return "internal/renderer/v1/testdata/weather-with-data.json"
     # return "/wttr.in/wttr.in-v2-v2/just-some-data.json"
 
     digest = hashlib.sha1(("%s %s" % (path, query)).encode("utf-8")).hexdigest()
     digest_number = ord(digest[0].upper())
-    penalty = 0
+    penalty = 50
     expiry_interval = 60 * (digest_number + penalty)
 
     timestamp = "%010d" % (int(time.time()) // expiry_interval * expiry_interval)
