@@ -11,10 +11,10 @@ import (
 	"github.com/chubin/wttr.in/internal/spec"
 )
 
-// FromRequest creates an Options struct based on the provided HTTP request.
+// FromRequest creates an options.Options struct based on the provided HTTP request.
 // It processes the URL path, domain name, and headers according to the specified rules.
-func FromRequest(r *http.Request) (*Options, error) {
-	opts := &Options{}
+func FromRequest(r *http.Request) (*options.Options, error) {
+	opts := &options.Options{}
 
 	// Step 1: Extract components from the URL path
 	urlPath := r.URL.Path
@@ -109,24 +109,11 @@ func FromRequest(r *http.Request) (*Options, error) {
 		opts.Lang = "en"
 	}
 
-	// Step 6: Set User-Agent from header
-	userAgent := r.Header.Get("User-Agent")
-	if userAgent != "" {
-		opts.Agent = userAgent
-		// Determine if it's a plain text client (e.g., curl, wget)
-		if opts.Output == "" {
-			if isPlainTextClient(userAgent) {
-				opts.Output = "text"
-			} else {
-				opts.Output = "html"
-			}
-		}
-	}
+	// Step 6: Set User-Agent from header. Output defaulting based on the
+	// agent is deferred to ApplyAutoFixes, where the view is known.
+	opts.Agent = r.Header.Get("User-Agent")
 
-	// Step 8: Set default metric units (overridden by explicit options if present)
-	opts.Metric = true
-
-	// Step 9: Set default transparency for PNG output if applicable
+	// Step 8: Set default transparency for PNG output if applicable
 	if opts.Output == "png" && opts.Transparency == 0 {
 		opts.Transparency = 150
 	}
@@ -134,7 +121,15 @@ func FromRequest(r *http.Request) (*Options, error) {
 	return opts, nil
 }
 
-func ApplyAutoFixes(opts *Options) {
+func ApplyAutoFixes(opts *options.Options) {
+	pages := []string{
+		":help",
+		":translation",
+		":bash.function",
+	}
+	if inSlice(opts.Location, pages) {
+		opts.View = "page"
+	}
 	if opts.View == "" {
 		if opts.Format == "j1" || opts.Format == "j2" || opts.Format == "v2" || opts.Format == "p1" {
 			opts.View = opts.Format
@@ -147,9 +142,45 @@ func ApplyAutoFixes(opts *Options) {
 	if opts.View == "j1" || opts.View == "j2" {
 		opts.Output = "json"
 	}
+	if opts.View == "line" && opts.Output == "html" {
+		opts.Output = "text"
+	}
+
+	// ATTENTION:
+	// This block is not active at the moment, because Output format is explicitly set above.
+	//
+	// Default output based on User-Agent. Compact/line views default to text
+	// for non-browsers (they are primarily consumed by scripts and terminals).
+	// The main views (v1, v2, etc.) only switch to text for known CLI clients,
+	// to preserve the rich HTML experience for anything that might be a browser.
+	if opts.Output == "" && opts.Agent != "" {
+		if opts.View == "line" {
+			if isBrowserClient(opts.Agent) {
+				opts.Output = "html"
+			} else {
+				opts.Output = "text"
+			}
+		} else {
+			if isPlainTextClient(opts.Agent) {
+				opts.Output = "text"
+			} else {
+				opts.Output = "html"
+			}
+		}
+	}
+
+	if !inSlice(opts.View, []string{"v1", "v2"}) {
+		opts.NoFollowLine = true
+	}
+
+	// USCS and Imperial are, strictly speaking, not the same,
+	// but in our context, there is no difference between them.
+	// If at least one of them is set, the other must be set as well.
+	opts.UseImperial = opts.UseImperial || opts.UseUscs
+	opts.UseUscs = opts.UseImperial
 }
 
-// ParseOptionsInFilename converts a wttr.in-style PNG filename into *Options
+// ParseOptionsInFilename converts a wttr.in-style PNG filename into *options.Options
 // using the same parsing/validation pipeline as normal ?query=string requests.
 //
 // Examples:
@@ -160,7 +191,7 @@ func ApplyAutoFixes(opts *Options) {
 //	"Berlin_u_300x150.png"       → use_imperial=true, width=300, height=150
 //
 // Returns location separately so caller can decide what to do with it.
-func ParseOptionsInFilename(filename string, cfg *spec.WttrInOptions) (*Options, string, error) {
+func ParseOptionsInFilename(filename string, cfg *spec.WttrInOptions) (*options.Options, string, error) {
 	if cfg == nil {
 		return nil, "", fmt.Errorf("config required")
 	}
@@ -170,13 +201,13 @@ func ParseOptionsInFilename(filename string, cfg *spec.WttrInOptions) (*Options,
 	name = strings.TrimSuffix(name, ".PNG") // just in case
 
 	if name == "" {
-		return &Options{Output: "png"}, "", nil
+		return &options.Options{Output: "png"}, "", nil
 	}
 
 	// 2. Split into location + option parts
 	parts := strings.Split(name, "_")
 	if len(parts) == 0 {
-		return &Options{Output: "png"}, "", nil
+		return &options.Options{Output: "png"}, "", nil
 	}
 
 	location := parts[0]
@@ -246,20 +277,19 @@ func ParseOptionsInFilename(filename string, cfg *spec.WttrInOptions) (*Options,
 	// 4. Turn into query string and parse with the real parser
 	queryStr := qParams.Encode()
 
-	rawMap, err := options.ParseQueryString(queryStr, cfg)
+	rawMap, err := ParseQueryString(queryStr, cfg)
 	if err != nil {
 		return nil, "", fmt.Errorf("failed to parse converted PNG query: %w (query was: %s)", err, queryStr)
 	}
 
-	// 5. Build Options the standard way
-	opts := &Options{
+	// 5. Build options.Options the standard way
+	opts := &options.Options{
 		Output:       "png",
 		Location:     location,
-		Transparency: 150,  // PNG default
-		Metric:       true, // global default
+		Transparency: 150, // PNG default
 	}
 
-	opts, err = ApplyParsedMap(opts, rawMap)
+	opts, err = options.ApplyParsedMap(opts, rawMap)
 	if err != nil {
 		return nil, "", err
 	}
@@ -267,7 +297,7 @@ func ParseOptionsInFilename(filename string, cfg *spec.WttrInOptions) (*Options,
 	return opts, location, nil
 }
 
-func Validate(opts *Options) error {
+func Validate(opts *options.Options) error {
 	if !isValidView(opts.View) {
 		return fmt.Errorf("invalid view: %s", opts.View)
 	}
@@ -286,17 +316,25 @@ func isValidLanguageCode(code string) bool {
 func isValidView(view string) bool {
 	// Example: support "v2", "j1", "j2" as valid views
 	return view == "files" ||
+		view == "page" ||
 		view == "line" ||
 		view == "v1" ||
+		view == "v1x" ||
 		view == "v2" ||
 		view == "p1" ||
 		view == "j1" ||
 		view == "j2"
 }
 
+// isBrowserClient determines if the User-Agent indicates a web browser.
+// All real browsers include "Mozilla/" in their User-Agent string for
+// historical Netscape-compatibility reasons.
+func isBrowserClient(userAgent string) bool {
+	return strings.Contains(strings.ToLower(userAgent), "mozilla/")
+}
+
 // isPlainTextClient determines if the User-Agent indicates a plain text client like curl or wget.
 func isPlainTextClient(userAgent string) bool {
-	// plainTextAgents contains signatures of the plain-text agents.
 	plainTextAgents := []string{
 		"curl",
 		"httpie",
@@ -321,5 +359,14 @@ func isPlainTextClient(userAgent string) bool {
 		}
 	}
 
+	return false
+}
+
+func inSlice(what string, where []string) bool {
+	for _, item := range where {
+		if item == what {
+			return true
+		}
+	}
 	return false
 }

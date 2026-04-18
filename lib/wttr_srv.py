@@ -9,6 +9,7 @@ import logging
 import io
 import os
 import time
+import json
 from gevent.threadpool import ThreadPool
 from flask import render_template, send_file, make_response
 
@@ -332,7 +333,42 @@ def parse_request(location, request, query, fast_mode=False):
     parsed_query["html_output"] = get_output_format(query, parsed_query)
     parsed_query["json_output"] = (parsed_query.get("view", "") or "").startswith("j")
 
-    if not fast_mode:  # not png_filename and not fast_mode:
+    # Extracting options passed by the core from the header
+
+    core_options_header_json_str = request.headers.get("X-Options", "")
+    core_options_header_json_str = core_options_header_json_str.encode(
+        "latin-1"
+    ).decode("utf-8")
+    if core_options_header_json_str:
+        core_options = json.loads(core_options_header_json_str)
+        if "view" in core_options:
+            del core_options["view"]
+        parsed_query.update(core_options)
+
+    # Extracting location data from the header
+
+    location_header_json_str = request.headers.get("X-Location", "")
+    location_header_json_str = location_header_json_str.encode("latin-1").decode(
+        "utf-8"
+    )
+    if location_header_json_str:
+        loc_json = json.loads(location_header_json_str)
+
+        location = "%s,%s" % (loc_json["Latitude"], loc_json["Longitude"])
+        hemisphere = float(loc_json["Latitude"]) > 0
+
+        parsed_query.update(
+            {
+                "location": location,
+                "override_location_name": loc_json["Name"],
+                "full_address": loc_json["FullAddress"],
+                "country": loc_json["Country"],
+                "query_source_location": location,
+                "hemisphere": hemisphere,
+            }
+        )
+
+    elif not fast_mode:  # not png_filename and not fast_mode:
         (
             location,
             override_location_name,
@@ -363,6 +399,7 @@ def parse_request(location, request, query, fast_mode=False):
         )
 
     parsed_query.update(query)
+
     return parsed_query
 
 

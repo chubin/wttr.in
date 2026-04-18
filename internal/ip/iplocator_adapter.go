@@ -3,6 +3,7 @@ package ip
 import (
 	"fmt"
 
+	"github.com/chubin/wttr.in/internal/domain"
 	"github.com/chubin/wttr.in/internal/weather"
 )
 
@@ -14,13 +15,13 @@ func NewIPCacheLocator(cache *Cache) weather.IPLocator {
 	return &ipCacheLocator{cache}
 }
 
-func (l *ipCacheLocator) GetIPData(ip string) (*weather.IPData, error) {
+func (l *ipCacheLocator) GetIPData(ip string) (*domain.IPData, error) {
 	addr, err := l.cache.Read(ip)
 	if err != nil {
-		return &weather.IPData{}, err
+		return &domain.IPData{}, err
 	}
 
-	return &weather.IPData{
+	return &domain.IPData{
 		IP:          addr.IP,
 		CountryCode: addr.CountryCode,
 		Country:     addr.Country,

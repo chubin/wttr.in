@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/chubin/wttr.in/internal/query"
-	"github.com/chubin/wttr.in/internal/weather"
+	"github.com/chubin/wttr.in/internal/domain"
+	"github.com/chubin/wttr.in/internal/options"
 )
 
 // ──────────────────────────────────────────────────────────────────────────────
@@ -44,7 +44,7 @@ func NewOnelineRenderer() *OnelineRenderer {
 // Helpers (usually kept private in the same file)
 // ──────────────────────────────────────────────────────────────────────────────
 
-func (r *OnelineRenderer) determineFormat(opts *query.Options) string {
+func (r *OnelineRenderer) determineFormat(opts *options.Options) string {
 	if opts == nil || opts.Format == "" {
 		return "%c %t" // sensible minimal default
 	}
@@ -74,8 +74,8 @@ var ErrNoWeatherData = errors.New("no weather data available in query")
 type renderContext struct {
 	Data     *parsedCurrentCondition
 	DataRaw  interface{}
-	Options  *query.Options
-	Location *weather.Location
+	Options  *options.Options
+	Location *domain.Location
 	Now      time.Time
 }
 
@@ -113,21 +113,21 @@ var placeholderRenderers = map[rune]RenderFunc{
 // Main rendering loop using the map
 // ──────────────────────────────────────────────────────────────────────────────
 
-func (r *OnelineRenderer) Render(q weather.Query) (weather.RenderOutput, error) {
+func (r *OnelineRenderer) Render(q domain.Query) (domain.RenderOutput, error) {
 	if q.Weather == nil || len(*q.Weather) == 0 {
-		return weather.RenderOutput{}, fmt.Errorf("no weather data")
+		return domain.RenderOutput{}, fmt.Errorf("no weather data")
 	}
 
 	data, err := parseCurrentCondition(*q.Weather)
 	if err != nil {
-		return weather.RenderOutput{}, err
+		return domain.RenderOutput{}, err
 	}
 
 	var dataRaw interface{} // or map[string]interface{}
 
 	err = json.Unmarshal(*q.Weather, &dataRaw)
 	if err != nil {
-		return weather.RenderOutput{}, err
+		return domain.RenderOutput{}, err
 	}
 
 	formatStr := r.determineFormat(q.Options)
@@ -165,7 +165,7 @@ func (r *OnelineRenderer) Render(q weather.Query) (weather.RenderOutput, error) 
 	// Replace \n in the text with new lines
 	output = strings.ReplaceAll(output, `\n`, "\n")
 
-	return weather.RenderOutput{
+	return domain.RenderOutput{
 		Content: []byte(output),
 	}, nil
 }

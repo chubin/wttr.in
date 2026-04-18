@@ -11,8 +11,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/chubin/wttr.in/internal/query"
-	"github.com/chubin/wttr.in/internal/weather"
+	"github.com/chubin/wttr.in/internal/domain"
+	"github.com/chubin/wttr.in/internal/options"
 )
 
 type Config struct {
@@ -30,10 +30,6 @@ type UplinkProcessor struct {
 	client2 *http.Client
 	client3 *http.Client
 	client4 *http.Client
-	// transport1 *http.Transport
-	// transport2 *http.Transport
-	// transport3 *http.Transport
-	// transport4 *http.Transport
 }
 
 func NewUplinkProcessor(cfg Config) *UplinkProcessor {
@@ -62,42 +58,14 @@ func NewUplinkProcessor(cfg Config) *UplinkProcessor {
 		client3: mkClient(cfg.Address3),
 		client4: mkClient(cfg.Address4),
 	}
-
-	// transport1 := &http.Transport{
-	// 	DialContext: func(ctx context.Context, network, _ string) (net.Conn, error) {
-	// 		return dialer.DialContext(ctx, network, cfg.Address1)
-	// 	},
-	// }
-	// transport2 := &http.Transport{
-	// 	DialContext: func(ctx context.Context, network, _ string) (net.Conn, error) {
-	// 		return dialer.DialContext(ctx, network, cfg.Address2)
-	// 	},
-	// }
-	// transport3 := &http.Transport{
-	// 	DialContext: func(ctx context.Context, network, _ string) (net.Conn, error) {
-	// 		return dialer.DialContext(ctx, network, cfg.Address3)
-	// 	},
-	// }
-	// transport4 := &http.Transport{
-	// 	DialContext: func(ctx context.Context, network, _ string) (net.Conn, error) {
-	// 		return dialer.DialContext(ctx, network, cfg.Address4)
-	// 	},
-	// }
-
-	// return &UplinkProcessor{
-	// 	transport1: transport1,
-	// 	transport2: transport2,
-	// 	transport3: transport3,
-	// 	transport4: transport4,
-	// }
 }
 
 func (p *UplinkProcessor) Route(
-	opts *query.Options, r *http.Request, ipData *weather.IPData, location *weather.Location,
-) (bool, *weather.CacheEntry, error) {
+	opts *options.Options, r *http.Request, ipData *domain.IPData, location *domain.Location,
+) (bool, *domain.CacheEntry, error) {
 	var (
 		uplinkRoute    bool = true
-		uplinkResponse *weather.CacheEntry
+		uplinkResponse *domain.CacheEntry
 		err            error
 		client         *http.Client
 	)
@@ -105,14 +73,14 @@ func (p *UplinkProcessor) Route(
 	//////////////////////////////////////////
 
 	// Views that are not processed by the uplink.
-	if opts.View == "line" || opts.View == "j1" || opts.View == "j2" {
+	if opts.View == "line" || opts.View == "j1" || opts.View == "j2" || opts.View == "v1x" || opts.View == "v1" || opts.View == "files" || opts.View == "page" {
 		return false, nil, nil
 	}
 
 	if checkURLForPNG(r) {
 		client = p.client4
-	} else if opts.View == "v1" || opts.View == "files" {
-		client = p.client3
+		// } else if opts.View == "v1" || opts.View == "files" {
+		// 	client = p.client3
 	} else if opts.View == "v2" || opts.View == "p1" {
 		client = p.client2
 	} else {
@@ -122,78 +90,101 @@ func (p *UplinkProcessor) Route(
 	//////////////////////////////////////////
 
 	if uplinkRoute {
-		uplinkResponse, err = getUplink(r, client, location)
+		uplinkResponse, err = getUplink(r, client, location, opts)
 	}
 
 	return uplinkRoute, uplinkResponse, err
 }
 
-func getUplink(req *http.Request, client *http.Client, location *weather.Location) (*weather.CacheEntry, error) {
-	// client := &http.Client{
-	// 	Transport: transport,
-	// }
+// getUplink forwards the incoming request to one of the backend uplink servers
+// and returns a cacheable response.
+//
+// It enriches the request with location and options data so the backend
+// can render the weather without needing to re-parse everything.
+func getUplink(req *http.Request, client *http.Client, location *domain.Location, opts *options.Options) (*domain.CacheEntry, error) {
+	// Build the target URL using the original Host and RequestURI.
+	// This preserves query parameters, path, etc.
+	targetURL := fmt.Sprintf("http://%s%s", req.Host, req.RequestURI)
 
-	queryURL := fmt.Sprintf("http://%s%s", req.Host, req.RequestURI)
-
-	proxyReq, err := http.NewRequest(req.Method, queryURL, req.Body)
+	// Create a new request that will be sent to the uplink backend.
+	proxyReq, err := http.NewRequestWithContext(req.Context(), req.Method, targetURL, req.Body)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to create proxy request: %w", err)
 	}
 
-	// proxyReq.Header.Set("Host", req.Host)
-	// proxyReq.Header.Set("X-Forwarded-For", req.RemoteAddr)
-
+	// Copy all original headers.
 	for header, values := range req.Header {
 		for _, value := range values {
 			proxyReq.Header.Add(header, value)
 		}
 	}
 
+	// Ensure we forward the real client IP.
 	if proxyReq.Header.Get("X-Forwarded-For") == "" {
 		proxyReq.Header.Set("X-Forwarded-For", ipFromAddr(req.RemoteAddr))
 	}
 
-	locationJson, err := json.Marshal(location)
-	if err != nil {
-		return nil, err
+	// Attach location data (geolocation info) as JSON header.
+	if location != nil {
+		locationJSON, err := json.Marshal(location)
+		if err != nil {
+			return nil, fmt.Errorf("failed to marshal location: %w", err)
+		}
+		proxyReq.Header.Set("X-Location", string(locationJSON))
 	}
 
-	proxyReq.Header.Set("X-Location", string(locationJson))
+	// Attach parsed options as JSON header.
+	if opts != nil {
+		optionsJSON, err := json.Marshal(opts)
+		if err != nil {
+			return nil, fmt.Errorf("failed to marshal options: %w", err)
+		}
+		proxyReq.Header.Set("X-Options", string(optionsJSON))
+	}
 
+	// Perform the request to the backend.
 	res, err := client.Do(proxyReq)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("uplink request failed: %w", err)
 	}
 	defer res.Body.Close()
 
 	body, err := io.ReadAll(res.Body)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to read uplink response body: %w", err)
 	}
 
-	return &weather.CacheEntry{
+	// Return a CacheEntry with randomized expiration (17–25 minutes) to
+	// spread out cache invalidation and reduce thundering herd on backends.
+	return &domain.CacheEntry{
 		Expires:    time.Now().Add(time.Duration(randInt(1000, 1500)) * time.Second),
 		Body:       body,
-		Header:     res.Header,
+		Header:     res.Header.Clone(), // clone to avoid sharing mutable header map
 		StatusCode: res.StatusCode,
 	}, nil
 }
 
+// checkURLForPNG returns true if the request is for a .png image
+// but not for files in the /files/ directory.
 func checkURLForPNG(r *http.Request) bool {
-	url := r.URL.String()
-	return strings.Contains(url, ".png") && !strings.Contains(url, "/files/")
+	urlStr := r.URL.String()
+	return strings.Contains(urlStr, ".png") && !strings.Contains(urlStr, "/files/")
 }
 
-func randInt(min int, max int) int {
+// randInt returns a random integer in the range [min, max).
+// Note: rand.Seed should be called once at program startup for better randomness.
+func randInt(min, max int) int {
+	if max <= min {
+		return min
+	}
 	return min + rand.Intn(max-min)
 }
 
-// ipFromAddr returns IP address from a ADDR:PORT pair.
+// ipFromAddr extracts the IP address from an "IP:PORT" string.
+// Returns the original string if no colon is found.
 func ipFromAddr(s string) string {
-	pos := strings.LastIndex(s, ":")
-	if pos == -1 {
-		return s
+	if pos := strings.LastIndex(s, ":"); pos != -1 {
+		return s[:pos]
 	}
-
-	return s[:pos]
+	return s
 }

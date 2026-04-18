@@ -10,6 +10,7 @@ import (
 	"time"
 	"unicode"
 
+	"github.com/chubin/wttr.in/internal/domain"
 	"github.com/chubin/wttr.in/internal/location"
 	"github.com/sirupsen/logrus"
 )
@@ -34,7 +35,7 @@ func NewCacheLocator(cache *location.Cache) Locator {
 }
 
 // GetLocation implements Locator interface
-func (l *cacheLocator) GetLocation(locationName string) (*Location, error) {
+func (l *cacheLocator) GetLocation(locationName string) (*domain.Location, error) {
 	// unknownLocation is a temporary workaround to limit
 	// the stream of the incorrect locations resolutions attempts.
 	//
@@ -98,7 +99,7 @@ func (l *cacheLocator) GetLocation(locationName string) (*Location, error) {
 	//
 	// → for most use-cases option 1 is acceptable
 
-	return &Location{
+	return &domain.Location{
 		Name: raw.Name, // already normalized
 		// Country:      "",              // not available
 		// CountryCode:  "",              // not available

@@ -21,6 +21,7 @@ query_options:
     type: string
     values:
       - v1
+      - v1x
       - v2
       - v3
       - line
@@ -82,38 +83,6 @@ query_options:
   - name: standard_font
     short: d
     description: "Restrict output to standard console font glyphs"
-    type: boolean
-    default: false
-    active: true
-  - name: no_follow
-    short: F
-    description: "Do not show the 'Follow' line"
-    type: boolean
-    default: false
-    active: true
-  - name: metric
-    short: m
-    description: "Use metric (SI) units (default everywhere except US)"
-    type: boolean
-    values:
-      - true
-      - false
-    default: true
-    active: true
-    note: "Overridden by 'uscs' if specified; default is 'uscs' in US"
-  - name: uscs
-    short: u
-    description: "Use USCS units (default in the US)"
-    type: boolean
-    values:
-      - true
-      - false
-    default: false
-    active: true
-    note: "Default is 'uscs' in US, 'metric' elsewhere"
-  - name: wind_ms
-    short: M
-    description: "Show wind speed in meters per second"
     type: boolean
     default: false
     active: true
@@ -214,7 +183,7 @@ query_options:
       cy: "Welsh (partial support)"
       bs: "Bosnian (partial support)"
       by: "Belarusian (partial support)"
-      cz: "Czech (partial support)"
+      cs: "Czech (partial support)"
       eo: "Esperanto (partial support)"
       es: "Spanish (partial support)"
       eu: "Basque (partial support)"
@@ -285,6 +254,8 @@ query_options:
     active: true
     note: "Disables advanced terminal features"
 
+####################################################
+
   - name: use_metric
     short: m
     description: "Use metric units for measurements"
@@ -302,12 +273,24 @@ query_options:
     note: "Only active when used with 'M' flag for metric units"
 
   - name: use_imperial
-    short: u
     description: "Use imperial units for measurements"
     type: boolean
     default: false
     active: true
     note: "Sets units to imperial system"
+
+  - name: use_uscs
+    short: u
+    description: "Use USCS units (default in the US)"
+    type: boolean
+    values:
+      - true
+      - false
+    default: false
+    active: true
+    note: "Default is 'uscs' in US, 'metric' elsewhere"
+
+####################################################
 
   - name: inverted_colors
     short: I

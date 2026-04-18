@@ -6,7 +6,7 @@ import (
 	"net/netip"
 	"strconv"
 
-	"github.com/chubin/wttr.in/internal/weather"
+	"github.com/chubin/wttr.in/internal/domain"
 	"github.com/oschwald/geoip2-golang/v2"
 )
 
@@ -34,7 +34,7 @@ func (l *IPLocatorGeoIP2) Close() error {
 }
 
 // GetIPData implements the IPLocator interface.
-func (l *IPLocatorGeoIP2) GetIPData(ipStr string) (*weather.IPData, error) {
+func (l *IPLocatorGeoIP2) GetIPData(ipStr string) (*domain.IPData, error) {
 	ip, err := netip.ParseAddr(ipStr)
 	if err != nil {
 		return nil, fmt.Errorf("invalid IP address: %w", err)
@@ -49,7 +49,7 @@ func (l *IPLocatorGeoIP2) GetIPData(ipStr string) (*weather.IPData, error) {
 		return nil, errors.New("no geolocation data found for this IP")
 	}
 
-	data := &weather.IPData{
+	data := &domain.IPData{
 		IP: ipStr,
 	}
 

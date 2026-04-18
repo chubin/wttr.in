@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"strconv"
 	"time"
+
+	"github.com/chubin/wttr.in/internal/domain"
 )
 
 // parsedCurrentCondition is a normalized, ready-to-use view of current weather
@@ -19,6 +21,7 @@ type parsedCurrentCondition struct {
 	FeelsLikeF     float64
 	Humidity       int     // 0–100
 	PrecipMM       float64 // mm in last period (usually 1h or 3h)
+	PrecipInches   float64 // mm in last period (usually 1h or 3h)
 	ChanceOfRain   int     // 0–100 %
 	PressureHpa    int
 	UVIndex        int
@@ -39,14 +42,10 @@ type parsedCurrentCondition struct {
 // parseCurrentCondition extracts and normalizes current weather data
 // from the raw JSON bytes returned by the upstream weather service.
 func parseCurrentCondition(raw []byte) (*parsedCurrentCondition, error) {
-	var fullWrapped struct {
-		Data WeatherData `json:"data"`
-	}
-	if err := json.Unmarshal(raw, &fullWrapped); err != nil {
+	var full domain.Weather
+	if err := json.Unmarshal(raw, &full); err != nil {
 		return nil, fmt.Errorf("invalid weather JSON: %w", err)
 	}
-
-	full := fullWrapped.Data
 
 	if len(full.CurrentCondition) == 0 {
 		return nil, fmt.Errorf("response missing current_condition array")
@@ -61,6 +60,7 @@ func parseCurrentCondition(raw []byte) (*parsedCurrentCondition, error) {
 
 	humidity, _ := strconv.Atoi(cc.Humidity)
 	precipMM, _ := strconv.ParseFloat(cc.PrecipMM, 64)
+	precipInches, _ := strconv.ParseFloat(cc.PrecipInches, 64)
 	pressure, _ := strconv.Atoi(cc.Pressure)
 	uv, _ := strconv.Atoi(cc.UVIndex)
 	windKmph, _ := strconv.ParseFloat(cc.WindspeedKmph, 64)
@@ -109,6 +109,7 @@ func parseCurrentCondition(raw []byte) (*parsedCurrentCondition, error) {
 		FeelsLikeF:       feelsF,
 		Humidity:         humidity,
 		PrecipMM:         precipMM,
+		PrecipInches:     precipInches,
 		ChanceOfRain:     0, // often comes from hourly → can be filled later if needed
 		PressureHpa:      pressure,
 		UVIndex:          uv,

@@ -1,7 +1,7 @@
-package oneline
+package domain
 
 // WeatherData represents the top-level structure of the weather API response.
-type WeatherData struct {
+type Weather struct {
 	CurrentCondition []CurrentCondition `json:"current_condition"`
 	NearestArea      []NearestArea      `json:"nearest_area"`
 	Request          []Request          `json:"request"`

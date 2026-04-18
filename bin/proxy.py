@@ -110,9 +110,12 @@ def _cache_file(path, query):
     is slightly varied basing on the path+query sha1 hash digest.
     """
 
+    # return "internal/renderer/v1/testdata/weather-with-data.json"
+    # return "/wttr.in/wttr.in-v2-v2/just-some-data.json"
+
     digest = hashlib.sha1(("%s %s" % (path, query)).encode("utf-8")).hexdigest()
     digest_number = ord(digest[0].upper())
-    penalty = 0
+    penalty = 50
     expiry_interval = 60 * (digest_number + penalty)
 
     timestamp = "%010d" % (int(time.time()) // expiry_interval * expiry_interval)
@@ -223,6 +226,9 @@ def add_translations(content, lang):
             d["data"]["current_condition"][0]["lang_%s" % lang] = [
                 {"value": translate(weather_condition, lang)}
             ]
+            d["data"]["current_condition"][0]["lang_xx"] = d["data"][
+                "current_condition"
+            ][0]["lang_%s" % lang]
         elif lang == "sr":
             d["data"]["current_condition"][0]["lang_%s" % lang] = [
                 {
@@ -231,6 +237,9 @@ def add_translations(content, lang):
                     )
                 }
             ]
+            d["data"]["current_condition"][0]["lang_xx"] = d["data"][
+                "current_condition"
+            ][0]["lang_%s" % lang]
         elif lang == "el":
             d["data"]["current_condition"][0]["lang_%s" % lang] = [
                 {
@@ -239,10 +248,16 @@ def add_translations(content, lang):
                     )
                 }
             ]
+            d["data"]["current_condition"][0]["lang_xx"] = d["data"][
+                "current_condition"
+            ][0]["lang_%s" % lang]
         elif lang == "sr-lat":
             d["data"]["current_condition"][0]["lang_%s" % lang] = [
                 {"value": d["data"]["current_condition"][0]["lang_sr"][0]["value"]}
             ]
+            d["data"]["current_condition"][0]["lang_xx"] = d["data"][
+                "current_condition"
+            ][0]["lang_%s" % lang]
 
         fixed_weather = []
         for w in d["data"]["weather"]:  # pylint: disable=invalid-name
@@ -253,16 +268,20 @@ def add_translations(content, lang):
                     h["lang_%s" % lang] = [
                         {"value": translate(weather_condition, lang)}
                     ]
+                    h["lang_xx"] = h["lang_%s" % lang]
                 elif lang == "sr":
                     h["lang_%s" % lang] = [
                         {"value": cyr(h["lang_%s" % lang][0]["value"])}
                     ]
+                    h["lang_xx"] = h["lang_%s" % lang]
                 elif lang == "el":
                     h["lang_%s" % lang] = [
                         {"value": _patch_greek(h["lang_%s" % lang][0]["value"])}
                     ]
+                    h["lang_xx"] = h["lang_%s" % lang]
                 elif lang == "sr-lat":
                     h["lang_%s" % lang] = [{"value": h["lang_sr"][0]["value"]}]
+                    h["lang_xx"] = h["lang_%s" % lang]
                 fixed_hourly.append(h)
             w["hourly"] = fixed_hourly
             fixed_weather.append(w)
@@ -329,7 +348,8 @@ def _make_query(path, query_string):
     else:
         # WWO tweaks
         query_string += "&extra=localObsTime"
-        query_string += "&includelocation=yes"
+        if "includelocation" not in query_string:
+            query_string += "&includelocation=yes"
         content, headers = _fetch_content_and_headers(path, query_string)
 
     return content, headers
@@ -388,7 +408,7 @@ if __name__ == "__main__":
     # app.debug = True
     if len(sys.argv) == 1:
         bind_addr = "0.0.0.0"
-        logging.getLogger('werkzeug').setLevel(logging.ERROR)  # Suppress Werkzeug logs
+        logging.getLogger("werkzeug").setLevel(logging.ERROR)  # Suppress Werkzeug logs
         SERVER = WSGIServer((bind_addr, PROXY_PORT), APP, log=None)
         SERVER.serve_forever()
     else:

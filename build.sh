@@ -20,6 +20,9 @@ EMBED_TARGET_DIR="internal/assets/embed"
 # Directories whose contents should be embedded (relative to project root)
 ASSET_ROOTS=(
     "spec"
+    "share/static"
+    "share/pages"
+    "share/templates"
 )
 
 
@@ -50,6 +53,7 @@ copy_assets() {
         fi
 
         target_dir="${EMBED_TARGET_DIR}/${src_root}"
+        mkdir -p "$target_dir"
 
         # Use rsync to copy directory structure efficiently
         # -a = archive mode (preserves permissions, times, symlinks, etc.)
@@ -107,9 +111,16 @@ cmd_build() {
     fi
 }
 
+cmd_update_css() {
+    curl -L -o share/static/terminal.css \
+      https://raw.githubusercontent.com/buildkite/terminal-to-html/refs/heads/main/internal/assets/terminal.css
+    sed -i 's@^[.]term-container {@.term-container-disabled {@' share/static/terminal.css
+}
+
 cmd_gen() {
     info "Generating..."
     ./"$BINARY_NAME" gen
+    go fmt internal/options/options.go
     info "Generating done"
 }
 
@@ -158,6 +169,7 @@ main() {
         gen)        cmd_gen "$@" ;;
         all)        cmd_all "$@" ;;
         clean)      cmd_clean "$@" ;;
+        update-css) cmd_update_css "$@" ;;
         help|--help|-h)
                     cmd_help ;;
         *)

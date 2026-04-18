@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"os"
 	"time"
@@ -10,11 +11,15 @@ import (
 
 	"github.com/chubin/wttr.in/internal/cache"
 	"github.com/chubin/wttr.in/internal/config"
+	"github.com/chubin/wttr.in/internal/formatter"
 	"github.com/chubin/wttr.in/internal/generate"
 	"github.com/chubin/wttr.in/internal/ip"
 	"github.com/chubin/wttr.in/internal/location"
 	"github.com/chubin/wttr.in/internal/logging"
-	"github.com/chubin/wttr.in/internal/oneline"
+	"github.com/chubin/wttr.in/internal/query"
+	"github.com/chubin/wttr.in/internal/renderer"
+	"github.com/chubin/wttr.in/internal/renderer/oneline"
+	v1 "github.com/chubin/wttr.in/internal/renderer/v1"
 	"github.com/chubin/wttr.in/internal/server"
 	"github.com/chubin/wttr.in/internal/spec"
 	"github.com/chubin/wttr.in/internal/uplink"
@@ -47,11 +52,27 @@ func srv(configFile string) error {
 	////////////////////////////
 
 	rendererMap := map[string]weather.Renderer{
-		"v1":   &weather.V1Renderer{},
-		"v2":   &weather.V2Renderer{},
-		"j1":   &weather.J1Renderer{},
-		"j2":   &weather.J2Renderer{},
+		"v1":   v1.NewV1Renderer(),
+		"v1x":  v1.NewV1Renderer(),
+		"v2":   &renderer.V2Renderer{},
+		"j1":   &renderer.J1Renderer{},
+		"j2":   &renderer.J2Renderer{},
 		"line": oneline.NewOnelineRenderer(),
+		"page": renderer.NewPageRenderer(),
+	}
+
+	////////////////////////////
+	// Configuring Formatters.
+	////////////////////////////
+
+	htmlFormatter, err := formatter.NewHTMLFormatter()
+	if err != nil {
+		return fmt.Errorf("html formatter creation error: %w", err)
+	}
+
+	formatterMap := map[string]weather.Formatter{
+		"text": &formatter.TextFormatter{},
+		"html": htmlFormatter,
 	}
 
 	////////////////////////////
@@ -91,11 +112,12 @@ func srv(configFile string) error {
 		weather.NewWeatherClient(cfg.Weather.WWO),
 		weather.NewCacheLocator(locationCache),
 		ipLocators,
-		weather.NewQueryParser(spec),
+		query.NewQueryParser(spec),
 		lruCache,
 		requestLogger,
 		uplink.NewUplinkProcessor(cfg.Uplink),
 		rendererMap,
+		formatterMap,
 	)
 
 	return server.Serve(&cfg.Server, &cfg.Logging, ws)

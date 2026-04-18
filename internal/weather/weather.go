@@ -3,6 +3,7 @@ package weather
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"log"
 	"net"
@@ -11,8 +12,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/chubin/wttr.in/internal/query"
+	"github.com/chubin/wttr.in/internal/domain"
+	"github.com/chubin/wttr.in/internal/options"
+	"github.com/chubin/wttr.in/internal/renderer"
 )
+
+var ErrDataSource = errors.New("weather data source not available")
 
 // Weatherer interface to fetch weather data based on location and language.
 type Weatherer interface {
@@ -21,45 +26,45 @@ type Weatherer interface {
 
 // IPLocator interface to fetch IP-related data.
 type IPLocator interface {
-	GetIPData(ip string) (*IPData, error)
+	GetIPData(ip string) (*domain.IPData, error)
 }
 
 // Locator interface to fetch location-related data.
 type Locator interface {
-	GetLocation(location string) (*Location, error)
+	GetLocation(location string) (*domain.Location, error)
 }
 
 // Renderer interface for rendering weather data into a visual representation.
 type Renderer interface {
-	Render(query Query) (RenderOutput, error)
+	Render(query domain.Query) (domain.RenderOutput, error)
 }
 
 // Formatter interface for converting rendered output into the final format.
 type Formatter interface {
-	Format(output RenderOutput) (*FormatOutput, error)
+	Format(query *domain.Query, output *domain.RenderOutput) (*domain.FormatOutput, error)
 }
 
 // QueryParser parses wttr.in / curl wttr.in style HTTP query strings
-// and returns the result as a strongly-typed *query.Options struct.
+// and returns the result as a strongly-typed *options.Options struct.
 type QueryParser interface {
 	// Parse parses the raw query string (the part after the ? character)
-	// and returns a populated *query.Options struct with all valid, active options set.
+	// and returns a populated *options.Options struct with all valid, active options set.
 	//
 	//   - Boolean flags without values are set to true (e.g. ?T -> Options.T = true)
 	//   - Short flags can be bundled (e.g. ?0pq -> CurrentOnly=true, p=true, q=true)
 	//   - Unknown, inactive, or invalid parameters cause an error
 	//   - Validation rules from the YAML spec (ranges, regexps, allowed values, ...) are enforced
 	//
-	// If the query is empty (no ? or ? alone), a zero-valued *query.Options is typically returned
+	// If the query is empty (no ? or ? alone), a zero-valued *options.Options is typically returned
 	// (all fields false/0/"").
 	//
 	// ctx can be used for cancellation, request-scoped logging, metrics collection, etc.
 	// Most implementations will ignore it in the first version.
-	Parse(ctx context.Context, r *http.Request) (*query.Options, error)
+	Parse(context.Context, *http.Request, *options.Options) (*options.Options, error)
 
 	// MustParse is a convenience variant that panics on error.
 	// Mainly useful in tests, initialization code, or when invalid input is a programmer error.
-	MustParse(ctx context.Context, r *http.Request) *query.Options
+	MustParse(context.Context, *http.Request, *options.Options) *options.Options
 }
 
 type RequestLogger interface {
@@ -67,58 +72,7 @@ type RequestLogger interface {
 }
 
 type UplinkProcessor interface {
-	Route(opts *query.Options, r *http.Request, ipData *IPData, location *Location) (bool, *CacheEntry, error)
-}
-
-// ClientData holds information about the client making the request.
-type ClientData struct {
-	ClientIP    string
-	ClientAgent string
-}
-
-// IPData holds information about the client's IP address and location.
-type IPData struct {
-	IP          string
-	CountryCode string
-	Country     string
-	Region      string
-	City        string
-	Latitude    string
-	Longitude   string
-}
-
-// Location holds detailed information about a specific location.
-type Location struct {
-	Name        string
-	Country     string
-	CountryCode string
-	Latitude    float64
-	Longitude   float64
-	FullAddress string
-	TimeZone    string
-}
-
-// WeatherData represents the internal weather data as raw bytes.
-type WeatherData []byte
-
-// Query holds all data necessary for processing a weather query.
-type Query struct {
-	ClientData *ClientData
-	Options    *query.Options
-	IPData     *IPData
-	Location   *Location
-	Weather    *WeatherData
-}
-
-// RenderOutput represents the intermediate output from a renderer (ANSI format).
-type RenderOutput struct {
-	Content []byte
-}
-
-// FormatOutput represents the final formatted output to be sent to the client.
-type FormatOutput struct {
-	Content     []byte
-	ContentType string
+	Route(opts *options.Options, r *http.Request, ipData *domain.IPData, location *domain.Location) (bool, *domain.CacheEntry, error)
 }
 
 // TimeTracker holds timing information for each step in the pipeline.
@@ -151,6 +105,7 @@ type WeatherService struct {
 	RequestLogger   RequestLogger
 	UplinkProcessor UplinkProcessor
 	RendererMap     map[string]Renderer
+	FormatterMap    map[string]Formatter
 }
 
 // NewWeatherService initializes a new pipeline based on the provided options.
@@ -163,6 +118,7 @@ func NewWeatherService(
 	requestLogger RequestLogger,
 	uplinkProcessor UplinkProcessor,
 	rendererMap map[string]Renderer,
+	formatterMap map[string]Formatter,
 ) *WeatherService {
 	return &WeatherService{
 		Weatherer:       weatherer,
@@ -173,6 +129,7 @@ func NewWeatherService(
 		RequestLogger:   requestLogger,
 		UplinkProcessor: uplinkProcessor,
 		RendererMap:     rendererMap,
+		FormatterMap:    formatterMap,
 	}
 }
 
@@ -203,83 +160,80 @@ func getClientIP(r *http.Request) string {
 	return r.RemoteAddr // worst case
 }
 
-// WeatherHandler is now much shorter — mainly orchestration + caching
+// WeatherHandler handles weather requests with proper cache coalescing.
 func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-	var (
-		bypassCache bool
-		cacheKey    string
-		entry       *CacheEntry
-		err         error
-	)
-
 	overallStart := time.Now()
-	tracker := TimeTracker{}
 
-	// Log incoming request.
-	// If the logging was not successful, write a warning and continue.
+	// Best-effort logging
 	if err := s.RequestLogger.Log(r); err != nil {
-		log.Println(err)
+		log.Println("RequestLogger error:", err)
 	}
 
-	if r.URL.Query().Get("debug") != "" {
-		bypassCache = true
+	bypassCache := r.URL.Query().Get("debug") != ""
+
+	if bypassCache {
+		s.serveFreshResponse(ctx, w, r)
+		return
 	}
 
-	if !bypassCache {
-		// 3. Build cache key (must include everything that affects output)
-		cacheKey = buildCacheKey(r)
+	cacheKey := buildCacheKey(r)
 
-		// 4. Fast path: cache hit
-		if entry := s.Cacher.Get(cacheKey); entry != nil {
+	// Fast path: cache hit
+	if entry := s.Cacher.Get(cacheKey); entry != nil {
+		s.serveFromCache(w, entry)
+		return
+	}
+
+	// Try to become the leader (atomic check + set)
+	if !s.Cacher.SetInProgressIfNotExists(cacheKey) {
+		// Someone else is already computing or we have a fresh entry now
+		if entry, err := s.Cacher.WaitForCompletion(cacheKey, 12*time.Second); err == nil && entry != nil {
 			s.serveFromCache(w, entry)
 			return
 		}
-
-		// 5. Coalescing: if someone else is already computing → wait
-		if s.Cacher.IsInProgress(cacheKey) {
-			entry, err := s.Cacher.WaitForCompletion(cacheKey, 12*time.Second)
-			if err == nil && entry != nil {
-				s.serveFromCache(w, entry)
-				return
-			}
-			// timeout → we'll compute it ourselves
-		}
-
-		// 6. Become the leader: mark in-progress and compute
-		s.Cacher.SetInProgress(cacheKey)
-
-		// Important: recover from panic to clean up in-progress flag
-		defer func() {
-			if rec := recover(); rec != nil {
-				s.Cacher.Remove(cacheKey)
-				panic(rec)
-			}
-		}()
+		// Timeout or failure → fall through and compute ourselves
 	}
 
-	// 7. The heavy part — now extracted
-	entry, err = s.computeResponse(ctx, r, &tracker)
+	// We are the leader → compute and store
+	s.computeAndStore(ctx, w, r, cacheKey, overallStart)
+}
+
+// Helper to keep the main handler clean
+func (s *WeatherService) serveFreshResponse(ctx context.Context, w http.ResponseWriter, r *http.Request) {
+	entry, err := s.computeResponse(ctx, r, &TimeTracker{})
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	s.serveFromCache(w, entry)
+}
+
+func (s *WeatherService) computeAndStore(ctx context.Context, w http.ResponseWriter, r *http.Request, cacheKey string, overallStart time.Time) {
+	tracker := &TimeTracker{}
+
+	defer func() {
+		if rec := recover(); rec != nil {
+			s.Cacher.Remove(cacheKey)
+			panic(rec)
+		}
+	}()
+
+	entry, err := s.computeResponse(ctx, r, tracker)
 	if err != nil {
 		s.Cacher.Remove(cacheKey)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	// This information will not be visible,
-	// because the debug output is already in response.
+	// Success: store in cache
+	s.Cacher.Set(cacheKey, *entry)
+
 	tracker.Add("Total computation time", time.Since(overallStart))
-
-	if !bypassCache {
-		// 8. Store successful result
-		s.Cacher.Set(cacheKey, *entry)
-	}
-
-	// 9. Send to client
-	s.serveFromCache(w, entry) // reuse same helper
+	s.serveFromCache(w, entry)
 }
 
-func (s *WeatherService) serveFromCache(w http.ResponseWriter, e *CacheEntry) {
+func (s *WeatherService) serveFromCache(w http.ResponseWriter, e *domain.CacheEntry) {
 	for k, vs := range e.Header {
 		w.Header()[k] = vs
 	}
@@ -289,12 +243,12 @@ func (s *WeatherService) serveFromCache(w http.ResponseWriter, e *CacheEntry) {
 }
 
 // computeResponse performs location resolution, weather fetch, rendering and formatting.
-// Returns ready-to-cache CacheEntry or error.
+// Returns ready-to-cache domain.CacheEntry or error.
 // Does NOT write to ResponseWriter — that stays in handler.
 func (s *WeatherService) computeResponse(
 	ctx context.Context, r *http.Request,
 	tracker *TimeTracker,
-) (*CacheEntry, error) {
+) (*domain.CacheEntry, error) {
 	debugRequested := r.URL.Query().Get("debug") != ""
 
 	clientIP := getClientIP(r)
@@ -304,29 +258,57 @@ func (s *WeatherService) computeResponse(
 	path := r.URL.Path // cleanPath(r.URL.Path) // helper: trim / and extensions
 	autoDetect := isAutoDetectPath(path)
 
+	// 0. Locate IP
+	var ipData *domain.IPData
+	var errIP error
+	for _, ipLocator := range s.IPLocators {
+		ipData, errIP = ipLocator.GetIPData(clientIP)
+		if errIP == nil && ipData != nil {
+			break
+		}
+	}
+	tracker.Add("IP locating", time.Since(start))
+
+	// For testing purposes, it is possibe to simulate US-based clients
+	// by setting country code in the HTTP headers of the request.
+	if countryCode := r.Header.Get("X-Client-Country-Code"); countryCode != "" {
+		ipData.CountryCode = countryCode
+	}
+
+	/////////////////////
+	// This part should be moved to queryparser.
+	ipOpts := options.Options{}
+	if isClientInUSA(ipData) {
+		ipOpts.UseMetric = false
+		ipOpts.UseImperial = true
+	} else {
+		ipOpts.UseMetric = true
+		ipOpts.UseImperial = false
+	}
+	///////////////////
+
 	// 1. Parse options (cheap, always first)
-	opts, err := s.QueryParser.Parse(ctx, r)
+	start = time.Now()
+	opts, err := s.QueryParser.Parse(ctx, r, &ipOpts)
 	if err != nil {
 		return nil, err
 	}
 	tracker.Add("Options parsing", time.Since(start))
 
 	locStr := opts.Location
-	var ipData *IPData
-	if autoDetect {
-		var errIP error
-		for _, ipLocator := range s.IPLocators {
-			ipData, errIP = ipLocator.GetIPData(clientIP)
-			if errIP == nil && ipData != nil {
-				locStr = ipData.City
-				if locStr == "" {
-					locStr = fmt.Sprintf("%s,%s", ipData.Latitude, ipData.Longitude)
-				}
-				break
+
+	if ipData != nil {
+		if autoDetect {
+			if ipData.City == "" {
+				locStr = fmt.Sprintf("%s,%s", ipData.Latitude, ipData.Longitude)
+			} else {
+				locStr = fmt.Sprintf("%s, %s, %s", ipData.City, ipData.Region, ipData.CountryCode)
+				// 	log.Printf("Using old style location for: %s, %s, %s\n", ipData.City, ipData.Region, ipData.CountryCode)
+				// 	locStr = ipData.City
 			}
 		}
-		tracker.Add("Determine location string + IP lookup", time.Since(start))
 	}
+	tracker.Add("Determine location string + IP lookup", time.Since(start))
 
 	if locStr == "" {
 		// Temporary use Berlin as the default location
@@ -337,8 +319,12 @@ func (s *WeatherService) computeResponse(
 	// ── Geocode ───────────────────────────────────────────────────────────
 	start = time.Now()
 	location, err := s.Locator.GetLocation(locStr)
-	if err != nil && opts.View != "files" {
-		return nil, fmt.Errorf("location not found: %w", err)
+	if err != nil {
+		if opts.View == "files" || opts.View == "page" {
+			location = &domain.Location{}
+		} else {
+			return nil, fmt.Errorf("location not found: %w", err)
+		}
 	}
 	tracker.Add("Geocode location", time.Since(start))
 
@@ -348,14 +334,14 @@ func (s *WeatherService) computeResponse(
 	// which can be added to the headers.
 	// ...
 	var (
-		formatOut *FormatOutput
-		query     Query
+		formatOut *domain.FormatOutput
+		query     domain.Query
 	)
 
 	// ── Build Query ───────────────────────────────────────────────────────
 	start = time.Now()
-	query = Query{
-		ClientData: &ClientData{
+	query = domain.Query{
+		ClientData: &domain.ClientData{
 			ClientIP:    clientIP,
 			ClientAgent: r.UserAgent(),
 		},
@@ -367,7 +353,7 @@ func (s *WeatherService) computeResponse(
 	start = time.Now()
 	var (
 		isUpstream     bool
-		uplinkResponse *CacheEntry
+		uplinkResponse *domain.CacheEntry
 
 		// compareWithUpstream is used when we the data
 		// must be delivered both by the uplink, and the core
@@ -385,26 +371,27 @@ func (s *WeatherService) computeResponse(
 		start = time.Now()
 		weatherBytes, err := s.Weatherer.GetWeather(location.Latitude, location.Longitude, opts.Lang)
 		if err != nil {
-			return nil, fmt.Errorf("weather fetch failed: %w", err)
+			return nil, ErrDataSource
 		}
 		tracker.Add("Fetch weather data", time.Since(start))
 
 		// ── Filling up Query ───────────────────────────────────────────────────────
 		query.IPData = ipData
-		query.Weather = (*WeatherData)(&weatherBytes)
+		query.Weather = (*domain.WeatherRaw)(&weatherBytes)
 
 		// ── Render + Format ───────────────────────────────────────────────────
 		start = time.Now()
 		renderer := s.selectRenderer(opts.View)
-		formatter := selectFormatter(opts.Output)
+		formatter := s.selectFormatter(opts.Output)
 
 		renderOut, err := renderer.Render(query)
 		if err != nil {
+			err = fmt.Errorf("render failed: %w [%s][%v,%v][%d][view=%v]", err, opts.Location, location.Latitude, location.Longitude, len(weatherBytes), opts.View)
 			log.Println(err)
-			return nil, fmt.Errorf("render failed: %w", err)
+			return nil, err
 		}
 
-		formatOut, err = formatter.Format(renderOut)
+		formatOut, err = formatter.Format(&query, &renderOut)
 		if err != nil {
 			log.Println(err)
 			return nil, fmt.Errorf("format failed: %w", err)
@@ -421,7 +408,7 @@ func (s *WeatherService) computeResponse(
 
 	if debugRequested {
 		debugInfo := getDebugInfo(r, &query, locStr, tracker)
-		return &CacheEntry{
+		return &domain.CacheEntry{
 			Body:       []byte(debugInfo),
 			StatusCode: http.StatusOK,
 			Header: http.Header{
@@ -431,7 +418,7 @@ func (s *WeatherService) computeResponse(
 		}, nil
 	}
 
-	return &CacheEntry{
+	return &domain.CacheEntry{
 		Body:       formatOut.Content,
 		StatusCode: http.StatusOK,
 		Expires:    time.Now().Add(12 * time.Minute), // tune this TTL
@@ -443,12 +430,12 @@ func (s *WeatherService) computeResponse(
 }
 
 func isAutoDetectPath(p string) bool {
-	return strings.Trim(p, "/") == ""
+	return strings.Trim(p, "/") == "" || strings.HasPrefix(strings.Trim(p, "/"), ":")
 }
 
 func getDebugInfo(
 	r *http.Request,
-	q *Query,
+	q *domain.Query,
 	requestedLocStr string,
 	timetracker *TimeTracker,
 ) string {
@@ -510,7 +497,7 @@ func getDebugInfo(
 	return sb.String()
 }
 
-func prettyPrintOptions(o *query.Options) string {
+func prettyPrintOptions(o *options.Options) string {
 	if o == nil {
 		return "  (nil)\n"
 	}
@@ -525,100 +512,27 @@ func prettyPrintOptions(o *query.Options) string {
 
 // selectRenderer chooses the appropriate renderer based on the format option.
 func (s *WeatherService) selectRenderer(view string) Renderer {
-	if renderer, found := s.RendererMap[view]; found {
-		return renderer
+	if rndrer, found := s.RendererMap[view]; found {
+		return rndrer
 	} else {
 		log.Println("Unknown renderer for view: ", view)
-		return &V1Renderer{} // If no format specified, use v1 renderer
+		return &renderer.V1Renderer{} // If no format specified, use v1 renderer
 	}
 }
 
 // selectFormatter chooses the appropriate formatter based on the output format option.
-func selectFormatter(output string) Formatter {
-	// if format == "j1" || format == "j2" {
-	// 	format = "json"
-	// }
-
+func (s *WeatherService) selectFormatter(output string) Formatter {
 	switch output {
 	case "terminal", "text", "ansi":
-		return &TextFormatter{}
-	case "browser":
-		return &BrowserFormatter{}
+		return s.FormatterMap["text"]
+	case "html":
+		return s.FormatterMap["html"]
 	case "png":
-		return &PNGFormatter{}
-	case "json":
-		return &JSONFormatter{}
+		return s.FormatterMap["png"]
 	default:
-		return &TerminalFormatter{} // Default to terminal formatter
+		return s.FormatterMap["text"]
 	}
 }
-
-// Renderer Implementations (Stubs)
-type V1Renderer struct{}
-
-func (r *V1Renderer) Render(query Query) (RenderOutput, error) {
-	// Stub: To be implemented
-	return RenderOutput{}, nil
-}
-
-type V2Renderer struct{}
-
-func (r *V2Renderer) Render(query Query) (RenderOutput, error) {
-	// Stub: To be implemented
-	return RenderOutput{}, nil
-}
-
-// Formatter Implementations (Stubs)
-type TerminalFormatter struct{}
-
-func (f *TerminalFormatter) Format(output RenderOutput) (*FormatOutput, error) {
-	return &FormatOutput{
-		Content:     output.Content,
-		ContentType: "application/text",
-	}, nil
-}
-
-type BrowserFormatter struct{}
-
-func (f *BrowserFormatter) Format(output RenderOutput) (*FormatOutput, error) {
-	// Stub: To be implemented
-	return &FormatOutput{}, nil
-}
-
-type PNGFormatter struct{}
-
-func (f *PNGFormatter) Format(output RenderOutput) (*FormatOutput, error) {
-	// Stub: To be implemented
-	return &FormatOutput{}, nil
-}
-
-type JSONFormatter struct{}
-
-func (f *JSONFormatter) Format(output RenderOutput) (*FormatOutput, error) {
-	return &FormatOutput{
-		Content:     output.Content,
-		ContentType: "application/json",
-	}, nil
-}
-
-type TextFormatter struct{}
-
-func (f *TextFormatter) Format(output RenderOutput) (*FormatOutput, error) {
-	return &FormatOutput{
-		Content:     output.Content,
-		ContentType: "application/text",
-	}, nil
-}
-
-// Stub Functions to be Implemented Separately
-// parseQueryOptions parses the incoming HTTP request into Options.
-func parseQueryOptions(r *http.Request) (*query.Options, error) {
-	// Stub: To be implemented
-	return nil, nil
-}
-
-// Weatherer and IPLocator implementations are also stubs to be provided externally.
-// They should be injected into NewWeatherService during initialization.
 
 func debugCompareOneLineRendering(format string, uplinkResponse string, internalResponse string) {
 	if uplinkResponse != internalResponse {
@@ -639,4 +553,8 @@ func debugCompareOneLineRendering(format string, uplinkResponse string, internal
 			fmt.Fprintf(os.Stderr, "Error writing to log file: %v\n", err)
 		}
 	}
+}
+
+func isClientInUSA(ipData *domain.IPData) bool {
+	return ipData.CountryCode == "US"
 }

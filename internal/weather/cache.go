@@ -3,40 +3,27 @@
 package weather
 
 import (
+	"fmt"
 	"net/http"
 	"time"
+
+	"github.com/chubin/wttr.in/internal/domain"
 )
-
-// CacheEntry represents a cached HTTP response.
-// It is immutable once stored in the cache.
-type CacheEntry struct {
-	// Body is the response body bytes
-	Body []byte
-
-	// Header contains the HTTP response headers to return to the client
-	Header http.Header
-
-	// StatusCode is the HTTP status code (200, 404, etc.)
-	StatusCode int
-
-	// Expires is the absolute time after which this entry should be considered stale
-	Expires time.Time
-}
 
 // Cacher defines the contract for all cache implementations used by the request processor.
 // Implementations may use LRU, Redis, in-memory maps, etc.
 type Cacher interface {
 	// Get returns a valid (non-expired) cache entry for the given key.
 	// Returns nil if the key does not exist or the entry has expired.
-	Get(key string) *CacheEntry
+	Get(key string) *domain.CacheEntry
 
 	// Set stores a completed response in the cache under the given key.
 	// This should clear any in-progress state for the same key.
-	Set(key string, entry CacheEntry)
+	Set(key string, entry domain.CacheEntry)
 
-	// SetInProgress marks that a request for this key is currently being processed.
+	// SetInProgressIfNotExists marks that a request for this key is currently being processed.
 	// Used to prevent duplicate upstream requests (coalescing).
-	SetInProgress(key string)
+	SetInProgressIfNotExists(key string) bool
 
 	// IsInProgress returns true if the key is currently being processed by another goroutine.
 	IsInProgress(key string) bool
@@ -49,7 +36,7 @@ type Cacher interface {
 	//   - the completed entry if available
 	//   - nil, nil if the entry was removed (e.g. upstream error)
 	//   - nil, error on timeout
-	WaitForCompletion(key string, maxWait time.Duration) (*CacheEntry, error)
+	WaitForCompletion(key string, maxWait time.Duration) (*domain.CacheEntry, error)
 
 	// Remove deletes the entry (and any in-progress marker) for the given key.
 	// Typically called when the upstream response should not be cached
@@ -61,6 +48,10 @@ type Cacher interface {
 	Close() error
 }
 
+// DefaultCacheInterval defines how often the cache key "rotates" (i.e. effective TTL).
+// All entries within the same interval share the same key.
+const DefaultCacheInterval = 1 * time.Hour
+
 // buildCacheKey generates a cache signature very similar to original wttr.in logic
 func buildCacheKey(r *http.Request) string {
 	ua := r.Header.Get("User-Agent")
@@ -69,6 +60,9 @@ func buildCacheKey(r *http.Request) string {
 	ip := getClientIP(r)
 	lang := r.Header.Get("Accept-Language")
 
-	// You can keep it exactly like original:
-	return ua + ":" + host + uri + ":" + ip + ":" + lang
+	// Bucket the current time by the interval
+	// Example: for 1 hour interval, all requests in the same hour get the same bucket
+	bucket := time.Now().Unix() / int64(DefaultCacheInterval.Seconds())
+
+	return fmt.Sprintf("%s:%s%s:%s:%s:%d", ua, host, uri, ip, lang, bucket)
 }
