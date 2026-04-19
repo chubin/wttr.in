@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>wttr.in — Weather Report</title>
-
-    <link rel="stylesheet" type="text/css" 
+    <link rel="stylesheet" type="text/css"
           href="https://adobe-fonts.github.io/source-code-pro/source-code-pro.css">
-
     <style>
         html, body {
             margin: 0;
@@ -16,17 +14,16 @@
             height: 100%;
             overflow: auto;
         }
-
         .term-container {
             background: #000000;
             color: #bbbbbb;
-            font-family: "Source Code Pro", 
-                         "DejaVu Sans Mono", 
-                         Menlo, 
-                         "Lucida Sans Typewriter", 
-                         "Lucida Console", 
-                         monaco, 
-                         "Bitstream Vera Sans Mono", 
+            font-family: "Source Code Pro",
+                         "DejaVu Sans Mono",
+                         Menlo,
+                         "Lucida Sans Typewriter",
+                         "Lucida Console",
+                         monaco,
+                         "Bitstream Vera Sans Mono",
                          monospace;
             font-size: 11.8px;
             line-height: 1.30 !important;
@@ -39,17 +36,37 @@
             max-width: 100%;
             width: fit-content;
             display: block;
-
             box-sizing: border-box;
         }
-
         .term-fg1, .bold {
             color: #eeeeee;
             font-weight: normal;
         }
-
         /* Buildkite terminal-to-html color classes */
         {{.CSS}}
+
+        /* Buttons container - prevents splitting on narrow screens */
+        .social-buttons {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 12px;
+            align-items: center;
+            margin-top: 12px;
+            padding: 0 10px;
+            overflow-x: auto;           /* scroll horizontally if too narrow */
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;      /* nicer scrollbar on Firefox */
+        }
+
+        .social-buttons::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .github-button,
+        .twitter-follow-button {
+            white-space: nowrap;        /* important for GitHub & Twitter widgets */
+            flex-shrink: 0;             /* prevent individual buttons from shrinking */
+        }
     </style>
 </head>
 <body>
@@ -58,14 +75,41 @@
     </div>
 
     {{ if not .Query.Options.NoFollowLine }}
+    <div class="social-buttons">
+        <a href="https://twitter.com/igor_chubin?ref_src=twsrc%5Etfw" 
+           class="twitter-follow-button" 
+           data-show-count="false">Follow @igor_chubin</a>
 
-    <a href="https://twitter.com/igor_chubin?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @igor_chubin</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    <a aria-label="Star chubin/wttr.in on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/chubin/wttr.in#stargazers_count" data-count-href="/chubin/wttr.in/stargazers" data-show-count="true" data-icon="octicon-star" href="https://github.com/chubin/wttr.in" class="github-button">wttr.in</a>
-    <a aria-label="Star schachmat/wego on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/schachmat/wego#stargazers_count" data-count-href="/schachmat/wego/stargazers" data-show-count="true" data-icon="octicon-star" href="https://github.com/schachmat/wego" class="github-button">wego</a>
-    <a aria-label="Star chubin/pyphoon on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/chubin/pyphoon#stargazers_count" data-count-href="/chubin/pyphoon/stargazers" data-show-count="true" data-icon="octicon-star" href="https://github.com/chubin/pyphoon" class="github-button">pyphoon</a>
+        <a aria-label="Star chubin/wttr.in on GitHub" 
+           data-count-aria-label="# stargazers on GitHub" 
+           data-count-api="/repos/chubin/wttr.in#stargazers_count" 
+           data-count-href="/chubin/wttr.in/stargazers" 
+           data-show-count="true" 
+           data-icon="octicon-star" 
+           href="https://github.com/chubin/wttr.in" 
+           class="github-button">wttr.in</a>
+
+        <a aria-label="Star schachmat/wego on GitHub" 
+           data-count-aria-label="# stargazers on GitHub" 
+           data-count-api="/repos/schachmat/wego#stargazers_count" 
+           data-count-href="/schachmat/wego/stargazers" 
+           data-show-count="true" 
+           data-icon="octicon-star" 
+           href="https://github.com/schachmat/wego" 
+           class="github-button">wego</a>
+
+        <a aria-label="Star chubin/pyphoon on GitHub" 
+           data-count-aria-label="# stargazers on GitHub" 
+           data-count-api="/repos/chubin/pyphoon#stargazers_count" 
+           data-count-href="/chubin/pyphoon/stargazers" 
+           data-show-count="true" 
+           data-icon="octicon-star" 
+           href="https://github.com/chubin/pyphoon" 
+           class="github-button">pyphoon</a>
+    </div>
+
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
-
     {{ end }}
-
 </body>
 </html>
