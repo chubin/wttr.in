@@ -28,7 +28,7 @@
             font-size: 11.8px;
             line-height: 1.30 !important;
             letter-spacing: 0.00em;
-            padding: 6px 10px;
+            padding: 6px 10px 0px 10px;
             white-space: pre;
             word-break: normal;
             overflow-wrap: normal;
@@ -51,7 +51,7 @@
             flex-wrap: nowrap;
             gap: 12px;
             align-items: center;
-            margin-top: 12px;
+            margin-top: 0px;
             padding: 0 10px;
             overflow-x: auto;           /* scroll horizontally if too narrow */
             -webkit-overflow-scrolling: touch;
@@ -73,8 +73,7 @@
     <div class="term-container">
         {{- .Body}}
     </div>
-
-    {{ if not .Query.Options.NoFollowLine }}
+    {{- if not .Query.Options.NoFollowLine }}
     <div class="social-buttons">
         <a href="https://twitter.com/igor_chubin?ref_src=twsrc%5Etfw" 
            class="twitter-follow-button" 
