@@ -132,12 +132,7 @@ query_options:
     type: integer
     description: "Random number, used to bypass the first caching layer (alias: dummy, random)"
     active: true
-  - name: no_color
-    short: T
-    description: "Switch off terminal color sequences (no colors)"
-    type: boolean
-    default: false
-    active: true
+
   - name: lang
     description: "Specify output language"
     type: string
@@ -324,7 +319,6 @@ query_options:
     default: 0
     active: true
     note: "Applicable only for PNG output"
-
 
   - name: no-terminal
     short: T

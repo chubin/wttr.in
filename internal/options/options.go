@@ -66,9 +66,6 @@ type Options struct {
 	// Random number, used to bypass the first caching layer (alias: dummy, random)
 	Nonce int `json:"nonce,omitempty"`
 
-	// Switch off terminal color sequences (no colors)
-	NoColor bool `json:"no_color,omitempty"`
-
 	// Specify output language (Languages from 'az' to 'zh' have partial support; others have full support)
 	Lang string `json:"lang,omitempty"`
 
@@ -229,10 +226,6 @@ func ApplyParsedMap(opts *Options, raw map[string]string) (*Options, error) {
 			return nil, fmt.Errorf("invalid integer for nonce: %w", err)
 		}
 		opts.Nonce = n
-	}
-
-	if v, ok := raw["no_color"]; ok {
-		opts.NoColor = (v == "true")
 	}
 
 	// string or fallback
