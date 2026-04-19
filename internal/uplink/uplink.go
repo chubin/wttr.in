@@ -73,7 +73,7 @@ func (p *UplinkProcessor) Route(
 	//////////////////////////////////////////
 
 	// Views that are not processed by the uplink.
-	if opts.View == "line" || opts.View == "j1" || opts.View == "j2" || opts.View == "v1x" || opts.View == "v1" || opts.View == "files" || opts.View == "page" || opts.View == "v2" {
+	if opts.View == "line" || opts.View == "j1" || opts.View == "j2" || opts.View == "v1x" || opts.View == "v1" || opts.View == "files" || opts.View == "page" {
 		return false, nil, nil
 	}
 
