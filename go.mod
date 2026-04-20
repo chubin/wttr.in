@@ -4,12 +4,13 @@ go 1.25.0
 
 require (
 	dario.cat/mergo v1.0.2
+	github.com/buildkite/terminal-to-html/v3 v3.16.8
+	github.com/clipperhouse/displaywidth v0.11.0
 	github.com/goastro/twilight v0.0.0-20220106142310-95fee74adefe
 	github.com/hashicorp/golang-lru/v2 v2.0.7
 	github.com/itchyny/gojq v0.12.18
 	github.com/kixorz/suncalc v1.0.0
 	github.com/klauspost/lctime v0.1.0
-	github.com/mattn/go-runewidth v0.0.19
 	github.com/nathan-osman/go-sunrise v1.1.0
 	github.com/oschwald/geoip2-golang/v2 v2.1.0
 	github.com/ringsaturn/tzf v1.0.4
@@ -22,9 +23,7 @@ require (
 )
 
 require (
-	github.com/buildkite/terminal-to-html/v3 v3.16.8 // indirect
-	github.com/clipperhouse/stringish v0.1.1 // indirect
-	github.com/clipperhouse/uax29/v2 v2.3.0 // indirect
+	github.com/clipperhouse/uax29/v2 v2.7.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/itchyny/timefmt-go v0.1.7 // indirect
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible // indirect
