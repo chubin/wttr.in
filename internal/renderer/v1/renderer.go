@@ -77,7 +77,11 @@ func (r *V1Renderer) Render(query domain.Query) (domain.RenderOutput, error) {
 	} else {
 		if r.rightToLeft {
 			caption = locationName + " " + caption
-			space := strings.Repeat(" ", 125-displaywidth.String(caption))
+			padding := 125 - displaywidth.String(caption)
+			if padding < 0 {
+				padding = 0
+			}
+			space := strings.Repeat(" ", padding)
 			header = space + caption + "\n\n"
 		} else {
 			header = fmt.Sprintf("%s: %s\n\n", caption, locationName)
