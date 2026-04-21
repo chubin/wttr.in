@@ -114,11 +114,6 @@ func FromRequest(r *http.Request) (*options.Options, error) {
 	// agent is deferred to ApplyAutoFixes, where the view is known.
 	opts.Agent = r.Header.Get("User-Agent")
 
-	// Step 8: Set default transparency for PNG output if applicable
-	if opts.Output == "png" && opts.Transparency == 0 {
-		opts.Transparency = 150
-	}
-
 	return opts, nil
 }
 
