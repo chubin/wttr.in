@@ -9,6 +9,7 @@ import (
 
 	"github.com/chubin/wttr.in/internal/options"
 	"github.com/chubin/wttr.in/internal/spec"
+	"github.com/chubin/wttr.in/internal/util"
 )
 
 // FromRequest creates an options.Options struct based on the provided HTTP request.
@@ -127,7 +128,7 @@ func ApplyAutoFixes(opts *options.Options) {
 		":translation",
 		":bash.function",
 	}
-	if inSlice(opts.Location, pages) {
+	if util.InSlice(opts.Location, pages) {
 		opts.View = "page"
 	}
 	if opts.View == "" {
@@ -173,7 +174,7 @@ func ApplyAutoFixes(opts *options.Options) {
 		}
 	}
 
-	if !inSlice(opts.View, []string{"v1", "v2"}) {
+	if !util.InSlice(opts.View, []string{"v1", "v2"}) {
 		opts.NoFollowLine = true
 	}
 
@@ -312,22 +313,13 @@ func Validate(opts *options.Options) error {
 // This is a simplified check; in a real application, you'd have a list of supported languages.
 func isValidLanguageCode(code string) bool {
 	// Simplified: assume any 2-letter lowercase code is a language
-	return len(code) == 2 && strings.ToLower(code) == code && !inSlice(code, []string{"v2", "v3"})
+	return len(code) == 2 && strings.ToLower(code) == code && !util.InSlice(code, []string{"v2", "v3"})
 }
 
 // isValidView checks if the provided string is a valid view name.
 // This is a placeholder; in a real application, you'd have a list of supported views.
 func isValidView(view string) bool {
-	// Example: support "v2", "j1", "j2" as valid views
-	return view == "files" ||
-		view == "page" ||
-		view == "line" ||
-		view == "v1" ||
-		view == "v1x" ||
-		view == "v2" ||
-		view == "p1" ||
-		view == "j1" ||
-		view == "j2"
+	return util.InSlice(view, []string{"files", "page", "line", "v1", "v1x", "v2", "p1", "j1", "j2"})
 }
 
 // isBrowserClient determines if the User-Agent indicates a web browser.
@@ -363,14 +355,5 @@ func isPlainTextClient(userAgent string) bool {
 		}
 	}
 
-	return false
-}
-
-func inSlice(what string, where []string) bool {
-	for _, item := range where {
-		if item == what {
-			return true
-		}
-	}
 	return false
 }
