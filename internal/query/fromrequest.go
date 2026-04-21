@@ -289,9 +289,8 @@ func ParseOptionsInFilename(filename string, cfg *spec.WttrInOptions) (*options.
 
 	// 5. Build options.Options the standard way
 	opts := &options.Options{
-		Output:       "png",
-		Location:     location,
-		Transparency: 150, // PNG default
+		Output:   "png",
+		Location: location,
 	}
 
 	opts, err = options.ApplyParsedMap(opts, rawMap)

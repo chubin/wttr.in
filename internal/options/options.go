@@ -325,10 +325,5 @@ func ApplyParsedMap(opts *Options, raw map[string]string) (*Options, error) {
 		opts.Lang = "en"
 	}
 
-	// force to string for template
-	if opts.Transparency == 0 {
-		opts.Transparency = 150
-	}
-
 	return opts, nil
 }

@@ -296,7 +296,7 @@ query_options:
     range:
       min: 0
       max: 255
-    default: 150
+    default: 255
     active: true
     note: "Applicable only for PNG output; 255 = not transparent"
 
