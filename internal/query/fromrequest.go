@@ -312,7 +312,7 @@ func Validate(opts *options.Options) error {
 // This is a simplified check; in a real application, you'd have a list of supported languages.
 func isValidLanguageCode(code string) bool {
 	// Simplified: assume any 2-letter lowercase code is a language
-	return len(code) == 2 && strings.ToLower(code) == code
+	return len(code) == 2 && strings.ToLower(code) == code && !inSlice(code, []string{"v2", "v3"})
 }
 
 // isValidView checks if the provided string is a valid view name.
