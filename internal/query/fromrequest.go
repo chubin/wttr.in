@@ -146,6 +146,10 @@ func ApplyAutoFixes(opts *options.Options) {
 		opts.Output = "text"
 	}
 
+	if opts.ForceAnsi {
+		opts.Output = "text"
+	}
+
 	// ATTENTION:
 	// This block is not active at the moment, because Output format is explicitly set above.
 	//

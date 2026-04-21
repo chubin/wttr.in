@@ -36,9 +36,6 @@ type Options struct {
 	// Show current weather, forecast for today, tomorrow, and day after
 	CurrentPlusThreeDays bool `json:"current_plus_three_days,omitempty"`
 
-	// Force ANSI output format for terminals
-	AnsiOutput bool `json:"ansi_output,omitempty"`
-
 	// Restrict output to standard console font glyphs
 	StandardFont bool `json:"standard_font,omitempty"`
 
@@ -72,7 +69,7 @@ type Options struct {
 	// Set background color for PNG output in hex (RRGGBB format) (Applicable only for PNG output)
 	Background string `json:"background,omitempty"`
 
-	// Force ANSI output mode (Enables ANSI formatting regardless of terminal capabilities)
+	// Ignore User-Agent and force ANSI output format (terminal) (Enables ANSI formatting regardless of the user agent)
 	ForceAnsi bool `json:"force-ansi,omitempty"`
 
 	// Use dumb terminal mode (Disables advanced terminal features)
@@ -170,10 +167,6 @@ func ApplyParsedMap(opts *Options, raw map[string]string) (*Options, error) {
 
 	if v, ok := raw["current_plus_three_days"]; ok {
 		opts.CurrentPlusThreeDays = (v == "true")
-	}
-
-	if v, ok := raw["ansi_output"]; ok {
-		opts.AnsiOutput = (v == "true")
 	}
 
 	if v, ok := raw["standard_font"]; ok {
