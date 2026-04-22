@@ -75,6 +75,7 @@ func srv(configFile string) error {
 	formatterMap := map[string]weather.Formatter{
 		"text": &formatter.TextFormatter{},
 		"html": htmlFormatter,
+		"png":  formatter.NewPNGFormatter(),
 	}
 
 	////////////////////////////

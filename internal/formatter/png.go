@@ -1,7 +1,6 @@
 package formatter
 
 import (
-	"context"
 	"fmt"
 
 	"github.com/chubin/wttr.in/internal/domain"
@@ -18,7 +17,6 @@ func NewPNGFormatter() *PNGFormatter {
 
 // Format implements the Formatter interface defined in weather.go
 func (f *PNGFormatter) Format(
-	ctx context.Context,
 	query *domain.Query,
 	renderOut *domain.RenderOutput,
 ) (*domain.FormatOutput, error) {
