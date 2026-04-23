@@ -80,7 +80,6 @@ func screenToBuffer(screen *te.Screen) [][]te.Cell {
 func fixGraphemes(text string) (string, []string) {
 	var builder strings.Builder
 	var graphemes []string
-
 	gr := uniseg.NewGraphemes(text)
 	for gr.Next() {
 		gra := gr.Str()
@@ -141,45 +140,84 @@ func lineLength(line []te.Cell) int {
 	return 0
 }
 
-func colorMapping(c color.Color, inverse bool) color.Color {
-	if inverse {
-		// Simple inversion for now - can be improved
-		r, g, b, a := c.RGBA()
-		return color.RGBA{uint8(255 - r>>8), uint8(255 - g>>8), uint8(255 - b>>8), uint8(a >> 8)}
+// colorFromANSI converts go-te color (from Attr.Fg / Attr.Bg) to real color.Color
+func colorFromANSI(c te.Color, inverse bool) color.Color {
+	if c.Mode == te.ColorDefault || c.Name == "default" {
+		if inverse {
+			return color.Black
+		}
+		return color.RGBA{211, 211, 211, 255} // lightgray
 	}
-	return c
+
+	// Named color
+	switch c.Name {
+	case "black":
+		return color.Black
+	case "red":
+		return color.RGBA{205, 49, 49, 255}
+	case "green":
+		return color.RGBA{0, 128, 0, 255}
+	case "yellow":
+		return color.RGBA{205, 205, 0, 255}
+	case "blue":
+		return color.RGBA{0, 0, 205, 255}
+	case "magenta":
+		return color.RGBA{205, 0, 205, 255}
+	case "cyan":
+		return color.RGBA{0, 205, 205, 255}
+	case "white":
+		return color.RGBA{229, 229, 229, 255}
+	}
+
+	// 256-color mode (most important for wttr.in)
+	if c.Mode == te.ColorANSI256 {
+		return ansi256ToColor(int(c.Index))
+	}
+
+	return color.RGBA{211, 211, 211, 255}
+}
+
+// ansi256ToColor maps common 256-color values used by wttr.in
+func ansi256ToColor(n int) color.Color {
+	switch {
+	case n == 226 || n == 227 || n == 190 || n == 220: // yellow / sun
+		return color.RGBA{255, 215, 0, 255}
+	case n >= 46 && n <= 82: // green shades
+		return color.RGBA{0, 255, 0, 255}
+	case n >= 118 && n <= 154: // bright green / cyan
+		return color.RGBA{0, 255, 100, 255}
+	case n >= 196 && n <= 208: // red / orange
+		return color.RGBA{255, 60, 60, 255}
+	case n >= 33 && n <= 39: // blue
+		return color.RGBA{100, 100, 255, 255}
+	}
+	return color.RGBA{200, 200, 200, 255}
 }
 
 func loadEmojiLib() (map[string]image.Image, error) {
 	emojilib := make(map[string]image.Image)
-
 	emojiFS, err := fs.Sub(assets.FS, "share/emoji")
 	if err != nil {
 		return nil, err
 	}
-
 	err = fs.WalkDir(emojiFS, ".", func(path string, d fs.DirEntry, err error) error {
 		if err != nil || d.IsDir() || !strings.HasSuffix(path, ".png") {
 			return err
 		}
-
 		f, err := emojiFS.Open(path)
 		if err != nil {
 			return err
 		}
 		defer f.Close()
-
 		img, _, err := image.Decode(f)
 		if err != nil {
 			return err
 		}
-
 		resized := resizeImage(img, CHAR_HEIGHT, CHAR_HEIGHT)
 		char := strings.TrimSuffix(filepath.Base(path), ".png")
 		emojilib[char] = resized
 		return nil
 	})
-
 	return emojilib, err
 }
 
@@ -211,7 +249,11 @@ func genTerm(buf [][]te.Cell, graphemes []string, opts PNGOptions) ([]byte, erro
 	dc := gg.NewContext(cols*CHAR_WIDTH, rows*CHAR_HEIGHT)
 
 	// Set background
-	bg := colorMapping(opts.Background, opts.Inverted)
+	bg := opts.Background
+	if opts.Inverted {
+		r, g, b, a := bg.RGBA()
+		bg = color.RGBA{uint8(255 - r>>8), uint8(255 - g>>8), uint8(255 - b>>8), uint8(a >> 8)}
+	}
 	dc.SetColor(bg)
 	dc.Clear()
 
@@ -223,8 +265,16 @@ func genTerm(buf [][]te.Cell, graphemes []string, opts PNGOptions) ([]byte, erro
 	for _, line := range buf {
 		xPos := 0.0
 		for _, cell := range line {
-			// Use background color from options + inversion support
-			fg := colorMapping(color.RGBA{211, 211, 211, 255}, opts.Inverted) // lightgray default
+			// FIXED: Use cell.Attr.Fg and cell.Attr.Bg (correct fields in go-te)
+			fg := colorFromANSI(cell.Attr.Fg, opts.Inverted)
+
+			// Background support
+			if cell.Attr.Bg.Mode != te.ColorDefault && cell.Attr.Bg.Name != "default" {
+				bgCol := colorFromANSI(cell.Attr.Bg, opts.Inverted)
+				dc.SetColor(bgCol)
+				dc.DrawRectangle(xPos, yPos, float64(CHAR_WIDTH), float64(CHAR_HEIGHT))
+				dc.Fill()
+			}
 
 			data := cell.Data
 			if data == "!" {
@@ -236,7 +286,6 @@ func genTerm(buf [][]te.Cell, graphemes []string, opts PNGOptions) ([]byte, erro
 
 			if data != "" && data != " " {
 				cat := scriptCategory([]rune(data)[0])
-
 				if cat == "Emoji" {
 					if img, ok := emojilib[data]; ok {
 						dc.DrawImage(img, int(xPos), int(yPos))
@@ -276,7 +325,6 @@ func genTerm(buf [][]te.Cell, graphemes []string, opts PNGOptions) ([]byte, erro
 	if err := png.Encode(&bufBytes, dc.Image()); err != nil {
 		return nil, err
 	}
-
 	return bufBytes.Bytes(), nil
 }
 
