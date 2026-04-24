@@ -66,6 +66,7 @@ func (r *Renderer) Render(query domain.Query) (domain.RenderOutput, error) {
 	}
 
 	loc := query.Options.Location
+	loc = strings.ToLower(loc)
 	optsMap := query.Options.ToMap()
 
 	for _, route := range r.routes {
