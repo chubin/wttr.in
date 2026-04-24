@@ -15,6 +15,7 @@ import (
 	"github.com/chubin/wttr.in/internal/domain"
 	"github.com/chubin/wttr.in/internal/options"
 	"github.com/chubin/wttr.in/internal/renderer"
+	"github.com/chubin/wttr.in/internal/util/termutil"
 )
 
 var ErrDataSource = errors.New("weather data source not available")
@@ -392,7 +393,9 @@ func (s *WeatherService) computeResponse(
 		}
 
 		if opts.NoTerminal {
-			renderOut.Content = removeANSI(renderOut.Content)
+			renderOut.Content = termutil.RemoveANSI(renderOut.Content)
+		} else {
+			renderOut.Content = termutil.TruecolorTo256(renderOut.Content)
 		}
 
 		formatOut, err = formatter.Format(&query, &renderOut)
@@ -561,31 +564,4 @@ func debugCompareOneLineRendering(format string, uplinkResponse string, internal
 
 func isClientInUSA(ipData *domain.IPData) bool {
 	return ipData.CountryCode == "US"
-}
-
-func removeANSI(text []byte) []byte {
-	if len(text) == 0 {
-		return text
-	}
-
-	// Create a new slice to store the result
-	result := make([]byte, 0, len(text))
-	i := 0
-
-	for i < len(text) {
-		if text[i] == 0x1B { // ESC character
-			// Skip until we find a letter (a-z or A-Z) which usually terminates the sequence
-			i++
-			for i < len(text) && !((text[i] >= 'A' && text[i] <= 'Z') || (text[i] >= 'a' && text[i] <= 'z')) {
-				i++
-			}
-			i++ // Skip the terminating letter
-		} else {
-			// Add non-ANSI character to result
-			result = append(result, text[i])
-			i++
-		}
-	}
-
-	return result
 }
