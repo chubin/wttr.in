@@ -19,6 +19,7 @@ import (
 	"github.com/chubin/wttr.in/internal/query"
 	"github.com/chubin/wttr.in/internal/renderer"
 	"github.com/chubin/wttr.in/internal/renderer/oneline"
+	"github.com/chubin/wttr.in/internal/renderer/subprocess"
 	v1 "github.com/chubin/wttr.in/internal/renderer/v1"
 	v2 "github.com/chubin/wttr.in/internal/renderer/v2"
 	"github.com/chubin/wttr.in/internal/server"
@@ -61,6 +62,9 @@ func srv(configFile string) error {
 		"j2":   &renderer.J2Renderer{},
 		"line": oneline.NewOnelineRenderer(),
 		"page": renderer.NewPageRenderer(),
+
+		// Subprocess renderer loaded from config
+		"subprocess": subprocess.NewRenderer(cfg.Renderer.Subprocess),
 	}
 
 	////////////////////////////

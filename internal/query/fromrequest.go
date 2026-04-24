@@ -123,9 +123,17 @@ func ApplyAutoFixes(opts *options.Options) {
 		":translation",
 		":bash.function",
 	}
+	subprocess := []string{
+		"moon",
+	}
+
 	if util.InSlice(opts.Location, pages) {
 		opts.View = "page"
 	}
+	if util.InSlice(opts.Location, subprocess) {
+		opts.View = "subprocess"
+	}
+
 	if opts.View == "" {
 		if opts.Format == "j1" || opts.Format == "j2" || opts.Format == "v2" || opts.Format == "p1" {
 			opts.View = opts.Format
@@ -313,7 +321,11 @@ func isValidLanguageCode(code string) bool {
 // isValidView checks if the provided string is a valid view name.
 // This is a placeholder; in a real application, you'd have a list of supported views.
 func isValidView(view string) bool {
-	return util.InSlice(view, []string{"files", "page", "line", "v1", "v1x", "v2", "p1", "j1", "j2"})
+	validViews := []string{
+		"files", "page", "line", "v1", "v1x", "v2", "p1", "j1", "j2",
+		"subprocess",
+	}
+	return util.InSlice(view, validViews)
 }
 
 // isBrowserClient determines if the User-Agent indicates a web browser.

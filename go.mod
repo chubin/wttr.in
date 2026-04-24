@@ -30,6 +30,7 @@ require (
 	github.com/clipperhouse/uax29/v2 v2.7.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
+	github.com/gookit/color v1.6.0 // indirect
 	github.com/itchyny/timefmt-go v0.1.7 // indirect
 	github.com/mattn/go-runewidth v0.0.19 // indirect
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible // indirect
@@ -42,6 +43,7 @@ require (
 	github.com/tidwall/geojson v1.4.6 // indirect
 	github.com/tidwall/rtree v1.10.0 // indirect
 	github.com/twpayne/go-polyline v1.1.1 // indirect
+	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
 	go.mongodb.org/mongo-driver v1.11.4 // indirect
 	golang.org/x/sys v0.38.0 // indirect
 	golang.org/x/text v0.36.0 // indirect

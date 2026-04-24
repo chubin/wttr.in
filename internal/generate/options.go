@@ -20,6 +20,7 @@ package options
 import (
 	"fmt"
 	"strconv"
+	"strings"
 )
 
 // Options represents parsed and validated wttr.in query options.
