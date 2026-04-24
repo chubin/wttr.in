@@ -8,7 +8,9 @@ import (
 	"log"
 	stdlog "log"
 	"net/http"
+	"path"
 	"runtime/debug"
+	"strings"
 	"time"
 
 	"github.com/chubin/wttr.in/internal/assets"
@@ -47,13 +49,59 @@ func copyHeader(dst, src http.Header) {
 func faviconHandler(w http.ResponseWriter, r *http.Request) {
 	data, err := assets.GetFile("share/static/favicon.ico")
 	if err != nil {
-		// Fallback: return 404 if favicon is missing
+		http.NotFound(w, r)
+		return
+	}
+	w.Header().Set("Content-Type", "image/x-icon")
+	w.Header().Set("Cache-Control", "public, max-age=86400")
+	w.WriteHeader(http.StatusOK)
+	_, _ = w.Write(data)
+}
+
+// staticFilesHandler serves embedded files under /files/
+func staticFilesHandler(w http.ResponseWriter, r *http.Request) {
+	// Remove /files/ prefix
+	filePath := strings.TrimPrefix(r.URL.Path, "/files/")
+	if filePath == "" || filePath == "/" {
 		http.NotFound(w, r)
 		return
 	}
 
-	w.Header().Set("Content-Type", "image/x-icon")
-	w.Header().Set("Cache-Control", "public, max-age=86400") // cache for 1 day
+	// Clean the path to prevent directory traversal
+	filePath = path.Clean(filePath)
+	if strings.HasPrefix(filePath, "..") {
+		http.NotFound(w, r)
+		return
+	}
+
+	// Full path inside the embedded FS: embed/share/static/...
+	embedPath := "share/static/" + filePath
+	log.Println(embedPath)
+
+	data, err := assets.GetFile(embedPath)
+	if err != nil {
+		log.Println(err)
+		http.NotFound(w, r)
+		return
+	}
+
+	// Set proper Content-Type based on file extension
+	contentType := "application/octet-stream"
+	switch path.Ext(filePath) {
+	case ".css":
+		contentType = "text/css; charset=utf-8"
+	case ".js":
+		contentType = "application/javascript; charset=utf-8"
+	case ".png":
+		contentType = "image/png"
+	case ".ico":
+		contentType = "image/x-icon"
+	case ".html":
+		contentType = "text/html; charset=utf-8"
+	}
+
+	w.Header().Set("Content-Type", contentType)
+	w.Header().Set("Cache-Control", "public, max-age=86400") // 1 day cache
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write(data)
 }
@@ -159,6 +207,7 @@ func Serve(conf *Config, logConf *logging.Config, ws *weather.WeatherService) er
 	// Register handlers with panic recovery
 	mux.HandleFunc("/", panicRecovery(mainHandler(ws, logger)))
 	mux.HandleFunc("/favicon.ico", panicRecovery(faviconHandler))
+	mux.HandleFunc("/files/", panicRecovery(staticFilesHandler))
 
 	if conf.PortHTTP != 0 {
 		go serveHTTP(mux, conf.PortHTTP, errorsLog, errs)
