@@ -13,6 +13,7 @@ import (
 
 	"github.com/chubin/wttr.in/internal/domain"
 	"github.com/chubin/wttr.in/internal/options"
+	"github.com/chubin/wttr.in/internal/util"
 )
 
 type Config struct {
@@ -71,11 +72,12 @@ func (p *UplinkProcessor) Route(
 	)
 
 	//////////////////////////////////////////
-
 	// Views that are not processed by the uplink.
-	if opts.View == "line" || opts.View == "j1" || opts.View == "j2" || opts.View == "v1x" || opts.View == "v1" || opts.View == "files" || opts.View == "page" {
+	// if !checkURLForPNG(r) {
+	if util.InSlice(opts.View, []string{"line", "j1", "j2", "v1x", "v1", "files", "page", "subprocess"}) {
 		return false, nil, nil
 	}
+	// }
 
 	if checkURLForPNG(r) {
 		client = p.client4

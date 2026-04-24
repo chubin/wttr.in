@@ -10,6 +10,7 @@ import (
 	"github.com/chubin/wttr.in/internal/ip"
 	"github.com/chubin/wttr.in/internal/location"
 	"github.com/chubin/wttr.in/internal/logging"
+	"github.com/chubin/wttr.in/internal/renderer/subprocess"
 	"github.com/chubin/wttr.in/internal/server"
 	"github.com/chubin/wttr.in/internal/uplink"
 	"github.com/chubin/wttr.in/internal/weather"
@@ -25,6 +26,14 @@ type Config struct {
 	Logging logging.Config
 	Uplink  uplink.Config
 	Server  server.Config
+
+	// Renderer configuration (currently only subprocess is configurable)
+	Renderer RendererConfig `yaml:"renderer"`
+}
+
+// RendererConfig holds configuration for all renderers that need external config.
+type RendererConfig struct {
+	Subprocess []subprocess.SubprocessRoute `yaml:"subprocess"`
 }
 
 // LoadFromYAML loads configuration from a YAML file and returns a pointer to Config

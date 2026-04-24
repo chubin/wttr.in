@@ -15,6 +15,7 @@ import (
 	"github.com/chubin/wttr.in/internal/domain"
 	"github.com/chubin/wttr.in/internal/options"
 	"github.com/chubin/wttr.in/internal/renderer"
+	"github.com/chubin/wttr.in/internal/util/termutil"
 )
 
 var ErrDataSource = errors.New("weather data source not available")
@@ -389,6 +390,12 @@ func (s *WeatherService) computeResponse(
 			err = fmt.Errorf("render failed: %w [%s][%v,%v][%d][view=%v]", err, opts.Location, location.Latitude, location.Longitude, len(weatherBytes), opts.View)
 			log.Println(err)
 			return nil, err
+		}
+
+		if opts.NoTerminal {
+			renderOut.Content = termutil.RemoveANSI(renderOut.Content)
+		} else {
+			renderOut.Content = termutil.TruecolorTo256(renderOut.Content)
 		}
 
 		formatOut, err = formatter.Format(&query, &renderOut)

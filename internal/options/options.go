@@ -4,6 +4,7 @@ package options
 import (
 	"fmt"
 	"strconv"
+	"strings"
 )
 
 // Options represents parsed and validated wttr.in query options.
@@ -36,9 +37,6 @@ type Options struct {
 	// Show current weather, forecast for today, tomorrow, and day after
 	CurrentPlusThreeDays bool `json:"current_plus_three_days,omitempty"`
 
-	// Force ANSI output format for terminals
-	AnsiOutput bool `json:"ansi_output,omitempty"`
-
 	// Restrict output to standard console font glyphs
 	StandardFont bool `json:"standard_font,omitempty"`
 
@@ -66,16 +64,13 @@ type Options struct {
 	// Random number, used to bypass the first caching layer (alias: dummy, random)
 	Nonce int `json:"nonce,omitempty"`
 
-	// Switch off terminal color sequences (no colors)
-	NoColor bool `json:"no_color,omitempty"`
-
 	// Specify output language (Languages from 'az' to 'zh' have partial support; others have full support)
 	Lang string `json:"lang,omitempty"`
 
 	// Set background color for PNG output in hex (RRGGBB format) (Applicable only for PNG output)
 	Background string `json:"background,omitempty"`
 
-	// Force ANSI output mode (Enables ANSI formatting regardless of terminal capabilities)
+	// Ignore User-Agent and force ANSI output format (terminal) (Enables ANSI formatting regardless of the user agent)
 	ForceAnsi bool `json:"force-ansi,omitempty"`
 
 	// Use dumb terminal mode (Disables advanced terminal features)
@@ -175,10 +170,6 @@ func ApplyParsedMap(opts *Options, raw map[string]string) (*Options, error) {
 		opts.CurrentPlusThreeDays = (v == "true")
 	}
 
-	if v, ok := raw["ansi_output"]; ok {
-		opts.AnsiOutput = (v == "true")
-	}
-
 	if v, ok := raw["standard_font"]; ok {
 		opts.StandardFont = (v == "true")
 	}
@@ -229,10 +220,6 @@ func ApplyParsedMap(opts *Options, raw map[string]string) (*Options, error) {
 			return nil, fmt.Errorf("invalid integer for nonce: %w", err)
 		}
 		opts.Nonce = n
-	}
-
-	if v, ok := raw["no_color"]; ok {
-		opts.NoColor = (v == "true")
 	}
 
 	// string or fallback
@@ -341,8 +328,192 @@ func ApplyParsedMap(opts *Options, raw map[string]string) (*Options, error) {
 
 	// force to string for template
 	if opts.Transparency == 0 {
-		opts.Transparency = 150
+		opts.Transparency = 255
 	}
 
 	return opts, nil
+}
+
+// ToMap converts Options back to map[string]string.
+// Only non-zero / non-default values are included.
+func (o *Options) ToMap() map[string]string {
+	if o == nil {
+		return make(map[string]string)
+	}
+
+	m := make(map[string]string)
+
+	// Strings (skip empty, except Lang which has explicit default)
+
+	if o.Format != "" {
+		m["format"] = o.Format
+	}
+
+	if o.View != "" {
+		m["view"] = o.View
+	}
+
+	if o.Output != "" {
+		m["output"] = o.Output
+	}
+
+	if o.Agent != "" {
+		m["agent"] = o.Agent
+	}
+
+	if o.Location != "" {
+		m["location"] = o.Location
+	}
+
+	if o.Lang != "" && o.Lang != "en" {
+		m["lang"] = o.Lang
+	}
+
+	if o.Background != "" {
+		m["background"] = o.Background
+	}
+
+	// Booleans (only true values)
+
+	if o.CurrentOnly {
+		m["current_only"] = "true"
+	}
+
+	if o.CurrentPlusToday {
+		m["current_plus_today"] = "true"
+	}
+
+	if o.CurrentPlusTwoDays {
+		m["current_plus_two_days"] = "true"
+	}
+
+	if o.CurrentPlusThreeDays {
+		m["current_plus_three_days"] = "true"
+	}
+
+	if o.StandardFont {
+		m["standard_font"] = "true"
+	}
+
+	if o.Narrow {
+		m["narrow"] = "true"
+	}
+
+	if o.Frame {
+		m["frame"] = "true"
+	}
+
+	if o.Quiet {
+		m["quiet"] = "true"
+	}
+
+	if o.Superquiet {
+		m["superquiet"] = "true"
+	}
+
+	if o.ForceAnsi {
+		m["force-ansi"] = "true"
+	}
+
+	if o.Dumb {
+		m["dumb"] = "true"
+	}
+
+	if o.UseMetric {
+		m["use_metric"] = "true"
+	}
+
+	if o.UseMsForWind {
+		m["use_ms_for_wind"] = "true"
+	}
+
+	if o.UseImperial {
+		m["use_imperial"] = "true"
+	}
+
+	if o.UseUscs {
+		m["use_uscs"] = "true"
+	}
+
+	if o.InvertedColors {
+		m["inverted_colors"] = "true"
+	}
+
+	if o.NoTerminal {
+		m["no-terminal"] = "true"
+	}
+
+	if o.Padding {
+		m["padding"] = "true"
+	}
+
+	if o.NoCaption {
+		m["no-caption"] = "true"
+	}
+
+	if o.NoCity {
+		m["no-city"] = "true"
+	}
+
+	if o.NoFollowLine {
+		m["no-follow-line"] = "true"
+	}
+
+	if o.QuestionMark {
+		m["question_mark"] = "true"
+	}
+
+	if o.Debug {
+		m["debug"] = "true"
+	}
+
+	// Integers (only non-zero)
+
+	if o.Period != 0 {
+		m["period"] = strconv.Itoa(o.Period)
+	}
+
+	if o.Random != 0 {
+		m["random"] = strconv.Itoa(o.Random)
+	}
+
+	if o.Dummy != 0 {
+		m["dummy"] = strconv.Itoa(o.Dummy)
+	}
+
+	if o.Nonce != 0 {
+		m["nonce"] = strconv.Itoa(o.Nonce)
+	}
+
+	if o.Transparency != 0 {
+		m["transparency"] = strconv.Itoa(o.Transparency)
+	}
+
+	if o.Height != 0 {
+		m["height"] = strconv.Itoa(o.Height)
+	}
+
+	if o.Width != 0 {
+		m["width"] = strconv.Itoa(o.Width)
+	}
+
+	if o.Days != 0 {
+		m["days"] = strconv.Itoa(o.Days)
+	}
+
+	return m
+}
+
+// ToQueryString returns the options as URL query string (e.g. "format=...&lang=de").
+func (o *Options) ToQueryString() string {
+	m := o.ToMap()
+	if len(m) == 0 {
+		return ""
+	}
+
+	parts := make([]string, 0, len(m))
+	for k, v := range m {
+		parts = append(parts, k+"="+v)
+	}
+	return strings.Join(parts, "&")
 }

@@ -12,13 +12,6 @@ func (f *TerminalFormatter) Format(query *domain.Query, output *domain.RenderOut
 	}, nil
 }
 
-type PNGFormatter struct{}
-
-func (f *PNGFormatter) Format(query *domain.Query, output *domain.RenderOutput) (*domain.FormatOutput, error) {
-	// Stub: To be implemented
-	return &domain.FormatOutput{}, nil
-}
-
 type JSONFormatter struct{}
 
 func (f *JSONFormatter) Format(query *domain.Query, output *domain.RenderOutput) (*domain.FormatOutput, error) {

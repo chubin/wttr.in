@@ -1,0 +1,109 @@
+# wttr.in Rendering & Uplink Routing Table
+# Rules are evaluated in order — first match wins
+# WIP. Not used at the moment.
+
+routes:
+  - name: special_pages
+    description: Help, translation, and bash function pages
+    condition:
+      location: [":help", ":translation", ":bash.function"]
+    set:
+      view: "page"
+      output: "html"
+      uplink: false
+      renderer: "page"
+      missing: []
+
+  - name: files_directory
+    description: Static files under /files/
+    condition:
+      path_starts_with: "files/"
+    set:
+      view: "files"
+      output: "html"
+      uplink: false
+      renderer: "page"
+      missing: []
+
+  - name: png_images
+    description: PNG output (routed to uplink client4)
+    condition:
+      url_contains: ".png"
+      url_not_contains: "/files/"
+    set:
+      view: "v1"
+      output: "png"
+      uplink: true
+      renderer: ""
+      missing: ["transparency=150"]
+
+  - name: json_views
+    description: j1 and j2 JSON formats
+    condition:
+      or:
+        - view: ["j1", "j2"]
+        - format: ["j1", "j2"]
+    set:
+      view: "{{ view | default: format | default: 'j1' }}"
+      output: "json"
+      uplink: false
+      renderer: "{{ view | default: format | default: 'j1' }}"
+      missing: []
+
+  - name: one_line
+    description: One-line/compact format (including unknown format=)
+    condition:
+      or:
+        - view: "line"
+        - format: {"not": ["", "j1", "j2", "v2", "p1"]}
+    set:
+      view: "line"
+      output: "{{ 'text' if output == 'html' else output | default: 'text' }}"
+      uplink: false
+      renderer: "line"
+      missing: ["Format"]
+
+  - name: v2_p1_uplink
+    description: v2 and p1 views are handled by uplink (client2)
+    condition:
+      view: ["v2", "p1"]
+    set:
+      view: "{{ view }}"
+      output: "text"
+      uplink: true
+      renderer: ""
+      missing: []
+
+  - name: v1_default
+    description: v1 / v1x or no view specified (main rich view)
+    condition:
+      or:
+        - view: ["v1", "v1x"]
+    set:
+      view: "v1"
+      output: "{{ output if output else ('text' if is_plain_text_client(agent) else 'html') }}"
+      uplink: false
+      renderer: "v1"
+      missing: ["Location"]
+
+  - name: auto_detect
+    description: Root path or :auto-style paths
+    condition:
+      or:
+        - path: ["", ":*"]
+    set:
+      view: "v1"
+      output: "html"
+      uplink: false
+      renderer: "v1"
+      missing: ["Location"]
+
+  - name: default
+    description: Catch-all fallback
+    condition: true
+    set:
+      view: "v1"
+      output: "{{ output if output else ('text' if is_plain_text_client(agent) else 'html') }}"
+      uplink: false
+      renderer: "v1"
+      missing: ["Location"]

@@ -341,8 +341,6 @@ def parse_request(location, request, query, fast_mode=False):
     ).decode("utf-8")
     if core_options_header_json_str:
         core_options = json.loads(core_options_header_json_str)
-        if "view" in core_options:
-            del core_options["view"]
         parsed_query.update(core_options)
 
     # Extracting location data from the header

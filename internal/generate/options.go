@@ -20,6 +20,7 @@ package options
 import (
 	"fmt"
 	"strconv"
+	"strings"
 )
 
 // Options represents parsed and validated wttr.in query options.
@@ -72,6 +73,65 @@ func ApplyParsedMap(opts *Options, raw map[string]string) (*Options, error) {
 {{end}}
 
 	return opts, nil
+}
+
+// ToMap converts Options back to map[string]string.
+// Only non-zero / non-default values are included.
+func (o *Options) ToMap() map[string]string {
+	if o == nil {
+		return make(map[string]string)
+	}
+
+	m := make(map[string]string)
+
+	// Strings (skip empty, except Lang which has explicit default)
+{{range .QueryOptions}}
+	{{if eq .FieldType "string"}}
+		{{if eq .Name "lang"}}
+	if o.{{.FieldName}} != "" && o.{{.FieldName}} != "{{.Default}}" {
+		m["{{.Name}}"] = o.{{.FieldName}}
+	}
+		{{else}}
+	if o.{{.FieldName}} != "" {
+		m["{{.Name}}"] = o.{{.FieldName}}
+	}
+		{{end}}
+	{{end}}
+{{end}}
+
+	// Booleans (only true values)
+{{range .QueryOptions}}
+	{{if eq .FieldType "bool"}}
+	if o.{{.FieldName}} {
+		m["{{.Name}}"] = "true"
+	}
+	{{end}}
+{{end}}
+
+	// Integers (only non-zero)
+{{range .QueryOptions}}
+	{{if eq .FieldType "int"}}
+	if o.{{.FieldName}} != 0 {
+		m["{{.Name}}"] = strconv.Itoa(o.{{.FieldName}})
+	}
+	{{end}}
+{{end}}
+
+	return m
+}
+
+// ToQueryString returns the options as URL query string (e.g. "format=...&lang=de").
+func (o *Options) ToQueryString() string {
+	m := o.ToMap()
+	if len(m) == 0 {
+		return ""
+	}
+
+	parts := make([]string, 0, len(m))
+	for k, v := range m {
+		parts = append(parts, k+"="+v)
+	}
+	return strings.Join(parts, "&")
 }
 `
 )

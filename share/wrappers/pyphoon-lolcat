@@ -1,0 +1,21 @@
+#!/bin/bash
+
+PATH=/usr/games:/home/igor/src/pyphoon/ve/bin:$PATH
+
+if ! which lolcat > /dev/null 2>&1 ; then
+  echo Please install lolcat first >&2
+  exit 1
+fi
+
+if [[ $WTTR_OPTION_LOCATION = *@* ]]; then
+  MOON_DATE=("$(sed s/.*@// <<< "$WTTR_OPTION_LOCATION")")
+fi
+
+if [[ -n $WTTR_OPTION_LANG ]]; then
+  OPT_LANG=(-l "$WTTR_OPTION_LANG")
+fi
+
+# FIXME:
+# Add hemisphere support (at the moment the north hemisphere is assumed)
+
+pyphoon "${OPT_LANG[@]}" "${MOON_DATE[@]}" | LANG=en_US.UTF-8 lolcat -f

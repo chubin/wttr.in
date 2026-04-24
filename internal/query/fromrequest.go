@@ -9,6 +9,7 @@ import (
 
 	"github.com/chubin/wttr.in/internal/options"
 	"github.com/chubin/wttr.in/internal/spec"
+	"github.com/chubin/wttr.in/internal/util"
 )
 
 // FromRequest creates an options.Options struct based on the provided HTTP request.
@@ -113,11 +114,6 @@ func FromRequest(r *http.Request) (*options.Options, error) {
 	// agent is deferred to ApplyAutoFixes, where the view is known.
 	opts.Agent = r.Header.Get("User-Agent")
 
-	// Step 8: Set default transparency for PNG output if applicable
-	if opts.Output == "png" && opts.Transparency == 0 {
-		opts.Transparency = 150
-	}
-
 	return opts, nil
 }
 
@@ -127,9 +123,19 @@ func ApplyAutoFixes(opts *options.Options) {
 		":translation",
 		":bash.function",
 	}
-	if inSlice(opts.Location, pages) {
+	subprocess := []string{
+		"moon",
+	}
+
+	if util.InSlice(opts.Location, pages) {
 		opts.View = "page"
 	}
+
+	location := strings.ToLower(opts.Location)
+	if util.InSlice(location, subprocess) || util.HasPrefixInSlice(location, subprocess, "@") {
+		opts.View = "subprocess"
+	}
+
 	if opts.View == "" {
 		if opts.Format == "j1" || opts.Format == "j2" || opts.Format == "v2" || opts.Format == "p1" {
 			opts.View = opts.Format
@@ -143,6 +149,10 @@ func ApplyAutoFixes(opts *options.Options) {
 		opts.Output = "json"
 	}
 	if opts.View == "line" && opts.Output == "html" {
+		opts.Output = "text"
+	}
+
+	if opts.ForceAnsi {
 		opts.Output = "text"
 	}
 
@@ -169,7 +179,7 @@ func ApplyAutoFixes(opts *options.Options) {
 		}
 	}
 
-	if !inSlice(opts.View, []string{"v1", "v2"}) {
+	if !util.InSlice(opts.View, []string{"v1", "v2"}) {
 		opts.NoFollowLine = true
 	}
 
@@ -284,9 +294,8 @@ func ParseOptionsInFilename(filename string, cfg *spec.WttrInOptions) (*options.
 
 	// 5. Build options.Options the standard way
 	opts := &options.Options{
-		Output:       "png",
-		Location:     location,
-		Transparency: 150, // PNG default
+		Output:   "png",
+		Location: location,
 	}
 
 	opts, err = options.ApplyParsedMap(opts, rawMap)
@@ -308,22 +317,17 @@ func Validate(opts *options.Options) error {
 // This is a simplified check; in a real application, you'd have a list of supported languages.
 func isValidLanguageCode(code string) bool {
 	// Simplified: assume any 2-letter lowercase code is a language
-	return len(code) == 2 && strings.ToLower(code) == code
+	return len(code) == 2 && strings.ToLower(code) == code && !util.InSlice(code, []string{"v2", "v3"})
 }
 
 // isValidView checks if the provided string is a valid view name.
 // This is a placeholder; in a real application, you'd have a list of supported views.
 func isValidView(view string) bool {
-	// Example: support "v2", "j1", "j2" as valid views
-	return view == "files" ||
-		view == "page" ||
-		view == "line" ||
-		view == "v1" ||
-		view == "v1x" ||
-		view == "v2" ||
-		view == "p1" ||
-		view == "j1" ||
-		view == "j2"
+	validViews := []string{
+		"files", "page", "line", "v1", "v1x", "v2", "p1", "j1", "j2",
+		"subprocess",
+	}
+	return util.InSlice(view, validViews)
 }
 
 // isBrowserClient determines if the User-Agent indicates a web browser.
@@ -359,14 +363,5 @@ func isPlainTextClient(userAgent string) bool {
 		}
 	}
 
-	return false
-}
-
-func inSlice(what string, where []string) bool {
-	for _, item := range where {
-		if item == what {
-			return true
-		}
-	}
 	return false
 }

@@ -74,12 +74,6 @@ query_options:
     type: boolean
     default: false
     active: true
-  - name: ansi_output
-    short: A
-    description: "Force ANSI output format for terminals"
-    type: boolean
-    default: false
-    active: true
   - name: standard_font
     short: d
     description: "Restrict output to standard console font glyphs"
@@ -132,12 +126,7 @@ query_options:
     type: integer
     description: "Random number, used to bypass the first caching layer (alias: dummy, random)"
     active: true
-  - name: no_color
-    short: T
-    description: "Switch off terminal color sequences (no colors)"
-    type: boolean
-    default: false
-    active: true
+
   - name: lang
     description: "Specify output language"
     type: string
@@ -240,11 +229,11 @@ query_options:
 
   - name: force-ansi
     short: A
-    description: "Force ANSI output mode"
+    description: "Ignore User-Agent and force ANSI output format (terminal)"
     type: boolean
     default: false
     active: true
-    note: "Enables ANSI formatting regardless of terminal capabilities"
+    note: "Enables ANSI formatting regardless of the user agent"
 
   - name: dumb
     short: d
@@ -307,7 +296,7 @@ query_options:
     range:
       min: 0
       max: 255
-    default: 150
+    default: 255
     active: true
     note: "Applicable only for PNG output; 255 = not transparent"
 
@@ -324,7 +313,6 @@ query_options:
     default: 0
     active: true
     note: "Applicable only for PNG output"
-
 
   - name: no-terminal
     short: T
