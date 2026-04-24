@@ -15,6 +15,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"regexp"
 	"strings"
 
 	"github.com/chubin/wttr.in/internal/domain"
@@ -83,10 +84,23 @@ func (r *Renderer) Render(query domain.Query) (domain.RenderOutput, error) {
 }
 
 func (r *Renderer) matchesLocation(route SubprocessRoute, loc string) bool {
-	if route.Location == "" || route.Location == "*" {
+	if route.Location == "" || route.Location == ".*" {
 		return true
 	}
-	return route.Location == loc
+
+	if route.Location == loc {
+		return true
+	}
+
+	// Compile the regular expression from route.Location
+	re, err := regexp.Compile(route.Location)
+	if err != nil {
+		// If the regexp is invalid return false
+		return false
+	}
+
+	// Check if the location matches the regular expression
+	return re.MatchString(loc)
 }
 
 func (r *Renderer) matchesSelectors(selectors map[string]string, opts map[string]string) bool {
