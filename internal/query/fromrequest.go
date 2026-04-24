@@ -130,7 +130,9 @@ func ApplyAutoFixes(opts *options.Options) {
 	if util.InSlice(opts.Location, pages) {
 		opts.View = "page"
 	}
-	if util.InSlice(opts.Location, subprocess) || util.HasPrefixInSlice(opts.Location, subprocess, "@") {
+
+	location := strings.ToLower(opts.Location)
+	if util.InSlice(location, subprocess) || util.HasPrefixInSlice(location, subprocess, "@") {
 		opts.View = "subprocess"
 	}
 
