@@ -165,7 +165,9 @@ func ApplyAutoFixes(opts *options.Options) {
 	// to preserve the rich HTML experience for anything that might be a browser.
 	if opts.Output == "" && opts.Agent != "" {
 		if opts.View == "line" {
-			if isBrowserClient(opts.Agent) {
+			if isPlainTextClient(opts.Agent) {
+				opts.Output = "text"
+			} else if isBrowserClient(opts.Agent) {
 				opts.Output = "html"
 			} else {
 				opts.Output = "text"
