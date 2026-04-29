@@ -21,10 +21,10 @@ func dimLabel(label string) string {
 	return dim + label + reset
 }
 
-// renderLocalTimeOnly returns only HH:MM:SS without timezone offset
-func renderLocalTimeOnly(ctx *oneline.RenderContext) string {
+// renderNowWithOffset returns current local time with timezone offset (e.g. 12:18:16+0200)
+func renderNowWithOffset(ctx *oneline.RenderContext) string {
 	if ctx == nil || ctx.Location == nil {
-		return time.Now().Format("15:04:05")
+		return time.Now().Format("15:04:05-0700")
 	}
 
 	loc := time.UTC
@@ -36,7 +36,8 @@ func renderLocalTimeOnly(ctx *oneline.RenderContext) string {
 	}
 
 	localTime := ctx.Now.In(loc)
-	return localTime.Format("15:04:05")
+	// Format: HH:MM:SS+ZZZZ (or -ZZZZ)
+	return localTime.Format("15:04:05-0700")
 }
 
 // textualInformation returns the rich bottom metadata block (matches original v2 exactly)
@@ -80,24 +81,24 @@ func textualInformation(q *domain.Query, loc *domain.Location, opts *options.Opt
 	b.WriteString(loc.TimeZone)
 	b.WriteRune('\n')
 
-	// === Full Astronomy Line ===
+	// === Full Astronomy Line (Now with timezone offset) ===
 	b.WriteString(dimLabel("  Now:   ") + " ")
-	b.WriteString(renderLocalTimeOnly(ctx)) // ← Only local time, no +0200
+	b.WriteString(renderNowWithOffset(ctx)) // ← 12:18:16+0200 style
 	b.WriteString(" " + dim + "|" + reset + " ")
-	b.WriteString(dimLabel("Dawn:  ") + " ")
+	b.WriteString(dimLabel("Dawn:") + "   ")
 	b.WriteString(oneline.RenderDawn(ctx))
-	b.WriteString(" " + dim + "|" + reset + " ")
+	b.WriteString("  " + dim + "|" + reset + " ")
 	b.WriteString(dimLabel("Sunrise:") + " ")
 	b.WriteString(oneline.RenderSunrise(ctx))
 	b.WriteRune('\n')
 
 	b.WriteString(dimLabel("  Zenith:") + " ")
-	b.WriteString(oneline.RenderSolarNoon(ctx))
+	b.WriteString(oneline.RenderSolarNoon(ctx) + "     ")
 	b.WriteString(" " + dim + "|" + reset + " ")
 	b.WriteString(dimLabel("Sunset:") + " ")
 	b.WriteString(oneline.RenderSunset(ctx))
-	b.WriteString(" " + dim + "|" + reset + " ")
-	b.WriteString(dimLabel("Dusk:") + " ")
+	b.WriteString("  " + dim + "|" + reset + " ")
+	b.WriteString(dimLabel("Dusk:") + "    ")
 	b.WriteString(oneline.RenderDusk(ctx))
 	b.WriteRune('\n')
 
