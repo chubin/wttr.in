@@ -83,7 +83,7 @@ func (r *V2Renderer) Render(q domain.Query) (domain.RenderOutput, error) {
 	buf.WriteString("\n")
 
 	// Astronomical
-	buf.WriteString(drawAstronomical(loc))
+	buf.WriteString(drawAstronomical(loc, opts))
 	buf.WriteString("\n\n")
 
 	// Frame + optional textual information

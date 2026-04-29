@@ -8,9 +8,9 @@ import (
 	"github.com/kixorz/suncalc"
 )
 
-// moonAgeDays returns the approximate age of the moon in days
+// MoonAgeDays returns the approximate age of the moon in days
 // (0 ≈ new moon, ~14.765 ≈ full moon, ~29.53 ≈ next new moon)
-func moonAgeDays(t time.Time) float64 {
+func MoonAgeDays(t time.Time) float64 {
 	// Reference new moon: 2000-01-06 18:14 UTC (Unix timestamp ≈ 947116440)
 	const referenceNewMoon = 947116440.0
 	const synodicMonth = 29.530588853 // mean synodic month in days
@@ -26,28 +26,30 @@ func moonAgeDays(t time.Time) float64 {
 	return age
 }
 
-// RenderMoonPhaseEmoji returns a Unicode moon phase emoji
-// Matches common 8-phase style used in wttr.in and many terminal tools
+// RenderMoonPhaseEmoji — improved to better match visual expectation + Python spirit
 func RenderMoonPhaseEmoji(ctx *RenderContext) string {
-	illum := suncalc.GetMoonIllumination(ctx.Now)
-
-	// illum.Phase is 0.0 (new) → 1.0 (next new moon)
-	// Map to 8 phases (0=new, 1=wx crescent, ..., 4=full, ..., 7=wn crescent)
-	// +0.5 before floor gives nice rounding/centering
-	phaseIndex := int(math.Floor(illum.Phase*8+0.5)) % 8
-
-	phases := [8]string{
-		0: "🌑", // New Moon
-		1: "🌒", // Waxing Crescent
-		2: "🌓", // First Quarter
-		3: "🌔", // Waxing Gibbous
-		4: "🌕", // Full Moon
-		5: "🌖", // Waning Gibbous
-		6: "🌗", // Last Quarter
-		7: "🌘", // Waning Crescent
+	if ctx == nil {
+		return "🌕"
 	}
 
-	return phases[phaseIndex]
+	illum := suncalc.GetMoonIllumination(ctx.Now)
+
+	// Best mapping: use illumination directly (most accurate for appearance)
+	// +0.5 gives good rounding to nearest visual phase
+	idx := int(math.Floor(illum.Phase*8+0.5)) % 8
+
+	phases := [8]string{
+		"🌑", // 0 New
+		"🌒", // 1 Waxing Crescent
+		"🌓", // 2 First Quarter
+		"🌔", // 3 Waxing Gibbous
+		"🌕", // 4 Full
+		"🌖", // 5 Waning Gibbous
+		"🌗", // 6 Last Quarter
+		"🌘", // 7 Waning Crescent
+	}
+
+	return phases[idx]
 }
 
 // RenderMoonDay returns approximate lunar day (days since last new moon, 0–29)
