@@ -90,7 +90,7 @@ func (r *V2Renderer) Render(q domain.Query) (domain.RenderOutput, error) {
 	content := addFrame(buf.String(), 72, opts)
 
 	if !opts.Quiet && !opts.Superquiet && !opts.NoTerminal {
-		content += textualInformation(weather, loc, opts)
+		content += textualInformation(&q, loc, opts)
 	}
 
 	return domain.RenderOutput{
@@ -106,80 +106,11 @@ func drawTimeScale(loc *domain.Location) string {
 	return "   6  12  18    6  12  18    6  12  18  \n"
 }
 
-func drawWeatherEmoji(codes []int, opts *options.Options) string {
-	// Basic weather code to emoji mapping (expand as needed)
-	emojiMap := map[int]string{
-		113: "☀️", 116: "⛅", 119: "☁️", 122: "☁️",
-		176: "🌦️", 200: "⛈️", 227: "❄️", 230: "❄️",
-		248: "🌫️", 260: "🌫️",
-	}
-
-	var b strings.Builder
-	for _, code := range codes {
-		emoji := emojiMap[code]
-		if emoji == "" {
-			emoji = "🌡️"
-		}
-		if opts.StandardFont {
-			emoji = "*"
-		}
-		b.WriteString(emoji + "  ")
-	}
-	b.WriteRune('\n')
-	return b.String()
-}
-
-func drawWind(dirs []int, speeds []float64, opts *options.Options) string {
-	var dirLine, speedLine strings.Builder
-
-	for i, deg := range dirs {
-		dirSymbol := getWindDirection(deg)
-		color := getWindColor(speeds[i])
-
-		dirLine.WriteString(fmt.Sprintf(" %s ", colorize(dirSymbol, color)))
-
-		spd := int(speeds[i])
-		speedStr := fmt.Sprintf("%d", spd)
-		if spd < 10 {
-			speedStr = " " + speedStr + " "
-		}
-		speedLine.WriteString(colorize(speedStr, color))
-	}
-
-	dirLine.WriteRune('\n')
-	speedLine.WriteRune('\n')
-	return dirLine.String() + speedLine.String()
-}
-
-func getWindDirection(deg int) string {
-	dirs := []string{"N", "NE", "E", "SE", "S", "SW", "W", "NW"}
-	return dirs[(deg+22)%360/45]
-}
-
-func getWindColor(speed float64) string {
-	switch {
-	case speed < 5:
-		return "38;5;242"
-	case speed < 15:
-		return "38;5;250"
-	case speed < 25:
-		return "38;5;226"
-	default:
-		return "38;5;196"
-	}
-}
-
 func colorize(text, colorCode string) string {
 	if colorCode == "" {
 		return text
 	}
 	return fmt.Sprintf("\033[%sm%s\033[0m", colorCode, text)
-}
-
-func drawAstronomical(loc *domain.Location) string {
-	// Placeholder - can be expanded with real sunrise/sunset calculation later
-	return "─ Sunrise ───── Noon ────── Sunset ───── Dusk ──\n" +
-		"   06:12       13:05        20:58        22:10   \n"
 }
 
 func addFrame(content string, width int, opts *options.Options) string {
@@ -208,23 +139,6 @@ func addFrame(content string, width int, opts *options.Options) string {
 
 	return frameTop + strings.Join(lines, "\n") + "\n" +
 		"└" + strings.Repeat("─", width) + "┘\n"
-}
-
-func textualInformation(weather domain.Weather, loc *domain.Location, opts *options.Options) string {
-	if len(weather.CurrentCondition) == 0 {
-		return ""
-	}
-	curr := weather.CurrentCondition[0]
-
-	desc := ""
-	if len(curr.WeatherDesc) > 0 {
-		desc = curr.WeatherDesc[0].Value
-	}
-
-	return fmt.Sprintf(
-		"\nWeather: %s, %s°C\nLocation: %s, %s\nTimezone: %s\n",
-		desc, curr.TempC, loc.Name, loc.Country, loc.TimeZone,
-	)
 }
 
 // interpolate - linear interpolation (used by temperature and rain)

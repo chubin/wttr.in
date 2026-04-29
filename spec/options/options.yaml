@@ -23,6 +23,7 @@ query_options:
       - v1
       - v1x
       - v2
+      - v2x
       - v3
       - line
       - j1
