@@ -56,18 +56,28 @@ func ConvertWeather(w domain.Weather) resp {
 	return r
 }
 
+// getTranslatedDesc returns the best available translation (lang_xx first, then English)
+func getTranslatedDesc(weatherDesc, langXX []domain.ValueItem, fallback string) string {
+	if len(langXX) > 0 && langXX[0].Value != "" {
+		return langXX[0].Value
+	}
+	if len(weatherDesc) > 0 && weatherDesc[0].Value != "" {
+		return weatherDesc[0].Value
+	}
+	return fallback
+}
+
 // Helper: convert current_condition
 func convertCondFromCurrent(cc domain.CurrentCondition) cond {
 	return cond{
 		FeelsLikeC:     parseInt(cc.FeelsLikeC),
 		PrecipMM:       parseFloat32(cc.PrecipMM),
-		TempC2:         parseInt(cc.TempC), // note: temp_C in current
+		TempC2:         parseInt(cc.TempC),
 		VisibleDistKM:  parseInt(cc.Visibility),
 		WeatherCode:    parseInt(cc.WeatherCode),
 		WindspeedKmph:  parseInt(cc.WindspeedKmph),
 		Winddir16Point: cc.Winddir16Point,
-		WeatherDesc:    convertValueItems(cc.WeatherDesc),
-		// ChanceOfRain not present in current_condition → leave empty
+		WeatherDesc:    convertValueItems([]domain.ValueItem{{Value: getTranslatedDesc(cc.WeatherDesc, cc.LangXX, "Unknown")}}),
 	}
 }
 
@@ -84,7 +94,7 @@ func convertCondFromHourly(h domain.Hourly) cond {
 		WindGustKmph:   parseInt(h.WindGustKmph),
 		WindspeedKmph:  parseInt(h.WindspeedKmph),
 		Winddir16Point: h.Winddir16Point,
-		WeatherDesc:    convertValueItems(h.WeatherDesc),
+		WeatherDesc:    convertValueItems([]domain.ValueItem{{Value: getTranslatedDesc(h.WeatherDesc, h.LangXX, "Unknown")}}),
 	}
 }
 

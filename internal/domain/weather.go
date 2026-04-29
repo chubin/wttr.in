@@ -28,6 +28,7 @@ type CurrentCondition struct {
 	WeatherCode      string      `json:"weatherCode"`
 	WeatherDesc      []ValueItem `json:"weatherDesc"`
 	WeatherIconURL   []ValueItem `json:"weatherIconUrl"`
+	LangXX           []ValueItem `json:"lang_xx"`
 	Winddir16Point   string      `json:"winddir16Point"`
 	WinddirDegree    string      `json:"winddirDegree"`
 	WindspeedKmph    string      `json:"windspeedKmph"`
@@ -116,6 +117,7 @@ type Hourly struct {
 	WeatherCode      string      `json:"weatherCode"`
 	WeatherDesc      []ValueItem `json:"weatherDesc"`
 	WeatherIconURL   []ValueItem `json:"weatherIconUrl"`
+	LangXX           []ValueItem `json:"lang_xx"`
 	Winddir16Point   string      `json:"winddir16Point"`
 	WinddirDegree    string      `json:"winddirDegree"`
 	WindspeedKmph    string      `json:"windspeedKmph"`

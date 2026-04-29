@@ -333,28 +333,31 @@ func (r *V1Renderer) formatCond(prefix string, c cond, isCurrent bool, opts *opt
 		desc = c.WeatherDesc[0].Value
 	}
 
-	// Pad/truncate description to 15 characters
-	if r.rightToLeft {
-		for displaywidth.String(desc) < 15 {
-			desc = " " + desc
-		}
-		for displaywidth.String(desc) > 15 {
-			_, size := utf8.DecodeLastRuneInString(desc)
-			desc = desc[:len(desc)-size]
-		}
-	} else {
-		for displaywidth.String(desc) < 15 {
-			desc += " "
-		}
-		for displaywidth.String(desc) > 15 {
-			_, size := utf8.DecodeLastRuneInString(desc)
-			desc = desc[:len(desc)-size]
+	descWidth := 15
+	if !isCurrent {
+		// Pad/truncate description to descWidth characters
+		if r.rightToLeft {
+			for displaywidth.String(desc) < descWidth {
+				desc = " " + desc
+			}
+			for displaywidth.String(desc) > descWidth {
+				_, size := utf8.DecodeLastRuneInString(desc)
+				desc = desc[:len(desc)-size]
+			}
+		} else {
+			for displaywidth.String(desc) < descWidth {
+				desc += " "
+			}
+			for displaywidth.String(desc) > descWidth {
+				_, size := utf8.DecodeLastRuneInString(desc)
+				desc = desc[:len(desc)-size]
+			}
 		}
 	}
 
 	if isCurrent {
-		if r.rightToLeft && displaywidth.String(desc) < 15 {
-			desc = strings.Repeat(" ", 15-displaywidth.String(desc)) + desc
+		if r.rightToLeft && displaywidth.String(desc) < descWidth {
+			desc = strings.Repeat(" ", descWidth-displaywidth.String(desc)) + desc
 		} else {
 			desc = strings.TrimRight(desc, " ")
 		}
@@ -363,14 +366,14 @@ func (r *V1Renderer) formatCond(prefix string, c cond, isCurrent bool, opts *opt
 		if r.rightToLeft {
 			if first, size := utf8.DecodeRuneInString(desc); first != ' ' {
 				desc = "…" + desc[size:]
-				for displaywidth.String(desc) < 15 {
+				for displaywidth.String(desc) < descWidth {
 					desc = " " + desc
 				}
 			}
 		} else {
 			if last, size := utf8.DecodeLastRuneInString(desc); last != ' ' {
 				desc = desc[:len(desc)-size] + "…"
-				for displaywidth.String(desc) < 15 {
+				for displaywidth.String(desc) < descWidth {
 					desc += " "
 				}
 			}

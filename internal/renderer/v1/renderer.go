@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"regexp"
-	"strconv"
 	"strings"
 
 	"github.com/chubin/wttr.in/internal/domain"
@@ -171,25 +170,15 @@ func determineNumDays(opts *options.Options) int {
 func convertCurrentConditionToCond(cc domain.CurrentCondition) cond {
 	c := cond{
 		FeelsLikeC:     parseInt(cc.FeelsLikeC),
-		TempC2:         parseInt(cc.TempC), // current uses temp_C
+		PrecipMM:       parseFloat32(cc.PrecipMM),
+		TempC2:         parseInt(cc.TempC),
 		VisibleDistKM:  parseInt(cc.Visibility),
 		WeatherCode:    parseInt(cc.WeatherCode),
 		WindspeedKmph:  parseInt(cc.WindspeedKmph),
 		Winddir16Point: cc.Winddir16Point,
-	}
-
-	// Convert WeatherDesc
-	if len(cc.WeatherDesc) > 0 {
-		c.WeatherDesc = []struct{ Value string }{{Value: cc.WeatherDesc[0].Value}}
-	} else {
-		c.WeatherDesc = []struct{ Value string }{{Value: "Unknown"}}
-	}
-
-	// PrecipMM
-	if cc.PrecipMM != "" {
-		if f, err := strconv.ParseFloat(cc.PrecipMM, 32); err == nil {
-			c.PrecipMM = float32(f)
-		}
+		WeatherDesc: []struct{ Value string }{
+			{Value: getTranslatedDesc(cc.WeatherDesc, cc.LangXX, "Unknown")},
+		},
 	}
 
 	return c
