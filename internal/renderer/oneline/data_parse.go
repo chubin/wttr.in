@@ -41,7 +41,7 @@ type parsedCurrentCondition struct {
 
 // parseCurrentCondition extracts and normalizes current weather data
 // from the raw JSON bytes returned by the upstream weather service.
-func parseCurrentCondition(raw []byte) (*parsedCurrentCondition, error) {
+func ParseCurrentCondition(raw []byte) (*parsedCurrentCondition, error) {
 	var full domain.Weather
 	if err := json.Unmarshal(raw, &full); err != nil {
 		return nil, fmt.Errorf("invalid weather JSON: %w", err)

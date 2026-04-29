@@ -17,7 +17,7 @@ import (
 // Unified render function signature
 // ──────────────────────────────────────────────────────────────────────────────
 
-type RenderFunc func(ctx *renderContext) string
+type RenderFunc func(ctx *RenderContext) string
 
 // OnelineRenderer is responsible for rendering weather data
 // in the compact one-line text format (?format=... or preconfigured IDs).
@@ -70,8 +70,8 @@ func (r *OnelineRenderer) determineFormat(opts *options.Options) string {
 // Example error definition (can be in the same package)
 var ErrNoWeatherData = errors.New("no weather data available in query")
 
-// renderContext holds everything a single placeholder might need
-type renderContext struct {
+// RenderContext holds everything a single placeholder might need
+type RenderContext struct {
 	Data     *parsedCurrentCondition
 	DataRaw  interface{}
 	Options  *options.Options
@@ -85,28 +85,28 @@ type renderContext struct {
 // ──────────────────────────────────────────────────────────────────────────────
 
 var placeholderRenderers = map[rune]RenderFunc{
-	'c': renderConditionEmoji,
-	'C': renderConditionFullName,
-	'x': renderConditionPlain,
-	'i': renderConditionCode,
-	't': renderTemperature,
-	'f': renderFeelsLike,
-	'w': renderWind,
-	'h': renderHumidity,
-	'p': renderPrecipitation,
-	'o': renderPrecipChance,
-	'P': renderPressure,
-	'u': renderUVIndex,
-	'l': renderLocation,
-	'm': renderMoonPhaseEmoji,
-	'M': renderMoonDay,
-	'S': renderSunrise,
-	's': renderSunset,
-	'D': renderDawn,
-	'd': renderDusk,
-	'z': renderSolarNoon,
-	'T': renderLocalTime,
-	'Z': renderTimezone,
+	'c': RenderConditionEmoji,
+	'C': RenderConditionFullName,
+	'x': RenderConditionPlain,
+	'i': RenderConditionCode,
+	't': RenderTemperature,
+	'f': RenderFeelsLike,
+	'w': RenderWind,
+	'h': RenderHumidity,
+	'p': RenderPrecipitation,
+	'o': RenderPrecipChance,
+	'P': RenderPressure,
+	'u': RenderUVIndex,
+	'l': RenderLocation,
+	'm': RenderMoonPhaseEmoji,
+	'M': RenderMoonDay,
+	'S': RenderSunrise,
+	's': RenderSunset,
+	'D': RenderDawn,
+	'd': RenderDusk,
+	'z': RenderSolarNoon,
+	'T': RenderLocalTime,
+	'Z': RenderTimezone,
 }
 
 // ──────────────────────────────────────────────────────────────────────────────
@@ -118,7 +118,7 @@ func (r *OnelineRenderer) Render(q domain.Query) (domain.RenderOutput, error) {
 		return domain.RenderOutput{}, fmt.Errorf("no weather data")
 	}
 
-	data, err := parseCurrentCondition(*q.Weather)
+	data, err := ParseCurrentCondition(*q.Weather)
 	if err != nil {
 		return domain.RenderOutput{}, err
 	}
@@ -133,7 +133,7 @@ func (r *OnelineRenderer) Render(q domain.Query) (domain.RenderOutput, error) {
 	formatStr := r.determineFormat(q.Options)
 	formatStr = TolerantUnescape(formatStr)
 
-	ctx := &renderContext{
+	ctx := &RenderContext{
 		Data:     data,
 		DataRaw:  dataRaw,
 		Options:  q.Options,
@@ -170,7 +170,7 @@ func (r *OnelineRenderer) Render(q domain.Query) (domain.RenderOutput, error) {
 	}, nil
 }
 
-func renderWithPlaceholders(format string, ctx *renderContext) string {
+func renderWithPlaceholders(format string, ctx *RenderContext) string {
 	var sb strings.Builder
 
 	for i := 0; i < len(format); i++ {

@@ -12,7 +12,7 @@ import (
 
 // sunriseTime returns local sunrise time in "HH:MM" format (24h)
 // Uses github.com/nathan-osman/go-sunrise for accurate calculation
-func sunriseTime(ctx *renderContext) string {
+func sunriseTime(ctx *RenderContext) string {
 	if ctx.Location == nil || ctx.Data == nil {
 		return "??:??:??"
 	}
@@ -39,7 +39,7 @@ func sunriseTime(ctx *renderContext) string {
 	return localRise.Format("15:04:05")
 }
 
-func sunsetTime(ctx *renderContext) string {
+func sunsetTime(ctx *RenderContext) string {
 	if ctx.Location == nil || ctx.Data == nil {
 		return "??:??:??"
 	}
@@ -66,7 +66,7 @@ func sunsetTime(ctx *renderContext) string {
 }
 
 // solarNoonTime — approximate as midpoint between sunrise & sunset
-func solarNoonTime(ctx *renderContext) string {
+func solarNoonTime(ctx *RenderContext) string {
 	riseStr := sunriseTime(ctx)
 	setStr := sunsetTime(ctx)
 
@@ -87,12 +87,12 @@ func solarNoonTime(ctx *renderContext) string {
 	return fmt.Sprintf("%02d:%02d:%02d", noonH, noonM, noonS)
 }
 
-// getLatLonAndTZ extracts latitude, longitude, and timezone from renderContext
+// getLatLonAndTZ extracts latitude, longitude, and timezone from RenderContext
 // Returns:
 //   - lat, lon: coordinates (0,0 if missing/invalid)
 //   - loc: timezone location (UTC fallback if missing)
 //   - ok: true only if we have usable coordinates
-func getLatLonAndTZ(ctx *renderContext) (lat, lon float64, loc *time.Location, ok bool) {
+func getLatLonAndTZ(ctx *RenderContext) (lat, lon float64, loc *time.Location, ok bool) {
 	if ctx == nil {
 		return 0, 0, time.UTC, false
 	}
@@ -124,7 +124,7 @@ func getLatLonAndTZ(ctx *renderContext) (lat, lon float64, loc *time.Location, o
 	ok = lat != 0 || lon != 0
 
 	if !ok {
-		fmt.Fprintln(os.Stderr, "WARNING: no usable latitude/longitude in renderContext")
+		fmt.Fprintln(os.Stderr, "WARNING: no usable latitude/longitude in RenderContext")
 	}
 
 	return lat, lon, loc, ok
@@ -134,7 +134,7 @@ func getLatLonAndTZ(ctx *renderContext) (lat, lon float64, loc *time.Location, o
 // Optional: Helper to get "today" at midnight local time
 // Useful for twilight calculations
 // ────────────────────────────────────────────────
-func getLocalMidnight(ctx *renderContext) time.Time {
+func getLocalMidnight(ctx *RenderContext) time.Time {
 	_, _, loc, _ := getLatLonAndTZ(ctx) // ignore ok here — UTC is safe fallback
 	now := ctx.Now
 	if now.IsZero() {
@@ -144,7 +144,7 @@ func getLocalMidnight(ctx *renderContext) time.Time {
 }
 
 // dawnTime returns civil dawn time in local HH:MM format (or "??:??" on error/failure)
-func dawnTime(ctx *renderContext) string {
+func dawnTime(ctx *RenderContext) string {
 	lat, lon, loc, ok := getLatLonAndTZ(ctx)
 	if !ok {
 		return "??:??:??"
@@ -169,7 +169,7 @@ func dawnTime(ctx *renderContext) string {
 }
 
 // duskTime returns civil dusk time in local HH:MM format (or "??:??" on error/failure)
-func duskTime(ctx *renderContext) string {
+func duskTime(ctx *RenderContext) string {
 	lat, lon, loc, ok := getLatLonAndTZ(ctx)
 	if !ok {
 		return "??:??:??"

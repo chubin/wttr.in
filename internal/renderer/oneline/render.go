@@ -12,7 +12,7 @@ import (
 // All render functions — same signature
 // ──────────────────────────────────────────────────────────────────────────────
 
-func renderConditionFullName(ctx *renderContext) string {
+func RenderConditionFullName(ctx *RenderContext) string {
 	if ctx.Options.Lang == "en" {
 		return ctx.Data.WeatherDesc
 	}
@@ -28,11 +28,11 @@ func renderConditionFullName(ctx *renderContext) string {
 	return val
 }
 
-func renderConditionCode(ctx *renderContext) string {
+func RenderConditionCode(ctx *RenderContext) string {
 	return ctx.Data.ConditionCode
 }
 
-func renderTemperature(ctx *renderContext) string {
+func RenderTemperature(ctx *RenderContext) string {
 	var val float64
 	var unit string
 	if ctx.Options.UseImperial {
@@ -47,7 +47,7 @@ func renderTemperature(ctx *renderContext) string {
 	return fmt.Sprintf("%s%.0f%s", sign, math.Round(val), unit)
 }
 
-func renderFeelsLike(ctx *renderContext) string {
+func RenderFeelsLike(ctx *RenderContext) string {
 	var val float64
 	var unit string
 	if ctx.Options.UseImperial {
@@ -62,7 +62,7 @@ func renderFeelsLike(ctx *renderContext) string {
 	return fmt.Sprintf("%s%.0f%s", sign, math.Round(val), unit)
 }
 
-func renderWind(ctx *renderContext) string {
+func RenderWind(ctx *RenderContext) string {
 	var dir string
 
 	dirIndex := getWindDirectionIndex(ctx.Data.WindDirDegree)
@@ -90,33 +90,33 @@ func renderWind(ctx *renderContext) string {
 	return fmt.Sprintf("%s%.0f%s", dir, math.Round(speed), unit)
 }
 
-func renderHumidity(ctx *renderContext) string {
+func RenderHumidity(ctx *RenderContext) string {
 	return fmt.Sprintf("%d%%", ctx.Data.Humidity)
 }
 
-func renderPrecipitation(ctx *renderContext) string {
+func RenderPrecipitation(ctx *RenderContext) string {
 	if ctx.Options.UseImperial || ctx.Options.UseUscs {
 		return fmt.Sprintf("%.1fin", ctx.Data.PrecipInches)
 	}
 	return fmt.Sprintf("%.1fmm", ctx.Data.PrecipMM)
 }
 
-func renderPrecipChance(ctx *renderContext) string {
+func RenderPrecipChance(ctx *RenderContext) string {
 	if ctx.Data.ChanceOfRain == 0 {
 		return ""
 	}
 	return fmt.Sprintf("%d%%", ctx.Data.ChanceOfRain)
 }
 
-func renderPressure(ctx *renderContext) string {
+func RenderPressure(ctx *RenderContext) string {
 	return fmt.Sprintf("%dhPa", ctx.Data.PressureHpa)
 }
 
-func renderUVIndex(ctx *renderContext) string {
+func RenderUVIndex(ctx *RenderContext) string {
 	return strconv.Itoa(ctx.Data.UVIndex)
 }
 
-func renderLocation(ctx *renderContext) string {
+func RenderLocation(ctx *RenderContext) string {
 	if ctx.Location != nil {
 		return ctx.Location.Name
 	}
@@ -126,28 +126,28 @@ func renderLocation(ctx *renderContext) string {
 	return "?"
 }
 
-func renderSunrise(ctx *renderContext) string {
+func RenderSunrise(ctx *RenderContext) string {
 	// implement with geo + date
 	return sunriseTime(ctx) // stub or real impl
 }
 
-func renderSunset(ctx *renderContext) string {
+func RenderSunset(ctx *RenderContext) string {
 	return sunsetTime(ctx)
 }
 
-func renderDawn(ctx *renderContext) string {
+func RenderDawn(ctx *RenderContext) string {
 	return dawnTime(ctx)
 }
 
-func renderDusk(ctx *renderContext) string {
+func RenderDusk(ctx *RenderContext) string {
 	return duskTime(ctx)
 }
 
-func renderSolarNoon(ctx *renderContext) string {
+func RenderSolarNoon(ctx *RenderContext) string {
 	return solarNoonTime(ctx)
 }
 
-func renderLocalTime(ctx *renderContext) string {
+func RenderLocalTime(ctx *RenderContext) string {
 	// Start with UTC as default
 	loc := time.UTC
 	if ctx.Location.TimeZone != "" {
@@ -162,7 +162,7 @@ func renderLocalTime(ctx *renderContext) string {
 	return localTime.Format("15:04:05-0700")
 }
 
-func renderTimezone(ctx *renderContext) string {
+func RenderTimezone(ctx *RenderContext) string {
 	if ctx.Location != nil && ctx.Location.TimeZone != "" {
 		return ctx.Location.TimeZone
 	}
@@ -171,7 +171,7 @@ func renderTimezone(ctx *renderContext) string {
 
 // renderConditionPlain implements the %x placeholder
 // Returns a very simple plain-text (ASCII-like) representation of the weather condition
-func renderConditionPlain(ctx *renderContext) string {
+func RenderConditionPlain(ctx *RenderContext) string {
 	if ctx == nil || ctx.Data == nil || ctx.Data.ConditionCode == "" {
 		return "?"
 	}

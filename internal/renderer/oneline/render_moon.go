@@ -26,9 +26,9 @@ func moonAgeDays(t time.Time) float64 {
 	return age
 }
 
-// renderMoonPhaseEmoji returns a Unicode moon phase emoji
+// RenderMoonPhaseEmoji returns a Unicode moon phase emoji
 // Matches common 8-phase style used in wttr.in and many terminal tools
-func renderMoonPhaseEmoji(ctx *renderContext) string {
+func RenderMoonPhaseEmoji(ctx *RenderContext) string {
 	illum := suncalc.GetMoonIllumination(ctx.Now)
 
 	// illum.Phase is 0.0 (new) → 1.0 (next new moon)
@@ -50,9 +50,9 @@ func renderMoonPhaseEmoji(ctx *renderContext) string {
 	return phases[phaseIndex]
 }
 
-// renderMoonDay returns approximate lunar day (days since last new moon, 0–29)
+// RenderMoonDay returns approximate lunar day (days since last new moon, 0–29)
 // Rounded to nearest integer — suitable for weather/terminal display
-func renderMoonDay(ctx *renderContext) string {
+func RenderMoonDay(ctx *RenderContext) string {
 	illum := suncalc.GetMoonIllumination(ctx.Now)
 
 	// Approximate age from phase value:

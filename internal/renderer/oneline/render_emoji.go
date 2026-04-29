@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// renderConditionEmoji returns emoji/symbol + appropriate spacing
+// RenderConditionEmoji returns emoji/symbol + appropriate spacing
 // Behaves as closely as possible to the original Python version:
 //
 //   if view == "v2n":
@@ -21,7 +21,7 @@ import (
 //       spaces = " " * (3 - WeatherSymbolWidthVTE.get(symbol, 1))
 //
 // If code is missing/invalid → warning to stderr + placeholder symbol
-func renderConditionEmoji(ctx *renderContext) string {
+func RenderConditionEmoji(ctx *RenderContext) string {
 	if ctx == nil || ctx.Data == nil || ctx.Data.ConditionCode == "" {
 		fmt.Fprintln(os.Stderr, "WARNING: renderCondition called with empty or nil ConditionCode")
 		return "❓"
