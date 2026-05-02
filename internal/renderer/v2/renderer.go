@@ -5,7 +5,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"math"
 	"strings"
 	"unicode/utf8"
 
@@ -52,8 +51,8 @@ func (r *V2Renderer) Render(q domain.Query) (domain.RenderOutput, error) {
 		return h.TempC
 	})
 	tempInterp := interpolate(tempValues, 72)
-	buf.WriteString(drawTemperatureDiagram(tempInterp, 10, 72))
 	buf.WriteString("\n")
+	buf.WriteString(DrawColoredTemperatureDiagram(tempInterp, 10, 72))
 
 	// Time scale
 	buf.WriteString(drawTimeScale(loc))
@@ -131,24 +130,4 @@ func addFrame(content string, width int, opts *options.Options) string {
 
 	return frameTop + strings.Join(lines, "\n") + "\n" +
 		"└" + strings.Repeat("─", width) + "┘\n"
-}
-
-// interpolate - linear interpolation (used by temperature and rain)
-func interpolate(data []float64, targetWidth int) []float64 {
-	if len(data) == 0 {
-		return make([]float64, targetWidth)
-	}
-	result := make([]float64, targetWidth)
-	n := len(data) - 1
-	for i := range result {
-		x := float64(i) / float64(targetWidth-1) * float64(n)
-		low := int(math.Floor(x))
-		high := low + 1
-		if high >= len(data) {
-			high = len(data) - 1
-		}
-		frac := x - float64(low)
-		result[i] = data[low]*(1-frac) + data[high]*frac
-	}
-	return result
 }
