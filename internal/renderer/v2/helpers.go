@@ -2,27 +2,9 @@ package v2
 
 import (
 	"strconv"
-	"strings"
-	"time"
 
 	"github.com/chubin/wttr.in/internal/domain"
 )
-
-// drawDate - respects NoCaption / NoCity indirectly through frame
-func drawDate(loc *domain.Location) string {
-	tz, _ := time.LoadLocation(loc.TimeZone)
-	now := time.Now().In(tz)
-
-	var b strings.Builder
-	for i := 0; i < 3; i++ {
-		d := now.AddDate(0, 0, i)
-		dateStr := d.Format("Mon 02 Jan")
-		padding := (24 - len(dateStr)) / 2
-		line := strings.Repeat(" ", padding) + dateStr + strings.Repeat(" ", 24-len(dateStr)-padding)
-		b.WriteString(line)
-	}
-	return b.String()
-}
 
 // Helper extractors (clean and reusable)
 func extractAllHourlyFloat(w domain.Weather, getter func(domain.Hourly) string) []float64 {

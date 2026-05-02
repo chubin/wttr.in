@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"math"
 	"strings"
+	"unicode/utf8"
 
 	"github.com/chubin/wttr.in/internal/domain"
 	"github.com/chubin/wttr.in/internal/options"
@@ -40,8 +41,8 @@ func (r *V2Renderer) Render(q domain.Query) (domain.RenderOutput, error) {
 	var buf bytes.Buffer
 
 	// Date header (3 days)
-	buf.WriteString(drawDate(loc))
 	buf.WriteString("\n\n")
+	buf.WriteString(drawDate(loc))
 
 	// Temperature diagram
 	tempValues := extractAllHourlyFloat(weather, func(h domain.Hourly) string {
@@ -102,17 +103,6 @@ func (r *V2Renderer) Render(q domain.Query) (domain.RenderOutput, error) {
 // Remaining drawing functions (not in helpers.go)
 // ===================================================================
 
-func drawTimeScale(loc *domain.Location) string {
-	return "   6  12  18    6  12  18    6  12  18  \n"
-}
-
-func colorize(text, colorCode string) string {
-	if colorCode == "" {
-		return text
-	}
-	return fmt.Sprintf("\033[%sm%s\033[0m", colorCode, text)
-}
-
 func addFrame(content string, width int, opts *options.Options) string {
 	if opts.NoCaption {
 		return content
@@ -127,15 +117,17 @@ func addFrame(content string, width int, opts *options.Options) string {
 		lines[i] = "│" + lines[i] + strings.Repeat(" ", spacesNumber) + "│"
 	}
 
-	title := " Weather Report "
+	title := "  Weather report for: "
 	if opts.Superquiet {
 		title = ""
-	} else if opts.Quiet || opts.NoCity {
-		title = " " + opts.Location + " "
+	} else if !opts.Quiet || !opts.NoCity {
+		title += opts.Location + "  "
+	} else if opts.Quiet {
+		title = opts.Location + "  "
 	}
 
 	caption := "┤" + title + "├"
-	frameTop := "┌" + caption + strings.Repeat("─", width-len(caption)) + "┐\n"
+	frameTop := "┌" + caption + strings.Repeat("─", width-utf8.RuneCountInString(caption)) + "┐\n"
 
 	return frameTop + strings.Join(lines, "\n") + "\n" +
 		"└" + strings.Repeat("─", width) + "┘\n"
