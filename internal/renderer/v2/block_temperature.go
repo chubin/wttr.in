@@ -4,8 +4,8 @@ import (
 	"github.com/kerrigan29a/drawille-go"
 )
 
-// drawTemperatureDiagram draws a clean, compact Braille temperature plot.
-func drawTemperatureDiagram(data []float64, heightChars, widthChars int) string {
+// DrawTemperatureDiagram draws a clean, compact Braille temperature plot.
+func DrawTemperatureDiagram(data []float64, heightChars, widthChars int) string {
 	heightDots := heightChars * 4
 	widthDots := widthChars * 2
 

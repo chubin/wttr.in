@@ -1,6 +1,7 @@
 package v2
 
 import (
+	"fmt"
 	"math"
 	"strings"
 
@@ -54,7 +55,7 @@ func colorForTemp(t, minT, maxT float64) te.Color {
 }
 
 // DrawColoredTemperatureDiagram returns the Braille temperature plot
-// with a temperature-based color gradient on the line (blue = cold, red = hot).
+// with color gradient + high/low temperature labels.
 func DrawColoredTemperatureDiagram(data []float64, heightChars, widthChars int) string {
 	if len(data) == 0 {
 		return "No temperature data"
@@ -70,16 +71,15 @@ func DrawColoredTemperatureDiagram(data []float64, heightChars, widthChars int) 
 		rangeT = 1
 	}
 
-	// 1. Build the Braille plot exactly as before
+	// 1. Build Braille plot
 	c := drawille.NewCanvas()
 	c.Inverse = false
-
 	prevX, prevY := -1, -1
 	for i, t := range data {
 		x := i * (widthDots - 1) / (len(data) - 1)
 		normalized := (t - minT) / rangeT
 		y := int(normalized * float64(heightDots-1))
-		y = heightDots - 1 - y
+		y = heightDots - 1 - y // invert Y for canvas
 
 		c.Set(x, y)
 		if prevX >= 0 {
@@ -90,16 +90,14 @@ func DrawColoredTemperatureDiagram(data []float64, heightChars, widthChars int) 
 
 	plotStr := c.Frame(0, 0, widthDots-1, heightDots-1)
 
-	// 2. Load into go-te screen
-	screen := te.NewScreen(widthChars, heightChars+1) // extra rows for safety + label space
+	// 2. Load into go-te screen (extra row for labels)
+	screen := te.NewScreen(widthChars, heightChars+2) // +2 for labels
 	stream := te.NewStream(screen, false)
 	normalized := strings.ReplaceAll(plotStr, "\n", "\r\n")
 	stream.Feed(normalized)
 
-	// 3. Color the line based on temperature (column → temp → color)
-	// Each character column corresponds to ~2 dots
+	// 3. Color the temperature line
 	for col := 0; col < widthChars; col++ {
-		// map character column back to dot x and then to temperature
 		xDot := col * 2
 		idx := float64(xDot) / float64(widthDots-1) * float64(len(data)-1)
 		low := int(math.Floor(idx))
@@ -112,7 +110,6 @@ func DrawColoredTemperatureDiagram(data []float64, heightChars, widthChars int) 
 
 		color := colorForTemp(t, FixedMinTemp, FixedMaxTemp)
 
-		// Color every non-space cell in this column (i.e. the line)
 		for row := 0; row < len(screen.Buffer); row++ {
 			if row >= len(screen.Buffer) || col >= len(screen.Buffer[row]) {
 				continue
@@ -124,11 +121,34 @@ func DrawColoredTemperatureDiagram(data []float64, heightChars, widthChars int) 
 		}
 	}
 
-	/// // 4. (Optional) Add a neutral label below
-	/// // label := fmt.Sprintf("min:%.0f°   max:%.0f°", minT, maxT)
-	/// // We could feed it again, but for simplicity we just return the colored plot
+	// ==================== ADD LABELS ====================
 
-	coloredPlot := teansi.ToANSI(screen)
+	// High temperature label (top-left)
+	highLabel := fmt.Sprintf("▲ %.0f°", maxT)
+	teansi.WriteText(screen, 0, 0, highLabel,
+		teansi.TrueColor(255, 100, 100), // warm red
+		te.Color{Mode: te.ColorDefault})
 
-	return coloredPlot
+	// Low temperature label (bottom-left, just below the plot)
+	lowLabel := fmt.Sprintf("▼ %.0f°", minT)
+	lowRow := heightChars - 1
+	teansi.WriteText(screen, lowRow, 0, lowLabel,
+		teansi.TrueColor(100, 180, 255), // cold blue
+		te.Color{Mode: te.ColorDefault})
+
+	// // Optional: Current/last temperature on the right
+	// if len(data) > 0 {
+	// 	lastT := data[len(data)-1]
+	// 	lastLabel := fmt.Sprintf("%.0f°", lastT)
+	// 	// Place near the right edge
+	// 	rightCol := widthChars - len(lastLabel) - 1
+	// 	if rightCol < 0 {
+	// 		rightCol = 0
+	// 	}
+	// 	teansi.WriteText(screen, 0, rightCol, lastLabel,
+	// 		colorForTemp(lastT, FixedMinTemp, FixedMaxTemp),
+	// 		te.Color{Mode: te.ColorDefault})
+	// }
+
+	return teansi.ToANSI(screen)
 }
