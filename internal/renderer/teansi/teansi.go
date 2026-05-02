@@ -4,6 +4,7 @@ package teansi
 
 import (
 	"fmt"
+	"log"
 	"strings"
 
 	"github.com/rcarmo/go-te/pkg/te"
@@ -21,6 +22,7 @@ func ToANSI(s *te.Screen) string {
 	lastBg := te.Color{Mode: te.ColorDefault}
 
 	for row := range s.Buffer {
+		log.Println(row)
 		for col := range s.Buffer[row] {
 			cell := s.Buffer[row][col]
 
@@ -124,4 +126,32 @@ func hexToUint8(s string) uint8 {
 	var v uint8
 	fmt.Sscanf(s, "%02x", &v)
 	return v
+}
+
+// WriteText writes a string at (row, col) with optional foreground/background color.
+// Stops at screen edges. Supports \n.
+func WriteText(s *te.Screen, row, col int, text string, fg, bg te.Color) {
+	if s == nil || len(s.Buffer) == 0 {
+		return
+	}
+
+	r, c := row, col
+
+	for _, ch := range text {
+		if ch == '\n' {
+			r++
+			c = col
+			continue
+		}
+
+		if r < 0 || r >= len(s.Buffer) || c < 0 || c >= len(s.Buffer[r]) {
+			continue // skip characters outside bounds
+		}
+
+		cell := &s.Buffer[r][c]
+		cell.Data = string(ch)
+		SetCellColor(s, r, c, fg, bg)
+
+		c++
+	}
 }
