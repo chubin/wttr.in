@@ -4,7 +4,6 @@ package teansi
 
 import (
 	"fmt"
-	"log"
 	"strings"
 
 	"github.com/rcarmo/go-te/pkg/te"
@@ -22,7 +21,6 @@ func ToANSI(s *te.Screen) string {
 	lastBg := te.Color{Mode: te.ColorDefault}
 
 	for row := range s.Buffer {
-		log.Println(row)
 		for col := range s.Buffer[row] {
 			cell := s.Buffer[row][col]
 

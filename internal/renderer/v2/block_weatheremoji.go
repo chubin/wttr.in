@@ -1,29 +1,32 @@
 package v2
 
 import (
+	"strconv"
 	"strings"
 
 	"github.com/chubin/wttr.in/internal/options"
+	"github.com/chubin/wttr.in/internal/renderer/oneline"
 )
 
+// drawWeatherEmoji renders hourly weather emojis by reusing RenderConditionEmoji
+// from the oneline package (via a minimal dummy context).
 func drawWeatherEmoji(codes []int, opts *options.Options) string {
-	// Basic weather code to emoji mapping (expand as needed)
-	emojiMap := map[int]string{
-		113: "☀️", 116: "⛅", 119: "☁️", 122: "☁️",
-		176: "🌦️", 200: "⛈️", 227: "❄️", 230: "❄️",
-		248: "🌫️", 260: "🌫️",
+	if len(codes) == 0 {
+		return "\n"
 	}
 
 	var b strings.Builder
+
 	for _, code := range codes {
-		emoji := emojiMap[code]
-		if emoji == "" {
-			emoji = "🌡️"
+		ctx := &oneline.RenderContext{
+			Data: &oneline.ParsedCurrentCondition{
+				ConditionCode: strconv.Itoa(code),
+			},
+			Options: opts,
+			// Location, Now, DataRaw can stay nil/zero — emoji renderer doesn't need them
 		}
-		if opts.StandardFont {
-			emoji = "*"
-		}
-		b.WriteString(emoji + "  ")
+
+		b.WriteString(oneline.RenderConditionEmoji(ctx))
 	}
 	b.WriteRune('\n')
 	return b.String()

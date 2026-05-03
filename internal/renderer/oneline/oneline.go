@@ -72,7 +72,7 @@ var ErrNoWeatherData = errors.New("no weather data available in query")
 
 // RenderContext holds everything a single placeholder might need
 type RenderContext struct {
-	Data     *parsedCurrentCondition
+	Data     *ParsedCurrentCondition
 	DataRaw  interface{}
 	Options  *options.Options
 	Location *domain.Location

@@ -9,9 +9,9 @@ import (
 	"github.com/chubin/wttr.in/internal/domain"
 )
 
-// parsedCurrentCondition is a normalized, ready-to-use view of current weather
+// ParsedCurrentCondition is a normalized, ready-to-use view of current weather
 // extracted from the WorldWeatherOnline-style JSON response
-type parsedCurrentCondition struct {
+type ParsedCurrentCondition struct {
 	// Core weather values
 	ConditionCode  string // "116", "248", etc.
 	WeatherDesc    string // "Partly cloudy" (translated if lang_xx present)
@@ -41,7 +41,7 @@ type parsedCurrentCondition struct {
 
 // parseCurrentCondition extracts and normalizes current weather data
 // from the raw JSON bytes returned by the upstream weather service.
-func ParseCurrentCondition(raw []byte) (*parsedCurrentCondition, error) {
+func ParseCurrentCondition(raw []byte) (*ParsedCurrentCondition, error) {
 	var full domain.Weather
 	if err := json.Unmarshal(raw, &full); err != nil {
 		return nil, fmt.Errorf("invalid weather JSON: %w", err)
@@ -100,7 +100,7 @@ func ParseCurrentCondition(raw []byte) (*parsedCurrentCondition, error) {
 		locName = full.NearestArea[0].AreaName[0].Value
 	}
 
-	return &parsedCurrentCondition{
+	return &ParsedCurrentCondition{
 		ConditionCode:    cc.WeatherCode,
 		WeatherDesc:      desc,
 		TempC:            tempC,
