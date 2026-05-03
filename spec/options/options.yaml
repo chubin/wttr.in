@@ -378,6 +378,19 @@ query_options:
     default: false
     active: true
 
+
+  - name: emoji
+    description: "Select emoji profile / symbol set (affects both appearance and terminal alignment)"
+    type: string
+    values:
+      - unicode   # Default: standard Unicode weather emojis (best for Ghostty, Kitty, modern terminals)
+      - nerd      # Weather Icons (Nerd Font / PUA glyphs) – richest icons, ideal with Nerd Font
+      - plain     # ASCII-only fallback (matches ?StandardFont, works everywhere)
+      - narrow
+    default: unicode
+    active: true
+    note: "Controls both the symbols used and their reserved width for perfect alignment in oneline formats and the v2 emoji row.  'nerd' is automatically used with ?view=v2d or v2n."
+
 format_specifiers:
   - specifier: "%c"
     description: "Weather condition"

@@ -123,6 +123,9 @@ type Options struct {
 
 	// Show debug output
 	Debug bool `json:"debug,omitempty"`
+
+	// Select emoji profile / symbol set (affects both appearance and terminal alignment) (Controls both the symbols used and their reserved width for perfect alignment in oneline formats and the v2 emoji row.  'nerd' is automatically used with ?view=v2d or v2n.)
+	Emoji string `json:"emoji,omitempty"`
 }
 
 // ApplyParsedMap populates Options from a validated map[string]string.
@@ -320,6 +323,11 @@ func ApplyParsedMap(opts *Options, raw map[string]string) (*Options, error) {
 		opts.Debug = (v == "true")
 	}
 
+	// string or fallback
+	if v, ok := raw["emoji"]; ok {
+		opts.Emoji = v
+	}
+
 	// Optional: apply defaults for unset fields (if not zero-value)
 
 	if opts.Lang == "" {
@@ -329,6 +337,10 @@ func ApplyParsedMap(opts *Options, raw map[string]string) (*Options, error) {
 	// force to string for template
 	if opts.Transparency == 0 {
 		opts.Transparency = 255
+	}
+
+	if opts.Emoji == "" {
+		opts.Emoji = "unicode"
 	}
 
 	return opts, nil
@@ -371,6 +383,10 @@ func (o *Options) ToMap() map[string]string {
 
 	if o.Background != "" {
 		m["background"] = o.Background
+	}
+
+	if o.Emoji != "" {
+		m["emoji"] = o.Emoji
 	}
 
 	// Booleans (only true values)
