@@ -24,6 +24,8 @@ query_options:
       - v1x
       - v2
       - v2x
+      - v2d
+      - v2n
       - v3
       - line
       - j1

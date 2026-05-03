@@ -326,7 +326,9 @@ func isValidLanguageCode(code string) bool {
 // This is a placeholder; in a real application, you'd have a list of supported views.
 func isValidView(view string) bool {
 	validViews := []string{
-		"files", "page", "line", "v1", "v1x", "v2", "v2x", "p1", "j1", "j2",
+		"files", "page", "line", "v1", "v1x",
+		"v2", "v2d", "v2n", "v2x",
+		"p1", "j1", "j2",
 		"subprocess",
 	}
 	return util.InSlice(view, validViews)

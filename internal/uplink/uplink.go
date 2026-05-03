@@ -74,7 +74,7 @@ func (p *UplinkProcessor) Route(
 	//////////////////////////////////////////
 	// Views that are not processed by the uplink.
 	// if !checkURLForPNG(r) {
-	if util.InSlice(opts.View, []string{"line", "j1", "j2", "v1x", "v1", "v2x", "files", "page", "subprocess"}) {
+	if util.InSlice(opts.View, []string{"line", "j1", "j2", "v1x", "v1", "v2", "v2d", "v2n", "v2x", "files", "page", "subprocess"}) {
 		return false, nil, nil
 	}
 	// }
