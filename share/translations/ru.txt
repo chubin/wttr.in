@@ -16,7 +16,7 @@
    : Слабый туман c изморозью                    : Freezing mist                                      :
    : Дождь, гололёд                              : Freezing rain                                      :
    : Сильный град                                : Hail shower                                        :
-   : Град,  гроза                                : Hail with thunderstorm                             :
+   : Град, гроза                                 : Hail with thunderstorm                             :
    : Туман/дымка                                 : Haze                                               :
    : Сильная метель                              : Heavy blowing snow                                 :
    : Сильный град, гроза                         : Heavy hail with thunderstorm                       :
