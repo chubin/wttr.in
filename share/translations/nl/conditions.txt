@@ -10,7 +10,7 @@
 : Lichte mist                                          : Shallow fog
 : Nevel                                                : Smoke
 : Windstoten                                           : Squalls
-: Onweer in de buurt                                   : Thunderstorm in vicinity
+: Onweer in de omgeving                                : Thunderstorm in vicinity
 : Sneeuw                                               : Snow
 : Regen                                                : Rain
 : Lichte regen, regenbuien                             : Light Rain, Rain Shower
@@ -20,7 +20,7 @@
 : Lichte motregen                                      : Light drizzle
 : Laag stuifsneeuw                                     : Low drifting snow
 : Lichte regen en sneeuw                               : Light rain and snow
-: Buien in de buurt                                    : Shower in vicinity
+: Buien in de omgeving                                 : Shower in vicinity
 : Regen met onweer                                     : Rain with thunderstorm
 : Regen en sneeuwbuien                                 : Rain and snow shower
 : Onweer                                               : Thunderstorm
@@ -28,7 +28,7 @@
 : Hagel met onweer                                     : Hail with thunderstorm
 : Nevel                                                : Haze
 : Lichte motregen en regen                             : Light drizzle and rain
-: Lichte regen en korrelhagel/sneeuwpallets met onweer : Light rain and small hail/snow pallets with thunderstorm
+: Lichte regen en korrelhagel/sneeuwkorrels met onweer : Light rain and small hail/snow pallets with thunderstorm
 113: Helder                               : Clear
 113: Zonnig                               : Sunny
 116: Deels bewolkt                        : Partly cloudy
@@ -46,7 +46,7 @@
 260: Rijp                                 : Freezing fog
 263: Plaatselijk motregen                 : Patchy light drizzle
 266: Motregen                             : Light drizzle
-281: Ijzel                                : Freezing drizzle
+281: IJzel                                : Freezing drizzle
 284: Zware ijzel                          : Heavy freezing drizzle
 293: Plaatselijk lichte regen             : Patchy light rain
 296: Lichte regen                         : Light rain
@@ -54,13 +54,13 @@
 302: Regen                                : Moderate rain
 305: Af en toe zware regen                : Heavy rain at times
 308: Zware regen                          : Heavy rain
-311: Lichte ijzel                         : Light freezing rain
-314: Zware ijzel                          : Moderate or heavy freezing rain
+311: Lichte aanvriezende regen            : Light freezing rain
+314: Zware aanvriezende regen             : Moderate or heavy freezing rain
 317: Lichte hagel                         : Light sleet
 320: Zware hagel                          : Moderate or heavy sleet
 323: Plaatselijk lichte sneeuw            : Patchy light snow
 326: Lichte sneeuw                        : Light snow
-329: Plaatselijke sneeuw                  : Patchy moderate snow
+329: Plaatselijke matige sneeuw           : Patchy moderate snow
 332: Sneeuw                               : Moderate snow
 335: Plaatselijk zware sneeuw             : Patchy heavy snow
 338: Zware sneeuw                         : Heavy snow
@@ -72,7 +72,7 @@
 365: Hagelbuien                           : Moderate or heavy sleet showers
 368: Lichte sneeuwbuien                   : Light snow showers
 371: Sneeuwbuien                          : Moderate or heavy snow showers
-386: Plaatselijk lichte regen met onweeer : Patchy light rain with thunder
+386: Plaatselijk lichte regen met onweer  : Patchy light rain with thunder
 389: Regen met onweer                     : Moderate or heavy rain with thunder
 392: Plaatselijk lichte sneeuw met onweer : Patchy light snow with thunder
 395: Sneeuw met onweer                    : Moderate or heavy snow with thunder

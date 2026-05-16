@@ -3,7 +3,7 @@ Gebruik:
     $ curl wttr.in              # huidige locatie
     $ curl wttr.in/muc          # weer op de luchthaven van München
 
-Ondersteunde locatiesoorten:
+Ondersteunde locaties:
 
     /paris                      # stadsnaam
     /~Eiffel+tower              # elke locatie (+ for spaties)
@@ -13,18 +13,18 @@ Ondersteunde locatiesoorten:
     /94107                      # gebiedscode
     /-78.46,106.76              # GPS-coördinaten
 
-Maanstand informatie:
+Maanstanden:
 
     /moon                       # Maanstand (voeg ,+US of ,+France toe voor deze plekken)
     /moon@2016-10-25            # Maanstand op deze datum (@2016-10-25)
 
 Eenheden:
 
-    m                          # metriek (SI) (overal gebruikt als standaard behalve in US)
-    u                          # USCS (standaard in US)
+    m                          # metrisch (SI) (overal gebruikt als standaard behalve in VS)
+    u                          # USCS (standaard in VS)
     M                          # laat windsnelheid in m/s zien
 
-Beeld opties:
+Weergaveopties:
 
     0                          # alleen huidig weer
     1                          # huidig weer + verwachting voor vandaag
@@ -36,7 +36,7 @@ Beeld opties:
     Q                          # superstille versie (geen "Weerbericht", geen stadsnaam)
     T                          # schakel terminalcodes uit (geen kleur)
 
-PNG opties:
+PNG-opties:
 
     /paris.png                  # genereert een PNG-bestand
     ?p                          # voegt een rand toe rond de uitvoer
@@ -51,7 +51,7 @@ PNG opties:
       /Paris_0pq.png          # in PNG het bestandstype specificeren achter _
       /Rome_0pq_lang=it.png   # lange opties worden gescheiden met _
 
-Lokalisatie:
+Localisatie:
 
     $ curl fr.wttr.in/Paris
     $ curl wttr.in/paris?lang=fr
