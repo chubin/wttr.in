@@ -1,9 +1,9 @@
 {
-  "NOT_FOUND_MESSAGE": "\nWij konden uw locatie niet vaststellen\ndus hebben we u naar Ojmjakon gebracht,\néén van de koudste permanent bewoonde gebieden op deze planeet.\n",
+  "NOT_FOUND_MESSAGE": "\nWe konden uw locatie niet vaststellen\ndus hebben we u naar Ojmjakon gebracht,\néén van de koudste permanent bewoonde gebieden op deze planeet.\n",
   "UNKNOWN_LOCATION": "Onbekende locatie",
   "LOCATION": "Locatie",
-  "CAPACITY_LIMIT_REACHED": "\nExcuse, wij kunnen u op dit moment dit weerbericht niet laten zien.\nHier is het weerbericht voor de standaard stad(zodat u weet hoe het er uitziet)\nWij lossen dit probleem zo snel mogelijk op.\nvoor updates kunt u ons op https://x.com/igor_chubin volgen.\n======================================================================================\n",
-  "NEW_FEATURE": "Nieuwe functie: tweetalige locatie namen \u001b[92mwttr.in/станция+Восток\u001b[0m (in UTF-8) en locatie zoeken \u001b[92mwttr.in/~Kilimanjaro\u001b[0m (zet er gewoon een ~ voor)",
+  "CAPACITY_LIMIT_REACHED": "\nSorry, we kunnen u op dit moment het weerbericht niet laten zien.\nHier is het weerbericht voor de standaard stad(zodat u weet hoe het er uitziet)\nWe lossen dit probleem zo snel mogelijk op.\nVoor updates kunt u ons op https://x.com/igor_chubin volgen.\n======================================================================================\n",
+  "NEW_FEATURE": "Nieuwe functie: meertalige locatienamen \u001b[92mwttr.in/станция+Восток\u001b[0m (in UTF-8) en locatie zoeken \u001b[92mwttr.in/~Kilimanjaro\u001b[0m (zet er gewoon een ~ voor)",
   "FOLLOW_ME": "Volg \u001b[46m\u001b[30m@igor_chubin\u001b[0m voor wttr.in updates",
   "CAPTION_WEATHER_REPORT_FOR": "Weerbericht voor:"
 }
