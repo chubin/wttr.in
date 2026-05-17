@@ -1,14 +1,6 @@
-   : Сильный дождь со снегом                     : Heavy rain and snow shower                         :
-   : Сильный ливень                              : Heavy rain shower                                  :
-   : Снежная позёмка                             : Low drifting snow                                  :
-   : Местами туман                               : Patches of fog                                     :
-   : Морось                                      : Drizzle                                            :
-   : Слабая морось, дождь                        : Light drizzle and rain                             :
-   : Снег                                        : Snow                                               :
-   : Дождь                                       : Rain                                               :
-   : Ливень                                      : Rain Shower                                        :
    : Песчаный позёмок                            : Blowing sand                                       :
    : Пыльный позёмок                             : Blowing widespread dust                            :
+   : Морось                                      : Drizzle                                            :
    : Морось, туман                               : Drizzle and fog                                    :
    : Морось, дождь                               : Drizzle and rain                                   :
    : Морось, гроза                               : Drizzle with thunderstorm                          :
@@ -16,19 +8,21 @@
    : Слабый туман c изморозью                    : Freezing mist                                      :
    : Дождь, гололёд                              : Freezing rain                                      :
    : Сильный град                                : Hail shower                                        :
-   : Град,  гроза                                : Hail with thunderstorm                             :
+   : Град, гроза                                 : Hail with thunderstorm                             :
    : Туман/дымка                                 : Haze                                               :
    : Сильная метель                              : Heavy blowing snow                                 :
    : Сильный град, гроза                         : Heavy hail with thunderstorm                       :
    : Сильный дождь с градом                      : Heavy rain and hail shower                         :
    : Сильный дождь с градом, гроза               : Heavy rain and hail with thunderstorm              :
+   : Сильный ливень                              : Heavy rain shower                                  :
    : Сильный дождь со снегом                     : Heavy rain and snow                                :
    : Сильный дождь, гроза                        : Heavy rain with thunderstorm                       :
    : Сильный снегопад                            : Heavy snow shower                                  :
    : Сильный снег, гроза                         : Heavy snow with thunderstorm                       :
    : Ледяная крупа                               : Ice pallets                                        :
    : Слабая морось, туман                        : Light drizzle and fog                              :
-   : Слабая морось со снегом                     : Light drizzle and snow                             :
+   : Слабая морось, дождь                        : Light drizzle and rain                             :
+   : Слабая морось, снег                         : Light drizzle and snow                             :
    : Слабая морось, гроза                        : Light drizzle with thunderstorm                    :
    : Слабая морось, гололёд                      : Light freezing drizzle                             :
    : Слабый дождь со снегом, гололёд             : Light freezing rain and snow                       :
@@ -38,7 +32,7 @@
    : Слабый дождь со снегом                      : Light rain and snow                                :
    : Слабый дождь, снежная крупа                 : Light rain and snow grains                         :
    : Снегопад с дождём                           : Light rain and snow shower                         :
-   : Снегопад с дождём, гроза                    : Light rain and snow with thunderstorm              :
+   : Слабый дождь со снегом, гроза               : Light rain and snow with thunderstorm              :
    : Слабый дождь, гроза                         : Light rain with thunderstorm                       :
    : Кратковременный ливень                      : Light shower                                       :
    : Небольшие осадки града/снежной крупы        : Light small hail/snow pallets                      :
@@ -48,13 +42,18 @@
    : Слабый снег с градом/снежной крупой, гроза  : Light snow and small hail/snow pallets with thunderstorm :
    : Слабый снег, снежная крупа                  : Light snow and snow grains                         :
    : Слабый снег, гроза                          : Light snow with thunderstorm                       :
+   : Небольшая гроза                             : Light thunderstorm                                                :
+   : Снежная позёмка                             : Low drifting snow                                  :
    : Туман, гроза                                : Mist with thunderstorm                             :
    : Умеренный до сильного снег, гроза           : Moderate or heavy snow in area with thunder        :
-   : Местами туман                               : Partial fog                                        :
    : Местами слабый снег, гроза                  : Patchy light snow in area with thunder             :
+   : Местами туман                               : Patches of fog                                     :
+   : Дождь                                       : Rain                                               :
+   : Ливень                                      : Rain Shower                                        :
    : Дождь с сильным градом                      : Rain and hail shower                               :
    : Дождь с градом, гроза                       : Rain and hail with thunderstorm                    :
    : Дождь, слабый туман                         : Rain and mist                                      :
+   : Дождь, слабый туман, гроза                  : Rain and mist with thunderstorm                    :
    : Дождь со снегом                             : Rain and snow                                      :
    : Дождь, снежная крупа                        : Rain and snow grains                               :
    : Дождь со снегом, гроза                      : Rain and snow with thunderstorm                    :
@@ -62,6 +61,7 @@
    : Песчаная буря                               : Sandstorm                                          :
    : Стелющийся туман                            : Shallow fog                                        :
    : Дым                                         : Smoke                                              :
+   : Снег                                        : Snow                                               :
    : Снег, ледяная крупа                         : Snow and ice pallets                               :
    : Снег, слабый туман                          : Snow and mist                                      :
    : Снег, снежная крупа                         : Snow and snow grains                               :
@@ -71,8 +71,8 @@
    : Шквалистый ветер                            : Squalls                                            :
    : Гроза                                       : Thunderstorm                                       :
    : Вулканический пепел                         : Volcanic ash                                       :
-113: Ясно                                        : Clear                                              :
 113: Солнечно                                    : Sunny                                              :
+114: Ясно                                        : Clear                                              :
 116: Переменная облачность                       : Partly cloudy                                      :
 119: Облачно                                     : Cloudy                                             :
 122: Пасмурно                                    : Overcast                                           :
@@ -85,7 +85,7 @@
 230: Снежная буря                                : Blizzard                                           :
 248: Туман                                       : Fog                                                :
 260: Туман с изморозью                           : Freezing fog                                       :
-263: Местами морось                              : Patchy light drizzle                               :
+263: Местами слабая морось                       : Patchy light drizzle                               :
 266: Слабая морось                               : Light drizzle                                      :
 281: Морось, гололёд                             : Freezing drizzle                                   :
 284: Сильная морось, гололёд                     : Heavy freezing drizzle                             :
@@ -104,7 +104,7 @@
 350: Ледяная крупа                               : Ice pellets                                        :
 356: Умеренный до сильного ливень                : Moderate or heavy rain shower                      :
 359: Проливной дождь                             : Torrential rain shower                             :
-362: Слабый мокрый снег                          : Light sleet showers                                :
+362: Слабый дождь с мокрым снегом                : Light sleet showers                                :
 365: Умеренный до сильного мокрый снег           : Moderate or heavy sleet showers                    :
 368: Кратковременный снегопад                    : Light snow showers                                 :
 371: Умеренный до сильного снегопад              : Moderate or heavy snow showers                     :
@@ -112,211 +112,3 @@
 389: Умеренный до сильного дождь, гроза          : Moderate or heavy rain with thunder                :
 392: Местами слабый снег, гроза                  : Patchy light snow with thunder                     :
 395: Умеренный до сильного снег, гроза           : Moderate or heavy snow with thunder                :
-   : Мгла в окрестностях                                               : Haze in vicinity                                                  :
-   : Сильный ливневой дождь со снегом                                  : Heavy rain and snow shower                                        :
-   : Сильный ливневой дождь                                            : Heavy rain shower                                                 :
-   : Слабая морось и снежные зёрна                                     : Light drizzle and snow grains                                     :
-   : Слабый ливневой дождь с дымкой                                    : Light rain and mist shower                                        :
-   : Слабый ливень из мелкого града/снежной крупы                      : Light small hail/snow pellets shower                              :
-   : Слабые ливневые осадки неустановленного вида                      : Light unknown precipitation shower                                :
-   : Гроза, дождь с мелким градом/снежной крупой                       : Rain and small hail/snow pellets with thunderstorm                :
-   : Ливневой снег в окрестностях                                      : Snow shower in vicinity                                           :
-   : Грозовая активность неподалёку                                    : Thundery outbreaks nearby                                         :
-   : Позёмка                                                           : Low drifting snow                                                 :
-   : Туман на ряде участков                                            : Patches of fog                                                    :
-   : Морось                                                            : Drizzle                                                           :
-   : Слабая морось и дождь                                             : Light drizzle and rain                                            :
-   : Снег                                                              : Snow                                                              :
-   : Дождь                                                             : Rain                                                              :
-   : Ливневый дождь                                                    : Rain Shower                                                       :
-   : Песчаная низовая метель                                           : Blowing sand                                                      :
-   : Повсеместная пылевая низовая метель                               : Blowing widespread dust                                           :
-   : Повсеместная пылевая низовая метель в окрестностях                : Blowing widespread dust in vicinity                               :
-   : Морось и туман                                                    : Drizzle and fog                                                   :
-   : Морось и дождь                                                    : Drizzle and rain                                                  :
-   : Ливневый дождь и морось                                           : Drizzle and rain shower                                           :
-   : Гроза с моросью                                                   : Drizzle with thunderstorm                                         :
-   : Пыльная буря                                                      : Dust storm                                                        :
-   : Туман в окрестностях                                              : Fog in vicinity                                                   :
-   : Переохлаждённая морось и дождь                                    : Freezing drizzle and rain                                         :
-   : Переохлаждённая дымка                                             : Freezing mist                                                     :
-   : Переохлаждённый дождь                                             : Freezing rain                                                     :
-   : Переохлаждённый дождь и снег                                      : Freezing rain and snow                                            :
-   : Переохлаждённые осадки неустановленного вида                      : Freezing unknown precipitation                                    :
-   : Воронкообразное облако в окрестностях                             : Funnel cloud in vicinity                                          :
-   : Ливень с градом                                                   : Hail shower                                                       :
-   : Гроза с градом                                                    : Hail with thunderstorm                                            :
-   : Мгла                                                              : Haze                                                              :
-   : Сильная низовая метель                                            : Heavy blowing snow                                                :
-   : Сильная морось                                                    : Heavy drizzle                                                     :
-   : Сильная морось и дождь                                            : Heavy drizzle and rain                                            :
-   : Сильные переохлаждённые осадки неустановленного вида              : Heavy freezing unknown precipitation                              :
-   : Гроза с сильным градом                                            : Heavy hail with thunderstorm                                      :
-   : Сильная ледяная крупа                                             : Heavy ice pallets                                                 :
-   : Сильный ливневой дождь с градом                                   : Heavy rain and hail shower                                        :
-   : Гроза с сильным дождём и градом                                   : Heavy rain and hail with thunderstorm                             :
-   : Сильный ливневой дождь с мелким градом/снежной крупой             : Heavy rain and small hail/snow pallets shower                     :
-   : Гроза, сильный дождь с мелким градом/снежной крупой               : Heavy rain and small hail/snow pallets with thunderstorm          :
-   : Сильный дождь со снегом                                           : Heavy rain and snow                                               :
-   : Гроза, сильный дождь со снегом/мелким градом/снежной крупой       : Heavy rain and snow and small hail/snow pallets with thunderstorm :
-   : Гроза с сильным дождём                                            : Heavy rain with thunderstorm                                      :
-   : Сильный ливень из мелкого града/снежной крупы                     : Heavy small hail/snow pallets shower                              :
-   : Гроза с сильным мелким градом/снежной крупой                      : Heavy small hail/snow pallets with thunderstorm                   :
-   : Сильный ливень из снега с мелким градом/снежной крупой            : Heavy snow and small hail/snow pallets shower                     :
-   : Гроза, сильный снег с мелким градом/снежной крупой                : Heavy snow and small hail/snow pallets with thunderstorm          :
-   : Сильный ливень из снега                                           : Heavy snow shower                                                 :
-   : Гроза, сильный снег                                               : Heavy snow with thunderstorm                                      :
-   : Осадки в виде кристаллов льда                                     : Ice crystals                                                      :
-   : Осадки в виде ледяной крупы                                       : Ice pallets                                                       :
-   : Слабая низовая метель                                             : Light blowing snow                                                :
-   : Слабая морось и туман                                             : Light drizzle and fog                                             :
-   : Слабая морось и ледяная крупа                                     : Light drizzle and ice pallets                                     :
-   : Слабая морось, дождь и снег                                       : Light drizzle and rain and snow                                   :
-   : Ливневый дождь и слабая морось                                    : Light drizzle and rain shower                                     :
-   : Гроза, слабая морось и дождь                                      : Light drizzle and rain with thunderstorm                          :
-   : Слабая морось, снег                                               : Light drizzle and snow                                            :
-   : Гроза, слабая морось                                              : Light drizzle with thunderstorm                                   :
-   : Слабая переохлаждённая морось                                     : Light freezing drizzle                                            :
-   : Слабая переохлаждённая морось и дождь                             : Light freezing drizzle and rain                                   :
-   : Слабая переохлаждённая морось и снег                              : Light freezing drizzle and snow                                   :
-   : Слабый переохлаждённый туман                                      : Light freezing fog                                                :
-   : Слабый переохлаждённый дождь и снег                               : Light freezing rain and snow                                      :
-   : Слабый переохлаждённый туман и снежные зёрна                      : Light freezing snow grains and fog                                :
-   : Слабые переохлаждённые осадки неустановленного вида               : Light freezing unknown precipitation                              :
-   : Слабый ливень из града                                            : Light hail shower                                                 :
-   : Слабое выпадение ледяных кристаллов                               : Light ice crystals                                                :
-   : Слабое выпадение ледяной крупы                                    : Light ice pallets                                                 :
-   : Слабый позёмок                                                    : Light low drifting                                                :
-   : Слабый позёмный снегоперенос                                      : Light low drifting snow                                           :
-   : Слабый ливневой дождь с градом                                    : Light rain and hail shower                                        :
-   : Гроза, слабый дождь с градом                                      : Light rain and hail with thunderstorm                             :
-   : Слабый дождь с ледяной крупой                                     : Light rain and ice pallets                                        :
-   : Слабый дождь и дымка                                              : Light rain and mist                                               :
-   : Слабый ливневой дождь с мелким градом/снежной крупой              : Light rain and small hail/snow pallets shower                     :
-   : Гроза, слабый дождь и мелкий град/снежная крупа                   : Light rain and small hail/snow pallets with thunderstorm          :
-   : Слабый дождь и снег                                               : Light rain and snow                                               :
-   : Слабый ливневой дождь с мелким градом/снежной крупой и снегом     : Light rain and snow and small hail/snow pallets shower            :
-   : Слабый дождь и снежные зёрна                                      : Light rain and snow grains                                        :
-   : Слабый ливневой дождь со снегом                                   : Light rain and snow shower                                        :
-   : Гроза, слабый дождь и снег                                        : Light rain and snow with thunderstorm                             :
-   : Гроза, слабый дождь                                               : Light rain with thunderstorm                                      :
-   : Слабый ливень                                                     : Light shower                                                      :
-   : Слабые ливни из ледяной крупы                                     : Light showers of ice pellets                                      :
-   : Слабые осадки из мелкого града/снежной крупы                      : Light small hail/snow pallets                                     :
-   : Слабые ливневые осадки из мелкого града/снежной крупы             : Light small hail/snow pallets shower                              :
-   : Гроза, слабые осадки из мелкого града/снежной крупы               : Light small hail/snow pallets with thunderstorm                   :
-   : Слабый снег с ледяной крупой                                      : Light snow and ice pallets                                        :
-   : Слабый снег с мелким градом/снежной крупой                        : Light snow and small hail/snow pallets                            :
-   : Слабый ливень из снега и мелкого града/снежной крупы              : Light snow and small hail/snow pallets shower                     :
-   : Гроза, снег с мелким градом/снежной крупой                        : Light snow and small hail/snow pallets with thunderstorm          :
-   : Слабые осадки в виде снега и снежных зёрен                        : Light snow and snow grains                                        :
-   : Слабые осадки в виде снежных зёрен                                : Light snow grains                                                 :
-   : Слабый ливневый снег                                              : Light snow shower                                                 :
-   : Гроза, слабые осадки в виде снега                                 : Light snow with thunderstorm                                      :
-   : Слабая гроза                                                      : Light thunderstorm                                                :
-   : Слабые осадки неустановленного вида                               : Light unknown precipitation                                       :
-   : Слабые сформированные пылевые/песчаные вихри                      : Light well-developed dust/sand whirls                             :
-   : Песчаный позёмок                                                  : Low drifting sand                                                 :
-   : Повсеместный пылевой позёмок                                      : Low drifting widespread dust                                      :
-   : Гроза с дымкой                                                    : Mist with thunderstorm                                            :
-   : Грозовая активность, сильный или умеренный дождь в окрестностях   : Moderate or heavy rain in area with thunder                       :
-   : Грозовая активность, сильный или умеренный снег в окрестностях    : Moderate or heavy snow in area with thunder                       :
-   : Местами туман                                                     : Partial fog                                                       :
-   : Туман на ряде участков в окрестностях                             : Patches of fog in vicinity                                        :
-   : Переохлаждённая морось на ряде участков неподалёку                : Patchy freezing drizzle nearby                                    :
-   : Грозовая активность, на ряде участков слабый дождь в окрестностях : Patchy light rain in area with thunder                            :
-   : Грозовая активность, на ряде участков слабый снег в окрестностях  : Patchy light snow in area with thunder                            :
-   : Дождь на ряде участков неподалёку                                 : Patchy rain nearby                                                :
-   : Мокрый снег на ряде участков неподалёку                           : Patchy sleet nearby                                               :
-   : Снег на ряде участков неподалёку                                  : Patchy snow nearby                                                :
-   : Ливневый дождь с градом                                           : Rain and hail shower                                              :
-   : Гроза, дождь с градом                                             : Rain and hail with thunderstorm                                   :
-   : Дождь и дымка                                                     : Rain and mist                                                     :
-   : Гроза, дождь и дымка                                              : Rain and mist with thunderstorm                                   :
-   : Ливневый дождь с мелким градом/снежной крупой                     : Rain and small hail/snow pallets shower                           :
-   : Гроза, дождь с мелким градом/снежной крупой                       : Rain and small hail/snow pallets with thunderstorm                :
-   : Дождь и снег                                                      : Rain and snow                                                     :
-   : Ливневый дождь с мелким градом/снежной крупой и снегом            : Rain and snow and small hail/snow pallets shower                  :
-   : Дождь со снежными зёрнами                                         : Rain and snow grains                                              :
-   : Ливневый дождь и снег                                             : Rain and snow shower                                              :
-   : Гроза, дождь и снег                                               : Rain and snow with thunderstorm                                   :
-   : Дождь в окрестностях                                              : Rain in vicinity                                                  :
-   : Ливневый дождь в окрестностях                                     : Rain shower in vicinity                                           :
-   : Гроза с дождём                                                    : Rain with thunderstorm                                            :
-   : Осадки в виде частиц песка                                        : Sand                                                              :
-   : Песчаная буря                                                     : Sandstorm                                                         :
-   : Приземный туман                                                   : Shallow fog                                                       :
-   : Приземная дымка                                                   : Shallow mist                                                      :
-   : Ливень                                                            : Shower                                                            :
-   : Ливень в окрестностях                                             : Shower in vicinity                                                :
-   : Осадки в виде мелкого града/снежной крупы                         : Small hail/snow pallets                                           :
-   : Ливневые осадки в виде мелкого града/снежной крупы                : Small hail/snow pallets shower                                    :
-   : Гроза, осадки в виде мелкого града/снежной крупы                  : Small hail/snow pallets with thunderstorm                         :
-   : Дым                                                               : Smoke                                                             :
-   : Осадки в виде снега и ледяной крупы                               : Snow and ice pallets                                              :
-   : Снег и дымка                                                      : Snow and mist                                                     :
-   : Ливневые осадки в виде снега и мелкого града/снежной крупы        : Snow and small hail/snow pellets shower                           :
-   : Гроза, осадки в виде снега и мелкого града/снежной крупы          : Snow and small hail/snow pallets with thunderstorm                :
-   : Снег и снежные зёрна                                              : Snow and snow grains                                              :
-   : Снежные зёрна                                                     : Snow grains                                                       :
-   : Ливневые осадки в виде снега                                      : Snow shower                                                       :
-   : Гроза, осадки в виде снега                                        : Snow with thunderstorm                                            :
-   : Шквал                                                             : Squalls                                                           :
-   : Гроза                                                             : Thunderstorm                                                      :
-   : Гроза в окрестностях                                              : Thunderstorm in vicinity                                          :
-   : Грозовая активность неподалёку                                    : Thundery outbreaks in nearby                                      :
-   : Осадки неустановленного вида                                      : Unknown precipitation                                             :
-   : Ливневые осадки неустановленного вида                             : Unknown precipitation shower                                      :
-   : Гроза с осадками неустановленного вида                            : Unknown precipitation with thunderstorm                           :
-   : Вулканическая пыль                                                : Volcanic ash                                                      :
-   : Вулканическая пыль в окрестностях                                 : Volcanic ash in vicinity                                          :
-   : Сформированные пылевые/песчаные вихри в окрестностях              : Well-developed dust/sand whirls in vicinity                       :
-   : Повсеместно пыль в воздухе                                        : Widespread dust                                                   :
-113: Ясно                                                              : Clear                                                             :
-113: Солнечно                                                          : Sunny                                                             :
-116: Переменная облачность                                             : Partly cloudy                                                     :
-119: Облачно                                                           : Cloudy                                                            :
-122: Пасмурно                                                          : Overcast                                                          :
-143: Дымка                                                             : Mist                                                              :
-176: На ряде участков возможен дождь                                   : Patchy rain possible                                              :
-179: На ряде участков возможен снег                                    : Patchy snow possible                                              :
-182: На ряде участков возможен мокрый снег                             : Patchy sleet possible                                             :
-185: На ряде участков возможна переохлаждённая морось                  : Patchy freezing drizzle possible                                  :
-200: Возможна грозовая активность                                      : Thundery outbreaks possible                                       :
-227: Снежная низовая метель                                            : Blowing snow                                                      :
-230: Близзард                                                          : Blizzard                                                          :
-248: Туман                                                             : Fog                                                               :
-260: Переохлаждённый туман                                             : Freezing fog                                                      :
-263: На ряде участков слабая морось                                    : Patchy light drizzle                                              :
-266: Слабая морось                                                     : Light drizzle                                                     :
-281: Переохлаждённая морось                                            : Freezing drizzle                                                  :
-284: Сильные осадки в виде переохлаждённой мороси                      : Heavy freezing drizzle                                            :
-293: На ряде участков слабый дождь                                     : Patchy light rain                                                 :
-296: Слабый дождь                                                      : Light rain                                                        :
-299: Временами умеренный дождь                                         : Moderate rain at times                                            :
-302: Умеренный дождь                                                   : Moderate rain                                                     :
-305: Временами сильный дождь                                           : Heavy rain at times                                               :
-308: Сильный дождь                                                     : Heavy rain                                                        :
-311: Слабый переохлаждённый дождь                                      : Light freezing rain                                               :
-314: Умеренный или сильный переохлаждённый дождь                       : Moderate or heavy freezing rain                                   :
-317: Слабый мокрый снег                                                : Light sleet                                                       :
-320: Умеренный или сильный мокрый снег                                 : Moderate or heavy sleet                                           :
-323: На ряде участков слабый снег                                      : Patchy light snow                                                 :
-326: Слабые осадки в виде снега                                        : Light snow                                                        :
-329: На ряде участков умеренный снегопад                               : Patchy moderate snow                                              :
-332: Умеренный снегопад                                                : Moderate snow                                                     :
-335: На ряде участков сильный снегопад                                 : Patchy heavy snow                                                 :
-338: Сильный снегопад                                                  : Heavy snow                                                        :
-350: Осадки в виде ледяной крупы                                       : Ice pellets                                                       :
-353: Слабый ливневой дождь                                             : Light rain shower                                                 :
-356: Сильный или умеренный ливневой дождь                              : Moderate or heavy rain shower                                     :
-359: Проливной ливневый дождь                                          : Torrential rain shower                                            :
-362: Слабый ливневой мокрый снег                                       : Light sleet showers                                               :
-365: Сильный или умеренный ливневой мокрый снег                        : Moderate or heavy sleet showers                                   :
-368: Слабые ливневые осадки в виде снега                               : Light snow showers                                                :
-371: Сильные или умеренные ливнёвые осадки в виде снега                : Moderate or heavy snow showers                                    :
-386: Грозовая активность, на ряде участков слабый дождь                : Patchy light rain with thunder                                    :
-389: Грозовая активность, сильный или умеренный дождь                  : Moderate or heavy rain with thunder                               :
-392: Грозовая активность, на ряде участков слабые осадки в виде снега  : Patchy light snow with thunder                                    :
-395: Грозовая активность, сильные или умеренные осадки в виде снега    : Moderate or heavy snow with thunder                               :
-
