@@ -179,7 +179,7 @@ func srv(configFile string) error {
 		localizer,
 	)
 
-	return server.Serve(&cfg.Server, &cfg.Logging, ws)
+	return server.Serve(cfg.Server, cfg.Logging, ws)
 }
 
 func main() {

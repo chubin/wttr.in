@@ -18,13 +18,6 @@ import (
 	"github.com/chubin/wttr.in/internal/weather"
 )
 
-type Config struct {
-	PortHTTP    int    `yaml:"portHttp"`
-	PortHTTPS   int    `yaml:"portHttps"`
-	TLSCertFile string `yaml:"tlsCertFile"`
-	TLSKeyFile  string `yaml:"tlsKeyFile"`
-}
-
 const logLineStart = "LOG_LINE_START "
 
 var ErrNoServersConfigured = errors.New("no servers configured")
