@@ -404,7 +404,7 @@ weather information about a geographical region is available:
     $ curl v3.wttr.in/Bayern.sxl
 ```
 
-![v3.wttr.in/Bayern](https://v3.wttr.in/Bayern.png)
+![Example of v3 map view](share/pics/San_Francisco.png)
 
 or directly in browser:
 
