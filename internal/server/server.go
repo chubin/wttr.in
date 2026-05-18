@@ -18,16 +18,12 @@ import (
 	"github.com/chubin/wttr.in/internal/weather"
 )
 
-type Config struct {
-	PortHTTP    int    `yaml:"portHttp"`
-	PortHTTPS   int    `yaml:"portHttps"`
-	TLSCertFile string `yaml:"tlsCertFile"`
-	TLSKeyFile  string `yaml:"tlsKeyFile"`
-}
-
 const logLineStart = "LOG_LINE_START "
 
 var ErrNoServersConfigured = errors.New("no servers configured")
+
+// certMap maps domain name -> certificate
+type certMap map[string]*tls.Certificate
 
 func suppressMessages() []string {
 	return []string{
@@ -74,10 +70,7 @@ func staticFilesHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Full path inside the embedded FS: embed/share/static/...
 	embedPath := "share/static/" + filePath
-	log.Println(embedPath)
-
 	data, err := assets.GetFile(embedPath)
 	if err != nil {
 		log.Println(err)
@@ -85,7 +78,7 @@ func staticFilesHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Set proper Content-Type based on file extension
+	// Set proper Content-Type
 	contentType := "application/octet-stream"
 	switch path.Ext(filePath) {
 	case ".css":
@@ -101,7 +94,7 @@ func staticFilesHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", contentType)
-	w.Header().Set("Cache-Control", "public, max-age=86400") // 1 day cache
+	w.Header().Set("Cache-Control", "public, max-age=86400")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write(data)
 }
@@ -111,27 +104,20 @@ func panicRecovery(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		defer func() {
 			if rec := recover(); rec != nil {
-				// Log the panic with full stack trace
 				stack := debug.Stack()
 				log.Printf("PANIC in handler %s %s: %v\n%s", r.Method, r.URL.Path, rec, stack)
-
-				// Optionally also write to stderr for visibility
 				fmt.Fprintf(log.Writer(), "PANIC recovered: %v\n%s\n", rec, stack)
 
-				// Return 500 to the client (but only if headers haven't been sent yet)
 				if !wroteHeader(w) {
 					http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 				}
 			}
 		}()
-
 		next(w, r)
 	}
 }
 
-// wroteHeader is a simple helper to avoid writing headers twice after panic
 func wroteHeader(w http.ResponseWriter) bool {
-	// This is a best-effort check. In real production code you might want a more robust solution.
 	type headerWriter interface {
 		WroteHeader() bool
 	}
@@ -153,15 +139,79 @@ func serveHTTP(mux *http.ServeMux, port int, logFile io.Writer, errs chan<- erro
 	errs <- srv.ListenAndServe()
 }
 
-func serveHTTPS(mux *http.ServeMux, port int, certFile, keyFile string, logFile io.Writer, errs chan<- error) {
+// loadCertificates loads all certificates and returns a map + default cert
+func loadCertificates(conf *Config) (certMap, *tls.Certificate, error) {
+	certs := make(certMap)
+	var defaultCert *tls.Certificate
+
+	// Load new multi-certificate config
+	for _, tc := range conf.TLSCerts {
+		cert, err := tls.LoadX509KeyPair(tc.CertFile, tc.KeyFile)
+		if err != nil {
+			return nil, nil, fmt.Errorf("failed to load certificate for domain %s: %w", tc.Domain, err)
+		}
+		certs[tc.Domain] = &cert
+
+		if defaultCert == nil {
+			defaultCert = &cert
+		}
+	}
+
+	// Backward compatibility: legacy single certificate
+	if len(certs) == 0 && conf.HasLegacyCert() {
+		cert, err := tls.LoadX509KeyPair(conf.TLSCertFile, conf.TLSKeyFile)
+		if err != nil {
+			return nil, nil, fmt.Errorf("failed to load legacy certificate: %w", err)
+		}
+		defaultCert = &cert
+		certs[""] = defaultCert // empty key = default
+	}
+
+	return certs, defaultCert, nil
+}
+
+// serveHTTPS starts HTTPS server with support for multiple certificates via SNI
+func serveHTTPS(mux *http.ServeMux, port int, conf *Config, logFile io.Writer, errs chan<- error) {
+	certs, defaultCert, err := loadCertificates(conf)
+	if err != nil {
+		errs <- fmt.Errorf("TLS certificate loading failed: %w", err)
+		return
+	}
+
 	tlsConfig := &tls.Config{
+		// This function is called for every TLS handshake (SNI)
+		GetCertificate: func(hello *tls.ClientHelloInfo) (*tls.Certificate, error) {
+			domain := hello.ServerName
+
+			// Exact match
+			if cert, ok := certs[domain]; ok {
+				return cert, nil
+			}
+
+			// Wildcard support (*.example.com)
+			for d, cert := range certs {
+				if strings.HasPrefix(d, "*.") && strings.HasSuffix(domain, d[1:]) {
+					return cert, nil
+				}
+			}
+
+			// Fallback to default certificate
+			if defaultCert != nil {
+				return defaultCert, nil
+			}
+
+			return nil, fmt.Errorf("no certificate configured for domain: %s", domain)
+		},
+
+		MinVersion: tls.VersionTLS13,
+		// You can uncomment and customize if needed:
 		// CipherSuites: []uint16{
 		// 	tls.TLS_CHACHA20_POLY1305_SHA256,
-		// 	tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
-		// 	tls.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
+		// 	tls.TLS_AES_256_GCM_SHA384,
+		// 	tls.TLS_AES_128_GCM_SHA256,
 		// },
-		// MinVersion: tls.VersionTLS13,
 	}
+
 	srv := &http.Server{
 		Addr:         fmt.Sprintf(":%d", port),
 		ErrorLog:     stdlog.New(logFile, logLineStart, stdlog.LstdFlags),
@@ -171,23 +221,22 @@ func serveHTTPS(mux *http.ServeMux, port int, certFile, keyFile string, logFile 
 		TLSConfig:    tlsConfig,
 		Handler:      mux,
 	}
-	errs <- srv.ListenAndServeTLS(certFile, keyFile)
+
+	// We pass empty strings because we manage certificates via TLSConfig.GetCertificate
+	errs <- srv.ListenAndServeTLS("", "")
 }
 
 func Serve(conf *Config, logConf *logging.Config, ws *weather.WeatherService) error {
 	var (
-		// mux is main HTTP/HTTP requests multiplexer.
 		mux = http.NewServeMux()
 
-		// logger is optimized requests logger.
 		logger = logging.NewRequestLogger(
 			logConf.AccessLog,
-			time.Duration(logConf.Interval)*time.Second)
+			time.Duration(logConf.Interval)*time.Second,
+		)
 
-		// errs is the servers errors channel.
 		errs = make(chan error, 1)
 
-		// numberOfServers started. If 0, exit.
 		numberOfServers int
 
 		errorsLog = logging.NewLogSuppressor(
@@ -195,12 +244,9 @@ func Serve(conf *Config, logConf *logging.Config, ws *weather.WeatherService) er
 			suppressMessages(),
 			logLineStart,
 		)
-
-		err error
 	)
 
-	err = errorsLog.Open()
-	if err != nil {
+	if err := errorsLog.Open(); err != nil {
 		return err
 	}
 
@@ -213,21 +259,20 @@ func Serve(conf *Config, logConf *logging.Config, ws *weather.WeatherService) er
 		go serveHTTP(mux, conf.PortHTTP, errorsLog, errs)
 		numberOfServers++
 	}
+
 	if conf.PortHTTPS != 0 {
-		go serveHTTPS(mux, conf.PortHTTPS, conf.TLSCertFile, conf.TLSKeyFile, errorsLog, errs)
+		go serveHTTPS(mux, conf.PortHTTPS, conf, errorsLog, errs)
 		numberOfServers++
 	}
+
 	if numberOfServers == 0 {
 		return ErrNoServersConfigured
 	}
 
-	return <-errs // block until one of the servers writes an error
+	return <-errs // block until one server fails
 }
 
-func mainHandler(
-	ws *weather.WeatherService,
-	logger *logging.RequestLogger,
-) func(http.ResponseWriter, *http.Request) {
+func mainHandler(ws *weather.WeatherService, logger *logging.RequestLogger) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if err := logger.Log(r); err != nil {
 			log.Println(err)

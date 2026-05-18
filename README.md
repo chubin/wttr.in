@@ -215,6 +215,16 @@ So, these two calls are the same:
     London: ⛅️ +7⁰C
 ```
 
+## Domains & Reliability
+
+- **Primary**: [wttr.in](https://wttr.in)
+- **Fallback**: [wttr.is](https://wttr.is) — **fully equivalent drop-in replacement**
+
+You can safely use `wttr.is` anywhere you currently use `wttr.in`.  
+Both domains are served from the same backend and kept in sync.
+
+We recommend using `wttr.is` in scripts, status bars, monitoring tools, and CI/CD pipelines for improved reliability.
+
 ## Integrations
 
 Thanks to the ease of integrating *wttr.in* into any program, there are a

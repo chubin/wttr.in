@@ -16,15 +16,6 @@ import (
 	"github.com/chubin/wttr.in/internal/util"
 )
 
-type Config struct {
-	Address1         string `yaml:"address1"`
-	Address2         string `yaml:"address2"`
-	Address3         string `yaml:"address3"`
-	Address4         string `yaml:"address4"`
-	Timeout          int    `yaml:"timeout"`
-	PrefetchInterval int    `yaml:"prefetchInterval"`
-}
-
 // UplinkProcessor handles incoming requests.
 type UplinkProcessor struct {
 	client1 *http.Client
@@ -33,7 +24,7 @@ type UplinkProcessor struct {
 	client4 *http.Client
 }
 
-func NewUplinkProcessor(cfg Config) *UplinkProcessor {
+func NewUplinkProcessor(cfg *Config) *UplinkProcessor {
 	dialer := &net.Dialer{
 		Timeout:   time.Duration(cfg.Timeout) * time.Second,
 		KeepAlive: time.Duration(cfg.Timeout) * time.Second,
