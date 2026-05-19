@@ -2,11 +2,12 @@ Usage:
 
     $ curl wttr.in          # current location
     $ curl wttr.in/muc      # weather in the Munich airport
+    $ curl wttr.is          # fully equivalent drop-in replacement
 
 Supported location types:
 
     /paris                  # city name
-    /~Eiffel+tower          # any location (+ for spaces)
+    /Eiffel+tower           # any location (+ for spaces)
     /Москва                 # Unicode name of any location in any language
     /muc                    # airport code (3 letters)
     /@stackoverflow.com     # domain name
@@ -51,6 +52,11 @@ Options can be combined:
     /Paris?0pq&lang=fr
     /Paris_0pq.png          # in PNG the file mode are specified after _
     /Rome_0pq_lang=it.png   # long options are separated with underscore
+
+Alternative domain:
+
+    $ curl wttr.is          # wttr.is is a fully equivalent fallback domain for wttr.in.
+    $ curl wttr.is/London   # You can use it as a complete drop-in replacement
 
 Localization:
 
