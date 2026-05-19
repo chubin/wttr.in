@@ -1,0 +1,7 @@
+{
+  "name": "meteomatics",
+  "fullname": "Meteomatics Weather API",
+  "description": "Offers high-resolution forecasts and data from meteodrones in JSON format, aimed at commercial use.",
+  "relevance": "Detailed data and JSON output could enhance wttr.in\u2019s professional-grade reports.",
+  "website": "https://www.meteomatics.com/en/weather-api"
+}

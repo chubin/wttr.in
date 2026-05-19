@@ -1,0 +1,7 @@
+{
+  "name": "tomorrowio",
+  "fullname": "Tomorrow.io Weather API",
+  "description": "Offers ultra-accurate, hyper-local weather data with real-time and historical endpoints in JSON format.",
+  "relevance": "High accuracy JSON output supports wttr.in\u2019s location-specific forecasts.",
+  "website": "https://www.tomorrow.io/weather-api"
+}

@@ -1,0 +1,7 @@
+{
+  "name": "meteostat",
+  "fullname": "Meteostat JSON API",
+  "description": "Provides historical weather and climate data for thousands of weather stations worldwide in JSON format.",
+  "relevance": "Ideal for wttr.in\u2019s historical data needs, with JSON output suitable for console formats.",
+  "website": "https://meteostat.net/en/api"
+}

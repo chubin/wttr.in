@@ -1,0 +1,7 @@
+{
+  "name": "climacell",
+  "fullname": "ClimaCell (now part of Tomorrow.io)",
+  "description": "Provides hyper-local weather data, including minute-by-minute forecasts in JSON format.",
+  "relevance": "Granular forecasts and JSON output meet wttr.in\u2019s need for detailed, console-friendly data.",
+  "website": "https://www.tomorrow.io"
+}

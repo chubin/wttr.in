@@ -1,0 +1,7 @@
+{
+  "name": "accuweather",
+  "fullname": "AccuWeather API",
+  "description": "Provides current conditions, forecasts, weather alarms, and radar data in JSON format, requiring a location key.",
+  "relevance": "JSON output and global reach suit wttr.in\u2019s needs; API key and limited free access are necessary.",
+  "website": "https://developer.accuweather.com"
+}

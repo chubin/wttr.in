@@ -1,0 +1,7 @@
+{
+  "name": "aviationweathercenter",
+  "fullname": "Aviation Weather Center (AWC) API",
+  "description": "Focuses on aviation weather data, including METARs, TAFs, and SIGMETs in JSON format with 100 requests/minute rate limits.",
+  "relevance": "Useful for aviation-focused reports, with JSON output compatible with console parsing.",
+  "website": "https://aviationweather.gov/data/api"
+}

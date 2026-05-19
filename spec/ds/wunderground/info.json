@@ -1,0 +1,7 @@
+{
+  "name": "wunderground",
+  "fullname": "Weather Underground API",
+  "description": "Offers current conditions, forecasts, and historical data in JSON format, utilizing personal weather station feeds.",
+  "relevance": "Community-driven data and JSON output enhance wttr.in but now requires a paid subscription.",
+  "website": "https://www.wunderground.com"
+}

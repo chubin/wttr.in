@@ -1,0 +1,6 @@
+{
+  "name": "globalweather",
+  "fullname": "Global Weather API",
+  "description": "Offers global current and forecast data in JSON, focused on simplicity.",
+  "relevance": "Simple JSON output integrates well with wttr.in\u2019s system."
+}
