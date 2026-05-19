@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "V noci",
+  "CAPTION_MORNING": "Ráno",
   "CAPTION_NOON": "Cez deň",
-  "CAPTION_EVENING": "Ráno",
-  "CAPTION_NIGHT": "Večer",
+  "CAPTION_EVENING": "Večer",
+  "CAPTION_NIGHT": "V noci",
   "LOCALE": "sk_SK"
 }

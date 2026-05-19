@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "Dan",
-  "CAPTION_NOON": "Noč",
+  "CAPTION_MORNING": "Jutro",
+  "CAPTION_NOON": "Dan",
   "CAPTION_EVENING": "Večer",
-  "CAPTION_NIGHT": "Jutro",
+  "CAPTION_NIGHT": "Noč",
   "LOCALE": "sl_SI"
 }

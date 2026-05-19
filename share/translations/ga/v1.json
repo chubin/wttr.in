@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "Oíche",
+  "CAPTION_MORNING": "Maidin",
   "CAPTION_NOON": "Nóin",
-  "CAPTION_EVENING": "Maidin",
-  "CAPTION_NIGHT": "Tráthnóna",
+  "CAPTION_EVENING": "Tráthnóna",
+  "CAPTION_NIGHT": "Oíche",
   "LOCALE": "ga_IE"
 }

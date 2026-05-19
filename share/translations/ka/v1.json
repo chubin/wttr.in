@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "დღე",
-  "CAPTION_NOON": "საღამო",
-  "CAPTION_EVENING": "ღამე",
-  "CAPTION_NIGHT": "დილა",
+  "CAPTION_MORNING": "დილა",
+  "CAPTION_NOON": "დღე",
+  "CAPTION_EVENING": "საღამო",
+  "CAPTION_NIGHT": "ღამე",
   "LOCALE": "ka_GE"
 }

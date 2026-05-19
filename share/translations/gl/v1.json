@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "Tarde",
-  "CAPTION_NOON": "Noite",
-  "CAPTION_EVENING": "Mediodía",
-  "CAPTION_NIGHT": "Mañá",
+  "CAPTION_MORNING": "Mañá",
+  "CAPTION_NOON": "Mediodía",
+  "CAPTION_EVENING": "Tarde",
+  "CAPTION_NIGHT": "Noite",
   "LOCALE": "gl_ES"
 }

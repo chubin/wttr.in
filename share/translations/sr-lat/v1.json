@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "Noć",
-  "CAPTION_NOON": "Veče",
-  "CAPTION_EVENING": "Podne",
-  "CAPTION_NIGHT": "Jutro",
+  "CAPTION_MORNING": "Jutro",
+  "CAPTION_NOON": "Podne",
+  "CAPTION_EVENING": "Veče",
+  "CAPTION_NIGHT": "Noć",
   "LOCALE": "sr_RS@latin"
 }

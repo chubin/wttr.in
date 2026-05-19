@@ -1,7 +1,7 @@
 {
   "CAPTION_MORNING": "Matí",
-  "CAPTION_NOON": "Tarda",
-  "CAPTION_EVENING": "Nit",
-  "CAPTION_NIGHT": "Dia",
+  "CAPTION_NOON": "Dia",
+  "CAPTION_EVENING": "Tarda",
+  "CAPTION_NIGHT": "Nit",
   "LOCALE": "ca_ES"
 }

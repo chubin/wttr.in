@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "Jorn",
-  "CAPTION_NOON": "Vèspre",
-  "CAPTION_EVENING": "Nuèch",
-  "CAPTION_NIGHT": "Matin",
+  "CAPTION_MORNING": "Matin",
+  "CAPTION_NOON": "Jorn",
+  "CAPTION_EVENING": "Vèspre",
+  "CAPTION_NIGHT": "Nuèch",
   "LOCALE": "oc_FR"
 }

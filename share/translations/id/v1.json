@@ -1,7 +1,7 @@
 {
   "CAPTION_MORNING": "Pagi",
-  "CAPTION_NOON": "Petang",
-  "CAPTION_EVENING": "Malam",
-  "CAPTION_NIGHT": "Hari",
+  "CAPTION_NOON": "Hari",
+  "CAPTION_EVENING": "Petang",
+  "CAPTION_NIGHT": "Malam",
   "LOCALE": "id_ID"
 }

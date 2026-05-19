@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "낮",
-  "CAPTION_NOON": "아침",
-  "CAPTION_EVENING": "밤",
-  "CAPTION_NIGHT": "저녁",
+  "CAPTION_MORNING": "아침",
+  "CAPTION_NOON": "낮",
+  "CAPTION_EVENING": "저녁",
+  "CAPTION_NIGHT": "밤",
   "LOCALE": "ko_KR"
 }

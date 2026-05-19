@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "Õhtu",
+  "CAPTION_MORNING": "Hommik",
   "CAPTION_NOON": "Päev",
-  "CAPTION_EVENING": "Öösel",
-  "CAPTION_NIGHT": "Hommik",
+  "CAPTION_EVENING": "Õhtu",
+  "CAPTION_NIGHT": "Öösel",
   "LOCALE": "et_EE"
 }

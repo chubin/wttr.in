@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "傍晚",
+  "CAPTION_MORNING": "早上",
   "CAPTION_NOON": "中午",
-  "CAPTION_EVENING": "早上",
+  "CAPTION_EVENING": "傍晚",
   "CAPTION_NIGHT": "夜间",
   "LOCALE": "zh_CN"
 }

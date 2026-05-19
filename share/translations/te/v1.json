@@ -1,6 +1,7 @@
 {
-  "CAPTION_MORNING": "రాత్రి",
-  "CAPTION_NOON": "సాయంత్రం",
-  "CAPTION_EVENING": "రోజు",
-  "CAPTION_NIGHT": "ఉదయం"
+  "CAPTION_MORNING": "ఉదయం",
+  "CAPTION_NOON": "రోజు",
+  "CAPTION_EVENING": "సాయంత్రం",
+  "CAPTION_NIGHT": "రాత్రి",
+  "LOCALE": "te_IN"
 }

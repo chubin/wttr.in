@@ -1,7 +1,7 @@
 {
   "CAPTION_MORNING": "Morgon",
-  "CAPTION_NOON": "Kväll",
-  "CAPTION_EVENING": "Eftermiddag",
+  "CAPTION_NOON": "Eftermiddag",
+  "CAPTION_EVENING": "Kväll",
   "CAPTION_NIGHT": "Natt",
   "LOCALE": "sv_SE"
 }

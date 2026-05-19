@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "Կեսօր",
-  "CAPTION_NOON": "Երեկո",
-  "CAPTION_EVENING": "Առավոտ",
+  "CAPTION_MORNING": "Առավոտ",
+  "CAPTION_NOON": "Կեսօր",
+  "CAPTION_EVENING": "Երեկո",
   "CAPTION_NIGHT": "Գիշեր",
   "LOCALE": "hy_AM"
 }

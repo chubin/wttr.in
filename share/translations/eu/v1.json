@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "Gaua",
-  "CAPTION_NOON": "Goiza",
-  "CAPTION_EVENING": "Eguerdia",
-  "CAPTION_NIGHT": "Arratsaldea",
+  "CAPTION_MORNING": "Goiza",
+  "CAPTION_NOON": "Eguerdia",
+  "CAPTION_EVENING": "Arratsaldea",
+  "CAPTION_NIGHT": "Gaua",
   "LOCALE": "eu_ES"
 }

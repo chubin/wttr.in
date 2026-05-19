@@ -1,7 +1,7 @@
 {
   "CAPTION_MORNING": "ጠዋት",
-  "CAPTION_NOON": "ሌሊት",
-  "CAPTION_EVENING": "ከሰዓት በኋላ",
-  "CAPTION_NIGHT": "ምሽት",
+  "CAPTION_NOON": "ከሰዓት በኋላ",
+  "CAPTION_EVENING": "ምሽት",
+  "CAPTION_NIGHT": "ሌሊት",
   "LOCALE": "am_ET"
 }
