@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "Нощ",
-  "CAPTION_NOON": "Вечер",
-  "CAPTION_EVENING": "Обяд",
-  "CAPTION_NIGHT": "Сутрин",
+  "CAPTION_MORNING": "Сутрин",
+  "CAPTION_NOON": "Обяд",
+  "CAPTION_EVENING": "Вечер",
+  "CAPTION_NIGHT": "Нощ",
   "LOCALE": "bg_BG"
 }

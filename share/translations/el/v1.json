@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "Μεσημέρι",
-  "CAPTION_NOON": "Βράδυ",
-  "CAPTION_EVENING": "Πρωί",
-  "CAPTION_NIGHT": "Απόγευμα",
+  "CAPTION_MORNING": "Πρωί",
+  "CAPTION_NOON": "Μεσημέρι",
+  "CAPTION_EVENING": "Απόγευμα",
+  "CAPTION_NIGHT": "Βράδυ",
   "LOCALE": "el_GR"
 }

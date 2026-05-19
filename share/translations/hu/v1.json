@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "Éjszaka",
+  "CAPTION_MORNING": "Reggel",
   "CAPTION_NOON": "Dél",
-  "CAPTION_EVENING": "Reggel",
-  "CAPTION_NIGHT": "Este",
+  "CAPTION_EVENING": "Este",
+  "CAPTION_NIGHT": "Éjszaka",
   "LOCALE": "hu_HU"
 }

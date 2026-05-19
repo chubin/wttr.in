@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "दोपहर",
-  "CAPTION_NOON": "रात",
-  "CAPTION_EVENING": "प्रातःकाल",
-  "CAPTION_NIGHT": "सायंकाल",
+  "CAPTION_MORNING": "प्रातःकाल",
+  "CAPTION_NOON": "दोपहर",
+  "CAPTION_EVENING": "सायंकाल",
+  "CAPTION_NIGHT": "रात",
   "LOCALE": "hi_IN"
 }

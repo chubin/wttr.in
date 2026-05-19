@@ -1,7 +1,7 @@
 {
   "CAPTION_MORNING": "Morning",
-  "CAPTION_NOON": "Evening",
-  "CAPTION_EVENING": "Night",
-  "CAPTION_NIGHT": "Noon",
+  "CAPTION_NOON": "Noon",
+  "CAPTION_EVENING": "Evening",
+  "CAPTION_NIGHT": "Night",
   "LOCALE": "zu_ZA"
 }

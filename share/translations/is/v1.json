@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "Nótt",
+  "CAPTION_MORNING": "Morgunn",
   "CAPTION_NOON": "Dagur",
   "CAPTION_EVENING": "Kvöld",
-  "CAPTION_NIGHT": "Morgunn",
+  "CAPTION_NIGHT": "Nótt",
   "LOCALE": "is_IS"
 }

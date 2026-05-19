@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "Nocte",
+  "CAPTION_MORNING": "Matino",
   "CAPTION_NOON": "Mediedie",
-  "CAPTION_EVENING": "Matino",
-  "CAPTION_NIGHT": "Vespere",
+  "CAPTION_EVENING": "Vespere",
+  "CAPTION_NIGHT": "Nocte",
   "LOCALE": "ia"
 }

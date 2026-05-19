@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "Ochtend",
-  "CAPTION_NOON": "Middag",
-  "CAPTION_EVENING": "Avond",
-  "CAPTION_NIGHT": "Nacht",
+  "CAPTION_MORNING": "'s Ochtends",
+  "CAPTION_NOON": "'s Middags",
+  "CAPTION_EVENING": "'s Avonds",
+  "CAPTION_NIGHT": "'s Nachts",
   "LOCALE": "nl_NL"
 }

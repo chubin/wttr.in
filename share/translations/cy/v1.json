@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "Nos",
-  "CAPTION_NOON": "Hwyr",
-  "CAPTION_EVENING": "Bore",
-  "CAPTION_NIGHT": "Dydd",
+  "CAPTION_MORNING": "Bore",
+  "CAPTION_NOON": "Dydd",
+  "CAPTION_EVENING": "Hwyr",
+  "CAPTION_NIGHT": "Nos",
   "LOCALE": "cy_GB"
 }

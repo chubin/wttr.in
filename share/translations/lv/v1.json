@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "Nakts",
-  "CAPTION_NOON": "Rīts",
-  "CAPTION_EVENING": "Diena",
-  "CAPTION_NIGHT": "Vakars",
+  "CAPTION_MORNING": "Rīts",
+  "CAPTION_NOON": "Diena",
+  "CAPTION_EVENING": "Vakars",
+  "CAPTION_NIGHT": "Nakts",
   "LOCALE": "lv_LV"
 }

@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "เย็น",
-  "CAPTION_NOON": "เช้า",
-  "CAPTION_EVENING": "วัน",
+  "CAPTION_MORNING": "เช้า",
+  "CAPTION_NOON": "วัน",
+  "CAPTION_EVENING": "เย็น",
   "CAPTION_NIGHT": "คืน",
   "LOCALE": "th_TH"
 }

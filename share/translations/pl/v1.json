@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "Wieczór",
-  "CAPTION_NOON": "Noc",
-  "CAPTION_EVENING": "Dzień",
-  "CAPTION_NIGHT": "Ranek",
+  "CAPTION_MORNING": "Ranek",
+  "CAPTION_NOON": "Dzień",
+  "CAPTION_EVENING": "Wieczór",
+  "CAPTION_NIGHT": "Noc",
   "LOCALE": "pl_PL"
 }

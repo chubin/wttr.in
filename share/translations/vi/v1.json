@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "Chiều",
-  "CAPTION_NOON": "Tối",
-  "CAPTION_EVENING": "Sáng",
-  "CAPTION_NIGHT": "Trưa",
+  "CAPTION_MORNING": "Sáng",
+  "CAPTION_NOON": "Trưa",
+  "CAPTION_EVENING": "Chiều",
+  "CAPTION_NIGHT": "Tối",
   "LOCALE": "vi_VN"
 }

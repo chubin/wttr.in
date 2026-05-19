@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "Nat",
+  "CAPTION_MORNING": "Morgen",
   "CAPTION_NOON": "Middag",
-  "CAPTION_EVENING": "Morgen",
-  "CAPTION_NIGHT": "Aften",
+  "CAPTION_EVENING": "Aften",
+  "CAPTION_NIGHT": "Nat",
   "LOCALE": "da_DK"
 }
