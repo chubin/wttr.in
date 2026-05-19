@@ -70,6 +70,7 @@
    : Снег, гроза                                 : Snow with thunderstorm                             :
    : Шквалистый ветер                            : Squalls                                            :
    : Гроза                                       : Thunderstorm                                       :
+   : Местами грозы                               : Thundery outbreaks nearby                          :
    : Вулканический пепел                         : Volcanic ash                                       :
 113: Солнечно                                    : Sunny                                              :
 114: Ясно                                        : Clear                                              :
@@ -81,6 +82,7 @@
 179: Местами снег                                : Patchy snow possible                               :
 182: Местами мокрый снег                         : Patchy sleet possible                              :
 185: Местами морось, гололёд                     : Patchy freezing drizzle possible                   :
+200: Возможны грозы                              : Thundery outbreaks possible                        :
 227: Метель                                      : Blowing snow                                       :
 230: Снежная буря                                : Blizzard                                           :
 248: Туман                                       : Fog                                                :
