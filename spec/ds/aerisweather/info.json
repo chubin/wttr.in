@@ -1,0 +1,7 @@
+{
+  "name": "aerisweather",
+  "fullname": "AerisWeather API",
+  "description": "Offers current conditions, forecasts, and maps in JSON format, with severe weather alerts focus.",
+  "relevance": "JSON output and alerts can enhance wttr.in\u2019s real-time reporting.",
+  "website": "https://www.aerisweather.com"
+}

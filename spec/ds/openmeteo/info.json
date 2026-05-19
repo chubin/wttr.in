@@ -1,0 +1,7 @@
+{
+  "name": "openmeteo",
+  "fullname": "Open-Meteo API",
+  "description": "Free, open-source API offering global forecasts and historical data in JSON, no key needed.",
+  "relevance": "Open-source and JSON output align with wttr.in\u2019s accessibility goals.",
+  "website": "https://open-meteo.com"
+}

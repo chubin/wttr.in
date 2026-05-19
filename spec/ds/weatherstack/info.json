@@ -1,0 +1,7 @@
+{
+  "name": "weatherstack",
+  "fullname": "Weatherstack API",
+  "description": "Offers real-time and historical data in JSON, supporting multiple languages and locations.",
+  "relevance": "Multilingual support and JSON output suit wttr.in\u2019s design.",
+  "website": "https://weatherstack.com"
+}

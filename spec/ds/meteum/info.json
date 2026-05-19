@@ -1,0 +1,7 @@
+{
+  "name": "meteum",
+  "fullname": "Meteum Weather API",
+  "description": "Provides AI-based hyper-local forecasts and historical data in JSON format, widely trusted worldwide.",
+  "relevance": "JSON output and global scope make it suitable for wttr.in\u2019s console-based reports.",
+  "website": "https://meteum.ai"
+}

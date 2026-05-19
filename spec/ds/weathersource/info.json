@@ -1,0 +1,7 @@
+{
+  "name": "weathersource",
+  "fullname": "Weather Source OnPoint API",
+  "description": "Delivers hyper-local weather data in JSON or GeoJSON formats, supporting hourly and daily resolutions for various parameters.",
+  "relevance": "Granular data and JSON output could enhance wttr.in\u2019s location-specific weather reports.",
+  "website": "https://weathersource.com/onpoint-api"
+}

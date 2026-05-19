@@ -1,0 +1,6 @@
+{
+  "name": "darksky",
+  "fullname": "Dark Sky API (Legacy)",
+  "description": "Provided detailed forecasts and historical data in JSON format (discontinued, acquired by Apple).",
+  "relevance": "Ideal JSON format for wttr.in, but its discontinuation limits use."
+}

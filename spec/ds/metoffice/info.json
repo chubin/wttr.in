@@ -1,0 +1,7 @@
+{
+  "name": "metoffice",
+  "fullname": "Met Office DataPoint API",
+  "description": "Provides UK-specific weather forecasts and observations in JSON and XML formats.",
+  "relevance": "Beneficial for UK users, with JSON output easily parsable for console displays; limited to UK data.",
+  "website": "https://www.metoffice.gov.uk/services/data/datapoint"
+}

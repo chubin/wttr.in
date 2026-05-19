@@ -1,0 +1,7 @@
+{
+  "name": "nws",
+  "fullname": "National Weather Service (NWS) API",
+  "description": "Offers free access to forecasts, alerts, and observations in JSON-LD and GeoJSON formats. Designed to be cache-friendly with rate limits for fair usage.",
+  "relevance": "Its open data policy and JSON endpoints are ideal for U.S.-based reports compatible with wttr.in\u2019s data parsing.",
+  "website": "https://www.weather.gov/documentation/services-web-api"
+}
