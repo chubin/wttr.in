@@ -60,7 +60,8 @@ Translated/improved/corrected by:
     * Portuguese:           Fernando Bitti Loureiro @fbitti (on github),
                             Hugo Carvalho (@hugok79 on github)
     * Romanian:             Gabriel Moruz
-    * Russian:              Igor Chubin, @layerex (on github), Vladimir Kalashnikov
+    * Russian:              Igor Chubin, @layerex (on github), Vladimir Kalashnikov,
+                            Alexander Tarasov <aliger14@mail.ru> (@algri14 on github)
     * Serbian:              Milan Stevanović @FathVader
     * Slovak:               Juraj Kakody
     * Slovenian:            B.S.
