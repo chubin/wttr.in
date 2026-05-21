@@ -183,6 +183,8 @@ func genTerm(buf [][]te.Cell, graphemes []string, opts PNGOptions) ([]byte, erro
 
 	dc := gg.NewContext(cols*CHAR_WIDTH, rows*CHAR_HEIGHT)
 
+	loadAndSetFont(dc, "default")
+
 	// Set background
 	bg := opts.Background
 	if opts.Inverted {
@@ -267,7 +269,7 @@ func genTerm(buf [][]te.Cell, graphemes []string, opts PNGOptions) ([]byte, erro
 
 func drawText(dc *gg.Context, text string, x, y float64, col color.Color) {
 	dc.SetColor(col)
-	// TODO: Load proper fonts per script category using assets.FS + gg.LoadFontFace
+
 	dc.DrawStringAnchored(text, x, y+float64(CHAR_HEIGHT)-2, 0, 1)
 }
 
