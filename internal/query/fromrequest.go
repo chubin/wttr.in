@@ -159,6 +159,10 @@ func ApplyAutoFixes(opts *options.Options) {
 		opts.Output = "text"
 	}
 
+	if opts.View == "v2" && opts.Output == "png" {
+		opts.Emoji = "narrow"
+	}
+
 	// ATTENTION:
 	// This block is not active at the moment, because Output format is explicitly set above.
 	//

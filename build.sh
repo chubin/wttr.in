@@ -51,6 +51,7 @@ error() { echo -e "${RED}ERROR: $1${NC}" >&2; exit 1; }
 
 ensure_clean_embed_dir() {
     mkdir -p "$EMBED_TARGET_DIR/fonts"
+    touch "$EMBED_TARGET_DIR/fonts/README.md"
 }
 
 copy_fonts() {
