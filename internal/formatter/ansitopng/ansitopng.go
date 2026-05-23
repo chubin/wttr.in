@@ -270,7 +270,7 @@ func genTerm(buf [][]te.Cell, graphemes []string, opts PNGOptions) ([]byte, erro
 func drawText(dc *gg.Context, text string, x, y float64, col color.Color) {
 	dc.SetColor(col)
 
-	dc.DrawStringAnchored(text, x, y+float64(CHAR_HEIGHT)-2, 0, 1)
+	dc.DrawStringAnchored(text, x, y+1, 0, 1)
 }
 
 func getSymbolWidth(s string) int {
