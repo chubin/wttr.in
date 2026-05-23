@@ -151,6 +151,9 @@ func ApplyAutoFixes(opts *options.Options) {
 	if opts.View == "line" && opts.Output == "html" {
 		opts.Output = "text"
 	}
+	if opts.View == "p1" {
+		opts.Output = "text"
+	}
 
 	if opts.ForceAnsi {
 		opts.Output = "text"
