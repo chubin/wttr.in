@@ -4,6 +4,8 @@ package generate
 import (
 	"fmt"
 	"os"
+	"path/filepath"
+	"strings"
 	"text/template"
 	"unicode"
 
@@ -14,11 +16,11 @@ import (
 
 var (
 	templateFile = "share/templates/options.go.tmpl"
-	configFile   = "share/defs/options/options.yaml"
+	configDir    = "share/defs/options"
 	outputFile   = "internal/options/options.go"
 )
 
-// OptionConfig mirrors the YAML structure (adjusted for generation needs)
+// OptionConfig mirrors the YAML structure
 type OptionConfig struct {
 	Name        string            `yaml:"name"`
 	Short       string            `yaml:"short,omitempty"`
@@ -27,7 +29,7 @@ type OptionConfig struct {
 	Default     interface{}       `yaml:"default"`
 	Active      bool              `yaml:"active"`
 	Note        string            `yaml:"note,omitempty"`
-	Values      []string          `yaml:"values,omitempty"` // simplified
+	Values      []string          `yaml:"values,omitempty"`
 	ValuesMap   map[string]string `yaml:"values_map,omitempty"`
 	Range       struct {
 		Min interface{} `yaml:"min"`
@@ -36,7 +38,7 @@ type OptionConfig struct {
 	Validate []string `yaml:"validate,omitempty"`
 }
 
-// OptionsConfig is the root of the YAML
+// OptionsConfig is the root of each YAML file
 type OptionsConfig struct {
 	QueryOptions     []OptionConfig    `yaml:"query_options"`
 	FormatSpecifiers []FormatSpecifier `yaml:"format_specifiers"`
@@ -69,7 +71,7 @@ func toGoType(typ string) string {
 	case "string":
 		return "string"
 	default:
-		return "string" // fallback – be conservative
+		return "string"
 	}
 }
 
@@ -95,16 +97,54 @@ func toFieldName(name string) string {
 	return string(result)
 }
 
-// GenerateOptionsAndParser is the main entry point
-func GenerateOptionsAndParser() error {
-	data, err := os.ReadFile(configFile)
+// loadAndMergeOptions reads all .yaml/.yml files in the directory and merges them
+func loadAndMergeOptions(dir string) (OptionsConfig, error) {
+	var merged OptionsConfig
+
+	entries, err := os.ReadDir(dir)
 	if err != nil {
-		return fmt.Errorf("read config: %w", err)
+		return merged, fmt.Errorf("read options directory %s: %w", dir, err)
 	}
 
-	var cfg OptionsConfig
-	if err := yaml.Unmarshal(data, &cfg); err != nil {
-		return fmt.Errorf("unmarshal yaml: %w", err)
+	for _, entry := range entries {
+		if entry.IsDir() {
+			continue
+		}
+
+		name := entry.Name()
+		if !strings.HasSuffix(name, ".yaml") && !strings.HasSuffix(name, ".yml") {
+			continue
+		}
+
+		path := filepath.Join(dir, name)
+
+		data, err := os.ReadFile(path)
+		if err != nil {
+			return merged, fmt.Errorf("read file %s: %w", path, err)
+		}
+
+		var cfg OptionsConfig
+		if err := yaml.Unmarshal(data, &cfg); err != nil {
+			return merged, fmt.Errorf("unmarshal %s: %w", path, err)
+		}
+
+		// Append lists from each file (as requested)
+		merged.QueryOptions = append(merged.QueryOptions, cfg.QueryOptions...)
+		merged.FormatSpecifiers = append(merged.FormatSpecifiers, cfg.FormatSpecifiers...)
+	}
+
+	if len(merged.QueryOptions) == 0 && len(merged.FormatSpecifiers) == 0 {
+		return merged, fmt.Errorf("no options found in directory %s", dir)
+	}
+
+	return merged, nil
+}
+
+// GenerateOptionsAndParser is the main entry point
+func GenerateOptionsAndParser() error {
+	cfg, err := loadAndMergeOptions(configDir)
+	if err != nil {
+		return err
 	}
 
 	var fields []GeneratedField
@@ -112,6 +152,7 @@ func GenerateOptionsAndParser() error {
 		if !opt.Active {
 			continue
 		}
+
 		fields = append(fields, GeneratedField{
 			Name:        opt.Name,
 			FieldName:   toFieldName(opt.Name),
