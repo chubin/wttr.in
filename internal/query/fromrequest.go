@@ -136,6 +136,13 @@ func ApplyAutoFixes(opts *options.Options) {
 		opts.View = "subprocess"
 	}
 
+	// Format and View are not fully orthogonal,
+	// but for the compatibility reasons the behavior should be kept:
+	// If both View and Format are both specified, Format should override View.
+	if opts.Format == "j1" || opts.Format == "j2" || opts.Format == "v2" || opts.Format == "p1" {
+		opts.View = opts.Format
+	}
+
 	if opts.View == "" {
 		if opts.Format == "j1" || opts.Format == "j2" || opts.Format == "v2" || opts.Format == "p1" {
 			opts.View = opts.Format
