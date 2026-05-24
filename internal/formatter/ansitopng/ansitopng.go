@@ -183,6 +183,8 @@ func genTerm(buf [][]te.Cell, graphemes []string, opts PNGOptions) ([]byte, erro
 
 	dc := gg.NewContext(cols*CHAR_WIDTH, rows*CHAR_HEIGHT)
 
+	loadAndSetFont(dc, "default")
+
 	// Set background
 	bg := opts.Background
 	if opts.Inverted {
@@ -267,8 +269,8 @@ func genTerm(buf [][]te.Cell, graphemes []string, opts PNGOptions) ([]byte, erro
 
 func drawText(dc *gg.Context, text string, x, y float64, col color.Color) {
 	dc.SetColor(col)
-	// TODO: Load proper fonts per script category using assets.FS + gg.LoadFontFace
-	dc.DrawStringAnchored(text, x, y+float64(CHAR_HEIGHT)-2, 0, 1)
+
+	dc.DrawStringAnchored(text, x, y+1, 0, 1)
 }
 
 func getSymbolWidth(s string) int {
@@ -276,43 +278,4 @@ func getSymbolWidth(s string) int {
 		return w
 	}
 	return 1
-}
-
-func scriptCategory(r rune) string {
-	if isEmoji(r) {
-		return "Emoji"
-	}
-	switch {
-	case r >= 0x0400 && r <= 0x04FF:
-		return "Cyrillic"
-	case r >= 0x0370 && r <= 0x03FF:
-		return "Greek"
-	case r >= 0x0600 && r <= 0x06FF:
-		return "Arabic"
-	case r >= 0x0590 && r <= 0x05FF:
-		return "Hebrew"
-	case (r >= 0x4E00 && r <= 0x9FFF) || (r >= 0x3400 && r <= 0x4DBF):
-		return "Han"
-	case r >= 0x3040 && r <= 0x309F:
-		return "Hiragana"
-	case r >= 0x30A0 && r <= 0x30FF:
-		return "Katakana"
-	case r >= 0xAC00 && r <= 0xD7AF:
-		return "Hangul"
-	case r >= 0x2800 && r <= 0x28FF:
-		return "Braille"
-	case r >= 0x0900 && r <= 0x097F || r >= 0xA8E0 && r <= 0xA8FF: // Devanagari + Extended
-		return "Devanagari"
-	case r >= 0x0980 && r <= 0x09FF: // Bengali
-		return "Bengali"
-	case r >= 0x0A00 && r <= 0x0A7F: // Gurmukhi
-		return "Gurmukhi"
-	}
-	return "default"
-}
-
-func isEmoji(r rune) bool {
-	return (r >= 0x1F000 && r <= 0x1FAFF) ||
-		(r >= 0x1F600 && r <= 0x1F64F) ||
-		(r >= 0x2600 && r <= 0x26FF)
 }
