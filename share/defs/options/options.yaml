@@ -207,6 +207,7 @@ query_options:
       zu: "Zulu (partial support)"
       he: "Hebrew (partial support)"
       zh: "Chinese (partial support)"
+      crk: "Plains Cree (partial support)"
     default: en
     active: true
     note: "Languages from 'az' to 'zh' have partial support; others have full support"
