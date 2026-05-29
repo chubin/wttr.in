@@ -1,0 +1,11 @@
+{
+  "NOT_FOUND_MESSAGE": "\nnamōya nika-kī-miskēnān anima ihtāwin,\nēkosi ōma kā-itohtahitāhk ōta Oymyakonihk,\nita māna kā-māwaci-tahkāyāk misiwēskamik.\n",
+  "UNKNOWN_LOCATION": "ēkā ē-kiskēyihcikātēk anima ihtāwin",
+  "LOCATION": "ihtāwin",
+  "CAPACITY_LIMIT_REACHED": "\nnimihtātēnān, mōya mēkwāc ē-kaskihtāyāhk ta-nātamāhk anima kiskēyihtamowin.\nōma ōma isiwēpan tāpātotamowin iyinito-ōtēnāhk ohci (sōskwāc ta-wāpahtahitāhk tānisi ē-isinākwahk).\nēkosi ētikwē wīpac nika-kī-nātēnān oski-kiskēyihtamowin.\nkika-kī-pimitisahēn https://x.com/igor_chubin ta-kāhcitinaman oskisīhcikēwina.\n======================================================================================\n",
+  "NEW_FEATURE": "oskisīhcikana: 
+ihtāwin wīhowina kā-mihcēto-itwēstamākēhk \033[92mwttr.in/станция+Восток\033[0m (UTF-8 ē-āpatahk) ihtāwin nanātawāpahtamowin kā-mihcēto-itwēstamākēhk
+\033[92mwttr.in/~Kilimanjaro\033[0m (sōskwāc masinaha ~ nīkān)",
+  "FOLLOW_ME": "kīspin nitawēyihtamani wttr.in oskisīhcikēwina, pimitisahinān ōta: \033[46m\033[30m@igor_chubin\033[0m",
+  "CAPTION_WEATHER_REPORT_FOR": "tānisi ē-isiwēpahk ōta:"
+}

@@ -1,0 +1,207 @@
+113: wāsēskwan / pīsimowan                       : Sunny                                            :
+114: wāsēskwan                                   : Clear                                            :
+116: mamēnaskwāw                                 : Partly cloudy                                    :
+119: yīkwaskwan / waskowan                       : Cloudy                                           :
+122: yīkwaskwan                                  : Overcast                                         :
+143: kaskawanipēstāw                             : Mist                                             :
+176: wī-kāh-kimiwan māskōc                       : Patchy rain possible                             :
+179: wī-māh-mispon māskōc                        : Patchy snow possible                             :
+182: sāh-sīsīkan māskōc                          : Patchy sleet possible                            :
+185: āh-āhkwaci-pahkipēscāsin māskōc             : Patchy freezing drizzle possible                 :
+200: pāh-piyēsīwan māskōc                        : Thundery outbreaks possible                      :
+227: pīwan                                       : Blowing snow                                     :
+230: pīwani-yōtin                                : Blizzard                                         :
+248: yīkowan                                     : Fog                                              :
+260: yīkopīwan                                   : Freezing fog                                     :
+263: apisci-pāh-pahkipēscāsin                    : Patchy light drizzle                             :
+266: apisci-pahkipēscāsin                        : Light drizzle                                    :
+281: āhkwaci-pahkipēscāsin                       : Freezing drizzle                                 :
+284: misi-āhkwaci-pahkipēscāsin                  : Heavy freezing drizzle                           :
+293: kāh-kimiwasin                               : Patchy light rain                                :
+296: kimiwasin                                   : Light rain                                       :
+299: kimiwan āskaw                               : Moderate rain at times                           :
+302: kimiwan                                     : Moderate rain                                    :
+305: misi-kimiwan āskaw                          : Heavy rain at times                              :
+308: misi-kimiwan                                : Heavy rain                                       :
+311: āhkwacipēscāsin                             : Light freezing rain                              :
+314: āhkwacipēstāw ahpō misi-āhkwacipēstāw       : Moderate or heavy freezing rain                  :
+317: sīsīkasin                                   : Light sleet                                      :
+320: sīsīkan ahpō misi-sīsīkan                   : Moderate or heavy sleet                          :
+323: māh-misposin                                : Patchy light snow                                :
+326: misposin                                    : Light snow                                       :
+329: māh-mispon                                  : Patchy moderate snow                             :
+332: mispon                                      : Moderate snow                                    :
+335: māh-misi-mispon                             : Patchy heavy snow                                :
+338: misi-mispon                                 : Heavy snow                                       :
+350: miskwamīsak pahkisinwak                     : Ice pellets                                      :
+353: aciyaw piko kimiwasin                       : Light rain shower                                :
+356: aciyaw piko kimiwan ahpō misi-kimiwan       : Moderate or heavy rain shower                    :
+359: aciyaw piko sīkipēstāw                      : Torrential rain shower                           :
+362: aciyaw piko sīsīkasin                       : Light sleet showers                              :
+365: aciyaw piko sīsīkan ahpō misi-sīsīkan       : Moderate or heavy sleet showers                  :
+368: aciyaw piko misposin                        : Light snow showers                               :
+371: aciyaw piko mispon ahpō misi-mispon         : Moderate or heavy snow showers                   :
+386: kāh-kimiwasin asici ē-kāh-kitocik           : Patchy light rain with thunder                   :
+389: kimiwan ahpō misi-kimiwan asici ē-kāh-kitocik : Moderate or heavy rain with thunder             :
+392: māh-misposin asici ē-kāh-kitocik            : Patchy light snow with thunder                   :
+395: mispon ahpō misi-mispon asici ē-kāh-kitocik : Moderate or heavy snow with thunder              :
+   : pīkisēyāw cīkāhtawāyāhk                     : Haze in vicinity                                 :
+   : aciyaw piko sīkipēstāw ēkwa mispon          : Heavy rain and snow shower                       :
+   : aciyaw piko sīkipēstāw                      : Heavy rain shower                                :
+   : pahkipēscāsin ēkwa mīna āhkwaci-pahkipēscāsin : Light drizzle and snow grains                  :
+   : aciyaw piko kimiwasin ēkwa kaskawanipēstāw  : Light rain and mist shower                       :
+   : aciyaw piko sīsīkasin                       : Light small hail/snow pellets shower             :
+   : aciyaw piko isipēscāsin                     : Light unknown precipitation shower               :
+   : kimiwan ēkwa sīsīkasin asici ē-kāh-kitocik  : Rain and small hail/snow pellets with thunderstorm :
+   : aciyaw piko mispon cīkāhtawāyāhk            : Snow shower in vicinity                          :
+   : pāh-piyēsīwan kisiwāk                       : Thundery outbreaks nearby                        :
+   : pīwasin                                     : Low drifting snow                                :
+   : yāh-yīkowan                                 : Patches of fog                                   :
+   : pahkipēscāsin                               : Drizzle                                          :
+   : apisci-pahkipēscāsin ēkwa kimiwan           : Light drizzle and rain                           :
+   : mispon / kōna                               : Snow                                             :
+   : kimiwan                                     : Rain                                             :
+   : aciyaw piko kimiwan                         : Rain Shower                                      :
+   : ohpāwahkāstan                               : Blowing sand                                     :
+   : ohpāwahkāstan misiwē                        : Blowing widespread dust                          :
+   : ohpāwahkāstan misiwē cīkāhtawāyāhk          : Blowing widespread dust in vicinity              :
+   : pahkipēscāsin ēkwa yīkowan                  : Drizzle and fog                                  :
+   : pahkipēscāsin ēkwa kimiwan                  : Drizzle and rain                                 :
+   : aciyaw piko pahkipēscāsin ēkwa kimiwan      : Drizzle and rain shower                          :
+   : pahkipēscāsin asici ē-kāh-kitocik           : Drizzle with thunderstorm                        :
+   : ohpāwahkāstan                               : Dust storm                                       :
+   : yīkowan cīkāhtawāyāhk                       : Fog in vicinity                                  :
+   : āhkwaci-pahkipēscāsin ēkwa kimiwan          : Freezing drizzle and rain                        :
+   : āhkwaci-kaskawanipēstāw                     : Freezing mist                                    :
+   : āhkwacipēstāw                               : Freezing rain                                    :
+   : āhkwacipēstāw ēkwa mispon                   : Freezing rain and snow                           :
+   : tānisi ētikwē isi-āhkwacipēstāw             : Freezing unknown precipitation                   :
+   : pistōsiw cīkāhtawāyāhk                      : Funnel cloud in vicinity                         :
+   : aciyaw piko sīsīkan                         : Hail shower                                      :
+   : sīsīkan asici ē-kāh-kitocik                 : Hail with thunderstorm                           :
+   : pīkisēyāw                                   : Haze                                             :
+   : misi-pīwan                                  : Heavy blowing snow                               :
+   : misi-pahkipēscāsin                          : Heavy drizzle                                    :
+   : misi-pahkipēscāsin ēkwa kimiwan             : Heavy drizzle and rain                           :
+   : nanātohk misi-āhkwacipēstāw                 : Heavy freezing unknown precipitation            :
+   : misi-sīsīkan asici ē-kāh-kitocik            : Heavy hail with thunderstorm                     :
+   : misi-sīsīkan                                : Heavy ice pellets                                :
+   : aciyaw piko sīkipēstāw ēkwa sīsīkan         : Heavy rain and hail shower                       :
+   : sīkipēstāw ēkwa sīsīkan asici ē-kāh-kitocik : Heavy rain and hail with thunderstorm            :
+   : aciyaw piko sīkipēstāw ēkwa sīsīkasin       : Heavy rain and small hail/snow pellets shower    :
+   : sīkipēstāw ēkwa sīsīkasin asici ē-kāh-kitocik : Heavy rain and small hail/snow pellets with thunderstorm :
+   : sīkipēstāw ēkwa mispon                      : Heavy rain and snow                              :
+   : sīkipēstāw, mispon, ēkwa sīsīkasin asici ē-kāh-kitocik : Heavy rain and snow and small hail/snow pellets with thunderstorm :
+   : sīkipēstāw asici ē-kāh-kitocik              : Heavy rain with thunderstorm                     :
+   : aciyaw piko misi-sīsīkasin                  : Heavy small hail/snow pellets shower             :
+   : misi-sīsīkasin asici ē-kāh-kitocik          : Heavy small hail/snow pellets with thunderstorm  :
+   : aciyaw piko misi-mispon ēkwa sīsīkasin      : Heavy snow and small hail/snow pellets shower    :
+   : misi-mispon ēkwa sīsīkasin asici ē-kāh-kitocik : Heavy snow and small hail/snow pellets with thunderstorm :
+   : aciyaw piko misi-mispon                     : Heavy snow shower                                :
+   : misi-mispon asici ē-kāh-kitocik             : Heavy snow with thunderstorm                     :
+   : miskwamīsisak nayēwac                       : Ice crystals                                     :
+   : sīsīkasin / miskwamīsak pahkisinwak         : Ice pellets                                      :
+   : pa-pīwasin                                  : Light blowing snow                               :
+   : apisci-pahkipēscāsin ēkwa yīkowan           : Light drizzle and fog                            :
+   : apisci-pahkipēscāsin ēkwa sīsīkasin         : Light drizzle and ice pellets                    :
+   : pahkipēscāsin, kimiwan ēkwa mispon          : Light drizzle and rain and snow                  :
+   : aciyaw piko apisci-pahkipēscāsin ēkwa kimiwan : Light drizzle and rain shower                    :
+   : apisci-pahkipēscāsin ēkwa kimiwan asici ē-kāh-kitocik : Light drizzle and rain with thunderstorm    :
+   : apisci-pahkipēscāsin ēkwa mispon            : Light drizzle and snow                           :
+   : apisci-pahkipēscāsin asici ē-kāh-kitocik    : Light drizzle with thunderstorm                  :
+   : apisci-āhkwaci-pahkipēscāsin                : Light freezing drizzle                           :
+   : apisci-āhkwaci-pahkipēscāsin ēkwa kimiwan   : Light freezing drizzle and rain                  :
+   : apisci-āhkwaci-pahkipēscāsin ēkwa mispon    : Light freezing drizzle and snow                  :
+   : yīkopīwasin / yīkwacisin                    : Light freezing fog                               :
+   : āhkwacipēscāsin ēkwa mispon                 : Light freezing rain and snow                     :
+   : āhkwaci-pahkipēscāsin ēkwa yīkowan          : Light freezing snow grains and fog               :
+   : nanātohk isi-āhkwacipēscāsin                : Light freezing unknown precipitation             :
+   : aciyaw piko sīsīkasin                       : Light hail shower                                :
+   : apisīs piko miskwamīsisak nayēwac           : Light ice crystals                               :
+   : sīsīkasin / apisci-miskwamīsak              : Light ice pellets                                :
+   : pa-pīwasin cīkaskamik                       : Light low drifting                               :
+   : pa-pīwasin cīkaskamik                       : Light low drifting snow                          :
+   : aciyaw piko kimiwasin ēkwa sīsīkan          : Light rain and hail shower                       :
+   : kimiwasin ēkwa sīsīkan asici ē-kāh-kitocik  : Light rain and hail with thunderstorm            :
+   : kimiwasin ēkwa sīsīkasin                    : Light rain and ice pellets                       :
+   : kimiwasin ēkwa kaskawanipēstāw              : Light rain and mist                              :
+   : aciyaw piko kimiwasin ēkwa sīsīkasin        : Light rain and small hail/snow pellets shower    :
+   : kimiwasin ēkwa sīsīkasin asici ē-kāh-kitocik : Light rain and small hail/snow pellets with thunderstorm :
+   : kimiwasin ēkwa mispon                       : Light rain and snow                              :
+   : aciyaw piko kimiwasin, mispon ēkwa sīsīkasin : Light rain and snow and small hail/snow pellets shower :
+   : kimiwasin ēkwa āhkwaci-pahkipēscāsin        : Light rain and snow grains                       :
+   : aciyaw piko kimiwasin ēkwa mispon           : Light rain and snow shower                       :
+   : kimiwasin ēkwa mispon asici ē-kāh-kitocik   : Light rain and snow with thunderstorm            :
+   : kimiwasin asici ē-kāh-kitocik               : Light rain with thunderstorm                     :
+   : aciyaw piko kimiwasin                       : Light shower                                     :
+   : aciyaw piko sīsīkasin                       : Light showers of ice pellets                     :
+   : sīsīkasin                                   : Light small hail/snow pellets                    :
+   : aciyaw piko sīsīkasin                       : Light small hail/snow pellets shower             :
+   : sīsīkasin asici ē-kāh-kitocik               : Light small hail/snow pellets with thunderstorm  :
+   : misposin ēkwa sīsīkasin                     : Light snow and ice pellets                       :
+   : misposin ēkwa sīsīkasin                     : Light snow and small hail/snow pellets           :
+   : aciyaw piko misposin ēkwa sīsīkasin         : Light snow and small hail/snow pellets shower    :
+   : misposin ēkwa sīsīkasin asici ē-kāh-kitocik : Light snow and small hail/snow pellets with thunderstorm :
+   : misposin ēkwa āhkwaci-pahkipēscāsin         : Light snow and snow grains                       :
+   : āhkwaci-pahkipēscāsin                       : Light snow grains                                :
+   : aciyaw piko misposin                        : Light snow shower                                :
+   : misposin asici ē-kāh-kitocik                : Light snow with thunderstorm                     :
+   : piyēsīwasin                                 : Light thunderstorm                               :
+   : tānisi ētikwē isipēscāsin                   : Light unknown precipitation                      :
+   : piscōsīsisa                                 : Light well-developed dust/sand whirls            :
+   : ohpāwahkāscasin cīkaskamik                  : Low drifting sand                                :
+   : ohpāwahkāscasin misiwē cīkaskamik           : Low drifting widespread dust                     :
+   : kaskawanipēstāw asici ē-kāh-kitocik         : Mist with thunderstorm                           :
+   : kimiwan ahpō misi-kimiwan cīkāhtawāyāhk asici ē-kāh-kitocik : Moderate or heavy rain in area with thunder      :
+   : mispon ahpō misi-mispon cīkāhtawāyāhk asici ē-kāh-kitocik : Moderate or heavy snow in area with thunder      :
+   : pāh-pahki yīkowan                           : Partial fog                                      :
+   : yāh-yīkowan cīkāhtawāyāhk                   : Patches of fog in vicinity                       :
+   : āh-āhkwaci-pahkipēscāsin kisiwāk            : Patchy freezing drizzle nearby                   :
+   : kāh-kimiwasin cīkāhtawāyāhk asici ē-kāh-kitocik : Patchy light rain in area with thunder         :
+   : māh-misposin cīkāhtawāyāhk asici ē-kāh-kitocik : Patchy light snow in area with thunder           :
+   : kāh-kimiwan kisiwāk                         : Patchy rain nearby                               :
+   : sāh-sīsīkan kisiwāk                         : Patchy sleet nearby                              :
+   : māh-mispon kisiwāk                          : Patchy snow nearby                               :
+   : aciyaw piko kimiwan ēkwa sīsīkan            : Rain and hail shower                             :
+   : kimiwan ēkwa sīsīkan asici ē-kāh-kitocik    : Rain and hail with thunderstorm                  :
+   : kimiwan ēkwa kaskawanipēstāw                : Rain and mist                                    :
+   : kimiwan ēkwa kaskawanipēstāw asici ē-kāh-kitocik : Rain and mist with thunderstorm               :
+   : aciyaw piko kimiwan ēkwa sīsīkasin          : Rain and small hail/snow pellets shower          :
+   : kimiwan ēkwa sīsīkasin asici ē-kāh-kitocik  : Rain and small hail/snow pellets with thunderstorm :
+   : kimiwan ēkwa mispon                         : Rain and snow                                    :
+   : aciyaw piko kimiwan, mispon ēkwa sīsīkasin  : Rain and snow and small hail/snow pellets shower :
+   : kimiwan ēkwa āhkwaci-pahkipēscāsin          : Rain and snow grains                             :
+   : aciyaw piko kimiwan ēkwa mispon             : Rain and snow shower                             :
+   : kimiwan ēkwa mispon asici ē-kāh-kitocik     : Rain and snow with thunderstorm                  :
+   : kimiwan cīkāhtawāyāhk                       : Rain in vicinity                                 :
+   : aciyaw piko kimiwan cīkāhtawāyāhk           : Rain shower in vicinity                          :
+   : kimiwan asici ē-kāh-kitocik                 : Rain with thunderstorm                           :
+   : yēkaw / yēkawan                             : Sand                                             :
+   : ohpāwahkāstani-yōtin                        : Sandstorm                                        :
+   : yīkowasin                                   : Shallow fog                                      :
+   : kaskawanipēscāsin                           : Shallow mist                                     :
+   : aciyaw piko kimiwan                         : Shower                                           :
+   : aciyaw piko kimiwan cīkāhtawāyāhk           : Shower in vicinity                               :
+   : sīsīkasin                                   : Small hail/snow pellets                          :
+   : aciyaw piko sīsīkasin                       : Small hail/snow pellets shower                   :
+   : sīsīkasin asici ē-kāh-kitocik               : Small hail/snow pellets with thunderstorm        :
+   : kaskāpahtēw / kaskāpahtēwan                 : Smoke                                            :
+   : mispon ēkwa sīsīkasin                       : Snow and ice pellets                             :
+   : mispon ēkwa kaskawanipēstāw                 : Snow and mist                                    :
+   : aciyaw piko mispon ēkwa sīsīkasin           : Snow and small hail/snow pellets shower          :
+   : mispon ēkwa sīsīkasin asici ē-kāh-kitocik   : Snow and small hail/snow pellets with thunderstorm :
+   : mispon ēkwa āhkwaci-pahkipēscāsin           : Snow and snow grains                             :
+   : āhkwaci-pahkipēscāsin                       : Snow grains                                      :
+   : aciyaw piko mispon                          : Snow shower                                      :
+   : mispon asici ē-kāh-kitocik                  : Snow with thunderstorm                           :
+   : mamēniyowēw                                 : Squalls                                          :
+   : piyēsīwan                                   : Thunderstorm                                     :
+   : piyēsīwan cīkāhtawāyāhk                     : Thunderstorm in vicinity                         :
+   : pāh-piyēsīwan kisiwāk                       : Thundery outbreaks nearby                        :
+   : tānisi ētikwē isipēstāw                     : Unknown precipitation                            :
+   : aciyaw piko (nanātohk) isipēstāw            : Unknown precipitation shower                     :
+   : tānisi ētikwē isipēstāw asici ē-kāh-kitocik : Unknown precipitation with thunderstorm          :
+   : pihko pahkitēwacīhk ohci                    : Volcanic ash                                     :
+   : pihko pahkitēwacīhk ohci cīkāhtawāyāhk      : Volcanic ash in vicinity                         :
+   : piscōsīsa cīkāhtawāyāhk                     : Well-developed dust/sand whirls in vicinity :
+   : ohpāwahkāstan misiwē                        : Widespread dust                                  :
