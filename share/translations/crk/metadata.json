@@ -1,0 +1,16 @@
+{
+  "code": "crk",
+  "name": "Plains Cree",
+  "locale": "crk",
+  "translators": [
+    {
+      "name": "Arok Wolvengrey"
+    },
+    {
+      "name": "Edward Doolittle",
+      "github": "edoolittle"
+    },
+  ],
+  "full_translation": true,
+  "issue": 1187
+}
