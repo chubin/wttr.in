@@ -2,6 +2,7 @@ package v1
 
 import (
 	"fmt"
+	"log"
 	"math"
 	"time"
 
@@ -130,7 +131,8 @@ func (r *V1Renderer) formatDate(dateStr string, opts *options.Options, l10n loca
 
 	localeStr := l10n.Text("LOCALE")
 	if err := lctime.SetLocale(localeStr); err != nil {
-		return "", err
+		// If locale can't be set, just print a warning and go on.
+		log.Printf("Can't set locale %s: %s\n", localeStr, err)
 	}
 
 	var dateName string
