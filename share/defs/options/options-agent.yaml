@@ -1,0 +1,47 @@
+query_options:
+  - name: agent-term
+    description: "Terminal type (TERM environment variable)"
+    type: string
+    hidden: true
+    active: true
+
+  - name: agent-cols
+    description: "Terminal width in columns"
+    type: integer
+    hidden: true
+    active: true
+
+  - name: agent-lines
+    description: "Terminal height in lines"
+    type: integer
+    hidden: true
+    active: true
+
+  - name: agent-attached
+    description: "Whether the client is attached to a terminal"
+    type: boolean
+    hidden: true
+    active: true
+
+  - name: agent-color
+    description: "Color support level of the client terminal"
+    type: string
+    hidden: true
+    active: true
+    values:
+      - truecolor
+      - 256
+      - 16
+      - mono
+
+  - name: agent-graphics
+    description: "Graphics protocol support (e.g. sixel, kitty)"
+    type: string
+    hidden: true
+    active: true
+
+  - name: agent-lang
+    description: "Language / locale environment setting"
+    type: string
+    hidden: true
+    active: true
