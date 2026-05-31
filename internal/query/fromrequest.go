@@ -374,6 +374,7 @@ func isPlainTextClient(userAgent string) bool {
 		"xh",
 		"nushell",
 		"zig",
+		"utils.web Limnoria module",
 	}
 
 	ua := strings.ToLower(userAgent)
