@@ -10,6 +10,27 @@ import (
 // Options represents parsed and validated wttr.in query options.
 type Options struct {
 
+	// Terminal type (TERM environment variable)
+	AgentTerm string `json:"agent-term,omitempty"`
+
+	// Terminal width in columns
+	AgentCols int `json:"agent-cols,omitempty"`
+
+	// Terminal height in lines
+	AgentLines int `json:"agent-lines,omitempty"`
+
+	// Whether the client is attached to a terminal
+	AgentAttached bool `json:"agent-attached,omitempty"`
+
+	// Color support level of the client terminal
+	AgentColor string `json:"agent-color,omitempty"`
+
+	// Graphics protocol support (e.g. sixel, kitty)
+	AgentGraphics string `json:"agent-graphics,omitempty"`
+
+	// Language / locale environment setting
+	AgentLang string `json:"agent-lang,omitempty"`
+
 	// Output structure format for oneline view (which is always implied when format is used).
 	Format string `json:"format,omitempty"`
 
@@ -131,6 +152,46 @@ type Options struct {
 // ApplyParsedMap populates Options from a validated map[string]string.
 // All values are already validated by options.ParseQueryString().
 func ApplyParsedMap(opts *Options, raw map[string]string) (*Options, error) {
+
+	// string or fallback
+	if v, ok := raw["agent-term"]; ok {
+		opts.AgentTerm = v
+	}
+
+	if v, ok := raw["agent-cols"]; ok {
+		n, err := strconv.Atoi(v)
+		if err != nil {
+			return nil, fmt.Errorf("invalid integer for agent-cols: %w", err)
+		}
+		opts.AgentCols = n
+	}
+
+	if v, ok := raw["agent-lines"]; ok {
+		n, err := strconv.Atoi(v)
+		if err != nil {
+			return nil, fmt.Errorf("invalid integer for agent-lines: %w", err)
+		}
+		opts.AgentLines = n
+	}
+
+	if v, ok := raw["agent-attached"]; ok {
+		opts.AgentAttached = (v == "true")
+	}
+
+	// string or fallback
+	if v, ok := raw["agent-color"]; ok {
+		opts.AgentColor = v
+	}
+
+	// string or fallback
+	if v, ok := raw["agent-graphics"]; ok {
+		opts.AgentGraphics = v
+	}
+
+	// string or fallback
+	if v, ok := raw["agent-lang"]; ok {
+		opts.AgentLang = v
+	}
 
 	// string or fallback
 	if v, ok := raw["format"]; ok {
@@ -357,6 +418,22 @@ func (o *Options) ToMap() map[string]string {
 
 	// Strings (skip empty, except Lang which has explicit default)
 
+	if o.AgentTerm != "" {
+		m["agent-term"] = o.AgentTerm
+	}
+
+	if o.AgentColor != "" {
+		m["agent-color"] = o.AgentColor
+	}
+
+	if o.AgentGraphics != "" {
+		m["agent-graphics"] = o.AgentGraphics
+	}
+
+	if o.AgentLang != "" {
+		m["agent-lang"] = o.AgentLang
+	}
+
 	if o.Format != "" {
 		m["format"] = o.Format
 	}
@@ -390,6 +467,10 @@ func (o *Options) ToMap() map[string]string {
 	}
 
 	// Booleans (only true values)
+
+	if o.AgentAttached {
+		m["agent-attached"] = "true"
+	}
 
 	if o.CurrentOnly {
 		m["current_only"] = "true"
@@ -484,6 +565,14 @@ func (o *Options) ToMap() map[string]string {
 	}
 
 	// Integers (only non-zero)
+
+	if o.AgentCols != 0 {
+		m["agent-cols"] = strconv.Itoa(o.AgentCols)
+	}
+
+	if o.AgentLines != 0 {
+		m["agent-lines"] = strconv.Itoa(o.AgentLines)
+	}
 
 	if o.Period != 0 {
 		m["period"] = strconv.Itoa(o.Period)
