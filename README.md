@@ -729,6 +729,6 @@ For production, create a systemd service. Cache and logs are stored under `/wttr
 
 ## wttr.in usage stats
 
-As of April 2026, *wttr.in* handles around 100 million queries per day from 400,000 to 450,000 users, according to the access logs.
+As of June 2026, *wttr.in* handles around 150 million queries per day from approximately 1.5 million users, according to the access logs.
 
 ![wttr.in usage stats](share/stats/stats.png)
