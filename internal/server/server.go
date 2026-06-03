@@ -172,6 +172,11 @@ func loadCertificates(conf *Config) (certMap, *tls.Certificate, error) {
 
 // serveHTTPS starts HTTPS server with support for multiple certificates via SNI
 func serveHTTPS(mux *http.ServeMux, port int, conf *Config, logFile io.Writer, errs chan<- error) {
+	// TLS Policy (June 2026):
+	// - We currently support TLS 1.2 + TLS 1.3 with strict modern ciphers.
+	// - TLS 1.2 will be disabled (MinVersion = tls.VersionTLS13) once compatibility
+	//   impact is acceptable (likely 2027+).
+
 	certs, defaultCert, err := loadCertificates(conf)
 	if err != nil {
 		errs <- fmt.Errorf("TLS certificate loading failed: %w", err)
@@ -179,7 +184,7 @@ func serveHTTPS(mux *http.ServeMux, port int, conf *Config, logFile io.Writer, e
 	}
 
 	tlsConfig := &tls.Config{
-		// This function is called for every TLS handshake (SNI)
+		// GetCertificate handles SNI for multiple domains + wildcard support
 		GetCertificate: func(hello *tls.ClientHelloInfo) (*tls.Certificate, error) {
 			domain := hello.ServerName
 
@@ -203,13 +208,30 @@ func serveHTTPS(mux *http.ServeMux, port int, conf *Config, logFile io.Writer, e
 			return nil, fmt.Errorf("no certificate configured for domain: %s", domain)
 		},
 
-		MinVersion: tls.VersionTLS13,
-		// You can uncomment and customize if needed:
-		// CipherSuites: []uint16{
-		// 	tls.TLS_CHACHA20_POLY1305_SHA256,
-		// 	tls.TLS_AES_256_GCM_SHA384,
-		// 	tls.TLS_AES_128_GCM_SHA256,
-		// },
+		// === TLS Version Configuration ===
+		MinVersion: tls.VersionTLS12, // Allow TLS 1.2 (required for broad compatibility)
+		MaxVersion: tls.VersionTLS13, // Prefer and allow up to TLS 1.3
+
+		// === Secure Cipher Suites (2026 best practices) ===
+		// These are strong, modern ciphers only.
+		// TLS 1.3 ciphers are always preferred when possible.
+		CipherSuites: []uint16{
+			// TLS 1.3 ciphers (preferred)
+			tls.TLS_AES_128_GCM_SHA256,
+			tls.TLS_AES_256_GCM_SHA384,
+			tls.TLS_CHACHA20_POLY1305_SHA256,
+
+			// TLS 1.2 secure ciphers only (no CBC, no RSA key exchange, no SHA-1)
+			tls.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
+			tls.TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,
+			tls.TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,
+			tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
+			tls.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
+			tls.TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,
+		},
+
+		// Prefer server cipher order (recommended)
+		PreferServerCipherSuites: true,
 	}
 
 	srv := &http.Server{
