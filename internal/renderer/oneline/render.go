@@ -35,7 +35,7 @@ func RenderConditionCode(ctx *RenderContext) string {
 func RenderTemperature(ctx *RenderContext) string {
 	var val float64
 	var unit string
-	if ctx.Options.UseImperial {
+	if usesImperialUnits(ctx) {
 		val, unit = ctx.Data.TempF, "°F"
 	} else {
 		val, unit = ctx.Data.TempC, "°C"
@@ -50,7 +50,7 @@ func RenderTemperature(ctx *RenderContext) string {
 func RenderFeelsLike(ctx *RenderContext) string {
 	var val float64
 	var unit string
-	if ctx.Options.UseImperial {
+	if usesImperialUnits(ctx) {
 		val, unit = ctx.Data.FeelsLikeF, "°F"
 	} else {
 		val, unit = ctx.Data.FeelsLikeC, "°C"
@@ -79,7 +79,7 @@ func RenderWind(ctx *RenderContext) string {
 	case ctx.Options.UseMsForWind:
 		speed = ctx.Data.WindKmph / 3.6
 		unit = "m/s"
-	case ctx.Options.UseImperial:
+	case usesImperialUnits(ctx):
 		speed = ctx.Data.WindMiles
 		unit = "mph"
 	default:
@@ -95,10 +95,14 @@ func RenderHumidity(ctx *RenderContext) string {
 }
 
 func RenderPrecipitation(ctx *RenderContext) string {
-	if ctx.Options.UseImperial || ctx.Options.UseUscs {
-		return fmt.Sprintf("%.1fin", ctx.Data.PrecipInches)
+	if usesImperialUnits(ctx) {
+		return fmt.Sprintf("%.2f in", ctx.Data.PrecipInches)
 	}
 	return fmt.Sprintf("%.1fmm", ctx.Data.PrecipMM)
+}
+
+func usesImperialUnits(ctx *RenderContext) bool {
+	return ctx != nil && ctx.Options != nil && (ctx.Options.UseImperial || ctx.Options.UseUscs)
 }
 
 func RenderPrecipChance(ctx *RenderContext) string {
