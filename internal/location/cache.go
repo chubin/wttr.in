@@ -228,10 +228,14 @@ func (c *Cache) flushBatch(batch []*Location) {
 // Resolve returns location data — first from cache (LRU → persistent), then from external search.
 func (c *Cache) Resolve(location string) (*Location, error) {
 	defer log.Debugln("Resolve() finished")
+	origLocation := location
 	location = normalizeLocationName(location)
 
 	// 1. Fastest path: LRU
 	if loc := c.getFromLRU(location); loc != nil {
+		// Restore original location name
+		loc.Name = origLocation
+
 		return loc, nil
 	}
 
@@ -245,6 +249,10 @@ func (c *Cache) Resolve(location string) (*Location, error) {
 			}
 		}
 		c.putToLRU(location, loc) // warm the LRU
+
+		// Restore original location name
+		loc.Name = origLocation
+
 		return loc, nil
 	}
 	if !errors.Is(err, types.ErrNotFound) {
@@ -268,6 +276,10 @@ func (c *Cache) Resolve(location string) (*Location, error) {
 	}
 
 	c.putToLRU(location, loc)
+
+	// Restore original location name
+	loc.Name = origLocation
+
 	return loc, nil
 }
 

@@ -12,6 +12,11 @@ func ToLocationCase(s string) string {
 		return ""
 	}
 
+	// If string already has any uppercase letter, preserve original casing
+	if hasUppercase(s) {
+		return s
+	}
+
 	// Common words that usually remain lowercase in place names
 	lowercaseWords := map[string]bool{
 		"of": true, "the": true, "and": true, "or": true,
@@ -20,6 +25,7 @@ func ToLocationCase(s string) string {
 		"de": true, "la": true, "las": true, "el": true, "los": true,
 		"da": true, "das": true, "do": true, "dos": true,
 		"van": true, "von": true, "der": true, "den": true,
+		"an": true, "am": true,
 		"upon": true, "sur": true, "sous": true,
 	}
 
@@ -47,6 +53,16 @@ func ToLocationCase(s string) string {
 	}
 
 	return strings.Join(result, " ")
+}
+
+// hasUppercase returns true if string contains any uppercase character
+func hasUppercase(s string) bool {
+	for _, r := range s {
+		if unicode.IsUpper(r) {
+			return true
+		}
+	}
+	return false
 }
 
 // handleHyphenated processes hyphenated words like "new-york", "saint-denis"

@@ -310,7 +310,7 @@ func (s *WeatherService) computeResponse(
 				locStr = fmt.Sprintf("%s, %s, %s",
 					util.ToLocationCase(ipData.City),
 					util.ToLocationCase(ipData.Region),
-					strings.ToTitle(ipData.CountryCode))
+					strings.ToUpper(ipData.CountryCode))
 			}
 		}
 	}
@@ -324,7 +324,7 @@ func (s *WeatherService) computeResponse(
 
 	// ── Geocode ───────────────────────────────────────────────────────────
 	start = time.Now()
-	location, err := s.Locator.GetLocation(strings.ToLower(locStr))
+	location, err := s.Locator.GetLocation(locStr)
 	if err != nil {
 		if opts.View == "files" || opts.View == "page" {
 			location = &domain.Location{}
