@@ -133,6 +133,9 @@ func (r *V1Renderer) formatDate(dateStr string, opts *options.Options, l10n loca
 	if err := lctime.SetLocale(localeStr); err != nil {
 		// If locale can't be set, just print a warning and go on.
 		log.Printf("Can't set locale %s: %s\n", localeStr, err)
+		if err := lctime.SetLocale("en_US"); err != nil {
+			return "", err
+		}
 	}
 
 	var dateName string
