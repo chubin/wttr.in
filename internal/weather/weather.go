@@ -15,6 +15,7 @@ import (
 	"github.com/chubin/wttr.in/internal/domain"
 	"github.com/chubin/wttr.in/internal/localization"
 	"github.com/chubin/wttr.in/internal/options"
+	"github.com/chubin/wttr.in/internal/util"
 	"github.com/chubin/wttr.in/internal/util/termutil"
 )
 
@@ -306,9 +307,10 @@ func (s *WeatherService) computeResponse(
 			if ipData.City == "" {
 				locStr = fmt.Sprintf("%s,%s", ipData.Latitude, ipData.Longitude)
 			} else {
-				locStr = fmt.Sprintf("%s, %s, %s", ipData.City, ipData.Region, ipData.CountryCode)
-				// 	log.Printf("Using old style location for: %s, %s, %s\n", ipData.City, ipData.Region, ipData.CountryCode)
-				// 	locStr = ipData.City
+				locStr = fmt.Sprintf("%s, %s, %s",
+					util.ToLocationCase(ipData.City),
+					util.ToLocationCase(ipData.Region),
+					strings.ToTitle(ipData.CountryCode))
 			}
 		}
 	}
@@ -322,7 +324,7 @@ func (s *WeatherService) computeResponse(
 
 	// ── Geocode ───────────────────────────────────────────────────────────
 	start = time.Now()
-	location, err := s.Locator.GetLocation(locStr)
+	location, err := s.Locator.GetLocation(strings.ToLower(locStr))
 	if err != nil {
 		if opts.View == "files" || opts.View == "page" {
 			location = &domain.Location{}

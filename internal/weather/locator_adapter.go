@@ -12,6 +12,7 @@ import (
 
 	"github.com/chubin/wttr.in/internal/domain"
 	"github.com/chubin/wttr.in/internal/location"
+	"github.com/chubin/wttr.in/internal/util"
 	"github.com/sirupsen/logrus"
 )
 
@@ -100,7 +101,7 @@ func (l *cacheLocator) GetLocation(locationName string) (*domain.Location, error
 	// → for most use-cases option 1 is acceptable
 
 	return &domain.Location{
-		Name: raw.Name, // already normalized
+		Name: util.ToLocationCase(raw.Name),
 		// Country:      "",              // not available
 		// CountryCode:  "",              // not available
 		Latitude:    lat,
