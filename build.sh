@@ -17,16 +17,7 @@ BINARY_NAME="srv"
 MAIN_PACKAGE="./main.go"           # adjust if your entry point is different
 EMBED_TARGET_DIR="internal/assets/embed"
 
-# ─── Font configuration ───────────────────────────────────────────────────────
-declare -A FONTS
-FONTS["DejaVuSansMono.ttf"]="/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf:fonts-dejavu-core"
-FONTS["wqy-zenhei.ttc"]="/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc:fonts-wqy-zenhei"
-FONTS["MTLc3m.ttf"]="/usr/share/fonts/truetype/motoya-l-cedar/MTLc3m.ttf:fonts-motoya-l-cedar"
-FONTS["LexiGulim.ttf"]="/usr/share/fonts/truetype/lexi/LexiGulim.ttf:fonts-lexi-gulim"
-FONTS["Symbola_hint.ttf"]="/usr/share/fonts/truetype/ancient-scripts/Symbola_hint.ttf:fonts-symbola"
-FONTS["NotoSansDevanagari-Regular.ttf"]="/usr/share/fonts/truetype/noto/NotoSansDevanagari-Regular.ttf:fonts-noto-core"
-FONTS["NotoSansBengali-Regular.ttf"]="/usr/share/fonts/truetype/noto/NotoSansBengali-Regular.ttf:fonts-noto-core"
-FONTS["NotoSansGurmukhi-Regular.ttf"]="/usr/share/fonts/truetype/noto/NotoSansGurmukhi-Regular.ttf:fonts-noto-core"
+FONTS_JSON="share/defs/fonts/scripts.json"
 
 # ─── Asset roots (non-font) ───────────────────────────────────────────────────
 ASSET_ROOTS=(
@@ -50,6 +41,7 @@ warn()  { echo -e "${YELLOW}⚠ $1${NC}" >&2; }
 error() { echo -e "${RED}ERROR: $1${NC}" >&2; exit 1; }
 
 ensure_clean_embed_dir() {
+    rm -rf "$EMBED_TARGET_DIR/fonts/"
     mkdir -p "$EMBED_TARGET_DIR/fonts"
     touch "$EMBED_TARGET_DIR/fonts/README.md"
 }
@@ -57,17 +49,27 @@ ensure_clean_embed_dir() {
 copy_fonts() {
     info "Copying fonts to embed directory..."
 
-    for font_file in "${!FONTS[@]}"; do
-        entry="${FONTS[$font_file]}"
-        src_path="${entry%%:*}"
-        pkg="${entry#*:}"
+    if ! command -v jq >/dev/null 2>&1; then
+        error "jq is required but not installed. Install with: sudo apt install jq"
+    fi
 
-        if [[ -f "$src_path" ]]; then
-            cp "$src_path" "$EMBED_TARGET_DIR/fonts/$font_file"
-            info "  Copied $font_file"
+    jq -r '
+        .scripts | to_entries[] |
+        select(.value.filename and .value.package) |
+        .value.filename as $path |
+        .value.package as $pkg |
+        ( $path | split("/") | last ) as $basename |
+        "\($path):\($pkg):\($basename)"
+    ' "$FONTS_JSON" | while IFS=: read -r src_path pkg basename; do
+        if [[ -r "$EMBED_TARGET_DIR/fonts/$basename" ]]; then
+            continue
+        fi
+        if [[ -n "$src_path" && -f "$src_path" ]]; then
+            cp "$src_path" "$EMBED_TARGET_DIR/fonts/$basename"
+            info " Copied $basename"
         else
-            warn "Font not found: $font_file"
-            warn "   → Install with: sudo apt install $pkg"
+            warn "Font not found: $basename"
+            warn " → Install with: sudo apt install $pkg"
         fi
     done
 }
