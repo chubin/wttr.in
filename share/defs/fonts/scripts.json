@@ -1,0 +1,199 @@
+{
+  "scripts": {
+    "default": {
+      "filename": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+      "package": "fonts-dejavu-core",
+      "ranges": []
+    },
+    "Cyrillic": {
+      "filename": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+      "package": "fonts-dejavu-core",
+      "ranges": [
+        [
+          1024,
+          1279
+        ]
+      ]
+    },
+    "Greek": {
+      "filename": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+      "package": "fonts-dejavu-core",
+      "ranges": [
+        [
+          880,
+          1023
+        ]
+      ]
+    },
+    "Arabic": {
+      "filename": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+      "package": "fonts-dejavu-core",
+      "ranges": [
+        [
+          1536,
+          1791
+        ]
+      ]
+    },
+    "Hebrew": {
+      "filename": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+      "package": "fonts-dejavu-core",
+      "ranges": [
+        [
+          1424,
+          1535
+        ]
+      ]
+    },
+    "Han": {
+      "filename": "/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc",
+      "package": "fonts-wqy-zenhei",
+      "ranges": [
+        [
+          19968,
+          40959
+        ],
+        [
+          13312,
+          19903
+        ]
+      ]
+    },
+    "Hiragana": {
+      "filename": "/usr/share/fonts/truetype/motoya-l-cedar/MTLc3m.ttf",
+      "package": "fonts-motoya-l-cedar",
+      "ranges": [
+        [
+          12352,
+          12447
+        ]
+      ]
+    },
+    "Katakana": {
+      "filename": "/usr/share/fonts/truetype/motoya-l-cedar/MTLc3m.ttf",
+      "package": "fonts-motoya-l-cedar",
+      "ranges": [
+        [
+          12448,
+          12543
+        ]
+      ]
+    },
+    "Hangul": {
+      "filename": "/usr/share/fonts/truetype/lexi/LexiGulim.ttf",
+      "package": "fonts-lexi-gulim",
+      "ranges": [
+        [
+          44032,
+          55215
+        ]
+      ]
+    },
+    "Braille": {
+      "filename": "/usr/share/fonts/truetype/ancient-scripts/Symbola_hint.ttf",
+      "package": "fonts-symbola",
+      "ranges": [
+        [
+          10240,
+          10495
+        ]
+      ]
+    },
+    "Emoji": {
+      "filename": "/usr/share/fonts/truetype/ancient-scripts/Symbola_hint.ttf",
+      "package": "fonts-symbola",
+      "ranges": [
+        [
+          126976,
+          129791
+        ],
+        [
+          128512,
+          128591
+        ],
+        [
+          9728,
+          9983
+        ],
+        [
+          9984,
+          10175
+        ]
+      ]
+    },
+    "Devanagari": {
+      "filename": "/usr/share/fonts/truetype/noto/NotoSansDevanagari-Regular.ttf",
+      "package": "fonts-noto-core",
+      "ranges": [
+        [
+          2304,
+          2431
+        ],
+        [
+          43232,
+          43263
+        ]
+      ]
+    },
+    "Bengali": {
+      "filename": "/usr/share/fonts/truetype/noto/NotoSansBengali-Regular.ttf",
+      "package": "fonts-noto-core",
+      "ranges": [
+        [
+          2432,
+          2559
+        ]
+      ]
+    },
+    "Gurmukhi": {
+      "filename": "/usr/share/fonts/truetype/noto/NotoSansGurmukhi-Regular.ttf",
+      "package": "fonts-noto-core",
+      "ranges": [
+        [
+          2560,
+          2687
+        ]
+      ]
+    },
+    "BoxDrawing": {
+      "filename": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+      "package": "fonts-dejavu-core",
+      "ranges": [
+        [
+          9472,
+          9599
+        ]
+      ]
+    },
+    "BlockElements": {
+      "filename": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+      "package": "fonts-dejavu-core",
+      "ranges": [
+        [
+          9600,
+          9631
+        ]
+      ]
+    },
+    "GeometricShapes": {
+      "filename": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+      "package": "fonts-dejavu-core",
+      "ranges": [
+        [
+          9632,
+          9727
+        ]
+      ]
+    },
+    "Powerline": {
+      "filename": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+      "package": "fonts-dejavu-core",
+      "ranges": [
+        [
+          57520,
+          57559
+        ]
+      ]
+    }
+  }
+}
