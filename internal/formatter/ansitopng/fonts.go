@@ -1,8 +1,7 @@
-// internal/formatter/ansitopng/fonts.go
 package ansitopng
 
 import (
-	"io/fs"
+	"encoding/json"
 	"log"
 	"os"
 	"sync"
@@ -12,36 +11,61 @@ import (
 	"github.com/chubin/wttr.in/internal/assets"
 )
 
-var fontPaths = map[string]string{
-	"default":    "fonts/DejaVuSansMono.ttf",
-	"Cyrillic":   "fonts/DejaVuSansMono.ttf",
-	"Greek":      "fonts/DejaVuSansMono.ttf",
-	"Gurmukhi":   "fonts/NotoSansGurmukhi-Regular.ttf",
-	"Arabic":     "fonts/DejaVuSansMono.ttf",
-	"Hebrew":     "fonts/DejaVuSansMono.ttf",
-	"Han":        "fonts/wqy-zenhei.ttc",
-	"Hiragana":   "fonts/MTLc3m.ttf",
-	"Katakana":   "fonts/MTLc3m.ttf",
-	"Hangul":     "fonts/LexiGulim.ttf",
-	"Braille":    "fonts/Symbola_hint.ttf",
-	"Emoji":      "fonts/Symbola_hint.ttf",
-	"Devanagari": "fonts/NotoSansDevanagari-Regular.ttf",
-	"Bengali":    "fonts/NotoSansBengali-Regular.ttf",
+// ScriptConfig represents one script entry from scripts.json
+type ScriptConfig struct {
+	Filename string  `json:"filename"`
+	Package  string  `json:"package"`
+	Ranges   [][]int `json:"ranges"`
 }
 
-// fontFiles holds the temporary file paths (extracted once at startup)
+// FontConfig holds the full configuration
+type FontConfig struct {
+	Scripts map[string]ScriptConfig `json:"scripts"`
+}
+
 var (
-	fontFiles = make(map[string]string) // category → real temp file path on disk
-	fontMu    sync.RWMutex
+	fontConfig FontConfig
+	fontFiles  = make(map[string]string) // category → temp file on disk
+	fontMu     sync.RWMutex
 )
 
-// preloadFontFiles extracts fonts from embed.FS to temp files once at startup
+// loadFontConfig loads configuration from embedded scripts.json
+func loadFontConfig() {
+	data, err := assets.GetFile("share/defs/fonts/scripts.json")
+	if err != nil {
+		log.Printf("ERROR: Could not read embedded scripts.json: %v", err)
+		return
+	}
+
+	if err := json.Unmarshal(data, &fontConfig); err != nil {
+		log.Printf("ERROR: Failed to parse scripts.json: %v", err)
+	}
+}
+
+// getFontBasename extracts filename from full system path
+func getFontBasename(fullPath string) string {
+	for i := len(fullPath) - 1; i >= 0; i-- {
+		if fullPath[i] == '/' || fullPath[i] == '\\' {
+			return fullPath[i+1:]
+		}
+	}
+	return fullPath
+}
+
+// preloadFontFiles extracts fonts from embed.FS to temporary files
 func preloadFontFiles() {
 	fontMu.Lock()
 	defer fontMu.Unlock()
 
-	for cat, relPath := range fontPaths {
-		data, err := fs.ReadFile(assets.FS, "embed/"+relPath)
+	for cat, cfg := range fontConfig.Scripts {
+		if cfg.Filename == "" {
+			continue
+		}
+
+		basename := getFontBasename(cfg.Filename)
+		relPath := "fonts/" + basename
+
+		data, err := assets.GetFile(relPath)
 		if err != nil {
 			log.Printf("ERROR: Could not read font %s from embed: %v", relPath, err)
 			continue
@@ -63,12 +87,19 @@ func preloadFontFiles() {
 		fontFiles[cat] = tmp.Name()
 		log.Printf("INFO: Extracted font for category '%s'", cat)
 	}
+
+	// Ensure default exists
+	if _, ok := fontFiles["default"]; !ok {
+		log.Printf("WARNING: No default font loaded")
+	}
 }
 
 func init() {
+	loadFontConfig()
 	preloadFontFiles()
 }
 
+// loadAndSetFont loads the appropriate font for a category
 func loadAndSetFont(dc *gg.Context, cat string) {
 	fontMu.RLock()
 	path, ok := fontFiles[cat]
@@ -83,14 +114,14 @@ func loadAndSetFont(dc *gg.Context, cat string) {
 		return
 	}
 
-	// CRITICAL FIX: Always load a fresh face -> no sharing
+	// Always load fresh face
 	if err := dc.LoadFontFace(path, FONT_SIZE); err != nil {
 		log.Printf("ERROR: Failed to load font %s: %v", cat, err)
 		dc.LoadFontFace("", FONT_SIZE)
 	}
 }
 
-// Optional: cleanup on shutdown (good practice)
+// CleanupFonts removes temporary font files (call on shutdown if needed)
 func CleanupFonts() {
 	fontMu.Lock()
 	defer fontMu.Unlock()
@@ -99,12 +130,13 @@ func CleanupFonts() {
 	}
 }
 
+// scriptCategory returns the font category for a given rune
 func scriptCategory(r rune) string {
 	if isEmoji(r) {
 		return "Emoji"
 	}
 
-	// Box drawing, blocks, geometric shapes, powerline — very important for wttr.in
+	// Special categories that use default font
 	if (r >= 0x2500 && r <= 0x257F) || // Box Drawing
 		(r >= 0x2580 && r <= 0x259F) || // Block Elements
 		(r >= 0x25A0 && r <= 0x25FF) || // Geometric Shapes
@@ -112,32 +144,17 @@ func scriptCategory(r rune) string {
 		return "default"
 	}
 
-	switch {
-	case r >= 0x0400 && r <= 0x04FF:
-		return "Cyrillic"
-	case r >= 0x0370 && r <= 0x03FF:
-		return "Greek"
-	case r >= 0x0600 && r <= 0x06FF:
-		return "Arabic"
-	case r >= 0x0590 && r <= 0x05FF:
-		return "Hebrew"
-	case (r >= 0x4E00 && r <= 0x9FFF) || (r >= 0x3400 && r <= 0x4DBF):
-		return "Han"
-	case r >= 0x3040 && r <= 0x309F:
-		return "Hiragana"
-	case r >= 0x30A0 && r <= 0x30FF:
-		return "Katakana"
-	case r >= 0xAC00 && r <= 0xD7AF:
-		return "Hangul"
-	case r >= 0x2800 && r <= 0x28FF:
-		return "Braille"
-	case (r >= 0x0900 && r <= 0x097F) || (r >= 0xA8E0 && r <= 0xA8FF):
-		return "Devanagari"
-	case r >= 0x0980 && r <= 0x09FF:
-		return "Bengali"
-	case r >= 0x0A00 && r <= 0x0A7F:
-		return "Gurmukhi"
+	// Dynamic range check from JSON
+	for cat, cfg := range fontConfig.Scripts {
+		for _, rng := range cfg.Ranges {
+			if len(rng) == 2 {
+				if r >= rune(rng[0]) && r <= rune(rng[1]) {
+					return cat
+				}
+			}
+		}
 	}
+
 	return "default"
 }
 
