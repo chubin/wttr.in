@@ -1,11 +1,3 @@
-Slabo fúkajúci sneh                    : Low drifting snow
-Miestami hmla                          : Patches of fog
-Mrholenie                              : Drizzle
-Slabé mrholenie                        : Light drizzle
-Sneh                                   : Snow
-Dážď                                   : Rain
-Slabý dážď                             : Light Rain
-Dažďová prehánka                       : Rain Shower
 113: Jasno                             : Clear
 113: Slnečno                           : Sunny
 116: Polooblačno                       : Partly cloudy
@@ -53,3 +45,14 @@ Dažďová prehánka                       : Rain Shower
 389: Silná búrka                       : Moderate or heavy rain with thunder
 392: Miestami slabá snehová búrka      : Patchy light snow with thunder
 395: Silná snehová búrka               : Moderate or heavy snow with thunder
+   : Ojedinelý dážď v okolí            : Patchy rain nearby
+   : Ojedinelý dážd so snehom v okolí  : Patchy sleet nearby
+   : Ojedinelé sneženie v okolí        : Patchy snow nearby
+   : Slabo fúkajúci sneh               : Low drifting snow
+   : Miestami hmla                     : Patches of fog
+   : Mrholenie                         : Drizzle
+   : Slabé mrholenie                   : Light drizzle
+   : Sneh                              : Snow
+   : Dážď                              : Rain
+   : Slabý dážď                        : Light Rain
+   : Dažďová prehánka                  : Rain Shower
