@@ -392,3 +392,12 @@ query_options:
     default: unicode
     active: true
     note: "Controls both the symbols used and their reserved width for perfect alignment in oneline formats and the v2 emoji row.  'nerd' is automatically used with ?view=v2d or v2n."
+
+
+# Options to be ignored
+
+  - name: fbclid
+    description: "Automatically added by Facebook. To be ignored."
+    type: string
+    default: ""
+    active: true

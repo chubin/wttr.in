@@ -126,6 +126,9 @@ type Options struct {
 
 	// Select emoji profile / symbol set (affects both appearance and terminal alignment) (Controls both the symbols used and their reserved width for perfect alignment in oneline formats and the v2 emoji row.  'nerd' is automatically used with ?view=v2d or v2n.)
 	Emoji string `json:"emoji,omitempty"`
+
+	// Automatically added by Facebook. To be ignored.
+	Fbclid string `json:"fbclid,omitempty"`
 }
 
 // ApplyParsedMap populates Options from a validated map[string]string.
@@ -328,6 +331,11 @@ func ApplyParsedMap(opts *Options, raw map[string]string) (*Options, error) {
 		opts.Emoji = v
 	}
 
+	// string or fallback
+	if v, ok := raw["fbclid"]; ok {
+		opts.Fbclid = v
+	}
+
 	// Optional: apply defaults for unset fields (if not zero-value)
 
 	if opts.Lang == "" {
@@ -387,6 +395,10 @@ func (o *Options) ToMap() map[string]string {
 
 	if o.Emoji != "" {
 		m["emoji"] = o.Emoji
+	}
+
+	if o.Fbclid != "" {
+		m["fbclid"] = o.Fbclid
 	}
 
 	// Booleans (only true values)
