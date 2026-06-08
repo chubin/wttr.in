@@ -546,7 +546,7 @@ Get the moon phase for a particular date by adding `@YYYY-MM-DD`:
 
 The moon phase information uses [pyphoon](https://github.com/chubin/pyphoon) as its backend.
 
-To get the moon phase information in the online mode, use `%m`:
+To get the moon phase information in the one-line mode, use `%m`:
 
     $ curl wttr.in/London?format=%m
     🌖

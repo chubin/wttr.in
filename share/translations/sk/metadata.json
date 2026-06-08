@@ -5,6 +5,10 @@
   "translators": [
     {
       "name": "Juraj Kakody"
+    },
+    {
+      "name": "Štefan Uram",
+      "github": "the_waiter"
     }
   ],
   "full_translation": false
