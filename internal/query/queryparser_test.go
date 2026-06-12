@@ -42,6 +42,13 @@ func TestWeatherUnits(t *testing.T) {
 			UseUscs:      false,
 			UseMsForWind: true,
 		},
+		{
+			parameters:   "/Kiev?Mu",
+			UseMetric:    false,
+			UseImperial:  true,
+			UseUscs:      true,
+			UseMsForWind: true,
+		},
 	}
 
 	ipOpts := &options.Options{}
