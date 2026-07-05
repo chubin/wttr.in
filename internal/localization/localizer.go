@@ -101,3 +101,13 @@ func (l10n L10n) WithLang(lang string) L10n {
 	}
 	return New(l10n.localizer, &options.Options{Lang: lang})
 }
+
+// IsRTL reports whether the active language is written right-to-left.
+func (l10n L10n) IsRTL() bool {
+	switch l10n.Lang {
+	case "he", "ar", "fa":
+		return true
+	default:
+		return false
+	}
+}
