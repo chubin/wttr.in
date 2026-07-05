@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "حبص",
-  "CAPTION_NOON": "رهظ",
-  "CAPTION_EVENING": "رصع",
-  "CAPTION_NIGHT": "بش",
+  "CAPTION_MORNING": "صبح",
+  "CAPTION_NOON": "ظهر",
+  "CAPTION_EVENING": "عصر",
+  "CAPTION_NIGHT": "شب",
   "LOCALE": "fa_IR"
 }

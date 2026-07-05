@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "רקוב",
-  "CAPTION_NOON": "םוֹיְ",
-  "CAPTION_EVENING": "ברֶעֶ",
-  "CAPTION_NIGHT": "הלָיְלַ",
+  "CAPTION_MORNING": "בוקר",
+  "CAPTION_NOON": "צהריים",
+  "CAPTION_EVENING": "ערב",
+  "CAPTION_NIGHT": "לילה",
   "LOCALE": "he_IL"
 }
