@@ -110,6 +110,41 @@ func (l *cacheLocator) GetLocation(locationName string) (*domain.Location, error
 	}, nil
 }
 
+// LocationFromIPData builds a domain.Location directly from IP geolocation data,
+// bypassing the geocoder. This is used in auto-detect mode when the IP lookup
+// already provides coordinates — geocoding the city+region+country string back
+// into coordinates is redundant and can produce wrong results (e.g. matching a
+// street named after a city instead of the city itself).
+func LocationFromIPData(ipData *domain.IPData) (*domain.Location, error) {
+	lat, err := strconv.ParseFloat(ipData.Latitude, 64)
+	if err != nil {
+		return nil, fmt.Errorf("invalid latitude from IP data: %w", err)
+	}
+	lon, err := strconv.ParseFloat(ipData.Longitude, 64)
+	if err != nil {
+		return nil, fmt.Errorf("invalid longitude from IP data: %w", err)
+	}
+
+	tz, err := location.LatLonToTimezone(lat, lon)
+	if err != nil {
+		logrus.Warnln("failed to resolve timezone from IP coordinates:", err)
+		tz = "UTC"
+	}
+
+	fullAddress := ipData.City
+	if ipData.Country != "" {
+		fullAddress = fmt.Sprintf("%s, %s", ipData.City, ipData.Country)
+	}
+
+	return &domain.Location{
+		Name:        ipData.City,
+		Latitude:    lat,
+		Longitude:   lon,
+		TimeZone:    tz,
+		FullAddress: fullAddress,
+	}, nil
+}
+
 // AppendToFile appends a string to the specified file with a timestamp
 func AppendToFile(filename string, content string) error {
 	// Open the file in append mode, create if it doesn't exist
