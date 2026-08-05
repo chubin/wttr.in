@@ -45,6 +45,11 @@ func (r *V2Renderer) Render(q domain.Query, localizer localization.Localizer) (d
 
 	var buf bytes.Buffer
 
+	// Location not found warning banner
+	if loc != nil && loc.LocationNotFound {
+		buf.WriteString(drawLocationNotFoundBanner(loc.OriginalLocation, l10n))
+	}
+
 	// Date header (3 days)
 	buf.WriteString("\n\n")
 	buf.WriteString(drawDate(loc, l10n))
@@ -107,6 +112,43 @@ func (r *V2Renderer) Render(q domain.Query, localizer localization.Localizer) (d
 // ===================================================================
 // Remaining drawing functions (not in helpers.go)
 // ===================================================================
+
+// drawLocationNotFoundBanner renders a warning banner when the requested
+// location could not be found and Oymyakon is used as fallback.
+// Mirrors the v1 404 page design with red background text.
+func drawLocationNotFoundBanner(originalLocation string, l10n localization.L10n) string {
+	const (
+		bgRed   = "\033[41m"
+		fgWhite = "\033[97m"
+		bold    = "\033[1m"
+		reset   = "\033[0m"
+	)
+
+	var sb strings.Builder
+	sb.WriteString("\n")
+	sb.WriteString(bgRed + fgWhite + bold)
+	sb.WriteString("╔══════════════════════════════════════════════════════════════════════╗\n")
+	sb.WriteString("║ ")
+	msg := l10n.Text("LOCATION_NOT_FOUND")
+	if msg == "" || msg == "LOCATION_NOT_FOUND" {
+		sb.WriteString("We were unable to find your location")
+		if originalLocation != "" {
+			sb.WriteString(": " + originalLocation)
+		}
+	} else {
+		sb.WriteString(msg)
+		if originalLocation != "" {
+			sb.WriteString(": " + originalLocation)
+		}
+	}
+	sb.WriteString("\n")
+	sb.WriteString("║ so we have brought you to Oymyakon,\n")
+	sb.WriteString("║ one of the coldest permanently inhabited locales on the planet.\n")
+	sb.WriteString("╚══════════════════════════════════════════════════════════════════════╝")
+	sb.WriteString(reset)
+	sb.WriteString("\n")
+	return sb.String()
+}
 
 func addFrame(content string, width int, opts *options.Options, l10n localization.L10n) string {
 	if opts.NoCaption {

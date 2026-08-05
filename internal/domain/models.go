@@ -51,6 +51,13 @@ type Location struct {
 	Longitude   float64
 	FullAddress string
 	TimeZone    string
+
+	// LocationNotFound is true when the requested location could not be
+	// resolved and a fallback location (Oymyakon) was used instead.
+	LocationNotFound bool
+	// OriginalLocation stores the user-requested location string that
+	// could not be resolved, for display in warning messages.
+	OriginalLocation string
 }
 
 // CacheEntry represents a cached response entry.

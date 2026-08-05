@@ -327,7 +327,19 @@ func (s *WeatherService) computeResponse(
 		if opts.View == "files" || opts.View == "page" {
 			location = &domain.Location{}
 		} else {
-			return nil, fmt.Errorf("location not found: %w", err)
+			// Location not found — use Oymyakon as fallback
+			// See https://github.com/chubin/wttr.in/issues/500
+			location = &domain.Location{
+				Name:             "Oymyakon, Russia",
+				Country:          "Russia",
+				CountryCode:      "RU",
+				Latitude:         63.4623,
+				Longitude:        142.7866,
+				TimeZone:         "Asia/Magadan",
+				LocationNotFound: true,
+				OriginalLocation: locStr,
+			}
+			log.Printf("location not found: %q, using Oymyakon fallback", locStr)
 		}
 	}
 	tracker.Add("Geocode location", time.Since(start))
@@ -446,7 +458,7 @@ func (s *WeatherService) computeResponse(
 
 	return &domain.CacheEntry{
 		Body:       formatOut.Content,
-		StatusCode: http.StatusOK,
+		StatusCode: locationStatusCode(location),
 		Expires:    time.Now().Add(12 * time.Minute), // tune this TTL
 		Header: http.Header{
 			"Content-Type":  []string{formatOut.ContentType},
@@ -583,4 +595,13 @@ func debugCompareOneLineRendering(format string, uplinkResponse string, internal
 
 func isClientInUSA(ipData *domain.IPData) bool {
 	return ipData.CountryCode == "US"
+}
+
+// locationStatusCode returns HTTP 404 if the location was not found
+// and a fallback was used, HTTP 200 otherwise.
+func locationStatusCode(loc *domain.Location) int {
+	if loc != nil && loc.LocationNotFound {
+		return http.StatusNotFound
+	}
+	return http.StatusOK
 }
