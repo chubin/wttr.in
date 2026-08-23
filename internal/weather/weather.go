@@ -15,6 +15,7 @@ import (
 	"github.com/chubin/wttr.in/internal/domain"
 	"github.com/chubin/wttr.in/internal/localization"
 	"github.com/chubin/wttr.in/internal/options"
+	"github.com/chubin/wttr.in/internal/types"
 	"github.com/chubin/wttr.in/internal/util/termutil"
 )
 
@@ -207,10 +208,21 @@ func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) 
 func (s *WeatherService) serveFreshResponse(ctx context.Context, w http.ResponseWriter, r *http.Request) {
 	entry, err := s.computeResponse(ctx, r, &TimeTracker{})
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		s.writeComputeError(w, err)
 		return
 	}
 	s.serveFromCache(w, entry)
+}
+
+// writeComputeError renders user-facing errors: unknown locations get
+// their localized 404 page, everything else a generic 500.
+func (s *WeatherService) writeComputeError(w http.ResponseWriter, err error) {
+	var nf *types.NotFoundError
+	if errors.As(err, &nf) {
+		http.Error(w, nf.Message, http.StatusNotFound)
+		return
+	}
+	http.Error(w, err.Error(), http.StatusInternalServerError)
 }
 
 func (s *WeatherService) computeAndStore(ctx context.Context, w http.ResponseWriter, r *http.Request, cacheKey string, overallStart time.Time) {
@@ -226,7 +238,7 @@ func (s *WeatherService) computeAndStore(ctx context.Context, w http.ResponseWri
 	entry, err := s.computeResponse(ctx, r, tracker)
 	if err != nil {
 		s.Cacher.Remove(cacheKey)
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		s.writeComputeError(w, err)
 		return
 	}
 
@@ -327,7 +339,11 @@ func (s *WeatherService) computeResponse(
 		if opts.View == "files" || opts.View == "page" {
 			location = &domain.Location{}
 		} else {
-			return nil, fmt.Errorf("location not found: %w", err)
+			// Unknown location: serve the localized 404 page
+			// instead of a generic internal error (#500)
+			l10n := localization.New(s.Localizer, opts)
+			msg := l10n.Text("NOT_FOUND_MESSAGE")
+			return nil, &types.NotFoundError{Message: msg}
 		}
 	}
 	tracker.Add("Geocode location", time.Since(start))
