@@ -1,6 +1,10 @@
 package location
 
-import "github.com/sirupsen/logrus"
+import (
+	"fmt"
+
+	"github.com/sirupsen/logrus"
+)
 
 type Provider interface {
 	Name() string
@@ -32,12 +36,20 @@ func (s *Searcher) Search(location string) (*Location, error) {
 		result *Location
 	)
 
+	if len(s.providers) == 0 {
+		return nil, fmt.Errorf("no location search providers configured")
+	}
+
 	for _, p := range s.providers {
 		logrus.Debugln("querying ", p.Name())
 		result, err = p.Query(location)
 		if result != nil && err == nil {
 			return result, nil
 		}
+	}
+
+	if result == nil && err == nil {
+		err = fmt.Errorf("location not found: %s", location)
 	}
 
 	return result, err

@@ -32,29 +32,28 @@ COPY . .
 RUN bash build.sh build
 
 # ========================
-# Runtime stage (keep Alpine for small final image)
+# Runtime stage (Debian-slim: the builder produces a glibc/cgo-linked
+# binary via mattn/go-sqlite3, which will not run under Alpine's musl libc)
 # ========================
-FROM alpine:3.23
+FROM debian:bookworm-slim
 
 WORKDIR /app
 
 # Minimal runtime dependencies
-RUN apk add --no-cache ca-certificates && \
-    adduser -D -u 1000 wttr && \
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates && \
+    rm -rf /var/lib/apt/lists/* && \
+    useradd -r -M -u 1000 -s /usr/sbin/nologin wttr && \
     mkdir -p /app/cache && \
     chown -R wttr:wttr /app
 
 # Copy the built binary
 COPY --from=builder /app/srv /app/bin/srv
 
-# Environment variables
-ENV WTTR_MYDIR="/app"
-ENV WTTR_GEOLITE="/app/GeoLite2-City.mmdb"
-ENV WTTR_LISTEN_HOST="0.0.0.0"
-ENV WTTR_LISTEN_PORT="8002"
-
 USER wttr
 
 EXPOSE 8002
 
-CMD ["/app/bin/srv"]
+# The binary's own CLI is `srv <subcommand> [args]`; the config file path
+# is required, so it must be supplied on the command line (see README's
+# "Installation" section for the config.yaml format).
+CMD ["/app/bin/srv", "srv", "/app/config.yaml"]
