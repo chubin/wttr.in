@@ -65,7 +65,7 @@ func (r *V1Renderer) Render(query domain.Query, localizer localization.Localizer
 	}
 
 	// Right-to-left support
-	r.rightToLeft = (opts.Lang == "he" || opts.Lang == "ar" || opts.Lang == "fa")
+	r.rightToLeft = l10n.IsRTL()
 
 	// Build caption
 	caption := l10n.Text("CAPTION_WEATHER_REPORT_FOR")
@@ -132,9 +132,16 @@ func (r *V1Renderer) Render(query domain.Query, localizer localization.Localizer
 	if !opts.CurrentOnly {
 
 		if !opts.Quiet && !opts.Superquiet && !opts.NoCity {
+			fullAddress := query.Location.FullAddress
+			if r.rightToLeft {
+				// Prepend a right-to-left mark so terminals render the
+				// location name in the correct visual order instead of
+				// treating it as left-to-right text (issue #932).
+				fullAddress = rlm + fullAddress
+			}
 			sb.WriteString(fmt.Sprintf("%s: %s [%v,%v]\n",
 				l10n.Text("LOCATION"),
-				query.Location.FullAddress, query.Location.Latitude, query.Location.Longitude))
+				fullAddress, query.Location.Latitude, query.Location.Longitude))
 		}
 
 		if opts.Output != "html" && !opts.NoFollowLine {

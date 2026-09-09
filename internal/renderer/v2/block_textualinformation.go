@@ -16,6 +16,10 @@ import (
 const (
 	dim   = "\033[2m"
 	reset = "\033[0m"
+
+	// rlm is the Unicode right-to-left mark (U+200F). See its use in
+	// buildLocationString and simpleTextualFallback below.
+	rlm = "‏"
 )
 
 func dimLabel(label string) string {
@@ -84,12 +88,12 @@ type section []field
 // textualInformation returns the rich bottom metadata block (data-first)
 func textualInformation(q *domain.Query, loc *domain.Location, opts *options.Options, l10n localization.L10n) string {
 	if q.Weather == nil || len(*q.Weather) == 0 {
-		return simpleTextualFallback(loc)
+		return simpleTextualFallback(loc, l10n.IsRTL())
 	}
 
 	data, err := oneline.ParseCurrentCondition(*q.Weather)
 	if err != nil {
-		return simpleTextualFallback(loc)
+		return simpleTextualFallback(loc, l10n.IsRTL())
 	}
 
 	ctx := &oneline.RenderContext{
@@ -113,7 +117,7 @@ func textualInformation(q *domain.Query, loc *domain.Location, opts *options.Opt
 			{label: l10n.Text("SUNSET"), value: oneline.RenderSunset(ctx)},
 			{label: l10n.Text("DUSK"), value: oneline.RenderDusk(ctx)},
 		},
-		{{label: l10n.Text("LOCATION"), value: buildLocationString(loc)}},
+		{{label: l10n.Text("LOCATION"), value: buildLocationString(loc, l10n.IsRTL())}},
 	}
 
 	return renderSections(sections)
@@ -202,8 +206,13 @@ func buildMainWeatherLine(ctx *oneline.RenderContext) string {
 }
 
 // buildLocationString builds the location line
-func buildLocationString(loc *domain.Location) string {
+func buildLocationString(loc *domain.Location, isRTL bool) string {
 	var b strings.Builder
+	if isRTL {
+		// Right-to-left mark (U+200F): without it, terminals display
+		// an RTL location name in the wrong visual order (issue #932).
+		b.WriteString(rlm)
+	}
 	if loc.FullAddress != "" {
 		b.WriteString(loc.FullAddress)
 	} else {
@@ -220,8 +229,12 @@ func buildLocationString(loc *domain.Location) string {
 }
 
 // simpleTextualFallback
-func simpleTextualFallback(loc *domain.Location) string {
+func simpleTextualFallback(loc *domain.Location, isRTL bool) string {
+	location := loc.Name
+	if isRTL {
+		location = rlm + location
+	}
 	return dimLabel("Weather: ") + "???\n" +
 		dimLabel("Timezone: ") + loc.TimeZone + "\n" +
-		dimLabel("Location: ") + loc.Name + "\n"
+		dimLabel("Location: ") + location + "\n"
 }

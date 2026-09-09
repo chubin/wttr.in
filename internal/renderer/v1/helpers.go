@@ -7,6 +7,13 @@ import (
 	"github.com/clipperhouse/displaywidth"
 )
 
+// rlm is the Unicode right-to-left mark (U+200F). Prepending it to a
+// string that starts with RTL script tells terminals and other
+// bidi-aware consumers to lay the text out right-to-left instead of
+// guessing from context, which otherwise leaves RTL location names
+// displayed in the wrong visual order (see issue #932).
+const rlm = "‏"
+
 // Safe parsing helpers
 func parseInt(s string) int {
 	if s == "" {

@@ -132,6 +132,64 @@ func diffLines(got, want string) string {
 	return diff.String()
 }
 
+// TestV1Renderer_LocationRTLMark checks that the "Location:" line is
+// prefixed with a right-to-left mark (U+200F) for RTL languages, and
+// that it stays plain for LTR languages. Without the mark, terminals
+// display RTL location names in the wrong visual order (issue #932).
+func TestV1Renderer_LocationRTLMark(t *testing.T) {
+	weatherRaw, err := loadWeatherRaw("testdata/weather.json")
+	if err != nil {
+		t.Fatalf("failed to load weather data: %v", err)
+	}
+
+	td, err := loadTestData("testdata/testcases.json")
+	if err != nil {
+		t.Fatalf("failed to load test data: %v", err)
+	}
+
+	localizer := translate.NewBundle(assets.FS)
+	renderer := NewV1Renderer()
+
+	cases := []struct {
+		lang    string
+		wantRTL bool
+	}{
+		{"en", false},
+		{"de", false},
+		{"fa", true},
+		{"ar", true},
+		{"he", true},
+	}
+
+	for _, tc := range cases {
+		t.Run(tc.lang, func(t *testing.T) {
+			query := domain.Query{
+				Location: &td.Location,
+				Weather:  weatherRaw,
+				Options:  &options.Options{Lang: tc.lang},
+			}
+
+			output, err := renderer.Render(query, localizer)
+			if err != nil {
+				t.Fatalf("Render failed: %v", err)
+			}
+
+			content := string(output.Content)
+
+			idx := strings.Index(content, td.Location.FullAddress)
+			if idx == -1 {
+				t.Fatalf("output does not contain the location's full address:\n%s", content)
+			}
+
+			hasRLMBefore := strings.HasSuffix(content[:idx], rlm)
+
+			if hasRLMBefore != tc.wantRTL {
+				t.Errorf("lang %q: RLM immediately before location = %v, want %v", tc.lang, hasRLMBefore, tc.wantRTL)
+			}
+		})
+	}
+}
+
 // ===================================================================
 // Helpers
 // ===================================================================
