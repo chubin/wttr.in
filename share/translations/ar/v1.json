@@ -1,7 +1,7 @@
 {
-  "CAPTION_MORNING": "ﺎﻠﻠﻴﻟ",
-  "CAPTION_NOON": "ﺎﻠﻤﺳﺍﺀ",
-  "CAPTION_EVENING": "ﺎﻠﻈﻫﺭ",
-  "CAPTION_NIGHT": "ﺎﻠﺼﺑﺎﺣ",
+  "CAPTION_MORNING": "صباح",
+  "CAPTION_NOON": "ظهر",
+  "CAPTION_EVENING": "مساء",
+  "CAPTION_NIGHT": "ليل",
   "LOCALE": "ar_TN"
 }
