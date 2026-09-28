@@ -7,14 +7,23 @@ import (
 	"github.com/ringsaturn/tzf"
 )
 
+// LatLonToTimezone returns the IANA timezone name for the given coordinates.
+// Falls back to "UTC" if the lookup fails or returns an empty result.
+func LatLonToTimezone(lat, lon float64) (string, error) {
+	finder, err := tzf.NewDefaultFinder()
+	if err != nil {
+		return "UTC", err
+	}
+	tzName := finder.GetTimezoneName(lon, lat)
+	if tzName == "" {
+		tzName = "UTC"
+	}
+	return tzName, nil
+}
+
 func enrichLocationWithTimezone(loc *Location) error {
 	if loc == nil {
 		return fmt.Errorf("nil location")
-	}
-
-	finder, err := tzf.NewDefaultFinder() // loads embedded timezone data
-	if err != nil {
-		return err
 	}
 
 	// Convert between the two Location types
@@ -28,12 +37,12 @@ func enrichLocationWithTimezone(loc *Location) error {
 		return fmt.Errorf("invalid longitude in cached location: %w", err)
 	}
 
-	tzName := finder.GetTimezoneName(lon, lat)
-	if tzName == "" {
-		tzName = "UTC" // fallback
+	tzName, err := LatLonToTimezone(lat, lon)
+	if err != nil {
+		return err
 	}
 
-	loc.Timezone = tzName // assuming you added TimeZone string to Location struct
+	loc.Timezone = tzName
 
 	return nil
 }

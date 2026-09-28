@@ -321,13 +321,26 @@ func (s *WeatherService) computeResponse(
 	}
 
 	// ── Geocode ───────────────────────────────────────────────────────────
+	// For auto-detected locations the IP lookup already provides coordinates,
+	// so we skip the geocoder entirely. Geocoding a city+region+country string
+	// back into coordinates is redundant and can misfire (e.g. "Berlin, State
+	// of Berlin, DE" matching a street called Berlinstraße in Fürth).
+	// The geocoder is still used for every explicitly user-specified location.
 	start = time.Now()
-	location, err := s.Locator.GetLocation(locStr)
-	if err != nil {
-		if opts.View == "files" || opts.View == "page" {
-			location = &domain.Location{}
-		} else {
-			return nil, fmt.Errorf("location not found: %w", err)
+	var location *domain.Location
+	if autoDetect && ipData != nil && ipData.Latitude != "" && ipData.Longitude != "" {
+		location, err = LocationFromIPData(ipData)
+		if err != nil {
+			return nil, fmt.Errorf("failed to build location from IP data: %w", err)
+		}
+	} else {
+		location, err = s.Locator.GetLocation(locStr)
+		if err != nil {
+			if opts.View == "files" || opts.View == "page" {
+				location = &domain.Location{}
+			} else {
+				return nil, fmt.Errorf("location not found: %w", err)
+			}
 		}
 	}
 	tracker.Add("Geocode location", time.Since(start))
