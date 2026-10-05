@@ -40,8 +40,11 @@ func (r *V2Renderer) Render(q domain.Query, localizer localization.Localizer) (d
 	}
 
 	opts := q.Options
+	if opts == nil {
+		opts = &options.Options{}
+	}
 	loc := q.Location
-	l10n := localization.New(localizer, q.Options)
+	l10n := localization.New(localizer, opts)
 
 	var buf bytes.Buffer
 
@@ -65,11 +68,17 @@ func (r *V2Renderer) Render(q domain.Query, localizer localization.Localizer) (d
 	buf.WriteString("\n")
 
 	// Rain sparkline
-	precipValues := extractAllHourlyFloat(weather, func(h domain.Hourly) string { return h.PrecipMM })
+	isImperial := opts.UseImperial || opts.UseUscs
+	precipValues := extractAllHourlyFloat(weather, func(h domain.Hourly) string {
+		if isImperial {
+			return h.PrecipInches
+		}
+		return h.PrecipMM
+	})
 	chanceValues := extractAllHourlyFloat(weather, func(h domain.Hourly) string { return h.ChanceOfRain })
 	precipInterp := interpolate(precipValues, 72)
 	chanceInterp := interpolate(chanceValues, 72)
-	buf.WriteString(drawRainSpark(precipInterp, chanceInterp, 5, 72))
+	buf.WriteString(drawRainSpark(precipInterp, chanceInterp, 5, 72, opts))
 	buf.WriteString("\n")
 
 	// Weather emojis
