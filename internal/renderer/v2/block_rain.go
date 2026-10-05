@@ -5,13 +5,15 @@ import (
 	"fmt"
 	"math"
 	"strings"
+
+	"github.com/chubin/wttr.in/internal/options"
 )
 
 // sparkBars as []rune — correct Unicode handling
 var sparkBars = []rune(" _▁▂▃▄▅▇█")
 
 // drawRainSpark — now matches Python v2 label position (TOP of the sparkline)
-func drawRainSpark(data, chanceData []float64, height, width int) string {
+func drawRainSpark(data, chanceData []float64, height, width int, opts *options.Options) string {
 	if len(data) == 0 || width == 0 {
 		return strings.Repeat(" ", width) + "\n"
 	}
@@ -27,9 +29,13 @@ func drawRainSpark(data, chanceData []float64, height, width int) string {
 	for i := 0; i < height; i++ {
 		for j := 0; j < width; j++ {
 			rowFromBottom := height - i - 1
-			character := box(rowFromBottom, data[j], maxValue, height)
+			var val float64
+			if j < len(data) {
+				val = data[j]
+			}
+			character := box(rowFromBottom, val, maxValue, height)
 
-			if data[j] != 0 && j < len(chanceData) && chanceData[j] > 0 {
+			if val != 0 && j < len(chanceData) && chanceData[j] > 0 {
 				chanceOfRain := math.Min(1.0, chanceData[j]/100.0*2.0)
 				colorIndex := int(5 * chanceOfRain)
 				colorCode := 16 + colorIndex
@@ -51,7 +57,17 @@ func drawRainSpark(data, chanceData []float64, height, width int) string {
 		}
 	}
 
-	label := fmt.Sprintf("%3.2fmm|%d%%", maxValue, int(chanceData[maxCol]))
+	unit := "mm"
+	if opts != nil && (opts.UseImperial || opts.UseUscs) {
+		unit = "in"
+	}
+
+	chance := 0
+	if maxCol < len(chanceData) {
+		chance = int(chanceData[maxCol])
+	}
+
+	label := fmt.Sprintf("%3.2f%s|%d%%", maxValue, unit, chance)
 	coloredLabel := fmt.Sprintf("\033[38;5;33m%s\033[0m", label)
 
 	// Python-style alignment
