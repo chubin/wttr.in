@@ -285,6 +285,10 @@ func (s *WeatherService) computeResponse(
 	if isClientInUSA(ipData) {
 		ipOpts.UseMetric = false
 		ipOpts.UseImperial = true
+	} else if isClientInUK(ipData) {
+		ipOpts.UseUk = true
+		ipOpts.UseMetric = false
+		ipOpts.UseImperial = false
 	} else {
 		ipOpts.UseMetric = true
 		ipOpts.UseImperial = false
@@ -583,4 +587,8 @@ func debugCompareOneLineRendering(format string, uplinkResponse string, internal
 
 func isClientInUSA(ipData *domain.IPData) bool {
 	return ipData.CountryCode == "US"
+}
+
+func isClientInUK(ipData *domain.IPData) bool {
+	return ipData.CountryCode == "GB"
 }

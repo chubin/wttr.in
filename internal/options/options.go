@@ -85,6 +85,9 @@ type Options struct {
 	// Use imperial units for measurements (Sets units to imperial system)
 	UseImperial bool `json:"use_imperial,omitempty"`
 
+	// Use UK hybrid units (Celsius for temperature, mph for wind, miles for visibility) (Celsius for temp, mph for wind, miles for visibility, mm for rain)
+	UseUk bool `json:"use_uk,omitempty"`
+
 	// Use USCS units (default in the US) (Default is 'uscs' in US, 'metric' elsewhere)
 	UseUscs bool `json:"use_uscs,omitempty"`
 
@@ -253,6 +256,10 @@ func ApplyParsedMap(opts *Options, raw map[string]string) (*Options, error) {
 
 	if v, ok := raw["use_imperial"]; ok {
 		opts.UseImperial = (v == "true")
+	}
+
+	if v, ok := raw["use_uk"]; ok {
+		opts.UseUk = (v == "true")
 	}
 
 	if v, ok := raw["use_uscs"]; ok {
@@ -445,6 +452,10 @@ func (o *Options) ToMap() map[string]string {
 
 	if o.UseImperial {
 		m["use_imperial"] = "true"
+	}
+
+	if o.UseUk {
+		m["use_uk"] = "true"
 	}
 
 	if o.UseUscs {

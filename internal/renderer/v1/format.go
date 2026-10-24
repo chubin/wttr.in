@@ -249,12 +249,13 @@ func (r *V1Renderer) formatWind(c cond, opts *options.Options) string {
 	unitWindString := unitWind(0, opts.Lang)
 	if opts.UseMsForWind {
 		unitWindString = unitWind(2, opts.Lang)
-	} else if opts.UseImperial {
+	} else if opts.UseImperial || opts.UseUk {
 		unitWindString = unitWind(1, opts.Lang)
 	}
 
-	gust := windInRightUnits(c.WindGustKmph, opts.UseMsForWind, opts.UseImperial)
-	speed := windInRightUnits(c.WindspeedKmph, opts.UseMsForWind, opts.UseImperial)
+	isMph := opts.UseImperial || opts.UseUk
+	gust := windInRightUnits(c.WindGustKmph, opts.UseMsForWind, isMph)
+	speed := windInRightUnits(c.WindspeedKmph, opts.UseMsForWind, isMph)
 
 	cWindGust := speedToColor(c.WindGustKmph, gust)
 	cWindSpeed := speedToColor(c.WindspeedKmph, speed)
@@ -284,13 +285,14 @@ func (r *V1Renderer) formatVisibility(c cond, opts *options.Options) string {
 		opts = &options.Options{}
 	}
 
+	isImperialDist := opts.UseImperial || opts.UseUk
 	vis := c.VisibleDistKM
-	if opts.UseImperial {
+	if isImperialDist {
 		vis = (vis * 621) / 1000
 	}
 
 	return r.pad(
-		fmt.Sprintf("%d %s", vis, unitVis(opts.UseImperial, opts.Lang)),
+		fmt.Sprintf("%d %s", vis, unitVis(isImperialDist, opts.Lang)),
 		15)
 }
 

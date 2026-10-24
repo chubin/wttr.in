@@ -60,7 +60,7 @@ func (p *strictQueryParser) Parse(ctx context.Context, r *http.Request, ipOpts *
 	}
 
 	// If there is no strong preference for specific units,
-	if !opts.UseMetric && !opts.UseImperial && !opts.UseUscs {
+	if !opts.UseMetric && !opts.UseImperial && !opts.UseUscs && !opts.UseUk {
 		// honor M flag to set metric if no other specified
 		if opts.UseMsForWind {
 			opts.UseMetric = true
@@ -69,6 +69,7 @@ func (p *strictQueryParser) Parse(ctx context.Context, r *http.Request, ipOpts *
 			opts.UseMetric = ipOpts.UseMetric
 			opts.UseImperial = ipOpts.UseImperial
 			opts.UseUscs = ipOpts.UseUscs
+			opts.UseUk = ipOpts.UseUk
 		}
 	}
 

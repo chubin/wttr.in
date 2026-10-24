@@ -270,6 +270,14 @@ query_options:
     active: true
     note: "Sets units to imperial system"
 
+  - name: use_uk
+    short: k
+    description: "Use UK hybrid units (Celsius for temperature, mph for wind, miles for visibility)"
+    type: boolean
+    default: false
+    active: true
+    note: "Celsius for temp, mph for wind, miles for visibility, mm for rain"
+    
   - name: use_uscs
     short: u
     description: "Use USCS units (default in the US)"
