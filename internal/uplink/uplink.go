@@ -25,6 +25,9 @@ type UplinkProcessor struct {
 }
 
 func NewUplinkProcessor(cfg *Config) *UplinkProcessor {
+	if cfg == nil {
+		cfg = &Config{Timeout: 5}
+	}
 	dialer := &net.Dialer{
 		Timeout:   time.Duration(cfg.Timeout) * time.Second,
 		KeepAlive: time.Duration(cfg.Timeout) * time.Second,
