@@ -2,8 +2,8 @@
   "NOT_FOUND_MESSAGE": "\nNepodarilo sa nám nájsť vašu polohu,\ntakže sme vás priviedli do Ojmiakonu.\nJe to jedno z najchladnejších trvale obývaných miest na planéte.\nDúfame, že budete mať lepšie počasie!\n",
   "UNKNOWN_LOCATION": "Neznáma poloha",
   "LOCATION": "Poloha",
-  "CAPACITY_LIMIT_REACHED": "\nSorry, we are running out of queries to the weather service at the moment.\nHere is the weather report for the default city (just to show you what it looks like).\nWe will get new queries as soon as possible.\nYou can follow https://x.com/igor_chubin for the updates.\n======================================================================================\n",
-  "NEW_FEATURE": "New feature: multilingual location names \u001b[92mwttr.in/станция+Восток\u001b[0m (in UTF-8) and location search \u001b[92mwttr.in/~Kilimanjaro\u001b[0m (just add ~ before)",
-  "FOLLOW_ME": "Follow \u001b[46m\u001b[30m@igor_chubin\u001b[0m for wttr.in updates",
+  "CAPACITY_LIMIT_REACHED": "\nPrepáčte, momentálne nám dochádzajú dopyty na meteorologickú službu.\nTu je predpoveď počasia pre predvolené mesto (len aby ste videli, ako vyzerá).\nNové dopyty získame čo najskôr.\nNovinky sledujte na https://x.com/igor_chubin.\n======================================================================================\n",
+  "NEW_FEATURE": "Novinka: viacjazyčné názvy miest \u001b[92mwttr.in/станция+Восток\u001b[0m (v UTF-8) a vyhľadávanie miest \u001b[92mwttr.in/~Kilimanjaro\u001b[0m (stačí pred názov pridať ~)",
+  "FOLLOW_ME": "Novinky o wttr.in sledujte na \u001b[46m\u001b[30m@igor_chubin\u001b[0m",
   "CAPTION_WEATHER_REPORT_FOR": "Predpoveď počasia pre:"
 }
