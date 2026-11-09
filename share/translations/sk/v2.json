@@ -1,3 +1,11 @@
 {
-  "WEATHER_REPORT_FOR": "Predpoveď počasia pre:"
+  "WEATHER_REPORT_FOR": "Predpoveď počasia pre:",
+  "WEATHER": "Počasie",
+  "TIMEZONE": "Časové pásmo",
+  "NOW": "Teraz",
+  "DAWN": "Úsvit",
+  "SUNRISE": "Východ slnka",
+  "ZENITH": "Zenit",
+  "SUNSET": "Západ slnka",
+  "DUSK": "Súmrak"
 }
