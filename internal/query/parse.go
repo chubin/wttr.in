@@ -115,10 +115,25 @@ func validateAndSetFlag(key string, shortToName map[string]string, nameToOption 
 		return fmt.Errorf("%w: %s", ErrOptionNotImplemented, name)
 	}
 	if opt.Type != "boolean" {
-		return fmt.Errorf("%w: %s", ErrValueRequired, key)
+		value, ok := shortFlagValues[name]
+		if !ok {
+			return fmt.Errorf("%w: %s", ErrValueRequired, key)
+		}
+		// An explicit value (e.g. transparency=100) takes precedence over the bare flag.
+		if _, set := result[name]; !set {
+			result[name] = value
+		}
+		return nil
 	}
 	result[name] = "true"
 	return nil
+}
+
+// shortFlagValues holds the values of non-boolean options whose short name
+// can be used as a bare flag. `t` is documented as "transparency 150" in
+// :help and README.
+var shortFlagValues = map[string]string{
+	"transparency": "150",
 }
 
 // handleValueOption processes options with values (e.g., "lang=fr").
