@@ -15,6 +15,7 @@ import (
 	"github.com/chubin/wttr.in/internal/domain"
 	"github.com/chubin/wttr.in/internal/localization"
 	"github.com/chubin/wttr.in/internal/options"
+	"github.com/chubin/wttr.in/internal/query"
 	"github.com/chubin/wttr.in/internal/util/termutil"
 )
 
@@ -207,7 +208,7 @@ func (s *WeatherService) WeatherHandler(w http.ResponseWriter, r *http.Request) 
 func (s *WeatherService) serveFreshResponse(ctx context.Context, w http.ResponseWriter, r *http.Request) {
 	entry, err := s.computeResponse(ctx, r, &TimeTracker{})
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), statusForError(err))
 		return
 	}
 	s.serveFromCache(w, entry)
@@ -226,7 +227,7 @@ func (s *WeatherService) computeAndStore(ctx context.Context, w http.ResponseWri
 	entry, err := s.computeResponse(ctx, r, tracker)
 	if err != nil {
 		s.Cacher.Remove(cacheKey)
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), statusForError(err))
 		return
 	}
 
@@ -583,4 +584,33 @@ func debugCompareOneLineRendering(format string, uplinkResponse string, internal
 
 func isClientInUSA(ipData *domain.IPData) bool {
 	return ipData.CountryCode == "US"
+}
+
+// statusForError maps client query-validation errors to HTTP 400.
+// Unknown server-side failures stay 500.
+func statusForError(err error) int {
+	switch {
+	case errors.Is(err, query.ErrInvalidQueryString),
+		errors.Is(err, query.ErrMultipleValues),
+		errors.Is(err, query.ErrUnknownOption),
+		errors.Is(err, query.ErrOptionNotImplemented),
+		errors.Is(err, query.ErrBooleanValueRequired),
+		errors.Is(err, query.ErrInvalidBooleanValue),
+		errors.Is(err, query.ErrValueRequired),
+		errors.Is(err, query.ErrInvalidStringValue),
+		errors.Is(err, query.ErrInvalidValidationRule),
+		errors.Is(err, query.ErrInvalidLengthRule),
+		errors.Is(err, query.ErrInvalidLength),
+		errors.Is(err, query.ErrInvalidRegexpRule),
+		errors.Is(err, query.ErrInvalidRegexp),
+		errors.Is(err, query.ErrUnsupportedRule),
+		errors.Is(err, query.ErrInvalidInteger),
+		errors.Is(err, query.ErrBelowMinimum),
+		errors.Is(err, query.ErrAboveMaximum),
+		errors.Is(err, query.ErrUnsupportedType),
+		errors.Is(err, query.ErrInactiveFormatSpecifier):
+		return http.StatusBadRequest
+	default:
+		return http.StatusInternalServerError
+	}
 }
