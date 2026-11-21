@@ -79,3 +79,84 @@ func TestRenderUSCSUsesImperialWeatherFields(t *testing.T) {
 		t.Fatalf("Render() = %q, want %q", got, want)
 	}
 }
+
+var dewPointWeatherFixture = domain.WeatherRaw(`{
+  "current_condition": [{
+    "FeelsLikeC": "10",
+    "FeelsLikeF": "50",
+    "cloudcover": "25",
+    "humidity": "92",
+    "localObsDateTime": "2026-06-04 12:00",
+    "precipInches": "0.50",
+    "precipMM": "12.7",
+    "pressure": "1012",
+    "temp_C": "18",
+    "temp_F": "64",
+    "uvIndex": "5",
+    "visibility": "10",
+    "weatherCode": "116",
+    "weatherDesc": [{"value": "Partly cloudy"}],
+    "winddir16Point": "S",
+    "winddirDegree": "180",
+    "windspeedKmph": "10",
+    "windspeedMiles": "6"
+  }],
+  "request": [{"query": "Thibodaux", "type": "City"}],
+  "weather": [{
+    "date": "2026-06-04",
+    "hourly": [
+      {"time": "900", "DewPointC": "11", "DewPointF": "52"},
+      {"time": "1200", "DewPointC": "16", "DewPointF": "61"},
+      {"time": "1500", "DewPointC": "18", "DewPointF": "64"}
+    ]
+  }]
+}`)
+
+func TestRenderDewPointUsesNearestHourly(t *testing.T) {
+	out, err := NewOnelineRenderer().Render(domain.Query{
+		Options: &options.Options{Format: "%e"},
+		Weather: &dewPointWeatherFixture,
+	}, nil)
+	if err != nil {
+		t.Fatalf("Render() error = %v", err)
+	}
+
+	if got, want := string(out.Content), "+16\u00b0C"; got != want {
+		t.Fatalf("Render() = %q, want %q", got, want)
+	}
+}
+
+func TestRenderDewPointUsesImperialUnits(t *testing.T) {
+	for name, opts := range map[string]*options.Options{
+		"imperial": {Format: "%e", UseImperial: true},
+		"uscs":     {Format: "%e", UseUscs: true},
+	} {
+		t.Run(name, func(t *testing.T) {
+			out, err := NewOnelineRenderer().Render(domain.Query{
+				Options: opts,
+				Weather: &dewPointWeatherFixture,
+			}, nil)
+			if err != nil {
+				t.Fatalf("Render() error = %v", err)
+			}
+
+			if got, want := string(out.Content), "+61\u00b0F"; got != want {
+				t.Fatalf("Render() = %q, want %q", got, want)
+			}
+		})
+	}
+}
+
+func TestRenderDewPointFallsBackToMagnus(t *testing.T) {
+	out, err := NewOnelineRenderer().Render(domain.Query{
+		Options: &options.Options{Format: "%e"},
+		Weather: &currentWeatherFixture,
+	}, nil)
+	if err != nil {
+		t.Fatalf("Render() error = %v", err)
+	}
+
+	if got, want := string(out.Content), "+17\u00b0C"; got != want {
+		t.Fatalf("Render() = %q, want %q", got, want)
+	}
+}

@@ -3,6 +3,7 @@ package oneline
 import (
 	"encoding/json"
 	"fmt"
+	"math"
 	"strconv"
 	"time"
 
@@ -19,6 +20,8 @@ type ParsedCurrentCondition struct {
 	TempF          float64
 	FeelsLikeC     float64
 	FeelsLikeF     float64
+	DewPointC      float64
+	DewPointF      float64
 	Humidity       int     // 0–100
 	PrecipMM       float64 // mm in last period (usually 1h or 3h)
 	PrecipInches   float64 // mm in last period (usually 1h or 3h)
@@ -91,6 +94,12 @@ func ParseCurrentCondition(raw []byte) (*ParsedCurrentCondition, error) {
 		obsTime = time.Now().UTC() // fallback
 	}
 
+	dewC, dewF, ok := dewPointFromHourly(full, obsTime)
+	if !ok {
+		dewC = dewPointMagnus(tempC, humidity)
+		dewF = dewC*9/5 + 32
+	}
+	
 	// ── Location fallback ──────────────────────────────────────────────────────
 	locName := "?"
 	if len(full.Request) > 0 {
@@ -107,6 +116,8 @@ func ParseCurrentCondition(raw []byte) (*ParsedCurrentCondition, error) {
 		TempF:            tempF,
 		FeelsLikeC:       feelsC,
 		FeelsLikeF:       feelsF,
+		DewPointC:        dewC,
+		DewPointF:        dewF,
 		Humidity:         humidity,
 		PrecipMM:         precipMM,
 		PrecipInches:     precipInches,
@@ -122,4 +133,68 @@ func ParseCurrentCondition(raw []byte) (*ParsedCurrentCondition, error) {
 		LocationName:     locName,
 		ObservationLocal: obsTime,
 	}, nil
+}
+
+// dewPointFromHourly picks DewPointC/DewPointF from the hourly slot
+// closest to the observation time. current_condition has no dew point field.
+func dewPointFromHourly(full domain.Weather, obs time.Time) (float64, float64, bool) {
+	var (
+		bestC, bestF float64
+		bestDelta    time.Duration
+		found        bool
+	)
+	for _, day := range full.Weather {
+		for _, h := range day.Hourly {
+			ht, ok := parseHourlyTime(day.Date, h.Time)
+			if !ok {
+				continue
+			}
+			c, errC := strconv.ParseFloat(h.DewPointC, 64)
+			f, errF := strconv.ParseFloat(h.DewPointF, 64)
+			if errC != nil || errF != nil {
+				continue
+			}
+			delta := ht.Sub(obs)
+			if delta < 0 {
+				delta = -delta
+			}
+			if !found || delta < bestDelta {
+				found = true
+				bestDelta = delta
+				bestC, bestF = c, f
+			}
+		}
+	}
+	return bestC, bestF, found
+}
+
+func parseHourlyTime(date, hhmm string) (time.Time, bool) {
+	n, err := strconv.Atoi(hhmm)
+	if err != nil {
+		return time.Time{}, false
+	}
+	hour := n / 100
+	min := n % 100
+	if hour < 0 || hour > 23 || min < 0 || min > 59 {
+		return time.Time{}, false
+	}
+	t, err := time.Parse("2006-01-02 15:04", fmt.Sprintf("%s %02d:%02d", date, hour, min))
+	if err != nil {
+		return time.Time{}, false
+	}
+	return t, true
+}
+
+// dewPointMagnus estimates dew point in °C from temperature and relative humidity.
+func dewPointMagnus(tempC float64, humidity int) float64 {
+	rh := float64(humidity)
+	if rh < 1 {
+		rh = 1
+	}
+	if rh > 100 {
+		rh = 100
+	}
+	const a, b = 17.625, 243.04
+	gamma := math.Log(rh/100) + (a*tempC)/(b+tempC)
+	return (b * gamma) / (a - gamma)
 }

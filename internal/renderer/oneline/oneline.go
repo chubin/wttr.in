@@ -91,6 +91,7 @@ var placeholderRenderers = map[rune]RenderFunc{
 	'x': RenderConditionPlain,
 	'i': RenderConditionCode,
 	't': RenderTemperature,
+	'e': RenderDewPoint,
 	'f': RenderFeelsLike,
 	'w': RenderWind,
 	'h': RenderHumidity,
