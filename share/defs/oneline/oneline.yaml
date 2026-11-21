@@ -28,6 +28,11 @@ format_specifiers:
     description: "Current temperature (with sign, °C by default, °F with ?F or imperial mode)"
     example: "+7°C  or  -3°F"
 
+  - name: dew_point
+    letter: "e"
+    description: "Dew point (with sign, °C by default, °F with ?u or imperial mode)"
+    example: "+4°C"
+
   - name: feels_like
     letter: "f"
     description: "Feels-like / apparent temperature"
