@@ -62,6 +62,21 @@ func RenderFeelsLike(ctx *RenderContext) string {
 	return fmt.Sprintf("%s%.0f%s", sign, math.Round(val), unit)
 }
 
+func RenderDewPoint(ctx *RenderContext) string {
+	var val float64
+	var unit string
+	if usesImperialUnits(ctx) {
+		val, unit = ctx.Data.DewPointF, "°F"
+	} else {
+		val, unit = ctx.Data.DewPointC, "°C"
+	}
+	sign := ""
+	if val >= 0 {
+		sign = "+"
+	}
+	return fmt.Sprintf("%s%.0f%s", sign, math.Round(val), unit)
+}
+
 func RenderWind(ctx *RenderContext) string {
 	var dir string
 
