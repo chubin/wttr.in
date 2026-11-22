@@ -79,6 +79,7 @@ func srv(configFile string) error {
 		"text": &formatter.TextFormatter{},
 		"html": htmlFormatter,
 		"png":  formatter.NewPNGFormatter(),
+		"json": &formatter.JSONFormatter{},
 	}
 
 	////////////////////////////
