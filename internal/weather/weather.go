@@ -555,6 +555,8 @@ func (s *WeatherService) selectFormatter(output string) Formatter {
 		return s.FormatterMap["html"]
 	case "png":
 		return s.FormatterMap["png"]
+	case "json":
+		return s.FormatterMap["json"]
 	default:
 		return s.FormatterMap["text"]
 	}
