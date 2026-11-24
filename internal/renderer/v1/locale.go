@@ -56,6 +56,11 @@ func localizedWind() map[string]map[int]string {
 			1: "mph",
 			2: "m/s",
 		},
+		"az": {
+			0: "km/saat",
+			1: "mph",
+			2: "m/s",
+		},
 		"be": {
 			0: "км/г",
 			1: "mph",

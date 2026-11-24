@@ -11,6 +11,7 @@ var WWOCodeToName = map[string]string{
 	"119": "Cloudy",
 	"122": "VeryCloudy",
 	"143": "Fog",
+	"149": "Fog",
 	"176": "LightShowers",
 	"179": "LightSleetShowers",
 	"182": "LightSleet",

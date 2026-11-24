@@ -1,0 +1,76 @@
+İstifadə qaydası:
+
+    $ curl wttr.in          # cari məkan
+    $ curl wttr.in/gyd      # Heydər Əliyev hava limanında hava
+    $ curl wttr.is          # tam ekvivalent alternativ ünvan
+
+Dəstəklənən məkan növləri:
+
+    /ganja                  # şəhər adı
+    /~Qız+qalası            # istənilən məkan (boşluq üçün + istifadə edin)
+    /Москва                 # istənilən dildə istənilən məkanın Unicode adı
+    /gyd                    # hava limanı kodu (3 hərf)
+    /@stackoverflow.com     # domen adı
+    /94107                  # poçt indeksi
+    /40.37,49.84            # GPS koordinatları
+
+Ayın fazası haqqında məlumat:
+
+    /moon                   # Ayın fazası (eyniadlı şəhərlər üçün ,+US və ya ,+France əlavə edin)
+    /moon@2016-10-25        # Göstərilən tarix üçün Ayın fazası (@2016-10-25)
+
+Ölçü vahidləri:
+
+    m                       # metrik sistem (SI) (ABŞ istisna olmaqla hər yerdə standart)
+    u                       # USCS (ABŞ-da standart)
+    M                       # küləyin sürətini m/s ilə göstər
+
+Görünüş seçimləri:
+
+    0                       # yalnız cari hava
+    1                       # cari hava + bugünkü proqnoz
+    2                       # cari hava + bugünkü və sabahkı proqnoz
+    A                       # User-Agent-ə məhəl qoyma və ANSI formatını (terminal) məcburi et
+    d                       # çıxışı standart konsol şriftinin simvolları ilə məhdudlaşdır
+    F                       # "Follow" sətrini göstərmə
+    n                       # dar görünüş (yalnız gündüz və gecə)
+    q                       # sakit görünüş ("Hava proqnozu" mətni olmadan)
+    Q                       # tam sakit görünüş ("Hava proqnozu" mətni və şəhər adı olmadan)
+    T                       # terminal ardıcıllıqlarını söndür (rəngsiz)
+
+PNG seçimləri:
+
+    /ganja.png              # PNG faylı yarat
+    p                       # çıxışın ətrafına çərçivə əlavə et
+    t                       # şəffaflıq 150
+    transparency=...        # 0-dan 255-ə qədər şəffaflıq (255 = şəffaf deyil)
+    background=...          # RRGGBB formatında fon rəngi, məs. 00aaaa
+
+Seçimləri birləşdirmək olar:
+
+    /Ganja?0pq
+    /Ganja?0pq&lang=az
+    /Ganja_0pq.png          # PNG-də fayl rejimləri _ işarəsindən sonra göstərilir
+    /Ganja_0pq_lang=az.png  # uzun seçimlər alt xətt ilə ayrılır
+
+Alternativ domen:
+
+    $ curl wttr.is          # wttr.is wttr.in üçün tam ekvivalent ehtiyat domendir.
+    $ curl wttr.is/Ganja    # Onu wttr.in-in tam əvəzi kimi istifadə edə bilərsiniz
+
+Lokallaşdırma:
+
+    $ curl az.wttr.in/Baku,AZ
+    $ curl wttr.in/Baku,AZ?lang=az
+    $ curl -H "Accept-Language: az" wttr.in/Baku,AZ
+
+Dəstəklənən dillər:
+
+    FULL_TRANSLATION (dəstəklənir)
+    PARTIAL_TRANSLATION (hazırlanır)
+
+Xüsusi ünvanlar:
+
+    /:help                  # bu səhifəni göstər
+    /:bash.function         # tövsiyə olunan wttr() bash funksiyasını göstər
+    /:translation           # tərcüməçilər haqqında məlumatı göstər
