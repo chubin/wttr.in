@@ -166,6 +166,7 @@ func codes() map[int][]string {
 		119: getIcon("iconCloudy"),
 		122: getIcon("iconVeryCloudy"),
 		143: getIcon("iconFog"),
+		149: getIcon("iconFog"),
 		176: getIcon("iconLightShowers"),
 		179: getIcon("iconLightSleetShowers"),
 		182: getIcon("iconLightSleet"),
