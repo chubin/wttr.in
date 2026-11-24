@@ -1,6 +1,7 @@
 package oneline
 
 import (
+	"math"
 	"testing"
 
 	"github.com/chubin/wttr.in/internal/domain"
@@ -158,5 +159,23 @@ func TestRenderDewPointFallsBackToMagnus(t *testing.T) {
 
 	if got, want := string(out.Content), "+17\u00b0C"; got != want {
 		t.Fatalf("Render() = %q, want %q", got, want)
+	}
+}
+
+func TestFormatSignedDegreesZero(t *testing.T) {
+	for _, tc := range []struct {
+		val  float64
+		want string
+	}{
+		{math.Copysign(0, -1), "0°C"}, // temp_C "-0" from upstream
+		{-0.3, "0°C"},
+		{0.4, "0°C"},
+		{-0.6, "-1°C"},
+		{18, "+18°C"},
+		{-5, "-5°C"},
+	} {
+		if got := formatSignedDegrees(tc.val, "°C"); got != tc.want {
+			t.Errorf("formatSignedDegrees(%v) = %q, want %q", tc.val, got, tc.want)
+		}
 	}
 }

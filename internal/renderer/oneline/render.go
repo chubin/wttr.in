@@ -40,11 +40,7 @@ func RenderTemperature(ctx *RenderContext) string {
 	} else {
 		val, unit = ctx.Data.TempC, "°C"
 	}
-	sign := ""
-	if val >= 0 {
-		sign = "+"
-	}
-	return fmt.Sprintf("%s%.0f%s", sign, math.Round(val), unit)
+	return formatSignedDegrees(val, unit)
 }
 
 func RenderFeelsLike(ctx *RenderContext) string {
@@ -55,11 +51,7 @@ func RenderFeelsLike(ctx *RenderContext) string {
 	} else {
 		val, unit = ctx.Data.FeelsLikeC, "°C"
 	}
-	sign := ""
-	if val >= 0 {
-		sign = "+"
-	}
-	return fmt.Sprintf("%s%.0f%s", sign, math.Round(val), unit)
+	return formatSignedDegrees(val, unit)
 }
 
 func RenderDewPoint(ctx *RenderContext) string {
@@ -70,11 +62,7 @@ func RenderDewPoint(ctx *RenderContext) string {
 	} else {
 		val, unit = ctx.Data.DewPointC, "°C"
 	}
-	sign := ""
-	if val >= 0 {
-		sign = "+"
-	}
-	return fmt.Sprintf("%s%.0f%s", sign, math.Round(val), unit)
+	return formatSignedDegrees(val, unit)
 }
 
 func RenderWind(ctx *RenderContext) string {
@@ -221,4 +209,19 @@ func getWindDirectionIndex(degree int) int {
 		normalizedDegree += 360.0
 	}
 	return int(normalizedDegree / 45.0)
+}
+
+// formatSignedDegrees rounds val to a whole degree and prefixes positive values
+// with "+", like the v1 renderer. Values that round to zero (including "-0"
+// from the upstream data, or e.g. -0.3) are rendered as "0", not "+-0" or "-0".
+func formatSignedDegrees(val float64, unit string) string {
+	r := math.Round(val)
+	if r == 0 {
+		r = 0 // normalize negative zero
+	}
+	sign := ""
+	if r > 0 {
+		sign = "+"
+	}
+	return fmt.Sprintf("%s%.0f%s", sign, r, unit)
 }
