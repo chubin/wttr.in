@@ -1,9 +1,9 @@
 {
-  "NOT_FOUND_MESSAGE": "\nWe were unable to find your location\nso we have brought you to Oymyakon,\none of the coldest permanently inhabited locales on the planet.\n",
-  "UNKNOWN_LOCATION": "Unknown location",
-  "LOCATION": "Location",
-  "CAPACITY_LIMIT_REACHED": "\nSorry, we are running out of queries to the weather service at the moment.\nHere is the weather report for the default city (just to show you what it looks like).\nWe will get new queries as soon as possible.\nYou can follow https://x.com/igor_chubin for the updates.\n======================================================================================\n",
-  "NEW_FEATURE": "New feature: multilingual location names \u001b[92mwttr.in/станция+Восток\u001b[0m (in UTF-8) and location search \u001b[92mwttr.in/~Kilimanjaro\u001b[0m (just add ~ before)",
-  "FOLLOW_ME": "Follow \u001b[46m\u001b[30m@igor_chubin\u001b[0m for wttr.in updates",
+  "NOT_FOUND_MESSAGE": "\nYerləşdiyiniz məkanı müəyyən edə bilmədik,\nona görə də sizi planetin daimi məskunlaşmış\nən soyuq yerlərindən biri olan Oymyakona gətirdik.\nÜmid edirik ki, sizdə hava daha yaxşıdır!\n",
+  "UNKNOWN_LOCATION": "Naməlum məkan",
+  "LOCATION": "Məkan",
+  "CAPACITY_LIMIT_REACHED": "\nTəəssüf ki, hazırda hava xidmətinə sorğu limitimiz tükənmək üzrədir.\nBudur, standart şəhər üçün hava proqnozu (necə göründüyünü göstərmək üçün).\nYeni sorğular imkan düşən kimi əlçatan olacaq.\nYeniliklər üçün https://x.com/igor_chubin hesabını izləyə bilərsiniz.\n======================================================================================\n",
+  "NEW_FEATURE": "Yeni imkan: istənilən dildə məkan adları \u001b[92mwttr.in/станция+Восток\u001b[0m (UTF-8 ilə) və məkan axtarışı \u001b[92mwttr.in/~Kilimanjaro\u001b[0m (sadəcə əvvəlinə ~ əlavə edin)",
+  "FOLLOW_ME": "wttr.in yenilikləri üçün \u001b[46m\u001b[30m@igor_chubin\u001b[0m hesabını izləyin",
   "CAPTION_WEATHER_REPORT_FOR": "Hava proqnozu:"
 }

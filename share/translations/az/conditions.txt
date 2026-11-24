@@ -1,48 +1,210 @@
-113: Aydınlı                            : Clear                             : Ясно                         
-113: Günəşli                            : Sunny                             : Солнечно
-116: Dəyişkən buludlu                   : Partly cloudy                     : Переменная облачность
-119: Buludlu                            : Cloudy                            : Облачно              
-122: Buludlu                            : Overcast                          : Пасмурно
-143: Çən                                : Mist                              : Дымка
-176: Bəzi yerlərdə yagış                : Patchy rain possible              : Местами дождь
-179: Bəzi yerlərdə qar                  : Patchy snow possible              : Местами снег
-182: Bəzi yerlərdə qar və yagış         : Patchy sleet possible             : Местами дождь со снегом
-185: Bəzi yerlərdə soyuq çisklinli hava : Patchy freezing drizzle possible  : Местами замерзающая морось
-200: Bəzi yerlərdə tufan                : Thundery outbreaks possible       : Местами грозы              
-227: Yüngül küləkli qar                 : Blowing snow                      : Поземок
-230: Çovqun                             : Blizzard                          : Метель
-248: Duman                              : Fog                               : Туман
-260: Güclü soyuq duman                  : Freezing fog                      : Переохлажденный туман
-263: Bəzi yerlərdə zəif çiskin          : Patchy light drizzle              : Местами слабая морось
-266: zəif çiskin                        : Light drizzle                     : Слабая морось
-281: Soyuq çiskin                       : Freezing drizzle                  : Замерзающая морось
-284: Güclü soyuq çiskin                 : Heavy freezing drizzle            : Сильная замерзающая морось
-293: Bəzi yerlərdə yüngül yagış         : Patchy light rain                 : Местами небольшой дождь
-296: Yüngül yagiş                       : Light rain                        : Небольшой дождь
-299: Bəzi vaxtlarda mülayim yagış       : Moderate rain at times            : Временами умеренный дождь
-302: Mülayim yagış                      : Moderate rain                     : Умеренный дождь
-305: Bəzi vaxtlarda güclü yagış         : Heavy rain at times               : Временами сильный дождь
-308: Güclü yagış                        : Heavy rain                        : Сильный дождь
-311: Zəif soyuq yagış                   : Light freezing rain               : Слабый переохлажденный дождь
-314: Mülayim yaxud güclü soyuq yagış    : Moderate or heavy freezing rain   : Умеренный или сильный переохлажденный дождь
-317: Yüngül yagış və qar                : Light sleet                       : Небольшой дождь со снегом
-320: Mülayim yaxud güclü yagış və qar   : Moderate or heavy sleet           : Умеренный или сильный дождь со снегом
-323: Bəzi yerlərdə yüngül qar           : Patchy light snow                 : Местами небольшой снег
-326: Yüngül qar                         : Light snow                        : Небольшой снег
-329: Bəzi yerlərdə mülayim qar          : Patchy moderate snow              : Местами умеренный снег
-332: Mülayim qar                        : Moderate snow                     : Умеренный снег
-335: Bəzi yerlərdə güclü qar            : Patchy heavy snow                 : Местами сильный снег
-338: Güclü qar                          : Heavy snow                        : Сильный снег
-350: Buzlu yagış                        : Ice pellets                       : Ледяной дождь
-353: Yüngül leysanlı yagış              : Light rain shower                 : Небольшой ливневый дождь
-356: Mülayim yaxud güclü leysanlı yagış : Moderate or heavy rain shower     : Умеренный или сильный ливневый дождь
-359: Çox güclü leysan                   : Torrential rain shower            : Очень сильный ливень
-362: Yüngül leysanlı yagış və sulu qar  : Light sleet showers               : Небольшой ливневый дождь со снегом
-365: Yüngül qar                         : Moderate or heavy sleet showers   : Небольшой снег
-368: Yüngül leysanlı yagış və qar       : Light snow showers                : Небольшой ливневый дождь со снегом
-371: Mülayim yaxud güclü qarlı leysan   : Moderate or heavy snow showers    : Умеренный или сильный снежный ливень
-386: Bəzi yerlərdə yüngül tufan və yagış: Patchy light rain with thunder      : Местами небольшой дождь с грозой
-389: Mülayim yaxud güclü yagış və tufan : Moderate or heavy rain with thunder : Умеренный или сильный дождь с грозой
-392: Bəzi yerlərdə yüngül tufan və qar  : Patchy light snow with thunder      : Местами небольшой снег с грозой
-395: Mülayim yaxud güclü qar və tufan   : Moderate or heavy snow with thunder : Умеренный или сильный снег с грозой 
-
+113: Günəşli                                      : Sunny                                               :
+114: Açıq                                         : Clear                                               :
+116: Dəyişkən buludlu                             : Partly cloudy                                       :
+119: Buludlu                                      : Cloudy                                              :
+122: Tutqun                                       : Overcast                                            :
+143: Çən                                          : Mist                                                :
+176: Yer-yer yağış mümkündür                      : Patchy rain possible                                :
+179: Yer-yer qar mümkündür                        : Patchy snow possible                                :
+182: Yer-yer sulu qar mümkündür                   : Patchy sleet possible                               :
+185: Yer-yer dondurucu çiskin mümkündür           : Patchy freezing drizzle possible                    :
+200: Ara-sıra ildırım mümkündür                   : Thundery outbreaks possible                         :
+227: Sovrulan qar                                 : Blowing snow                                        :
+230: Çovğun                                       : Blizzard                                            :
+248: Duman                                        : Fog                                                 :
+260: Dondurucu duman                              : Freezing fog                                        :
+263: Yer-yer zəif çiskin                          : Patchy light drizzle                                :
+266: Zəif çiskin                                  : Light drizzle                                       :
+281: Dondurucu çiskin                             : Freezing drizzle                                    :
+284: Güclü dondurucu çiskin                       : Heavy freezing drizzle                              :
+293: Yer-yer zəif yağış                           : Patchy light rain                                   :
+296: Zəif yağış                                   : Light rain                                          :
+299: Arabir orta yağış                            : Moderate rain at times                              :
+302: Orta yağış                                   : Moderate rain                                       :
+305: Arabir güclü yağış                           : Heavy rain at times                                 :
+308: Güclü yağış                                  : Heavy rain                                          :
+311: Zəif dondurucu yağış                         : Light freezing rain                                 :
+314: Orta/güclü dondurucu yağış                   : Moderate or heavy freezing rain                     :
+317: Zəif sulu qar                                : Light sleet                                         :
+320: Orta/güclü sulu qar                          : Moderate or heavy sleet                             :
+323: Yer-yer zəif qar                             : Patchy light snow                                   :
+326: Zəif qar                                     : Light snow                                          :
+329: Yer-yer orta qar                             : Patchy moderate snow                                :
+332: Orta qar                                     : Moderate snow                                       :
+335: Yer-yer güclü qar                            : Patchy heavy snow                                   :
+338: Güclü qar                                    : Heavy snow                                          :
+350: Buz dənələri                                 : Ice pellets                                         :
+353: Qısa zəif yağış                              : Light rain shower                                   :
+356: Qısa güclü yağış                             : Moderate or heavy rain shower                       :
+359: Çox güclü leysan                             : Torrential rain shower                              :
+362: Qısa zəif sulu qar                           : Light sleet showers                                 :
+365: Qısa güclü sulu qar                          : Moderate or heavy sleet showers                     :
+368: Qısa zəif qar                                : Light snow showers                                  :
+371: Qısa güclü qar                               : Moderate or heavy snow showers                      :
+386: Zəif yağış və ildırım                        : Patchy light rain with thunder                      :
+389: Orta/güclü yağış və ildırım                  : Moderate or heavy rain with thunder                 :
+392: Zəif qar və ildırım                          : Patchy light snow with thunder                      :
+395: Orta/güclü qar və ildırım                    : Moderate or heavy snow with thunder                 :
+   : Yaxınlıqda qübar                             : Haze in vicinity                                    :
+   : Güclü yağış və qar                           : Heavy rain and snow shower                          :
+   : Leysan                                       : Heavy rain shower                                   :
+   : Zəif çiskin və qar dənələri                  : Light drizzle and snow grains                       :
+   : Zəif yağış və çən                            : Light rain and mist shower                          :
+   : Qısamüddətli zəif xırda dolu                 : Light small hail/snow pellets shower                :
+   : Qısamüddətli zəif naməlum yağıntı            : Light unknown precipitation shower                  :
+   : Yağış, dolu və ildırım                       : Rain and small hail/snow pellets with thunderstorm  :
+   : Yaxınlıqda qısamüddətli qar                  : Snow shower in vicinity                             :
+   : Yaxınlıqda ara-sıra ildırım                  : Thundery outbreaks nearby                           :
+   : Alçaq qar sovrulması                         : Low drifting snow                                   :
+   : Yer-yer duman                                : Patches of fog                                      :
+   : Çiskin                                       : Drizzle                                             :
+   : Zəif çiskin və yağış                         : Light drizzle and rain                              :
+   : Qar                                          : Snow                                                :
+   : Yağış                                        : Rain                                                :
+   : Qısamüddətli yağış                           : Rain Shower                                         :
+   : Sovrulan qum                                 : Blowing sand                                        :
+   : Toz sovrulması                               : Blowing widespread dust                             :
+   : Yaxınlıqda toz sovrulması                    : Blowing widespread dust in vicinity                 :
+   : Çiskin və duman                              : Drizzle and fog                                     :
+   : Çiskin və yağış                              : Drizzle and rain                                    :
+   : Çiskin və yağış                              : Drizzle and rain shower                             :
+   : İldırımlı çiskin                             : Drizzle with thunderstorm                           :
+   : Toz fırtınası                                : Dust storm                                          :
+   : Yaxınlıqda duman                             : Fog in vicinity                                     :
+   : Dondurucu çiskin və yağış                    : Freezing drizzle and rain                           :
+   : Dondurucu çən                                : Freezing mist                                       :
+   : Dondurucu yağış                              : Freezing rain                                       :
+   : Dondurucu yağış və qar                       : Freezing rain and snow                              :
+   : Dondurucu naməlum yağıntı                    : Freezing unknown precipitation                      :
+   : Yaxınlıqda huni şəkilli bulud                : Funnel cloud in vicinity                            :
+   : Qısamüddətli dolu                            : Hail shower                                         :
+   : İldırımlı dolu                               : Hail with thunderstorm                              :
+   : Qübar                                        : Haze                                                :
+   : Güclü qar sovrulması                         : Heavy blowing snow                                  :
+   : Güclü çiskin                                 : Heavy drizzle                                       :
+   : Güclü çiskin və yağış                        : Heavy drizzle and rain                              :
+   : Güclü dondurucu naməlum yağıntı              : Heavy freezing unknown precipitation                :
+   : Güclü ildırımlı dolu                         : Heavy hail with thunderstorm                        :
+   : Güclü buz dənələri                           : Heavy ice pallets                                   :
+   : Güclü yağış və dolu                          : Heavy rain and hail shower                          :
+   : Güclü yağış, dolu və ildırım                 : Heavy rain and hail with thunderstorm               :
+   : Güclü yağış və dolu                          : Heavy rain and small hail/snow pallets shower       :
+   : Güclü yağış, dolu və ildırım                 : Heavy rain and small hail/snow pallets with thunderstorm:
+   : Güclü yağış və qar                           : Heavy rain and snow                                 :
+   : Güclü yağış, qar, dolu və ildırım            : Heavy rain and snow and small hail/snow pallets with thunderstorm:
+   : Güclü ildırımlı yağış                        : Heavy rain with thunderstorm                        :
+   : Qısamüddətli güclü xırda dolu                : Heavy small hail/snow pallets shower                :
+   : Güclü dolu və ildırım                        : Heavy small hail/snow pallets with thunderstorm     :
+   : Güclü qar və dolu                            : Heavy snow and small hail/snow pallets shower       :
+   : Güclü qar, dolu və ildırım                   : Heavy snow and small hail/snow pallets with thunderstorm:
+   : Qısamüddətli güclü qar                       : Heavy snow shower                                   :
+   : Güclü ildırımlı qar                          : Heavy snow with thunderstorm                        :
+   : Buz kristalları                              : Ice crystals                                        :
+   : Buz dənələri                                 : Ice pallets                                         :
+   : Zəif qar sovrulması                          : Light blowing snow                                  :
+   : Zəif çiskin və duman                         : Light drizzle and fog                               :
+   : Zəif çiskin və buz dənələri                  : Light drizzle and ice pallets                       :
+   : Zəif çiskin, yağış və qar                    : Light drizzle and rain and snow                     :
+   : Zəif çiskin və yağış                         : Light drizzle and rain shower                       :
+   : Zəif çiskin, yağış və ildırım                : Light drizzle and rain with thunderstorm            :
+   : Zəif çiskin və qar                           : Light drizzle and snow                              :
+   : Zəif ildırımlı çiskin                        : Light drizzle with thunderstorm                     :
+   : Zəif dondurucu çiskin                        : Light freezing drizzle                              :
+   : Zəif dondurucu çiskin və yağış               : Light freezing drizzle and rain                     :
+   : Zəif dondurucu çiskin və qar                 : Light freezing drizzle and snow                     :
+   : Zəif dondurucu duman                         : Light freezing fog                                  :
+   : Zəif dondurucu yağış və qar                  : Light freezing rain and snow                        :
+   : Zəif dondurucu qar dənələri və duman         : Light freezing snow grains and fog                  :
+   : Zəif dondurucu naməlum yağıntı               : Light freezing unknown precipitation                :
+   : Qısamüddətli zəif dolu                       : Light hail shower                                   :
+   : Zəif buz kristalları                         : Light ice crystals                                  :
+   : Zəif buz dənələri                            : Light ice pallets                                   :
+   : Zəif alçaq sovrulma                          : Light low drifting                                  :
+   : Zəif alçaq qar sovrulması                    : Light low drifting snow                             :
+   : Zəif yağış və dolu                           : Light rain and hail shower                          :
+   : Zəif yağış, dolu və ildırım                  : Light rain and hail with thunderstorm               :
+   : Zəif yağış və buz dənələri                   : Light rain and ice pallets                          :
+   : Zəif yağış və çən                            : Light rain and mist                                 :
+   : Zəif yağış və dolu                           : Light rain and small hail/snow pallets shower       :
+   : Zəif yağış, dolu və ildırım                  : Light rain and small hail/snow pallets with thunderstorm:
+   : Zəif yağış və qar                            : Light rain and snow                                 :
+   : Zəif yağış, qar və dolu                      : Light rain and snow and small hail/snow pallets shower:
+   : Zəif yağış və qar dənələri                   : Light rain and snow grains                          :
+   : Zəif yağış və qar                            : Light rain and snow shower                          :
+   : Zəif yağış, qar və ildırım                   : Light rain and snow with thunderstorm               :
+   : Zəif ildırımlı yağış                         : Light rain with thunderstorm                        :
+   : Qısamüddətli zəif yağış                      : Light shower                                        :
+   : Qısamüddətli zəif buz dənələri               : Light showers of ice pellets                        :
+   : Zəif xırda dolu                              : Light small hail/snow pallets                       :
+   : Qısamüddətli zəif xırda dolu                 : Light small hail/snow pallets shower                :
+   : Zəif dolu və ildırım                         : Light small hail/snow pallets with thunderstorm     :
+   : Zəif qar və buz dənələri                     : Light snow and ice pallets                          :
+   : Zəif qar və dolu                             : Light snow and small hail/snow pallets              :
+   : Zəif qar və dolu                             : Light snow and small hail/snow pallets shower       :
+   : Zəif qar, dolu və ildırım                    : Light snow and small hail/snow pallets with thunderstorm:
+   : Zəif qar və qar dənələri                     : Light snow and snow grains                          :
+   : Zəif qar dənələri                            : Light snow grains                                   :
+   : Qısamüddətli zəif qar                        : Light snow shower                                   :
+   : Zəif ildırımlı qar                           : Light snow with thunderstorm                        :
+   : Zəif ildırım                                 : Light thunderstorm                                  :
+   : Zəif naməlum yağıntı                         : Light unknown precipitation                         :
+   : Zəif toz/qum burulğanları                    : Light well-developed dust/sand whirls               :
+   : Alçaq qum sovrulması                         : Low drifting sand                                   :
+   : Alçaq toz sovrulması                         : Low drifting widespread dust                        :
+   : Çən və ildırım                               : Mist with thunderstorm                              :
+   : Orta/güclü ildırımlı yağış                   : Moderate or heavy rain in area with thunder         :
+   : Orta/güclü ildırımlı qar                     : Moderate or heavy snow in area with thunder         :
+   : Qismən duman                                 : Partial fog                                         :
+   : Yaxınlıqda yer-yer duman                     : Patches of fog in vicinity                          :
+   : Yaxınlıqda yer-yer dondurucu çiskin          : Patchy freezing drizzle nearby                      :
+   : Yer-yer zəif ildırımlı yağış                 : Patchy light rain in area with thunder              :
+   : Yer-yer zəif ildırımlı qar                   : Patchy light snow in area with thunder              :
+   : Yaxınlıqda yer-yer yağış                     : Patchy rain nearby                                  :
+   : Yaxınlıqda yer-yer sulu qar                  : Patchy sleet nearby                                 :
+   : Yaxınlıqda yer-yer qar                       : Patchy snow nearby                                  :
+   : Yağış və dolu                                : Rain and hail shower                                :
+   : Yağış, dolu və ildırım                       : Rain and hail with thunderstorm                     :
+   : Yağış və çən                                 : Rain and mist                                       :
+   : Yağış, çən və ildırım                        : Rain and mist with thunderstorm                     :
+   : Yağış və dolu                                : Rain and small hail/snow pallets shower             :
+   : Yağış, dolu və ildırım                       : Rain and small hail/snow pallets with thunderstorm  :
+   : Yağış və qar                                 : Rain and snow                                       :
+   : Yağış, qar və dolu                           : Rain and snow and small hail/snow pallets shower    :
+   : Yağış və qar dənələri                        : Rain and snow grains                                :
+   : Yağış və qar                                 : Rain and snow shower                                :
+   : Yağış, qar və ildırım                        : Rain and snow with thunderstorm                     :
+   : Yaxınlıqda yağış                             : Rain in vicinity                                    :
+   : Yaxınlıqda qısamüddətli yağış                : Rain shower in vicinity                             :
+   : İldırımlı yağış                              : Rain with thunderstorm                              :
+   : Qum                                          : Sand                                                :
+   : Qum fırtınası                                : Sandstorm                                           :
+   : Alçaq duman                                  : Shallow fog                                         :
+   : Alçaq çən                                    : Shallow mist                                        :
+   : Qısamüddətli yağış                           : Shower                                              :
+   : Yaxınlıqda qısamüddətli yağış                : Shower in vicinity                                  :
+   : Xırda dolu                                   : Small hail/snow pallets                             :
+   : Qısamüddətli xırda dolu                      : Small hail/snow pallets shower                      :
+   : Xırda dolu və ildırım                        : Small hail/snow pallets with thunderstorm           :
+   : Tüstü                                        : Smoke                                               :
+   : Qar və buz dənələri                          : Snow and ice pallets                                :
+   : Qar və çən                                   : Snow and mist                                       :
+   : Qar və dolu                                  : Snow and small hail/snow pellets shower             :
+   : Qar, dolu və ildırım                         : Snow and small hail/snow pallets with thunderstorm  :
+   : Qar və qar dənələri                          : Snow and snow grains                                :
+   : Qar dənələri                                 : Snow grains                                         :
+   : Qısamüddətli qar                             : Snow shower                                         :
+   : İldırımlı qar                                : Snow with thunderstorm                              :
+   : Qəfil güclü külək                            : Squalls                                             :
+   : İldırım                                      : Thunderstorm                                        :
+   : Yaxınlıqda ildırım                           : Thunderstorm in vicinity                            :
+   : Yaxınlıqda ara-sıra ildırım                  : Thundery outbreaks in nearby                        :
+   : Naməlum yağıntı                              : Unknown precipitation                               :
+   : Qısamüddətli naməlum yağıntı                 : Unknown precipitation shower                        :
+   : İldırımlı naməlum yağıntı                    : Unknown precipitation with thunderstorm             :
+   : Vulkan külü                                  : Volcanic ash                                        :
+   : Yaxınlıqda vulkan külü                       : Volcanic ash in vicinity                            :
+   : Yaxınlıqda toz/qum burulğanları              : Well-developed dust/sand whirls in vicinity         :
+   : Havada toz                                   : Widespread dust                                     :
+   : Tüstülü duman                                : Smoky haze                                          :
+   : Qısamüddətli orta/güclü buz dənələri         : Moderate or heavy showers of ice pellets            :
+   : Zəif və qısamüddətli yağış                   : Light rain, rain shower                             :

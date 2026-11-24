@@ -1,11 +1,11 @@
 {
   "WEATHER_REPORT_FOR": "Hava proqnozu:",
   "WEATHER": "Hava",
-  "TIMEZONE": "Saat zonası",
+  "TIMEZONE": "Saat qurşağı",
   "NOW": "İndi",
   "DAWN": "Şəfəq",
-  "SUNRISE": "Günəş çıxdı",
+  "SUNRISE": "Günəşin çıxması",
   "ZENITH": "Zenit",
-  "SUNSET": "Gün batımı",
-  "DUSK": "Toran"
+  "SUNSET": "Günəşin batması",
+  "DUSK": "Alatoran"
 }
