@@ -64,7 +64,12 @@ func srv(configFile string) error {
 		"j2":         &renderer.J2Renderer{},
 		"line":       oneline.NewOnelineRenderer(),
 		"page":       renderer.NewPageRenderer(),
-		"subprocess": subprocess.NewRenderer(cfg.Renderer.Subprocess),
+		"subprocess": func() weather.Renderer {
+			if cfg.Renderer != nil {
+				return subprocess.NewRenderer(cfg.Renderer.Subprocess)
+			}
+			return subprocess.NewRenderer(nil)
+		}(),
 	}
 
 	////////////////////////////
