@@ -2,6 +2,7 @@
 package v2
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
 	"time"
@@ -92,8 +93,15 @@ func textualInformation(q *domain.Query, loc *domain.Location, opts *options.Opt
 		return simpleTextualFallback(loc)
 	}
 
+	// The translated condition (lang_xx) is only available in the raw JSON.
+	var dataRaw interface{}
+	if err := json.Unmarshal(*q.Weather, &dataRaw); err != nil {
+		return simpleTextualFallback(loc)
+	}
+
 	ctx := &oneline.RenderContext{
 		Data:     data,
+		DataRaw:  dataRaw,
 		Options:  opts,
 		Location: loc,
 		Now:      time.Now(),
